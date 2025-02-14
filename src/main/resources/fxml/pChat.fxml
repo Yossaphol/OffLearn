@@ -164,7 +164,7 @@
                   <Insets />
                </VBox.margin>
             </Pane>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="180.0" style="-fx-background-radius: 15; -fx-background-color: &quot;8100CC&quot;;" text="คอร์สของคุณ" textFill="WHITE">
+            <Button fx:id="myCourse" mnemonicParsing="false" prefHeight="50.0" prefWidth="180.0" style="-fx-background-radius: 15; -fx-background-color: &quot;8100CC&quot;;" text="คอร์สของคุณ" textFill="WHITE">
                <font>
                   <Font name="Kodchasan Bold" size="20.0" />
                </font></Button>
@@ -196,7 +196,7 @@
                         </ImageView>
                      </children>
                   </StackPane>
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" style="-fx-background-color: &quot;8100CC&quot;; -fx-background-radius: 10;" text="คอร์สทั้งหมด" textFill="WHITE">
+                  <Button fx:id="allCourse" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" style="-fx-background-color: &quot;8100CC&quot;; -fx-background-radius: 10;" text="คอร์สทั้งหมด" textFill="WHITE">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
