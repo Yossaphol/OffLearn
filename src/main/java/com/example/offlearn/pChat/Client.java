@@ -1,73 +1,51 @@
 package com.example.offlearn.pChat;
 
-import javafx.scene.layout.VBox;
-
 import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.*;
+import java.util.*;
 
 public class Client {
-
     private Socket socket;
-    private BufferedReader bufferedReader;
-    private BufferedWriter bufferedWriter;
+    private BufferedReader reader;
+    private BufferedWriter writer;
 
-    public Client(Socket socket){
-        try{
-            this.socket = socket;
-            this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-        } catch (IOException e){
-            System.out.println("Error creating client.");
-            e.printStackTrace();
-            closeEverything(socket, bufferedReader, bufferedWriter);
+    public Client(String teacherIP, int teacherPort, String studentName) {
+        try {
+            this.socket = new Socket(teacherIP, teacherPort);
+            this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            this.writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+
+            // ส่งชื่อนักเรียนให้ครูรู้ว่าใครคุยอยู่
+            writer.write(studentName);
+            writer.newLine();
+            writer.flush();
+
+            listenForMessages();
+        } catch (IOException e) {
+            System.out.println("Cannot connect to teacher.");
         }
     }
 
-    public void sendMessageToServer(String messageToServer){
-        try{
-            bufferedWriter.write(messageToServer);
-            bufferedWriter.newLine();
-            bufferedWriter.flush();
-        } catch (IOException e){
-            e.printStackTrace();
-            System.out.println("Error sending message to the server");
-            closeEverything(socket, bufferedReader, bufferedWriter);
+    public void sendMessage(String message) {
+        try {
+            writer.write(message);
+            writer.newLine();
+            writer.flush();
+        } catch (IOException e) {
+            System.out.println("Failed to send message.");
         }
     }
 
-    public void receiveMessageFromServer(VBox vBox){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (socket.isConnected()) {
-                    try {
-                        String messageFromServer = bufferedReader.readLine();
-                        pChatController.addLabel(messageFromServer, vBox);
-                    } catch (IOException e){
-                        e.printStackTrace();
-                        System.out.println("Error receiving message from the server");
-                        closeEverything(socket, bufferedReader, bufferedWriter);
-                        break;
-                    }
+    private void listenForMessages() {
+        new Thread(() -> {
+            try {
+                String message;
+                while ((message = reader.readLine()) != null) {
+                    System.out.println("Teacher: " + message);
                 }
+            } catch (IOException e) {
+                System.out.println("Disconnected from teacher.");
             }
         }).start();
-    }
-
-    public void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter){
-        try{
-            if (bufferedReader != null){
-                bufferedReader.close();
-            }
-            if (bufferedWriter != null){
-                bufferedWriter.close();
-            }
-            if (socket != null){
-                socket.close();
-            }
-        } catch (IOException e){
-            e.printStackTrace();
-        }
     }
 }
