@@ -6,48 +6,47 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Server {
+public class Client {
 
-    private ServerSocket serverSocket;
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
 
-    public Server(ServerSocket serverSocket){
+    public Client(Socket socket){
         try{
-            this.serverSocket = serverSocket;
-            this.socket = serverSocket.accept();
+            this.socket = socket;
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         } catch (IOException e){
-            System.out.println("Error creating server.");
+            System.out.println("Error creating client.");
             e.printStackTrace();
-        }
-    }
-
-    public void sendMessageToClient(String messageToClient){
-        try{
-            bufferedWriter.write(messageToClient);
-            bufferedWriter.newLine();
-            bufferedWriter.flush();
-        } catch (IOException e){
-            e.printStackTrace();
-            System.out.println("Error sending message to the client");
             closeEverything(socket, bufferedReader, bufferedWriter);
         }
     }
 
-    public void receiveMessageFromClient(VBox vBox){
+    public void sendMessageToServer(String messageToServer){
+        try{
+            bufferedWriter.write(messageToServer);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+        } catch (IOException e){
+            e.printStackTrace();
+            System.out.println("Error sending message to the server");
+            closeEverything(socket, bufferedReader, bufferedWriter);
+        }
+    }
+
+    public void receiveMessageFromServer(VBox vBox){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 while (socket.isConnected()) {
                     try {
-                        String messageFromClient = bufferedReader.readLine();
-                        pChatController.addLabel(messageFromClient, vBox);
+                        String messageFromServer = bufferedReader.readLine();
+                        pChatController.addLabel(messageFromServer, vBox);
                     } catch (IOException e){
                         e.printStackTrace();
-                        System.out.println("Error receiving message from the client");
+                        System.out.println("Error receiving message from the server");
                         closeEverything(socket, bufferedReader, bufferedWriter);
                         break;
                     }

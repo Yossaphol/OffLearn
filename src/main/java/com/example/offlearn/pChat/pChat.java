@@ -17,7 +17,7 @@ public class pChat extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(pChat.class.getResource("/fxml/pChat.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
 
-        primaryStage.setTitle("Offlearn");
+        primaryStage.setTitle("Offlearn Client");
         primaryStage.setScene(scene);
         primaryStage.show();
 

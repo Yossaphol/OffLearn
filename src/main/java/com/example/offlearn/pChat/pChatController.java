@@ -14,12 +14,12 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -43,7 +43,7 @@ public class pChatController implements Initializable {
     @FXML
     private ScrollPane spMain;
 
-    private Server server;
+    private Client client;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -51,9 +51,9 @@ public class pChatController implements Initializable {
         allCourse.setStyle("-fx-background-color: linear-gradient(to right, #4D0079, #8100CC); -fx-background-radius: 15;");
 
         try{
-            server = new Server(new ServerSocket(5678));
+            client = new Client(new Socket("localhost", 5678));
         } catch (IOException e){
-            System.out.println("Error creating server.");
+            System.out.println("Error creating client.");
         }
 
         vboxMessage.heightProperty().addListener(new ChangeListener<Number>() {
@@ -63,7 +63,7 @@ public class pChatController implements Initializable {
             }
         });
 
-        server.receiveMessageFromClient(vboxMessage);
+        client.receiveMessageFromServer(vboxMessage);
 
         sendButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -87,19 +87,19 @@ public class pChatController implements Initializable {
                     hBox.getChildren().add(textFlow);
                     vboxMessage.getChildren().add(hBox);
 
-                    server.sendMessageToClient(messageToSend);
+                    client.sendMessageToServer(messageToSend);
                     tfMessage.clear();
                 }
             }
         });
     }
 
-    public static void addLabel(String messageFromClient,VBox vbox){
+    public static void addLabel(String msgFromServer,VBox vbox){
         HBox hBox = new HBox();
         hBox.setAlignment(Pos.CENTER_LEFT);
         hBox.setPadding(new Insets(5, 5, 5, 10));
 
-        Text text = new Text(messageFromClient);
+        Text text = new Text(msgFromServer);
         TextFlow textFlow = new TextFlow(text);
         textFlow.setStyle("-fx-background-color: rgb(233, 233, 235);" +
                 "-fx-background-radius: 20px;" +
