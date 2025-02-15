@@ -47,8 +47,8 @@ public class pChatController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        myCourse.setStyle("-fx-background-color: linear-gradient(to right, #4D0079, #8100CC); -fx-background-radius: 15;");
-        allCourse.setStyle("-fx-background-color: linear-gradient(to right, #4D0079, #8100CC); -fx-background-radius: 15;");
+        myCourse.setStyle("-fx-background-color: linear-gradient(to right, #4D0079, #8100CC); -fx-border-radius: 15px;");
+        allCourse.setStyle("-fx-background-color: linear-gradient(to right, #4D0079, #8100CC); -fx-border-radius: 15px;");
 
         try{
             client = new Client(new Socket("localhost", 5678));
@@ -79,7 +79,7 @@ public class pChatController implements Initializable {
 
                     textFlow.setStyle("-fx-text-fill: #000000;" +
                             "-fx-background-color: #DB9DFF;" +
-                            "-fx-background-radius: 20px;" +
+                            "-fx-border-radius: 20px;" +
                             "-fx-font-size: 16px;");
 
                     textFlow.setPadding(new Insets(15, 15, 15, 15));
@@ -102,7 +102,7 @@ public class pChatController implements Initializable {
         Text text = new Text(msgFromServer);
         TextFlow textFlow = new TextFlow(text);
         textFlow.setStyle("-fx-background-color: rgb(233, 233, 235);" +
-                "-fx-background-radius: 20px;" +
+                "-fx-border-radius: 20px;" +
                 "-fx-font-size: 16px;");
 
         textFlow.setPadding(new Insets(15, 15, 15, 15));
