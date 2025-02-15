@@ -6,4 +6,5 @@ module com.example.offlearn {
 
     opens  com.example.offlearn.pChat to javafx.fxml;
     exports com.example.offlearn.pChat;
+
 }
