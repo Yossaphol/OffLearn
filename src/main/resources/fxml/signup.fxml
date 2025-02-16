@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:controller="loginAndSignUp.signupController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="loginAndSignUp.signupController">
     <children>
         <VBox prefHeight="1024.0" prefWidth="745.0" style="-fx-padding: 0;">
             <children>
@@ -50,7 +53,7 @@
         </VBox>
         <VBox alignment="CENTER" prefHeight="783.0" prefWidth="631.0">
             <children>
-                <VBox prefHeight="699.0" prefWidth="631.0" style="-fx-border-color: black; -fx-padding: 70; -fx-border-radius: 20;">
+                <VBox prefHeight="699.0" prefWidth="631.0" style="-fx-border-color: black; -fx-padding: 70; -fx-border-radius: 20; -fx-background-color: white; -fx-background-radius: 20;">
                     <children>
                         <VBox alignment="CENTER" prefHeight="61.0" prefWidth="696.0">
                             <children>
@@ -69,14 +72,20 @@
                   <Pane prefHeight="48.0" prefWidth="489.0" />
                   <HBox prefHeight="89.0" prefWidth="489.0">
                      <children>
-                        <VBox prefHeight="74.0" prefWidth="237.0">
+                        <VBox prefHeight="124.0" prefWidth="193.0">
                            <children>
                                       <Label contentDisplay="TOP" text="Name">
                                           <font>
                                               <Font name="Kodchasan Regular" size="20.0" />
                                           </font>
                                       </Label>
-                                      <TextField prefHeight="43.0" prefWidth="224.0" style="-fx-border-radius: 10;" />
+                                      <TextField prefHeight="43.0" prefWidth="224.0" style="-fx-border-radius: 10; -fx-background-color: transparent; -fx-border-color: black;">
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                                 <font>
+                                    <Font name="Kodchasan Regular" size="16.0" />
+                                 </font></TextField>
                            </children>
                         </VBox>
                         <Pane prefHeight="74.0" prefWidth="54.0" />
@@ -87,49 +96,86 @@
                                     <Font name="Kodchasan Regular" size="20.0" />
                                  </font>
                               </Label>
-                              <TextField prefHeight="44.0" prefWidth="224.0" style="-fx-border-radius: 10;" />
+                              <TextField prefHeight="44.0" prefWidth="224.0" style="-fx-border-radius: 10; -fx-background-color: transparent; -fx-border-color: black;">
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                                 <font>
+                                    <Font name="Kodchasan Regular" size="16.0" />
+                                 </font></TextField>
                            </children>
                         </VBox>
                      </children>
                   </HBox>
                         <VBox prefHeight="256.0" prefWidth="489.0">
                             <children>
-                        <Label contentDisplay="TOP" text="Set Username">
+                        <Label contentDisplay="TOP" prefHeight="38.0" prefWidth="140.0" text="Set Username">
                            <font>
                               <Font name="Kodchasan Regular" size="20.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="44.0" prefWidth="489.0" />
-                                <Label contentDisplay="TOP" text="Set Password">
+                        <TextField prefHeight="44.0" prefWidth="489.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 10;">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                           <font>
+                              <Font name="Kodchasan Regular" size="16.0" />
+                           </font></TextField>
+                                <Label contentDisplay="TOP" prefHeight="38.0" prefWidth="138.0" text="Set Password">
                                     <font>
                                         <Font name="Kodchasan Regular" size="20.0" />
                                     </font>
                                 </Label>
-                                <TextField prefHeight="44.0" prefWidth="489.0" style="-fx-border-radius: 10;" />
-                        <Label contentDisplay="TOP" text="Gmail">
+                                <TextField prefHeight="44.0" prefWidth="489.0" style="-fx-border-radius: 10; -fx-background-color: transparetn; -fx-border-color: black;">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                           <font>
+                              <Font name="Kodchasan Regular" size="16.0" />
+                           </font></TextField>
+                        <Label contentDisplay="TOP" prefHeight="39.0" prefWidth="54.0" text="Gmail">
                            <font>
                               <Font name="Kodchasan Regular" size="20.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="44.0" prefWidth="489.0" style="-fx-border-radius: 10;" />
+                        <TextField prefHeight="44.0" prefWidth="489.0" promptText="Example@gmail.com" style="-fx-border-radius: 10; -fx-background-color: transparent; -fx-border-color: black;">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                           <font>
+                              <Font name="Kodchasan Regular" size="16.0" />
+                           </font></TextField>
                             </children>
                         </VBox>
                           <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="489.0">
                               <children>
-                                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="132.0" style="-fx-background-color: black; -fx-border-radius: 10;" text="Signup" textFill="WHITE">
+                                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="132.0" style="-fx-background-color: black; -fx-border-radius: 10; -fx-background-radius: 10;" text="Sign up" textFill="WHITE">
                                       <font>
                                           <Font name="Kodchasan Regular" size="20.0" />
                                       </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                                   </Button>
                                   <Pane prefHeight="40.0" prefWidth="15.0" />
-                                  <Label prefHeight="20.0" prefWidth="174.0" text="I already have account">
-                                      <font>
-                                          <Font name="Kodchasan Regular" size="14.0" />
-                                      </font>
-                                  </Label>
+                        <Button mnemonicParsing="false" onAction="#switchToLogin" prefHeight="40.0" prefWidth="209.0" style="-fx-background-color: none; -fx-border-radius: 10;" text="I already have account">
+                           <font>
+                              <Font name="Kodchasan Regular" size="16.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
                               </children>
                           </HBox>
                     </children>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.6117647290229797" green="0.6117647290229797" blue="0.6117647290229797" />
+                     </color>
+                  </DropShadow>
+               </effect>
                 </VBox>
             </children>
         </VBox>
