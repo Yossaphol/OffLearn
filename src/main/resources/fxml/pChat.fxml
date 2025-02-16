@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -337,79 +338,7 @@
                         <Insets bottom="10.0" left="20.0" />
                      </VBox.margin>
                   </Label>
-                  <HBox prefHeight="47.0" prefWidth="298.0">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="20.0" />
-                     </VBox.margin>
-                     <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                           <Image url="@../img/Profile/bussiness-man.png" />
-                        </image>
-                     </ImageView>
-                     <VBox prefHeight="47.0" prefWidth="217.0">
-                        <children>
-                           <Label text="Asst.Prof.Dr. Taravichet Titij" textFill="#8100cc">
-                              <font>
-                                 <Font name="Kodchasan Bold" size="15.0" />
-                              </font>
-                           </Label>
-                           <Label text="เพิ่งส่ง" textFill="#8e8e8e" />
-                        </children>
-                        <HBox.margin>
-                           <Insets left="20.0" />
-                        </HBox.margin>
-                     </VBox>
-                  </HBox>
-                  <HBox prefHeight="47.0" prefWidth="298.0">
-                     <children>
-                        <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../img/Profile/doctor.png" />
-                           </image>
-                        </ImageView>
-                        <VBox prefHeight="47.0" prefWidth="217.0">
-                           <children>
-                              <Label text="Wiraya Boonpriam" textFill="#8100cc">
-                                 <font>
-                                    <Font name="Kodchasan Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label text="ส่ง 2 ชม. ที่แล้ว" textFill="#8e8e8e" />
-                           </children>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </VBox>
-                     </children>
-                     <VBox.margin>
-                        <Insets bottom="20.0" left="20.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox prefHeight="47.0" prefWidth="298.0">
-                     <children>
-                        <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../img/Profile/man.png" />
-                           </image>
-                        </ImageView>
-                        <VBox prefHeight="47.0" prefWidth="217.0">
-                           <children>
-                              <Label text="ผศ.ดร. สุพัณณดา โชติพันธ์" textFill="#8100cc">
-                                 <font>
-                                    <Font name="Kodchasan Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label text="อ่านแล้ว 2 นาที" textFill="#8e8e8e" />
-                           </children>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </VBox>
-                     </children>
-                     <VBox.margin>
-                        <Insets left="20.0" />
-                     </VBox.margin>
-                  </HBox>
+                  <ListView fx:id="teacherList" prefHeight="575.0" prefWidth="298.0" />
                </children>
             </VBox>
          </left>

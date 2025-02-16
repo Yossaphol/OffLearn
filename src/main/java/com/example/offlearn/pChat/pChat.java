@@ -24,8 +24,5 @@ public class pChat extends Application {
         primaryStage.setTitle("Offlearn Client");
         primaryStage.setScene(scene);
         primaryStage.show();
-
     }
-
-
 }
