@@ -82,7 +82,10 @@
                                       <TextField prefHeight="43.0" prefWidth="224.0" style="-fx-border-radius: 10; -fx-background-color: transparent; -fx-border-color: black;">
                                  <cursor>
                                     <Cursor fx:constant="TEXT" />
-                                 </cursor></TextField>
+                                 </cursor>
+                                 <font>
+                                    <Font name="Kodchasan Regular" size="16.0" />
+                                 </font></TextField>
                            </children>
                         </VBox>
                         <Pane prefHeight="74.0" prefWidth="54.0" />
@@ -96,7 +99,10 @@
                               <TextField prefHeight="44.0" prefWidth="224.0" style="-fx-border-radius: 10; -fx-background-color: transparent; -fx-border-color: black;">
                                  <cursor>
                                     <Cursor fx:constant="TEXT" />
-                                 </cursor></TextField>
+                                 </cursor>
+                                 <font>
+                                    <Font name="Kodchasan Regular" size="16.0" />
+                                 </font></TextField>
                            </children>
                         </VBox>
                      </children>
@@ -111,7 +117,10 @@
                         <TextField prefHeight="44.0" prefWidth="489.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 10;">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
-                           </cursor></TextField>
+                           </cursor>
+                           <font>
+                              <Font name="Kodchasan Regular" size="16.0" />
+                           </font></TextField>
                                 <Label contentDisplay="TOP" prefHeight="38.0" prefWidth="138.0" text="Set Password">
                                     <font>
                                         <Font name="Kodchasan Regular" size="20.0" />
@@ -120,16 +129,22 @@
                                 <TextField prefHeight="44.0" prefWidth="489.0" style="-fx-border-radius: 10; -fx-background-color: transparetn; -fx-border-color: black;">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
-                           </cursor></TextField>
+                           </cursor>
+                           <font>
+                              <Font name="Kodchasan Regular" size="16.0" />
+                           </font></TextField>
                         <Label contentDisplay="TOP" prefHeight="39.0" prefWidth="54.0" text="Gmail">
                            <font>
                               <Font name="Kodchasan Regular" size="20.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="44.0" prefWidth="489.0" style="-fx-border-radius: 10; -fx-background-color: transparent; -fx-border-color: black;">
+                        <TextField prefHeight="44.0" prefWidth="489.0" promptText="Example@gmail.com" style="-fx-border-radius: 10; -fx-background-color: transparent; -fx-border-color: black;">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
-                           </cursor></TextField>
+                           </cursor>
+                           <font>
+                              <Font name="Kodchasan Regular" size="16.0" />
+                           </font></TextField>
                             </children>
                         </VBox>
                           <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="489.0">

@@ -3,6 +3,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -76,19 +77,23 @@
                               <Font name="Kodchasan Regular" size="20.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="47.0" prefWidth="489.0" style="-fx-border-radius: 10; -fx-border-color: black; -fx-background-color: transparent;">
+                        <TextField prefHeight="40.0" prefWidth="489.0" style="-fx-border-radius: 10; -fx-border-color: black; -fx-background-color: transparent;">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
-                           </cursor></TextField>
+                           </cursor>
+                           <font>
+                              <Font name="Kodchasan Regular" size="16.0" />
+                           </font></TextField>
                         <Label contentDisplay="TOP" text="Password">
                            <font>
                               <Font name="Kodchasan Regular" size="20.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="47.0" prefWidth="489.0" style="-fx-border-radius: 10; -fx-border-color: black; -fx-background-color: transparent;">
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor></TextField>
+                        <PasswordField prefHeight="40.0" prefWidth="489.0" style="-fx-border-radius: 10; -fx-border-color: black; -fx-background-color: transparent;">
+                           <font>
+                              <Font name="Kodchasan Regular" size="16.0" />
+                           </font>
+                        </PasswordField>
                         <VBox alignment="TOP_RIGHT" prefHeight="37.0" prefWidth="489.0">
                            <children>
                               <Button alignment="TOP_RIGHT" contentDisplay="TOP" mnemonicParsing="false" onAction="#forgotPassword" style="-fx-background-color: none;" text="Forgot your password?">
