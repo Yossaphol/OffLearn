@@ -1,6 +1,6 @@
 package com.example.offlearn.pChat;
 
-import javafx.geometry.Pos;
+import com.example.offlearn.pChat.DataBase.TeacherDBConnect;
 
 import java.io.*;
 import java.net.*;
@@ -10,14 +10,24 @@ public class Server {
     private ServerSocket serverSocket;
     private Map<String, ClientHandler> students = new HashMap<>();
     private pChatTeacherController controller;
+    private TeacherDBConnect teacherDb;
+    private String teacherName;
+    private String teacherIP;
+    private int teacherPort;
 
     public Server(ServerSocket serverSocket, pChatTeacherController controller) {
         this.serverSocket = serverSocket;
         this.controller = controller;
+        this.teacherDb = new TeacherDBConnect();
+        this.teacherName = "teacher 1";
+        this.teacherIP = getLocalIPAddress();
+        this.teacherPort = serverSocket.getLocalPort();
+        saveTeacherInfoToDB(teacherName);
     }
 
     public void startServer() {
-        System.out.println("Teacher server is running...");
+        System.out.println("Teacher server is running on " + teacherIP + ":" + teacherPort);
+
         try {
             while (!serverSocket.isClosed()) {
                 Socket socket = serverSocket.accept();
@@ -34,14 +44,21 @@ public class Server {
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
             String studentName = reader.readLine();
-            students.put(studentName, new ClientHandler(socket, reader, writer));
-            controller.addStudent(studentName);
-            System.out.println(studentName + " connected.");
+
+            if (!students.containsKey(studentName)) {
+                students.put(studentName, new ClientHandler(socket, reader, writer));
+
+                controller.addStudent(studentName);
+                teacherDb.addStudent(studentName, socket.getInetAddress().getHostAddress(), socket.getPort());
+
+                System.out.println(studentName + " connected.");
+            }
 
             String message;
             while ((message = reader.readLine()) != null) {
                 System.out.println(studentName + ": " + message);
-                controller.addMessage(studentName + ": " + message, Pos.CENTER_LEFT, "#EAEAEA");
+
+                controller.receiveMessage(studentName, message);
             }
 
         } catch (IOException e) {
@@ -49,18 +66,40 @@ public class Server {
         }
     }
 
+
+
     public void sendMessageToStudent(String studentName, String message) {
         ClientHandler student = students.get(studentName);
         if (student != null) {
-            student.sendMessage("Teacher: " + message);
+            System.out.println("Sending message to " + studentName + ": " + message);
+            student.sendMessage(message);
+        } else {
+            System.out.println("Student not found: " + studentName);
         }
     }
 
     public void closeServer() {
         try {
-            if (serverSocket != null) serverSocket.close();
+            if (serverSocket != null) {
+                serverSocket.close();
+                System.out.println("Server closed.");
+            }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void saveTeacherInfoToDB(String teacherName) {
+        String ip = getLocalIPAddress();
+        int port = serverSocket.getLocalPort();
+        teacherDb.addTeacher(teacherName, ip, port);
+    }
+
+    private String getLocalIPAddress() {
+        try {
+            return InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException e) {
+            return "localhost";
         }
     }
 
@@ -83,4 +122,6 @@ public class Server {
             }
         }
     }
+
+
 }

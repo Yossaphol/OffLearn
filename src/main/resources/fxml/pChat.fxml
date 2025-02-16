@@ -338,7 +338,7 @@
                         <Insets bottom="10.0" left="20.0" />
                      </VBox.margin>
                   </Label>
-                  <ListView fx:id="studentList" prefHeight="200.0" prefWidth="200.0" />
+                  <ListView fx:id="studentList" prefHeight="568.0" prefWidth="298.0" />
                </children>
             </VBox>
          </left>
@@ -357,7 +357,7 @@
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Button>
-                        <TextField fx:id="tfMessage" prefHeight="54.0" prefWidth="320.0" promptText="เขียนข้อความ">
+                        <TextField fx:id="tfMessage" prefHeight="54.0" prefWidth="320.0" promptText="เขียนข้อความ" style="-fx-background-radius: 10;">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>

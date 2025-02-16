@@ -31,14 +31,13 @@ public class pChatTeacherController implements Initializable {
     @FXML
     private VBox vboxMessage;
 
-
     @FXML
     private ScrollPane spMain;
 
     @FXML
     private ListView<String> studentList;
 
-    private Map<String, VBox> studentChatBoxes = new HashMap<>();
+    private Map<String, List<HBox>> chatHistory = new HashMap<>();
     private String selectedStudent;
 
     private Server server;
@@ -51,6 +50,38 @@ public class pChatTeacherController implements Initializable {
         stdDb = new StudentDBConnect();
         loadStudentList();
 
+        vboxMessage.getChildren().clear();
+        selectedStudent = null;
+
+        studentList.setCellFactory(param -> new ListCell<String>() {
+            private final HBox hBox = new HBox(10);
+            private final ImageView profileImage = new ImageView();
+            private final Label nameLabel = new Label();
+
+            {
+                profileImage.setFitHeight(50);
+                profileImage.setFitWidth(50);
+                hBox.getChildren().addAll(profileImage, nameLabel);
+            }
+
+            @Override
+            protected void updateItem(String studentName, boolean empty) {
+                super.updateItem(studentName, empty);
+
+                if (empty || studentName == null) {
+                    setGraphic(null);
+                } else {
+                    Image profilePic = new Image(getClass().getResourceAsStream("/img/Profile/user.png"));
+                    profileImage.setImage(profilePic);
+
+                    nameLabel.setText(studentName);
+                    nameLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+
+                    setGraphic(hBox);
+                }
+            }
+        });
+
         try {
             server = new Server(new ServerSocket(5678), this);
             new Thread(server::startServer).start();
@@ -58,38 +89,28 @@ public class pChatTeacherController implements Initializable {
             System.out.println("Error creating teacher server.");
         }
 
-        studentList.setCellFactory(listView -> new ListCell<>() {
-            @Override
-            protected void updateItem(String student, boolean empty) {
-                super.updateItem(student, empty);
-                if (empty || student == null) {
-                    setGraphic(null);
-                } else {
-                    setGraphic(createStudentBox(student));
-                }
-            }
-        });
-
         studentList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 selectedStudent = newValue;
                 vboxMessage.getChildren().clear();
+                loadChatHistory(selectedStudent);
                 System.out.println("Selected student: " + selectedStudent);
             }
         });
 
-        sendButton.setOnAction(event -> {
-            if (selectedStudent != null) {
-                String messageToSend = tfMessage.getText();
-                if (!messageToSend.isEmpty()) {
-                    addMessage(messageToSend, Pos.CENTER_RIGHT, "#DB9DFF");
-                    server.sendMessageToStudent(selectedStudent, messageToSend);
-                    tfMessage.clear();
-                }
-            } else {
-                System.out.println("กรุณาเลือกนักเรียนก่อนส่งข้อความ!");
-            }
-        });
+
+        sendButton.setOnAction(event -> sendMessage());
+    }
+
+    private void sendMessage() {
+        if (selectedStudent != null && !tfMessage.getText().isEmpty()) {
+            String messageToSend = tfMessage.getText();
+            addMessage(messageToSend, Pos.CENTER_RIGHT, "#DB9DFF");
+            server.sendMessageToStudent(selectedStudent, messageToSend);
+            tfMessage.clear();
+        } else {
+            System.out.println("Please select student");
+        }
     }
 
     public void addMessage(String message, Pos position, String color) {
@@ -103,15 +124,25 @@ public class pChatTeacherController implements Initializable {
         textFlow.setPadding(new Insets(15, 15, 15, 15));
 
         hBox.getChildren().add(textFlow);
+        chatHistory.computeIfAbsent(selectedStudent, k -> new ArrayList<>()).add(hBox);
+
         Platform.runLater(() -> vboxMessage.getChildren().add(hBox));
     }
 
-    public void addStudent(String studentName) {
-        Platform.runLater(() -> studentList.getItems().add(studentName));
+    private void loadChatHistory(String studentName) {
+        Platform.runLater(() -> {
+            vboxMessage.getChildren().clear();
+            List<HBox> history = chatHistory.getOrDefault(studentName, new ArrayList<>());
+            vboxMessage.getChildren().addAll(history);
+        });
     }
 
-    public void removeStudent(String studentName) {
-        Platform.runLater(() -> studentList.getItems().remove(studentName));
+    public void addStudent(String studentName) {
+        Platform.runLater(() -> {
+            if (!studentList.getItems().contains(studentName)) {
+                studentList.getItems().add(studentName);
+            }
+        });
     }
 
     private void loadStudentList() {
@@ -120,26 +151,31 @@ public class pChatTeacherController implements Initializable {
         studentList.setItems(observableList);
     }
 
-    private VBox createStudentBox(String studentName) {
-        HBox hBox = new HBox();
-        hBox.setSpacing(10);
-        hBox.setPadding(new Insets(5));
-        hBox.setAlignment(Pos.CENTER_LEFT);
-
-        Image image = new Image(getClass().getResource("/img/Profile/user.png").toExternalForm());
-        ImageView profilePic = new ImageView(image);
-        profilePic.setFitHeight(50);
-        profilePic.setFitWidth(50);
-
-        Label nameLabel = new Label(studentName);
-        nameLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
-
-        hBox.getChildren().addAll(profilePic, nameLabel);
-
-        VBox vBox = new VBox(hBox);
-        vBox.setStyle("-fx-background-color: #f0f0f0; -fx-padding: 10px; -fx-border-radius: 5px;");
-        vBox.setAlignment(Pos.CENTER_LEFT);
-
-        return vBox;
+    public void receiveMessage(String studentName, String message) {
+        Platform.runLater(() -> {
+            if (selectedStudent != null && selectedStudent.equals(studentName)) {
+                addMessage(message, Pos.CENTER_LEFT, "#9FE2BF");
+            }
+            chatHistory.computeIfAbsent(studentName, k -> new ArrayList<>()).add(createMessageBox(message, Pos.CENTER_LEFT, "#9FE2BF"));
+        });
     }
+
+    private HBox createMessageBox(String message, Pos position, String color) {
+        HBox hBox = new HBox();
+        hBox.setAlignment(position);
+        hBox.setPadding(new Insets(5, 5, 5, 10));
+
+        Text text = new Text(message);
+        TextFlow textFlow = new TextFlow(text);
+        textFlow.setStyle("-fx-background-color: " + color + "; -fx-background-radius: 20px; -fx-font-size: 16px;");
+        textFlow.setPadding(new Insets(15, 15, 15, 15));
+
+        hBox.getChildren().add(textFlow);
+        return hBox;
+    }
+
+    public ObservableList<String> getStudentList() {
+        return studentList.getItems();
+    }
+
 }

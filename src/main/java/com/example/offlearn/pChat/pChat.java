@@ -18,9 +18,6 @@ public class pChat extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(pChat.class.getResource("/fxml/pChat.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
 
-        TeacherDBConnect db = new TeacherDBConnect();
-        db.addTeacher("Test");
-
         primaryStage.setTitle("Offlearn");
         primaryStage.setScene(scene);
         primaryStage.show();
