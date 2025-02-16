@@ -28,4 +28,42 @@ public class TeacherDBConnect {
         }
         return teacherNames;
     }
+
+    public String getTeacherIP(String teacherName) {
+        String query = "SELECT IP FROM studentdb.teacherlist WHERE name = ?";
+        String ip = "";
+
+        try (Connection conn = connectDB();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, teacherName);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                ip = rs.getString("IP");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ip;
+    }
+
+    public int getTeacherPort(String teacherName) {
+        String query = "SELECT Port FROM studentdb.teacherlist WHERE name = ?";
+        int port = 0;
+
+        try (Connection conn = connectDB();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, teacherName);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                port = rs.getInt("Port");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return port;
+    }
 }

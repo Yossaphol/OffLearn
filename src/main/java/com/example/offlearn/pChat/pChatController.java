@@ -37,10 +37,10 @@ public class pChatController implements Initializable {
     private ListView<String> teacherList;
 
     private Map<String, List<HBox>> chatHistory = new HashMap<>();
+    private Map<String, Client> clientMap = new HashMap<>();
     private String selectedTeacher;
-
-    private Client client;
     private TeacherDBConnect teacherDb;
+    private String studentName = "StudentTest";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -49,48 +49,60 @@ public class pChatController implements Initializable {
         teacherDb = new TeacherDBConnect();
         loadTeacherList();
 
-        String teacherIP = "127.0.0.1";
-        int teacherPort = 5678;
-        String studentName = "Student1";
-
-        client = new Client(teacherIP, teacherPort, studentName);
+        vboxMessage.getChildren().clear();
 
         teacherList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                selectedTeacher = newValue;
-
-                // ล้างแชทก่อนหน้า และโหลดแชทของอาจารย์ที่เลือกใหม่
-                Platform.runLater(() -> {
-                    vboxMessage.getChildren().clear();
-                    loadChatHistory(selectedTeacher);
-                });
-
-                System.out.println("Selected teacher: " + selectedTeacher);
+                switchTeacher(newValue);
             }
         });
 
-        teacherList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                selectedTeacher = newValue;
-                loadChatHistory(selectedTeacher);
-                System.out.println("Selected teacher: " + selectedTeacher);
-            }
-        });
+        sendButton.setOnAction(event -> sendMessage());
+    }
 
-        sendButton.setOnAction(event -> {
-            if (selectedTeacher != null) {
-                String messageToSend = tfMessage.getText();
-                if (!messageToSend.isEmpty()) {
-                    addMessage(messageToSend, Pos.CENTER_RIGHT, "#DB9DFF");
-                    client.sendMessage(messageToSend);
+    private void switchTeacher(String newTeacher) {
+        if (selectedTeacher != null && clientMap.containsKey(selectedTeacher)) {
+            clientMap.get(selectedTeacher).closeConnection();
+        }
 
-                    // ใช้ Platform.runLater เพื่อให้แน่ใจว่า TextField ถูกเคลียร์
-                    Platform.runLater(() -> tfMessage.clear());
-                }
-            } else {
-                System.out.println("กรุณาเลือกอาจารย์ก่อนส่งข้อความ!");
-            }
+        selectedTeacher = newTeacher;
+        String teacherIP = teacherDb.getTeacherIP(selectedTeacher);
+        int teacherPort = teacherDb.getTeacherPort(selectedTeacher);
+
+        Client client = new Client(teacherIP, teacherPort, studentName);
+        client.setMessageListener(this::receiveMessage);
+
+        clientMap.put(selectedTeacher, client);
+
+        Platform.runLater(() -> {
+            vboxMessage.getChildren().clear();
+            loadChatHistory(selectedTeacher);
         });
+    }
+
+    public void receiveMessage(String message) {
+        if (selectedTeacher == null) {
+            System.out.println("Don't selected");
+            return;
+        }
+
+        Platform.runLater(() -> addMessage(message, Pos.CENTER_LEFT, "#9FE2BF"));
+    }
+
+    private void sendMessage() {
+        if (selectedTeacher != null && clientMap.containsKey(selectedTeacher)) {
+            String messageToSend = tfMessage.getText();
+            if (!messageToSend.isEmpty()) {
+                addMessage(messageToSend, Pos.CENTER_RIGHT, "#DB9DFF");
+
+                Client client = clientMap.get(selectedTeacher);
+                client.sendMessage(messageToSend);
+
+                Platform.runLater(() -> tfMessage.clear());
+            }
+        } else {
+            System.out.println("Please selected teacher");
+        }
     }
 
     public void addMessage(String message, Pos position, String color) {
@@ -105,7 +117,6 @@ public class pChatController implements Initializable {
 
         hBox.getChildren().add(textFlow);
 
-        // บันทึกประวัติแชท
         chatHistory.computeIfAbsent(selectedTeacher, k -> new ArrayList<>()).add(hBox);
 
         Platform.runLater(() -> vboxMessage.getChildren().add(hBox));
@@ -113,7 +124,7 @@ public class pChatController implements Initializable {
 
     private void loadChatHistory(String teacherName) {
         Platform.runLater(() -> {
-            vboxMessage.getChildren().clear(); // ล้างแชทเก่า
+            vboxMessage.getChildren().clear();
             List<HBox> history = chatHistory.getOrDefault(teacherName, new ArrayList<>());
             vboxMessage.getChildren().addAll(history);
         });
@@ -131,28 +142,35 @@ public class pChatController implements Initializable {
         ArrayList<String> teacherNames = teacherDb.getTeacherName();
         ObservableList<String> observableList = FXCollections.observableArrayList(teacherNames);
         teacherList.setItems(observableList);
-    }
 
-    private VBox createTeacherBox(String teacherName) {
-        HBox hBox = new HBox();
-        hBox.setSpacing(10);
-        hBox.setPadding(new Insets(5));
-        hBox.setAlignment(Pos.CENTER_LEFT);
+        teacherList.setCellFactory(listView -> new ListCell<String>() {
+            private final HBox content;
+            private final ImageView profilePic;
+            private final Label nameLabel;
 
-        Image image = new Image(getClass().getResource("/img/Profile/teacher.png").toExternalForm());
-        ImageView profilePic = new ImageView(image);
-        profilePic.setFitHeight(50);
-        profilePic.setFitWidth(50);
+            {
+                profilePic = new ImageView(new Image(getClass().getResource("/img/Profile/teacher.png").toExternalForm()));
+                profilePic.setFitHeight(40);
+                profilePic.setFitWidth(40);
 
-        Label nameLabel = new Label(teacherName);
-        nameLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+                nameLabel = new Label();
+                nameLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
 
-        hBox.getChildren().addAll(profilePic, nameLabel);
+                content = new HBox(10, profilePic, nameLabel);
+                content.setAlignment(Pos.CENTER_LEFT);
+                content.setPadding(new Insets(5));
+            }
 
-        VBox vBox = new VBox(hBox);
-        vBox.setStyle("-fx-background-color: #f0f0f0; -fx-padding: 10px; -fx-border-radius: 5px;");
-        vBox.setAlignment(Pos.CENTER_LEFT);
-
-        return vBox;
+            @Override
+            protected void updateItem(String teacherName, boolean empty) {
+                super.updateItem(teacherName, empty);
+                if (empty || teacherName == null) {
+                    setGraphic(null);
+                } else {
+                    nameLabel.setText(teacherName);
+                    setGraphic(content);
+                }
+            }
+        });
     }
 }

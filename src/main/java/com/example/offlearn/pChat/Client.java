@@ -2,7 +2,6 @@ package com.example.offlearn.pChat;
 
 import java.io.*;
 import java.net.*;
-import java.util.*;
 
 public class Client {
     private Socket socket;
@@ -15,7 +14,6 @@ public class Client {
             this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
-            // ส่งชื่อนักเรียนให้ครูรู้ว่าใครคุยอยู่
             writer.write(studentName);
             writer.newLine();
             writer.flush();
@@ -42,10 +40,43 @@ public class Client {
                 String message;
                 while ((message = reader.readLine()) != null) {
                     System.out.println("Teacher: " + message);
+
+                    if (messageListener != null) {
+                        messageListener.onMessageReceived(message);
+                    }
                 }
             } catch (IOException e) {
                 System.out.println("Disconnected from teacher.");
             }
         }).start();
+    }
+
+
+    public interface MessageListener {
+        void onMessageReceived(String message);
+    }
+
+    private MessageListener messageListener;
+
+    public void setMessageListener(MessageListener listener) {
+        this.messageListener = listener;
+    }
+
+
+    public void closeConnection() {
+        try {
+            if (reader != null) {
+                reader.close();
+            }
+            if (writer != null) {
+                writer.close();
+            }
+            if (socket != null) {
+                socket.close();
+            }
+            System.out.println("Connection closed.");
+        } catch (IOException e) {
+            System.out.println("Error closing connection.");
+        }
     }
 }

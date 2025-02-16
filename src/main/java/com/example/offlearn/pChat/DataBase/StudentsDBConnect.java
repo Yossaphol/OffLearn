@@ -15,14 +15,23 @@ public class StudentsDBConnect {
     }
 
     public void addStudent(String studentName) {
-        String query = "INSERT INTO studentdb.studentlist (name) VALUES (?) ON DUPLICATE KEY UPDATE name=name";
+        String checkQuery = "SELECT COUNT(*) FROM studentdb.studentlist WHERE name = ?";
+        String insertQuery = "INSERT INTO studentdb.studentlist (name) VALUES (?)";
 
         try (Connection conn = connectDB();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+             PreparedStatement checkStmt = conn.prepareStatement(checkQuery);
+             PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) {
 
-            pstmt.setString(1, studentName);
-            pstmt.executeUpdate();
-            System.out.println("Insert to data base complete");
+            checkStmt.setString(1, studentName);
+            var rs = checkStmt.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                System.out.println("Student already exists. Skipping insertion.");
+                return;
+            }
+
+            insertStmt.setString(1, studentName);
+            insertStmt.executeUpdate();
+            System.out.println("Insert to database complete");
 
         } catch (SQLException e) {
             e.printStackTrace();
