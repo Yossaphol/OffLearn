@@ -37,6 +37,15 @@ public class pChatTeacherController implements Initializable {
     @FXML
     private ListView<String> studentList;
 
+    @FXML
+    private ImageView currStudentImg;
+
+    @FXML
+    private Label currStudentName;
+
+    @FXML
+    private Button myCourse;
+
     private Map<String, List<HBox>> chatHistory = new HashMap<>();
     private String selectedStudent;
 
@@ -46,6 +55,8 @@ public class pChatTeacherController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         spMain.vvalueProperty().bind(vboxMessage.heightProperty());
+        myCourse.setStyle("-fx-background-color: linear-gradient(to right, #0675DE, #033F78); " +
+                "-fx-background-radius: 15px 15px 15px 15px;");
 
         stdDb = new StudentDBConnect();
         loadStudentList();
@@ -92,7 +103,8 @@ public class pChatTeacherController implements Initializable {
         studentList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 selectedStudent = newValue;
-                vboxMessage.getChildren().clear();
+                currStudentName.setText(selectedStudent);
+                currStudentImg.setImage(new Image(getClass().getResource("/img/Profile/user.png").toExternalForm()));
                 loadChatHistory(selectedStudent);
                 System.out.println("Selected student: " + selectedStudent);
             }
@@ -100,12 +112,14 @@ public class pChatTeacherController implements Initializable {
 
 
         sendButton.setOnAction(event -> sendMessage());
+        tfMessage.setOnAction(event -> sendMessage());
+
     }
 
     private void sendMessage() {
         if (selectedStudent != null && !tfMessage.getText().isEmpty()) {
             String messageToSend = tfMessage.getText();
-            addMessage(messageToSend, Pos.CENTER_RIGHT, "#DB9DFF");
+            addMessage(messageToSend, Pos.CENTER_RIGHT, "#81C2FF");
             server.sendMessageToStudent(selectedStudent, messageToSend);
             tfMessage.clear();
         } else {
@@ -154,7 +168,7 @@ public class pChatTeacherController implements Initializable {
     public void receiveMessage(String studentName, String message) {
         Platform.runLater(() -> {
             if (selectedStudent != null && selectedStudent.equals(studentName)) {
-                addMessage(message, Pos.CENTER_LEFT, "#9FE2BF");
+                addMessage(message, Pos.CENTER_LEFT, "#D9D9D9");
             }
             chatHistory.computeIfAbsent(studentName, k -> new ArrayList<>()).add(createMessageBox(message, Pos.CENTER_LEFT, "#9FE2BF"));
         });
