@@ -36,6 +36,21 @@ public class pChatController implements Initializable {
     @FXML
     private ListView<String> teacherList;
 
+    @FXML
+    private Button allCourse;
+
+    @FXML
+    private Button myCourse;
+
+    @FXML
+    private HBox currentTeacher;
+
+    @FXML
+    private ImageView currentTeacherImg;
+
+    @FXML
+    private Label currentTeacherName;
+
     private Map<String, List<HBox>> chatHistory = new HashMap<>();
     private Map<String, Client> clientMap = new HashMap<>();
     private String selectedTeacher;
@@ -45,6 +60,10 @@ public class pChatController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         spMain.vvalueProperty().bind(vboxMessage.heightProperty());
+        allCourse.setStyle("-fx-background-color: linear-gradient(to bottom, #410066, #8100CC);" +
+                "-fx-background-radius: 10px 10px 10px 10px;");
+        myCourse.setStyle("-fx-background-color: linear-gradient(to right, #410066, #8100CC);" +
+                "-fx-background-radius: 15px 15px 15px 15px;");
 
         teacherDb = new TeacherDBConnect();
         loadTeacherList();
@@ -58,6 +77,8 @@ public class pChatController implements Initializable {
         });
 
         sendButton.setOnAction(event -> sendMessage());
+        tfMessage.setOnAction(event -> sendMessage());
+
     }
 
     private void switchTeacher(String newTeacher) {
@@ -75,6 +96,10 @@ public class pChatController implements Initializable {
         clientMap.put(selectedTeacher, client);
 
         Platform.runLater(() -> {
+
+            currentTeacherName.setText(selectedTeacher);
+            currentTeacherImg.setImage(new Image(getClass().getResource("/img/Profile/user.png").toExternalForm()));
+
             vboxMessage.getChildren().clear();
             loadChatHistory(selectedTeacher);
         });
@@ -86,24 +111,29 @@ public class pChatController implements Initializable {
             return;
         }
 
-        Platform.runLater(() -> addMessage(message, Pos.CENTER_LEFT, "#9FE2BF"));
+        Platform.runLater(() -> addMessage(message, Pos.CENTER_LEFT, "D9D9D9"));
     }
 
     private void sendMessage() {
-        if (selectedTeacher != null && clientMap.containsKey(selectedTeacher)) {
+        if (selectedTeacher != null) {
             String messageToSend = tfMessage.getText();
             if (!messageToSend.isEmpty()) {
                 addMessage(messageToSend, Pos.CENTER_RIGHT, "#DB9DFF");
 
                 Client client = clientMap.get(selectedTeacher);
-                client.sendMessage(messageToSend);
+                if (client != null) {
+                    client.sendMessage(messageToSend);
+                } else {
+                    System.out.println("Teacher is offline, storing message.");
+                }
 
                 Platform.runLater(() -> tfMessage.clear());
             }
         } else {
-            System.out.println("Please selected teacher");
+            System.out.println("Please select a teacher");
         }
     }
+
 
     public void addMessage(String message, Pos position, String color) {
         HBox hBox = new HBox();

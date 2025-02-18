@@ -345,24 +345,40 @@
          <center>
             <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <ScrollPane fx:id="spMain" prefHeight="679.0" prefWidth="860.0" vbarPolicy="ALWAYS">
+                  <HBox fx:id="currentTeacher" alignment="CENTER_LEFT" prefHeight="155.0" prefWidth="860.0">
+                     <children>
+                        <ImageView fx:id="currentTeacherImg" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label fx:id="currentTeacherName" textFill="#8100cc">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Kodchasan Regular" size="16.0" />
+                           </font>
+                        </Label>
+                     </children></HBox>
+                  <ScrollPane fx:id="spMain" prefHeight="449.0" prefWidth="860.0" vbarPolicy="ALWAYS">
                      <content>
                         <VBox fx:id="vboxMessage" prefHeight="172.0" prefWidth="843.0" />
                      </content>
                   </ScrollPane>
-                  <HBox alignment="CENTER" prefHeight="390.0" prefWidth="860.0" style="-fx-background-color: white;">
+                  <HBox alignment="CENTER" prefHeight="223.0" prefWidth="860.0" style="-fx-background-color: white;">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="49.0" style="-fx-background-color: &quot;8100CC&quot;; -fx-background-radius: 10;" text="+" textFill="WHITE">
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="49.0" style="-fx-background-color: &quot;8100CC&quot;; -fx-background-radius: 10 0 0 10;" text="+" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Button>
-                        <TextField fx:id="tfMessage" prefHeight="50.0" prefWidth="320.0" promptText="เขียนข้อความ" style="-fx-background-radius: 10;">
+                        <TextField fx:id="tfMessage" prefHeight="50.0" prefWidth="320.0" promptText="เขียนข้อความ" style="-fx-background-radius: 0 10 10 0; -fx-border-color: &quot;8100CC&quot;; -fx-border-radius: 0 10 10 0;">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                            <padding>
-                              <Insets left="30.0" />
+                              <Insets left="20.0" />
                            </padding>
                         </TextField>
                         <Button fx:id="sendButton" mnemonicParsing="false" prefHeight="45.0" prefWidth="76.0" style="-fx-background-color: &quot;8100CC&quot;; -fx-background-radius: 10;" text="SEND" textFill="WHITE">
