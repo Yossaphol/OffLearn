@@ -169,6 +169,8 @@ public class pChatTeacherController implements Initializable {
         Platform.runLater(() -> {
             if (selectedStudent != null && selectedStudent.equals(studentName)) {
                 addMessage(message, Pos.CENTER_LEFT, "#D9D9D9");
+            } else {
+                showNotification(studentName, message);
             }
             chatHistory.computeIfAbsent(studentName, k -> new ArrayList<>()).add(createMessageBox(message, Pos.CENTER_LEFT, "#9FE2BF"));
         });
@@ -192,4 +194,7 @@ public class pChatTeacherController implements Initializable {
         return studentList.getItems();
     }
 
+    private void showNotification(String studentName, String message) {
+        System.out.println("New message from " + studentName + ": " + message);
+    }
 }
