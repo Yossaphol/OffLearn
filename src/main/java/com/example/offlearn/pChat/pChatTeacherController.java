@@ -1,6 +1,8 @@
 package com.example.offlearn.pChat;
 
+import com.example.offlearn.pChat.DataBase.ChatHistoryDB;
 import com.example.offlearn.pChat.DataBase.StudentDBConnect;
+import com.example.offlearn.pChat.DataBase.TeacherDBConnect;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -51,6 +53,8 @@ public class pChatTeacherController implements Initializable {
 
     private Server server;
     private StudentDBConnect stdDb;
+    private ChatHistoryDB chatHistoryDB;
+    private TeacherDBConnect teacherDBConnect;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -59,6 +63,8 @@ public class pChatTeacherController implements Initializable {
                 "-fx-background-radius: 15px 15px 15px 15px;");
 
         stdDb = new StudentDBConnect();
+        chatHistoryDB = new ChatHistoryDB();
+        teacherDBConnect = new TeacherDBConnect();
         loadStudentList();
 
         vboxMessage.getChildren().clear();
@@ -105,13 +111,23 @@ public class pChatTeacherController implements Initializable {
                 selectedStudent = newValue;
                 currStudentName.setText(selectedStudent);
                 currStudentImg.setImage(new Image(getClass().getResource("/img/Profile/user.png").toExternalForm()));
-                loadChatHistory(selectedStudent);
-                System.out.println("Selected student: " + selectedStudent);
+
+                int teacherId = teacherDBConnect.getTeacherId(server.getTeacherName());
+                int studentId = stdDb.getStudentID(selectedStudent);
+
+                loadChatHistoryFromDB(teacherId, studentId);
             }
         });
 
 
-        sendButton.setOnAction(event -> sendMessage());
+        sendButton.setOnAction(event -> {
+            sendMessage();
+
+            int teacherId = teacherDBConnect.getTeacherId(server.getTeacherName());
+            int studentId = stdDb.getStudentID(selectedStudent);
+            loadChatHistoryFromDB(teacherId, studentId);
+        });
+
         tfMessage.setOnAction(event -> sendMessage());
 
     }
@@ -121,11 +137,17 @@ public class pChatTeacherController implements Initializable {
             String messageToSend = tfMessage.getText();
             addMessage(messageToSend, Pos.CENTER_RIGHT, "#81C2FF");
             server.sendMessageToStudent(selectedStudent, messageToSend);
+
+            int sender_id = teacherDBConnect.getTeacherId(server.getTeacherName());
+            int receive_id = stdDb.getStudentID(selectedStudent);
+            chatHistoryDB.saveChatMessage(sender_id, "teacher", receive_id, "student", messageToSend);
+
             tfMessage.clear();
         } else {
             System.out.println("Please select student");
         }
     }
+
 
     public void addMessage(String message, Pos position, String color) {
         HBox hBox = new HBox();
@@ -141,14 +163,6 @@ public class pChatTeacherController implements Initializable {
         chatHistory.computeIfAbsent(selectedStudent, k -> new ArrayList<>()).add(hBox);
 
         Platform.runLater(() -> vboxMessage.getChildren().add(hBox));
-    }
-
-    private void loadChatHistory(String studentName) {
-        Platform.runLater(() -> {
-            vboxMessage.getChildren().clear();
-            List<HBox> history = chatHistory.getOrDefault(studentName, new ArrayList<>());
-            vboxMessage.getChildren().addAll(history);
-        });
     }
 
     public void addStudent(String studentName) {
@@ -170,7 +184,7 @@ public class pChatTeacherController implements Initializable {
             if (selectedStudent != null && selectedStudent.equals(studentName)) {
                 addMessage(message, Pos.CENTER_LEFT, "#D9D9D9");
             }
-            chatHistory.computeIfAbsent(studentName, k -> new ArrayList<>()).add(createMessageBox(message, Pos.CENTER_LEFT, "#9FE2BF"));
+            chatHistory.computeIfAbsent(studentName, k -> new ArrayList<>()).add(createMessageBox(message, Pos.CENTER_LEFT, "#D9D9D9"));
         });
     }
 
@@ -191,5 +205,25 @@ public class pChatTeacherController implements Initializable {
     public ObservableList<String> getStudentList() {
         return studentList.getItems();
     }
+
+    private void loadChatHistoryFromDB(int teacherId, int studentId) {
+        vboxMessage.getChildren().clear();
+
+        List<Map<String, String>> messages = chatHistoryDB.getAllMessages(teacherId, studentId);
+
+        for (Map<String, String> msgData : messages) {
+            int senderId = Integer.parseInt(msgData.get("sender_id"));
+            String msgText = msgData.get("message_text");
+
+            if (senderId == teacherId) {
+                addMessage(msgText, Pos.CENTER_RIGHT, "#81C2FF"); // ข้อความที่ครูส่ง
+            } else {
+                addMessage(msgText, Pos.CENTER_LEFT, "#D9D9D9"); // ข้อความที่นักเรียนส่ง
+            }
+        }
+    }
+
+
+
 
 }

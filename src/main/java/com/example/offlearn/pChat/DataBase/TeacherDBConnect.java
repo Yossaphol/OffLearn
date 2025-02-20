@@ -72,4 +72,20 @@ public class TeacherDBConnect {
             e.printStackTrace();
         }
     }
+
+    public int getTeacherId(String teacherName) {
+        String query = "SELECT TeacherID FROM teacherlist WHERE name = ?";
+        try (Connection conn = connectDB();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, teacherName);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("TeacherID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
 }

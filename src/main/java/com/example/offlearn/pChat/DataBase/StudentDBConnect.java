@@ -31,4 +31,19 @@ public class StudentDBConnect {
     }
 
 
+    public int getStudentID(String studentName) {
+        String query = "SELECT StudentID FROM studentlist WHERE name = ?";
+        try (Connection conn = connectDB();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, studentName);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("StudentID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1; // ถ้าไม่เจอ
+    }
+
 }

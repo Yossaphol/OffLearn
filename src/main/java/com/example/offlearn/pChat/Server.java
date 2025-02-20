@@ -38,6 +38,10 @@ public class Server {
         }
     }
 
+    public String getTeacherName(){
+        return this.teacherName;
+    }
+
     private void handleStudent(Socket socket) {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
