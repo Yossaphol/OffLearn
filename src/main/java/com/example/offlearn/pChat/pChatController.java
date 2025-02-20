@@ -1,6 +1,8 @@
 package com.example.offlearn.pChat;
 
+import com.example.offlearn.pChat.DataBase.StudentsDBConnect;
 import com.example.offlearn.pChat.DataBase.TeacherDBConnect;
+import com.example.offlearn.pChat.DataBase.ChatHistoryDB;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -55,6 +57,8 @@ public class pChatController implements Initializable {
     private Map<String, Client> clientMap = new HashMap<>();
     private String selectedTeacher;
     private TeacherDBConnect teacherDb;
+    private ChatHistoryDB chatHistoryDB;
+    private StudentsDBConnect studentsDBConnect;
     private String studentName = "StudentTest";
 
     @Override
@@ -66,6 +70,8 @@ public class pChatController implements Initializable {
                 "-fx-background-radius: 15px 15px 15px 15px;");
 
         teacherDb = new TeacherDBConnect();
+        chatHistoryDB = new ChatHistoryDB();
+        studentsDBConnect = new StudentsDBConnect();
         loadTeacherList();
 
         vboxMessage.getChildren().clear();
@@ -82,11 +88,13 @@ public class pChatController implements Initializable {
     }
 
     private void switchTeacher(String newTeacher) {
-        if (selectedTeacher != null && clientMap.containsKey(selectedTeacher)) {
-            clientMap.get(selectedTeacher).closeConnection();
+        String oldTeacher = selectedTeacher;
+        selectedTeacher = newTeacher;
+
+        if (oldTeacher != null && clientMap.containsKey(oldTeacher)) {
+            clientMap.get(oldTeacher).closeConnection();
         }
 
-        selectedTeacher = newTeacher;
         String teacherIP = teacherDb.getTeacherIP(selectedTeacher);
         int teacherPort = teacherDb.getTeacherPort(selectedTeacher);
 
@@ -96,7 +104,6 @@ public class pChatController implements Initializable {
         clientMap.put(selectedTeacher, client);
 
         Platform.runLater(() -> {
-
             currentTeacherName.setText(selectedTeacher);
             currentTeacherImg.setImage(new Image(getClass().getResource("/img/Profile/user.png").toExternalForm()));
 
@@ -105,13 +112,16 @@ public class pChatController implements Initializable {
         });
     }
 
+
     public void receiveMessage(String message) {
         if (selectedTeacher == null) {
             System.out.println("Don't selected");
             return;
         }
 
-        Platform.runLater(() -> addMessage(message, Pos.CENTER_LEFT, "D9D9D9"));
+        Platform.runLater(() -> {
+            addMessage(message, Pos.CENTER_LEFT, "D9D9D9");
+        });
     }
 
     private void sendMessage() {
@@ -123,9 +133,11 @@ public class pChatController implements Initializable {
                 Client client = clientMap.get(selectedTeacher);
                 if (client != null) {
                     client.sendMessage(messageToSend);
-                } else {
-                    System.out.println("Teacher is offline, storing message.");
                 }
+
+                int receiverId = teacherDb.getTeacherId(selectedTeacher);
+                int senderId = studentsDBConnect.getStudentID(studentName);
+                chatHistoryDB.saveChatMessage(senderId, "student", receiverId, "teacher", messageToSend);
 
                 Platform.runLater(() -> tfMessage.clear());
             }
@@ -153,19 +165,38 @@ public class pChatController implements Initializable {
     }
 
     private void loadChatHistory(String teacherName) {
+        if (selectedTeacher == null) return;
+
+        vboxMessage.getChildren().clear();
+
+        int studentId = studentsDBConnect.getStudentID(studentName);
+        int teacherId = teacherDb.getTeacherId(teacherName);
+
+        List<String[]> sentMessages = chatHistoryDB.getSentMessages(studentId, teacherId);
+        List<String[]> receivedMessages = chatHistoryDB.getReceivedMessages(studentId, teacherId);
+
+        List<String[]> allMessages = new ArrayList<>();
+        for (String[] msg : sentMessages) {
+            allMessages.add(new String[]{"student", msg[0], msg[1]});
+        }
+        for (String[] msg : receivedMessages) {
+            allMessages.add(new String[]{"teacher", msg[0], msg[1]});
+        }
+
+        allMessages.sort(Comparator.comparing(msg -> msg[2]));
+
         Platform.runLater(() -> {
-            vboxMessage.getChildren().clear();
-            List<HBox> history = chatHistory.getOrDefault(teacherName, new ArrayList<>());
-            vboxMessage.getChildren().addAll(history);
+            for (String[] msgData : allMessages) {
+                String senderType = msgData[0];
+                String message = msgData[1];
+
+                if (senderType.equals("student")) {
+                    addMessage(message, Pos.CENTER_RIGHT, "#DB9DFF");
+                } else {
+                    addMessage(message, Pos.CENTER_LEFT, "#D9D9D9");
+                }
+            }
         });
-    }
-
-    public void addTeacher(String teacherName) {
-        Platform.runLater(() -> teacherList.getItems().add(teacherName));
-    }
-
-    public void removeTeacher(String teacherName) {
-        Platform.runLater(() -> teacherList.getItems().remove(teacherName));
     }
 
     private void loadTeacherList() {

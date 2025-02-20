@@ -1,9 +1,6 @@
 package com.example.offlearn.pChat.DataBase;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class StudentsDBConnect {
     private final String url = "jdbc:mysql://localhost:3306/studentdb?serverTimezone=UTC";
@@ -37,4 +34,28 @@ public class StudentsDBConnect {
             e.printStackTrace();
         }
     }
+
+    public int getStudentID(String studentName) {
+        String query = "SELECT StudentID FROM studentdb.studentlist WHERE name = ?";
+        int studentId = -1;
+
+        try (Connection conn = connectDB();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, studentName);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                studentId = rs.getInt("StudentID");
+            } else {
+                System.out.println("Student not found: " + studentName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Returning StudentID: " + studentId); // Debugging
+        return studentId;
+    }
+
 }
