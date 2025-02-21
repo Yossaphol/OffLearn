@@ -72,7 +72,7 @@
                                                         <Insets bottom="10.0" />
                                                     </VBox.margin>
                                                 </Label>
-                                                <HBox alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
+                                                <HBox fx:id="dashboard" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
                                                     <children>
                                                         <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                                             <image>
@@ -98,7 +98,7 @@
                                                         <Insets bottom="20.0" />
                                                     </VBox.margin>
                                                 </HBox>
-                                                <HBox alignment="BOTTOM_LEFT" prefHeight="19.0" prefWidth="280.0">
+                                                <HBox fx:id="course" alignment="BOTTOM_LEFT" prefHeight="19.0" prefWidth="280.0">
                                                     <children>
                                                         <ImageView fitHeight="29.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                                             <image>
@@ -124,7 +124,7 @@
                                                         <Insets bottom="20.0" />
                                                     </VBox.margin>
                                                 </HBox>
-                                                <HBox alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
+                                                <HBox fx:id="inbox" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
                                                     <children>
                                                         <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                                             <image>
@@ -150,7 +150,7 @@
                                                         <Insets bottom="20.0" />
                                                     </VBox.margin>
                                                 </HBox>
-                                                <HBox alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
+                                                <HBox fx:id="task" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
                                                     <children>
                                                         <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                                             <image>
@@ -176,7 +176,7 @@
                                                         <Insets bottom="20.0" />
                                                     </VBox.margin>
                                                 </HBox>
-                                                <HBox alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
+                                                <HBox fx:id="roadmap" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
                                                     <children>
                                                         <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                                             <image>

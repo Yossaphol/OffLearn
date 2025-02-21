@@ -1,6 +1,5 @@
 package HomeAndNavigation;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -12,7 +11,7 @@ public class Navigator {
 
     public void dashboardRoute(MouseEvent event, HBox hBox){
         try {
-            Pane newPane = FXMLLoader.load(getClass().getResource("/fxml/dashboard.fxml"));
+            Pane newPane = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
             hBox.getChildren().setAll(newPane);
         } catch (IOException e){
             e.printStackTrace();
@@ -21,7 +20,7 @@ public class Navigator {
 
     public void courseRoute(MouseEvent event,HBox hBox){
         try {
-            Pane newPane = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
+            Pane newPane = FXMLLoader.load(getClass().getResource("/fxml/course.fxml"));
             hBox.getChildren().setAll(newPane);
         } catch (IOException e){
             e.printStackTrace();

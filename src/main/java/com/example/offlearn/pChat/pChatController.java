@@ -75,6 +75,13 @@ public class pChatController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         route();
+
+        hoverEffect(dashboard);
+        hoverEffect(course);
+        hoverEffect(inbox);
+        hoverEffect(task);
+        hoverEffect(roadmap);
+
         spMain.vvalueProperty().bind(vboxMessage.heightProperty());
         allCourse.setStyle("-fx-background-color: linear-gradient(to bottom, #410066, #8100CC);" +
                 "-fx-background-radius: 10px 10px 10px 10px;");
@@ -97,6 +104,11 @@ public class pChatController implements Initializable {
         sendButton.setOnAction(event -> sendMessage());
         tfMessage.setOnAction(event -> sendMessage());
 
+    }
+
+    public void hoverEffect(HBox hBox){
+        hBox.setOnMouseEntered(mouseEvent -> hBox.setOpacity(0.3));
+        hBox.setOnMouseExited(mouseEvent -> hBox.setOpacity(1));
     }
 
     public void route(){
