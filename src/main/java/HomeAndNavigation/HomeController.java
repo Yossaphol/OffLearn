@@ -1,6 +1,10 @@
 package HomeAndNavigation;
 
+<<<<<<< HEAD
 import javafx.event.ActionEvent;
+=======
+import com.sun.tools.javac.Main;
+>>>>>>> 80515dcc5c3b3f55b9d00c9d8f479e6b61d6aabf
 import javafx.fxml.FXML;
 import javafx.animation.FadeTransition;
 import javafx.scene.Node;
@@ -15,7 +19,11 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+<<<<<<< HEAD
 import javafx.scene.image.ImageView;
+=======
+import javafx.scene.layout.HBox;
+>>>>>>> 80515dcc5c3b3f55b9d00c9d8f479e6b61d6aabf
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -26,7 +34,12 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+<<<<<<< HEAD
 import javafx.scene.control.Button;
+=======
+import org.w3c.dom.html.HTMLObjectElement;
+
+>>>>>>> 80515dcc5c3b3f55b9d00c9d8f479e6b61d6aabf
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
@@ -56,6 +69,7 @@ public class HomeController implements Initializable {
     public Circle leaderboard_pfp3;
     public Rectangle course_pic;
     public Circle category_pic;
+<<<<<<< HEAD
     public VBox popup;
     public Label progressCategory;
     public ProgressBar categorybar;
@@ -70,6 +84,14 @@ public class HomeController implements Initializable {
     public Label progressCategory2;
     public VBox popup1;
     public VBox popup2;
+=======
+    public HBox dashboard;
+    public HBox course;
+    public HBox inbox;
+    public HBox task;
+    public HBox roadmap;
+
+>>>>>>> 80515dcc5c3b3f55b9d00c9d8f479e6b61d6aabf
     @FXML
     private VBox calendarContainer;
     @FXML
@@ -81,12 +103,16 @@ public class HomeController implements Initializable {
     @FXML
     private NumberAxis yAxis;
 
+    @FXML
+    private HBox MainFrame;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         progressValue();
         calendarDisplay();
         setupBarChart();
         setImgContainer();
+<<<<<<< HEAD
 
         bg.setOnMouseClicked(event -> {
             if (popup.isVisible() && !popup.contains(event.getX() - popup.getLayoutX(), event.getY() - popup.getLayoutY())) {
@@ -163,6 +189,18 @@ public class HomeController implements Initializable {
 
         fade1.play();
         fade.play();
+=======
+        route();
+    }
+
+    public void route(){
+        Navigator nav = new Navigator();
+        dashboard.setOnMouseClicked(mouseEvent -> nav.dashboardRoute(mouseEvent, MainFrame));
+        course.setOnMouseClicked(mouseEvent -> nav.courseRoute(mouseEvent, MainFrame));
+        inbox.setOnMouseClicked(mouseEvent -> nav.inboxRoute(mouseEvent, MainFrame));
+        task.setOnMouseClicked(mouseEvent -> nav.taskRoute(mouseEvent, MainFrame));
+        roadmap.setOnMouseClicked(mouseEvent -> nav.roadmapRoute(mouseEvent, MainFrame));
+>>>>>>> 80515dcc5c3b3f55b9d00c9d8f479e6b61d6aabf
     }
 
     private void setImgContainer(){

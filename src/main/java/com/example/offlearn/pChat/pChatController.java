@@ -1,5 +1,6 @@
 package com.example.offlearn.pChat;
 
+import HomeAndNavigation.Navigator;
 import com.example.offlearn.pChat.DataBase.StudentsDBConnect;
 import com.example.offlearn.pChat.DataBase.TeacherDBConnect;
 import com.example.offlearn.pChat.DataBase.ChatHistoryDB;
@@ -53,6 +54,16 @@ public class pChatController implements Initializable {
     @FXML
     private Label currentTeacherName;
 
+    @FXML
+    private HBox MainFrame;
+
+    @FXML
+    public HBox dashboard;
+    public HBox course;
+    public HBox inbox;
+    public HBox task;
+    public HBox roadmap;
+
     private Map<String, List<HBox>> chatHistory = new HashMap<>();
     private Map<String, Client> clientMap = new HashMap<>();
     private String selectedTeacher;
@@ -63,6 +74,7 @@ public class pChatController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        route();
         spMain.vvalueProperty().bind(vboxMessage.heightProperty());
         allCourse.setStyle("-fx-background-color: linear-gradient(to bottom, #410066, #8100CC);" +
                 "-fx-background-radius: 10px 10px 10px 10px;");
@@ -85,6 +97,15 @@ public class pChatController implements Initializable {
         sendButton.setOnAction(event -> sendMessage());
         tfMessage.setOnAction(event -> sendMessage());
 
+    }
+
+    public void route(){
+        Navigator nav = new Navigator();
+        dashboard.setOnMouseClicked(mouseEvent -> nav.dashboardRoute(mouseEvent, MainFrame));
+        course.setOnMouseClicked(mouseEvent -> nav.courseRoute(mouseEvent, MainFrame));
+        inbox.setOnMouseClicked(mouseEvent -> nav.inboxRoute(mouseEvent, MainFrame));
+        task.setOnMouseClicked(mouseEvent -> nav.taskRoute(mouseEvent, MainFrame));
+        roadmap.setOnMouseClicked(mouseEvent -> nav.roadmapRoute(mouseEvent, MainFrame));
     }
 
     private void switchTeacher(String newTeacher) {
