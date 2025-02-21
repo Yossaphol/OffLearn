@@ -73,7 +73,6 @@ public class HomeController implements Initializable {
     public Label progressCategory2;
     public VBox popup1;
     public VBox popup2;
-
     public HBox dashboard;
     public HBox course;
     public HBox inbox;
@@ -92,9 +91,6 @@ public class HomeController implements Initializable {
     @FXML
     private NumberAxis yAxis;
 
-    @FXML
-    private HBox MainFrame;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         progressValue();
@@ -102,6 +98,12 @@ public class HomeController implements Initializable {
         setupBarChart();
         setImgContainer();
         route();
+
+        hoverEffect(dashboard);
+        hoverEffect(course);
+        hoverEffect(inbox);
+        hoverEffect(task);
+        hoverEffect(roadmap);
 
         bg.setOnMouseClicked(event -> {
             if (popup.isVisible() && !popup.contains(event.getX() - popup.getLayoutX(), event.getY() - popup.getLayoutY())) {
@@ -116,13 +118,17 @@ public class HomeController implements Initializable {
         });
     }
 
+    public void hoverEffect(HBox hBox){
+        hBox.setOnMouseEntered(mouseEvent -> hBox.setOpacity(0.3));
+        hBox.setOnMouseExited(mouseEvent -> hBox.setOpacity(1));
+    }
     public void route(){
         Navigator nav = new Navigator();
-        dashboard.setOnMouseClicked(mouseEvent -> nav.dashboardRoute(mouseEvent, MainFrame));
-        course.setOnMouseClicked(mouseEvent -> nav.courseRoute(mouseEvent, MainFrame));
-        inbox.setOnMouseClicked(mouseEvent -> nav.inboxRoute(mouseEvent, MainFrame));
-        task.setOnMouseClicked(mouseEvent -> nav.taskRoute(mouseEvent, MainFrame));
-        roadmap.setOnMouseClicked(mouseEvent -> nav.roadmapRoute(mouseEvent, MainFrame));
+        dashboard.setOnMouseClicked(mouseEvent -> nav.dashboardRoute(mouseEvent, bg));
+        course.setOnMouseClicked(mouseEvent -> nav.courseRoute(mouseEvent, bg));
+        inbox.setOnMouseClicked(mouseEvent -> nav.inboxRoute(mouseEvent, bg));
+        task.setOnMouseClicked(mouseEvent -> nav.taskRoute(mouseEvent, bg));
+        roadmap.setOnMouseClicked(mouseEvent -> nav.roadmapRoute(mouseEvent, bg));
     }
 
     @FXML
