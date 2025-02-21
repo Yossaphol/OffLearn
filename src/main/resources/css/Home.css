@@ -1,0 +1,28 @@
+.chart-bar{
+-fx-background-radius: 5px 5px 0 0;
+}
+.chart-plot-background{
+-fx-background-color: transparent;
+}
+.progress-bar {
+    -fx-accent: #8100CC;
+    -fx-background-color: #F6F6F6;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent;
+    -fx-pref-height: 20px;
+    -fx-background-insets: 0;
+    -fx-padding:0;
+    -fx-border-color: transparent;
+}
+.image-view-rounded {
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+}
+.overflow-img{
+    -fx-clipping: true;
+}
+.smallProgressbar{
+    -fx-pref-height: 12;
+     -fx-accent: #81CC00;
+    -fx-background-color: #F6F6F6;
+}

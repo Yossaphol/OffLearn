@@ -14,7 +14,7 @@ public class forgotPassword extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(login.class.getResource("/fxml/forgotPassword.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(forgotPassword.class.getResource("/fxml/forgotPassword.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
 
         primaryStage.setTitle("Offlearn");
