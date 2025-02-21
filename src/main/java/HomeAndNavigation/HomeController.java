@@ -1,6 +1,12 @@
 package HomeAndNavigation;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.animation.FadeTransition;
+import javafx.scene.Node;
+import javafx.scene.control.Control;
+import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
@@ -9,6 +15,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -19,7 +26,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-
+import javafx.scene.control.Button;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
@@ -27,9 +34,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+
 public class HomeController implements Initializable {
 
     @FXML
+
     public ProgressBar progress1;
     public ProgressBar progress2;
     public Label progressValue2;
@@ -47,6 +56,20 @@ public class HomeController implements Initializable {
     public Circle leaderboard_pfp3;
     public Rectangle course_pic;
     public Circle category_pic;
+    public VBox popup;
+    public Label progressCategory;
+    public ProgressBar categorybar;
+    public HBox forAddL;
+    public HBox hideIfpopupOpen;
+    public HBox bg;
+    public Circle category_pic1;
+    public Circle category_pic2;
+    public Label progressCategory1;
+    public ProgressBar categorybar1;
+    public ProgressBar categorybar2;
+    public Label progressCategory2;
+    public VBox popup1;
+    public VBox popup2;
     @FXML
     private VBox calendarContainer;
     @FXML
@@ -64,10 +87,85 @@ public class HomeController implements Initializable {
         calendarDisplay();
         setupBarChart();
         setImgContainer();
+
+        bg.setOnMouseClicked(event -> {
+            if (popup.isVisible() && !popup.contains(event.getX() - popup.getLayoutX(), event.getY() - popup.getLayoutY())) {
+                closePopup(popup);
+            }
+            if (popup1.isVisible() && !popup1.contains(event.getX() - popup1.getLayoutX(), event.getY() - popup1.getLayoutY())) {
+                closePopup(popup1);
+            }
+            if (popup2.isVisible() && !popup2.contains(event.getX() - popup2.getLayoutX(), event.getY() - popup2.getLayoutY())) {
+                closePopup(popup2);
+            }
+        });
+    }
+
+    @FXML
+    private void openPopup(ActionEvent event){
+        Button clickedbtn = (Button) event.getSource();
+        switch (clickedbtn.getId()){
+            case "btnpopup":
+                _openPopup(popup);
+                break;
+            case "btnpopup1":
+                _openPopup(popup1);
+                break;
+            case "btnpopup2":
+                _openPopup(popup2);
+                break;
+        }
+    }
+
+    @FXML
+    private void _openPopup(Node popup) {
+        popup.toFront();
+        FadeTransition fade = new FadeTransition(Duration.millis(300), popup);
+        FadeTransition fade1 = new FadeTransition(Duration.millis(300), hideIfpopupOpen);
+
+        if (!popup.isVisible()) {
+            popup.setVisible(true);
+            popup.setOpacity(0);
+            fade.setFromValue(0);
+            fade.setToValue(1);
+            hideIfpopupOpen.setVisible(false);
+            hideIfpopupOpen.setOpacity(0);
+            fade1.setFromValue(1);
+            fade1.setToValue(0);
+            fade1.setOnFinished(e -> hideIfpopupOpen.setVisible(false));
+        } else {
+            hideIfpopupOpen.setVisible(true);
+            hideIfpopupOpen.setOpacity(0);
+            fade1.setFromValue(0);
+            fade1.setToValue(1);
+
+            fade.setFromValue(1);
+            fade.setToValue(0);
+            fade.setOnFinished(e -> popup.setVisible(false));
+        }
+
+        fade1.play();
+        fade.play();
+    }
+
+    private void closePopup(Node popup) {
+        FadeTransition fade = new FadeTransition(Duration.millis(300), popup);
+        FadeTransition fade1 = new FadeTransition(Duration.millis(300), hideIfpopupOpen);
+
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.setOnFinished(e -> popup.setVisible(false));
+
+        hideIfpopupOpen.setVisible(true);
+        hideIfpopupOpen.setOpacity(0);
+        fade1.setFromValue(0);
+        fade1.setToValue(1);
+
+        fade1.play();
+        fade.play();
     }
 
     private void setImgContainer(){
-        // For image containers, since I can't set its radius directly
         Image imgAtBanner = new Image(getClass().getResource("/img/Picture/bg.jpg").toExternalForm());
         imgContainer.setStroke(Color.TRANSPARENT);
         imgContainer.setFill(new ImagePattern(imgAtBanner));
@@ -102,15 +200,26 @@ public class HomeController implements Initializable {
         course_pic.setStroke(Color.TRANSPARENT);
         course_pic.setFill(new ImagePattern(course_pic1));
 
-        Image category_pic1 = new Image(getClass().getResource("/img/icon/code.png").toExternalForm());
+        Image category_pics = new Image(getClass().getResource("/img/icon/code.png").toExternalForm());
         category_pic.setStroke(Color.TRANSPARENT);
-        category_pic.setFill(new ImagePattern(category_pic1));
+        category_pic.setFill(new ImagePattern(category_pics));
+
+        Image category_pic1s = new Image(getClass().getResource("/img/icon/partners.png").toExternalForm());
+        category_pic1.setStroke(Color.TRANSPARENT);
+        category_pic1.setFill(new ImagePattern(category_pic1s));
+
+        Image category_pic2s = new Image(getClass().getResource("/img/icon/artificial-intelligence.png").toExternalForm());
+        category_pic2.setStroke(Color.TRANSPARENT);
+        category_pic2.setFill(new ImagePattern(category_pic2s));
     }
 
     private void progressValue(){
         progress1.setProgress(Double.parseDouble(progressValue1.getText().replace("%", "").trim()) / 100);
         progress2.setProgress(Double.parseDouble(progressValue2.getText().replace("%", "").trim()) / 100);
         continueProgress.setProgress(Double.parseDouble(progressOfConValue.getText().replace("%", "").trim()) / 100);
+        categorybar.setProgress(Double.parseDouble(progressCategory.getText().replace("% completed", "").trim()) / 100);
+        categorybar1.setProgress(Double.parseDouble(progressCategory1.getText().replace("% completed", "").trim()) / 100);
+        categorybar2.setProgress(Double.parseDouble(progressCategory2.getText().replace("% completed", "").trim()) / 100);
     }
 
 
@@ -135,7 +244,6 @@ public class HomeController implements Initializable {
 
         for (int i = 0; i < chartData.size(); i++) {
             XYChart.Data<String, Number> data = chartData.get(i);
-
             if (i % 2 == 0) {
                 series.getData().add(data);
                 data.nodeProperty().addListener((observable, oldNode, newNode) -> {
@@ -152,11 +260,8 @@ public class HomeController implements Initializable {
                 });
             }
         }
-
         barChart.getData().add(series);
     }
-
-
 
 
 }
