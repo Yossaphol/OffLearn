@@ -27,13 +27,13 @@
 
 <HBox fx:id="MainFrame" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HomeAndNavigation.HomeController">
    <children>
-      <ScrollPane prefHeight="1043.0" prefWidth="1440.0">
+      <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1024.0" prefWidth="1440.0" HBox.hgrow="ALWAYS">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1024.0" prefWidth="1424.0">
+            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="1024.0" prefWidth="1440.0">
                <children>
                   <HBox prefHeight="1011.0" prefWidth="1440.0">
                      <children>
-                        <VBox fx:id="leftWrapper" alignment="CENTER" minWidth="300.0" prefHeight="1024.0" prefWidth="293.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;">
+                        <VBox fx:id="leftWrapper" alignment="CENTER" minWidth="300.0" prefHeight="1024.0" prefWidth="293.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;" HBox.hgrow="ALWAYS">
                            <children>
                               <HBox alignment="CENTER" prefHeight="66.0" prefWidth="280.0">
                                  <children>
@@ -72,7 +72,7 @@
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <HBox fx:id="dashborad" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
+                                    <HBox fx:id="dashboard" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
                                        <children>
                                           <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -297,7 +297,7 @@
                               </VBox>
                            </children>
                         </VBox>
-                        <VBox prefHeight="1024.0" prefWidth="1139.0" style="-fx-background-color: #FBFBFB;">
+                        <VBox prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: #FBFBFB;" HBox.hgrow="ALWAYS">
                            <children>
                               <Pane prefHeight="62.0" prefWidth="1139.0" />
                               <HBox alignment="CENTER" prefHeight="75.0" prefWidth="1139.0" style="-fx-background-color: #FBFBFB;">

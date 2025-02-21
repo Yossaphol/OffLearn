@@ -3,6 +3,8 @@ module com.example.offlearn {
     requires javafx.fxml;
     requires java.sql;
     requires java.desktop;
+    requires jdk.xml.dom;
+    requires jdk.compiler;
 
 
     opens  com.example.offlearn.pChat to javafx.fxml;
@@ -14,5 +16,13 @@ module com.example.offlearn {
     opens HomeAndNavigation to javafx.fxml;
     exports HomeAndNavigation;
 
+    opens dashboard to javafx.fxml;
+    exports dashboard;
+
+    opens roadmap to javafx.fxml;
+    exports roadmap;
+
+    opens task to javafx.fxml;
+    exports task;
 
 }

@@ -1,5 +1,6 @@
 package HomeAndNavigation;
 
+import com.sun.tools.javac.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,6 +10,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -19,6 +21,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import org.w3c.dom.html.HTMLObjectElement;
 
 import java.awt.*;
 import java.io.IOException;
@@ -47,6 +50,12 @@ public class HomeController implements Initializable {
     public Circle leaderboard_pfp3;
     public Rectangle course_pic;
     public Circle category_pic;
+    public HBox dashboard;
+    public HBox course;
+    public HBox inbox;
+    public HBox task;
+    public HBox roadmap;
+
     @FXML
     private VBox calendarContainer;
     @FXML
@@ -58,12 +67,25 @@ public class HomeController implements Initializable {
     @FXML
     private NumberAxis yAxis;
 
+    @FXML
+    private HBox MainFrame;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         progressValue();
         calendarDisplay();
         setupBarChart();
         setImgContainer();
+        route();
+    }
+
+    public void route(){
+        Navigator nav = new Navigator();
+        dashboard.setOnMouseClicked(mouseEvent -> nav.dashboardRoute(mouseEvent, MainFrame));
+        course.setOnMouseClicked(mouseEvent -> nav.courseRoute(mouseEvent, MainFrame));
+        inbox.setOnMouseClicked(mouseEvent -> nav.inboxRoute(mouseEvent, MainFrame));
+        task.setOnMouseClicked(mouseEvent -> nav.taskRoute(mouseEvent, MainFrame));
+        roadmap.setOnMouseClicked(mouseEvent -> nav.roadmapRoute(mouseEvent, MainFrame));
     }
 
     private void setImgContainer(){
