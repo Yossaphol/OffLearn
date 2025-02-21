@@ -460,34 +460,383 @@
                                                             </children>
                                                         </Pane>
                                                         <Pane prefHeight="15.0" prefWidth="844.0" />
-                                                        <Pane prefHeight="36.0" prefWidth="844.0">
+                                                        <Pane prefHeight="30.0" prefWidth="799.0">
                                                             <children>
-                                                                <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="844.0">
-                                                                    <children>
-                                                                        <Label prefHeight="26.0" prefWidth="708.0" text="หมวดหมู่">
-                                                                            <font>
-                                                                                <Font name="Noto Sans Thai Regular" size="16.0" />
-                                                                            </font>
-                                                                            <padding>
-                                                                                <Insets left="50.0" />
-                                                                            </padding>
-                                                                        </Label>
-                                                                        <Label alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="115.0" text="ดูทั้งหมด" textFill="#8100cc" underline="true">
-                                                                            <font>
-                                                                                <Font name="Noto Sans Thai Regular" size="16.0" />
-                                                                            </font>
-                                                                            <padding>
-                                                                                <Insets right="50.0" />
-                                                                            </padding>
-                                                                            <cursor>
-                                                                                <Cursor fx:constant="HAND" />
-                                                                            </cursor>
-                                                                        </Label>
-                                                                    </children>
-                                                                </HBox>
+                                                <VBox layoutX="31.0" prefHeight="167.0" prefWidth="754.0">
+                                                   <children>
+                                                                      <HBox alignment="TOP_CENTER" prefHeight="35.0" prefWidth="754.0">
+                                                                          <children>
+                                                                              <Label prefHeight="26.0" prefWidth="675.0" text="หมวดหมู่">
+                                                                                  <font>
+                                                                                      <Font name="Noto Sans Thai Regular" size="16.0" />
+                                                                                  </font>
+                                                                                  <padding>
+                                                                                      <Insets left="50.0" />
+                                                                                  </padding>
+                                                                              </Label>
+                                                                              <Label alignment="TOP_RIGHT" prefHeight="26.0" prefWidth="113.0" text="ดูทั้งหมด" textFill="#8100cc">
+                                                                                  <font>
+                                                                                      <Font name="Noto Sans Thai Regular" size="16.0" />
+                                                                                  </font>
+                                                                                  <cursor>
+                                                                                      <Cursor fx:constant="HAND" />
+                                                                                  </cursor>
+                                                                              </Label>
+                                                                          </children>
+                                                                      </HBox>
+                                                      <VBox alignment="CENTER" prefHeight="134.0" prefWidth="754.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                                                         <effect>
+                                                            <DropShadow>
+                                                               <color>
+                                                                  <Color red="0.7699999809265137" green="0.7699999809265137" blue="0.7699999809265137" opacity="0.25" />
+                                                               </color>
+                                                            </DropShadow>
+                                                         </effect>
+                                                         <children>
+                                                            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="807.0">
+                                                               <children>
+                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                                                                     <effect>
+                                                                        <DropShadow>
+                                                                           <color>
+                                                                              <Color red="0.7699999809265137" green="0.7699999809265137" blue="0.7699999809265137" opacity="0.25" />
+                                                                           </color>
+                                                                        </DropShadow>
+                                                                     </effect>
+                                                                     <HBox.margin>
+                                                                        <Insets left="10.0" right="10.0" />
+                                                                     </HBox.margin>
+                                                                     <children>
+                                                                        <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                                                           <image>
+                                                                              <Image url="@../img/icon/code.png" />
+                                                                           </image>
+                                                                        </ImageView>
+                                                                        <VBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="92.0">
+                                                                           <children>
+                                                                              <Label text="Coding">
+                                                                                 <font>
+                                                                                    <Font name="Kodchasan Bold" size="14.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                              <ProgressBar prefHeight="7.0" prefWidth="77.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../css/Home.css" />
+                                                                           </children>
+                                                                           <padding>
+                                                                              <Insets left="7.0" right="7.0" />
+                                                                           </padding>
+                                                                        </VBox>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                                                                     <effect>
+                                                                        <DropShadow>
+                                                                           <color>
+                                                                              <Color red="0.7699999809265137" green="0.7699999809265137" blue="0.7699999809265137" opacity="0.25" />
+                                                                           </color>
+                                                                        </DropShadow>
+                                                                     </effect>
+                                                                     <children>
+                                                                        <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                                                           <image>
+                                                                              <Image url="@../img/icon/code.png" />
+                                                                           </image>
+                                                                        </ImageView>
+                                                                        <VBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="92.0">
+                                                                           <children>
+                                                                              <Label text="Coding">
+                                                                                 <font>
+                                                                                    <Font name="Kodchasan Bold" size="14.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                              <ProgressBar prefHeight="7.0" prefWidth="77.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../css/Home.css" />
+                                                                           </children>
+                                                                           <padding>
+                                                                              <Insets left="7.0" right="7.0" />
+                                                                           </padding>
+                                                                        </VBox>
+                                                                     </children>
+                                                                     <HBox.margin>
+                                                                        <Insets left="10.0" right="10.0" />
+                                                                     </HBox.margin>
+                                                                  </HBox>
+                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                                                                     <effect>
+                                                                        <DropShadow>
+                                                                           <color>
+                                                                              <Color red="0.7699999809265137" green="0.7699999809265137" blue="0.7699999809265137" opacity="0.25" />
+                                                                           </color>
+                                                                        </DropShadow>
+                                                                     </effect>
+                                                                     <children>
+                                                                        <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                                                           <image>
+                                                                              <Image url="@../img/icon/code.png" />
+                                                                           </image>
+                                                                        </ImageView>
+                                                                        <VBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="92.0">
+                                                                           <children>
+                                                                              <Label text="Coding">
+                                                                                 <font>
+                                                                                    <Font name="Kodchasan Bold" size="14.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                              <ProgressBar prefHeight="7.0" prefWidth="77.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../css/Home.css" />
+                                                                           </children>
+                                                                           <padding>
+                                                                              <Insets left="7.0" right="7.0" />
+                                                                           </padding>
+                                                                        </VBox>
+                                                                     </children>
+                                                                     <HBox.margin>
+                                                                        <Insets left="10.0" right="10.0" />
+                                                                     </HBox.margin>
+                                                                  </HBox>
+                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                                                                     <effect>
+                                                                        <DropShadow>
+                                                                           <color>
+                                                                              <Color red="0.7699999809265137" green="0.7699999809265137" blue="0.7699999809265137" opacity="0.25" />
+                                                                           </color>
+                                                                        </DropShadow>
+                                                                     </effect>
+                                                                     <children>
+                                                                        <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                                                           <image>
+                                                                              <Image url="@../img/icon/code.png" />
+                                                                           </image>
+                                                                        </ImageView>
+                                                                        <VBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="92.0">
+                                                                           <children>
+                                                                              <Label text="Coding">
+                                                                                 <font>
+                                                                                    <Font name="Kodchasan Bold" size="14.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                              <ProgressBar prefHeight="7.0" prefWidth="77.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../css/Home.css" />
+                                                                           </children>
+                                                                           <padding>
+                                                                              <Insets left="7.0" right="7.0" />
+                                                                           </padding>
+                                                                        </VBox>
+                                                                     </children>
+                                                                     <HBox.margin>
+                                                                        <Insets left="10.0" right="10.0" />
+                                                                     </HBox.margin>
+                                                                  </HBox>
+                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                                                                     <effect>
+                                                                        <DropShadow>
+                                                                           <color>
+                                                                              <Color red="0.7699999809265137" green="0.7699999809265137" blue="0.7699999809265137" opacity="0.25" />
+                                                                           </color>
+                                                                        </DropShadow>
+                                                                     </effect>
+                                                                     <children>
+                                                                        <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                                                           <image>
+                                                                              <Image url="@../img/icon/code.png" />
+                                                                           </image>
+                                                                        </ImageView>
+                                                                        <VBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="92.0">
+                                                                           <children>
+                                                                              <Label text="Coding">
+                                                                                 <font>
+                                                                                    <Font name="Kodchasan Bold" size="14.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                              <ProgressBar prefHeight="7.0" prefWidth="77.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../css/Home.css" />
+                                                                           </children>
+                                                                           <padding>
+                                                                              <Insets left="7.0" right="7.0" />
+                                                                           </padding>
+                                                                        </VBox>
+                                                                     </children>
+                                                                     <HBox.margin>
+                                                                        <Insets left="10.0" right="10.0" />
+                                                                     </HBox.margin>
+                                                                  </HBox>
+                                                               </children>
+                                                               <VBox.margin>
+                                                                  <Insets bottom="15.0" />
+                                                               </VBox.margin>
+                                                            </HBox>
+                                                            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="807.0">
+                                                               <children>
+                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                                                                     <effect>
+                                                                        <DropShadow>
+                                                                           <color>
+                                                                              <Color red="0.7699999809265137" green="0.7699999809265137" blue="0.7699999809265137" opacity="0.25" />
+                                                                           </color>
+                                                                        </DropShadow>
+                                                                     </effect>
+                                                                     <HBox.margin>
+                                                                        <Insets left="10.0" right="10.0" />
+                                                                     </HBox.margin>
+                                                                     <children>
+                                                                        <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                                                           <image>
+                                                                              <Image url="@../img/icon/code.png" />
+                                                                           </image>
+                                                                        </ImageView>
+                                                                        <VBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="92.0">
+                                                                           <children>
+                                                                              <Label text="Coding">
+                                                                                 <font>
+                                                                                    <Font name="Kodchasan Bold" size="14.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                              <ProgressBar prefHeight="7.0" prefWidth="77.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../css/Home.css" />
+                                                                           </children>
+                                                                           <padding>
+                                                                              <Insets left="7.0" right="7.0" />
+                                                                           </padding>
+                                                                        </VBox>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                                                                     <effect>
+                                                                        <DropShadow>
+                                                                           <color>
+                                                                              <Color red="0.7699999809265137" green="0.7699999809265137" blue="0.7699999809265137" opacity="0.25" />
+                                                                           </color>
+                                                                        </DropShadow>
+                                                                     </effect>
+                                                                     <children>
+                                                                        <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                                                           <image>
+                                                                              <Image url="@../img/icon/code.png" />
+                                                                           </image>
+                                                                        </ImageView>
+                                                                        <VBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="92.0">
+                                                                           <children>
+                                                                              <Label text="Coding">
+                                                                                 <font>
+                                                                                    <Font name="Kodchasan Bold" size="14.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                              <ProgressBar prefHeight="7.0" prefWidth="77.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../css/Home.css" />
+                                                                           </children>
+                                                                           <padding>
+                                                                              <Insets left="7.0" right="7.0" />
+                                                                           </padding>
+                                                                        </VBox>
+                                                                     </children>
+                                                                     <HBox.margin>
+                                                                        <Insets left="10.0" right="10.0" />
+                                                                     </HBox.margin>
+                                                                  </HBox>
+                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                                                                     <effect>
+                                                                        <DropShadow>
+                                                                           <color>
+                                                                              <Color red="0.7699999809265137" green="0.7699999809265137" blue="0.7699999809265137" opacity="0.25" />
+                                                                           </color>
+                                                                        </DropShadow>
+                                                                     </effect>
+                                                                     <children>
+                                                                        <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                                                           <image>
+                                                                              <Image url="@../img/icon/code.png" />
+                                                                           </image>
+                                                                        </ImageView>
+                                                                        <VBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="92.0">
+                                                                           <children>
+                                                                              <Label text="Coding">
+                                                                                 <font>
+                                                                                    <Font name="Kodchasan Bold" size="14.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                              <ProgressBar prefHeight="7.0" prefWidth="77.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../css/Home.css" />
+                                                                           </children>
+                                                                           <padding>
+                                                                              <Insets left="7.0" right="7.0" />
+                                                                           </padding>
+                                                                        </VBox>
+                                                                     </children>
+                                                                     <HBox.margin>
+                                                                        <Insets left="10.0" right="10.0" />
+                                                                     </HBox.margin>
+                                                                  </HBox>
+                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                                                                     <effect>
+                                                                        <DropShadow>
+                                                                           <color>
+                                                                              <Color red="0.7699999809265137" green="0.7699999809265137" blue="0.7699999809265137" opacity="0.25" />
+                                                                           </color>
+                                                                        </DropShadow>
+                                                                     </effect>
+                                                                     <children>
+                                                                        <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                                                           <image>
+                                                                              <Image url="@../img/icon/code.png" />
+                                                                           </image>
+                                                                        </ImageView>
+                                                                        <VBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="92.0">
+                                                                           <children>
+                                                                              <Label text="Coding">
+                                                                                 <font>
+                                                                                    <Font name="Kodchasan Bold" size="14.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                              <ProgressBar prefHeight="7.0" prefWidth="77.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../css/Home.css" />
+                                                                           </children>
+                                                                           <padding>
+                                                                              <Insets left="7.0" right="7.0" />
+                                                                           </padding>
+                                                                        </VBox>
+                                                                     </children>
+                                                                     <HBox.margin>
+                                                                        <Insets left="10.0" right="10.0" />
+                                                                     </HBox.margin>
+                                                                  </HBox>
+                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                                                                     <effect>
+                                                                        <DropShadow>
+                                                                           <color>
+                                                                              <Color red="0.7699999809265137" green="0.7699999809265137" blue="0.7699999809265137" opacity="0.25" />
+                                                                           </color>
+                                                                        </DropShadow>
+                                                                     </effect>
+                                                                     <children>
+                                                                        <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                                                           <image>
+                                                                              <Image url="@../img/icon/code.png" />
+                                                                           </image>
+                                                                        </ImageView>
+                                                                        <VBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="92.0">
+                                                                           <children>
+                                                                              <Label text="Coding">
+                                                                                 <font>
+                                                                                    <Font name="Kodchasan Bold" size="14.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                              <ProgressBar prefHeight="7.0" prefWidth="77.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../css/Home.css" />
+                                                                           </children>
+                                                                           <padding>
+                                                                              <Insets left="7.0" right="7.0" />
+                                                                           </padding>
+                                                                        </VBox>
+                                                                     </children>
+                                                                     <HBox.margin>
+                                                                        <Insets left="10.0" right="10.0" />
+                                                                     </HBox.margin>
+                                                                  </HBox>
+                                                               </children>
+                                                               <VBox.margin>
+                                                                  <Insets />
+                                                               </VBox.margin>
+                                                            </HBox>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                                         </padding>
+                                                      </VBox>
+                                                   </children>
+                                                </VBox>
                                                             </children>
                                                         </Pane>
-                                                        <HBox alignment="CENTER" prefHeight="67.0" prefWidth="820.0">
+                                                        <HBox alignment="CENTER" prefHeight="67.0" prefWidth="820.0" visible="false">
                                                             <children>
                                                                 <Pane maxHeight="350.0" maxWidth="700.0" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 20;">
                                                                     <effect>
@@ -845,7 +1194,7 @@
                                                                 <Insets right="20.0" />
                                                             </VBox.margin>
                                                         </HBox>
-                                                        <HBox fx:id="hideIfpopupOpen" alignment="TOP_CENTER" prefHeight="54.0" prefWidth="820.0">
+                                                        <HBox fx:id="hideIfpopupOpen" alignment="TOP_CENTER" prefHeight="54.0" prefWidth="820.0" visible="false">
                                                             <children>
                                                                 <Label alignment="TOP_LEFT" prefHeight="33.0" prefWidth="634.0" text="เรียนต่อ">
                                                                     <font>
