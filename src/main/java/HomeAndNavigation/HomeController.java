@@ -67,7 +67,6 @@ public class HomeController implements Initializable {
     }
 
     private void setImgContainer(){
-        // For image containers, since I can't set its radius directly
         Image imgAtBanner = new Image(getClass().getResource("/img/Picture/bg.jpg").toExternalForm());
         imgContainer.setStroke(Color.TRANSPARENT);
         imgContainer.setFill(new ImagePattern(imgAtBanner));
