@@ -1,11 +1,18 @@
 package HomeAndNavigation;
 
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.animation.FadeTransition;
 import javafx.scene.Node;
 import com.sun.tools.javac.Main;
-import javafx.scene.control.Control;
+import javafx.scene.control.*;
+import javafx.animation.FadeTransition;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 import javafx.fxml.FXMLLoader;
@@ -14,8 +21,6 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -27,7 +32,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.control.Button;
+
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
@@ -78,6 +83,26 @@ public class HomeController implements Initializable {
     public HBox inbox;
     public HBox task;
     public HBox roadmap;
+    public HBox home;
+    public ProgressBar codingProgress;
+    public VBox categoryPopup;
+    public HBox category_recommend;
+    public Button seeAll;
+    public ProgressBar businessProgress;
+    public ProgressBar aiProgress;
+    public ProgressBar mathProgress;
+    public Button yourCoursebtn;
+    public Button allCoursebtn;
+    public HBox setting;
+    public HBox logout;
+    public Pane continueCourse1;
+    public Pane topLeaderboard;
+    public Pane smallStatistic;
+    public Button btn_dashboard_atStatistics;
+    public Pane smallUserProfile;
+    public Pane cat1;
+    public Pane cat2;
+    public Pane cat3;
 
 
     @FXML
@@ -104,26 +129,129 @@ public class HomeController implements Initializable {
         hoverEffect(inbox);
         hoverEffect(task);
         hoverEffect(roadmap);
+        hoverEffect(yourCoursebtn);
+        hoverEffect(allCoursebtn);
+        hoverEffect(setting);
+        hoverEffect(logout);
+        hoverEffect(continueCourse1);
+        hoverEffect(topLeaderboard);
+        hoverEffect(smallStatistic);
+        hoverEffect(btn_dashboard_atStatistics);
+        hoverEffect(smallUserProfile);
+        hoverEffect(calendarContainer);
+        hoverEffect(cat1);
+        hoverEffect(cat2);
+        hoverEffect(cat3);
 
-        bg.setOnMouseClicked(event -> {
-            if (popup.isVisible() && !popup.contains(event.getX() - popup.getLayoutX(), event.getY() - popup.getLayoutY())) {
-                closePopup(popup);
-            }
-            if (popup1.isVisible() && !popup1.contains(event.getX() - popup1.getLayoutX(), event.getY() - popup1.getLayoutY())) {
-                closePopup(popup1);
-            }
-            if (popup2.isVisible() && !popup2.contains(event.getX() - popup2.getLayoutX(), event.getY() - popup2.getLayoutY())) {
-                closePopup(popup2);
-            }
+        closePopupAuto();
+    }
+
+
+    public void hoverEffect(Button btn) {
+        ScaleTransition scaleUp = new ScaleTransition(Duration.millis(200), btn);
+        scaleUp.setFromX(1);
+        scaleUp.setFromY(1);
+        scaleUp.setToX(1.05);
+        scaleUp.setToY(1.05);
+        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(200), btn);
+        scaleDown.setFromX(1.05);
+        scaleDown.setFromY(1.05);
+        scaleDown.setToX(1);
+        scaleDown.setToY(1);
+
+        btn.setOnMouseEntered(mouseEvent -> {
+            scaleUp.play();
+        });
+        btn.setOnMouseExited(mouseEvent -> {
+            scaleDown.play();
         });
     }
 
-    public void hoverEffect(HBox hBox){
-        hBox.setOnMouseEntered(mouseEvent -> hBox.setOpacity(0.3));
-        hBox.setOnMouseExited(mouseEvent -> hBox.setOpacity(1));
+    public void hoverEffect(Pane pane) {
+        ScaleTransition scaleUp = new ScaleTransition(Duration.millis(200), pane);
+        scaleUp.setFromX(1);
+        scaleUp.setFromY(1);
+        scaleUp.setToX(1.03);
+        scaleUp.setToY(1.03);
+
+        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(200), pane);
+        scaleDown.setFromX(1.03);
+        scaleDown.setFromY(1.03);
+        scaleDown.setToX(1);
+        scaleDown.setToY(1);
+
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(10);
+        pane.setOnMouseEntered(mouseEvent -> {
+            scaleUp.play();
+            dropShadow.setColor(Color.web("#8100CC", 0.25));
+            pane.setEffect(dropShadow);
+        });
+
+        pane.setOnMouseExited(mouseEvent -> {
+            scaleDown.play();
+            dropShadow.setColor(Color.web("#c6c6c6", 0.25));
+            pane.setEffect(dropShadow);
+        });
     }
+
+    public void hoverEffect(VBox vBox) {
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(10);
+        dropShadow.setColor(Color.TRANSPARENT); // Start with no visible color
+        vBox.setEffect(dropShadow);
+
+        vBox.setOnMouseEntered(mouseEvent -> {
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.ZERO, new KeyValue(dropShadow.colorProperty(), Color.TRANSPARENT)),
+                    new KeyFrame(Duration.millis(200), new KeyValue(dropShadow.colorProperty(), Color.web("#8100CC", 0.25)))
+            );
+            timeline.play();
+        });
+
+        vBox.setOnMouseExited(mouseEvent -> {
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.ZERO, new KeyValue(dropShadow.colorProperty(), dropShadow.getColor())),
+                    new KeyFrame(Duration.millis(200), new KeyValue(dropShadow.colorProperty(), Color.TRANSPARENT))
+            );
+            timeline.play();
+        });
+    }
+
+    public void hoverEffect(HBox hBox) {
+        // Scale transition
+        ScaleTransition scaleUp = new ScaleTransition(Duration.millis(100), hBox);
+        scaleUp.setFromX(1);
+        scaleUp.setFromY(1);
+        scaleUp.setToX(1.05);
+        scaleUp.setToY(1.05);
+
+        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(100), hBox);
+        scaleDown.setFromX(1.05);
+        scaleDown.setFromY(1.05);
+        scaleDown.setToX(1);
+        scaleDown.setToY(1);
+
+        hBox.setOnMouseEntered(mouseEvent -> {
+            scaleUp.play();
+            if(!hBox.getId().equals("logout")){
+                hBox.setStyle("-fx-background-color: #F7E9FF;");
+            }
+            else{
+                hBox.setStyle("-fx-background-color: #FFEBEB;");
+            }
+        });
+
+        hBox.setOnMouseExited(mouseEvent -> {
+            scaleDown.play();
+            hBox.setStyle("-fx-background-color: transparent;");
+        });
+    }
+
+
     public void route(){
         Navigator nav = new Navigator();
+        home.setOnMouseClicked(mouseEvent -> nav.homeRoute(mouseEvent, bg));
         dashboard.setOnMouseClicked(mouseEvent -> nav.dashboardRoute(mouseEvent, bg));
         course.setOnMouseClicked(mouseEvent -> nav.courseRoute(mouseEvent, bg));
         inbox.setOnMouseClicked(mouseEvent -> nav.inboxRoute(mouseEvent, bg));
@@ -144,6 +272,8 @@ public class HomeController implements Initializable {
             case "btnpopup2":
                 _openPopup(popup2);
                 break;
+            case "seeAll":
+                _openPopup(categoryPopup);
         }
     }
 
@@ -152,8 +282,17 @@ public class HomeController implements Initializable {
         popup.toFront();
         FadeTransition fade = new FadeTransition(Duration.millis(300), popup);
         FadeTransition fade1 = new FadeTransition(Duration.millis(300), hideIfpopupOpen);
+        FadeTransition fade2 = new FadeTransition(Duration.millis(300), category_recommend);
 
         if (!popup.isVisible()) {
+            if(popup.getId().equals("categoryPopup")){
+                seeAll.setText("ปิด");
+                category_recommend.setVisible(false);
+                category_recommend.setOpacity(0);
+                fade2.setFromValue(1);
+                fade2.setToValue(0);
+                fade2.setOnFinished(e -> category_recommend.setVisible(false));
+            }
             popup.setVisible(true);
             popup.setOpacity(0);
             fade.setFromValue(0);
@@ -164,21 +303,53 @@ public class HomeController implements Initializable {
             fade1.setToValue(0);
             fade1.setOnFinished(e -> hideIfpopupOpen.setVisible(false));
         } else {
+            if(popup.getId().equals("categoryPopup")){
+                seeAll.setText("ดูทั้งหมด");
+                category_recommend.setVisible(true);
+                category_recommend.setOpacity(0);
+                fade2.setFromValue(0);
+                fade2.setToValue(1);
+            }
             hideIfpopupOpen.setVisible(true);
             hideIfpopupOpen.setOpacity(0);
             fade1.setFromValue(0);
             fade1.setToValue(1);
-
             fade.setFromValue(1);
             fade.setToValue(0);
             fade.setOnFinished(e -> popup.setVisible(false));
         }
-
         fade1.play();
         fade.play();
+        fade2.play();
+    }
+
+    public void closePopupAuto(){
+        bg.setOnMouseClicked(event -> {
+            if (popup.isVisible() && !popup.contains(event.getX() - popup.getLayoutX(), event.getY() - popup.getLayoutY())) {
+                closePopup(popup);
+            }
+            if (popup1.isVisible() && !popup1.contains(event.getX() - popup1.getLayoutX(), event.getY() - popup1.getLayoutY())) {
+                closePopup(popup1);
+            }
+            if (popup2.isVisible() && !popup2.contains(event.getX() - popup2.getLayoutX(), event.getY() - popup2.getLayoutY())) {
+                closePopup(popup2);
+            }
+            if (categoryPopup.isVisible() && !categoryPopup.contains(event.getX() - categoryPopup.getLayoutX(), event.getY() - categoryPopup.getLayoutY())) {
+                seeAll.setText("ดูทั้งหมด");
+                closePopup(categoryPopup);
+            }
+        });
     }
 
     private void closePopup(Node popup) {
+        FadeTransition fade2 = new FadeTransition(Duration.millis(300), category_recommend);
+        if(popup.getId().equals("categoryPopup")){
+            category_recommend.setVisible(true);
+            category_recommend.setOpacity(0);
+            fade2.setFromValue(0);
+            fade2.setToValue(1);
+        }
+
         FadeTransition fade = new FadeTransition(Duration.millis(300), popup);
         FadeTransition fade1 = new FadeTransition(Duration.millis(300), hideIfpopupOpen);
 
@@ -193,6 +364,7 @@ public class HomeController implements Initializable {
 
         fade1.play();
         fade.play();
+        fade2.play();
     }
 
     private void setImgContainer(){
@@ -243,14 +415,21 @@ public class HomeController implements Initializable {
         category_pic2.setFill(new ImagePattern(category_pic2s));
     }
 
-    private void progressValue(){
+    private void progressValue() {
         progress1.setProgress(Double.parseDouble(progressValue1.getText().replace("%", "").trim()) / 100);
         progress2.setProgress(Double.parseDouble(progressValue2.getText().replace("%", "").trim()) / 100);
         continueProgress.setProgress(Double.parseDouble(progressOfConValue.getText().replace("%", "").trim()) / 100);
+
         categorybar.setProgress(Double.parseDouble(progressCategory.getText().replace("% completed", "").trim()) / 100);
         categorybar1.setProgress(Double.parseDouble(progressCategory1.getText().replace("% completed", "").trim()) / 100);
         categorybar2.setProgress(Double.parseDouble(progressCategory2.getText().replace("% completed", "").trim()) / 100);
+
+        codingProgress.setProgress(Double.parseDouble(progressCategory.getText().replace("% completed", "").trim()) / 100);
+        businessProgress.setProgress(Double.parseDouble(progressValue1.getText().replace("%", "").trim()) / 100);
+        mathProgress.setProgress(Double.parseDouble(progressValue2.getText().replace("%", "").trim()) / 100);
+        aiProgress.setProgress(Double.parseDouble(progressValue1.getText().replace("%", "").trim()) / 100);
     }
+
 
 
     private void calendarDisplay(){

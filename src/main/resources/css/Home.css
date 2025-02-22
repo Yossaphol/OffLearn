@@ -27,7 +27,7 @@
     -fx-background-color: #F6F6F6;
 }
 .smallestProgressbar{
--fx-pref-height: 7;
+-fx-pref-height: 11;
  -fx-accent: #81CC00;
     -fx-background-color: #F6F6F6;
 }

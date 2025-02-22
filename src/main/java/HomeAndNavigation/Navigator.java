@@ -7,11 +7,21 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
-public class Navigator {
+public class
+Navigator {
+
+    public void homeRoute(MouseEvent event, HBox hBox){
+        try {
+            Pane newPane = FXMLLoader.load(getClass().getResource("/fxml/Home.fxml"));
+            hBox.getChildren().setAll(newPane);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 
     public void dashboardRoute(MouseEvent event, HBox hBox){
         try {
-            Pane newPane = FXMLLoader.load(getClass().getResource("/fxml/home.fxml"));
+            Pane newPane = FXMLLoader.load(getClass().getResource("/fxml/dashboard.fxml"));
             hBox.getChildren().setAll(newPane);
         } catch (IOException e){
             e.printStackTrace();
@@ -29,7 +39,7 @@ public class Navigator {
 
     public void inboxRoute(MouseEvent event,HBox hBox){
         try {
-            Pane newPane = FXMLLoader.load(getClass().getResource("/fxml/pChat.fxml"));
+            Pane newPane = FXMLLoader.load(getClass().getResource("/fxml/inbox/pChat.fxml"));
             hBox.getChildren().setAll(newPane);
         } catch (IOException e) {
             e.printStackTrace();
