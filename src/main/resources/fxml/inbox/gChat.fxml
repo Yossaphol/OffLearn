@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="890.0" maxWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inbox.pChat.globalButtonController">
+   <children>
+      <HBox prefHeight="174.0" prefWidth="870.0" />
+      <ScrollPane fitToWidth="true" vbarPolicy="ALWAYS">
+         <content>
+            <VBox maxWidth="4000.0" prefHeight="600.0" prefWidth="1484.0">
+            </VBox>
+         </content>
+      </ScrollPane>
+   </children>
+</VBox>

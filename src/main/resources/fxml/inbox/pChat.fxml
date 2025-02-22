@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="MainFrame" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.offlearn.pChat.pChatController">
+<HBox fx:id="MainFrame" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inbox.pChat.pChatController">
    <children>
       <VBox fx:id="leftWrapper" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="280.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;">
          <children>
@@ -63,7 +63,7 @@
                      <children>
                         <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../img/icon/dashboard.png" />
+                              <Image url="@../../img/icon/dashboard.png" />
                            </image>
                         </ImageView>
                         <Label text="Dashboard">
@@ -86,7 +86,7 @@
                      <children>
                         <ImageView fitHeight="29.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../img/icon/audio-book.png" />
+                              <Image url="@../../img/icon/audio-book.png" />
                            </image>
                         </ImageView>
                         <Label text="Course">
@@ -109,7 +109,7 @@
                      <children>
                         <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../img/icon/inbox.png" />
+                              <Image url="@../../img/icon/inbox.png" />
                            </image>
                         </ImageView>
                         <Label text="Inbox" textFill="#8100cc">
@@ -132,7 +132,7 @@
                      <children>
                         <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../img/icon/task.png" />
+                              <Image url="@../../img/icon/task.png" />
                            </image>
                         </ImageView>
                         <Label text="Task">
@@ -155,7 +155,7 @@
                      <children>
                         <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../img/icon/business-plan.png" />
+                              <Image url="@../../img/icon/business-plan.png" />
                            </image>
                         </ImageView>
                         <Label text="Roadmap">
@@ -186,7 +186,7 @@
                   <Font name="Kodchasan Bold" size="20.0" />
                </font></Button>
          </children></VBox>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="SOMETIMES">
+      <BorderPane fx:id="borderPane" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="SOMETIMES">
          <top>
             <HBox alignment="CENTER" prefHeight="134.0" prefWidth="200.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;" BorderPane.alignment="CENTER_LEFT">
                <children>
@@ -205,7 +205,7 @@
                         </TextField>
                         <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../img/icon/search-interface-symbol.png" />
+                              <Image url="@../../img/icon/search-interface-symbol.png" />
                            </image>
                            <StackPane.margin>
                               <Insets left="30.0" />
@@ -226,7 +226,7 @@
                         <Circle fill="WHITE" radius="16.0" stroke="#898989" strokeType="INSIDE" />
                         <ImageView fitHeight="22.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../img/icon/grocery-store.png" />
+                              <Image url="@../../img/icon/grocery-store.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -236,7 +236,7 @@
                   </StackPane>
                   <ImageView fitHeight="22.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../img/icon/settings.png" />
+                        <Image url="@../../img/icon/settings.png" />
                      </image>
                      <HBox.margin>
                         <Insets left="15.0" />
@@ -251,7 +251,7 @@
                      <children>
                         <ImageView fitHeight="24.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../img/icon/logout.png" />
+                              <Image url="@../../img/icon/logout.png" />
                            </image>
                         </ImageView>
                         <Label text="Logout" textFill="RED">
@@ -274,11 +274,11 @@
             </HBox>
          </top>
          <left>
-            <VBox prefHeight="890.0" prefWidth="300.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;" BorderPane.alignment="CENTER">
+            <VBox fx:id="pChatBar" prefHeight="890.0" prefWidth="300.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;" BorderPane.alignment="CENTER">
                <children>
                   <VBox prefHeight="98.0" prefWidth="298.0">
                      <children>
-                        <Label text="Label" textFill="#8100cc">
+                        <Label text="Chat" textFill="#8100cc">
                            <VBox.margin>
                               <Insets left="30.0" />
                            </VBox.margin>
@@ -301,7 +301,7 @@
                               </TextField>
                               <ImageView fitHeight="15.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../img/icon/search-interface-symbol.png" />
+                                    <Image url="@../../img/icon/search-interface-symbol.png" />
                                  </image>
                                  <StackPane.margin>
                                     <Insets left="40.0" top="10.0" />
@@ -311,9 +311,9 @@
                         </StackPane>
                      </children>
                   </VBox>
-                  <HBox prefHeight="59.0" prefWidth="298.0">
+                  <HBox prefHeight="76.0" prefWidth="339.0">
                      <children>
-                        <VBox alignment="CENTER" prefHeight="76.0" prefWidth="68.0">
+                        <VBox prefHeight="76.0" prefWidth="278.0">
                            <children>
                               <Label text="สาธารณะ" textFill="#8100cc">
                                  <font>
@@ -323,21 +323,34 @@
                                     <Insets bottom="10.0" />
                                  </VBox.margin>
                               </Label>
-                              <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../img/icon/earth.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </VBox>
-                        <VBox alignment="BOTTOM_LEFT" prefHeight="69.0" prefWidth="100.0">
-                           <children>
-                              <Label text="Global Chat | คอมมิวนิตู้" textFill="#8100cc">
-                                 <font>
-                                    <Font name="Kodchasan Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label text="99+ ข้อความ" textFill="#8e8e8e" />
+                              <HBox fx:id="globalButton" prefHeight="46.0" prefWidth="96.0">
+                                 <children>
+                                    <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../img/icon/earth.png" />
+                                       </image>
+                                    </ImageView>
+                                    <VBox alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="189.0">
+                                       <children>
+                                          <Label text="Global Chat | คอมมิวนิตี้" textFill="#8100cc">
+                                             <font>
+                                                <Font name="Kodchasan Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="99+ ข้อความ" textFill="#8e8e8e" />
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </HBox>
                            </children>
                         </VBox>
                      </children>
@@ -359,7 +372,7 @@
             </VBox>
          </left>
          <center>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <VBox fx:id="pChatDisplay" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
                   <HBox fx:id="currentTeacher" alignment="CENTER_LEFT" prefHeight="155.0" prefWidth="860.0">
                      <children>

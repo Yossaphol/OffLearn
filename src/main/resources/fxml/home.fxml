@@ -27,7 +27,7 @@
 
 <HBox fx:id="bg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HomeAndNavigation.HomeController">
     <children>
-        <ScrollPane prefHeight="1024.0" prefWidth="1552.0">
+        <ScrollPane prefHeight="1024.0" prefWidth="1552.0" vbarPolicy="ALWAYS" vmax="20.0">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1024.0" prefWidth="1424.0">
                     <children>

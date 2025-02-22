@@ -1,4 +1,4 @@
-package com.example.offlearn.pChat;
+package inbox;
 
 import java.io.*;
 import java.net.*;

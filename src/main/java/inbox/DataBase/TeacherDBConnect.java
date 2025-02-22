@@ -1,4 +1,4 @@
-package com.example.offlearn.pChat.DataBase;
+package inbox.DataBase;
 
 import java.sql.*;
 import java.util.ArrayList;
