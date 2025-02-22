@@ -141,6 +141,7 @@ public class HomeController implements Initializable {
         hoverEffect(calendarContainer);
         hoverEffect(cat1);
         hoverEffect(cat2);
+
         hoverEffect(cat3);
 
         closePopupAuto();
