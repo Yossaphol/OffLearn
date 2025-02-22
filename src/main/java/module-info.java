@@ -7,8 +7,8 @@ module com.example.offlearn {
     requires jdk.compiler;
 
 
-    opens  com.example.offlearn.pChat to javafx.fxml;
-    exports com.example.offlearn.pChat;
+    opens inbox to javafx.fxml;
+    exports inbox;
 
     opens loginAndSignUp to javafx.fxml;
     exports loginAndSignUp;
@@ -24,5 +24,11 @@ module com.example.offlearn {
 
     opens task to javafx.fxml;
     exports task;
+
+    exports inbox.pChat;
+    opens inbox.pChat to javafx.fxml;
+
+    exports inbox.gChat;
+    opens inbox.gChat to javafx.fxml;
 
 }

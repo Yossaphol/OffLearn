@@ -29,7 +29,7 @@ public class Navigator {
 
     public void inboxRoute(MouseEvent event,HBox hBox){
         try {
-            Pane newPane = FXMLLoader.load(getClass().getResource("/fxml/pChat.fxml"));
+            Pane newPane = FXMLLoader.load(getClass().getResource("/fxml/inbox/pChat.fxml"));
             hBox.getChildren().setAll(newPane);
         } catch (IOException e) {
             e.printStackTrace();
