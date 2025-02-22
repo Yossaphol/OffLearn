@@ -274,7 +274,7 @@
             </HBox>
          </top>
          <left>
-            <VBox fx:id="pChatBar" prefHeight="890.0" prefWidth="300.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;" BorderPane.alignment="CENTER">
+            <VBox fx:id="privateBar" prefHeight="890.0" prefWidth="300.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;" BorderPane.alignment="CENTER">
                <children>
                   <VBox prefHeight="98.0" prefWidth="298.0">
                      <children>
@@ -289,7 +289,7 @@
                               <Insets top="20.0" />
                            </padding>
                         </Label>
-                        <StackPane alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="298.0" style="-fx-border-radius: 10px;">
+                        <StackPane alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="298.0" style="-fx-border-radius: 10px;">
                            <children>
                               <TextField prefHeight="27.0" prefWidth="238.0" promptText="ค้นหาบทสนทนา" style="-fx-background-radius: 10;">
                                  <StackPane.margin>

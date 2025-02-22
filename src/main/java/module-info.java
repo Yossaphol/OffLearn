@@ -5,6 +5,7 @@ module com.example.offlearn {
     requires java.desktop;
     requires jdk.xml.dom;
     requires jdk.compiler;
+    requires jdk.dynalink;
 
 
     opens inbox to javafx.fxml;

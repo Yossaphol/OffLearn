@@ -5,7 +5,6 @@ import inbox.Client;
 import inbox.DataBase.StudentsDBConnect;
 import inbox.DataBase.TeacherDBConnect;
 import inbox.DataBase.ChatHistoryDB;
-import inbox.gChat.PChatUI;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import jdk.dynalink.beans.StaticClass;
 
 import java.io.IOException;
 import java.net.URL;
@@ -69,10 +69,9 @@ public class pChatController implements Initializable {
     public HBox task;
     public HBox roadmap;
     public BorderPane borderPane;
-    public VBox pChatBar;
+    public VBox privateBar;
     public VBox pChatDisplay;
     public HBox globalButton;
-    public HBox privateButton;
 
     private Map<String, List<HBox>> chatHistory = new HashMap<>();
     private Map<String, Client> clientMap = new HashMap<>();
@@ -117,20 +116,35 @@ public class pChatController implements Initializable {
 
     }
 
-    public void switchToGlobal(){
+
+    public void switchToGlobal() {
         globalButton.setOnMouseEntered(mouseEvent -> globalButton.setOpacity(0.5));
         globalButton.setOnMouseExited(mouseEvent -> globalButton.setOpacity(1));
 
-        FXMLLoader globalRoute = new FXMLLoader(getClass().getResource("/fxml/inbox/routeToPChat.fxml"));
-        FXMLLoader globalChatDisplay = new FXMLLoader(getClass().getResource("/fxml/inbox/gChat.fxml"));
         globalButton.setOnMouseClicked(mouseEvent -> {
             try {
+                FXMLLoader globalRoute = new FXMLLoader(getClass().getResource("/fxml/inbox/routeToPChat.fxml"));
+                FXMLLoader globalChatDisplay = new FXMLLoader(getClass().getResource("/fxml/inbox/gChat.fxml"));
+
                 borderPane.setLeft(globalRoute.load());
                 borderPane.setCenter(globalChatDisplay.load());
+
+                globalButtonController controller = globalRoute.getController();
+
+                controller.setPrivateButtonClickListener(() -> {
+                    switchBackToDefault();
+                });
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
+    }
+
+
+    private void switchBackToDefault() {
+        borderPane.setLeft(privateBar);
+        borderPane.setCenter(pChatDisplay);
     }
 
     public void hoverEffect(HBox hBox){
