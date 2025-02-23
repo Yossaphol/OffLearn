@@ -8,6 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -32,7 +33,7 @@
                         <Insets bottom="10.0" />
                      </padding>
                   </Label>
-                  <Button mnemonicParsing="false" style="-fx-background-color: &quot;8100CC&quot;; -fx-background-radius: 15;" text="Create your topic" textFill="WHITE">
+                  <Button fx:id="createTopic" mnemonicParsing="false" style="-fx-background-color: &quot;8100CC&quot;; -fx-background-radius: 15;" text="Create your topic" textFill="WHITE">
                      <font>
                         <Font name="Kodchasan Bold" size="17.0" />
                      </font>
@@ -47,280 +48,284 @@
             <Insets left="30.0" top="30.0" />
          </padding>
       </HBox>
-      <ScrollPane prefHeight="761.0" prefWidth="870.0" vbarPolicy="ALWAYS">
-         <content>
-            <VBox prefHeight="753.0" prefWidth="855.0">
-               <padding>
-                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-               </padding>
-               <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="639.0" prefWidth="794.0" style="-fx-border-color: &quot;A8A8A8&quot;; -fx-border-radius: 25;">
+      <StackPane prefHeight="765.0" prefWidth="870.0">
+         <children>
+            <ScrollPane prefHeight="404.0" prefWidth="870.0" vbarPolicy="ALWAYS">
+               <content>
+                  <VBox prefHeight="753.0" prefWidth="855.0">
+                     <padding>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                     </padding>
                      <children>
-                        <HBox prefHeight="113.0" prefWidth="794.0" style="-fx-background-radius: 25 25 0 0; -fx-border-radius: 25 25 0 0; -fx-border-color: &quot;A8A8A8&quot;;">
+                        <VBox alignment="TOP_CENTER" prefHeight="639.0" prefWidth="794.0" style="-fx-border-color: &quot;A8A8A8&quot;; -fx-border-radius: 25;">
                            <children>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                              <HBox prefHeight="113.0" prefWidth="794.0" style="-fx-background-radius: 25 25 0 0; -fx-border-radius: 25 25 0 0; -fx-border-color: &quot;A8A8A8&quot;;">
+                                 <children>
+                                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../img/Profile/man.png" />
+                                       </image>
+                                    </ImageView>
+                                    <VBox prefHeight="57.0" prefWidth="258.0">
+                                       <children>
+                                          <Label text="Student1" textFill="#8100cc">
+                                             <font>
+                                                <Font name="Kodchasan Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="17.00 25/08/2026">
+                                             <font>
+                                                <Font name="Kodchasan Regular" size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" top="20.0" />
+                                 </padding>
+                              </HBox>
+                              <ImageView fitHeight="360.0" fitWidth="488.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../img/Profile/man.png" />
+                                    <Image url="@../../img/Picture/jeswin-thomas-hecib2an4T4-unsplash.jpg" />
                                  </image>
                               </ImageView>
-                              <VBox prefHeight="57.0" prefWidth="258.0">
+                              <TextFlow prefHeight="126.0" prefWidth="793.0" style="-fx-border-color: &quot;A8A8A8&quot;;">
                                  <children>
-                                    <Label text="Student1" textFill="#8100cc">
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="เราเชื่อว่าทุกคนต้องมีอาการที่เรียกว่า 'เบื่อออออ'  'ไม่มีอะไรทำเลยยยยย' นั่งหน้าคอมเข้าแต่เฟชบุค หรือพันทิปจนเบื่อแล้วเบื่ออีกแต่ยังอยากเล่นอินเตอร์เน็ตอยู่ แต่ก็ไม่รู้จะเล่นอะไรแล้ว แต่ก็ยังอยากจะเล่นอยู่นะ (เอ๊ะ ยังไง?)  เราก็กำลังมีอาการอย่างนี้อยู่เลย ก็เข้าๆออกๆเฟชบุค พันทิป อ่านกระทู้นั้นกระทู้นี้ เข้าเว็บนั้นเว็บนี้ จนเรากลับมาเล่น  Tumblr บางคนสงสัยว่าเจ้าเว็บนี้คืออะไร หรือบางคนอาจจะรู้แล้ว">
                                        <font>
-                                          <Font name="Kodchasan Bold" size="14.0" />
+                                          <Font name="Kodchasan Regular" size="14.0" />
                                        </font>
-                                    </Label>
-                                    <Label text="17.00 25/08/2026">
+                                    </Text>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </TextFlow>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="57.0" prefWidth="793.0">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../img/icon/like.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../img/icon/dislike.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <Pane prefHeight="77.0" prefWidth="507.0" />
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../img/icon/comment.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <Label prefHeight="20.0" prefWidth="109.0" text="Comment">
                                        <font>
-                                          <Font name="Kodchasan Regular" size="12.0" />
+                                          <Font name="Kodchasan Regular" size="14.0" />
                                        </font>
                                     </Label>
                                  </children>
-                                 <HBox.margin>
-                                    <Insets left="10.0" />
-                                 </HBox.margin>
-                              </VBox>
-                           </children>
-                           <padding>
-                              <Insets bottom="20.0" left="20.0" top="20.0" />
-                           </padding>
-                        </HBox>
-                        <ImageView fitHeight="360.0" fitWidth="488.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../img/Picture/jeswin-thomas-hecib2an4T4-unsplash.jpg" />
-                           </image>
-                        </ImageView>
-                        <TextFlow prefHeight="126.0" prefWidth="793.0" style="-fx-border-color: &quot;A8A8A8&quot;;">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="เราเชื่อว่าทุกคนต้องมีอาการที่เรียกว่า 'เบื่อออออ'  'ไม่มีอะไรทำเลยยยยย' นั่งหน้าคอมเข้าแต่เฟชบุค หรือพันทิปจนเบื่อแล้วเบื่ออีกแต่ยังอยากเล่นอินเตอร์เน็ตอยู่ แต่ก็ไม่รู้จะเล่นอะไรแล้ว แต่ก็ยังอยากจะเล่นอยู่นะ (เอ๊ะ ยังไง?)  เราก็กำลังมีอาการอย่างนี้อยู่เลย ก็เข้าๆออกๆเฟชบุค พันทิป อ่านกระทู้นั้นกระทู้นี้ เข้าเว็บนั้นเว็บนี้ จนเรากลับมาเล่น  Tumblr บางคนสงสัยว่าเจ้าเว็บนี้คืออะไร หรือบางคนอาจจะรู้แล้ว">
-                                 <font>
-                                    <Font name="Kodchasan Regular" size="14.0" />
-                                 </font>
-                              </Text>
+                                 <padding>
+                                    <Insets bottom="20.0" top="20.0" />
+                                 </padding>
+                              </HBox>
                            </children>
                            <VBox.margin>
-                              <Insets top="20.0" />
+                              <Insets bottom="50.0" />
                            </VBox.margin>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </TextFlow>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="57.0" prefWidth="793.0">
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefHeight="639.0" prefWidth="794.0" style="-fx-border-color: &quot;A8A8A8&quot;; -fx-border-radius: 25;">
                            <children>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../img/icon/like.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../img/icon/dislike.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets left="20.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Pane prefHeight="77.0" prefWidth="507.0" />
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../img/icon/comment.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets right="20.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Label prefHeight="20.0" prefWidth="109.0" text="Comment">
-                                 <font>
-                                    <Font name="Kodchasan Regular" size="14.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <padding>
-                              <Insets bottom="20.0" top="20.0" />
-                           </padding>
-                        </HBox>
-                     </children>
-                     <VBox.margin>
-                        <Insets bottom="50.0" />
-                     </VBox.margin>
-                  </VBox>
-                  <VBox alignment="TOP_CENTER" prefHeight="639.0" prefWidth="794.0" style="-fx-border-color: &quot;A8A8A8&quot;; -fx-border-radius: 25;">
-                     <children>
-                        <HBox prefHeight="113.0" prefWidth="794.0" style="-fx-background-radius: 25 25 0 0; -fx-border-radius: 25 25 0 0; -fx-border-color: &quot;A8A8A8&quot;;">
-                           <children>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../img/Profile/man.png" />
-                                 </image>
-                              </ImageView>
-                              <VBox prefHeight="57.0" prefWidth="258.0">
+                              <HBox prefHeight="113.0" prefWidth="794.0" style="-fx-background-radius: 25 25 0 0; -fx-border-radius: 25 25 0 0; -fx-border-color: &quot;A8A8A8&quot;;">
                                  <children>
-                                    <Label text="Student1" textFill="#8100cc">
+                                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../img/Profile/man.png" />
+                                       </image>
+                                    </ImageView>
+                                    <VBox prefHeight="57.0" prefWidth="258.0">
+                                       <children>
+                                          <Label text="Student1" textFill="#8100cc">
+                                             <font>
+                                                <Font name="Kodchasan Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="17.00 25/08/2026">
+                                             <font>
+                                                <Font name="Kodchasan Regular" size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" top="20.0" />
+                                 </padding>
+                              </HBox>
+                              <ImageView fitHeight="360.0" fitWidth="488.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../img/Picture/jeswin-thomas-hecib2an4T4-unsplash.jpg" />
+                                 </image>
+                              </ImageView>
+                              <TextFlow prefHeight="126.0" prefWidth="793.0" style="-fx-border-color: &quot;A8A8A8&quot;;">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="เราเชื่อว่าทุกคนต้องมีอาการที่เรียกว่า 'เบื่อออออ'  'ไม่มีอะไรทำเลยยยยย' นั่งหน้าคอมเข้าแต่เฟชบุค หรือพันทิปจนเบื่อแล้วเบื่ออีกแต่ยังอยากเล่นอินเตอร์เน็ตอยู่ แต่ก็ไม่รู้จะเล่นอะไรแล้ว แต่ก็ยังอยากจะเล่นอยู่นะ (เอ๊ะ ยังไง?)  เราก็กำลังมีอาการอย่างนี้อยู่เลย ก็เข้าๆออกๆเฟชบุค พันทิป อ่านกระทู้นั้นกระทู้นี้ เข้าเว็บนั้นเว็บนี้ จนเรากลับมาเล่น  Tumblr บางคนสงสัยว่าเจ้าเว็บนี้คืออะไร หรือบางคนอาจจะรู้แล้ว">
                                        <font>
-                                          <Font name="Kodchasan Bold" size="14.0" />
+                                          <Font name="Kodchasan Regular" size="14.0" />
                                        </font>
-                                    </Label>
-                                    <Label text="17.00 25/08/2026">
+                                    </Text>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </TextFlow>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="57.0" prefWidth="793.0">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../img/icon/like.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../img/icon/dislike.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <Pane prefHeight="77.0" prefWidth="507.0" />
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../img/icon/comment.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <Label prefHeight="20.0" prefWidth="109.0" text="Comment">
                                        <font>
-                                          <Font name="Kodchasan Regular" size="12.0" />
+                                          <Font name="Kodchasan Regular" size="14.0" />
                                        </font>
                                     </Label>
                                  </children>
-                                 <HBox.margin>
-                                    <Insets left="10.0" />
-                                 </HBox.margin>
-                              </VBox>
+                                 <padding>
+                                    <Insets bottom="20.0" top="20.0" />
+                                 </padding>
+                              </HBox>
                            </children>
-                           <padding>
-                              <Insets bottom="20.0" left="20.0" top="20.0" />
-                           </padding>
-                        </HBox>
-                        <ImageView fitHeight="360.0" fitWidth="488.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../img/Picture/jeswin-thomas-hecib2an4T4-unsplash.jpg" />
-                           </image>
-                        </ImageView>
-                        <TextFlow prefHeight="126.0" prefWidth="793.0" style="-fx-border-color: &quot;A8A8A8&quot;;">
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefHeight="639.0" prefWidth="794.0" style="-fx-border-color: &quot;A8A8A8&quot;; -fx-border-radius: 25;">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="เราเชื่อว่าทุกคนต้องมีอาการที่เรียกว่า 'เบื่อออออ'  'ไม่มีอะไรทำเลยยยยย' นั่งหน้าคอมเข้าแต่เฟชบุค หรือพันทิปจนเบื่อแล้วเบื่ออีกแต่ยังอยากเล่นอินเตอร์เน็ตอยู่ แต่ก็ไม่รู้จะเล่นอะไรแล้ว แต่ก็ยังอยากจะเล่นอยู่นะ (เอ๊ะ ยังไง?)  เราก็กำลังมีอาการอย่างนี้อยู่เลย ก็เข้าๆออกๆเฟชบุค พันทิป อ่านกระทู้นั้นกระทู้นี้ เข้าเว็บนั้นเว็บนี้ จนเรากลับมาเล่น  Tumblr บางคนสงสัยว่าเจ้าเว็บนี้คืออะไร หรือบางคนอาจจะรู้แล้ว">
-                                 <font>
-                                    <Font name="Kodchasan Regular" size="14.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                           <VBox.margin>
-                              <Insets top="20.0" />
-                           </VBox.margin>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </TextFlow>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="57.0" prefWidth="793.0">
-                           <children>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../img/icon/like.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../img/icon/dislike.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets left="20.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Pane prefHeight="77.0" prefWidth="507.0" />
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../img/icon/comment.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets right="20.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Label prefHeight="20.0" prefWidth="109.0" text="Comment">
-                                 <font>
-                                    <Font name="Kodchasan Regular" size="14.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <padding>
-                              <Insets bottom="20.0" top="20.0" />
-                           </padding>
-                        </HBox>
-                     </children>
-                  </VBox>
-                  <VBox alignment="TOP_CENTER" prefHeight="639.0" prefWidth="794.0" style="-fx-border-color: &quot;A8A8A8&quot;; -fx-border-radius: 25;">
-                     <children>
-                        <HBox prefHeight="113.0" prefWidth="794.0" style="-fx-background-radius: 25 25 0 0; -fx-border-radius: 25 25 0 0; -fx-border-color: &quot;A8A8A8&quot;;">
-                           <children>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../img/Profile/man.png" />
-                                 </image>
-                              </ImageView>
-                              <VBox prefHeight="57.0" prefWidth="258.0">
+                              <HBox prefHeight="113.0" prefWidth="794.0" style="-fx-background-radius: 25 25 0 0; -fx-border-radius: 25 25 0 0; -fx-border-color: &quot;A8A8A8&quot;;">
                                  <children>
-                                    <Label text="Student1" textFill="#8100cc">
+                                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../img/Profile/man.png" />
+                                       </image>
+                                    </ImageView>
+                                    <VBox prefHeight="57.0" prefWidth="258.0">
+                                       <children>
+                                          <Label text="Student1" textFill="#8100cc">
+                                             <font>
+                                                <Font name="Kodchasan Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="17.00 25/08/2026">
+                                             <font>
+                                                <Font name="Kodchasan Regular" size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" top="20.0" />
+                                 </padding>
+                              </HBox>
+                              <ImageView fitHeight="360.0" fitWidth="488.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../img/Picture/jeswin-thomas-hecib2an4T4-unsplash.jpg" />
+                                 </image>
+                              </ImageView>
+                              <TextFlow prefHeight="126.0" prefWidth="793.0" style="-fx-border-color: &quot;A8A8A8&quot;;">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="เราเชื่อว่าทุกคนต้องมีอาการที่เรียกว่า 'เบื่อออออ'  'ไม่มีอะไรทำเลยยยยย' นั่งหน้าคอมเข้าแต่เฟชบุค หรือพันทิปจนเบื่อแล้วเบื่ออีกแต่ยังอยากเล่นอินเตอร์เน็ตอยู่ แต่ก็ไม่รู้จะเล่นอะไรแล้ว แต่ก็ยังอยากจะเล่นอยู่นะ (เอ๊ะ ยังไง?)  เราก็กำลังมีอาการอย่างนี้อยู่เลย ก็เข้าๆออกๆเฟชบุค พันทิป อ่านกระทู้นั้นกระทู้นี้ เข้าเว็บนั้นเว็บนี้ จนเรากลับมาเล่น  Tumblr บางคนสงสัยว่าเจ้าเว็บนี้คืออะไร หรือบางคนอาจจะรู้แล้ว">
                                        <font>
-                                          <Font name="Kodchasan Bold" size="14.0" />
+                                          <Font name="Kodchasan Regular" size="14.0" />
                                        </font>
-                                    </Label>
-                                    <Label text="17.00 25/08/2026">
+                                    </Text>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </TextFlow>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="57.0" prefWidth="793.0">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../img/icon/like.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../img/icon/dislike.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <Pane prefHeight="77.0" prefWidth="507.0" />
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../img/icon/comment.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <Label prefHeight="20.0" prefWidth="109.0" text="Comment">
                                        <font>
-                                          <Font name="Kodchasan Regular" size="12.0" />
+                                          <Font name="Kodchasan Regular" size="14.0" />
                                        </font>
                                     </Label>
                                  </children>
-                                 <HBox.margin>
-                                    <Insets left="10.0" />
-                                 </HBox.margin>
-                              </VBox>
+                                 <padding>
+                                    <Insets bottom="20.0" top="20.0" />
+                                 </padding>
+                              </HBox>
                            </children>
-                           <padding>
-                              <Insets bottom="20.0" left="20.0" top="20.0" />
-                           </padding>
-                        </HBox>
-                        <ImageView fitHeight="360.0" fitWidth="488.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../img/Picture/jeswin-thomas-hecib2an4T4-unsplash.jpg" />
-                           </image>
-                        </ImageView>
-                        <TextFlow prefHeight="126.0" prefWidth="793.0" style="-fx-border-color: &quot;A8A8A8&quot;;">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="เราเชื่อว่าทุกคนต้องมีอาการที่เรียกว่า 'เบื่อออออ'  'ไม่มีอะไรทำเลยยยยย' นั่งหน้าคอมเข้าแต่เฟชบุค หรือพันทิปจนเบื่อแล้วเบื่ออีกแต่ยังอยากเล่นอินเตอร์เน็ตอยู่ แต่ก็ไม่รู้จะเล่นอะไรแล้ว แต่ก็ยังอยากจะเล่นอยู่นะ (เอ๊ะ ยังไง?)  เราก็กำลังมีอาการอย่างนี้อยู่เลย ก็เข้าๆออกๆเฟชบุค พันทิป อ่านกระทู้นั้นกระทู้นี้ เข้าเว็บนั้นเว็บนี้ จนเรากลับมาเล่น  Tumblr บางคนสงสัยว่าเจ้าเว็บนี้คืออะไร หรือบางคนอาจจะรู้แล้ว">
-                                 <font>
-                                    <Font name="Kodchasan Regular" size="14.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                           <VBox.margin>
-                              <Insets top="20.0" />
-                           </VBox.margin>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </TextFlow>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="57.0" prefWidth="793.0">
-                           <children>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../img/icon/like.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../img/icon/dislike.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets left="20.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Pane prefHeight="77.0" prefWidth="507.0" />
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../img/icon/comment.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets right="20.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Label prefHeight="20.0" prefWidth="109.0" text="Comment">
-                                 <font>
-                                    <Font name="Kodchasan Regular" size="14.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <padding>
-                              <Insets bottom="20.0" top="20.0" />
-                           </padding>
-                        </HBox>
+                        </VBox>
                      </children>
                   </VBox>
-               </children>
-            </VBox>
-         </content>
-      </ScrollPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </StackPane>
    </children>
 </VBox>

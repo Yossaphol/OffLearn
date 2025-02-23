@@ -7,7 +7,6 @@ module com.example.offlearn {
     requires jdk.compiler;
     requires jdk.dynalink;
 
-
     opens inbox to javafx.fxml;
     exports inbox;
 
@@ -31,5 +30,7 @@ module com.example.offlearn {
 
     exports inbox.gChat;
     opens inbox.gChat to javafx.fxml;
+
+    exports swing to javafx.graphics;
 
 }
