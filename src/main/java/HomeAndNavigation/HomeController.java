@@ -103,6 +103,8 @@ public class HomeController implements Initializable {
     public Pane cat1;
     public Pane cat2;
     public Pane cat3;
+    public HBox learn_now;
+    public HBox home_nav;
 
 
     @FXML
@@ -141,9 +143,14 @@ public class HomeController implements Initializable {
         hoverEffect(calendarContainer);
         hoverEffect(cat1);
         hoverEffect(cat2);
-
+        hoverEffect(learn_now);
         hoverEffect(cat3);
+        hoverEffect(home_nav);
 
+        applyHoverEffectToInside(categoryPopup);
+        applyHoverEffectToInside(popup);
+        applyHoverEffectToInside(popup1);
+        applyHoverEffectToInside(popup2);
         closePopupAuto();
     }
 
@@ -221,31 +228,53 @@ public class HomeController implements Initializable {
 
     public void hoverEffect(HBox hBox) {
         // Scale transition
-        ScaleTransition scaleUp = new ScaleTransition(Duration.millis(100), hBox);
+        ScaleTransition scaleUp = new ScaleTransition(Duration.millis(150), hBox);
         scaleUp.setFromX(1);
         scaleUp.setFromY(1);
-        scaleUp.setToX(1.05);
-        scaleUp.setToY(1.05);
+        scaleUp.setToX(1.07); // Slightly bigger scale for better effect
+        scaleUp.setToY(1.07);
 
-        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(100), hBox);
-        scaleDown.setFromX(1.05);
-        scaleDown.setFromY(1.05);
+        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(150), hBox);
+        scaleDown.setFromX(1.07);
+        scaleDown.setFromY(1.07);
         scaleDown.setToX(1);
         scaleDown.setToY(1);
 
+        DropShadow glow = new DropShadow();
+        glow.setRadius(20);
+        glow.setSpread(0.5);
+        glow.setColor(Color.web("#8100CC", 0.6));
+
         hBox.setOnMouseEntered(mouseEvent -> {
             scaleUp.play();
-            if(!hBox.getId().equals("logout")){
-                hBox.setStyle("-fx-background-color: #F7E9FF;");
-            }
-            else{
-                hBox.setStyle("-fx-background-color: #FFEBEB;");
+            switch (hBox.getId()) {
+                case "logout":
+                    hBox.setStyle("-fx-background-color: #FFEBEB;");
+                    break;
+                case "learn_now":
+                    hBox.setEffect(glow);
+                    hBox.setStyle(
+                            "-fx-background-radius: 30; " +
+                                    "-fx-background-color: linear-gradient(to right, #8100CC, #A000FF);"
+                    );
+                    break;
+                default:
+                    hBox.setStyle("-fx-background-color: #F7E9FF;");
+                    break;
             }
         });
 
         hBox.setOnMouseExited(mouseEvent -> {
             scaleDown.play();
-            hBox.setStyle("-fx-background-color: transparent;");
+            switch (hBox.getId()){
+                case "learn_now":
+                    hBox.setEffect(null);
+                    hBox.setStyle("-fx-background-radius: 30;" + "-fx-background-color: #8100CC;");
+                    break;
+                default :
+                    hBox.setStyle("-fx-background-color: transparent;");
+            }
+
         });
     }
 
@@ -471,6 +500,61 @@ public class HomeController implements Initializable {
             }
         }
         barChart.getData().add(series);
+    }
+
+    public void applyHoverEffectToInside(VBox root) {
+        for (Node node : root.lookupAll(".explore_roadmapOrAddList")) {
+            if (node instanceof HBox box) {
+                applyHoverEffect1(box);
+            }
+        }
+        for (Node node : root.lookupAll(".small-category")) {
+            if (node instanceof HBox box) {
+                    applyHoverEffect(box);
+            }
+        }
+    }
+
+
+
+    private void applyHoverEffect(HBox categoryBox) {
+        ScaleTransition scaleUp = new ScaleTransition(Duration.millis(200), categoryBox);
+        scaleUp.setToX(1.08);
+        scaleUp.setToY(1.08);
+
+        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(200), categoryBox);
+        scaleDown.setToX(1);
+        scaleDown.setToY(1);
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(10);
+        dropShadow.setColor(Color.web("#c4c4c4", 0.25));
+        categoryBox.setEffect(dropShadow);
+
+        categoryBox.setOnMouseEntered(event -> {
+            scaleUp.play();
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.ZERO, new KeyValue(dropShadow.colorProperty(), Color.TRANSPARENT)),
+                    new KeyFrame(Duration.millis(200), new KeyValue(dropShadow.colorProperty(), Color.web("#8100CC", 0.25)))
+            );
+            timeline.play();
+        });
+        categoryBox.setOnMouseExited(event -> {
+            scaleDown.play();
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.ZERO, new KeyValue(dropShadow.colorProperty(), dropShadow.getColor())),
+                    new KeyFrame(Duration.millis(200), new KeyValue(dropShadow.colorProperty(), Color.web("#c4c4c4", 0.25)))
+            );
+            timeline.play();
+        });
+    }
+
+    private void applyHoverEffect1(HBox categoryBox) {
+        categoryBox.setOnMouseEntered(event -> {
+            categoryBox.setStyle("-fx-background-color: #F4F4F4;");
+        });
+        categoryBox.setOnMouseExited(event -> {
+            categoryBox.setStyle("-fx-background-color: transparent;");
+        });
     }
 
 

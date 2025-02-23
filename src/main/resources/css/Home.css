@@ -31,3 +31,11 @@
  -fx-accent: #81CC00;
     -fx-background-color: #F6F6F6;
 }
+
+.small-category {
+    -fx-background-color: white;
+}
+
+.explore_roadmapOrAddList{
+    -fx-background-color: white;
+}
