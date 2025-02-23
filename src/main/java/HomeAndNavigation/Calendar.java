@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class Calendar extends Application {
 
@@ -16,7 +15,7 @@ public class Calendar extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-            FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("/fxml/CustomCalendar.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("/fxml/HomePage/CustomCalendar.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load());
             primaryStage.setTitle("Offlearn Client");

@@ -105,6 +105,8 @@ public class HomeController implements Initializable {
     public Circle teacher_pfp_OOP;
     public Rectangle course_pic_Data;
     public Rectangle course_pic_OOP;
+    public Button cart;
+    public HBox profile_btn;
     private List<AnchorPane> slides;
     private int slideIndex = 0;
 
@@ -323,12 +325,44 @@ public class HomeController implements Initializable {
 
     public void route(){
         Navigator nav = new Navigator();
+
+        //Home
         home.setOnMouseClicked(mouseEvent -> nav.homeRoute(mouseEvent, bg));
+        home_nav.setOnMouseClicked(mouseEvent -> nav.homeRoute(mouseEvent, bg));
+
+        //Dashboard
         dashboard.setOnMouseClicked(mouseEvent -> nav.dashboardRoute(mouseEvent, bg));
+        btn_dashboard_atStatistics.setOnMouseClicked(mouseEvent -> nav.dashboardRoute(mouseEvent, bg));
+        profile_btn.setOnMouseClicked(mouseEvent -> nav.dashboardRoute(mouseEvent, bg));
+
+        //Course
         course.setOnMouseClicked(mouseEvent -> nav.courseRoute(mouseEvent, bg));
+        allCoursebtn.setOnMouseClicked(mouseEvent -> nav.courseRoute(mouseEvent, bg));
+
+        //My Course
+        yourCoursebtn.setOnMouseClicked(mouseEvent -> nav.myCourseRoute(mouseEvent, bg));
+        calendarContainer.setOnMouseClicked(mouseEvent -> nav.myCourseRoute(mouseEvent, bg));
+
+        //cart
+        cart.setOnMouseClicked(mouseEvent -> nav.cartRoute(mouseEvent, bg));
+
+        //Inbox
         inbox.setOnMouseClicked(mouseEvent -> nav.inboxRoute(mouseEvent, bg));
+
+        //Task
         task.setOnMouseClicked(mouseEvent -> nav.taskRoute(mouseEvent, bg));
+
+        //Roadmap
         roadmap.setOnMouseClicked(mouseEvent -> nav.roadmapRoute(mouseEvent, bg));
+
+        //Leaderboard
+        topLeaderboard.setOnMouseClicked(mouseEvent -> nav.leaderboardRoute(mouseEvent, bg));
+
+        //setting
+        setting.setOnMouseClicked(mouseEvent -> nav.settingRoute(mouseEvent, bg));
+
+        //Logout
+        logout.setOnMouseClicked(mouseEvent -> nav.logoutRoute(mouseEvent, bg));
     }
 
     @FXML
@@ -492,7 +526,7 @@ public class HomeController implements Initializable {
 
     private void calendarDisplay(){
         try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/CustomCalendar.fxml"));
+            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/HomePage/CustomCalendar.fxml"));
             VBox calendarContent = calendarLoader.load();
             calendarContainer.getChildren().setAll(calendarContent);
         } catch (IOException e) {

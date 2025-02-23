@@ -27,7 +27,7 @@
 
 <HBox fx:id="bg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HomeAndNavigation.HomeController">
     <children>
-        <ScrollPane prefHeight="1024.0" prefWidth="1468.0" vbarPolicy="ALWAYS" vmax="20.0">
+        <ScrollPane prefHeight="1024.0" prefWidth="1440.0" vbarPolicy="ALWAYS" vmax="20.0">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1023.0" prefWidth="1424.0">
                     <children>
@@ -41,7 +41,7 @@
                                                   <children>
                                                       <ImageView fitHeight="72.0" fitWidth="79.0" pickOnBounds="true" preserveRatio="true">
                                                           <image>
-                                                              <Image url="@../img/icon/Group%2022.png" />
+                                                              <Image url="@../../img/icon/Group%2022.png" />
                                                           </image>
                                                       </ImageView>
                                                       <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
@@ -83,7 +83,7 @@
                                                     <children>
                                                         <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                                             <image>
-                                                                <Image url="@../img/icon/dashboard.png" />
+                                                                <Image url="@../../img/icon/dashboard.png" />
                                                             </image>
                                                             <cursor>
                                                                 <Cursor fx:constant="HAND" />
@@ -112,7 +112,7 @@
                                        <children>
                                           <ImageView fitHeight="29.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../img/icon/home.png" />
+                                                <Image url="@../../img/icon/home.png" />
                                              </image>
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
@@ -141,7 +141,7 @@
                                                     <children>
                                                         <ImageView fitHeight="29.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                                             <image>
-                                                                <Image url="@../img/icon/audio-book.png" />
+                                                                <Image url="@../../img/icon/audio-book.png" />
                                                             </image>
                                                             <cursor>
                                                                 <Cursor fx:constant="HAND" />
@@ -170,7 +170,7 @@
                                                     <children>
                                                         <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                                             <image>
-                                                                <Image url="@../img/icon/inbox.png" />
+                                                                <Image url="@../../img/icon/inbox.png" />
                                                             </image>
                                                             <cursor>
                                                                 <Cursor fx:constant="HAND" />
@@ -199,7 +199,7 @@
                                                     <children>
                                                         <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                                             <image>
-                                                                <Image url="@../img/icon/task.png" />
+                                                                <Image url="@../../img/icon/task.png" />
                                                             </image>
                                                             <cursor>
                                                                 <Cursor fx:constant="HAND" />
@@ -228,7 +228,7 @@
                                                     <children>
                                                         <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                                             <image>
-                                                                <Image url="@../img/icon/business-plan.png" />
+                                                                <Image url="@../../img/icon/business-plan.png" />
                                                             </image>
                                                             <cursor>
                                                                 <Cursor fx:constant="HAND" />
@@ -294,7 +294,7 @@
                                                     <children>
                                                         <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                                             <image>
-                                                                <Image url="@../img/icon/settings.png" />
+                                                                <Image url="@../../img/icon/settings.png" />
                                                             </image>
                                                             <cursor>
                                                                 <Cursor fx:constant="HAND" />
@@ -320,7 +320,7 @@
                                                     <children>
                                                         <ImageView fitHeight="29.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                                             <image>
-                                                                <Image url="@../img/icon/logout.png" />
+                                                                <Image url="@../../img/icon/logout.png" />
                                                             </image>
                                                             <cursor>
                                                                 <Cursor fx:constant="HAND" />
@@ -373,7 +373,7 @@
                                                         </TextField>
                                                         <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                                                             <image>
-                                                                <Image url="@../img/icon/search-interface-symbol.png" />
+                                                                <Image url="@../../img/icon/search-interface-symbol.png" />
                                                             </image>
                                                             <StackPane.margin>
                                                                 <Insets left="30.0" />
@@ -392,14 +392,14 @@
                                                         <Cursor fx:constant="HAND" />
                                                     </cursor>
                                                 </Button>
-                                    <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+                                    <Button fx:id="cart" mnemonicParsing="false" style="-fx-background-color: transparent;">
                                        <graphic>
                                                       <StackPane prefHeight="133.0" prefWidth="37.0">
                                                           <children>
                                                               <Circle fill="WHITE" radius="16.0" stroke="#898989" strokeType="INSIDE" />
                                                               <ImageView fitHeight="22.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                                                   <image>
-                                                                      <Image url="@../img/icon/grocery-store.png" />
+                                                                      <Image url="@../../img/icon/grocery-store.png" />
                                                                   </image>
                                                                   <cursor>
                                                                       <Cursor fx:constant="HAND" />
@@ -419,7 +419,7 @@
                                                 </Line>
                                     <Pane fx:id="smallUserProfile" prefHeight="64.0" prefWidth="174.0" style="-fx-background-color: white; -fx-background-radius: 18;">
                                        <children>
-                                                      <HBox alignment="CENTER_LEFT" prefHeight="68.0" prefWidth="174.0">
+                                                      <HBox fx:id="profile_btn" alignment="CENTER_LEFT" prefHeight="68.0" prefWidth="174.0">
                                                           <children>
                                                               <VBox alignment="CENTER" prefHeight="60.0" prefWidth="173.0">
                                                                   <children>
@@ -437,7 +437,7 @@
                                                                               </Button>
                                                                               <ImageView fitHeight="26.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                                                                   <image>
-                                                                                      <Image url="@../img/icon/logout.png" />
+                                                                                      <Image url="@../../img/icon/logout.png" />
                                                                                   </image>
                                                                                   <HBox.margin>
                                                                                       <Insets right="5.0" />
@@ -471,7 +471,7 @@
                                                 <VBox alignment="TOP_CENTER" prefHeight="921.0" prefWidth="1029.0">
                                                     <children>
                                                         <Pane prefHeight="39.0" prefWidth="1162.0" />
-                                                        <Pane maxHeight="290.0" maxWidth="700.0" prefHeight="350.0" prefWidth="649.0" style="-fx-background-color: black; -fx-background-radius: 20;" styleClass="overflow-img" stylesheets="@../css/Home.css">
+                                                        <Pane maxHeight="290.0" maxWidth="700.0" prefHeight="350.0" prefWidth="649.0" style="-fx-background-color: black; -fx-background-radius: 20;" styleClass="overflow-img" stylesheets="@../../css/Home.css">
                                                             <effect>
                                                                 <DropShadow>
                                                                     <color>
@@ -502,7 +502,7 @@
                                                                         <Font name="Kodchasan Regular" size="14.0" />
                                                                     </font>
                                                                 </Label>
-                                                                <HBox fx:id="learn_now" alignment="CENTER" layoutX="87.0" layoutY="218.0" prefHeight="45.0" prefWidth="148.0" style="-fx-background-color: #8100CC; -fx-background-radius: 30;" stylesheets="@../css/Home.css">
+                                                                <HBox fx:id="learn_now" alignment="CENTER" layoutX="87.0" layoutY="218.0" prefHeight="45.0" prefWidth="148.0" style="-fx-background-color: #8100CC; -fx-background-radius: 30;" stylesheets="@../../css/Home.css">
                                                                     <children>
                                                                         <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="เรียนเลย" textFill="WHITE">
                                                                             <font>
@@ -511,7 +511,7 @@
                                                                         </Button>
                                                                         <ImageView fitHeight="36.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                                                                             <image>
-                                                                                <Image url="@../img/icon/circle-chevron-right-solid.png" />
+                                                                                <Image url="@../../img/icon/circle-chevron-right-solid.png" />
                                                                             </image>
                                                                         </ImageView>
                                                                     </children>
@@ -558,7 +558,7 @@
                                                          <children>
                                                             <HBox alignment="CENTER" prefHeight="46.0" prefWidth="807.0">
                                                                <children>
-                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="small-category" stylesheets="@../css/Home.css">
+                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="small-category" stylesheets="@../../css/Home.css">
                                                                      <effect>
                                                                         <DropShadow>
                                                                            <color>
@@ -572,7 +572,7 @@
                                                                      <children>
                                                                         <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                                                            <image>
-                                                                              <Image url="@../img/icon/code.png" />
+                                                                              <Image url="@../../img/icon/code.png" />
                                                                            </image>
                                                                         </ImageView>
                                                                         <VBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="92.0">
@@ -582,7 +582,7 @@
                                                                                     <Font name="Kodchasan Bold" size="14.0" />
                                                                                  </font>
                                                                               </Label>
-                                                                              <ProgressBar fx:id="codingProgress" prefHeight="10.0" prefWidth="60.0" styleClass="smallestProgressbar" stylesheets="@../css/Home.css" />
+                                                                              <ProgressBar fx:id="codingProgress" prefHeight="10.0" prefWidth="60.0" styleClass="smallestProgressbar" stylesheets="@../../css/Home.css" />
                                                                            </children>
                                                                            <padding>
                                                                               <Insets left="7.0" right="7.0" />
@@ -596,7 +596,7 @@
                                                                         <Cursor fx:constant="HAND" />
                                                                      </cursor>
                                                                   </HBox>
-                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="small-category" stylesheets="@../css/Home.css">
+                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="small-category" stylesheets="@../../css/Home.css">
                                                                      <effect>
                                                                         <DropShadow>
                                                                            <color>
@@ -607,7 +607,7 @@
                                                                      <children>
                                                                         <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                                                            <image>
-                                                                              <Image url="@../img/icon/partners.png" />
+                                                                              <Image url="@../../img/icon/partners.png" />
                                                                            </image>
                                                                         </ImageView>
                                                                         <VBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="92.0">
@@ -617,7 +617,7 @@
                                                                                     <Font name="Kodchasan Bold" size="14.0" />
                                                                                  </font>
                                                                               </Label>
-                                                                              <ProgressBar fx:id="businessProgress" prefHeight="7.0" prefWidth="77.0" progress="0.43" styleClass="smallestProgressbar" stylesheets="@../css/Home.css" />
+                                                                              <ProgressBar fx:id="businessProgress" prefHeight="7.0" prefWidth="77.0" progress="0.43" styleClass="smallestProgressbar" stylesheets="@../../css/Home.css" />
                                                                            </children>
                                                                            <padding>
                                                                               <Insets left="7.0" right="7.0" />
@@ -634,7 +634,7 @@
                                                                         <Cursor fx:constant="HAND" />
                                                                      </cursor>
                                                                   </HBox>
-                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="small-category" stylesheets="@../css/Home.css">
+                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="small-category" stylesheets="@../../css/Home.css">
                                                                      <effect>
                                                                         <DropShadow>
                                                                            <color>
@@ -645,7 +645,7 @@
                                                                      <children>
                                                                         <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                                                            <image>
-                                                                              <Image url="@../img/icon/artificial-intelligence.png" />
+                                                                              <Image url="@../../img/icon/artificial-intelligence.png" />
                                                                            </image>
                                                                         </ImageView>
                                                                         <VBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="92.0">
@@ -655,7 +655,7 @@
                                                                                     <Font name="Kodchasan Bold" size="14.0" />
                                                                                  </font>
                                                                               </Label>
-                                                                              <ProgressBar fx:id="aiProgress" prefHeight="7.0" prefWidth="77.0" progress="0.61" styleClass="smallestProgressbar" stylesheets="@../css/Home.css" />
+                                                                              <ProgressBar fx:id="aiProgress" prefHeight="7.0" prefWidth="77.0" progress="0.61" styleClass="smallestProgressbar" stylesheets="@../../css/Home.css" />
                                                                            </children>
                                                                            <padding>
                                                                               <Insets left="7.0" right="7.0" />
@@ -672,7 +672,7 @@
                                                                         <Cursor fx:constant="HAND" />
                                                                      </cursor>
                                                                   </HBox>
-                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="small-category" stylesheets="@../css/Home.css">
+                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="small-category" stylesheets="@../../css/Home.css">
                                                                      <effect>
                                                                         <DropShadow>
                                                                            <color>
@@ -683,7 +683,7 @@
                                                                      <children>
                                                                         <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                                                            <image>
-                                                                              <Image url="@../img/icon/joystick.png" />
+                                                                              <Image url="@../../img/icon/joystick.png" />
                                                                            </image>
                                                                         </ImageView>
                                                                         <VBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="92.0">
@@ -693,7 +693,7 @@
                                                                                     <Font name="Kodchasan Bold" size="14.0" />
                                                                                  </font>
                                                                               </Label>
-                                                                              <ProgressBar prefHeight="7.0" prefWidth="77.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../css/Home.css" />
+                                                                              <ProgressBar prefHeight="7.0" prefWidth="77.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../../css/Home.css" />
                                                                            </children>
                                                                            <padding>
                                                                               <Insets left="7.0" right="7.0" />
@@ -710,7 +710,7 @@
                                                                         <Cursor fx:constant="HAND" />
                                                                      </cursor>
                                                                   </HBox>
-                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="small-category" stylesheets="@../css/Home.css">
+                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="small-category" stylesheets="@../../css/Home.css">
                                                                      <effect>
                                                                         <DropShadow>
                                                                            <color>
@@ -721,7 +721,7 @@
                                                                      <children>
                                                                         <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                                                            <image>
-                                                                              <Image url="@../img/icon/musical-note.png" />
+                                                                              <Image url="@../../img/icon/musical-note.png" />
                                                                            </image>
                                                                         </ImageView>
                                                                         <VBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="92.0">
@@ -731,7 +731,7 @@
                                                                                     <Font name="Kodchasan Bold" size="14.0" />
                                                                                  </font>
                                                                               </Label>
-                                                                              <ProgressBar prefHeight="7.0" prefWidth="77.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../css/Home.css" />
+                                                                              <ProgressBar prefHeight="7.0" prefWidth="77.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../../css/Home.css" />
                                                                            </children>
                                                                            <padding>
                                                                               <Insets left="7.0" right="7.0" />
@@ -755,7 +755,7 @@
                                                             </HBox>
                                                             <HBox alignment="CENTER" prefHeight="46.0" prefWidth="807.0">
                                                                <children>
-                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="small-category" stylesheets="@../css/Home.css">
+                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="small-category" stylesheets="@../../css/Home.css">
                                                                      <effect>
                                                                         <DropShadow>
                                                                            <color>
@@ -769,7 +769,7 @@
                                                                      <children>
                                                                         <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                                                            <image>
-                                                                              <Image url="@../img/icon/budget.png" />
+                                                                              <Image url="@../../img/icon/budget.png" />
                                                                            </image>
                                                                         </ImageView>
                                                                         <VBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="92.0">
@@ -779,7 +779,7 @@
                                                                                     <Font name="Kodchasan Bold" size="14.0" />
                                                                                  </font>
                                                                               </Label>
-                                                                              <ProgressBar prefHeight="7.0" prefWidth="77.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../css/Home.css" />
+                                                                              <ProgressBar prefHeight="7.0" prefWidth="77.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../../css/Home.css" />
                                                                            </children>
                                                                            <padding>
                                                                               <Insets left="7.0" right="7.0" />
@@ -793,7 +793,7 @@
                                                                         <Cursor fx:constant="HAND" />
                                                                      </cursor>
                                                                   </HBox>
-                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="small-category" stylesheets="@../css/Home.css">
+                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="small-category" stylesheets="@../../css/Home.css">
                                                                      <effect>
                                                                         <DropShadow>
                                                                            <color>
@@ -804,7 +804,7 @@
                                                                      <children>
                                                                         <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                                                            <image>
-                                                                              <Image url="@../img/icon/chalkboard.png" />
+                                                                              <Image url="@../../img/icon/chalkboard.png" />
                                                                            </image>
                                                                         </ImageView>
                                                                         <VBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="92.0">
@@ -814,7 +814,7 @@
                                                                                     <Font name="Kodchasan Bold" size="14.0" />
                                                                                  </font>
                                                                               </Label>
-                                                                              <ProgressBar fx:id="mathProgress" prefHeight="7.0" prefWidth="77.0" progress="0.29" styleClass="smallestProgressbar" stylesheets="@../css/Home.css" />
+                                                                              <ProgressBar fx:id="mathProgress" prefHeight="7.0" prefWidth="77.0" progress="0.29" styleClass="smallestProgressbar" stylesheets="@../../css/Home.css" />
                                                                            </children>
                                                                            <padding>
                                                                               <Insets left="7.0" right="7.0" />
@@ -831,7 +831,7 @@
                                                                         <Cursor fx:constant="HAND" />
                                                                      </cursor>
                                                                   </HBox>
-                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="small-category" stylesheets="@../css/Home.css">
+                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="small-category" stylesheets="@../../css/Home.css">
                                                                      <effect>
                                                                         <DropShadow>
                                                                            <color>
@@ -842,7 +842,7 @@
                                                                      <children>
                                                                         <ImageView fitHeight="33.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                                                                            <image>
-                                                                              <Image url="@../img/icon/apple.png" />
+                                                                              <Image url="@../../img/icon/apple.png" />
                                                                            </image>
                                                                         </ImageView>
                                                                         <VBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="92.0">
@@ -852,7 +852,7 @@
                                                                                     <Font name="Kodchasan Bold" size="14.0" />
                                                                                  </font>
                                                                               </Label>
-                                                                              <ProgressBar prefHeight="7.0" prefWidth="77.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../css/Home.css" />
+                                                                              <ProgressBar prefHeight="7.0" prefWidth="77.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../../css/Home.css" />
                                                                            </children>
                                                                            <padding>
                                                                               <Insets left="7.0" right="7.0" />
@@ -869,7 +869,7 @@
                                                                         <Cursor fx:constant="HAND" />
                                                                      </cursor>
                                                                   </HBox>
-                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="small-category" stylesheets="@../css/Home.css">
+                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="small-category" stylesheets="@../../css/Home.css">
                                                                      <effect>
                                                                         <DropShadow>
                                                                            <color>
@@ -880,7 +880,7 @@
                                                                      <children>
                                                                         <ImageView fitHeight="37.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                                                                            <image>
-                                                                              <Image url="@../img/icon/graphic-designer.png" />
+                                                                              <Image url="@../../img/icon/graphic-designer.png" />
                                                                            </image>
                                                                         </ImageView>
                                                                         <VBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="92.0">
@@ -890,7 +890,7 @@
                                                                                     <Font name="Kodchasan Bold" size="14.0" />
                                                                                  </font>
                                                                               </Label>
-                                                                              <ProgressBar prefHeight="7.0" prefWidth="77.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../css/Home.css" />
+                                                                              <ProgressBar prefHeight="7.0" prefWidth="77.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../../css/Home.css" />
                                                                            </children>
                                                                            <padding>
                                                                               <Insets left="7.0" right="7.0" />
@@ -907,7 +907,7 @@
                                                                         <Cursor fx:constant="HAND" />
                                                                      </cursor>
                                                                   </HBox>
-                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="small-category" stylesheets="@../css/Home.css">
+                                                                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="121.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="small-category" stylesheets="@../../css/Home.css">
                                                                      <effect>
                                                                         <DropShadow>
                                                                            <color>
@@ -918,7 +918,7 @@
                                                                      <children>
                                                                         <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                                                            <image>
-                                                                              <Image url="@../img/icon/healthy-lifestyle-logo.png" />
+                                                                              <Image url="@../../img/icon/healthy-lifestyle-logo.png" />
                                                                            </image>
                                                                         </ImageView>
                                                                         <VBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="92.0">
@@ -928,7 +928,7 @@
                                                                                     <Font name="Kodchasan Bold" size="14.0" />
                                                                                  </font>
                                                                               </Label>
-                                                                              <ProgressBar prefHeight="7.0" prefWidth="77.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../css/Home.css" />
+                                                                              <ProgressBar prefHeight="7.0" prefWidth="77.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../../css/Home.css" />
                                                                            </children>
                                                                            <padding>
                                                                               <Insets left="7.0" right="7.0" />
@@ -992,7 +992,7 @@
                                                                                                 <Font name="Kodchasan Regular" size="13.0" />
                                                                                             </font>
                                                                                         </Label>
-                                                                                        <ProgressBar fx:id="categorybar" prefHeight="6.0" prefWidth="100.0" progress="0.0" styleClass="smallProgressbar" stylesheets="@../css/Home.css" />
+                                                                                        <ProgressBar fx:id="categorybar" prefHeight="6.0" prefWidth="100.0" progress="0.0" styleClass="smallProgressbar" stylesheets="@../../css/Home.css" />
                                                                                     </children>
                                                                                     <cursor>
                                                                                         <Cursor fx:constant="HAND" />
@@ -1002,7 +1002,7 @@
                                                                                     <graphic>
                                                                                         <ImageView fitHeight="25.0" fitWidth="7.0" pickOnBounds="true" preserveRatio="true">
                                                                                             <image>
-                                                                                                <Image url="@../img/icon/Group%20268.png" />
+                                                                                                <Image url="@../../img/icon/Group%20268.png" />
                                                                                             </image>
                                                                                             <cursor>
                                                                                                 <Cursor fx:constant="HAND" />
@@ -1020,7 +1020,7 @@
                                                                         </HBox>
                                                                         <VBox alignment="BOTTOM_RIGHT" layoutX="27.0" layoutY="63.0" prefHeight="115.0" prefWidth="175.0">
                                                                             <children>
-                                                                                <VBox fx:id="popup" prefHeight="128.0" prefWidth="175.0" style="-fx-background-color: white; -fx-background-radius: 10;" stylesheets="@../css/Home.css" visible="false">
+                                                                                <VBox fx:id="popup" prefHeight="128.0" prefWidth="175.0" style="-fx-background-color: white; -fx-background-radius: 10;" stylesheets="@../../css/Home.css" visible="false">
                                                                                     <effect>
                                                                                         <DropShadow>
                                                                                             <color>
@@ -1033,7 +1033,7 @@
                                                                                             <children>
                                                                                                 <ImageView fitHeight="57.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                                                                                                     <image>
-                                                                                                        <Image url="@../img/icon/add.png" />
+                                                                                                        <Image url="@../../img/icon/add.png" />
                                                                                                     </image>
                                                                                                     <HBox.margin>
                                                                                                         <Insets left="10.0" right="10.0" />
@@ -1053,7 +1053,7 @@
                                                                                             <children>
                                                                                                 <ImageView fitHeight="57.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                                                                                                     <image>
-                                                                                                        <Image url="@../img/icon/business-plan.png" />
+                                                                                                        <Image url="@../../img/icon/business-plan.png" />
                                                                                                     </image>
                                                                                                     <HBox.margin>
                                                                                                         <Insets left="10.0" right="10.0" />
@@ -1115,7 +1115,7 @@
                                                                                                 <Font name="Kodchasan Regular" size="13.0" />
                                                                                             </font>
                                                                                         </Label>
-                                                                                        <ProgressBar fx:id="categorybar1" prefHeight="6.0" prefWidth="100.0" progress="0.0" styleClass="smallProgressbar" stylesheets="@../css/Home.css" />
+                                                                                        <ProgressBar fx:id="categorybar1" prefHeight="6.0" prefWidth="100.0" progress="0.0" styleClass="smallProgressbar" stylesheets="@../../css/Home.css" />
                                                                                     </children>
                                                                                     <cursor>
                                                                                         <Cursor fx:constant="HAND" />
@@ -1125,7 +1125,7 @@
                                                                                     <graphic>
                                                                                         <ImageView fitHeight="25.0" fitWidth="7.0" pickOnBounds="true" preserveRatio="true">
                                                                                             <image>
-                                                                                                <Image url="@../img/icon/Group%20268.png" />
+                                                                                                <Image url="@../../img/icon/Group%20268.png" />
                                                                                             </image>
                                                                                             <cursor>
                                                                                                 <Cursor fx:constant="HAND" />
@@ -1156,7 +1156,7 @@
                                                                                             <children>
                                                                                                 <ImageView fitHeight="57.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                                                                                                     <image>
-                                                                                                        <Image url="@../img/icon/add.png" />
+                                                                                                        <Image url="@../../img/icon/add.png" />
                                                                                                     </image>
                                                                                                     <HBox.margin>
                                                                                                         <Insets left="10.0" right="10.0" />
@@ -1176,7 +1176,7 @@
                                                                                             <children>
                                                                                                 <ImageView fitHeight="57.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                                                                                                     <image>
-                                                                                                        <Image url="@../img/icon/business-plan.png" />
+                                                                                                        <Image url="@../../img/icon/business-plan.png" />
                                                                                                     </image>
                                                                                                     <HBox.margin>
                                                                                                         <Insets left="10.0" right="10.0" />
@@ -1238,7 +1238,7 @@
                                                                                                 <Font name="Kodchasan Regular" size="13.0" />
                                                                                             </font>
                                                                                         </Label>
-                                                                                        <ProgressBar fx:id="categorybar2" prefHeight="6.0" prefWidth="100.0" progress="0.0" styleClass="smallProgressbar" stylesheets="@../css/Home.css" />
+                                                                                        <ProgressBar fx:id="categorybar2" prefHeight="6.0" prefWidth="100.0" progress="0.0" styleClass="smallProgressbar" stylesheets="@../../css/Home.css" />
                                                                                     </children>
                                                                                     <cursor>
                                                                                         <Cursor fx:constant="HAND" />
@@ -1248,7 +1248,7 @@
                                                                                     <graphic>
                                                                                         <ImageView fitHeight="25.0" fitWidth="7.0" pickOnBounds="true" preserveRatio="true">
                                                                                             <image>
-                                                                                                <Image url="@../img/icon/Group%20268.png" />
+                                                                                                <Image url="@../../img/icon/Group%20268.png" />
                                                                                             </image>
                                                                                             <cursor>
                                                                                                 <Cursor fx:constant="HAND" />
@@ -1279,7 +1279,7 @@
                                                                                             <children>
                                                                                                 <ImageView fitHeight="57.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                                                                                                     <image>
-                                                                                                        <Image url="@../img/icon/add.png" />
+                                                                                                        <Image url="@../../img/icon/add.png" />
                                                                                                     </image>
                                                                                                     <HBox.margin>
                                                                                                         <Insets left="10.0" right="10.0" />
@@ -1299,7 +1299,7 @@
                                                                                             <children>
                                                                                                 <ImageView fitHeight="57.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                                                                                                     <image>
-                                                                                                        <Image url="@../img/icon/business-plan.png" />
+                                                                                                        <Image url="@../../img/icon/business-plan.png" />
                                                                                                     </image>
                                                                                                     <HBox.margin>
                                                                                                         <Insets left="10.0" right="10.0" />
@@ -1351,7 +1351,7 @@
                                                          <graphic>
                                                                               <ImageView fitHeight="43.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                                                                                   <image>
-                                                                                      <Image url="@../img/icon/previous.png" />
+                                                                                      <Image url="@../../img/icon/previous.png" />
                                                                                   </image>
                                                                                   <cursor>
                                                                                       <Cursor fx:constant="HAND" />
@@ -1367,7 +1367,7 @@
                                                          <graphic>
                                                                               <ImageView fitHeight="43.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                                                                                   <image>
-                                                                                      <Image url="@../img/icon/next.png" />
+                                                                                      <Image url="@../../img/icon/next.png" />
                                                                                   </image>
                                                                                   <cursor>
                                                                                       <Cursor fx:constant="HAND" />
@@ -1385,7 +1385,7 @@
                                                                 <Insets top="60.0" />
                                                             </VBox.margin>
                                                         </HBox>
-                                          <AnchorPane fx:id="slider" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/Home.css">
+                                          <AnchorPane fx:id="slider" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../css/Home.css">
                                              <children>
                                                 <AnchorPane fx:id="slide1" prefHeight="285.0" prefWidth="760.0">
                                                    <children>
@@ -1403,7 +1403,7 @@
                                                                                     <Cursor fx:constant="HAND" />
                                                                                 </cursor>
                                                                                 <children>
-                                                                                    <VBox prefHeight="306.0" prefWidth="361.0" stylesheets="@../css/Home.css">
+                                                                                    <VBox prefHeight="306.0" prefWidth="361.0" stylesheets="@../../css/Home.css">
                                                                                         <padding>
                                                                                             <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                                                                                         </padding>
@@ -1491,7 +1491,7 @@
                                                                   <Cursor fx:constant="HAND" />
                                                                </cursor>
                                                                <children>
-                                                                  <VBox prefHeight="306.0" prefWidth="361.0" stylesheets="@../css/Home.css">
+                                                                  <VBox prefHeight="306.0" prefWidth="361.0" stylesheets="@../../css/Home.css">
                                                                      <padding>
                                                                         <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                                                                      </padding>
@@ -1584,7 +1584,7 @@
                                                                   <Cursor fx:constant="HAND" />
                                                                </cursor>
                                                                <children>
-                                                                  <VBox prefHeight="306.0" prefWidth="361.0" stylesheets="@../css/Home.css">
+                                                                  <VBox prefHeight="306.0" prefWidth="361.0" stylesheets="@../../css/Home.css">
                                                                      <padding>
                                                                         <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                                                                      </padding>
@@ -1716,7 +1716,7 @@
                                                                         </Label>
                                                                         <HBox prefHeight="109.0" prefWidth="237.0">
                                                                             <children>
-                                                                                <BarChart fx:id="barChart" barGap="10.0" legendVisible="false" prefHeight="150.0" prefWidth="258.0" style="-fx-background-color: #F7E9FF; -fx-background-radius: 15;" stylesheets="@../css/Home.css" titleSide="LEFT">
+                                                                                <BarChart fx:id="barChart" barGap="10.0" legendVisible="false" prefHeight="150.0" prefWidth="258.0" style="-fx-background-color: #F7E9FF; -fx-background-radius: 15;" stylesheets="@../../css/Home.css" titleSide="LEFT">
                                                                                     <xAxis>
                                                                                         <CategoryAxis prefHeight="16.0" prefWidth="173.0" side="BOTTOM" tickLabelFill="#8100cc" tickLabelGap="8.0" fx:id="xAxis">
                                                                                             <tickLabelFont>
@@ -1761,7 +1761,7 @@
                                                                                         </Label>
                                                                                     </children>
                                                                                 </HBox>
-                                                                                <ProgressBar fx:id="progress1" prefHeight="14.0" prefWidth="237.0" progress="0.0" stylesheets="@../css/Home.css" />
+                                                                                <ProgressBar fx:id="progress1" prefHeight="14.0" prefWidth="237.0" progress="0.0" stylesheets="@../../css/Home.css" />
                                                                                 <HBox prefHeight="21.0" prefWidth="237.0">
                                                                                     <children>
                                                                                         <Label prefHeight="18.0" prefWidth="127.0" text="Cyber security">
@@ -1776,7 +1776,7 @@
                                                                                         </Label>
                                                                                     </children>
                                                                                 </HBox>
-                                                                                <ProgressBar fx:id="progress2" prefHeight="14.0" prefWidth="237.0" progress="0.0" stylesheets="@../css/Home.css" />
+                                                                                <ProgressBar fx:id="progress2" prefHeight="14.0" prefWidth="237.0" progress="0.0" stylesheets="@../../css/Home.css" />
                                                                                 <Pane prefHeight="8.0" prefWidth="237.0" />
                                                                                 <Button fx:id="btn_dashboard_atStatistics" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #8100CC; -fx-background-radius: 10;" text="Dashboard" textFill="WHITE">
                                                                                     <font>
@@ -1817,7 +1817,7 @@
                                                                                 </Label>
                                                                                 <ImageView fitHeight="29.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                                                                     <image>
-                                                                                        <Image url="@../img/icon/trophy-star.png" />
+                                                                                        <Image url="@../../img/icon/trophy-star.png" />
                                                                                     </image>
                                                                                 </ImageView>
                                                                             </children>

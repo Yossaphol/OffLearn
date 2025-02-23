@@ -15,7 +15,7 @@ public class login extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(login.class.getResource("/fxml/login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(login.class.getResource("/fxml/LoginSingup/login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         primaryStage.setTitle("Offlearn");
         primaryStage.setScene(scene);

@@ -14,7 +14,7 @@ public class Home extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("/fxml/home.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("/fxml/HomePage/home.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         primaryStage.setTitle("Offlearn");
         primaryStage.setScene(scene);

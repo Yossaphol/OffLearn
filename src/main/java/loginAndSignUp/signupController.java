@@ -32,7 +32,7 @@ public class signupController implements Initializable {
 
         fadeOut.setOnFinished(e -> {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginSingup/login.fxml"));
                 root = loader.load();
 
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
