@@ -15,9 +15,6 @@ public class gChat extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(gChat.class.getResource("/fxml/inbox/gChat.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
 
-        gChatController controller = fxmlLoader.getController();
-        controller.setPrimaryStage(primaryStage);
-
         primaryStage.setTitle("Offlearn Client");
         primaryStage.setScene(scene);
         primaryStage.show();

@@ -17,20 +17,13 @@ public class gChatController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-    }
+        postTopic postGui = new postTopic();
 
-    public void CreateTopic(){
-        if (primaryStage != null) {
-            postTopic postGui = new postTopic();
-            createTopic.setOnAction(actionEvent -> postGui.openSwingWindow(this.primaryStage));
-        } else {
-            System.out.println("Error: primaryStage is null");
-        }
-    }
-
-    public void setPrimaryStage(Stage stage){
-        this.primaryStage = stage;
-        CreateTopic();
+        createTopic.setOnAction(actionEvent -> postGui.openSwingWindow());
 
     }
 }
+
+
+
+

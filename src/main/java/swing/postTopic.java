@@ -1,5 +1,6 @@
 package swing;
-import javafx.stage.Stage;
+
+import inbox.DataBase.topicDB;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,14 +10,12 @@ import java.awt.event.ActionListener;
 public class postTopic implements ActionListener {
 
     private JFrame jFrame;
-    private JDesktopPane desktopPane;
-    private JInternalFrame jInternalFrame;
-    private JPanel top, middle, buttom;
-    private JButton cancle, post, browseButton;
-    private JTextField jTextField;
+    private JPanel contentPanel;
+    private JButton cancel, post;
+    private JTextArea jTextArea;
     private JLabel yourTopic;
 
-    public void openSwingWindow(Stage primaryStage){
+    public void openSwingWindow() {
         SwingUtilities.invokeLater(() -> {
 
             try {
@@ -27,70 +26,61 @@ public class postTopic implements ActionListener {
 
             jFrame = new JFrame("Swing Window");
             jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            jFrame.setUndecorated(true);
-            jFrame.setSize(400, 200);
+            jFrame.setUndecorated(true); // ปิดขอบของระบบเพื่อให้เราสร้างขอบเอง
+            jFrame.setSize(400, 400);
+            jFrame.setLocation(800, 300);
 
-            double stageX = primaryStage.getX();
-            double stageY = primaryStage.getY();
-            double stageWidth = primaryStage.getWidth();
-            double stageHeight = primaryStage.getHeight();
+            contentPanel = new JPanel(new BorderLayout());
+            contentPanel.setBorder(BorderFactory.createLineBorder(Color.decode("#A8A8A8"), 2));
+            contentPanel.setBackground(Color.WHITE);
 
-            int frameWidth = jFrame.getWidth();
-            int frameHeight = jFrame.getHeight();
-
-            int x = (int) (stageX + (stageWidth - frameWidth) / 2);
-            int y = (int) (stageY + (stageHeight - frameHeight) / 2);
-
-            jFrame.setLocation(x, y);
-
-            desktopPane = new JDesktopPane();
-            jFrame.add(desktopPane);
-
-            jInternalFrame = new JInternalFrame();
-            jInternalFrame.setSize(400, 200);
-            jInternalFrame.setBorder(null);
-            ((javax.swing.plaf.basic.BasicInternalFrameUI) jInternalFrame.getUI()).setNorthPane(null);
-            jInternalFrame.setVisible(true);
-            jInternalFrame.setLayout(new BorderLayout());
-
-            jTextField = new JTextField();
-
-            top = new JPanel();
-            middle = new JPanel();
-            buttom = new JPanel();
-
-            top.setLayout(new FlowLayout(FlowLayout.CENTER));
-            middle.setLayout(new BorderLayout());
-            buttom.setLayout(new FlowLayout(FlowLayout.RIGHT));
-
+            JPanel top = new JPanel(new FlowLayout(FlowLayout.CENTER));
             yourTopic = new JLabel("Your Topics");
+            top.add(yourTopic);
 
-            cancle = new JButton("Cancle");
+            JPanel middle = new JPanel(new BorderLayout());
+            jTextArea = new JTextArea(20, 50);
+            jTextArea.setLineWrap(true);
+            jTextArea.setWrapStyleWord(true);
+            jTextArea.setMargin(new Insets(5, 5, 5, 5));
+            JScrollPane scrollPane = new JScrollPane(jTextArea);
+            middle.add(scrollPane, BorderLayout.CENTER);
+
+            JPanel bottom = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+            cancel = new JButton("Cancel");
             post = new JButton("Post");
 
-            cancle.addActionListener(this);
+            post.setBackground(Color.decode("#8100CC"));
+            post.setForeground(Color.WHITE);
+            post.setBorderPainted(false);
 
-            middle.add(yourTopic, BorderLayout.NORTH);
-            middle.add(jTextField, BorderLayout.CENTER);
+            post.addActionListener(this);
+            cancel.setBorderPainted(false);
+            cancel.setBackground(Color.decode("#D9D9D9"));
+            cancel.addActionListener(this);
 
-            buttom.add(cancle);
-            buttom.add(post);
+            bottom.add(cancel);
+            bottom.add(post);
 
-            jInternalFrame.add(top, BorderLayout.NORTH);
-            jInternalFrame.add(middle, BorderLayout.CENTER);
-            jInternalFrame.add(buttom, BorderLayout.SOUTH);
+            contentPanel.add(top, BorderLayout.NORTH);
+            contentPanel.add(middle, BorderLayout.CENTER);
+            contentPanel.add(bottom, BorderLayout.SOUTH);
 
-            desktopPane.add(jInternalFrame);
-
+            jFrame.setContentPane(contentPanel);
             jFrame.setVisible(true);
         });
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Cancle")){
-            System.exit(0);
+        if (e.getSource() == cancel) {
+            jFrame.dispose();
+        } else if (e.getSource() == post){
+            String messages = jTextArea.getText();
+            topicDB topic = new topicDB();
+            topic.saveTopic(messages, "test");
+            jFrame.dispose();
         }
     }
+
 }
