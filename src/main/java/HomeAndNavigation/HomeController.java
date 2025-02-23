@@ -4,44 +4,32 @@ import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import com.sun.tools.javac.Main;
 import javafx.scene.control.*;
 import javafx.animation.FadeTransition;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 import javafx.scene.layout.HBox;
-import javafx.util.Duration;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.image.Image;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.image.Image;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import org.w3c.dom.html.HTMLObjectElement;
-import com.sun.tools.javac.Main;
-import javafx.scene.layout.HBox;
 
 public class HomeController implements Initializable {
 
@@ -95,7 +83,6 @@ public class HomeController implements Initializable {
     public Button allCoursebtn;
     public HBox setting;
     public HBox logout;
-    public Pane continueCourse1;
     public Pane topLeaderboard;
     public Pane smallStatistic;
     public Button btn_dashboard_atStatistics;
@@ -105,6 +92,21 @@ public class HomeController implements Initializable {
     public Pane cat3;
     public HBox learn_now;
     public HBox home_nav;
+    public AnchorPane slider;
+    public AnchorPane slide1;
+    public AnchorPane slide2;
+    public Button next;
+    public Button previous;
+    public ProgressBar continueProgressOOP;
+    public Label progressOfConValueOOP;
+    public Label progressOfConValueData;
+    public ProgressBar continueProgressData;
+    public Circle teacher_pfp_Data;
+    public Circle teacher_pfp_OOP;
+    public Rectangle course_pic_Data;
+    public Rectangle course_pic_OOP;
+    private List<AnchorPane> slides;
+    private int slideIndex = 0;
 
 
     @FXML
@@ -135,7 +137,6 @@ public class HomeController implements Initializable {
         hoverEffect(allCoursebtn);
         hoverEffect(setting);
         hoverEffect(logout);
-        hoverEffect(continueCourse1);
         hoverEffect(topLeaderboard);
         hoverEffect(smallStatistic);
         hoverEffect(btn_dashboard_atStatistics);
@@ -151,8 +152,49 @@ public class HomeController implements Initializable {
         applyHoverEffectToInside(popup);
         applyHoverEffectToInside(popup1);
         applyHoverEffectToInside(popup2);
+        applyHoverEffectToInside(slide1);
+        applyHoverEffectToInside(slide2);
         closePopupAuto();
+        callSlider();
     }
+
+    public void callSlider(){
+        slides = new ArrayList<>();
+        slides.add(slide1);
+        slides.add(slide2);
+
+        updateSlide();
+        next.setOnAction(event -> showNext());
+        previous.setOnAction(event -> showPrevious());
+    }
+
+    private void updateSlide(){
+        for(int i=0; i<slides.size(); i++){
+            slides.get(i).setVisible(i == slideIndex);
+        }
+    }
+
+    private void showNext(){
+        slideIndex = (slideIndex + 1)%slides.size();
+        slideTransition(slides.get(slideIndex));
+        updateSlide();
+    }
+
+    private void showPrevious(){
+        slideIndex = (slideIndex-1+slides.size())%slides.size();
+        slideTransition(slides.get(slideIndex));
+        updateSlide();
+    }
+
+    private void slideTransition(Node slide) {
+        FadeTransition fadeIn = new FadeTransition(Duration.millis(500), slide);
+        fadeIn.setFromValue(0);
+        fadeIn.setToValue(1);
+        fadeIn.play();
+    }
+
+
+
 
 
     public void hoverEffect(Button btn) {
@@ -206,7 +248,7 @@ public class HomeController implements Initializable {
     public void hoverEffect(VBox vBox) {
         DropShadow dropShadow = new DropShadow();
         dropShadow.setRadius(10);
-        dropShadow.setColor(Color.TRANSPARENT); // Start with no visible color
+        dropShadow.setColor(Color.TRANSPARENT);
         vBox.setEffect(dropShadow);
 
         vBox.setOnMouseEntered(mouseEvent -> {
@@ -231,7 +273,7 @@ public class HomeController implements Initializable {
         ScaleTransition scaleUp = new ScaleTransition(Duration.millis(150), hBox);
         scaleUp.setFromX(1);
         scaleUp.setFromY(1);
-        scaleUp.setToX(1.07); // Slightly bigger scale for better effect
+        scaleUp.setToX(1.07);
         scaleUp.setToY(1.07);
 
         ScaleTransition scaleDown = new ScaleTransition(Duration.millis(150), hBox);
@@ -397,53 +439,37 @@ public class HomeController implements Initializable {
         fade2.play();
     }
 
-    private void setImgContainer(){
-        Image imgAtBanner = new Image(getClass().getResource("/img/Picture/bg.jpg").toExternalForm());
-        imgContainer.setStroke(Color.TRANSPARENT);
-        imgContainer.setFill(new ImagePattern(imgAtBanner));
+    private void setImgContainer() {
+        loadAndSetImage(imgContainer, "/img/Picture/bg.jpg");
+        loadAndSetImage(teacherBanner, "/img/Picture/อาจารย์ แบงค์.jpg");
 
-        Image imgTeacherAtBanner = new Image(getClass().getResource("/img/Picture/อาจารย์ แบงค์.jpg").toExternalForm());
-        teacherBanner.setStroke(Color.TRANSPARENT);
-        teacherBanner.setFill(new ImagePattern(imgTeacherAtBanner));
+        loadAndSetImage(pfp, "/img/Profile/doctor.png");
+        loadAndSetImage(pfp_statistic, "/img/Profile/doctor.png");
+        loadAndSetImage(teacher_pfp, "/img/Profile/man.png");
 
-        Image profilepic = new Image(getClass().getResource("/img/Profile/doctor.png").toExternalForm());
-        pfp.setStroke(Color.TRANSPARENT);
-        pfp.setFill(new ImagePattern(profilepic));
+        String studentPfpPath = "/img/Profile/student.png";
+        loadAndSetImage(leaderboard_pfp, studentPfpPath);
+        loadAndSetImage(leaderboard_pfp1, studentPfpPath);
+        loadAndSetImage(leaderboard_pfp2, studentPfpPath);
+        loadAndSetImage(leaderboard_pfp3, studentPfpPath);
 
-        Image profilepic1 = new Image(getClass().getResource("/img/Profile/doctor.png").toExternalForm());
-        pfp_statistic.setStroke(Color.TRANSPARENT);
-        pfp_statistic.setFill(new ImagePattern(profilepic1));
+        loadAndSetImage(course_pic, "/img/Picture/Python.png");
+        loadAndSetImage(category_pic, "/img/icon/code.png");
+        loadAndSetImage(category_pic1, "/img/icon/partners.png");
+        loadAndSetImage(category_pic2, "/img/icon/artificial-intelligence.png");
 
-        Image teacher1 = new Image(getClass().getResource("/img/Profile/man.png").toExternalForm());
-        teacher_pfp.setStroke(Color.TRANSPARENT);
-        teacher_pfp.setFill(new ImagePattern(teacher1));
-
-        Image user2 = new Image(getClass().getResource("/img/Profile/student.png").toExternalForm());
-        leaderboard_pfp.setStroke(Color.TRANSPARENT);
-        leaderboard_pfp.setFill(new ImagePattern(user2));
-        leaderboard_pfp1.setStroke(Color.TRANSPARENT);
-        leaderboard_pfp1.setFill(new ImagePattern(user2));
-        leaderboard_pfp2.setStroke(Color.TRANSPARENT);
-        leaderboard_pfp2.setFill(new ImagePattern(user2));
-        leaderboard_pfp3.setStroke(Color.TRANSPARENT);
-        leaderboard_pfp3.setFill(new ImagePattern(user2));
-
-        Image course_pic1 = new Image(getClass().getResource("/img/Picture/Python.png").toExternalForm());
-        course_pic.setStroke(Color.TRANSPARENT);
-        course_pic.setFill(new ImagePattern(course_pic1));
-
-        Image category_pics = new Image(getClass().getResource("/img/icon/code.png").toExternalForm());
-        category_pic.setStroke(Color.TRANSPARENT);
-        category_pic.setFill(new ImagePattern(category_pics));
-
-        Image category_pic1s = new Image(getClass().getResource("/img/icon/partners.png").toExternalForm());
-        category_pic1.setStroke(Color.TRANSPARENT);
-        category_pic1.setFill(new ImagePattern(category_pic1s));
-
-        Image category_pic2s = new Image(getClass().getResource("/img/icon/artificial-intelligence.png").toExternalForm());
-        category_pic2.setStroke(Color.TRANSPARENT);
-        category_pic2.setFill(new ImagePattern(category_pic2s));
+        loadAndSetImage(teacher_pfp_OOP, "/img/Profile/man.png");
+        loadAndSetImage(teacher_pfp_Data, "/img/Profile/teacher.png");
+        loadAndSetImage(course_pic_Data, "/img/Picture/DSA.jpg");
+        loadAndSetImage(course_pic_OOP, "/img/Picture/bg.jpg");
     }
+
+    private void loadAndSetImage(Shape shape, String path) {
+        Image img = new Image(getClass().getResource(path).toExternalForm());
+        shape.setStroke(Color.TRANSPARENT);
+        shape.setFill(new ImagePattern(img));
+    }
+
 
     private void progressValue() {
         progress1.setProgress(Double.parseDouble(progressValue1.getText().replace("%", "").trim()) / 100);
@@ -458,6 +484,8 @@ public class HomeController implements Initializable {
         businessProgress.setProgress(Double.parseDouble(progressValue1.getText().replace("%", "").trim()) / 100);
         mathProgress.setProgress(Double.parseDouble(progressValue2.getText().replace("%", "").trim()) / 100);
         aiProgress.setProgress(Double.parseDouble(progressValue1.getText().replace("%", "").trim()) / 100);
+        continueProgressData.setProgress(Double.parseDouble(progressOfConValueData.getText().replace("%", "").trim()) / 100);
+        continueProgressOOP.setProgress(Double.parseDouble(progressOfConValueOOP.getText().replace("%", "").trim()) / 100);
     }
 
 
@@ -500,6 +528,14 @@ public class HomeController implements Initializable {
             }
         }
         barChart.getData().add(series);
+    }
+
+    public void applyHoverEffectToInside(AnchorPane root) {
+        for (Node node : root.lookupAll(".continueCourse")) {
+            if (node instanceof Pane p) {
+                hoverEffect(p);
+            }
+        }
     }
 
     public void applyHoverEffectToInside(VBox root) {

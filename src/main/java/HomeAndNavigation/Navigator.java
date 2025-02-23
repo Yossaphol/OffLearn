@@ -1,10 +1,16 @@
 package HomeAndNavigation;
 
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 public class Navigator {
