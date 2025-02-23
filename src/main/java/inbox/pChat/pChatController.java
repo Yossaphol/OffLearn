@@ -64,6 +64,7 @@ public class pChatController implements Initializable {
 
     @FXML
     public HBox dashboard;
+    public HBox home;
     public HBox course;
     public HBox inbox;
     public HBox task;
@@ -87,6 +88,7 @@ public class pChatController implements Initializable {
         switchToGlobal();
 
         hoverEffect(dashboard);
+        hoverEffect(home);
         hoverEffect(course);
         hoverEffect(inbox);
         hoverEffect(task);
@@ -155,6 +157,7 @@ public class pChatController implements Initializable {
     public void route(){
         Navigator nav = new Navigator();
         dashboard.setOnMouseClicked(mouseEvent -> nav.dashboardRoute(mouseEvent, MainFrame));
+        home.setOnMouseClicked(mouseEvent -> nav.homeRoute(mouseEvent, MainFrame));
         course.setOnMouseClicked(mouseEvent -> nav.courseRoute(mouseEvent, MainFrame));
         inbox.setOnMouseClicked(mouseEvent -> nav.inboxRoute(mouseEvent, MainFrame));
         task.setOnMouseClicked(mouseEvent -> nav.taskRoute(mouseEvent, MainFrame));

@@ -82,6 +82,29 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </HBox>
+                  <HBox fx:id="home" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
+                     <children>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../img/icon/home.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="Home">
+                           <font>
+                              <Font name="Kodchasan Bold" size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </HBox>
                   <HBox fx:id="course" alignment="BOTTOM_LEFT" prefHeight="27.0" prefWidth="150.0">
                      <children>
                         <ImageView fitHeight="29.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
