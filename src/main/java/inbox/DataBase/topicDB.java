@@ -1,9 +1,10 @@
 package inbox.DataBase;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import inbox.gChat.topicContent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.VBox;
+
+import java.sql.*;
 
 public class topicDB {
     private final String url = "jdbc:mysql://localhost:3306/studentdb?serverTimezone=UTC";
@@ -25,5 +26,31 @@ public class topicDB {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public VBox showTopicFromDB(){
+
+        VBox vbox = new VBox(20);
+
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement stmt = conn.prepareStatement("SELECT posterName, topic_messages, time_stamp FROM topicdb");
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/inbox/topicContent.fxml"));
+                VBox messageBox = loader.load();
+
+                topicContent controller = loader.getController();
+                controller.setName(rs.getString("posterName"));
+                controller.setMessages(rs.getString("topic_messages"));
+                controller.setTime(rs.getString("time_stamp"));
+
+                vbox.getChildren().addFirst(messageBox);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return vbox;
     }
 }
