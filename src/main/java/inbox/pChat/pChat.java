@@ -24,5 +24,6 @@ public class pChat extends Application {
         primaryStage.setFullScreenExitHint("");
         primaryStage.setScene(scene);
         primaryStage.show();
+
     }
 }
