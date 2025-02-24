@@ -17,6 +17,8 @@ public class Home extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("/fxml/HomePage/home.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         primaryStage.setTitle("Offlearn");
+        primaryStage.setFullScreen(true);
+        primaryStage.setFullScreenExitHint("");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

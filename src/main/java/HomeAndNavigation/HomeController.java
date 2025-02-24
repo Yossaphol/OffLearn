@@ -4,6 +4,7 @@ import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.animation.FadeTransition;
 import javafx.scene.control.Button;
@@ -26,6 +27,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 import java.io.IOException;
+import java.net.DatagramSocket;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -107,6 +109,9 @@ public class HomeController implements Initializable {
     public Rectangle course_pic_OOP;
     public Button cart;
     public HBox profile_btn;
+    public Button pfp_btn;
+    public ScrollPane mainScrollPane;
+    public HBox rootpage;
     private List<AnchorPane> slides;
     private int slideIndex = 0;
 
@@ -158,7 +163,15 @@ public class HomeController implements Initializable {
         applyHoverEffectToInside(slide2);
         closePopupAuto();
         callSlider();
+
+        mainScrollPane.requestLayout();
+        mainScrollPane.prefWidthProperty().bind(rootpage.widthProperty());
+        mainScrollPane.prefHeightProperty().bind(rootpage.heightProperty());
+        mainScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        mainScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     }
+
+
 
     public void callSlider(){
         slides = new ArrayList<>();
@@ -334,6 +347,7 @@ public class HomeController implements Initializable {
         dashboard.setOnMouseClicked(mouseEvent -> nav.dashboardRoute(mouseEvent, bg));
         btn_dashboard_atStatistics.setOnMouseClicked(mouseEvent -> nav.dashboardRoute(mouseEvent, bg));
         profile_btn.setOnMouseClicked(mouseEvent -> nav.dashboardRoute(mouseEvent, bg));
+        pfp_btn.setOnMouseClicked(mouseEvent -> nav.dashboardRoute(mouseEvent, bg));
 
         //Course
         course.setOnMouseClicked(mouseEvent -> nav.courseRoute(mouseEvent, bg));
@@ -580,7 +594,7 @@ public class HomeController implements Initializable {
         }
         for (Node node : root.lookupAll(".small-category")) {
             if (node instanceof HBox box) {
-                    applyHoverEffect(box);
+                applyHoverEffect(box);
             }
         }
     }
