@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -56,20 +57,23 @@
       </TextFlow>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-border-color: &quot;C2C2C2&quot;; -fx-border-radius: 0 0 25 25;">
          <children>
-            <ImageView fitHeight="50.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+            <Label fx:id="favourite_count" text="0">
+               <font>
+                  <Font name="Kodchasan Bold" size="18.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="favourite" fitHeight="50.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../img/icon/like.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../img/icon/dislike.png" />
+                  <Image url="@../../img/icon/favourite.png" />
                </image>
                <HBox.margin>
-                  <Insets left="20.0" />
+                  <Insets left="5.0" />
                </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
-            <Pane prefHeight="77.0" prefWidth="644.0" />
+            <Pane prefHeight="75.0" prefWidth="662.0" />
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/icon/comment.png" />
