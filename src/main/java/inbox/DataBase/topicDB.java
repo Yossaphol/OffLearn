@@ -33,7 +33,7 @@ public class topicDB {
         VBox vbox = new VBox(20);
 
         try (Connection conn = DriverManager.getConnection(url, user, password);
-             PreparedStatement stmt = conn.prepareStatement("SELECT posterName, topic_messages, time_stamp FROM topicdb");
+             PreparedStatement stmt = conn.prepareStatement("SELECT topicID, posterName, topic_messages, time_stamp, favourite_count FROM topicdb");
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
@@ -41,9 +41,12 @@ public class topicDB {
                 VBox messageBox = loader.load();
 
                 topicContent controller = loader.getController();
+                controller.setTopicId(rs.getInt("topicID"));
                 controller.setName(rs.getString("posterName"));
                 controller.setMessages(rs.getString("topic_messages"));
                 controller.setTime(rs.getString("time_stamp"));
+                controller.setFavourite_count(rs.getInt("favourite_count"));
+
 
                 vbox.getChildren().addFirst(messageBox);
             }
@@ -52,5 +55,31 @@ public class topicDB {
         }
 
         return vbox;
+    }
+
+    public void updateFavCount(int topicId) {
+        String sql = "UPDATE topicdb SET favourite_count = favourite_count + 1 WHERE topicID = ?";
+
+        try (Connection conn = connectDB();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, topicId);
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void decreseFavCount(int topicId) {
+        String sql = "UPDATE topicdb SET favourite_count = favourite_count - 1 WHERE topicID = ?";
+
+        try (Connection conn = connectDB();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, topicId);
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 }

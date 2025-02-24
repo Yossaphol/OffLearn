@@ -8,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import swing.postTopic;
 
 import java.net.URL;
@@ -25,8 +24,6 @@ public class gChatController implements Initializable {
     @FXML
     private ImageView refresh;
 
-    private Stage primaryStage;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         postTopic postGui = new postTopic();
@@ -39,7 +36,7 @@ public class gChatController implements Initializable {
 
     }
 
-    private void refreshContent() {
+    public void refreshContent() {
         new Thread(() -> {
             topicDB topicDB = new topicDB();
             VBox newContent = topicDB.showTopicFromDB();
