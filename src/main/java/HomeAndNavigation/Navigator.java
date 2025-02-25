@@ -67,18 +67,20 @@ public class Navigator {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root, 1600, 1080);
 
             root.setOpacity(0);
             stage.setScene(scene);
+
             stage.setMaximized(true);
+            stage.show();
+            stage.sizeToScene();
 
             FadeTransition fadeIn = new FadeTransition(Duration.millis(300), root);
             fadeIn.setFromValue(0);
             fadeIn.setToValue(1);
             fadeIn.play();
 
-            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
