@@ -20,8 +20,8 @@ public class pChat extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("/fxml/inbox/pChat.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         primaryStage.setTitle("Offlearn");
+        primaryStage.setMaximized(true);
         primaryStage.setFullScreen(true);
-        primaryStage.setFullScreenExitHint("");
         primaryStage.setScene(scene);
         primaryStage.show();
 

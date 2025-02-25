@@ -7,6 +7,9 @@ module com.example.offlearn {
     requires jdk.compiler;
     requires jdk.dynalink;
 
+    opens mainApp to javafx.fxml;
+    exports mainApp;
+
     opens inbox to javafx.fxml;
     exports inbox;
 

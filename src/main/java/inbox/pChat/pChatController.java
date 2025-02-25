@@ -17,12 +17,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import jdk.dynalink.beans.StaticClass;
 
 import java.io.IOException;
 import java.net.URL;
@@ -134,9 +132,7 @@ public class pChatController implements Initializable {
 
                 globalButtonController controller = globalRoute.getController();
 
-                controller.setPrivateButtonClickListener(() -> {
-                    switchBackToDefault();
-                });
+                controller.setPrivateButtonClickListener(this::switchBackToDefault);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -157,12 +153,12 @@ public class pChatController implements Initializable {
 
     public void route(){
         Navigator nav = new Navigator();
-        dashboard.setOnMouseClicked(mouseEvent -> nav.dashboardRoute(mouseEvent, MainFrame));
-        home.setOnMouseClicked(mouseEvent -> nav.homeRoute(mouseEvent, MainFrame));
-        course.setOnMouseClicked(mouseEvent -> nav.courseRoute(mouseEvent, MainFrame));
-        inbox.setOnMouseClicked(mouseEvent -> nav.inboxRoute(mouseEvent, MainFrame));
-        task.setOnMouseClicked(mouseEvent -> nav.taskRoute(mouseEvent, MainFrame));
-        roadmap.setOnMouseClicked(mouseEvent -> nav.roadmapRoute(mouseEvent, MainFrame));
+        dashboard.setOnMouseClicked(nav::dashboardRoute);
+        home.setOnMouseClicked(nav::homeRoute);
+        course.setOnMouseClicked(nav::courseRoute);
+        inbox.setOnMouseClicked(nav::inboxRoute);
+        task.setOnMouseClicked(nav::taskRoute);
+        roadmap.setOnMouseClicked(nav::roadmapRoute);
     }
 
     private void switchTeacher(String newTeacher) {
