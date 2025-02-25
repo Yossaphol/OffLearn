@@ -25,13 +25,13 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="bg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HomeAndNavigation.HomeController">
+<HBox fx:id="bg" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="922.0" prefWidth="1452.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HomeAndNavigation.HomeController">
    <children>
-      <ScrollPane fx:id="mainScrollPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="2000.0" prefWidth="1468.0" HBox.hgrow="ALWAYS">
+      <ScrollPane fx:id="mainScrollPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1024.0" prefWidth="1440.0" HBox.hgrow="ALWAYS">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1190.0" prefWidth="1440.0">
                <children>
-                  <HBox fx:id="rootpage" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1024.0" prefWidth="1440.0">
+                  <HBox fx:id="rootpage" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1195.0" prefWidth="1440.0">
                      <children>
                         <VBox fx:id="leftWrapper" alignment="CENTER" minWidth="300.0" prefHeight="1024.0" prefWidth="293.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;">
                            <children>
