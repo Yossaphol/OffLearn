@@ -340,43 +340,43 @@ public class HomeController implements Initializable {
         Navigator nav = new Navigator();
 
         //Home
-        home.setOnMouseClicked(mouseEvent -> nav.homeRoute(mouseEvent, bg));
-        home_nav.setOnMouseClicked(mouseEvent -> nav.homeRoute(mouseEvent, bg));
+        home.setOnMouseClicked(nav::homeRoute);
+        home_nav.setOnMouseClicked(nav::homeRoute);
 
         //Dashboard
-        dashboard.setOnMouseClicked(mouseEvent -> nav.dashboardRoute(mouseEvent, bg));
-        btn_dashboard_atStatistics.setOnMouseClicked(mouseEvent -> nav.dashboardRoute(mouseEvent, bg));
-        profile_btn.setOnMouseClicked(mouseEvent -> nav.dashboardRoute(mouseEvent, bg));
-        pfp_btn.setOnMouseClicked(mouseEvent -> nav.dashboardRoute(mouseEvent, bg));
+        dashboard.setOnMouseClicked(nav::dashboardRoute);
+        btn_dashboard_atStatistics.setOnMouseClicked(nav::dashboardRoute);
+        profile_btn.setOnMouseClicked(nav::dashboardRoute);
+        pfp_btn.setOnMouseClicked(nav::dashboardRoute);
 
         //Course
-        course.setOnMouseClicked(mouseEvent -> nav.courseRoute(mouseEvent, bg));
-        allCoursebtn.setOnMouseClicked(mouseEvent -> nav.courseRoute(mouseEvent, bg));
+        course.setOnMouseClicked(nav::courseRoute);
+        allCoursebtn.setOnMouseClicked(nav::courseRoute);
 
         //My Course
-        yourCoursebtn.setOnMouseClicked(mouseEvent -> nav.myCourseRoute(mouseEvent, bg));
-        calendarContainer.setOnMouseClicked(mouseEvent -> nav.myCourseRoute(mouseEvent, bg));
+        yourCoursebtn.setOnMouseClicked(nav::myCourseRoute);
+        calendarContainer.setOnMouseClicked(nav::myCourseRoute);
 
         //cart
-        cart.setOnMouseClicked(mouseEvent -> nav.cartRoute(mouseEvent, bg));
+        cart.setOnMouseClicked(nav::cartRoute);
 
         //Inbox
-        inbox.setOnMouseClicked(mouseEvent -> nav.inboxRoute(mouseEvent, bg));
+        inbox.setOnMouseClicked(nav::inboxRoute);
 
         //Task
-        task.setOnMouseClicked(mouseEvent -> nav.taskRoute(mouseEvent, bg));
+        task.setOnMouseClicked(nav::taskRoute);
 
         //Roadmap
-        roadmap.setOnMouseClicked(mouseEvent -> nav.roadmapRoute(mouseEvent, bg));
+        roadmap.setOnMouseClicked(nav::roadmapRoute);
 
         //Leaderboard
-        topLeaderboard.setOnMouseClicked(mouseEvent -> nav.leaderboardRoute(mouseEvent, bg));
+        topLeaderboard.setOnMouseClicked(nav::leaderboardRoute);
 
         //setting
-        setting.setOnMouseClicked(mouseEvent -> nav.settingRoute(mouseEvent, bg));
+        setting.setOnMouseClicked(nav::settingRoute);
 
         //Logout
-        logout.setOnMouseClicked(mouseEvent -> nav.logoutRoute(mouseEvent, bg));
+        logout.setOnMouseClicked(nav::logoutRoute);
     }
 
     @FXML
