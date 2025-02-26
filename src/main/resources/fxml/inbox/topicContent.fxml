@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="263.0" prefWidth="800.0" style="-fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: &quot;C2C2C2&quot;; -fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inbox.gChat.topicContent">
+<VBox fx:id="topicView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="265.0" prefWidth="800.0" style="-fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: &quot;C2C2C2&quot;; -fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inbox.gChat.topicContent">
    <children>
       <HBox prefHeight="58.0" prefWidth="800.0" style="-fx-background-color: &quot;F8F3D9&quot;; -fx-background-radius: 25 25 0 0; -fx-border-radius: 25 25 0 0; -fx-border-color: &quot;C2C2C2&quot;;">
          <children>
@@ -74,11 +74,6 @@
                </cursor>
             </ImageView>
             <Pane prefHeight="75.0" prefWidth="662.0" />
-            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../img/icon/comment.png" />
-               </image>
-            </ImageView>
          </children>
       </HBox>
    </children>
