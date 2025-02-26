@@ -2,12 +2,16 @@ package inbox.gChat;
 
 import inbox.DataBase.topicDB;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,6 +34,12 @@ public class topicContent implements Initializable {
 
     @FXML
     private Label favourite_count;
+
+    @FXML
+    private ImageView comment;
+
+    @FXML
+    private VBox topicView;
 
     private boolean fav;
     private int topicId;
@@ -103,4 +113,5 @@ public class topicContent implements Initializable {
         int currentCount = Integer.parseInt(favourite_count.getText()) - 1;
         favourite_count.setText(String.valueOf(currentCount));
     }
+
 }
