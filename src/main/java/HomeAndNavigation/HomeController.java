@@ -13,6 +13,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 import javafx.scene.layout.HBox;
 import javafx.fxml.FXMLLoader;
@@ -26,12 +27,15 @@ import javafx.scene.image.Image;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.DatagramSocket;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import FontLoader.FontLoader;
 
 public class HomeController implements Initializable {
 
@@ -135,6 +139,10 @@ public class HomeController implements Initializable {
         setImgContainer();
         route();
 
+        FontLoader fontLoader = new FontLoader();
+        fontLoader.loadFonts();
+
+
         hoverEffect(dashboard);
         hoverEffect(course);
         hoverEffect(inbox);
@@ -169,7 +177,10 @@ public class HomeController implements Initializable {
         mainScrollPane.prefHeightProperty().bind(rootpage.heightProperty());
         mainScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         mainScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
     }
+
+
 
 
 

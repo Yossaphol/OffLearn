@@ -25,13 +25,13 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="bg" fillHeight="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="811.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HomeAndNavigation.HomeController">
+<HBox fx:id="bg" fillHeight="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HomeAndNavigation.HomeController">
    <children>
-      <ScrollPane fx:id="mainScrollPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1024.0" prefWidth="1440.0" HBox.hgrow="ALWAYS">
+      <ScrollPane fx:id="mainScrollPane" prefHeight="1024.0" prefWidth="1440.0" HBox.hgrow="ALWAYS">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1190.0" prefWidth="1440.0">
+            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1190.0" prefWidth="1440.0">
                <children>
-                  <HBox fx:id="rootpage" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1195.0" prefWidth="1440.0">
+                  <HBox fx:id="rootpage" prefHeight="1195.0" prefWidth="1440.0">
                      <children>
                         <VBox fx:id="leftWrapper" alignment="CENTER" minWidth="300.0" prefHeight="1024.0" prefWidth="293.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;">
                            <children>
@@ -258,7 +258,7 @@
                                     <Insets left="60.0" />
                                  </padding>
                               </VBox>
-                              <Button fx:id="yourCoursebtn" mnemonicParsing="false" prefHeight="65.0" prefWidth="167.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #410066, #8100CC); -fx-background-radius: 10;" text="คอร์สของคุณ" textFill="WHITE">
+                              <Button fx:id="yourCoursebtn" mnemonicParsing="false" prefHeight="58.0" prefWidth="167.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #410066, #8100CC); -fx-background-radius: 10;" text="คอร์สของคุณ" textFill="WHITE">
                                  <font>
                                     <Font name="Noto Sans Thai Bold" size="20.0" />
                                  </font>

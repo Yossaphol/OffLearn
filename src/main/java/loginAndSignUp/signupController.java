@@ -1,5 +1,6 @@
 package loginAndSignUp;
 
+import FontLoader.FontLoader;
 import javafx.animation.FadeTransition;
 import javafx.fxml.Initializable;
 import java.net.URL;
@@ -20,15 +21,21 @@ public class signupController implements Initializable {
     private Scene scene;
     private Parent root;
 
+    FontLoader fontLoader;
+
+    @FXML
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        fontLoader = new FontLoader();
+        fontLoader.loadFonts();
+    }
+
     // Link to login
     @FXML
     private void switchToLogin(ActionEvent event) throws IOException {
-
         FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.5));
         fadeOut.setNode(((Node) event.getSource()).getScene().getRoot());
         fadeOut.setFromValue(1);
         fadeOut.setToValue(0);
-
 
         fadeOut.setOnFinished(e -> {
             try {
@@ -52,10 +59,5 @@ public class signupController implements Initializable {
         });
 
         fadeOut.play();
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 }

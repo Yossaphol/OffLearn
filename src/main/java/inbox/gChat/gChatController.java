@@ -9,6 +9,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import swing.postTopic;
+import FontLoader.FontLoader;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,6 +35,8 @@ public class gChatController implements Initializable {
         refresh.setOnMouseClicked(mouseEvent -> refreshContent());
 
 
+        FontLoader fontLoader = new FontLoader();
+        fontLoader.loadFonts();
     }
 
     public void refreshContent() {

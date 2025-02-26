@@ -1,5 +1,6 @@
 package inbox.pChat;
 
+import FontLoader.FontLoader;
 import HomeAndNavigation.Navigator;
 import inbox.Client;
 import inbox.DataBase.StudentsDBConnect;
@@ -115,6 +116,10 @@ public class pChatController implements Initializable {
         sendButton.setOnAction(event -> sendMessage());
         tfMessage.setOnAction(event -> sendMessage());
 
+
+
+        FontLoader fontLoader = new FontLoader();
+        fontLoader.loadFonts();
     }
 
 
