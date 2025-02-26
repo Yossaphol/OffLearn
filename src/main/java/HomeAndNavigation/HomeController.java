@@ -10,6 +10,7 @@ import javafx.animation.FadeTransition;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
@@ -178,6 +179,7 @@ public class HomeController implements Initializable {
         mainScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         mainScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
+
     }
 
 
@@ -218,9 +220,6 @@ public class HomeController implements Initializable {
         fadeIn.setToValue(1);
         fadeIn.play();
     }
-
-
-
 
 
     public void hoverEffect(Button btn) {

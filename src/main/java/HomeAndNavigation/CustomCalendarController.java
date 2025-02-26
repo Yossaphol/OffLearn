@@ -31,7 +31,7 @@ public class CustomCalendarController {
         for (int day = 1; day <= daysInMonth; day++) {
             Label dayLabel = new Label(String.valueOf(day));
 
-            dayLabel.setStyle("-fx-font-family: 'Kodchasan'; -fx-font-weight: bold; -fx-fill: #000000; ");
+//            dayLabel.setStyle("-fx-font?-family: 'Kodchasan'; -fx-font-weight: bold; -fx-fill: #000000; ");
 
             dayLabel.setMaxWidth(Double.MAX_VALUE);
             calendarGrid.add(dayLabel, col, row);

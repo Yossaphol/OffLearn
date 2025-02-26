@@ -6,6 +6,7 @@ module com.example.offlearn {
     requires jdk.xml.dom;
     requires jdk.compiler;
     requires jdk.dynalink;
+    requires io.github.cdimascio.dotenv.java;
 
     opens mainApp to javafx.fxml;
     exports mainApp;

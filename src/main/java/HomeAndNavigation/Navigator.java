@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -67,14 +68,22 @@ public class Navigator {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root, 1600, 1080);
+            Scene scene = new Scene(root);
 
             root.setOpacity(0);
             stage.setScene(scene);
 
-            stage.setMaximized(true);
+            stage.setFullScreen(true);
+            stage.setFullScreenExitHint("");
+
+            stage.fullScreenProperty().addListener((obs, wasFullScreen, isNowFullScreen) -> {
+                if (!isNowFullScreen) {
+                    stage.setFullScreen(false);
+                    stage.setMaximized(true);
+                }
+            });
+
             stage.show();
-            stage.sizeToScene();
 
             FadeTransition fadeIn = new FadeTransition(Duration.millis(300), root);
             fadeIn.setFromValue(0);
@@ -93,7 +102,15 @@ public class Navigator {
 
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            stage.setMaximized(true);
+            stage.setFullScreen(true);
+            stage.setFullScreenExitHint("");
+
+            stage.fullScreenProperty().addListener((obs, wasFullScreen, isNowFullScreen) -> {
+                if (!isNowFullScreen) {
+                    stage.setFullScreen(false);
+                    stage.setMaximized(true);
+                }
+            });
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

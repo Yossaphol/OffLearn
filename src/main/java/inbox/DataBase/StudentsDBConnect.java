@@ -1,11 +1,14 @@
 package inbox.DataBase;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 import java.sql.*;
 
 public class StudentsDBConnect {
-    private final String url = "jdbc:mysql://localhost:3306/studentdb?serverTimezone=UTC";
-    private final String user = "root";
-    private final String password = "1234";
+    private static final Dotenv nev = Dotenv.load();
+    private static final String url = nev.get("DB_URL");
+    private static final String user = nev.get("DB_USER");
+    private static final String  password = nev.get("DB_PASS");
 
     private Connection connectDB() throws SQLException {
         return DriverManager.getConnection(url, user, password);

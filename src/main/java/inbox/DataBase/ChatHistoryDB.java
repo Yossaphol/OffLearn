@@ -1,17 +1,20 @@
 
 package inbox.DataBase;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
     public class ChatHistoryDB {
-        private static final String URL = "jdbc:mysql://localhost:3306/studentdb?serverTimezone=UTC";
-        private static final String USER = "root";
-        private static final String PASSWORD = "1234";
+        private static final Dotenv nev = Dotenv.load();
+        private static final String url = nev.get("DB_URL");
+        private static final String user = nev.get("DB_USER");
+        private static final String  password = nev.get("DB_PASS");
 
         private static Connection connectDB() throws SQLException {
-            return DriverManager.getConnection(URL, USER, PASSWORD);
+            return DriverManager.getConnection(url, user, password);
         }
 
         public List<String[]> getSentMessages(int studentId, int teacherId) {
