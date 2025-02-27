@@ -3,6 +3,7 @@ package Server.inbox.pChat;
 import Server.inbox.pChat.Database.ChatHistoryDB;
 import Server.inbox.pChat.Database.StudentDBConnect;
 import Server.inbox.pChat.Database.TeacherDBConnect;
+import client.inbox.pChat.pChatController;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +14,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -23,7 +25,7 @@ import java.net.ServerSocket;
 import java.net.URL;
 import java.util.*;
 
-public class pChatServerController implements Initializable {
+public class pChatServerController extends pChatController implements Initializable {
     @FXML
     private Button sendButton;
 
@@ -48,6 +50,18 @@ public class pChatServerController implements Initializable {
     @FXML
     private Button myCourse;
 
+    @FXML
+    private HBox globalButton;
+
+    @FXML
+    private BorderPane borderPane;
+
+    @FXML
+    private VBox privateBar;
+
+    @FXML
+    private VBox pChatDisplay;
+
     private Map<String, List<HBox>> chatHistory = new HashMap<>();
     private String selectedStudent;
 
@@ -58,6 +72,11 @@ public class pChatServerController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        switchToGlobal();
+
+
+
         spMain.vvalueProperty().bind(vboxMessage.heightProperty());
         myCourse.setStyle("-fx-background-color: linear-gradient(to right, #0675DE, #033F78); " +
                 "-fx-background-radius: 15px 15px 15px 15px;");

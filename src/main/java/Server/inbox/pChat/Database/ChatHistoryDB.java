@@ -18,48 +18,6 @@ public class ChatHistoryDB {
         return DriverManager.getConnection(url, user, password);
     }
 
-    public List<String> getSentMessages(int studentId, int teacherId) {
-        List<String> messages = new ArrayList<>();
-        String query = "SELECT message_text FROM messages WHERE sender_id = ? AND receiver_id = ? ORDER BY message_id ASC";
-
-        try (Connection conn = connectDB();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-
-            pstmt.setInt(1, studentId);
-            pstmt.setInt(2, teacherId);
-            ResultSet rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                messages.add(rs.getString("message_text"));
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Error fetching sent messages: " + e.getMessage());
-        }
-        return messages;
-    }
-
-    public List<String> getReceivedMessages(int studentId, int teacherId) {
-        List<String> messages = new ArrayList<>();
-        String query = "SELECT message_text FROM messages WHERE sender_id = ? AND receiver_id = ? ORDER BY message_id ASC";
-
-        try (Connection conn = connectDB();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-
-            pstmt.setInt(1, teacherId);
-            pstmt.setInt(2, studentId);
-            ResultSet rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                messages.add(rs.getString("message_text"));
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Error fetching received messages: " + e.getMessage());
-        }
-        return messages;
-    }
-
     public void saveChatMessage(int senderId, String senderType, int receiverId, String receiverType, String message) {
         String query = "INSERT INTO messages (sender_id, sender_type, receiver_id, receiver_type, message_text) VALUES (?, ?, ?, ?, ?)";
 

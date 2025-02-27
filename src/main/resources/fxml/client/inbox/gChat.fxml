@@ -13,16 +13,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="890.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.inbox.gChat.gChatController">
+<VBox fx:id="main" prefHeight="890.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.inbox.gChat.gChatController">
    <children>
-      <HBox prefHeight="140.0" prefWidth="870.0">
+      <HBox alignment="CENTER" prefHeight="140.0" prefWidth="870.0">
          <children>
             <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../img/Profile/bussiness-man.png" />
                </image>
             </ImageView>
-            <VBox prefHeight="104.0" prefWidth="353.0">
+            <VBox prefHeight="71.0" prefWidth="230.0">
                <children>
                   <Label text="StudentTest" textFill="#8100cc">
                      <font>
@@ -45,7 +45,7 @@
                   <Insets left="10.0" />
                </HBox.margin>
             </VBox>
-            <Pane prefHeight="102.0" prefWidth="316.0" />
+            <Pane fx:id="pane" prefHeight="71.0" prefWidth="443.0" />
             <ImageView fx:id="refresh" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../img/icon/rotate-left.png" />
@@ -61,7 +61,7 @@
       </HBox>
       <StackPane prefHeight="765.0" prefWidth="870.0">
          <children>
-            <ScrollPane fx:id="scrollPane" prefHeight="404.0" prefWidth="870.0" vbarPolicy="ALWAYS" StackPane.alignment="TOP_CENTER">
+            <ScrollPane fx:id="scrollPane" prefHeight="404.0" prefWidth="870.0" vbarPolicy="ALWAYS" StackPane.alignment="CENTER">
                <StackPane.margin>
                   <Insets />
                </StackPane.margin>

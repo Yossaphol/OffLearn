@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import client.swing.postTopic;
 import client.FontLoader.FontLoader;
@@ -25,6 +26,12 @@ public class gChatController implements Initializable {
     @FXML
     private ImageView refresh;
 
+    @FXML
+    private VBox main;
+
+    @FXML
+    private Pane pane;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         postTopic postGui = new postTopic();
@@ -33,10 +40,6 @@ public class gChatController implements Initializable {
         createTopic.setOnAction(actionEvent -> postGui.openSwingWindow());
 
         refresh.setOnMouseClicked(mouseEvent -> refreshContent());
-
-
-        FontLoader fontLoader = new FontLoader();
-        fontLoader.loadFonts();
     }
 
     public void refreshContent() {
@@ -46,6 +49,18 @@ public class gChatController implements Initializable {
 
             Platform.runLater(() -> scrollPane.setContent(newContent));
         }).start();
+    }
+
+    public ScrollPane getScrollPane(){
+        return this.scrollPane;
+    }
+
+    public Pane getPane(){
+        return this.pane;
+    }
+
+    public VBox getMain(){
+        return this.main;
     }
 }
 
