@@ -6,34 +6,37 @@ module com.example.offlearn {
     requires jdk.xml.dom;
     requires jdk.compiler;
     requires jdk.dynalink;
+    requires io.github.cdimascio.dotenv.java;
 
-    opens mainApp to javafx.fxml;
-    exports mainApp;
+    opens client.mainApp to javafx.fxml;
+    exports client.mainApp;
 
-    opens inbox to javafx.fxml;
-    exports inbox;
+    opens client.inbox to javafx.fxml;
+    exports client.inbox;
 
-    opens loginAndSignUp to javafx.fxml;
-    exports loginAndSignUp;
+    opens client.loginAndSignUp to javafx.fxml;
+    exports client.loginAndSignUp;
 
-    opens HomeAndNavigation to javafx.fxml;
-    exports HomeAndNavigation;
+    opens client.HomeAndNavigation to javafx.fxml;
+    exports client.HomeAndNavigation;
 
-    opens dashboard to javafx.fxml;
-    exports dashboard;
+    opens client.dashboard to javafx.fxml;
+    exports client.dashboard;
 
-    opens roadmap to javafx.fxml;
-    exports roadmap;
+    opens client.roadmap to javafx.fxml;
+    exports client.roadmap;
 
-    opens task to javafx.fxml;
-    exports task;
+    opens client.task to javafx.fxml;
+    exports client.task;
 
-    exports inbox.pChat;
-    opens inbox.pChat to javafx.fxml;
+    exports client.inbox.pChat;
+    opens client.inbox.pChat to javafx.fxml;
 
-    exports inbox.gChat;
-    opens inbox.gChat to javafx.fxml;
+    exports client.inbox.gChat;
+    opens client.inbox.gChat to javafx.fxml;
 
-    exports swing to javafx.graphics;
+    exports client.swing to javafx.graphics;
 
+    exports Server.inbox.pChat;
+    opens Server.inbox.pChat to javafx.fxml;
 }
