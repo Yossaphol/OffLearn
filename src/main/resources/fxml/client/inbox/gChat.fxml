@@ -45,7 +45,7 @@
                   <Insets left="10.0" />
                </HBox.margin>
             </VBox>
-            <Pane fx:id="pane" prefHeight="71.0" prefWidth="443.0" />
+            <Pane fx:id="pane" prefHeight="71.0" prefWidth="443.0" HBox.hgrow="ALWAYS" />
             <ImageView fx:id="refresh" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../img/icon/rotate-left.png" />
@@ -53,6 +53,9 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
             </ImageView>
          </children>
          <padding>
