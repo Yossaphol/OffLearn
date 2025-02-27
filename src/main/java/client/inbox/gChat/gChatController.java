@@ -51,10 +51,6 @@ public class gChatController implements Initializable {
         }).start();
     }
 
-    public ScrollPane getScrollPane(){
-        return this.scrollPane;
-    }
-
     public Pane getPane(){
         return this.pane;
     }
