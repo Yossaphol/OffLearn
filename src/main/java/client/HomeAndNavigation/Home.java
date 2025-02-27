@@ -19,7 +19,7 @@ public class Home extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         primaryStage.setTitle("Offlearn");
         primaryStage.setMaximized(true);
-        primaryStage.setFullScreen(false);
+        primaryStage.setFullScreen(true);
         primaryStage.setFullScreenExitHint("");
         primaryStage.setScene(scene);
         primaryStage.show();

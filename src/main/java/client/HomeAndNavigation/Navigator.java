@@ -100,7 +100,7 @@ public class Navigator {
 
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            stage.setFullScreen(true);
+            stage.setFullScreen(false);
             stage.setFullScreenExitHint("");
 
             stage.fullScreenProperty().addListener((obs, wasFullScreen, isNowFullScreen) -> {

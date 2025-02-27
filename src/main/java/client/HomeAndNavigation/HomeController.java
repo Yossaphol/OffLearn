@@ -512,7 +512,7 @@ public class HomeController implements Initializable {
         loadAndSetImage(course_pic_OOP, "/img/Picture/bg.jpg");
     }
 
-    private void loadAndSetImage(Shape shape, String path) {
+    public void loadAndSetImage(Shape shape, String path) {
         Image img = new Image(getClass().getResource(path).toExternalForm());
         shape.setStroke(Color.TRANSPARENT);
         shape.setFill(new ImagePattern(img));
