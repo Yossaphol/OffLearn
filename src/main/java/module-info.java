@@ -39,4 +39,7 @@ module com.example.offlearn {
 
     exports Server.inbox.pChat;
     opens Server.inbox.pChat to javafx.fxml;
+
+    exports client.payment;
+    opens client.payment to javafx.fxml;
 }
