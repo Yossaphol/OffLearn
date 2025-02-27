@@ -19,7 +19,7 @@
 
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Server.inbox.pChat.pChatServerController">
    <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="SOMETIMES">
+      <BorderPane fx:id="borderPane" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="SOMETIMES">
          <top>
             <HBox alignment="CENTER" prefHeight="134.0" prefWidth="200.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;" BorderPane.alignment="CENTER_LEFT">
                <children>
@@ -63,7 +63,7 @@
                         </TextField>
                         <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../img/icon/search-interface-symbol.png" />
+                              <Image url="@../../img/icon/magnifying-glass-solid.png" />
                            </image>
                            <StackPane.margin>
                               <Insets left="120.0" />
@@ -149,7 +149,7 @@
             </HBox>
          </top>
          <left>
-            <VBox prefHeight="890.0" prefWidth="300.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;" BorderPane.alignment="CENTER">
+            <VBox fx:id="privateBar" prefHeight="890.0" prefWidth="300.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;" BorderPane.alignment="CENTER">
                <children>
                   <VBox prefHeight="98.0" prefWidth="298.0">
                      <children>
@@ -176,7 +176,7 @@
                               </TextField>
                               <ImageView fitHeight="15.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../img/icon/search-interface-symbol.png" />
+                                    <Image url="@../../img/icon/magnifying-glass-solid.png" />
                                  </image>
                                  <StackPane.margin>
                                     <Insets left="40.0" top="10.0" />
@@ -186,41 +186,48 @@
                         </StackPane>
                      </children>
                   </VBox>
-                  <HBox prefHeight="59.0" prefWidth="298.0">
+                  <VBox prefHeight="50.0" prefWidth="298.0">
                      <children>
-                        <VBox prefHeight="76.0" prefWidth="68.0">
+                        <Label text="สาธารณะ" textFill="#0675de">
+                           <font>
+                              <Font name="Kodchasan Bold" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox fx:id="globalButton" prefHeight="59.0" prefWidth="298.0">
                            <children>
-                              <Label text="สาธารณะ" textFill="#0675de">
-                                 <font>
-                                    <Font name="Kodchasan Bold" size="14.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../img/icon/earth.png" />
-                                 </image>
-                              </ImageView>
+                              <VBox prefHeight="76.0" prefWidth="68.0">
+                                 <children>
+                                    <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../img/icon/earth.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="BOTTOM_LEFT" prefHeight="69.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="Global Chat | คอมมิวนิตู้" textFill="#0675de">
+                                       <font>
+                                          <Font name="Kodchasan Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="99+ ข้อความ" textFill="#8e8e8e" />
+                                 </children>
+                              </VBox>
                            </children>
-                        </VBox>
-                        <VBox alignment="BOTTOM_LEFT" prefHeight="69.0" prefWidth="100.0">
-                           <children>
-                              <Label text="Global Chat | คอมมิวนิตู้" textFill="#0675de">
-                                 <font>
-                                    <Font name="Kodchasan Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label text="99+ ข้อความ" textFill="#8e8e8e" />
-                           </children>
-                        </VBox>
+                           <VBox.margin>
+                              <Insets left="20.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
                      </children>
                      <VBox.margin>
-                        <Insets left="20.0" top="10.0" />
+                        <Insets top="20.0" />
                      </VBox.margin>
-                  </HBox>
-                  <Pane prefHeight="39.0" prefWidth="298.0" />
+                  </VBox>
+                  <Pane prefHeight="28.0" prefWidth="298.0" />
                   <Label text="ส่วนตัว" textFill="#0675de">
                      <font>
                         <Font name="Kodchasan Bold" size="14.0" />
@@ -234,7 +241,7 @@
             </VBox>
          </left>
          <center>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <VBox fx:id="pChatDisplay" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="155.0" prefWidth="1140.0">
                      <children>

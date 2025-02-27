@@ -115,11 +115,6 @@ public class pChatController implements Initializable {
 
         sendButton.setOnAction(event -> sendMessage());
         tfMessage.setOnAction(event -> sendMessage());
-
-
-
-        FontLoader fontLoader = new FontLoader();
-        fontLoader.loadFonts();
     }
 
 
@@ -146,7 +141,7 @@ public class pChatController implements Initializable {
     }
 
 
-    private void switchBackToDefault() {
+    public void switchBackToDefault() {
         borderPane.setLeft(privateBar);
         borderPane.setCenter(pChatDisplay);
     }
@@ -166,7 +161,7 @@ public class pChatController implements Initializable {
         roadmap.setOnMouseClicked(nav::roadmapRoute);
     }
 
-    private void switchTeacher(String newTeacher) {
+    public void switchTeacher(String newTeacher) {
         String oldTeacher = selectedTeacher;
         selectedTeacher = newTeacher;
 

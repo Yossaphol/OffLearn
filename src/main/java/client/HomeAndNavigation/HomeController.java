@@ -134,10 +134,6 @@ public class HomeController implements Initializable {
         setImgContainer();
         route();
 
-        FontLoader fontLoader = new FontLoader();
-        fontLoader.loadFonts();
-
-
         hoverEffect(dashboard);
         hoverEffect(course);
         hoverEffect(inbox);

@@ -14,30 +14,6 @@ public class StudentsDBConnect {
         return DriverManager.getConnection(url, user, password);
     }
 
-    public void addStudent(String studentName) {
-        String checkQuery = "SELECT COUNT(*) FROM studentdb.studentlist WHERE name = ?";
-        String insertQuery = "INSERT INTO studentdb.studentlist (name) VALUES (?)";
-
-        try (Connection conn = connectDB();
-             PreparedStatement checkStmt = conn.prepareStatement(checkQuery);
-             PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) {
-
-            checkStmt.setString(1, studentName);
-            var rs = checkStmt.executeQuery();
-            if (rs.next() && rs.getInt(1) > 0) {
-                System.out.println("Student already exists. Skipping insertion.");
-                return;
-            }
-
-            insertStmt.setString(1, studentName);
-            insertStmt.executeUpdate();
-            System.out.println("Insert to database complete");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public int getStudentID(String studentName) {
         String query = "SELECT StudentID FROM studentdb.studentlist WHERE name = ?";
         int studentId = -1;
