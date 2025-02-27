@@ -13,7 +13,7 @@ public class FontLoader {
 
     public void loadFonts() {
         try {
-            File fontsFolder = new File(getClass().getResource("/resources/fonts").toURI());
+            File fontsFolder = new File(getClass().getResource("/fonts").toURI());
 
             for (File fontFile : fontsFolder.listFiles()) {
                 if (fontFile.isFile() && fontFile.getName().endsWith(".ttf")) {

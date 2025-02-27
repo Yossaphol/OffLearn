@@ -116,6 +116,7 @@ public class HomeController implements Initializable {
     public Button pfp_btn;
     public ScrollPane mainScrollPane;
     public HBox rootpage;
+    public HBox firstRoot;
     private List<AnchorPane> slides;
     private int slideIndex = 0;
 
@@ -178,9 +179,10 @@ public class HomeController implements Initializable {
         mainScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         mainScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
+
+        bg.prefWidthProperty().bind(firstRoot.widthProperty());
+        bg.prefHeightProperty().bind(firstRoot.heightProperty());
     }
-
-
 
 
 

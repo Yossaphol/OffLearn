@@ -43,3 +43,20 @@
 .continueCourse{
     -fx-background-color: white;
 }
+
+.scroll-pane {
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
+
+
+.scroll-pane:focused {
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
