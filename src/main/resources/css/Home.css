@@ -60,3 +60,20 @@
     -fx-background-radius: 0;
     -fx-border-radius: 0;
 }
+
+.smallProgressbar1{
+    -fx-pref-height: 12;
+     -fx-accent: #8100CC;
+    -fx-background-color: #F6F6F6;
+}
+
+.text-area {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-inner-shadow: none;
+    -fx-text-fill: #8100cc;
+}
+
