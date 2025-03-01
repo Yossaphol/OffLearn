@@ -11,8 +11,11 @@ public class payment extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(payment.class.getResource("/fxml/client/payment/payment.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 650);
 
+
         stage.setTitle("Offlearn Client");
         stage.setScene(scene);
         stage.show();
     }
 }
+
+
