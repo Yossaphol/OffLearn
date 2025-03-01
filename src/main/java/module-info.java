@@ -7,6 +7,11 @@ module com.example.offlearn {
     requires jdk.compiler;
     requires jdk.dynalink;
     requires io.github.cdimascio.dotenv.java;
+    requires com.google.zxing.javase;
+    requires com.google.zxing;
+    requires org.json;
+    requires stripe.java;
+    requires okhttp3;
 
     opens client.mainApp to javafx.fxml;
     exports client.mainApp;

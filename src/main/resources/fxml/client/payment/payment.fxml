@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="600.0" style="-fx-background-radius: 25; -fx-border-radius: 25; -fx-background-color: &quot;EFEFEF&quot;; -fx-border-color: black;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="paymentDisplay" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="600.0" style="-fx-background-radius: 25; -fx-border-radius: 25; -fx-background-color: &quot;EFEFEF&quot;; -fx-border-color: black;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.payment.paymentController">
    <children>
       <HBox alignment="TOP_RIGHT" prefHeight="11.0" prefWidth="539.0">
          <children>
@@ -54,7 +54,7 @@
                   </VBox>
                </children>
             </HBox>
-            <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="qrCode" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../img/icon/qr.png" />
                </image></ImageView>
@@ -62,7 +62,7 @@
       </VBox>
       <VBox alignment="CENTER" prefHeight="100.0" prefWidth="539.0">
          <children>
-            <Label text="Payment Accepted Here">
+            <Label fx:id="status" text="Payment Accepted Here">
                <font>
                   <Font name="Kodchasan Bold" size="36.0" />
                </font>
@@ -72,7 +72,7 @@
                   <Font name="Kodchasan Bold" size="40.0" />
                </font>
             </Label>
-            <Label text="baht.">
+            <Label text="THB">
                <font>
                   <Font name="Kodchasan Regular" size="20.0" />
                </font>
