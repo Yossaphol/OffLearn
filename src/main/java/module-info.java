@@ -12,6 +12,7 @@ module com.example.offlearn {
     requires org.json;
     requires stripe.java;
     requires okhttp3;
+    requires javafx.media;
 
     opens client.mainApp to javafx.fxml;
     exports client.mainApp;
@@ -47,4 +48,7 @@ module com.example.offlearn {
 
     exports client.payment;
     opens client.payment to javafx.fxml;
+
+    exports client.learningPage;
+    opens client.learningPage to javafx.fxml;
 }
