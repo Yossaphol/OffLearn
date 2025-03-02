@@ -1,6 +1,7 @@
 package client.inbox.pChat;
 
 import client.FontLoader.FontLoader;
+import client.HomeAndNavigation.HomeController;
 import client.HomeAndNavigation.Navigator;
 import client.inbox.Client;
 import client.inbox.DataBase.StudentsDBConnect;
@@ -86,13 +87,7 @@ public class pChatController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         route();
         switchToGlobal();
-
-        hoverEffect(dashboard);
-        hoverEffect(home);
-        hoverEffect(course);
-        hoverEffect(inbox);
-        hoverEffect(task);
-        hoverEffect(roadmap);
+        hoverEffect();
 
         spMain.vvalueProperty().bind(vboxMessage.heightProperty());
         allCourse.setStyle("-fx-background-color: linear-gradient(to bottom, #410066, #8100CC);" +
@@ -146,9 +141,14 @@ public class pChatController implements Initializable {
         borderPane.setCenter(pChatDisplay);
     }
 
-    public void hoverEffect(HBox hBox){
-        hBox.setOnMouseEntered(mouseEvent -> hBox.setOpacity(0.3));
-        hBox.setOnMouseExited(mouseEvent -> hBox.setOpacity(1));
+    public void hoverEffect(){
+        HomeController method = new HomeController();
+        method.hoverEffect(dashboard);
+        method.hoverEffect(home);
+        method.hoverEffect(course);
+        method.hoverEffect(inbox);
+        method.hoverEffect(task);
+        method.hoverEffect(roadmap);
     }
 
     public void route(){
