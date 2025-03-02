@@ -93,6 +93,8 @@ public class dashboardController implements Initializable {
     public BarChart scoreChart;
     public CategoryAxis xAxis_score;
     public NumberAxis yAxis_score;
+    public Label min;
+    public Label avg;
 
     @FXML
     private StackedBarChart<String, Number> courseProgressionChart;
@@ -328,25 +330,64 @@ public class dashboardController implements Initializable {
 
 
     private void scoreChart() {
+        ArrayList<Double> Score = new ArrayList<Double>();
+        Score.add(13000.4);
+        Score.add(27000.83);
+        Score.add(9700.0);
+
         XYChart.Series<String, Number> module1 = new XYChart.Series<>();
         module1.setName(first_subject_name.getText());
-        module1.getData().add(new XYChart.Data<>("Score Overview", 13000.4));
+        module1.getData().add(new XYChart.Data<>("Score Overview", Score.get(0)));
 
         XYChart.Series<String, Number> module2 = new XYChart.Series<>();
         module2.setName(second_subject_name.getText());
-        module2.getData().add(new XYChart.Data<>("Score Overview",27000.83));
+        module2.getData().add(new XYChart.Data<>("Score Overview", Score.get(1)));
 
         XYChart.Series<String, Number> module3 = new XYChart.Series<>();
         module3.setName(third_subject_name.getText());
-        module3.getData().add(new XYChart.Data<>("Score Overview", 9700));
+        module3.getData().add(new XYChart.Data<>("Score Overview", Score.get(2)));
+
+
+        //Set Avg and Min score
+        Double total = 0.0;
+        for(int i = 0; i< Score.size(); i++){
+            total+=Score.get(i);
+        }
+
+        Double lowest = 0.0;
+        for(int i = 0; i< Score.size(); i++){
+            if(lowest == 0.0){
+                lowest = Score.get(0);
+            }
+            if(Score.get(i) < lowest){
+                lowest = Score.get(i);
+            }
+        }
+        Double average = total / Score.size();
+
+        avg.setText(Double.toString(average));
+        min.setText(Double.toString(lowest));
+
 
         scoreChart.getData().addAll(module1, module2, module3);
 
         Platform.runLater(() -> {
-            scoreChart.lookup(".default-color2.chart-bar").setStyle("-fx-bar-fill: " +getColorLabel(first_val)+ ";"+"-fx-background-radius: 0;");
-            scoreChart.lookup(".default-color1.chart-bar").setStyle("-fx-bar-fill: " +getColorLabel(second_val)+ ";"+"-fx-background-radius: 0;");
-            scoreChart.lookup(".default-color0.chart-bar").setStyle("-fx-bar-fill: " +getColorLabel(third_val)+ ";"+"-fx-background-radius: 0;");
+            String color1 = getColorLabel(first_val);
+            String color2 = getColorLabel(second_val);
+            String color3 = getColorLabel(third_val);
+            scoreChart.lookup(".default-color2.chart-bar").setStyle("-fx-bar-fill: "+color1+"; -fx-background-radius: 0;");
+            scoreChart.lookup(".default-color1.chart-bar").setStyle("-fx-bar-fill: "+color2+"; -fx-background-radius: 0;");
+            scoreChart.lookup(".default-color0.chart-bar").setStyle("-fx-bar-fill: "+color3+"; -fx-background-radius: 0;");
+
+            Node legend1 = scoreChart.lookup(".default-color2.chart-legend-item-symbol");
+            Node legend2 = scoreChart.lookup(".default-color1.chart-legend-item-symbol");
+            Node legend3 = scoreChart.lookup(".default-color0.chart-legend-item-symbol");
+
+            if (legend1 != null) legend1.setStyle("-fx-background-color: "+color3+";");
+            if (legend2 != null) legend2.setStyle("-fx-background-color: "+color2+";");
+            if (legend3 != null) legend3.setStyle("-fx-background-color: "+color1 + ";");
         });
+
     }
 
 }
