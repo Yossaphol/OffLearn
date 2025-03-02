@@ -397,7 +397,7 @@
                                                                             <effect>
                                                                                 <DropShadow>
                                                                                     <color>
-                                                                                        <Color red="0.7699999809265137" green="0.7699999809265137" blue="0.7699999809265137" opacity="0.25" />
+                                                                                        <Color red="0.7686274647712708" green="0.7686274647712708" blue="0.7686274647712708" opacity="0.25" />
                                                                                     </color>
                                                                                 </DropShadow>
                                                                             </effect>
