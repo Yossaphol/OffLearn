@@ -54,4 +54,7 @@ module com.example.offlearn {
 
     exports client.Setting to javafx.fxml;
     opens client.Setting;
+
+    exports client.navBarAndSearchbar to javafx.fxml;
+    opens client.navBarAndSearchbar;
 }
