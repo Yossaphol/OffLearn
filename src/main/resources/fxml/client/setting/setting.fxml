@@ -93,7 +93,7 @@
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </HBox>
-                        <HBox fx:id="home_nav" alignment="BOTTOM_LEFT" prefHeight="19.0" prefWidth="280.0">
+                        <HBox fx:id="home" alignment="BOTTOM_LEFT" prefHeight="19.0" prefWidth="280.0">
                             <children>
                                 <ImageView fitHeight="29.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
