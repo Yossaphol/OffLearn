@@ -27,7 +27,6 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class dashboardController implements Initializable {
@@ -93,6 +92,10 @@ public class dashboardController implements Initializable {
     public BarChart scoreChart;
     public CategoryAxis xAxis_score;
     public NumberAxis yAxis_score;
+    public Label min;
+    public Label avg;
+    public VBox leftWrapper;
+    public HBox searhbar_container;
 
     @FXML
     private StackedBarChart<String, Number> courseProgressionChart;
@@ -122,15 +125,6 @@ public class dashboardController implements Initializable {
         method_home.loadAndSetImage(inboxP2,"/img/Profile/teacher.png");
 
         //Hover effect
-        method_home.hoverEffect(dashboard);
-        method_home.hoverEffect(course);
-        method_home.hoverEffect(inbox);
-        method_home.hoverEffect(task);
-        method_home.hoverEffect(roadmap);
-        method_home.hoverEffect(home);
-        method_home.hoverEffect(yourCoursebtn);
-        method_home.hoverEffect(calendarContainer);
-        method_home.hoverEffect(allCoursebtn);
         method_home.hoverEffect(cat1);
         method_home.hoverEffect(cat2);
         method_home.hoverEffect(user_profile);
@@ -146,7 +140,6 @@ public class dashboardController implements Initializable {
 
         method_home.applyHoverEffectToInside(quickInbox);
 
-        route();
 
         //Adjust size
         mainScrollPane.requestLayout();
@@ -156,7 +149,6 @@ public class dashboardController implements Initializable {
         mainScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
         closePopupAuto();
-        calendarDisplay();
 
         applyHoverEffectToInside(popup);
         applyHoverEffectToInside(popup1);
@@ -171,55 +163,34 @@ public class dashboardController implements Initializable {
         //Call chart
         courseProgressionChart();
         scoreChart();
+
+        displayNavbar();
+        displaySearchBar();
     }
 
 
-    private void calendarDisplay(){
+
+
+    private void displayNavbar(){
         try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/client/HomePage/CustomCalendar.fxml"));
-            VBox calendarContent = calendarLoader.load();
-            calendarContainer.getChildren().setAll(calendarContent);
+            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/client/NavAndSearchbar/navBar.fxml"));
+            VBox navContent = calendarLoader.load();
+            leftWrapper.getChildren().setAll(navContent);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void route(){
-        Navigator nav = new Navigator();
-
-        //Home
-        home.setOnMouseClicked(nav::homeRoute);
-        logo.setOnMouseClicked(nav::homeRoute);
-
-        //Dashboard
-        dashboard.setOnMouseClicked(nav::dashboardRoute);
-
-        //Course
-        course.setOnMouseClicked(nav::courseRoute);
-        allCoursebtn.setOnMouseClicked(nav::courseRoute);
-
-        //My Course
-        yourCoursebtn.setOnMouseClicked(nav::myCourseRoute);
-        calendarContainer.setOnMouseClicked(nav::myCourseRoute);
-
-        //cart
-        cart.setOnMouseClicked(nav::cartRoute);
-
-        //Inbox
-        inbox.setOnMouseClicked(nav::inboxRoute);
-
-        //Task
-        task.setOnMouseClicked(nav::taskRoute);
-
-        //Roadmap
-        roadmap.setOnMouseClicked(nav::roadmapRoute);
-
-        //setting
-        setting_btn.setOnMouseClicked(nav::settingRoute);
-
-        //Logout
-        logout.setOnMouseClicked(nav::logoutRoute);
+    private void displaySearchBar(){
+        try {
+            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/client/NavAndSearchbar/searchBar.fxml"));
+            HBox searchbarContent = calendarLoader.load();
+            searhbar_container.getChildren().setAll(searchbarContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
 
     @FXML
@@ -328,25 +299,64 @@ public class dashboardController implements Initializable {
 
 
     private void scoreChart() {
+        ArrayList<Double> Score = new ArrayList<Double>();
+        Score.add(13000.4);
+        Score.add(27000.83);
+        Score.add(9700.0);
+
         XYChart.Series<String, Number> module1 = new XYChart.Series<>();
         module1.setName(first_subject_name.getText());
-        module1.getData().add(new XYChart.Data<>("Score Overview", 13000.4));
+        module1.getData().add(new XYChart.Data<>("Score Overview", Score.get(0)));
 
         XYChart.Series<String, Number> module2 = new XYChart.Series<>();
         module2.setName(second_subject_name.getText());
-        module2.getData().add(new XYChart.Data<>("Score Overview",27000.83));
+        module2.getData().add(new XYChart.Data<>("Score Overview", Score.get(1)));
 
         XYChart.Series<String, Number> module3 = new XYChart.Series<>();
         module3.setName(third_subject_name.getText());
-        module3.getData().add(new XYChart.Data<>("Score Overview", 9700));
+        module3.getData().add(new XYChart.Data<>("Score Overview", Score.get(2)));
+
+
+        //Set Avg and Min score
+        Double total = 0.0;
+        for(int i = 0; i< Score.size(); i++){
+            total+=Score.get(i);
+        }
+
+        Double lowest = 0.0;
+        for(int i = 0; i< Score.size(); i++){
+            if(lowest == 0.0){
+                lowest = Score.get(0);
+            }
+            if(Score.get(i) < lowest){
+                lowest = Score.get(i);
+            }
+        }
+        Double average = total / Score.size();
+
+        avg.setText(Double.toString(average));
+        min.setText(Double.toString(lowest));
+
 
         scoreChart.getData().addAll(module1, module2, module3);
 
         Platform.runLater(() -> {
-            scoreChart.lookup(".default-color2.chart-bar").setStyle("-fx-bar-fill: " +getColorLabel(first_val)+ ";"+"-fx-background-radius: 0;");
-            scoreChart.lookup(".default-color1.chart-bar").setStyle("-fx-bar-fill: " +getColorLabel(second_val)+ ";"+"-fx-background-radius: 0;");
-            scoreChart.lookup(".default-color0.chart-bar").setStyle("-fx-bar-fill: " +getColorLabel(third_val)+ ";"+"-fx-background-radius: 0;");
+            String color1 = getColorLabel(first_val);
+            String color2 = getColorLabel(second_val);
+            String color3 = getColorLabel(third_val);
+            scoreChart.lookup(".default-color2.chart-bar").setStyle("-fx-bar-fill: "+color1+"; -fx-background-radius: 0;");
+            scoreChart.lookup(".default-color1.chart-bar").setStyle("-fx-bar-fill: "+color2+"; -fx-background-radius: 0;");
+            scoreChart.lookup(".default-color0.chart-bar").setStyle("-fx-bar-fill: "+color3+"; -fx-background-radius: 0;");
+
+            Node legend1 = scoreChart.lookup(".default-color2.chart-legend-item-symbol");
+            Node legend2 = scoreChart.lookup(".default-color1.chart-legend-item-symbol");
+            Node legend3 = scoreChart.lookup(".default-color0.chart-legend-item-symbol");
+
+            if (legend1 != null) legend1.setStyle("-fx-background-color: "+color3+";");
+            if (legend2 != null) legend2.setStyle("-fx-background-color: "+color2+";");
+            if (legend3 != null) legend3.setStyle("-fx-background-color: "+color1 + ";");
         });
+
     }
 
 }
