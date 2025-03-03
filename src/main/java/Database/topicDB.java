@@ -7,21 +7,11 @@ import javafx.scene.layout.VBox;
 
 import java.sql.*;
 
-public class topicDB {
-    private static final Dotenv nev = Dotenv.load();
-    private static final String url = nev.get("DB_URL");
-    private static final String user = nev.get("DB_USER");
-    private static final String  password = nev.get("DB_PASS");
-
-
-    private Connection connectDB() throws SQLException {
-        return DriverManager.getConnection(url, user, password);
-    }
-
+public class topicDB extends ConnectDB{
 
     public void saveTopic(String messages, String posterName){
         String sql = "INSERT INTO topicdb (topic_messages, posterName, time_stamp) VALUES (?, ?, NOW())";
-        try (Connection conn = connectDB();
+        try (Connection conn = this.connectToDB();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, messages);
             pstmt.setString(2, posterName);
@@ -36,7 +26,7 @@ public class topicDB {
 
         VBox vbox = new VBox(20);
 
-        try (Connection conn = DriverManager.getConnection(url, user, password);
+        try (Connection conn = this.connectToDB();
              PreparedStatement stmt = conn.prepareStatement("SELECT topicID, posterName, topic_messages, time_stamp, favourite_count FROM topicdb");
              ResultSet rs = stmt.executeQuery()) {
 
@@ -64,7 +54,7 @@ public class topicDB {
     public void updateFavCount(int topicId) {
         String sql = "UPDATE topicdb SET favourite_count = favourite_count + 1 WHERE topicID = ?";
 
-        try (Connection conn = connectDB();
+        try (Connection conn = this.connectToDB();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, topicId);
             pstmt.executeUpdate();
@@ -77,7 +67,7 @@ public class topicDB {
     public void decreseFavCount(int topicId) {
         String sql = "UPDATE topicdb SET favourite_count = favourite_count - 1 WHERE topicID = ?";
 
-        try (Connection conn = connectDB();
+        try (Connection conn = this.connectToDB();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, topicId);
             pstmt.executeUpdate();
