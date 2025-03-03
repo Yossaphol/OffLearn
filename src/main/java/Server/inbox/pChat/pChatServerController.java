@@ -1,7 +1,7 @@
 package Server.inbox.pChat;
 
 import Server.inbox.pChat.Database.ChatHistoryDB;
-import Server.inbox.pChat.Database.StudentDBConnect;
+import Database.StudentDBConnect;
 import Server.inbox.pChat.Database.TeacherDBConnect;
 import client.inbox.pChat.pChatController;
 import javafx.application.Platform;

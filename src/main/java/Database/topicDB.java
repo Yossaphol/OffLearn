@@ -1,9 +1,8 @@
-package client.inbox.DataBase;
+package Database;
 
 import client.inbox.gChat.topicContent;
 import io.github.cdimascio.dotenv.Dotenv;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 
 import java.sql.*;
