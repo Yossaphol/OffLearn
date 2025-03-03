@@ -5,21 +5,13 @@ import io.github.cdimascio.dotenv.Dotenv;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class StudentDBConnect {
-    private static final Dotenv env = Dotenv.load();
-    private final String url = env.get("DB_URL");
-    private final String user = env.get("DB_USER");
-    private final String password = env.get("DB_PASS");
+public class StudentDBConnect extends ConnectDB {
 
-    private Connection connectDB() throws SQLException {
-        return DriverManager.getConnection(url, user, password);
-    }
-
-    public ArrayList<String> getStdName() {
+    public ArrayList<String> getStudentNames() {
         ArrayList<String> studentNames = new ArrayList<>();
         String query = "SELECT name FROM studentdb.studentlist";
 
-        try (Connection conn = connectDB();
+        try (Connection conn = this.connectToDB();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
@@ -33,20 +25,25 @@ public class StudentDBConnect {
         return studentNames;
     }
 
-
     public int getStudentID(String studentName) {
-        String query = "SELECT StudentID FROM studentlist WHERE name = ?";
-        try (Connection conn = connectDB();
+        String query = "SELECT StudentID FROM studentdb.studentlist WHERE name = ?";
+        int studentId = -1;
+
+        try (Connection conn = this.connectToDB();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
+
             pstmt.setString(1, studentName);
             ResultSet rs = pstmt.executeQuery();
+
             if (rs.next()) {
-                return rs.getInt("StudentID");
+                studentId = rs.getInt("StudentID");
+            } else {
+                System.out.println("Student not found: " + studentName);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return -1; // ถ้าไม่เจอ
-    }
 
+        return studentId;
+    }
 }
