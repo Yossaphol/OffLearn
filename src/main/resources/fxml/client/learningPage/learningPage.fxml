@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="bg" fillHeight="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2093.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.learningPage.learningPageController">
+    <VBox fx:id="leftWrapper" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="300.0" prefHeight="1024.0" prefWidth="293.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;" />
+   <ScrollPane fx:id="mainScrollPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="2103.0" prefWidth="1140.0" stylesheets="@../../../css/Home.css" vbarPolicy="NEVER">
+      <content>
+         <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="2094.0" prefWidth="1118.0">
+            <children>
+               <HBox fx:id="rootpage" prefHeight="2093.0" prefWidth="1440.0">
+                  <children>
+                      <VBox prefHeight="1950.0" prefWidth="1139.0" style="-fx-background-color: #FBFBFB;">
+                          <Pane prefHeight="62.0" prefWidth="1139.0" />
+                          <HBox fx:id="searhbar_container" alignment="CENTER" prefHeight="65.0" prefWidth="1139.0" style="-fx-background-color: #FBFBFB;" />
+                        <HBox fx:id="content" prefHeight="2042.0" prefWidth="1139.0">
+                           <children>
+                              <VBox prefHeight="2017.0" prefWidth="519.0">
+                                 <children>
+                                    <Label fx:id="subject_name" text="Problem Solving for Computer Programming" textFill="#8100cc">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="ep" text="EP 13 : List, Dictionary in Python" textFill="#a4a4a4">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <MediaView fitHeight="200.0" fitWidth="200.0" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0" />
+                           </children>
+                        </HBox>
+                      </VBox>
+                  </children>
+               </HBox>
+            </children>
+         </AnchorPane>
+      </content>
+   </ScrollPane>
+</HBox>
