@@ -1,4 +1,4 @@
-package Server.inbox.pChat.Database;
+package Database;
 
 import io.github.cdimascio.dotenv.Dotenv;
 

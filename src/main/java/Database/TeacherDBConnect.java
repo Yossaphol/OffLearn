@@ -1,4 +1,4 @@
-package client.inbox.DataBase;
+package Database;
 
 import io.github.cdimascio.dotenv.Dotenv;
 

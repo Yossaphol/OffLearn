@@ -1,12 +1,9 @@
 package client.inbox.pChat;
 
-import client.FontLoader.FontLoader;
 import client.HomeAndNavigation.HomeController;
 import client.HomeAndNavigation.Navigator;
 import client.inbox.Client;
-import client.inbox.DataBase.StudentsDBConnect;
-import client.inbox.DataBase.TeacherDBConnect;
-import client.inbox.DataBase.ChatHistoryDB;
+import Database.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
