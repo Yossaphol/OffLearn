@@ -14,7 +14,7 @@ public class learningPage extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("/fxml/client/learningPage/learningPage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(learningPage.class.getResource("/fxml/client/learningPage/learningPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         primaryStage.setTitle("Offlearn");
         primaryStage.setMaximized(true);

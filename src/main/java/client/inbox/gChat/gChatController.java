@@ -1,6 +1,6 @@
 package client.inbox.gChat;
 
-import client.inbox.DataBase.topicDB;
+import Database.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,7 +10,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import client.swing.postTopic;
-import client.FontLoader.FontLoader;
 
 import java.net.URL;
 import java.util.ResourceBundle;

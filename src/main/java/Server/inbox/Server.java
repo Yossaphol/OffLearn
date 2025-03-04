@@ -1,8 +1,7 @@
 package Server.inbox;
 
 import Server.inbox.pChat.pChatServerController;
-import Server.inbox.pChat.Database.TeacherDBConnect;
-
+import Database.*;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -58,7 +57,7 @@ public class Server {
                 students.put(studentName, new ClientHandler(socket, reader, writer));
 
                 controller.addStudent(studentName);
-                teacherDb.addStudent(studentName, socket.getInetAddress().getHostAddress(), socket.getPort());
+                teacherDb.addOrUpdateUser("studentlist" ,studentName, socket.getInetAddress().getHostAddress(), socket.getPort());
 
                 System.out.println(studentName + " connected.");
             }
@@ -99,7 +98,7 @@ public class Server {
     public void saveTeacherInfoToDB(String teacherName) {
         String ip = getLocalIPAddress();
         int port = serverSocket.getLocalPort();
-        teacherDb.addTeacher(teacherName, ip, port);
+        teacherDb.addOrUpdateUser("teacherlist" ,teacherName, ip, port);
     }
 
     private String getLocalIPAddress() {

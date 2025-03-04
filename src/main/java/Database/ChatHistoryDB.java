@@ -1,6 +1,4 @@
-package Server.inbox.pChat.Database;
-
-import io.github.cdimascio.dotenv.Dotenv;
+package Database;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,20 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ChatHistoryDB {
-    private static final Dotenv env = Dotenv.load();
-    private static final String url = env.get("DB_URL");
-    private static final String user = env.get("DB_USER");
-    private static final String password = env.get("DB_PASS");
-
-    private static Connection connectDB() throws SQLException {
-        return DriverManager.getConnection(url, user, password);
-    }
+public class ChatHistoryDB extends ConnectDB {
 
     public void saveChatMessage(int senderId, String senderType, int receiverId, String receiverType, String message) {
         String query = "INSERT INTO messages (sender_id, sender_type, receiver_id, receiver_type, message_text) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conn = connectDB();
+        try (Connection conn = this.connectToDB();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setInt(1, senderId);
@@ -39,12 +29,12 @@ public class ChatHistoryDB {
 
     public List<Map<String, String>> getAllMessages(int teacherId, int studentId) {
         List<Map<String, String>> messages = new ArrayList<>();
-        String query = "SELECT sender_id, message_text FROM messages " +
+        String query = "SELECT sender_id, message_text, timestamp FROM messages " +
                 "WHERE (sender_id = ? AND receiver_id = ?) " +
                 "OR (sender_id = ? AND receiver_id = ?) " +
                 "ORDER BY timestamp ASC";
 
-        try (Connection conn = connectDB();
+        try (Connection conn = this.connectToDB();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setInt(1, teacherId);
@@ -57,6 +47,7 @@ public class ChatHistoryDB {
                 Map<String, String> messageData = new HashMap<>();
                 messageData.put("sender_id", String.valueOf(rs.getInt("sender_id")));
                 messageData.put("message_text", rs.getString("message_text"));
+                messageData.put("timestamp", rs.getString("timestamp"));
                 messages.add(messageData);
             }
 
@@ -65,6 +56,4 @@ public class ChatHistoryDB {
         }
         return messages;
     }
-
-
 }

@@ -1,24 +1,35 @@
-package client.inbox.DataBase;
+package Database;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
 import java.sql.*;
+import java.util.ArrayList;
 
-public class StudentsDBConnect {
-    private static final Dotenv nev = Dotenv.load();
-    private static final String url = nev.get("DB_URL");
-    private static final String user = nev.get("DB_USER");
-    private static final String  password = nev.get("DB_PASS");
+public class StudentDBConnect extends ConnectDB {
 
-    private Connection connectDB() throws SQLException {
-        return DriverManager.getConnection(url, user, password);
+    public ArrayList<String> getStudentNames() {
+        ArrayList<String> studentNames = new ArrayList<>();
+        String query = "SELECT name FROM studentdb.studentlist";
+
+        try (Connection conn = this.connectToDB();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                studentNames.add(rs.getString("name"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return studentNames;
     }
 
     public int getStudentID(String studentName) {
         String query = "SELECT StudentID FROM studentdb.studentlist WHERE name = ?";
         int studentId = -1;
 
-        try (Connection conn = connectDB();
+        try (Connection conn = this.connectToDB();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setString(1, studentName);
@@ -33,8 +44,6 @@ public class StudentsDBConnect {
             e.printStackTrace();
         }
 
-        System.out.println("Returning StudentID: " + studentId); // Debugging
         return studentId;
     }
-
 }
