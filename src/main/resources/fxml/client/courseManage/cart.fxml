@@ -449,7 +449,7 @@
                            <children>
                               <ImageView fitHeight="24.0" fitWidth="91.0">
                                  <image>
-                                    <Image url="@../../../../../../target/classes/img/icon/amount.png" />
+                                    <Image url="@../../../img/icon/amount.png" />
                                  </image>
                               </ImageView>
                               <Pane prefHeight="29.0" prefWidth="30.0" />
@@ -488,7 +488,7 @@
                      <children>
                         <ImageView fitHeight="1.0" fitWidth="1036.0">
                            <image>
-                              <Image url="@../../../../../../target/classes/img/icon/separator.png" />
+                              <Image url="@../../../img/icon/separator.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -559,7 +559,7 @@
                            <children>
                               <ImageView fitHeight="24.0" fitWidth="91.0">
                                  <image>
-                                    <Image url="@../../../../../../target/classes/img/icon/amount.png" />
+                                    <Image url="@../../../img/icon/amount.png" />
                                  </image>
                               </ImageView>
                               <Pane prefHeight="29.0" prefWidth="30.0" />
@@ -597,7 +597,7 @@
                <children>
                   <ImageView fitHeight="1.0" fitWidth="1036.0">
                      <image>
-                        <Image url="@../../../../../../target/classes/img/icon/separator.png" />
+                        <Image url="@../../../img/icon/separator.png" />
                      </image>
                   </ImageView>
                </children>
@@ -668,7 +668,7 @@
                            <children>
                               <ImageView fitHeight="24.0" fitWidth="91.0">
                                  <image>
-                                    <Image url="@../../../../../../target/classes/img/icon/amount.png" />
+                                    <Image url="@../../../img/icon/amount.png" />
                                  </image>
                               </ImageView>
                               <Pane prefHeight="29.0" prefWidth="30.0" />
@@ -706,7 +706,7 @@
                <children>
                   <ImageView fitHeight="1.0" fitWidth="1036.0">
                      <image>
-                        <Image url="@../../../../../../target/classes/img/icon/separator.png" />
+                        <Image url="@../../../img/icon/separator.png" />
                      </image>
                   </ImageView>
                </children>
