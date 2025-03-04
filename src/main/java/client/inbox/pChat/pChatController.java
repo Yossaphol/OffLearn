@@ -1,12 +1,9 @@
 package client.inbox.pChat;
 
-import client.FontLoader.FontLoader;
 import client.HomeAndNavigation.HomeController;
 import client.HomeAndNavigation.Navigator;
 import client.inbox.Client;
-import client.inbox.DataBase.StudentsDBConnect;
-import client.inbox.DataBase.TeacherDBConnect;
-import client.inbox.DataBase.ChatHistoryDB;
+import Database.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -80,7 +77,7 @@ public class pChatController implements Initializable {
     private String selectedTeacher;
     private TeacherDBConnect teacherDb;
     private ChatHistoryDB chatHistoryDB;
-    private StudentsDBConnect studentsDBConnect;
+    private StudentDBConnect studentDBConnect;
     private String studentName = "StudentTest";
 
     @Override
@@ -97,7 +94,7 @@ public class pChatController implements Initializable {
 
         teacherDb = new TeacherDBConnect();
         chatHistoryDB = new ChatHistoryDB();
-        studentsDBConnect = new StudentsDBConnect();
+        studentDBConnect = new StudentDBConnect();
         loadTeacherList();
 
         vboxMessage.getChildren().clear();
@@ -169,8 +166,14 @@ public class pChatController implements Initializable {
             clientMap.get(oldTeacher).closeConnection();
         }
 
-        String teacherIP = teacherDb.getTeacherIP(selectedTeacher);
-        int teacherPort = teacherDb.getTeacherPort(selectedTeacher);
+        Map<String, String> teacherInfo = teacherDb.getTeacherInfo(selectedTeacher);
+        if (teacherInfo == null || !teacherInfo.containsKey("IP") || !teacherInfo.containsKey("Port")) {
+            System.err.println("Error: ไม่พบข้อมูลอาจารย์ " + selectedTeacher);
+            return;
+        }
+
+        String teacherIP = teacherInfo.get("IP");
+        int teacherPort = Integer.parseInt(teacherInfo.get("Port"));
 
         Client client = new Client(teacherIP, teacherPort, studentName);
         client.setMessageListener(this::receiveMessage);
@@ -179,7 +182,7 @@ public class pChatController implements Initializable {
 
         Platform.runLater(() -> {
             currentTeacherName.setText(selectedTeacher);
-            currentTeacherImg.setImage(new Image(getClass().getResource("/img/Profile/user.png").toExternalForm()));
+            currentTeacherImg.setImage(TEACHER_IMAGE);
 
             vboxMessage.getChildren().clear();
             loadChatHistory(selectedTeacher);
@@ -210,7 +213,7 @@ public class pChatController implements Initializable {
                 }
 
                 int receiverId = teacherDb.getTeacherId(selectedTeacher);
-                int senderId = studentsDBConnect.getStudentID(studentName);
+                int senderId = studentDBConnect.getStudentID(studentName);
                 chatHistoryDB.saveChatMessage(senderId, "student", receiverId, "teacher", messageToSend);
 
                 Platform.runLater(() -> tfMessage.clear());
@@ -243,26 +246,17 @@ public class pChatController implements Initializable {
 
         vboxMessage.getChildren().clear();
 
-        int studentId = studentsDBConnect.getStudentID(studentName);
+        int studentId = studentDBConnect.getStudentID(studentName);
         int teacherId = teacherDb.getTeacherId(teacherName);
 
-        List<String[]> sentMessages = chatHistoryDB.getSentMessages(studentId, teacherId);
-        List<String[]> receivedMessages = chatHistoryDB.getReceivedMessages(studentId, teacherId);
-
-        List<String[]> allMessages = new ArrayList<>();
-        for (String[] msg : sentMessages) {
-            allMessages.add(new String[]{"student", msg[0], msg[1]});
-        }
-        for (String[] msg : receivedMessages) {
-            allMessages.add(new String[]{"teacher", msg[0], msg[1]});
-        }
-
-        allMessages.sort(Comparator.comparing(msg -> msg[2]));
+        List<Map<String, String>> allMessages = chatHistoryDB.getAllMessages(teacherId, studentId);
 
         Platform.runLater(() -> {
-            for (String[] msgData : allMessages) {
-                String senderType = msgData[0];
-                String message = msgData[1];
+            for (Map<String, String> msgData : allMessages) {
+                int senderId = Integer.parseInt(msgData.get("sender_id"));
+                String message = msgData.get("message_text");
+
+                String senderType = (senderId == studentId) ? "student" : "teacher";
 
                 if (senderType.equals("student")) {
                     addMessage(message, Pos.CENTER_RIGHT, "#DB9DFF");
@@ -273,18 +267,23 @@ public class pChatController implements Initializable {
         });
     }
 
+
+    private static final Image TEACHER_IMAGE = new Image(
+            Objects.requireNonNull(pChatController.class.getResource("/img/Profile/teacher.png")).toExternalForm()
+    );
+
     private void loadTeacherList() {
-        ArrayList<String> teacherNames = teacherDb.getTeacherName();
+        List<String> teacherNames = teacherDb.getTeacherNames(); // เรียกจาก TeacherDBConnect ที่รวมแล้ว
         ObservableList<String> observableList = FXCollections.observableArrayList(teacherNames);
         teacherList.setItems(observableList);
 
-        teacherList.setCellFactory(listView -> new ListCell<String>() {
+        teacherList.setCellFactory(listView -> new ListCell<>() {
             private final HBox content;
             private final ImageView profilePic;
             private final Label nameLabel;
 
             {
-                profilePic = new ImageView(new Image(getClass().getResource("/img/Profile/teacher.png").toExternalForm()));
+                profilePic = new ImageView(TEACHER_IMAGE);
                 profilePic.setFitHeight(40);
                 profilePic.setFitWidth(40);
 
@@ -308,4 +307,5 @@ public class pChatController implements Initializable {
             }
         });
     }
+
 }
