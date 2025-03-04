@@ -12,7 +12,7 @@ target/
 *.iml
 *.ipr
 
-src/main/resources/
+src/main/resources/videos/
 
 ### Eclipse ###
 .apt_generated
