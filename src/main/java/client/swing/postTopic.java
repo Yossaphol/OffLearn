@@ -1,6 +1,6 @@
 package client.swing;
 
-import client.inbox.DataBase.topicDB;
+import Database.*;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,8 +1,6 @@
 package Server.inbox.pChat;
 
-import Server.inbox.pChat.Database.ChatHistoryDB;
-import Server.inbox.pChat.Database.StudentDBConnect;
-import Server.inbox.pChat.Database.TeacherDBConnect;
+import Database.*;
 import client.inbox.pChat.pChatController;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -74,8 +72,6 @@ public class pChatServerController extends pChatController implements Initializa
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         switchToGlobal();
-
-
 
         spMain.vvalueProperty().bind(vboxMessage.heightProperty());
         myCourse.setStyle("-fx-background-color: linear-gradient(to right, #0675DE, #033F78); " +
@@ -193,7 +189,7 @@ public class pChatServerController extends pChatController implements Initializa
     }
 
     private void loadStudentList() {
-        ArrayList<String> stdList = stdDb.getStdName();
+        ArrayList<String> stdList = stdDb.getStudentNames();
         ObservableList<String> observableList = FXCollections.observableArrayList(stdList);
         studentList.setItems(observableList);
     }

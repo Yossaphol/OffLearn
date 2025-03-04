@@ -1,6 +1,6 @@
 package client.inbox.gChat;
 
-import client.inbox.DataBase.topicDB;
+import Database.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
