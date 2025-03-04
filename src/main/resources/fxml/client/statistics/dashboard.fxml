@@ -66,7 +66,7 @@
                                                                                   </effect>
                                                                                   <children>
                                                                                       <Rectangle fx:id="userpfp" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="161.0" layoutX="24.0" layoutY="24.0" stroke="#ffffff00" strokeType="INSIDE" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="183.0" />
-                                                                                      <Label layoutX="233.0" layoutY="32.0" style="-fx-background-color: #EBC8FF; -fx-background-radius: 20;" text="Top4 in Leaderboard" textFill="#8100cc">
+                                                                                      <Label layoutX="233.0" layoutY="32.0" style="-fx-background-color: #EBC8FF; -fx-background-radius: 20;" text="Top 4 in Leaderboard" textFill="#8100cc">
                                                                                           <font>
                                                                                               <Font name="Noto Sans Thai Bold" size="13.0" />
                                                                                           </font>
