@@ -60,4 +60,7 @@ module com.example.offlearn {
 
     exports client.navBarAndSearchbar to javafx.fxml;
     opens client.navBarAndSearchbar;
+
+    exports client.courseManage;
+    opens client.courseManage;
 }

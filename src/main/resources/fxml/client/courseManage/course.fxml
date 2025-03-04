@@ -22,7 +22,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="MainFrame" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2093.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.dashboard.dashboardController">
+<HBox fx:id="MainFrame" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2093.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.courseManage.courseController">
    <VBox fx:id="leftWrapper" minWidth="300.0" prefHeight="1024.0" prefWidth="293.0" />
    <ScrollPane fx:id="mainSscrollPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="2103.0" prefWidth="1140.0">
      <content>
@@ -312,7 +312,7 @@
                                                                      <Insets top="6.0" />
                                                                   </padding>
                                                                </VBox>
-                                                               <Button fx:id="btnpopup1" mnemonicParsing="false" onAction="#openPopup" style="-fx-background-color: transparent;">
+                                                               <Button fx:id="btnpopup1" mnemonicParsing="false" style="-fx-background-color: transparent;">
                                                                   <graphic>
                                                                      <ImageView fitHeight="25.0" fitWidth="7.0" pickOnBounds="true" preserveRatio="true">
                                                                         <image>
@@ -367,7 +367,7 @@
                                                                      <Insets top="6.0" />
                                                                   </padding>
                                                                </VBox>
-                                                               <Button fx:id="btnpopup11" mnemonicParsing="false" onAction="#openPopup" style="-fx-background-color: transparent;">
+                                                               <Button fx:id="btnpopup11" mnemonicParsing="false" style="-fx-background-color: transparent;">
                                                                   <graphic>
                                                                      <ImageView fitHeight="25.0" fitWidth="7.0" pickOnBounds="true" preserveRatio="true">
                                                                         <image>

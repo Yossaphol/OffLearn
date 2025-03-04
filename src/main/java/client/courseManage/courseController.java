@@ -1,5 +1,6 @@
 package client.courseManage;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
@@ -10,9 +11,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class courseController implements Initializable {
+    @FXML
     public VBox leftWrapper;
     public HBox rootPage;
-    public HBox searhbar_container;
+    public HBox searchbar_container;
+
     public void initialize(URL location, ResourceBundle resources) {
         displayNavbar();
         displaySearchBar();
@@ -31,7 +34,7 @@ public class courseController implements Initializable {
         try {
             FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/client/NavAndSearchbar/searchBar.fxml"));
             HBox searchbarContent = calendarLoader.load();
-            searhbar_container.getChildren().setAll(searchbarContent);
+            searchbar_container.getChildren().setAll(searchbarContent);
         } catch (IOException e) {
             e.printStackTrace();
         }

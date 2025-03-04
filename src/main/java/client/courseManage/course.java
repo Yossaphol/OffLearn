@@ -16,7 +16,7 @@ public class course extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("/fxml/client/courseManage/course.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(course.class.getResource("/fxml/client/courseManage/course.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         primaryStage.setTitle("Offlearn");
         primaryStage.setMaximized(true);
