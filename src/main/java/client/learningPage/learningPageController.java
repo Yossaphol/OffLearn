@@ -8,13 +8,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -36,13 +40,26 @@ public class learningPageController implements Initializable {
     public Label subject_name;
     public Label ep;
     public HBox content;
+    public Circle teacherImg;
+    public Label teacherName;
+    public Label clipDescription;
+    public Label role;
+    public ScrollPane mainScrollPane;
+    public Button btnLike;
+    public Button btnDislike;
+    public Button btnContectTeacher;
+    public Button btnGloblalChat;
+    public Label countLike;
+    public Label countDislike;
+    public Button btnOffLoad;
 
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         FontLoader fontLoader = new FontLoader();
         fontLoader.loadFonts();
 
-        //HomeController method_home = new HomeController();
+        HomeController method_home = new HomeController();
+        Navigator method_navigator = new Navigator();
 
         //สำหรับใครที่จะเทสหน้านี้ให้เอาไฟล์คลิป .mp4 ของตัวเองไปใส่ใน /resource/videos/ ตั้งชื่อเป็น Test.mp4 แนะนำให้เป็นคลิปแนวนอน 16:9
         String videoPath = getClass().getResource("/videos/Test.mp4").toExternalForm();
@@ -51,13 +68,27 @@ public class learningPageController implements Initializable {
 
         // ตั้งค่าให้เล่นใน MediaView
         mediaView.setMediaPlayer(mediaPlayer);
-        mediaPlayer.setAutoPlay(true);
+//        mediaPlayer.setAutoPlay(true);
 
         displayNavbar();
         displaySearchBar();
 
         subject_name.setText("Test Subject");
         ep.setText("Test Episode : 0");
+        teacherName.setText("Puwanas Chaichitchaem");
+        role.setText("ศาสตราจารย์");
+        clipDescription.setText("ความรักกันไม่ได้หรอก ฉันชอบแอบมานานแล้ว พี่พรรลบ เขาเทอไม่รักฉัน เขาไม่แย่งเธอหรอก. 7 yrs. 2. ยะศิษย์ แดน เพ็งเซ้ง. คนอื่นไม่รู้ แต่กรูดูจนจบฮ่าๆๆ แหวงเเป๊ก เย๊กกะไฟฟ้า");
+        method_home.loadAndSetImage(teacherImg, "/img/Profile/user.png");
+
+        method_home.hoverEffect(btnContectTeacher);
+        method_home.hoverEffect(btnGloblalChat);
+        method_home.hoverEffect(btnLike);
+        method_home.hoverEffect(btnDislike);
+        method_home.hoverEffect(btnOffLoad);
+
+        countLike.setText("0");
+        countDislike.setText("0");
+
         // ปรับ Seekbar ตามเวลาวิดีโอ
         mediaPlayer.setOnReady(() -> {
             sliderTime.setMax(mediaPlayer.getTotalDuration().toSeconds());
@@ -86,7 +117,6 @@ public class learningPageController implements Initializable {
         int seconds = (int) newTime.toSeconds() % 60;
         return String.format("%02d:%02d", minutes, seconds);
     }
-
 
     private void displayNavbar(){
         try {
