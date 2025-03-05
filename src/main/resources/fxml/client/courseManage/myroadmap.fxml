@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="bg" fillHeight="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2093.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.roadmap.myroadmapcontroller">
+   <children>
+      <VBox fx:id="sideBar" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="300.0" prefHeight="1193.0" prefWidth="300.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;">
+         <children>
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" prefWidth="200.0">
+               <VBox.margin>
+                  <Insets bottom="40.0" top="40.0" />
+               </VBox.margin>
+            </HBox>
+            <VBox fx:id="calendarContainer" maxHeight="1.7976931348623157E308" maxWidth="200.0" prefWidth="200.0" style="-fx-border-radius: 10; -fx-background-radius: 10;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </VBox>
+            <Pane maxHeight="1.7976931348623157E308" prefWidth="298.0" />
+            <VBox maxHeight="1.7976931348623157E308" prefWidth="280.0">
+               <padding>
+                  <Insets left="60.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </VBox>
+         </children>
+      </VBox>
+      <ScrollPane fx:id="mainScrollPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../../../css/Home.css" HBox.hgrow="ALWAYS">
+         <content>
+            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1190.0" prefWidth="1118.0">
+               <children>
+                  <HBox fx:id="rootpage" prefHeight="1195.0" prefWidth="1440.0">
+                     <children>
+                        <VBox fx:id="content_container" prefHeight="1270.0" prefWidth="1139.0" style="-fx-background-color: #FBFBFB;">
+                           <children>
+                              <Pane fx:id="searchBar" prefHeight="62.0" prefWidth="1139.0">
+                                 <VBox.margin>
+                                    <Insets top="40.0" />
+                                 </VBox.margin></Pane>
+                              <HBox fx:id="content" prefHeight="920.0" prefWidth="1139.0">
+                                 <children>
+                                    <VBox fx:id="myroadmap_container" alignment="TOP_CENTER" prefHeight="921.0" prefWidth="1029.0">
+                                       <children>
+                                          <HBox fx:id="roadmap_header_container" alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="924.0">
+                                             <children>
+                                                <Label fx:id="roadmap_header_text" contentDisplay="TOP" prefHeight="26.0" prefWidth="182.0" text="Roadmap ของคุณ" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="Noto Sans Thai Regular" size="16.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="140.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox fx:id="hearted_roadmap_container" alignment="CENTER" prefHeight="40.0" prefWidth="820.0">
+                                             <children>
+                                                <Pane fx:id="hearted_roadmap_box_1" maxHeight="350.0" maxWidth="700.0" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                                                   <effect>
+                                                      <DropShadow>
+                                                         <color>
+                                                            <Color red="0.7764706015586853" green="0.7764706015586853" blue="0.7764706015586853" opacity="0.25" />
+                                                         </color>
+                                                      </DropShadow>
+                                                   </effect>
+                                                   <children>
+                                                      <HBox alignment="CENTER" prefHeight="62.0" prefWidth="150.0">
+                                                         <children>
+                                                            <VBox fx:id="hearted_roadmap_nameprobar_container_1" prefHeight="200.0" prefWidth="100.0">
+                                                               <children>
+                                                                  <Label fx:id="hearted_roadmap_1" text="Front-end">
+                                                                     <font>
+                                                                        <Font size="14.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <ProgressBar fx:id="hearted_roadmap_probar_1" prefHeight="6.0" prefWidth="100.0" progress="0.0" styleClass="smallProgressbar" stylesheets="@../../../css/Home.css" />
+                                                               </children>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </VBox>
+                                                            <Circle fx:id="heart_Button_1" fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                               <HBox.margin>
+                                                                  <Insets bottom="20.0" left="7.0" />
+                                                               </HBox.margin>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </Circle>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets right="20.0" />
+                                                   </HBox.margin>
+                                                </Pane>
+                                                <Pane fx:id="hearted_roadmap_box_2" maxHeight="350.0" maxWidth="700.0" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                                                   <effect>
+                                                      <DropShadow>
+                                                         <color>
+                                                            <Color red="0.7764706015586853" green="0.7764706015586853" blue="0.7764706015586853" opacity="0.25" />
+                                                         </color>
+                                                      </DropShadow>
+                                                   </effect>
+                                                   <children>
+                                                      <HBox alignment="CENTER" prefHeight="62.0" prefWidth="150.0">
+                                                         <children>
+                                                            <VBox fx:id="hearted_roadmap_nameprobar_container_2" prefHeight="200.0" prefWidth="100.0">
+                                                               <children>
+                                                                  <Label fx:id="hearted_roadmap_2" text="UX UI">
+                                                                     <font>
+                                                                        <Font size="14.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <ProgressBar fx:id="hearted_roadmap_probar_2" prefHeight="6.0" prefWidth="100.0" progress="0.0" styleClass="smallProgressbar" stylesheets="@../../../css/Home.css" />
+                                                               </children>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </VBox>
+                                                            <Circle fx:id="heart_Button_2" fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                               <HBox.margin>
+                                                                  <Insets bottom="20.0" left="7.0" />
+                                                               </HBox.margin>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </Circle>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets right="20.0" />
+                                                   </HBox.margin>
+                                                </Pane>
+                                                <Pane fx:id="hearted_roadmap_box_3" maxHeight="350.0" maxWidth="700.0" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                                                   <effect>
+                                                      <DropShadow>
+                                                         <color>
+                                                            <Color red="0.7764706015586853" green="0.7764706015586853" blue="0.7764706015586853" opacity="0.25" />
+                                                         </color>
+                                                      </DropShadow>
+                                                   </effect>
+                                                   <children>
+                                                      <HBox fx:id="hearted_roadmap_nameprobar_container_3" alignment="CENTER" prefHeight="62.0" prefWidth="148.0">
+                                                         <children>
+                                                            <VBox prefHeight="150.0" prefWidth="100.0">
+                                                               <children>
+                                                                  <Label fx:id="hearted_roadmap_3" text="Data Sci">
+                                                                     <font>
+                                                                        <Font size="14.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <ProgressBar fx:id="hearted_roadmap_probar_3" prefHeight="6.0" prefWidth="100.0" progress="0.0" styleClass="smallProgressbar" stylesheets="@../../../css/Home.css" />
+                                                               </children>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </VBox>
+                                                            <Circle fx:id="heart_Button_3" fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                               <HBox.margin>
+                                                                  <Insets bottom="20.0" left="7.0" />
+                                                               </HBox.margin>
+                                                            </Circle>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                </Pane>
+                                             </children>
+                                             <padding>
+                                                <Insets left="50.0" right="300.0" />
+                                             </padding>
+                                             <VBox.margin>
+                                                <Insets bottom="50.0" right="20.0" top="20.0" />
+                                             </VBox.margin>
+                                             <effect>
+                                                <Blend />
+                                             </effect>
+                                          </HBox>
+                                          <Pane fx:id="selected_roadmap_box" maxHeight="338.0" maxWidth="772.0" prefHeight="271.0" prefWidth="772.0" style="-fx-background-color: white; -fx-background-radius: 20;" styleClass="overflow-img" stylesheets="@../../../css/Home.css">
+                                             <children>
+                                                <Label fx:id="selected_roadmap_name" layoutX="28.0" layoutY="22.0" prefHeight="70.0" prefWidth="385.0" text="Data Scientist / AI">
+                                                   <font>
+                                                      <Font name="Kodchasan Bold" size="48.0" />
+                                                   </font>
+                                                </Label>
+                                                <Circle fx:id="selected_roadmap_teacher_picture" fill="DODGERBLUE" layoutX="528.0" layoutY="203.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                                                <Label fx:id="selected_roadmap_teacher_name" layoutX="557.0" layoutY="179.0" prefHeight="22.0" prefWidth="277.0" text="Teacher Name" textFill="#8100cc">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="selected_roadmap_teacher_title" layoutX="557.0" layoutY="203.0" prefHeight="22.0" prefWidth="277.0" text="Title" />
+                                                <Label fx:id="selected_roadmap_createby_text" layoutX="557.0" layoutY="159.0" prefHeight="22.0" prefWidth="277.0" text="สร้างโดย" />
+                                                <Label fx:id="selected_roadmap_description" layoutX="28.0" layoutY="92.0" prefHeight="43.0" prefWidth="622.0" text="Step by step guide สำหรับการเป็น Data Scientist ในปี 2025">
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="selected_roadmap_progrgressfraction_header" layoutX="154.0" layoutY="170.0" prefHeight="22.0" prefWidth="79.0" text="เนื้อหา">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="selected_roadmap_time_header" layoutX="288.0" layoutY="170.0" prefHeight="22.0" prefWidth="138.0" text="ระยะเวลาของ Roadmap">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="selected_roadmap_time" layoutX="288.0" layoutY="203.0" prefHeight="22.0" prefWidth="56.0" text="210 ชม." textFill="#8100cc">
+                                                   <font>
+                                                      <Font name="Kodchasan Regular" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="selected_roadmap_progrgressfraction" layoutX="154.0" layoutY="203.0" prefHeight="22.0" prefWidth="50.0" text="48/120" textFill="#8100cc">
+                                                   <font>
+                                                      <Font name="Kodchasan Regular" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="selected_roadmap_progrgresspercent" layoutX="35.0" layoutY="203.0" prefHeight="22.0" prefWidth="97.0" text="40%" textFill="#8100cc">
+                                                   <font>
+                                                      <Font name="Kodchasan Regular" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="selected_roadmap_progrgresspercent_header" layoutX="38.0" layoutY="175.0" prefHeight="22.0" prefWidth="79.0" text="ความคืบหน้า">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets bottom="20.0" />
+                                             </VBox.margin>
+                                             <effect>
+                                                <DropShadow>
+                                                   <color>
+                                                      <Color red="0.49473685026168823" green="0.49473685026168823" blue="0.49473685026168823" />
+                                                   </color>
+                                                </DropShadow>
+                                             </effect>
+                                          </Pane>
+                                          <Pane fx:id="pretest_container" prefHeight="30.0" prefWidth="799.0">
+                                             <children>
+                                                <HBox fx:id="pretest_box" alignment="CENTER" layoutX="124.0" layoutY="-8.0" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: #8100CC; -fx-background-radius: 30;" stylesheets="@../../../css/Home.css">
+                                                   <children>
+                                                      <Button fx:id="pretest_button_text" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Pre-test" textFill="WHITE">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Button>
+                                                      <ImageView fx:id="pretest_button_arrow" fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../img/icon/circle-chevron-right-solid.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </HBox>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets bottom="50.0" />
+                                             </VBox.margin>
+                                          </Pane>
+                                          <VBox fx:id="roadmap_optional_extra_container" alignment="TOP_CENTER" prefHeight="100.0" prefWidth="100.0">
+                                             <children>
+                                                <HBox fx:id="roadmap_node_container" prefHeight="42.0" prefWidth="1077.0">
+                                                   <children>
+                                                      <VBox fx:id="raodmap_node_column1" prefHeight="54.0" prefWidth="510.0">
+                                                         <children>
+                                                            <VBox fx:id="raodmap_node_1" prefHeight="200.0" prefWidth="400.0">
+                                                               <children>
+                                                                  <HBox fx:id="raodmap_node_node_box_1" alignment="CENTER" maxWidth="150.0" prefHeight="50.0" prefWidth="150.0" style="-fx-border-color: Purple;">
+                                                                     <children>
+                                                                        <Label fx:id="raodmap_node_header_1" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="170.0" text="Mathematics">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                     <VBox.margin>
+                                                                        <Insets bottom="10.0" />
+                                                                     </VBox.margin>
+                                                                  </HBox>
+                                                                  <Label fx:id="raodmap_node_discription" prefHeight="20.0" prefWidth="412.0" text="Linear algebra, Calculus, Mathematical analysis, Differential Calculus">
+                                                                     <VBox.margin>
+                                                                        <Insets bottom="10.0" />
+                                                                     </VBox.margin>
+                                                                  </Label>
+                                                                  <HBox fx:id="raodmap_node_button_box_1" alignment="CENTER" maxWidth="100.0" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #8100CC; -fx-background-radius: 30;" stylesheets="@../../../css/Home.css">
+                                                                     <children>
+                                                                        <Button fx:id="raodmap_node_button_1" mnemonicParsing="false" style="-fx-background-color: transparent;" text="คอร์ส" textFill="WHITE">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font>
+                                                                        </Button>
+                                                                     </children>
+                                                                     <cursor>
+                                                                        <Cursor fx:constant="HAND" />
+                                                                     </cursor>
+                                                                  </HBox>
+                                                               </children>
+                                                               <VBox.margin>
+                                                                  <Insets left="100.0" />
+                                                               </VBox.margin>
+                                                            </VBox>
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox fx:id="raodmap_node_column_2" prefHeight="54.0" prefWidth="573.0">
+                                                         <children>
+                                                            <VBox fx:id="raodmap_node_2" prefHeight="200.0" prefWidth="400.0">
+                                                               <children>
+                                                                  <HBox fx:id="raodmap_node_header_container_2" alignment="CENTER" maxWidth="150.0" prefHeight="50.0" prefWidth="150.0" style="-fx-border-color: Purple;">
+                                                                     <VBox.margin>
+                                                                        <Insets bottom="10.0" />
+                                                                     </VBox.margin>
+                                                                     <children>
+                                                                        <Label fx:id="raodmap_node_header_2" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="170.0" text="Statistics">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <Label fx:id="raodmap_node_discription_2" prefHeight="20.0" prefWidth="412.0" text="Linear algebra, Calculus, Mathematical analysis, Differential Calculus">
+                                                                     <VBox.margin>
+                                                                        <Insets bottom="10.0" />
+                                                                     </VBox.margin>
+                                                                  </Label>
+                                                                  <HBox fx:id="raodmap_node_button_box_2" alignment="CENTER" maxWidth="100.0" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #8100CC; -fx-background-radius: 30;" stylesheets="@../../../css/Home.css">
+                                                                     <cursor>
+                                                                        <Cursor fx:constant="HAND" />
+                                                                     </cursor>
+                                                                     <children>
+                                                                        <Button fx:id="raodmap_node_button_2" mnemonicParsing="false" style="-fx-background-color: transparent;" text="คอร์ส" textFill="WHITE">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font>
+                                                                        </Button>
+                                                                     </children>
+                                                                  </HBox>
+                                                               </children>
+                                                               <VBox.margin>
+                                                                  <Insets left="50.0" />
+                                                               </VBox.margin>
+                                                            </VBox>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets bottom="20.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <HBox fx:id="optinal_course_container" alignment="CENTER" minHeight="100.0" prefHeight="100.0" prefWidth="1010.0">
+                                                   <children>
+                                                      <Pane fx:id="optinal_course_box" maxHeight="350.0" maxWidth="700.0" prefHeight="100.0" prefWidth="279.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                                                         <effect>
+                                                            <DropShadow>
+                                                               <color>
+                                                                  <Color red="0.7764706015586853" green="0.7764706015586853" blue="0.7764706015586853" opacity="0.25" />
+                                                               </color>
+                                                            </DropShadow>
+                                                         </effect>
+                                                         <children>
+                                                            <VBox fx:id="optinal_course_content_container" alignment="TOP_CENTER" layoutX="-1.0" prefHeight="100.0" prefWidth="280.0">
+                                                               <children>
+                                                                  <Label fx:id="optinal_course_header" prefHeight="27.0" prefWidth="159.0" text="OPTIONAL COURSE">
+                                                                     <font>
+                                                                        <Font size="18.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <HBox minHeight="20.0" prefHeight="20.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <Label fx:id="optinal_course_name_1" prefHeight="22.0" prefWidth="277.0" text="Software Engineer" textFill="#8100cc">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                           <HBox.margin>
+                                                                              <Insets left="20.0" />
+                                                                           </HBox.margin>
+                                                                        </Label>
+                                                                        <ImageView fx:id="optinal_course_button" fitHeight="32.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                                                           <image>
+                                                                              <Image url="@../../../img/icon/right-purple.png" />
+                                                                           </image>
+                                                                           <cursor>
+                                                                              <Cursor fx:constant="HAND" />
+                                                                           </cursor>
+                                                                           <HBox.margin>
+                                                                              <Insets right="10.0" />
+                                                                           </HBox.margin>
+                                                                        </ImageView>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <Label fx:id="optinal_course_description_1" prefHeight="20.0" prefWidth="412.0" text="For embed AI on APP/WEB">
+                                                                     <VBox.margin>
+                                                                        <Insets left="20.0" />
+                                                                     </VBox.margin>
+                                                                  </Label>
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </Pane>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets bottom="20.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <Label fx:id="extra_roadmap_header" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="223.0" text="ต่อยอดด้วยแขนง Roadmap ที่เกี่ยวข้อง">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="20.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <HBox fx:id="extra_roadmap_button_container" alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
+                                                   <children>
+                                                      <HBox fx:id="extra_roadmap_button_box_1" alignment="CENTER" maxHeight="30.0" maxWidth="120.0" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #8100CC; -fx-background-radius: 30;" stylesheets="@../../../css/Home.css">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                         <children>
+                                                            <Button fx:id="extra_roadmap_button_1" mnemonicParsing="false" prefWidth="126.0" style="-fx-background-color: transparent;" text="Prompt Engineer" textFill="WHITE">
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </Button>
+                                                         </children>
+                                                         <HBox.margin>
+                                                            <Insets right="20.0" />
+                                                         </HBox.margin>
+                                                      </HBox>
+                                                      <HBox fx:id="extra_roadmap_button_box_2" alignment="CENTER" maxHeight="30.0" maxWidth="120.0" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #8100CC; -fx-background-radius: 30;" stylesheets="@../../../css/Home.css">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                         <children>
+                                                            <Button fx:id="extra_roadmap_button_2" mnemonicParsing="false" style="-fx-background-color: transparent;" text="AI Engineer" textFill="WHITE" />
+                                                         </children>
+                                                         <HBox.margin>
+                                                            <Insets left="20.0" />
+                                                         </HBox.margin>
+                                                      </HBox>
+                                                   </children>
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                   <VBox.margin>
+                                                      <Insets bottom="20.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                          <VBox fx:id="related_roadmap_container" alignment="TOP_CENTER" prefHeight="124.0" prefWidth="1030.0">
+                                             <children>
+                                                <HBox fx:id="related_roadmap_header_container" prefHeight="20.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Label fx:id="related_roadmap_header" prefHeight="20.0" prefWidth="195.0" text="Roadmap ที่เกี่ยวข้อง" textFill="#8100cc">
+                                                         <HBox.margin>
+                                                            <Insets bottom="20.0" left="150.0" />
+                                                         </HBox.margin>
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <Pane fx:id="related_roadmap_box_1" maxHeight="350.0" maxWidth="700.0" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                                                   <effect>
+                                                      <DropShadow>
+                                                         <color>
+                                                            <Color red="0.7764706015586853" green="0.7764706015586853" blue="0.7764706015586853" opacity="0.25" />
+                                                         </color>
+                                                      </DropShadow>
+                                                   </effect>
+                                                   <children>
+                                                      <Label fx:id="related_roadmap_description_1" layoutX="114.0" layoutY="4.0" prefHeight="42.0" prefWidth="227.0" text="เรียนรู้การเป็น Python  developer ในปี 2025" textFill="#767676" />
+                                                      <Label fx:id="related_roadmap_time_1" layoutX="413.0" layoutY="4.0" prefHeight="42.0" prefWidth="85.0" text="ระยะเวลา 80 ชม." />
+                                                      <Label fx:id="related_roadmap_progressfraction_1" layoutX="555.0" layoutY="4.0" prefHeight="42.0" prefWidth="73.0" text="เนื้อหา 11/120" />
+                                                      <ImageView fx:id="related_roadmap_button_1" fitHeight="32.0" fitWidth="22.0" layoutX="663.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../img/icon/right-purple.png" />
+                                                         </image>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </ImageView>
+                                                      <Label fx:id="related_roadmap_name_1" layoutX="23.0" layoutY="4.0" prefHeight="42.0" prefWidth="151.0" text="Python">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </children>
+</HBox>
