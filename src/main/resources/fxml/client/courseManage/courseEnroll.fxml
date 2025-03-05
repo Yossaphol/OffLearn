@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="2512.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.Cart">
+<AnchorPane prefHeight="2512.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.courseManage.courseEnroll">
     <children>
         <VBox fx:id="leftWrapper" alignment="TOP_CENTER" layoutX="-5.0" layoutY="-1.0" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="300.0" prefHeight="2513.0" prefWidth="315.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;">
             <children>
