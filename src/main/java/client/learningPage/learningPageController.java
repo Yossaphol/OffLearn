@@ -6,10 +6,7 @@ import client.HomeAndNavigation.Navigator;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -19,6 +16,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -52,6 +50,17 @@ public class learningPageController implements Initializable {
     public Label countLike;
     public Label countDislike;
     public Button btnOffLoad;
+    public Label countPlaylist;
+    public Button bntEp;
+    public Label labelPercent;
+    public ProgressBar progressBar;
+    public Label btnRoadmap;
+    public Button nextCourse;
+    public Label category;
+    public Label nextCourseName;
+    public Label nextTeacherName;
+    public ProgressBar nextCourseProgressBar;
+    public Rectangle nextImgCourse;
 
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -85,9 +94,22 @@ public class learningPageController implements Initializable {
         method_home.hoverEffect(btnLike);
         method_home.hoverEffect(btnDislike);
         method_home.hoverEffect(btnOffLoad);
+        method_home.hoverEffect(bntEp);
+        method_home.hoverEffect(nextCourse);
+
+        bntEp.setText("Episode : 69");
+
+        labelPercent.setText("69%");
+
+        nextCourseName.setText("DSA");
+        nextTeacherName.setText("อาจารย์ขิม ใจดี");
+        category.setText("</>coding");
+        method_home.loadAndSetImage(nextImgCourse, "/img/Profile/user.png");
 
         countLike.setText("0");
         countDislike.setText("0");
+
+
 
         // ปรับ Seekbar ตามเวลาวิดีโอ
         mediaPlayer.setOnReady(() -> {
