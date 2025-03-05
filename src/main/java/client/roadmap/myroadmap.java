@@ -1,5 +1,4 @@
 package client.roadmap;
-import client.dashboard.dashboard;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,7 +14,7 @@ public class myroadmap extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(myroadmap.class.getResource("/fxml/client/Roadmap/myroadmap.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(myroadmap.class.getResource("/fxml/client/courseManage/myroadmap.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         primaryStage.setTitle("Offlearn");
         primaryStage.setMaximized(true);
