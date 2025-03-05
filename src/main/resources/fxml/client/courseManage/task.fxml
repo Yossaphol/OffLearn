@@ -1,16 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<HBox fx:id="MainFrame" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.task.taskController">
-   <children>
-      <Label text="Waiting for your design">
-         <font>
-            <Font size="76.0" />
-         </font>
-      </Label>
-   </children>
+<HBox fx:id="MainFrame" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.task.taskController">
+   <VBox fx:id="navBar" prefHeight="1024.0" prefWidth="300.0" />
+   <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="2094.0" prefWidth="1143.0" style="-fx-background-color: #fbfbfb;">
+      <Pane prefHeight="58.0" prefWidth="1142.0" style="-fx-background-color: #ffffff;" />
+      <HBox fx:id="searhbar_container" prefHeight="65.0" prefWidth="1142.0" style="-fx-background-color: #ffffff;" />
+      <Pane prefHeight="87.0" prefWidth="1142.0" style="-fx-background-color: #ffffff;" />
+      <VBox prefHeight="634.0" prefWidth="1142.0" style="-fx-background-color: #ffffff00;">
+         <TabPane fx:id="tabPane" prefHeight="898.0" prefWidth="1142.0" stylesheets="@../../../css/tabPane.css"
+                  tabClosingPolicy="UNAVAILABLE">
+            <Tab fx:id="btnUpComing" text="กำลังจะมาถึง">
+               <VBox fx:id="containerUpComing" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="1142.0"
+                     style="-fx-background-color: #fbfbfb;">
+                  <VBox fx:id="boxUpComing" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0"
+                        prefWidth="1004.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                     </VBox.margin>
+                     <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="28.0" prefWidth="260.0">
+                        <Label fx:id="labelUpComingDate" prefHeight="27.0" prefWidth="250.0" text="labelUpComingDate">
+                           <font>
+                              <Font name="System Bold" size="18.0"/>
+                           </font>
+                           <opaqueInsets>
+                              <Insets/>
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets left="5.0" top="5.0"/>
+                           </HBox.margin>
+                        </Label>
+                     </HBox>
+                     <Button fx:id="task" mnemonicParsing="false" prefHeight="66.0" prefWidth="1004.0"
+                             style="-fx-background-color: #F0E8E8; -fx-background-radius: 10;">
+                        <graphic>
+                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                              <VBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="813.0">
+                                 <Label fx:id="taskInformation" text="taskInformation" textFill="#8800cc">
+                                    <font>
+                                       <Font name="System Bold" size="16.0"/>
+                                    </font>
+                                 </Label>
+                                 <Label fx:id="taskDetail" text="taskDetail"/>
+                              </VBox>
+                              <VBox alignment="CENTER_RIGHT" prefHeight="58.0" prefWidth="174.0">
+                                 <Label fx:id="point" alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="74.0"
+                                        text="point" textAlignment="RIGHT">
+                                    <font>
+                                       <Font name="System Bold" size="14.0"/>
+                                    </font>
+                                 </Label>
+                              </VBox>
+                           </HBox>
+                        </graphic>
+                     </Button>
+                  </VBox>
+               </VBox>
+            </Tab>
+            <Tab fx:id="btnLate" text="เลยกำหนด">
+               <VBox fx:id="containerLate" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0"
+                     style="-fx-background-color: #fbfbfb;">
+                  <VBox fx:id="boxUpComing1" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0"
+                        prefWidth="1004.0">
+                     <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="28.0" prefWidth="260.0">
+                        <Label fx:id="labelUpComingDate1" prefHeight="27.0" prefWidth="250.0"
+                               text="labelUpComingDate">
+                           <font>
+                              <Font name="System Bold" size="18.0"/>
+                           </font>
+                           <opaqueInsets>
+                              <Insets/>
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets left="5.0" top="5.0"/>
+                           </HBox.margin>
+                        </Label>
+                     </HBox>
+                     <Button fx:id="task1" mnemonicParsing="false" prefHeight="66.0" prefWidth="1004.0"
+                             style="-fx-background-color: #F0E8E8; -fx-background-radius: 10;">
+                        <graphic>
+                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                              <VBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="813.0">
+                                 <Label fx:id="taskInformation1" text="taskInformation" textFill="#8800cc">
+                                    <font>
+                                       <Font name="System Bold" size="16.0"/>
+                                    </font>
+                                 </Label>
+                                 <Label fx:id="taskDetail1" text="taskDetail"/>
+                              </VBox>
+                              <VBox alignment="CENTER_RIGHT" prefHeight="58.0" prefWidth="174.0">
+                                 <Label fx:id="point1" alignment="CENTER_RIGHT" prefHeight="20.0"
+                                        prefWidth="74.0" text="point" textAlignment="RIGHT">
+                                    <font>
+                                       <Font name="System Bold" size="14.0"/>
+                                    </font>
+                                 </Label>
+                              </VBox>
+                           </HBox>
+                        </graphic>
+                     </Button>
+                  </VBox>
+               </VBox>
+            </Tab>
+            <Tab fx:id="btnComplete" text="เสร็จแล้วคร้าบ">
+               <VBox fx:id="containerComplete" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0"
+                     style="-fx-background-color: #fbfbfb;">
+                  <VBox fx:id="boxUpComing2" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0"
+                        prefWidth="1004.0">
+                     <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="28.0" prefWidth="260.0">
+                        <Label fx:id="labelUpComingDate2" prefHeight="27.0" prefWidth="250.0"
+                               text="labelUpComingDate">
+                           <font>
+                              <Font name="System Bold" size="18.0"/>
+                           </font>
+                           <opaqueInsets>
+                              <Insets/>
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets left="5.0" top="5.0"/>
+                           </HBox.margin>
+                        </Label>
+                     </HBox>
+                     <Button fx:id="task2" mnemonicParsing="false" prefHeight="66.0" prefWidth="1004.0"
+                             style="-fx-background-color: #F0E8E8; -fx-background-radius: 10;">
+                        <graphic>
+                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                              <VBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="813.0">
+                                 <Label fx:id="taskInformation2" text="taskInformation" textFill="#8800cc">
+                                    <font>
+                                       <Font name="System Bold" size="16.0"/>
+                                    </font>
+                                 </Label>
+                                 <Label fx:id="taskDetail2" text="taskDetail"/>
+                              </VBox>
+                              <VBox alignment="CENTER_RIGHT" prefHeight="58.0" prefWidth="174.0">
+                                 <Label fx:id="point2" alignment="CENTER_RIGHT" prefHeight="20.0"
+                                        prefWidth="74.0" text="point" textAlignment="RIGHT">
+                                    <font>
+                                       <Font name="System Bold" size="14.0"/>
+                                    </font>
+                                 </Label>
+                              </VBox>
+                           </HBox>
+                        </graphic>
+                     </Button>
+                  </VBox>
+               </VBox>
+            </Tab>
+         </TabPane>
+      </VBox>
+   </VBox>
 </HBox>

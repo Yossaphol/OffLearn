@@ -1,0 +1,22 @@
+.tab-pane {
+    -fx-background-color: #1e1e1e;
+}
+
+.tab {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-border-radius: 5px 5px 0px 0px;
+}
+
+.tab:selected {
+    -fx-background-color: #8800cc56;
+    -fx-text-fill: #8800cc;
+}
+
+.tab-header-area {
+    -fx-background-color: #252526;
+}
+
+.tab-label {
+    -fx-text-fill: black;
+}
