@@ -1,4 +1,4 @@
-package Student.test.testPage;
+package Student.test;
 
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 
 public class testPageController implements Initializable {
     public VBox leftWrapper;
-
+    public HBox searchbarContent;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {displayNavbar();}
     private void displayNavbar(){
