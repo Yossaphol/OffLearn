@@ -1,7 +1,6 @@
 package Database;
 
-import client.inbox.gChat.topicContent;
-import io.github.cdimascio.dotenv.Dotenv;
+import Student.inbox.gChat.topicContent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
 
@@ -31,7 +30,7 @@ public class topicDB extends ConnectDB{
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/client/inbox/topicContent.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/inbox/topicContent.fxml"));
                 VBox messageBox = loader.load();
 
                 topicContent controller = loader.getController();
