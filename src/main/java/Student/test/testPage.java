@@ -1,4 +1,4 @@
-package Student.test.testPage;
+package Student.test;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
