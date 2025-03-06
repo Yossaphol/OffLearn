@@ -14,59 +14,59 @@ module com.example.offlearn {
     requires okhttp3;
     requires javafx.media;
 
-    opens client.mainApp to javafx.fxml;
-    exports client.mainApp;
+    opens Student.mainApp to javafx.fxml;
+    exports Student.mainApp;
 
-    opens client.inbox to javafx.fxml;
-    exports client.inbox;
+    opens Student.inbox to javafx.fxml;
+    exports Student.inbox;
 
-    opens client.loginAndSignUp to javafx.fxml;
-    exports client.loginAndSignUp;
+    opens Student.loginAndSignUp to javafx.fxml;
+    exports Student.loginAndSignUp;
 
-    opens client.HomeAndNavigation to javafx.fxml;
-    exports client.HomeAndNavigation;
+    opens Student.HomeAndNavigation to javafx.fxml;
+    exports Student.HomeAndNavigation;
 
-    opens client.dashboard to javafx.fxml;
-    exports client.dashboard;
+    opens Student.dashboard to javafx.fxml;
+    exports Student.dashboard;
 
-    opens client.roadmap to javafx.fxml;
-    exports client.roadmap;
+    opens Student.roadmap to javafx.fxml;
+    exports Student.roadmap;
 
-    opens client.task to javafx.fxml;
-    exports client.task;
+    opens Student.task to javafx.fxml;
+    exports Student.task;
 
-    exports client.inbox.pChat;
-    opens client.inbox.pChat to javafx.fxml;
+    exports Student.inbox.pChat;
+    opens Student.inbox.pChat to javafx.fxml;
 
-    exports client.inbox.gChat;
-    opens client.inbox.gChat to javafx.fxml;
+    exports Student.inbox.gChat;
+    opens Student.inbox.gChat to javafx.fxml;
 
-    exports client.swing to javafx.graphics;
+    exports Student.swing to javafx.graphics;
 
-    exports Server.inbox.pChat;
-    opens Server.inbox.pChat to javafx.fxml;
+    exports Teacher.inbox.pChat;
+    opens Teacher.inbox.pChat to javafx.fxml;
 
-    exports client.payment;
-    opens client.payment to javafx.fxml;
+    exports Student.payment;
+    opens Student.payment to javafx.fxml;
 
-    exports client.learningPage;
-    opens client.learningPage to javafx.fxml;
+    exports Student.learningPage;
+    opens Student.learningPage to javafx.fxml;
 
-    exports client.myCourse;
-    opens client.myCourse to javafx.fxml;
+    exports Student.myCourse;
+    opens Student.myCourse to javafx.fxml;
 
-    exports client.Setting to javafx.fxml;
-    opens client.Setting;
+    exports Student.Setting to javafx.fxml;
+    opens Student.Setting;
 
-    exports client.navBarAndSearchbar to javafx.fxml;
-    opens client.navBarAndSearchbar;
+    exports Student.navBarAndSearchbar to javafx.fxml;
+    opens Student.navBarAndSearchbar;
 
-    exports client.courseManage to javafx.fxml;
-    opens client.courseManage;
+    exports Student.courseManage to javafx.fxml;
+    opens Student.courseManage;
 
-    exports client.test.testPage to javafx.fxml;
-    opens client.test.testPage;
+    exports Student.test.testPage to javafx.fxml;
+    opens Student.test.testPage;
 
-    exports client.test.answerPage to javafx.fxml;
-    opens client.test.answerPage;
+    exports Student.test.answerPage to javafx.fxml;
+    opens Student.test.answerPage;
 }
