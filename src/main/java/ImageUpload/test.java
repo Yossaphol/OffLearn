@@ -26,7 +26,7 @@ public class test extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Azure Blob Image Upload");
 
-        Button uploadButton = new Button("Choose your file");
+        Button uploadButton = new Button("Choose your file.");
         Button uploadToAzureButton = new Button("Upload");
         statusLabel = new Label("waiting");
         imageView = new ImageView();
