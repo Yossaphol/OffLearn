@@ -63,4 +63,10 @@ module com.example.offlearn {
 
     exports client.courseManage to javafx.fxml;
     opens client.courseManage;
+
+    exports client.test.testPage to javafx.fxml;
+    opens client.test.testPage;
+
+    exports client.test.answerPage to javafx.fxml;
+    opens client.test.answerPage;
 }
