@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox fx:id="bg" fillHeight="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2093.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.dashboard.dashboardController">
+   <children>
+      <ScrollPane fx:id="mainScrollPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="2103.0" prefWidth="1140.0" stylesheets="@../../../css/Home.css" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
+         <content>
+            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="2094.0" prefWidth="1392.0">
+               <children>
+                  <HBox fx:id="rootpage" prefHeight="2093.0" prefWidth="1440.0">
+                     <children>
+                        <VBox prefHeight="2093.0" prefWidth="1452.0" style="-fx-background-color: #FBFBFB;">
+                           <children>
+                              <Pane prefHeight="62.0" prefWidth="1139.0" />
+                              <HBox fx:id="searhbar_container" alignment="CENTER" prefHeight="65.0" prefWidth="1139.0" style="-fx-background-color: #FBFBFB;" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </children>
+</HBox>

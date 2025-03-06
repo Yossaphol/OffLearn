@@ -29,7 +29,7 @@ public class Navigator {
     }
 
     public void inboxRoute(MouseEvent event){
-        navigateTo("/fxml/Student/inbox/pChat.fxml", event);
+        navigateTo("/fxml/Student/Teacher.inbox/pChat.fxml", event);
     }
 
     public void taskRoute(MouseEvent event){

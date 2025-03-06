@@ -116,8 +116,8 @@ public class pChatController implements Initializable {
 
         globalButton.setOnMouseClicked(mouseEvent -> {
             try {
-                FXMLLoader globalRoute = new FXMLLoader(getClass().getResource("/fxml/Student/inbox/routeToPChat.fxml"));
-                FXMLLoader globalChatDisplay = new FXMLLoader(getClass().getResource("/fxml/Student/inbox/gChat.fxml"));
+                FXMLLoader globalRoute = new FXMLLoader(getClass().getResource("/fxml/Student/Teacher.inbox/routeToPChat.fxml"));
+                FXMLLoader globalChatDisplay = new FXMLLoader(getClass().getResource("/fxml/Student/Teacher.inbox/gChat.fxml"));
 
                 borderPane.setLeft(globalRoute.load());
                 borderPane.setCenter(globalChatDisplay.load());

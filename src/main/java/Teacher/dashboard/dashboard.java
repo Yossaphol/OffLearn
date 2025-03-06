@@ -1,25 +1,26 @@
-package Student.inbox.pChat;
-
-import Student.HomeAndNavigation.Home;
+package Teacher.dashboard;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class pChat extends Application {
+import java.io.IOException;
+
+public class dashboard extends Application {
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("/fxml/Student/Teacher.inbox/pChat.fxml"));
+    public void start(Stage primaryStage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Teacher.navigator.navbar.class.getResource("/fxml/Teacher/statistics/dashboard.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         primaryStage.setTitle("Offlearn");
         primaryStage.setMaximized(true);
         primaryStage.setFullScreen(true);
+        primaryStage.setFullScreenExitHint("");
         primaryStage.setScene(scene);
         primaryStage.show();
-
     }
 }

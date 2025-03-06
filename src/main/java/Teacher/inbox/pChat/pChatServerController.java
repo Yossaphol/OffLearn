@@ -17,7 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import Teacher.inbox.Server;
+import Teacher.Server;
 
 import java.net.ServerSocket;
 import java.net.URL;
