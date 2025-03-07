@@ -11,8 +11,9 @@ module com.example.offlearn {
     requires com.google.zxing;
     requires org.json;
     requires stripe.java;
-    requires okhttp3;
+//    requires okhttp3;
     requires javafx.media;
+    requires com.azure.storage.blob;
 
     opens Student.mainApp to javafx.fxml;
     exports Student.mainApp;
@@ -67,10 +68,10 @@ module com.example.offlearn {
     exports Student.test to javafx.fxml;
     opens Student.test;
 
-//    exports Teacher.dashboard to javafx.fxml;
-//    opens Teacher.dashboard;
-//
-//    exports Teacher.navigator to javafx.fxml;
-//    opens Teacher.navigator;
+   exports Teacher.dashboard to javafx.fxml;
+    opens Teacher.dashboard;
+
+    exports Teacher.navigator to javafx.fxml;
+    opens Teacher.navigator;
 
 }
