@@ -96,7 +96,7 @@
                         <Insets left="20.0" />
                      </HBox.margin>
                      <font>
-                        <Font name="Noto Sans Thai Bold" size="16.0" />
+                        <Font name="Noto Sans Thai Bold" size="18.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />

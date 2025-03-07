@@ -42,7 +42,7 @@
                                             <children>
                                                 <VBox alignment="TOP_CENTER" prefHeight="1712.0" prefWidth="1138.0">
                                                     <children>
-                                                        <VBox fx:id="us_st" prefHeight="348.0" prefWidth="1038.0">
+                                                        <VBox fx:id="us_st" prefHeight="280.0" prefWidth="1039.0">
                                                             <children>
                                                                 <Label prefHeight="22.0" prefWidth="953.0" text="โปรไฟล์" textFill="#a8a8a8">
                                                                     <font>
@@ -52,11 +52,11 @@
                                                                         <Insets bottom="10.0" />
                                                                     </VBox.margin>
                                                                 </Label>
-                                                                <HBox prefHeight="310.0" prefWidth="1038.0">
+                                                                <HBox prefHeight="247.0" prefWidth="1039.0">
                                                                     <children>
-                                                      <VBox prefHeight="368.0" prefWidth="721.0">
+                                                      <VBox prefHeight="247.0" prefWidth="766.0">
                                                          <children>
-                                                                              <Pane fx:id="user_profile" maxHeight="215.0" maxWidth="730.0" prefHeight="209.0" prefWidth="719.0" style="-fx-background-color: white; -fx-background-radius: 20;" styleClass="overflow-img" stylesheets="@../../../css/Home.css">
+                                                                              <Pane fx:id="user_profile" maxHeight="215.0" maxWidth="764.0" prefHeight="209.0" prefWidth="764.0" style="-fx-background-color: white; -fx-background-radius: 20;" styleClass="overflow-img" stylesheets="@../../../css/Home.css">
                                                                                   <effect>
                                                                                       <DropShadow>
                                                                                           <color>
@@ -95,7 +95,7 @@
                                                                                           </font>
                                                                                       </Label>
                                                                                       <Circle fx:id="trophy" fill="DODGERBLUE" layoutX="385.0" layoutY="170.0" radius="11.0" stroke="#ffffff00" strokeType="INSIDE" />
-                                                                                      <ImageView fitHeight="22.0" fitWidth="16.0" layoutX="665.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                                                                                      <ImageView fitHeight="22.0" fitWidth="16.0" layoutX="718.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                                                                                           <image>
                                                                                               <Image url="@../../../img/icon/edit.png" />
                                                                                           </image>
@@ -108,54 +108,59 @@
                                                                   <Insets bottom="10.0" />
                                                                </VBox.margin>
                                                                               </Pane>
-                                                                          <VBox fx:id="category" prefHeight="102.0" prefWidth="695.0">
-                                                                              <children>
-                                                                  <HBox prefHeight="28.0" prefWidth="790.0">
+                                                         </children>
+                                                      </VBox>
+                                                                        <VBox fx:id="interestC" prefHeight="247.0" prefWidth="267.0" style="-fx-background-color: white; -fx-background-radius: 20;" stylesheets="@../../../css/Home.css">
+                                                                            <padding>
+                                                                                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                                                            </padding>
+                                                                            <HBox.margin>
+                                                                                <Insets left="20.0" />
+                                                                            </HBox.margin>
+                                                                            <effect>
+                                                                                <DropShadow>
+                                                                                    <color>
+                                                                                        <Color red="0.7764706015586853" green="0.7764706015586853" blue="0.7764706015586853" opacity="0.25" />
+                                                                                    </color>
+                                                                                </DropShadow>
+                                                                            </effect>
+                                                         <children>
+                                                            <Label prefHeight="22.0" prefWidth="623.0" text="ลิสต์หมวดหมู่ที่สนใจ" textFill="#a8a8a8">
+                                                               <font>
+                                                                  <Font name="Noto Sans Thai Regular" size="13.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <ScrollPane hbarPolicy="NEVER" prefHeight="294.0" prefWidth="271.0" styleClass="scroll-panej" stylesheets="@../../../css/Home.css" vbarPolicy="NEVER">
+                                                              <content>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="199.0" prefWidth="222.0" stylesheets="@../../../css/Home.css">
                                                                      <children>
-                                                                                        <Label prefHeight="22.0" prefWidth="623.0" text="ลิสต์หมวดหมู่ที่สนใจ" textFill="#a8a8a8">
-                                                                                            <font>
-                                                                                                <Font name="Noto Sans Thai Regular" size="13.0" />
-                                                                                            </font>
-                                                                                        </Label>
-                                                                        <Label alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="63.0" text="ดูทั้งหมด" textFill="#8100cc">
-                                                                           <font>
-                                                                              <Font name="Noto Sans Thai Regular" size="14.0" />
-                                                                           </font>
-                                                                           <cursor>
-                                                                              <Cursor fx:constant="HAND" />
-                                                                           </cursor>
-                                                                        </Label>
-                                                                     </children>
-                                                                  </HBox>
-                                                                                  <HBox fx:id="category_recommend" alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="729.0">
-                                                                                      <children>
-                                                                                          <Pane fx:id="cat1" maxHeight="350.0" maxWidth="700.0" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                                                                                          <Pane fx:id="cat1" layoutX="7.0" layoutY="12.0" maxHeight="350.0" maxWidth="700.0" prefHeight="72.0" prefWidth="204.0" style="-fx-background-color: white; -fx-background-radius: 20;">
                                                                                               <effect>
                                                                                                   <DropShadow>
                                                                                                       <color>
-                                                                                                          <Color red="0.7764706015586853" green="0.7764706015586853" blue="0.7764706015586853" opacity="0.25" />
+                                                                                                          <Color red="0.7699999809265137" green="0.7699999809265137" blue="0.7699999809265137" opacity="0.25" />
                                                                                                       </color>
                                                                                                   </DropShadow>
                                                                                               </effect>
                                                                                               <children>
-                                                                                                  <HBox alignment="CENTER" prefHeight="62.0" prefWidth="202.0">
+                                                                                                  <HBox alignment="CENTER" prefHeight="69.0" prefWidth="205.0" style="-fx-background-color: transparent;">
                                                                                                       <children>
                                                                                                           <Circle fx:id="category_pic" fill="DODGERBLUE" radius="19.0" stroke="BLACK" strokeType="INSIDE">
                                                                                                               <HBox.margin>
-                                                                                                                  <Insets left="7.0" right="7.0" />
+                                                                                                                  <Insets left="7.0" right="18.0" />
                                                                                                               </HBox.margin>
                                                                                                               <cursor>
                                                                                                                   <Cursor fx:constant="HAND" />
                                                                                                               </cursor>
                                                                                                           </Circle>
-                                                                                                          <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                                                                                                          <VBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="126.0">
                                                                                                               <children>
                                                                                                                   <Label text="Coding">
                                                                                                                       <font>
                                                                                                                           <Font name="Kodchasan Bold" size="18.0" />
                                                                                                                       </font>
                                                                                                                   </Label>
-                                                                                                                  <Label fx:id="progressCategory" text="20% completed" textFill="#929292">
+                                                                                                                  <Label fx:id="progressCategory" text="20% completed" textFill="#b5b5b5">
                                                                                                                       <font>
                                                                                                                           <Font name="Kodchasan Regular" size="13.0" />
                                                                                                                       </font>
@@ -166,319 +171,17 @@
                                                                                                                   <Cursor fx:constant="HAND" />
                                                                                                               </cursor>
                                                                                                           </VBox>
-                                                                                                          <Button fx:id="btnpopup" mnemonicParsing="false" onAction="#openPopup" style="-fx-background-color: transparent;">
-                                                                                                              <graphic>
-                                                                                                                  <ImageView fitHeight="25.0" fitWidth="7.0" pickOnBounds="true" preserveRatio="true">
-                                                                                                                      <image>
-                                                                                                                          <Image url="@../../../img/icon/Group%20268.png" />
-                                                                                                                      </image>
-                                                                                                                      <cursor>
-                                                                                                                          <Cursor fx:constant="HAND" />
-                                                                                                                      </cursor>
-                                                                                                                  </ImageView>
-                                                                                                              </graphic>
-                                                                                                              <cursor>
-                                                                                                                  <Cursor fx:constant="HAND" />
-                                                                                                              </cursor>
-                                                                                                              <HBox.margin>
-                                                                                                                  <Insets left="10.0" />
-                                                                                                              </HBox.margin>
-                                                                                                          </Button>
                                                                                                       </children>
                                                                                                   </HBox>
-                                                                                                  <VBox alignment="BOTTOM_RIGHT" layoutX="27.0" layoutY="63.0" prefHeight="115.0" prefWidth="175.0">
-                                                                                                      <children>
-                                                                                                          <VBox fx:id="popup" prefHeight="128.0" prefWidth="175.0" style="-fx-background-color: white; -fx-background-radius: 10;" stylesheets="@../../../css/Home.css" visible="false">
-                                                                                                              <effect>
-                                                                                                                  <DropShadow>
-                                                                                                                      <color>
-                                                                                                                          <Color red="0.7699999809265137" green="0.7699999809265137" blue="0.7699999809265137" opacity="0.25" />
-                                                                                                                      </color>
-                                                                                                                  </DropShadow>
-                                                                                                              </effect>
-                                                                                                              <children>
-                                                                                                                  <HBox alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="202.0" styleClass="explore_roadmapOrAddList" stylesheets="@../../../css/Home.css">
-                                                                                                                      <children>
-                                                                                                                          <ImageView fitHeight="57.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-                                                                                                                              <image>
-                                                                                                                                  <Image url="@../../../img/icon/add.png" />
-                                                                                                                              </image>
-                                                                                                                              <HBox.margin>
-                                                                                                                                  <Insets left="10.0" right="10.0" />
-                                                                                                                              </HBox.margin>
-                                                                                                                          </ImageView>
-                                                                                                                          <Label text="เอาออกจากลิสต์">
-                                                                                                                              <font>
-                                                                                                                                  <Font name="Noto Sans Thai Regular" size="12.0" />
-                                                                                                                              </font>
-                                                                                                                          </Label>
-                                                                                                                      </children>
-                                                                                                                      <cursor>
-                                                                                                                          <Cursor fx:constant="HAND" />
-                                                                                                                      </cursor>
-                                                                                                                  </HBox>
-                                                                                                                  <HBox alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="202.0" styleClass="explore_roadmapOrAddList" stylesheets="@../../../css/Home.css">
-                                                                                                                      <children>
-                                                                                                                          <ImageView fitHeight="57.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-                                                                                                                              <image>
-                                                                                                                                  <Image url="@../../../img/icon/business-plan.png" />
-                                                                                                                              </image>
-                                                                                                                              <HBox.margin>
-                                                                                                                                  <Insets left="10.0" right="10.0" />
-                                                                                                                              </HBox.margin>
-                                                                                                                          </ImageView>
-                                                                                                                          <Label text="สำรวจ Roadmap">
-                                                                                                                              <font>
-                                                                                                                                  <Font name="Noto Sans Thai Regular" size="12.0" />
-                                                                                                                              </font>
-                                                                                                                          </Label>
-                                                                                                                      </children>
-                                                                                                                      <cursor>
-                                                                                                                          <Cursor fx:constant="HAND" />
-                                                                                                                      </cursor>
-                                                                                                                  </HBox>
-                                                                                                              </children>
-                                                                                                              <VBox.margin>
-                                                                                                                  <Insets top="10.0" />
-                                                                                                              </VBox.margin>
-                                                                                                              <padding>
-                                                                                                                  <Insets bottom="10.0" top="10.0" />
-                                                                                                              </padding>
-                                                                                                          </VBox>
-                                                                                                      </children>
-                                                                                                  </VBox>
                                                                                               </children>
-                                                                                              <HBox.margin>
-                                                                                                  <Insets right="20.0" />
-                                                                                              </HBox.margin>
                                                                                           </Pane>
-                                                                                          <Pane fx:id="cat2" maxHeight="350.0" maxWidth="700.0" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 20;">
-                                                                                              <effect>
-                                                                                                  <DropShadow>
-                                                                                                      <color>
-                                                                                                          <Color red="0.7764706015586853" green="0.7764706015586853" blue="0.7764706015586853" opacity="0.25" />
-                                                                                                      </color>
-                                                                                                  </DropShadow>
-                                                                                              </effect>
-                                                                                              <children>
-                                                                                                  <HBox alignment="CENTER" prefHeight="62.0" prefWidth="202.0">
-                                                                                                      <children>
-                                                                                                          <Circle fx:id="category_pic1" fill="DODGERBLUE" radius="19.0" stroke="BLACK" strokeType="INSIDE">
-                                                                                                              <HBox.margin>
-                                                                                                                  <Insets left="7.0" right="7.0" />
-                                                                                                              </HBox.margin>
-                                                                                                              <cursor>
-                                                                                                                  <Cursor fx:constant="HAND" />
-                                                                                                              </cursor>
-                                                                                                          </Circle>
-                                                                                                          <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
-                                                                                                              <children>
-                                                                                                                  <Label text="Business">
-                                                                                                                      <font>
-                                                                                                                          <Font name="Kodchasan Bold" size="18.0" />
-                                                                                                                      </font>
-                                                                                                                  </Label>
-                                                                                                                  <Label fx:id="progressCategory1" text="70% completed" textFill="#929292">
-                                                                                                                      <font>
-                                                                                                                          <Font name="Kodchasan Regular" size="13.0" />
-                                                                                                                      </font>
-                                                                                                                  </Label>
-                                                                                                                  <ProgressBar fx:id="categorybar1" prefHeight="6.0" prefWidth="100.0" progress="0.0" styleClass="smallProgressbar" stylesheets="@../../../css/Home.css" />
-                                                                                                              </children>
-                                                                                                              <cursor>
-                                                                                                                  <Cursor fx:constant="HAND" />
-                                                                                                              </cursor>
-                                                                                                          </VBox>
-                                                                                                          <Button fx:id="btnpopup1" mnemonicParsing="false" onAction="#openPopup" style="-fx-background-color: transparent;">
-                                                                                                              <graphic>
-                                                                                                                  <ImageView fitHeight="25.0" fitWidth="7.0" pickOnBounds="true" preserveRatio="true">
-                                                                                                                      <image>
-                                                                                                                          <Image url="@../../../img/icon/Group%20268.png" />
-                                                                                                                      </image>
-                                                                                                                      <cursor>
-                                                                                                                          <Cursor fx:constant="HAND" />
-                                                                                                                      </cursor>
-                                                                                                                  </ImageView>
-                                                                                                              </graphic>
-                                                                                                              <cursor>
-                                                                                                                  <Cursor fx:constant="HAND" />
-                                                                                                              </cursor>
-                                                                                                              <HBox.margin>
-                                                                                                                  <Insets left="10.0" />
-                                                                                                              </HBox.margin>
-                                                                                                          </Button>
-                                                                                                      </children>
-                                                                                                  </HBox>
-                                                                                                  <VBox alignment="BOTTOM_RIGHT" layoutX="27.0" layoutY="63.0" prefHeight="115.0" prefWidth="175.0">
-                                                                                                      <children>
-                                                                                                          <VBox fx:id="popup1" prefHeight="111.0" prefWidth="175.0" style="-fx-background-color: white; -fx-background-radius: 10;" visible="false">
-                                                                                                              <effect>
-                                                                                                                  <DropShadow>
-                                                                                                                      <color>
-                                                                                                                          <Color red="0.7699999809265137" green="0.7699999809265137" blue="0.7699999809265137" opacity="0.25" />
-                                                                                                                      </color>
-                                                                                                                  </DropShadow>
-                                                                                                              </effect>
-                                                                                                              <children>
-                                                                                                                  <HBox alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="202.0" styleClass="explore_roadmapOrAddList" stylesheets="@../../../css/Home.css">
-                                                                                                                      <children>
-                                                                                                                          <ImageView fitHeight="57.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-                                                                                                                              <image>
-                                                                                                                                  <Image url="@../../../img/icon/add.png" />
-                                                                                                                              </image>
-                                                                                                                              <HBox.margin>
-                                                                                                                                  <Insets left="10.0" right="10.0" />
-                                                                                                                              </HBox.margin>
-                                                                                                                          </ImageView>
-                                                                                                                          <Label text="เอาออกจากลิสต์">
-                                                                                                                              <font>
-                                                                                                                                  <Font name="Noto Sans Thai Regular" size="12.0" />
-                                                                                                                              </font>
-                                                                                                                          </Label>
-                                                                                                                      </children>
-                                                                                                                      <cursor>
-                                                                                                                          <Cursor fx:constant="HAND" />
-                                                                                                                      </cursor>
-                                                                                                                  </HBox>
-                                                                                                                  <HBox alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="202.0" styleClass="explore_roadmapOrAddList" stylesheets="@../../../css/Home.css">
-                                                                                                                      <children>
-                                                                                                                          <ImageView fitHeight="57.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-                                                                                                                              <image>
-                                                                                                                                  <Image url="@../../../img/icon/business-plan.png" />
-                                                                                                                              </image>
-                                                                                                                              <HBox.margin>
-                                                                                                                                  <Insets left="10.0" right="10.0" />
-                                                                                                                              </HBox.margin>
-                                                                                                                          </ImageView>
-                                                                                                                          <Label text="สำรวจ Roadmap">
-                                                                                                                              <font>
-                                                                                                                                  <Font name="Noto Sans Thai Regular" size="12.0" />
-                                                                                                                              </font>
-                                                                                                                          </Label>
-                                                                                                                      </children>
-                                                                                                                      <cursor>
-                                                                                                                          <Cursor fx:constant="HAND" />
-                                                                                                                      </cursor>
-                                                                                                                  </HBox>
-                                                                                                              </children>
-                                                                                                              <VBox.margin>
-                                                                                                                  <Insets top="10.0" />
-                                                                                                              </VBox.margin>
-                                                                                                              <padding>
-                                                                                                                  <Insets bottom="10.0" top="10.0" />
-                                                                                                              </padding>
-                                                                                                          </VBox>
-                                                                                                      </children>
-                                                                                                  </VBox>
-                                                                                              </children>
-                                                                                              <HBox.margin>
-                                                                                                  <Insets right="20.0" />
-                                                                                              </HBox.margin>
-                                                                                          </Pane>
-                                                                                      </children>
-                                                                                      <padding>
-                                                                                          <Insets left="50.0" right="50.0" />
-                                                                                      </padding>
-                                                                                      <VBox.margin>
-                                                                                          <Insets bottom="10.0" />
-                                                                                      </VBox.margin>
-                                                                                  </HBox>
-                                                                              </children>
-                                                                          </VBox>
-                                                         </children>
-                                                      </VBox>
-                                                                        <VBox fx:id="quickInbox" prefHeight="346.0" prefWidth="323.0" style="-fx-background-color: white; -fx-background-radius: 20;" stylesheets="@../../../css/Home.css">
-                                                                            <padding>
-                                                                                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-                                                                            </padding>
-                                                                            <HBox.margin>
-                                                                                <Insets left="20.0" />
-                                                                            </HBox.margin>
-                                                                            <effect>
-                                                                                <DropShadow>
-                                                                                    <color>
-                                                                                        <Color red="0.7686274647712708" green="0.7686274647712708" blue="0.7686274647712708" opacity="0.25" />
-                                                                                    </color>
-                                                                                </DropShadow>
-                                                                            </effect>
-                                                         <children>
-                                                            <HBox alignment="CENTER" prefHeight="27.0" prefWidth="388.0">
-                                                               <children>
-                                                                  <Label prefHeight="7.0" prefWidth="205.0" text="Inbox" textFill="#8100cc">
-                                                                     <font>
-                                                                        <Font name="Noto Sans Thai Bold" size="18.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="57.0" style="-fx-border-color: black; -fx-border-radius: 30;" text="Private">
-                                                                     <font>
-                                                                        <Font name="Noto Sans Thai Regular" size="10.0" />
-                                                                     </font>
-                                                                     <cursor>
-                                                                        <Cursor fx:constant="HAND" />
-                                                                     </cursor>
-                                                                  </Label>
-                                                               </children>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="4.0" />
-                                                               </VBox.margin>
-                                                            </HBox>
-                                                            <Line endX="181.0" startX="-100.0" stroke="#ebc8ff" strokeWidth="2.0" />
-                                                            <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="283.0" styleClass="explore_roadmapOrAddList">
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" top="10.0" />
-                                                               </VBox.margin>
-                                                               <children>
-                                                                  <Circle fx:id="inboxP" fill="DODGERBLUE" radius="19.0" stroke="BLACK" strokeType="INSIDE">
-                                                                     <cursor>
-                                                                        <Cursor fx:constant="HAND" />
-                                                                     </cursor>
-                                                                     <HBox.margin>
-                                                                        <Insets right="10.0" />
-                                                                     </HBox.margin>
-                                                                  </Circle>
-                                                                  <Label prefHeight="27.0" prefWidth="124.0" text="Wiraya" textFill="#8100cc">
-                                                                     <font>
-                                                                        <Font name="Noto Sans Thai Bold" size="18.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                                  <Label prefHeight="27.0" prefWidth="108.0" text=".....Hellooo" textFill="#c2c2c2">
-                                                                     <font>
-                                                                        <Font size="13.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                               </children>
-                                                               <cursor>
-                                                                  <Cursor fx:constant="HAND" />
-                                                               </cursor>
-                                                            </HBox>
-                                                            <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="283.0" styleClass="explore_roadmapOrAddList">
-                                                               <children>
-                                                                  <Circle fx:id="inboxP2" fill="DODGERBLUE" radius="19.0" stroke="BLACK" strokeType="INSIDE">
-                                                                     <cursor>
-                                                                        <Cursor fx:constant="HAND" />
-                                                                     </cursor>
-                                                                     <HBox.margin>
-                                                                        <Insets right="10.0" />
-                                                                     </HBox.margin>
-                                                                  </Circle>
-                                                                  <Label prefHeight="27.0" prefWidth="124.0" text="Jane" textFill="#8100cc">
-                                                                     <font>
-                                                                        <Font name="Noto Sans Thai Bold" size="18.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                                  <Label prefHeight="27.0" prefWidth="108.0" text="How about you?" textFill="#c2c2c2">
-                                                                     <font>
-                                                                        <Font size="13.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                               </children>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" top="10.0" />
-                                                               </VBox.margin>
-                                                               <cursor>
-                                                                  <Cursor fx:constant="HAND" />
-                                                               </cursor>
-                                                            </HBox>
+                                                                     </children>
+                                                                  </AnchorPane>
+                                                              </content>
+                                                               <padding>
+                                                                  <Insets top="5.0" />
+                                                               </padding>
+                                                            </ScrollPane>
                                                          </children>
                                                                         </VBox>
                                                                     </children>
@@ -964,12 +667,12 @@
                                                                               </HBox>
                                                                               <HBox prefHeight="257.0" prefWidth="518.0">
                                                                                  <children>
-                                                                                    <LineChart prefHeight="249.0" prefWidth="531.0">
+                                                                                    <LineChart fx:id="score_development" prefHeight="249.0" prefWidth="531.0">
                                                                                       <xAxis>
-                                                                                        <CategoryAxis side="BOTTOM" />
+                                                                                        <CategoryAxis side="BOTTOM" fx:id="xAxis_scoreDev" />
                                                                                       </xAxis>
                                                                                       <yAxis>
-                                                                                        <NumberAxis side="LEFT" />
+                                                                                        <NumberAxis fx:id="yAxis_scoreDev" side="LEFT" />
                                                                                       </yAxis>
                                                                                     </LineChart>
                                                                                     <VBox prefHeight="249.0" prefWidth="149.0">

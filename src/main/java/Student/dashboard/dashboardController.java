@@ -96,6 +96,11 @@ public class dashboardController implements Initializable {
     public Label avg;
     public VBox leftWrapper;
     public HBox searhbar_container;
+    public ScrollPane interest_cat;
+    public VBox interestC;
+    public LineChart score_development;
+    public CategoryAxis xAxis_scoreDev;
+    public NumberAxis yAxis_scoreDev;
 
     @FXML
     private StackedBarChart<String, Number> courseProgressionChart;
@@ -120,15 +125,11 @@ public class dashboardController implements Initializable {
         method_home.loadAndSetImage(userpfp, "/img/Picture/bg.jpg");
         method_home.loadAndSetImage(trophy,"/img/icon/trophy-star.png" );
         method_home.loadAndSetImage(category_pic,"/img/icon/code.png" );
-        method_home.loadAndSetImage(category_pic1,"/img/icon/partners.png");
-        method_home.loadAndSetImage(inboxP,"/img/Profile/doctor.png");
-        method_home.loadAndSetImage(inboxP2,"/img/Profile/teacher.png");
 
         //Hover effect
         method_home.hoverEffect(cat1);
-        method_home.hoverEffect(cat2);
         method_home.hoverEffect(user_profile);
-        method_home.hoverEffect(quickInbox);
+        method_home.hoverEffect(interestC);
         method_home.hoverEffect(quizBox);
         method_home.hoverEffect(roadmapProgression);
         method_home.hoverEffect(courseProgression);
@@ -138,7 +139,6 @@ public class dashboardController implements Initializable {
         method_home.hoverEffect(btn_continue);
         method_home.hoverEffect(btn_otherCourse);
 
-        method_home.applyHoverEffectToInside(quickInbox);
 
 
         //Adjust size
@@ -148,21 +148,20 @@ public class dashboardController implements Initializable {
         mainScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         mainScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        closePopupAuto();
+        //closePopupAuto();
 
-        applyHoverEffectToInside(popup);
-        applyHoverEffectToInside(popup1);
+
 
         us_st.setViewOrder(-1);
 
         categorybar.setProgress(Double.parseDouble(progressCategory.getText().replace("% completed", "").trim()) / 100);
-        categorybar1.setProgress(Double.parseDouble(progressCategory1.getText().replace("% completed", "").trim()) / 100);
         roadmap_progress.setProgress(Double.parseDouble(roadmap_value.getText().replace("%", "").trim()) / 100);
         roadmap_progress1.setProgress(Double.parseDouble(roadmap_value1.getText().replace("%", "").trim()) / 100);
 
         //Call chart
         courseProgressionChart();
         scoreChart();
+        scoreDevelopmentChart();
 
         displayNavbar();
         displaySearchBar();
@@ -358,5 +357,37 @@ public class dashboardController implements Initializable {
         });
 
     }
+
+
+
+    public void scoreDevelopmentChart() {
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+
+        series.getData().add(new XYChart.Data<>("Quiz1", 100));
+        series.getData().add(new XYChart.Data<>("Quiz2", 300));
+        series.getData().add(new XYChart.Data<>("Quiz3", 200));
+        series.getData().add(new XYChart.Data<>("Quiz4", 500));
+        series.getData().add(new XYChart.Data<>("Quiz5", 480));
+
+        score_development.getData().add(series);
+        score_development.setLegendVisible(false);
+
+        Platform.runLater(() -> {
+            Node line = series.getNode().lookup(".chart-series-line");
+            if (line != null) {
+                line.setStyle("-fx-stroke: #8100cc; -fx-stroke-width: 2px;");
+            }
+
+            for (XYChart.Data<String, Number> data : series.getData()) {
+                Node node = data.getNode();
+                if (node != null) {
+                    node.setStyle("-fx-background-color: transparent; -fx-shape: none;");
+                }
+            }
+        });
+    }
+
+
+
 
 }

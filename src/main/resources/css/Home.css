@@ -80,3 +80,14 @@
 .navT{
     -fx-background-color: white;
 }
+
+.scroll-panej > .viewport {
+   -fx-background-color: transparent;
+}
+
+.scroll-panej{
+   -fx-background-color: transparent;
+}
+
+
+
