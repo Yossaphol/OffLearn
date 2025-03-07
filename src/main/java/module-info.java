@@ -74,4 +74,7 @@ module com.example.offlearn {
     exports Teacher.navigator to javafx.fxml;
     opens Teacher.navigator;
 
+    exports Student.leaderboard to javafx.fxml;
+    opens Student.leaderboard;
+
 }

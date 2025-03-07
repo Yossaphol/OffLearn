@@ -1,14 +1,199 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fxml.Leaderboard"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<HBox fx:id="bg" fillHeight="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2093.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.leaderboard.leaderboardController">
+   <children>
+      <VBox fx:id="leftWrapper" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="300.0" prefHeight="1024.0" prefWidth="293.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;" />
+      <ScrollPane fx:id="mainScrollPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="2103.0" prefWidth="1140.0" stylesheets="@../../../css/Home.css" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
+         <content>
+            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="2094.0" prefWidth="1118.0">
+               <children>
+                  <HBox fx:id="rootpage" prefHeight="2093.0" prefWidth="1440.0">
+                     <children>
+                        <VBox prefHeight="1950.0" prefWidth="1139.0" style="-fx-background-color: #FBFBFB;">
+                           <children>
+                              <Pane prefHeight="62.0" prefWidth="1139.0" />
+                              <HBox fx:id="searhbar_container" alignment="CENTER" prefHeight="65.0" prefWidth="1139.0" style="-fx-background-color: #FBFBFB;">
+                                 <VBox.margin>
+                                    <Insets bottom="50.0" />
+                                 </VBox.margin></HBox>
+                              <Label fx:id="welcomeText" text="Label" textFill="#8100cc">
+                                 <VBox.margin>
+                                    <Insets bottom="50.0" left="50.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="Noto Sans Thai Regular" size="18.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="BOTTOM_CENTER" prefHeight="498.0" prefWidth="1139.0">
+                                 <children>
+                                    <VBox maxHeight="400.0" prefHeight="400.0" prefWidth="273.0">
+                                       <children>
+                                          <VBox alignment="TOP_CENTER" prefHeight="314.0" prefWidth="273.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                                             <effect>
+                                                <DropShadow>
+                                                   <color>
+                                                      <Color red="0.7699999809265137" green="0.7699999809265137" blue="0.7699999809265137" opacity="0.25" />
+                                                   </color>
+                                                </DropShadow>
+                                             </effect>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" />
+                                             </VBox.margin>
+                                             <children>
+                                                <Circle fx:id="pic2" fill="DODGERBLUE" radius="73.0" stroke="BLACK" strokeType="INSIDE" />
+                                                <Label fx:id="name_nd" text="Second" textFill="#8100cc">
+                                                   <font>
+                                                      <Font name="System Bold" size="32.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="pts_nd" text="10030.4">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <padding>
+                                                <Insets top="10.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #0675DE;">
+                                             <children>
+                                                <Label text="2" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="Noto Sans Thai Bold" size="66.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="30.0" right="30.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="461.0" prefWidth="312.0">
+                                       <children>
+                                          <ImageView fitHeight="44.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../img/icon/trophy-star.png" />
+                                             </image>
+                                             <VBox.margin>
+                                                <Insets left="30.0" />
+                                             </VBox.margin>
+                                          </ImageView>
+                                          <VBox prefHeight="452.0" prefWidth="312.0">
+                                             <children>
+                                                <VBox alignment="TOP_CENTER" prefHeight="261.0" prefWidth="312.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                                                   <effect>
+                                                      <DropShadow>
+                                                         <color>
+                                                            <Color red="0.7699999809265137" green="0.7699999809265137" blue="0.7699999809265137" opacity="0.25" />
+                                                         </color>
+                                                      </DropShadow>
+                                                   </effect>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                   <children>
+                                                      <Circle fx:id="pic1" fill="DODGERBLUE" radius="73.0" stroke="BLACK" strokeType="INSIDE" />
+                                                      <Label fx:id="name_nd1" text="First" textFill="#8100cc">
+                                                         <font>
+                                                            <Font name="System Bold" size="32.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="pts_nd1" text="10030.4">
+                                                         <font>
+                                                            <Font name="System Bold" size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets top="10.0" />
+                                                   </padding>
+                                                </VBox>
+                                                <VBox alignment="CENTER" prefHeight="192.0" prefWidth="312.0" style="-fx-background-color: #8100cc;">
+                                                   <children>
+                                                      <Label text="1" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="Noto Sans Thai Bold" size="66.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox maxHeight="400.0" prefHeight="377.0" prefWidth="273.0">
+                                       <children>
+                                          <VBox alignment="TOP_CENTER" prefHeight="314.0" prefWidth="211.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                                             <effect>
+                                                <DropShadow>
+                                                   <color>
+                                                      <Color red="0.7699999809265137" green="0.7699999809265137" blue="0.7699999809265137" opacity="0.25" />
+                                                   </color>
+                                                </DropShadow>
+                                             </effect>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" />
+                                             </VBox.margin>
+                                             <children>
+                                                <Circle fx:id="pic3" fill="DODGERBLUE" radius="73.0" stroke="BLACK" strokeType="INSIDE" />
+                                                <Label fx:id="name_nd2" text="Third" textFill="#8100cc">
+                                                   <font>
+                                                      <Font name="System Bold" size="32.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="pts_nd2" text="10030.4">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <padding>
+                                                <Insets top="10.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #4A7500;">
+                                             <children>
+                                                <Label text="3" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="Noto Sans Thai Bold" size="66.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="30.0" right="30.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets left="50.0" right="50.0" />
+                                 </padding>
+                              </HBox>
+                              <VBox fx:id="leaderboardTable_container" prefHeight="613.0" prefWidth="1139.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </children>
+</HBox>
