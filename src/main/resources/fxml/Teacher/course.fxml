@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1419.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="1.0" layoutY="-5.0" prefHeight="1422.0" prefWidth="1444.0">
+         <children>
+            <Pane prefHeight="197.0" prefWidth="1444.0" />
+            <HBox prefHeight="74.0" prefWidth="1444.0">
+               <children>
+                  <HBox prefHeight="52.0" prefWidth="1444.0">
+                     <children>
+                        <Pane prefHeight="100.0" prefWidth="276.0" />
+                        <VBox prefHeight="100.0" prefWidth="224.0">
+                           <children>
+                              <Label text="Course management" textFill="#0675de">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label text="การจัดการคอร์ส" textFill="#a8a8a8">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <Pane prefHeight="95.0" prefWidth="1444.0" />
+            <HBox prefHeight="298.0" prefWidth="1444.0">
+               <children>
+                  <Pane prefHeight="215.0" prefWidth="238.0" />
+                  <HBox prefHeight="298.0" prefWidth="976.0">
+                     <children>
+                        <VBox prefHeight="298.0" prefWidth="478.0">
+                           <children>
+                              <Label text="ยอดการลงทะเบียน" textFill="#0675de">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefHeight="0.0" prefWidth="478.0" />
+                              <HBox alignment="CENTER_LEFT" prefHeight="105.0" prefWidth="478.0">
+                                 <children>
+                                    <Pane prefHeight="62.0" prefWidth="89.0" />
+                                    <Label prefHeight="88.0" prefWidth="267.0" text="ทั้งหมด 1,350 คนในเดือนนี้">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="47.0" prefWidth="478.0">
+                                 <children>
+                                    <Pane prefHeight="220.0" prefWidth="134.0" />
+                                    <VBox prefHeight="220.0" prefWidth="139.0">
+                                       <children>
+                                          <Pane prefHeight="200.0" prefWidth="139.0" />
+                                          <Pane prefHeight="117.0" prefWidth="139.0" />
+                                          <Label text="35%" textFill="#0675de">
+                                             <font>
+                                                <Font size="64.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="เพิ่มขึ้น">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <VBox alignment="CENTER" prefHeight="38.0" prefWidth="478.0">
+                                 <children>
+                                    <Label text="จาก 1,000 คน เดือนที่แล้ว">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="292.0" stroke="BLACK" strokeType="INSIDE" width="516.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <Pane prefHeight="200.0" prefWidth="200.0" />
+            <HBox prefHeight="73.0" prefWidth="1444.0">
+               <children>
+                  <Pane prefHeight="61.0" prefWidth="241.0" />
+                  <Label text="การจัดการคอร์ส" textFill="#a8a8a8">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox prefHeight="607.0" prefWidth="1444.0">
+               <children>
+                  <HBox prefHeight="32.0" prefWidth="1444.0">
+                     <children>
+                        <Pane prefHeight="32.0" prefWidth="272.0" />
+                        <Label text="คอร์ส(2)">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="32.0" prefWidth="457.0" />
+                        <Label text="หมวดหมู่">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="32.0" prefWidth="241.0" />
+                        <Label text="จำนวนผู้เรียน">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="97.0" prefWidth="1444.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="1444.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1446.0">
+                                 <children>
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="89.0" stroke="BLACK" strokeType="INSIDE" width="960.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Pane prefHeight="32.0" prefWidth="1444.0" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1446.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="89.0" stroke="BLACK" strokeType="INSIDE" width="960.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
