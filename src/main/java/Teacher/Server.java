@@ -1,4 +1,4 @@
-package Teacher.inbox;
+package Teacher;
 
 import Teacher.inbox.pChat.pChatServerController;
 import Database.*;

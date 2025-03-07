@@ -12,7 +12,7 @@ public class gChat extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(gChat.class.getResource("/fxml/Student/inbox/gChat.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(gChat.class.getResource("/fxml/Student/Teacher.inbox/gChat.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
 
         primaryStage.setTitle("Offlearn Client");

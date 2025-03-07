@@ -19,7 +19,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="bg" fillHeight="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.test.testPage.testPageController">
+<HBox fx:id="bg" fillHeight="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.test.testPageController">
    <children>
       <VBox fx:id="leftWrapper" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="300.0" prefHeight="1024.0" prefWidth="293.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;">
          <children>
