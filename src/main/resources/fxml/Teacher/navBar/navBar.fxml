@@ -14,11 +14,11 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="TOP_CENTER" maxWidth="1.7976931348623157E308" prefHeight="271.0" prefWidth="1440.0" style="-fx-background-color: #FBFBFB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.navigator.navbarController">
+<HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="271.0" prefWidth="1440.0" style="-fx-background-color: #FBFBFB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.navigator.navbarController">
    <children>
-      <VBox prefHeight="317.0" prefWidth="1440.0">
+      <VBox alignment="TOP_CENTER" prefHeight="317.0" prefWidth="1440.0">
          <children>
-            <HBox prefHeight="361.0" prefWidth="1553.0">
+            <HBox alignment="TOP_CENTER" prefHeight="361.0" prefWidth="1553.0">
                <children>
                   <HBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" prefHeight="72.0" prefWidth="205.0">
                      <children>
@@ -50,7 +50,7 @@
                         </HBox>
                      </children>
                   </HBox>
-                  <StackPane alignment="TOP_LEFT" prefHeight="72.0" prefWidth="774.0" style="-fx-border-radius: 27px;">
+                  <StackPane alignment="TOP_LEFT" prefHeight="261.0" prefWidth="751.0" style="-fx-border-radius: 27px;">
                      <children>
                         <TextField prefHeight="47.0" prefWidth="774.0" promptText="เริ่มต้นการเรียนรู้......" style="-fx-background-radius: 27; -fx-border-color: #C2C2C2; -fx-background-color: white; -fx-border-radius: 27;">
                            <font>
@@ -76,9 +76,9 @@
                         </ImageView>
                      </children>
                   </StackPane>
-                  <Button fx:id="nav" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                  <Button fx:id="nav" mnemonicParsing="false" onAction="#openPopup" style="-fx-background-color: transparent;">
                      <graphic>
-                        <ImageView fitHeight="36.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="nav_icon" fitHeight="36.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../img/icon/menu.png" />
                            </image>
@@ -87,6 +87,9 @@
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="allCoursebtn" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" style="-fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #0675DE, #033F78); -fx-background-radius: 10;" text="ถอนรายได้" textFill="WHITE">
                      <HBox.margin>
@@ -99,11 +102,11 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <HBox alignment="CENTER" prefHeight="68.0" prefWidth="174.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="261.0" prefWidth="203.0">
                      <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="60.0" prefWidth="173.0">
+                        <VBox alignment="TOP_CENTER" prefHeight="261.0" prefWidth="202.0">
                            <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="184.0">
+                              <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="324.0">
                                  <children>
                                     <Button fx:id="logout" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="45.0" prefWidth="147.0" style="-fx-background-color: transparent;" text="Logout" textFill="#f40000">
                                        <font>
@@ -122,149 +125,154 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </HBox>
+                              <VBox fx:id="navPopup" alignment="CENTER" maxHeight="316.0" maxWidth="300.0" prefHeight="183.0" prefWidth="267.0" style="-fx-background-color: white; -fx-background-radius: 20;" stylesheets="@../../../css/Home.css" visible="false">
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color red="0.7699999809265137" green="0.7699999809265137" blue="0.7699999809265137" opacity="0.25" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                                 <children>
+                                    <HBox fx:id="dashboard" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0" styleClass="navT">
+                                       <children>
+                                          <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../img/icon/dashboard.png" />
+                                             </image>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </ImageView>
+                                          <Label text="Dashboard" textFill="#0675de">
+                                             <font>
+                                                <Font name="Kodchasan Bold" size="20.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <padding>
+                                          <Insets left="25.0" />
+                                       </padding>
+                                    </HBox>
+                                    <HBox fx:id="course" alignment="BOTTOM_LEFT" prefHeight="19.0" prefWidth="280.0" styleClass="navT">
+                                       <children>
+                                          <ImageView fitHeight="29.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../img/icon/audio-book.png" />
+                                             </image>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </ImageView>
+                                          <Label text="Course">
+                                             <font>
+                                                <Font name="Kodchasan Bold" size="20.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <padding>
+                                          <Insets left="25.0" />
+                                       </padding>
+                                    </HBox>
+                                    <HBox fx:id="inbox" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0" styleClass="navT" stylesheets="@../../../css/Home.css">
+                                       <children>
+                                          <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../img/icon/inbox.png" />
+                                             </image>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </ImageView>
+                                          <Label text="Inbox">
+                                             <font>
+                                                <Font name="Kodchasan Bold" size="20.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <padding>
+                                          <Insets left="25.0" />
+                                       </padding>
+                                    </HBox>
+                                    <HBox fx:id="task" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0" styleClass="navT">
+                                       <children>
+                                          <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../img/icon/settings.png" />
+                                             </image>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </ImageView>
+                                          <Label text="Setting">
+                                             <font>
+                                                <Font name="Kodchasan Bold" size="20.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <padding>
+                                          <Insets left="25.0" />
+                                       </padding>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" top="25.0" />
+                                 </padding>
+                              </VBox>
                            </children>
                         </VBox>
                      </children>
                   </HBox>
                </children>
             </HBox>
-            <VBox alignment="TOP_RIGHT" prefHeight="616.0" prefWidth="1440.0">
-               <children>
-                  <VBox fx:id="navPopup" maxHeight="100.0" maxWidth="300.0" prefHeight="289.0" prefWidth="300.0" style="-fx-background-color: white; -fx-background-radius: 20;" visible="false">
-                     <effect>
-                        <DropShadow>
-                           <color>
-                              <Color red="0.7699999809265137" green="0.7699999809265137" blue="0.7699999809265137" opacity="0.25" />
-                           </color>
-                        </DropShadow>
-                     </effect>
-                     <children>
-                        <HBox fx:id="dashboard" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
-                           <children>
-                              <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../img/icon/dashboard.png" />
-                                 </image>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </ImageView>
-                              <Label text="Dashboard" textFill="#0675de">
-                                 <font>
-                                    <Font name="Kodchasan Bold" size="20.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="10.0" />
-                                 </HBox.margin>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Label>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </HBox>
-                        <HBox fx:id="course" alignment="BOTTOM_LEFT" prefHeight="19.0" prefWidth="280.0">
-                           <children>
-                              <ImageView fitHeight="29.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../img/icon/audio-book.png" />
-                                 </image>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </ImageView>
-                              <Label text="Course">
-                                 <font>
-                                    <Font name="Kodchasan Bold" size="20.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="5.0" />
-                                 </HBox.margin>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Label>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </HBox>
-                        <HBox fx:id="inbox" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
-                           <children>
-                              <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../img/icon/inbox.png" />
-                                 </image>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </ImageView>
-                              <Label text="Inbox">
-                                 <font>
-                                    <Font name="Kodchasan Bold" size="20.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="10.0" />
-                                 </HBox.margin>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Label>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </HBox>
-                        <HBox fx:id="task" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
-                           <children>
-                              <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../img/icon/settings.png" />
-                                 </image>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </ImageView>
-                              <Label text="Setting">
-                                 <font>
-                                    <Font name="Kodchasan Bold" size="20.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="10.0" />
-                                 </HBox.margin>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Label>
-                           </children>
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </HBox>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="20.0" right="20.0" top="25.0" />
-                     </padding>
-                  </VBox>
-               </children>
-               <padding>
-                  <Insets right="170.0" />
-               </padding>
-            </VBox>
          </children>
       </VBox>
    </children>

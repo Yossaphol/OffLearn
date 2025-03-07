@@ -16,7 +16,7 @@
                      <children>
                         <VBox prefHeight="2093.0" prefWidth="1452.0" style="-fx-background-color: #FBFBFB;">
                            <children>
-                              <Pane prefHeight="62.0" prefWidth="1139.0" />
+                              <Pane prefHeight="40.0" prefWidth="1440.0" />
                               <HBox fx:id="searhbar_container" alignment="CENTER" prefHeight="65.0" prefWidth="1139.0" style="-fx-background-color: #FBFBFB;" />
                            </children>
                         </VBox>
