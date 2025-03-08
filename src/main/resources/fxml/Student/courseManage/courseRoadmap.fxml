@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="54.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.courseManage.courseRoadmapController">
+   <children>
+      <VBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="213.0">
+         <children>
+            <Label text="Front-end developer">
+               <font>
+                  <Font name="Kodchasan Bold" size="16.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="19.0" prefWidth="213.0">
+               <children>
+                  <Label text="23" textFill="#8100cc">
+                     <font>
+                        <Font name="Kodchasan Regular" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text=" คอร์ส " />
+                  <Label text="19" textFill="#8100cc">
+                     <font>
+                        <Font name="Kodchasan Regular" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text=" ชั่วโมง" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <ImageView fitHeight="57.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../img/icon/right-purple.png" />
+         </image>
+      </ImageView>
+   </children>
+</HBox>

@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1055.0" prefWidth="1440.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.videoDetail.videoDetailController">
+   <children>
+      <ScrollPane fx:id="mainscrollpane" hbarPolicy="NEVER" prefHeight="1055.0" prefWidth="1440.0" style="-fx-background-color: white;" vbarPolicy="NEVER">
+         <content>
+            <VBox prefHeight="1057.0" prefWidth="1440.0" style="-fx-background-color: white;">
+               <children>
+                  <Pane prefHeight="32.0" prefWidth="1440.0" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox fx:id="teachernavbarcontainer" prefHeight="100.0" prefWidth="1447.0" />
+                     </children></HBox>
+                  <Pane layoutX="10.0" layoutY="10.0" prefHeight="32.0" prefWidth="1440.0" />
+                  <VBox prefHeight="892.0" prefWidth="1440.0" style="-fx-background-color: white;">
+                     <children>
+                        <HBox prefHeight="70.0" prefWidth="1440.0">
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0" />
+                              <Button fx:id="backbutton" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="ย้อนกลับ" textFill="#0675de">
+                                 <font>
+                                    <Font name="System Bold Italic" size="16.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="316.0" prefWidth="1440.0">
+                           <children>
+                              <HBox prefHeight="351.0" prefWidth="289.0" />
+                              <VBox prefHeight="316.0" prefWidth="908.0">
+                                 <children>
+                                    <VBox prefHeight="87.0" prefWidth="826.0">
+                                       <children>
+                                          <Label text="Video Detail" textFill="#0675de">
+                                             <font>
+                                                <Font name="System Bold" size="23.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets left="10.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label text="ข้อมูลวิดีโอ" textFill="#c3c3c3">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets left="10.0" top="5.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <HBox prefHeight="239.0" prefWidth="890.0" style="-fx-background-radius: 30; -fx-background-color: white; -fx-border-radius: 30;">
+                                       <children>
+                                          <VBox prefHeight="234.0" prefWidth="862.0">
+                                             <children>
+                                                <VBox prefHeight="21.0" prefWidth="826.0" />
+                                                <VBox prefHeight="202.0" prefWidth="826.0">
+                                                   <children>
+                                                      <HBox prefHeight="202.0" prefWidth="846.0">
+                                                         <children>
+                                                            <HBox prefHeight="202.0" prefWidth="21.0" />
+                                                            <HBox prefHeight="202.0" prefWidth="704.0">
+                                                               <children>
+                                                                  <HBox alignment="CENTER" prefHeight="192.0" prefWidth="257.0" style="-fx-background-radius: 25; -fx-border-radius: 25;" HBox.hgrow="ALWAYS">
+                                                                     <HBox.margin>
+                                                                        <Insets right="15.0" top="10.0" />
+                                                                     </HBox.margin>
+                                                                     <children>
+                                                                        <ImageView fx:id="videothumbnail" fitHeight="175.0" fitWidth="419.0" pickOnBounds="true" preserveRatio="true">
+                                                                           <image>
+                                                                              <Image url="@../../../img/icon/chronometer.png" />
+                                                                           </image>
+                                                                        </ImageView>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <VBox prefHeight="202.0" prefWidth="512.0">
+                                                                     <children>
+                                                                        <Label fx:id="subjectname" prefHeight="17.0" prefWidth="462.0" text="Subject name" textFill="#0675de">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="24.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="10.0" />
+                                                                           </VBox.margin>
+                                                                        </Label>
+                                                                        <Label text="คำอธิบาย" textFill="#0675de">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="viddescription" alignment="TOP_LEFT" prefHeight="51.0" prefWidth="466.0" text="placeholder description" wrapText="true">
+                                                                           <font>
+                                                                              <Font size="15.0" />
+                                                                           </font>
+                                                                           <VBox.margin>
+                                                                              <Insets bottom="5.0" top="5.0" />
+                                                                           </VBox.margin>
+                                                                        </Label>
+                                                                        <Label text="แนบไฟล์" textFill="#0675de">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <VBox fx:id="attachmentcontainer" prefHeight="43.0" prefWidth="501.0" />
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </HBox>
+                                                            <HBox prefHeight="79.0" prefWidth="51.0">
+                                                               <children>
+                                                                  <Button fx:id="toedit" mnemonicParsing="false" prefHeight="33.0" prefWidth="32.0" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-radius: 10; -fx-cursor: hand;" textFill="TRANSPARENT">
+                                                                     <graphic>
+                                                                        <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                                                           <image>
+                                                                              <Image url="@../../../img/icon/edit.png" />
+                                                                           </image>
+                                                                        </ImageView>
+                                                                     </graphic>
+                                                                  </Button>
+                                                               </children>
+                                                               <HBox.margin>
+                                                                  <Insets left="80.0" />
+                                                               </HBox.margin>
+                                                            </HBox>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <effect>
+                                          <DropShadow height="15.0" offsetY="5.0" radius="8.5">
+                                             <color>
+                                                <Color red="0.8157894611358643" green="0.8157894611358643" blue="0.8157894611358643" />
+                                             </color>
+                                          </DropShadow>
+                                       </effect>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <VBox prefHeight="44.0" prefWidth="1440.0" />
+                        <HBox prefHeight="70.0" prefWidth="1440.0">
+                           <children>
+                              <HBox prefHeight="70.0" prefWidth="321.0" />
+                              <HBox prefHeight="55.0" prefWidth="246.0">
+                                 <children>
+                                    <Label prefHeight="55.0" prefWidth="94.0" text="ความยาว :">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="videoduration" prefHeight="55.0" prefWidth="85.0" text="videotime">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="55.0" prefWidth="219.0">
+                                 <children>
+                                    <Label prefHeight="55.0" prefWidth="139.0" text="อัพโหลดเมื่อ :">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="dateadded" prefHeight="54.0" prefWidth="140.0" text="dateadded">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="322.0" prefWidth="1440.0">
+                           <children>
+                              <HBox prefHeight="377.0" prefWidth="277.0" />
+                              <HBox prefHeight="322.0" prefWidth="512.0" style="-fx-background-radius: 15; -fx-background-color: white; -fx-border-radius: 15;">
+                                 <children>
+                                    <VBox prefHeight="322.0" prefWidth="521.0">
+                                       <children>
+                                          <VBox prefHeight="21.0" prefWidth="826.0" />
+                                          <VBox prefHeight="290.0" prefWidth="530.0">
+                                             <children>
+                                                <HBox prefHeight="284.0" prefWidth="470.0">
+                                                   <children>
+                                                      <HBox prefHeight="253.0" prefWidth="31.0" />
+                                                      <VBox prefHeight="284.0" prefWidth="498.0">
+                                                         <children>
+                                                            <Label prefHeight="17.0" prefWidth="462.0" text="การมีส่วนร่วม" textFill="#0675de">
+                                                               <font>
+                                                                  <Font name="System Bold" size="24.0" />
+                                                               </font>
+                                                               <VBox.margin>
+                                                                  <Insets bottom="25.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                            <HBox prefHeight="23.0" prefWidth="494.0">
+                                                               <children>
+                                                                  <Label prefHeight="49.0" prefWidth="161.0" text="การเข้าชม">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="18.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <HBox prefHeight="27.0" prefWidth="84.0" />
+                                                                  <Label prefHeight="27.0" prefWidth="221.0" text="เปอร์เซนต์ความคืบหน้าเฉลี่ย">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="18.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                               </children>
+                                                            </HBox>
+                                                            <HBox prefHeight="83.0" prefWidth="494.0">
+                                                               <children>
+                                                                  <HBox prefHeight="100.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <Label fx:id="viewcount" alignment="CENTER" prefHeight="76.0" text="ViewCount">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="48.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label alignment="BOTTOM_CENTER" prefHeight="61.0" prefWidth="32.0" text="ครั้ง">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="16.0" />
+                                                                           </font>
+                                                                           <HBox.margin>
+                                                                              <Insets left="5.0" />
+                                                                           </HBox.margin>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox prefHeight="77.0" prefWidth="44.0" />
+                                                                  <HBox prefHeight="100.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <Label fx:id="percentage" alignment="CENTER" prefHeight="81.0" text="Percentage">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="48.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                               </children>
+                                                            </HBox>
+                                                            <HBox prefHeight="23.0" prefWidth="494.0">
+                                                               <children>
+                                                                  <Label prefHeight="49.0" prefWidth="161.0" text="ผู้เข้าชม">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="18.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                               </children>
+                                                            </HBox>
+                                                            <HBox prefHeight="100.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <HBox prefHeight="100.0" prefWidth="200.0">
+                                                                     <children>
+                                                                        <Label fx:id="usercount" alignment="CENTER" prefHeight="62.0" text="UserCount">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="48.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label alignment="BOTTOM_CENTER" prefHeight="62.0" prefWidth="33.0" text="คน">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="16.0" />
+                                                                           </font>
+                                                                           <HBox.margin>
+                                                                              <Insets left="5.0" />
+                                                                           </HBox.margin>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox prefHeight="94.0" prefWidth="46.0" />
+                                                                  <VBox prefHeight="94.0" prefWidth="238.0">
+                                                                     <children>
+                                                                        <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="238.0">
+                                                                           <children>
+                                                                              <Button fx:id="btnLike" alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: transparent;" textFill="TRANSPARENT">
+                                                                                 <graphic>
+                                                                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                                                                       <image>
+                                                                                          <Image url="@../../../img/icon/like.png" />
+                                                                                       </image>
+                                                                                    </ImageView>
+                                                                                 </graphic>
+                                                                              </Button>
+                                                                              <Label fx:id="countLike" alignment="BOTTOM_LEFT" prefHeight="34.0" prefWidth="53.0" text="likeCount">
+                                                                                 <font>
+                                                                                    <Font name="System Bold" size="16.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                              <Button fx:id="btnDislike" alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="41.0" style="-fx-background-color: transparent;">
+                                                                                 <graphic>
+                                                                                    <ImageView fitHeight="56.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                                                                       <image>
+                                                                                          <Image url="@../../../img/icon/dislike.png" />
+                                                                                       </image>
+                                                                                    </ImageView>
+                                                                                 </graphic>
+                                                                                 <HBox.margin>
+                                                                                    <Insets left="10.0" />
+                                                                                 </HBox.margin>
+                                                                              </Button>
+                                                                              <Label fx:id="countDislike" alignment="BOTTOM_LEFT" prefHeight="33.0" prefWidth="88.0" text="dislikeCount">
+                                                                                 <font>
+                                                                                    <Font name="System Bold" size="16.0" />
+                                                                                 </font>
+                                                                              </Label>
+                                                                           </children>
+                                                                        </HBox>
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <effect>
+                                    <DropShadow height="15.0" offsetY="5.0" radius="8.5">
+                                       <color>
+                                          <Color red="0.8157894611358643" green="0.8157894611358643" blue="0.8157894611358643" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </HBox>
+                              <HBox prefHeight="322.0" prefWidth="15.0" />
+                              <HBox prefHeight="322.0" prefWidth="386.0" style="-fx-background-radius: 15; -fx-background-color: white; -fx-border-radius: 15;">
+                                 <children>
+                                    <VBox alignment="CENTER" prefHeight="322.0" prefWidth="521.0">
+                                       <children>
+                                          <VBox prefHeight="19.0" prefWidth="360.0" />
+                                          <VBox alignment="CENTER" prefHeight="306.0" prefWidth="360.0">
+                                             <children>
+                                                <HBox alignment="CENTER" prefHeight="314.0" prefWidth="360.0">
+                                                   <children>
+                                                      <HBox prefHeight="253.0" prefWidth="31.0" />
+                                                      <VBox alignment="CENTER" prefHeight="284.0" prefWidth="403.0">
+                                                         <children>
+                                                            <HBox prefHeight="23.0" prefWidth="494.0">
+                                                               <children>
+                                                                  <Label prefHeight="35.0" prefWidth="131.0" text="ความคิดเห็น" textFill="#0675de">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="24.0" />
+                                                                     </font>
+                                                                     <HBox.margin>
+                                                                        <Insets left="15.0" />
+                                                                     </HBox.margin>
+                                                                  </Label>
+                                                                  <HBox alignment="CENTER_RIGHT" prefHeight="35.0">
+                                                                     <children>
+                                                                        <Label alignment="CENTER" prefHeight="46.0" prefWidth="12.0" text="(" textFill="#0675de">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="24.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="CENTER" prefHeight="35.0">
+                                                                     <children>
+                                                                        <Label fx:id="commentcount" contentDisplay="CENTER" prefHeight="35.0" text="commentcount" textFill="#0675de">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="24.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="15.0">
+                                                                     <children>
+                                                                        <Label text=")" textFill="#0675de">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="24.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                               </children>
+                                                            </HBox>
+                                                            <ScrollPane prefHeight="256.0" prefWidth="374.0">
+                                                               <content>
+                                                                  <VBox fx:id="commentcontainer" alignment="CENTER" prefHeight="246.0" prefWidth="357.0">
+                                                                     <children>
+                                                                        <VBox fx:id="nocommentcontainer" alignment="CENTER" prefHeight="47.0" prefWidth="353.0" />
+                                                                     </children>
+                                                                  </VBox>
+                                                               </content>
+                                                               <VBox.margin>
+                                                                  <Insets right="5.0" />
+                                                               </VBox.margin>
+                                                            </ScrollPane>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <effect>
+                                    <DropShadow height="15.0" offsetY="5.0" radius="8.5">
+                                       <color>
+                                          <Color red="0.8157894611358643" green="0.8157894611358643" blue="0.8157894611358643" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </HBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </children>
+</HBox>

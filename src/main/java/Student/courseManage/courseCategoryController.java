@@ -1,15 +1,11 @@
-package Teacher.LoginAndSignup;
+package Student.courseManage;
 
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class loginController implements Initializable {
-
+public class courseCategoryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
