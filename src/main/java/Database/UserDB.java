@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class UserDB extends ConnectDB{
 
     public void testConnect(){
-        String query = "SELECT StudentID, Fullname FROM studentdb.user";
+        String query = "SELECT User_ID, Fullname FROM studentdb.user";
 
         try (Connection conn = this.connectToDB();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -16,7 +16,7 @@ public class UserDB extends ConnectDB{
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                int studentId = rs.getInt("StudentID");
+                int studentId = rs.getInt("User_ID");
                 String fullName = rs.getString("Fullname");
 
                 System.out.println("ID: " + studentId + ", Name: " + fullName);
