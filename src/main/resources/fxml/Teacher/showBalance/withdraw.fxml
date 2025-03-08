@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox prefHeight="135.0" prefWidth="1440.0" />
+      <HBox prefHeight="910.0" prefWidth="1440.0">
+         <children>
+            <VBox prefHeight="900.0" prefWidth="982.0">
+               <HBox.margin>
+                  <Insets bottom="80.0" left="120.0" top="80.0" />
+               </HBox.margin>
+               <children>
+                  <Label text="การถอนรายได้" textFill="#0675de">
+                     <font>
+                        <Font name="Noto Sans Thai Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="41.0" prefWidth="924.0" />
+                  <HBox prefHeight="643.0" prefWidth="944.0">
+                     <children>
+                        <Pane prefHeight="643.0" prefWidth="91.0" />
+                        <VBox prefHeight="643.0" prefWidth="853.0">
+                           <children>
+                              <HBox prefHeight="102.0" prefWidth="853.0">
+                                 <children>
+                                    <HBox alignment="BOTTOM_LEFT" prefHeight="102.0" prefWidth="648.0">
+                                       <children>
+                                          <Label text="20,0000.00">
+                                             <font>
+                                                <Font name="Kodchasan Bold" size="64.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets right="16.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label text="บาท">
+                                             <font>
+                                                <Font name="Noto Sans Thai Bold" size="24.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="BOTTOM_LEFT" prefHeight="110.0" prefWidth="853.0">
+                                 <children>
+                                    <VBox alignment="BOTTOM_LEFT" prefHeight="73.0" prefWidth="282.0">
+                                       <children>
+                                          <Label text="บัญชี">
+                                             <font>
+                                                <Font name="Noto Sans Thai Bold" size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="111-9600-11559-9" textFill="#0675de">
+                                             <font>
+                                                <Font name="Kodchasan Bold" size="24.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="BOTTOM_LEFT" prefHeight="73.0" prefWidth="328.0">
+                                       <children>
+                                          <Label text="ชื่อบัญชี">
+                                             <font>
+                                                <Font name="Noto Sans Thai Bold" size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Wirayabovorn Boonpriam" textFill="#0675de">
+                                             <font>
+                                                <Font name="Kodchasan Bold" size="24.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../img/icon/edit.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="367.0">
+                                       <children>
+                                          <Label text="ธนาคาร">
+                                             <font>
+                                                <Font name="Noto Sans Thai Bold" size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="กสิกรไทย" textFill="#0675de">
+                                             <font>
+                                                <Font name="Kodchasan Bold" size="24.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Pane prefHeight="49.0" prefWidth="853.0" />
+                              <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="162.0" style="-fx-background-color: #0675DE; -fx-background-radius: 8;" text="ถอนเงิน" textFill="WHITE">
+                                 <font>
+                                    <Font name="Noto Sans Thai Bold" size="20.0" />
+                                 </font>
+                              </Button>
+                              <Label text="*โปรดตรวจสอบความถูกต้องของบันชีรับเงิน" textFill="#868686">
+                                 <font>
+                                    <Font name="Noto Sans Thai Regular" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Pane prefHeight="900.0" prefWidth="455.0" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
