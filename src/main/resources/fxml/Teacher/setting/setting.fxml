@@ -13,7 +13,7 @@
 <AnchorPane prefHeight="1000.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.setting.settingController">
    <children>
       <HBox fx:id="navBar" prefHeight="271.0" prefWidth="1440.0" />
-      <VBox fx:id="setting_container" layoutX="-14.0" layoutY="271.0" prefHeight="1518.0" prefWidth="1259.0" style="-fx-background-color: white;">
+      <VBox fx:id="setting_container" layoutX="90.0" layoutY="271.0" prefHeight="1518.0" prefWidth="1259.0" style="-fx-background-color: white;">
          <children>
             <Label fx:id="setting_header" text="การตั้งค่า" textFill="#a8a8a8">
                <font>

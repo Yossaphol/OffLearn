@@ -16,7 +16,7 @@ public class setting extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(myroadmap.class.getResource("/fxml/Student/courseManage/myroadmap.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(setting.class.getResource("/fxml/Teacher/setting/setting.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         primaryStage.setTitle("Offlearn");
         primaryStage.setMaximized(true);

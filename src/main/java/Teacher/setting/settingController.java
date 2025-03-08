@@ -64,7 +64,7 @@ public class settingController implements Initializable {
     private void displayNavbar(){
         try {
             FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/navBar/navBar.fxml"));
-            VBox navContent = calendarLoader.load();
+            HBox navContent = calendarLoader.load();
             navBar.getChildren().setAll(navContent);
         } catch (IOException e) {
             e.printStackTrace();
