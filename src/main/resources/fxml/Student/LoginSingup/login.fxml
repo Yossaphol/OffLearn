@@ -139,7 +139,7 @@
                </effect>
             </VBox>
             <Pane prefHeight="15.0" prefWidth="631.0" />
-            <Button mnemonicParsing="false" style="-fx-background-color: none; -fx-underline: true;" text="Login as a Teacher">
+            <Button mnemonicParsing="false" onAction="#switchtoTeacherLogin" style="-fx-background-color: none; -fx-underline: true;" text="Login as a Teacher">
                <font>
                   <Font name="Kodchasan Regular" size="16.0" />
                </font>
