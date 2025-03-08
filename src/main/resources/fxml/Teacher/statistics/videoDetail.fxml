@@ -225,12 +225,12 @@
                                                                <children>
                                                                   <HBox prefHeight="100.0" prefWidth="200.0">
                                                                      <children>
-                                                                        <Label fx:id="viewcount" alignment="TOP_LEFT" prefHeight="76.0" text="ViewCount">
+                                                                        <Label fx:id="viewcount" alignment="CENTER" prefHeight="76.0" text="ViewCount">
                                                                            <font>
-                                                                              <Font name="System Bold" size="32.0" />
+                                                                              <Font name="System Bold" size="48.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <Label prefHeight="57.0" prefWidth="33.0" text="ครั้ง">
+                                                                        <Label alignment="BOTTOM_CENTER" prefHeight="61.0" prefWidth="32.0" text="ครั้ง">
                                                                            <font>
                                                                               <Font name="System Bold" size="16.0" />
                                                                            </font>
@@ -243,9 +243,9 @@
                                                                   <HBox prefHeight="77.0" prefWidth="44.0" />
                                                                   <HBox prefHeight="100.0" prefWidth="200.0">
                                                                      <children>
-                                                                        <Label fx:id="percentage" alignment="TOP_LEFT" prefHeight="81.0" text="Percentage">
+                                                                        <Label fx:id="percentage" alignment="CENTER" prefHeight="81.0" text="Percentage">
                                                                            <font>
-                                                                              <Font name="System Bold" size="32.0" />
+                                                                              <Font name="System Bold" size="48.0" />
                                                                            </font>
                                                                         </Label>
                                                                      </children>
@@ -265,12 +265,12 @@
                                                                <children>
                                                                   <HBox prefHeight="100.0" prefWidth="200.0">
                                                                      <children>
-                                                                        <Label fx:id="usercount" alignment="TOP_LEFT" prefHeight="83.0" text="UserCount">
+                                                                        <Label fx:id="usercount" alignment="CENTER" prefHeight="62.0" text="UserCount">
                                                                            <font>
-                                                                              <Font name="System Bold" size="32.0" />
+                                                                              <Font name="System Bold" size="48.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <Label prefHeight="62.0" prefWidth="33.0" text="คน">
+                                                                        <Label alignment="BOTTOM_CENTER" prefHeight="62.0" prefWidth="33.0" text="คน">
                                                                            <font>
                                                                               <Font name="System Bold" size="16.0" />
                                                                            </font>

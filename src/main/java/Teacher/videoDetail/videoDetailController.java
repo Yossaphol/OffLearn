@@ -84,7 +84,9 @@ public class videoDetailController implements Initializable {
         dateadded.setText("01/01/2568");
         percentage.setText("64%");
         viewcount.setText(CommaFormat(viewCountNum));
+        FontScale(viewcount);
         usercount.setText(CommaFormat(userCountNum));
+        FontScale(usercount);
         countLike.setText(CommaFormat(likeCountNum));
         countDislike.setText(CommaFormat(dislikeCountNum));
         commentcount.setText(CommaFormat(commentCountNum));
@@ -99,8 +101,22 @@ public class videoDetailController implements Initializable {
         }
     }
     private String CommaFormat(int number) {
-        // You can also do: return String.format("%,d", number);
         NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
         return nf.format(number);
+    }
+    private void FontScale(Label label) {
+        String text = label.getText();
+        int length = text.length();
+
+        //tweak as desire
+        if (length <= 4) {
+            label.setStyle("-fx-font-size: 48; -fx-font-weight: bold;");
+        } else if (length <= 6) {
+            label.setStyle("-fx-font-size: 44; -fx-font-weight: bold;");
+        } else if (length <= 8) {
+            label.setStyle("-fx-font-size: 32; -fx-font-weight: bold;");
+        } else {
+            label.setStyle("-fx-font-size: 28; -fx-font-weight: bold;");
+        }
     }
 }
