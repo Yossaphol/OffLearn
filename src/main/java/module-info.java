@@ -82,4 +82,7 @@ module com.example.offlearn {
     exports Student.leaderboard to javafx.fxml;
     opens Student.leaderboard;
 
+    exports Teacher.addQuiz to javafx.fxml;
+    opens Teacher.addQuiz;
+
 }
