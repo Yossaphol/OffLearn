@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="1240.0" prefWidth="821.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.Teacher.Quiz.addQuizController">
    <children>
       <VBox layoutX="34.0" layoutY="32.0" prefHeight="986.0" prefWidth="764.0">
@@ -198,11 +197,11 @@
                                           <Pane prefHeight="19.0" prefWidth="157.0" />
                                           <HBox prefHeight="43.0" prefWidth="157.0">
                                              <children>
-                                                <Button mnemonicParsing="false" text="Button" />
+                                                <Button mnemonicParsing="false" text="Answer 1" />
                                                 <Pane prefHeight="43.0" prefWidth="15.0" />
-                                                <Button mnemonicParsing="false" text="Button" />
+                                                <Button mnemonicParsing="false" text="Answer 2" />
                                                 <Pane prefHeight="43.0" prefWidth="15.0" />
-                                                <Button mnemonicParsing="false" text="Button" />
+                                                <Button mnemonicParsing="false" text="Answer 3" />
                                              </children>
                                           </HBox>
                                           <Label text="เพิ่มคำตอบ">
