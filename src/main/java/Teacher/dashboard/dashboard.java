@@ -14,7 +14,7 @@ public class dashboard extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Teacher.navigator.navbar.class.getResource("/fxml/Teacher/statistics/dashboard.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Teacher.dashboard.dashboard.class.getResource("/fxml/Teacher/statistics/dashboard.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         primaryStage.setTitle("Offlearn");
         primaryStage.setMaximized(true);

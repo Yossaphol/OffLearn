@@ -13,7 +13,7 @@ public class dashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        displayNavbar();
+        //displayNavbar();
     }
 
     private void displayNavbar(){
