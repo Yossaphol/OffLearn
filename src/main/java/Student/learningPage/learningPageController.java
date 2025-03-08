@@ -76,6 +76,8 @@ public class learningPageController implements Initializable {
         displayNavbar();
         displaySearchBar();
 
+
+
         subject_name.setText("Test Subject");
         ep.setText("Test Episode : 0");
         teacherName.setText("Puwanas Chaichitchaem");
