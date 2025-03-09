@@ -19,20 +19,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="bg" fillHeight="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2409.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.dashboard.dashboardController">
+<HBox fx:id="bg" fillHeight="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2579.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.dashboard.dashboardController">
    <children>
-      <ScrollPane fx:id="mainScrollPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="2441.0" prefWidth="1440.0" stylesheets="@../../../css/Home.css" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
+      <ScrollPane fx:id="mainScrollPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="2587.0" prefWidth="1440.0" stylesheets="@../../../css/Home.css" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
          <content>
-            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="2412.0" prefWidth="1392.0">
+            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="2582.0" prefWidth="1392.0">
                <children>
-                  <HBox fx:id="rootpage" prefHeight="2414.0" prefWidth="1440.0">
+                  <HBox fx:id="rootpage" prefHeight="2584.0" prefWidth="1440.0">
                      <children>
                         <VBox prefHeight="2269.0" prefWidth="1440.0" style="-fx-background-color: #FBFBFB;">
                            <children>
-                              <Pane prefHeight="107.0" prefWidth="1440.0" />
+                              <Pane prefHeight="57.0" prefWidth="1440.0" />
                               <HBox fx:id="searhbar_container" alignment="CENTER" prefHeight="65.0" prefWidth="1139.0" style="-fx-background-color: #FBFBFB;" />
                               <VBox prefHeight="2305.0" prefWidth="1440.0">
                                  <children>
@@ -46,125 +45,14 @@
                                           <Font name="Noto Sans Thai Regular" size="16.0" />
                                        </font>
                                     </Label>
-                                    <HBox prefHeight="311.0" prefWidth="1140.0">
-                                       <children>
-                                          <Rectangle fx:id="user_pfp" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="329.0" stroke="BLACK" strokeType="INSIDE" width="282.0">
-                                             <HBox.margin>
-                                                <Insets right="25.0" />
-                                             </HBox.margin>
-                                          </Rectangle>
-                                          <VBox alignment="CENTER_LEFT" prefHeight="329.0" prefWidth="681.0">
-                                             <children>
-                                                <Label text="Sirname  Lastname" textFill="#0675de">
-                                                   <font>
-                                                      <Font name="System Bold" size="41.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label text="Short Bio description" textFill="#a8a8a8">
-                                                   <font>
-                                                      <Font size="19.0" />
-                                                   </font>
-                                                </Label>
-                                                <HBox alignment="CENTER_LEFT" prefHeight="21.0" prefWidth="766.0">
-                                                   <children>
-                                                      <ImageView fx:id="oneStar" fitHeight="29.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@../../../img/icon/star%20(2).png" />
-                                                         </image>
-                                                      </ImageView>
-                                                      <ImageView fx:id="twoStar" fitHeight="29.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@../../../img/icon/star%20(2).png" />
-                                                         </image>
-                                                      </ImageView>
-                                                      <ImageView fx:id="threeStar" fitHeight="29.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@../../../img/icon/star%20(2).png" />
-                                                         </image>
-                                                      </ImageView>
-                                                      <ImageView fx:id="fourStar" fitHeight="29.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true" />
-                                                      <Label text="total review amount ex.12,300" textFill="#a8a8a8">
-                                                         <HBox.margin>
-                                                            <Insets left="20.0" />
-                                                         </HBox.margin>
-                                                         <font>
-                                                            <Font size="13.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                </HBox>
-                                                <HBox alignment="CENTER_LEFT" prefHeight="21.0" prefWidth="766.0">
-                                                   <children>
-                                                      <Button fx:id="like_btn" mnemonicParsing="false" style="-fx-background-color: transparent;" text="like amount">
-                                                         <graphic>
-                                                            <ImageView fitHeight="70.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                                               <image>
-                                                                  <Image url="@../../../img/icon/like.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                         </graphic>
-                                                         <cursor>
-                                                            <Cursor fx:constant="HAND" />
-                                                         </cursor>
-                                                      </Button>
-                                                      <Button fx:id="dislike_btn" mnemonicParsing="false" style="-fx-background-color: transparent;" text="dislike amount">
-                                                         <graphic>
-                                                            <ImageView fitHeight="70.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                                               <image>
-                                                                  <Image url="@../../../img/icon/dislike.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                         </graphic>
-                                                         <cursor>
-                                                            <Cursor fx:constant="HAND" />
-                                                         </cursor>
-                                                      </Button>
-                                                   </children>
-                                                   <VBox.margin>
-                                                      <Insets top="10.0" />
-                                                   </VBox.margin>
-                                                </HBox>
-                                                <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Course amount" textFill="#0675de">
-                                                   <VBox.margin>
-                                                      <Insets top="20.0" />
-                                                   </VBox.margin>
-                                                   <graphic>
-                                                      <ImageView fitHeight="28.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@../../../img/icon/video-lesson.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                   <font>
-                                                      <Font name="Noto Sans Thai Bold" size="15.0" />
-                                                   </font>
-                                                </Button>
-                                             </children>
-                                          </VBox>
-                                          <VBox prefHeight="200.0" prefWidth="100.0">
-                                             <children>
-                                                <Button fx:id="edit" mnemonicParsing="false" style="-fx-background-color: transparent;">
-                                                   <graphic>
-                                                      <ImageView fitHeight="24.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@../../../img/icon/edit.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
-                                                </Button>
-                                             </children>
-                                          </VBox>
-                                       </children>
+                                    <HBox fx:id="dashboard_profile" prefHeight="311.0" prefWidth="1140.0">
                                        <VBox.margin>
                                           <Insets top="25.0" />
                                        </VBox.margin>
                                     </HBox>
                                     <HBox prefHeight="52.0" prefWidth="1140.0">
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="163.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="คอร์ส" textFill="WHITE">
+                                          <Button fx:id="course_btn" mnemonicParsing="false" prefHeight="54.0" prefWidth="163.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="คอร์ส" textFill="WHITE">
                                              <font>
                                                 <Font name="Noto Sans Thai Bold" size="22.0" />
                                              </font>
@@ -182,7 +70,7 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
-                                          <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="163.0" style="-fx-background-color: #8100cc; -fx-background-radius: 10;" text="ถอนรายได้" textFill="WHITE">
+                                          <Button fx:id="withdraw_btn1" mnemonicParsing="false" prefHeight="54.0" prefWidth="163.0" style="-fx-background-color: #8100cc; -fx-background-radius: 10;" text="ถอนรายได้" textFill="WHITE">
                                              <font>
                                                 <Font name="Noto Sans Thai Bold" size="22.0" />
                                              </font>
@@ -260,9 +148,9 @@
                                                 </VBox>
                                              </children>
                                           </VBox>
-                                          <HBox prefHeight="217.0" prefWidth="486.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                                          <HBox fx:id="linechart_container" prefHeight="217.0" prefWidth="486.0" style="-fx-background-color: white; -fx-background-radius: 20;">
                                              <children>
-                                                <LineChart fx:id="lineChart" prefHeight="217.0" prefWidth="477.0">
+                                                <LineChart fx:id="lineChart_enroll" prefHeight="217.0" prefWidth="477.0">
                                                   <xAxis>
                                                     <CategoryAxis side="BOTTOM" />
                                                   </xAxis>
@@ -287,12 +175,12 @@
                                           </HBox>
                                        </children>
                                     </HBox>
-                                    <HBox alignment="TOP_CENTER" prefHeight="148.0" prefWidth="1140.0">
+                                    <HBox alignment="TOP_CENTER" prefHeight="261.0" prefWidth="1140.0">
                                        <VBox.margin>
                                           <Insets top="70.0" />
                                        </VBox.margin>
                                        <children>
-                                          <VBox prefHeight="196.0" prefWidth="378.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                                          <VBox fx:id="piechartContainer" prefHeight="261.0" prefWidth="490.0" style="-fx-background-color: white; -fx-background-radius: 20;">
                                              <effect>
                                                 <DropShadow>
                                                    <color>
@@ -306,9 +194,9 @@
                                                       <Font name="Noto Sans Thai Bold" size="16.0" />
                                                    </font>
                                                 </Label>
-                                                <HBox prefHeight="100.0" prefWidth="200.0">
+                                                <HBox prefHeight="205.0" prefWidth="386.0">
                                                    <children>
-                                                      <PieChart fx:id="pie_chart" prefHeight="127.0" prefWidth="180.0" />
+                                                      <PieChart fx:id="pie_chart_std" prefHeight="205.0" prefWidth="269.0" />
                                                       <VBox alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="143.0">
                                                          <children>
                                                             <Label fx:id="pass_rate" text="สอบผ่าน &lt;num&gt;%" textFill="#0675de">
@@ -336,7 +224,7 @@
                                                 <Insets right="60.0" />
                                              </HBox.margin>
                                           </VBox>
-                                          <VBox maxHeight="144.0" prefHeight="144.0" prefWidth="349.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                                          <VBox fx:id="lowScore_container" maxHeight="144.0" prefHeight="144.0" prefWidth="349.0" style="-fx-background-color: white; -fx-background-radius: 20;">
                                              <effect>
                                                 <DropShadow>
                                                    <color>
@@ -375,7 +263,7 @@
                                                 <Insets right="60.0" />
                                              </HBox.margin>
                                           </VBox>
-                                          <VBox maxHeight="144.0" prefHeight="144.0" prefWidth="349.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                                          <VBox fx:id="revenue_container" maxHeight="144.0" prefHeight="144.0" prefWidth="349.0" style="-fx-background-color: white; -fx-background-radius: 20;">
                                              <effect>
                                                 <DropShadow>
                                                    <color>
@@ -466,90 +354,13 @@
                                                 <Insets left="20.0" right="20.0" />
                                              </padding>
                                           </HBox>
-                                          <ScrollPane hbarPolicy="NEVER" prefHeight="323.0" prefWidth="1140.0" styleClass="scroll-panej" stylesheets="@../../../css/Home.css" vbarPolicy="ALWAYS">
+                                          <ScrollPane fx:id="courseTableContainer" hbarPolicy="NEVER" prefHeight="323.0" prefWidth="1140.0" styleClass="scroll-panej" stylesheets="@../../../css/Home.css" vbarPolicy="ALWAYS">
                                             <content>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="308.0" prefWidth="1102.0">
                                                    <children>
                                                       <VBox prefHeight="396.0" prefWidth="1105.0">
                                                          <children>
-                                                            <HBox alignment="CENTER_LEFT" prefHeight="95.0" prefWidth="1105.0" style="-fx-background-color: white; -fx-background-radius: 10;">
-                                                               <children>
-                                                                  <VBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="745.0">
-                                                                     <children>
-                                                                        <Label fx:id="course_name" prefHeight="29.0" prefWidth="768.0" text="Course_name" textFill="#0675de">
-                                                                           <font>
-                                                                              <Font name="Noto Sans Thai Bold" size="24.0" />
-                                                                           </font>
-                                                                        </Label>
-                                                                        <HBox alignment="CENTER_LEFT" prefHeight="21.0" prefWidth="766.0">
-                                                                           <children>
-                                                                              <Button fx:id="like_btn1" mnemonicParsing="false" style="-fx-background-color: transparent;" text="like amount">
-                                                                                 <graphic>
-                                                                                    <ImageView fitHeight="70.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                                                                       <image>
-                                                                                          <Image url="@../../../img/icon/like.png" />
-                                                                                       </image>
-                                                                                    </ImageView>
-                                                                                 </graphic>
-                                                                                 <cursor>
-                                                                                    <Cursor fx:constant="HAND" />
-                                                                                 </cursor>
-                                                                                 <font>
-                                                                                    <Font name="Noto Sans Thai Regular" size="13.0" />
-                                                                                 </font>
-                                                                                 <HBox.margin>
-                                                                                    <Insets right="20.0" />
-                                                                                 </HBox.margin>
-                                                                              </Button>
-                                                                              <Button fx:id="dislike_btn1" mnemonicParsing="false" style="-fx-background-color: transparent;" text="dislike amount">
-                                                                                 <graphic>
-                                                                                    <ImageView fitHeight="70.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                                                                       <image>
-                                                                                          <Image url="@../../../img/icon/dislike.png" />
-                                                                                       </image>
-                                                                                    </ImageView>
-                                                                                 </graphic>
-                                                                                 <cursor>
-                                                                                    <Cursor fx:constant="HAND" />
-                                                                                 </cursor>
-                                                                                 <font>
-                                                                                    <Font name="Noto Sans Thai Regular" size="13.0" />
-                                                                                 </font>
-                                                                                 <HBox.margin>
-                                                                                    <Insets right="20.0" />
-                                                                                 </HBox.margin>
-                                                                              </Button>
-                                                                              <Label fx:id="view_count" text="รับชม &lt;จำนวน&gt; ครั้ง">
-                                                                                 <font>
-                                                                                    <Font name="Noto Sans Thai Regular" size="13.0" />
-                                                                                 </font>
-                                                                                 <HBox.margin>
-                                                                                    <Insets right="20.0" />
-                                                                                 </HBox.margin>
-                                                                              </Label>
-                                                                              <Label fx:id="enroll_count" text="&lt;จำนวน&gt; enrolled">
-                                                                                 <font>
-                                                                                    <Font name="Noto Sans Thai Regular" size="13.0" />
-                                                                                 </font>
-                                                                              </Label>
-                                                                           </children>
-                                                                        </HBox>
-                                                                     </children>
-                                                                  </VBox>
-                                                                  <Label fx:id="category" prefHeight="29.0" prefWidth="215.0" text="Category" textFill="#0675de">
-                                                                     <font>
-                                                                        <Font name="Noto Sans Thai Bold" size="19.0" />
-                                                                     </font>
-                                                                     <HBox.margin>
-                                                                        <Insets right="10.0" />
-                                                                     </HBox.margin>
-                                                                  </Label>
-                                                                  <Label fx:id="revenue" prefHeight="29.0" prefWidth="203.0" text="revenue" textFill="#0675de">
-                                                                     <font>
-                                                                        <Font name="Noto Sans Thai Bold" size="19.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                               </children>
+                                                            <HBox fx:id="course_container_table" alignment="CENTER_LEFT" prefHeight="95.0" prefWidth="1105.0">
                                                                <effect>
                                                                   <DropShadow>
                                                                      <color>
@@ -570,7 +381,7 @@
                                                 </AnchorPane>
                                             </content>
                                           </ScrollPane>
-                                          <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="203.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="การจัดการคอร์ส" textFill="WHITE">
+                                          <Button fx:id="course_manageBtn" mnemonicParsing="false" prefHeight="53.0" prefWidth="203.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="การจัดการคอร์ส" textFill="WHITE">
                                              <font>
                                                 <Font name="Noto Sans Thai Bold" size="17.0" />
                                              </font>
@@ -607,7 +418,7 @@
                                                 <Insets bottom="10.0" />
                                              </VBox.margin>
                                           </HBox>
-                                          <VBox prefHeight="378.0" prefWidth="1081.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-color: #A8A8A8; -fx-border-radius: 20;">
+                                          <VBox fx:id="overview_revenue_container" prefHeight="378.0" prefWidth="1081.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-color: #A8A8A8; -fx-border-radius: 20;">
                                              <children>
                                                 <VBox prefHeight="76.0" prefWidth="1140.0">
                                                    <children>
@@ -629,12 +440,12 @@
                                                 </VBox>
                                                 <HBox prefHeight="273.0" prefWidth="1138.0">
                                                    <children>
-                                                      <BarChart prefHeight="273.0" prefWidth="1053.0">
+                                                      <BarChart fx:id="revenueChart" barGap="2.0" prefHeight="273.0" prefWidth="1053.0">
                                                         <xAxis>
-                                                          <CategoryAxis side="BOTTOM" />
+                                                          <CategoryAxis side="BOTTOM" fx:id="xAxis_revenue" />
                                                         </xAxis>
                                                         <yAxis>
-                                                          <NumberAxis side="LEFT" />
+                                                          <NumberAxis fx:id="yAxis_revenue" side="LEFT" />
                                                         </yAxis>
                                                       </BarChart>
                                                       <VBox alignment="CENTER_LEFT" prefHeight="273.0" prefWidth="626.0">
@@ -678,7 +489,7 @@
                                                 <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                                              </padding>
                                           </VBox>
-                                          <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="184.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="ถอนรายได้" textFill="WHITE">
+                                          <Button fx:id="withdrawBtn" mnemonicParsing="false" prefHeight="53.0" prefWidth="184.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="ถอนรายได้" textFill="WHITE">
                                              <font>
                                                 <Font name="Noto Sans Thai Bold" size="17.0" />
                                              </font>

@@ -1,5 +1,6 @@
 package Teacher.navigator;
 
+import Teacher.navigator.Navigator;
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
@@ -18,7 +19,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,11 +26,25 @@ public class navbarController implements Initializable {
     public HBox navPopup;
     public Button nav;
     public ImageView nav_icon;
+    public Button withdrawBtn;
+    public HBox dashboard;
+    public HBox course;
+    public HBox inbox;
+    public HBox setting;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-    closePopupAuto();
-    applyHoverEffectToInside(navPopup);
+
+
+        closePopupAuto();
+        applyHoverEffectToInside(navPopup);
+        hoverEffect(withdrawBtn);
+        route();
+
+
+
+
     }
 
     @FXML
@@ -146,5 +160,48 @@ public class navbarController implements Initializable {
         });
     }
 
+    public void hoverEffect(Button btn) {
+        ScaleTransition scaleUp = new ScaleTransition(Duration.millis(200), btn);
+        scaleUp.setFromX(1);
+        scaleUp.setFromY(1);
+        scaleUp.setToX(1.05);
+        scaleUp.setToY(1.05);
+        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(200), btn);
+        scaleDown.setFromX(1.05);
+        scaleDown.setFromY(1.05);
+        scaleDown.setToX(1);
+        scaleDown.setToY(1);
+
+        btn.setOnMouseEntered(mouseEvent -> {
+            scaleUp.play();
+        });
+        btn.setOnMouseExited(mouseEvent -> {
+            scaleDown.play();
+        });
+    }
+
+
+    public void route(){
+        Teacher.navigator.Navigator nav = new Navigator();
+
+        //Dashboard
+        dashboard.setOnMouseClicked(nav::dashboardRoute);
+
+        //Course
+        course.setOnMouseClicked(nav::courseRoute);
+
+
+        //Inbox
+        inbox.setOnMouseClicked(nav::inboxRoute);
+
+
+
+        //setting
+        setting.setOnMouseClicked(nav::settingRoute);
+
+    }
 
 }
+
+
+

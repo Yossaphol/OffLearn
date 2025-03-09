@@ -91,7 +91,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="allCoursebtn" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" style="-fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #0675DE, #033F78); -fx-background-radius: 10;" text="ถอนรายได้" textFill="WHITE">
+                  <Button fx:id="withdrawBtn" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" style="-fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #0675DE, #033F78); -fx-background-radius: 10;" text="ถอนรายได้" textFill="WHITE">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
@@ -229,7 +229,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </HBox>
-                  <HBox fx:id="task" alignment="CENTER" prefHeight="19.0" prefWidth="280.0" style="-fx-background-color: transparent;" styleClass="navT">
+                  <HBox fx:id="setting" alignment="CENTER" prefHeight="19.0" prefWidth="280.0" style="-fx-background-color: transparent;" styleClass="navT">
                      <children>
                         <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                            <image>

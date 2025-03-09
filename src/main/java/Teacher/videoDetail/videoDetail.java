@@ -13,7 +13,7 @@ public class videoDetail extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Student.myCourse.myCourse.class.getResource("/fxml/Teacher/statistics/videoDetail.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Student.myCourse.myCourse.class.getResource("/fxml/Teacher/somethingWithVideo/videoDetail.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1440, 720);
         primaryStage.setTitle("Offlearn");
         //primaryStage.setFullScreen(true);
