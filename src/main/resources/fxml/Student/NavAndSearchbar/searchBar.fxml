@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" prefHeight="65.0" prefWidth="1139.0" style="-fx-background-color: #FBFBFB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.navBarAndSearchbar.searchBarC">
+<HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="65.0" prefWidth="1139.0" style="-fx-background-color: #FBFBFB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.navBarAndSearchbar.searchBarC">
    <children>
       <StackPane alignment="CENTER_LEFT" prefHeight="95.0" prefWidth="630.0" style="-fx-border-radius: 27px;">
          <children>

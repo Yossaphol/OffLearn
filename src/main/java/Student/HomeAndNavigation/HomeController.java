@@ -128,30 +128,20 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         progressValue();
-        calendarDisplay();
         setupBarChart();
         setImgContainer();
         route();
 
-        hoverEffect(dashboard);
-        hoverEffect(course);
-        hoverEffect(inbox);
-        hoverEffect(task);
-        hoverEffect(roadmap);
-        hoverEffect(yourCoursebtn);
-        hoverEffect(allCoursebtn);
-        hoverEffect(setting);
-        hoverEffect(logout);
+
+
+
         hoverEffect(topLeaderboard);
         hoverEffect(smallStatistic);
         hoverEffect(btn_dashboard_atStatistics);
-        hoverEffect(smallUserProfile);
-        hoverEffect(calendarContainer);
         hoverEffect(cat1);
         hoverEffect(cat2);
         hoverEffect(learn_now);
         hoverEffect(cat3);
-        hoverEffect(home_nav);
 
         applyHoverEffectToInside(categoryPopup);
         applyHoverEffectToInside(popup);
@@ -162,11 +152,6 @@ public class HomeController implements Initializable {
         closePopupAuto();
         callSlider();
 
-        mainScrollPane.requestLayout();
-        mainScrollPane.prefWidthProperty().bind(rootpage.widthProperty());
-        mainScrollPane.prefHeightProperty().bind(rootpage.heightProperty());
-        mainScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        mainScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
 
     }
@@ -338,44 +323,18 @@ public class HomeController implements Initializable {
     public void route(){
         Navigator nav = new Navigator();
 
-        //Home
-        home.setOnMouseClicked(nav::homeRoute);
-        home_nav.setOnMouseClicked(nav::homeRoute);
+
 
         //Dashboard
-        dashboard.setOnMouseClicked(nav::dashboardRoute);
         btn_dashboard_atStatistics.setOnMouseClicked(nav::dashboardRoute);
-        profile_btn.setOnMouseClicked(nav::dashboardRoute);
-        pfp_btn.setOnMouseClicked(nav::dashboardRoute);
 
-        //Course
-        course.setOnMouseClicked(nav::courseRoute);
-        allCoursebtn.setOnMouseClicked(nav::courseRoute);
 
-        //My Course
-        yourCoursebtn.setOnMouseClicked(nav::myCourseRoute);
-        calendarContainer.setOnMouseClicked(nav::myCourseRoute);
 
-        //cart
-        cart.setOnMouseClicked(nav::cartRoute);
 
-        //Inbox
-        inbox.setOnMouseClicked(nav::inboxRoute);
-
-        //Task
-        task.setOnMouseClicked(nav::taskRoute);
-
-        //Roadmap
-        roadmap.setOnMouseClicked(nav::roadmapRoute);
 
         //Leaderboard
         topLeaderboard.setOnMouseClicked(nav::leaderboardRoute);
 
-        //setting
-        setting.setOnMouseClicked(nav::settingRoute);
-
-        //Logout
-        logout.setOnMouseClicked(nav::logoutRoute);
     }
 
     @FXML
@@ -490,7 +449,6 @@ public class HomeController implements Initializable {
         loadAndSetImage(imgContainer, "/img/Picture/bg.jpg");
         loadAndSetImage(teacherBanner, "/img/Picture/อาจารย์ แบงค์.jpg");
 
-        loadAndSetImage(pfp, "/img/Profile/doctor.png");
         loadAndSetImage(pfp_statistic, "/img/Profile/doctor.png");
         loadAndSetImage(teacher_pfp, "/img/Profile/man.png");
 
@@ -537,15 +495,7 @@ public class HomeController implements Initializable {
 
 
 
-    private void calendarDisplay(){
-        try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/HomePage/CustomCalendar.fxml"));
-            VBox calendarContent = calendarLoader.load();
-            calendarContainer.getChildren().setAll(calendarContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 
     private void setupBarChart() {
         List<XYChart.Data<String, Number>> chartData = new ArrayList<>();

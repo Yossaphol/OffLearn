@@ -1,15 +1,19 @@
 package Student.navBarAndSearchbar;
 
 import Student.HomeAndNavigation.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class navBarController implements Initializable {
@@ -24,6 +28,12 @@ public class navBarController implements Initializable {
     public Button yourCoursebtn;
     public VBox calendarContainer;
     public HBox task;
+    public Button roadmap_btn;
+    public Button task_btn;
+    public Button inbox_btn;
+    public Button course_btn;
+    public Button home_btn;
+    public Button dashboard_btn;
 
 
     @Override
@@ -47,13 +57,16 @@ public class navBarController implements Initializable {
 
         //Home
         home.setOnMouseClicked(nav::homeRoute);
+        home_btn.setOnMouseClicked(nav::homeRoute);
         logo.setOnMouseClicked(nav::homeRoute);
 
         //Dashboard
         dashboard.setOnMouseClicked(nav::dashboardRoute);
+        dashboard_btn.setOnMouseClicked(nav::dashboardRoute);
 
         //Course
         course.setOnMouseClicked(nav::courseRoute);
+        course_btn.setOnMouseClicked(nav::courseRoute);
 
         //My Course
         yourCoursebtn.setOnMouseClicked(nav::myCourseRoute);
@@ -62,12 +75,15 @@ public class navBarController implements Initializable {
 
         //Inbox
         inbox.setOnMouseClicked(nav::inboxRoute);
+        inbox_btn.setOnMouseClicked(nav::inboxRoute);
 
         //Task
         task.setOnMouseClicked(nav::taskRoute);
+        task_btn.setOnMouseClicked(nav::taskRoute);
 
         //Roadmap
         roadmap.setOnMouseClicked(nav::roadmapRoute);
+        roadmap_btn.setOnMouseClicked(nav::roadmapRoute);
 
     }
     private void calendarDisplay(){
@@ -78,6 +94,18 @@ public class navBarController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void changeFontColor(ActionEvent event) {
+        Button clickedBtn = (Button) event.getSource();
+
+        List<Button> buttons = Arrays.asList(home_btn, dashboard_btn, course_btn, inbox_btn, task_btn, roadmap_btn);
+
+        for (Button btn : buttons) {
+            btn.setTextFill(Color.BLACK);
+        }
+        clickedBtn.setTextFill(Color.web("#8100cc"));
     }
 
 

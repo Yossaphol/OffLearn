@@ -55,28 +55,27 @@
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
+               <padding>
+                  <Insets left="60.0" />
+               </padding>
             </Label>
             <HBox fx:id="dashboard" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
                <children>
-                  <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../img/icon/dashboard.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-                  <Label text="Dashboard" textFill="#8100cc">
+                  <Button fx:id="dashboard_btn" mnemonicParsing="false" onAction="#changeFontColor" style="-fx-background-color: transparent;" text="Dashboard">
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/icon/dashboard.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
                      <font>
                         <Font name="Kodchasan Bold" size="20.0" />
                      </font>
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Label>
+                  </Button>
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" />
@@ -84,28 +83,27 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <padding>
+                  <Insets left="60.0" />
+               </padding>
             </HBox>
-            <HBox fx:id="home" alignment="BOTTOM_LEFT" prefHeight="19.0" prefWidth="280.0">
+            <HBox fx:id="home" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
                <children>
-                  <ImageView fitHeight="29.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../img/icon/home.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-                  <Label text="Home">
+                  <Button fx:id="home_btn" mnemonicParsing="false" onAction="#changeFontColor" style="-fx-background-color: transparent;" text="Home">
                      <font>
                         <Font name="Kodchasan Bold" size="20.0" />
                      </font>
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Label>
+                     <graphic>
+                        <ImageView fitHeight="29.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/icon/home.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -113,28 +111,27 @@
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
+               <padding>
+                  <Insets left="60.0" />
+               </padding>
             </HBox>
-            <HBox fx:id="course" alignment="BOTTOM_LEFT" prefHeight="19.0" prefWidth="280.0">
+            <HBox fx:id="course" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
                <children>
-                  <ImageView fitHeight="29.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../img/icon/audio-book.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-                  <Label text="Course">
+                  <Button fx:id="course_btn" mnemonicParsing="false" onAction="#changeFontColor" style="-fx-background-color: transparent;" text="Course">
                      <font>
                         <Font name="Kodchasan Bold" size="20.0" />
                      </font>
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Label>
+                     <graphic>
+                        <ImageView fitHeight="29.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/icon/audio-book.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" />
@@ -142,28 +139,27 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <padding>
+                  <Insets left="60.0" />
+               </padding>
             </HBox>
             <HBox fx:id="inbox" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
                <children>
-                  <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../img/icon/inbox.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-                  <Label text="Inbox">
+                  <Button fx:id="inbox_btn" mnemonicParsing="false" onAction="#changeFontColor" style="-fx-background-color: transparent;" text="Inbox">
                      <font>
                         <Font name="Kodchasan Bold" size="20.0" />
                      </font>
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Label>
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/icon/inbox.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" />
@@ -171,28 +167,27 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <padding>
+                  <Insets left="60.0" />
+               </padding>
             </HBox>
             <HBox fx:id="task" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
                <children>
-                  <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../img/icon/task.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-                  <Label text="Task">
+                  <Button fx:id="task_btn" mnemonicParsing="false" onAction="#changeFontColor" style="-fx-background-color: transparent;" text="Task">
                      <font>
                         <Font name="Kodchasan Bold" size="20.0" />
                      </font>
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Label>
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/icon/task.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" />
@@ -200,28 +195,27 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <padding>
+                  <Insets left="60.0" />
+               </padding>
             </HBox>
             <HBox fx:id="roadmap" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
                <children>
-                  <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../img/icon/business-plan.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-                  <Label text="Roadmap">
+                  <Button fx:id="roadmap_btn" mnemonicParsing="false" onAction="#changeFontColor" style="-fx-background-color: transparent;" text="Roadmap">
                      <font>
                         <Font name="Kodchasan Bold" size="20.0" />
                      </font>
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Label>
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/icon/business-plan.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -229,11 +223,11 @@
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
+               <padding>
+                  <Insets left="60.0" />
+               </padding>
             </HBox>
          </children>
-         <padding>
-            <Insets left="60.0" />
-         </padding>
          <VBox.margin>
             <Insets bottom="10.0" />
          </VBox.margin>
