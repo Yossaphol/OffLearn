@@ -5,11 +5,13 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
 <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="118.0" prefWidth="1440.0" style="-fx-background-color: #FBFBFB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.navigator.navbarController">
@@ -129,7 +131,7 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox fx:id="navPopup" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox fx:id="navPopup" alignment="CENTER" maxWidth="900.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 20;" visible="false">
                <children>
                   <HBox fx:id="dashboard" alignment="CENTER" prefHeight="19.0" prefWidth="280.0" style="-fx-background-color: transparent;" styleClass="navT">
                      <children>
@@ -260,6 +262,16 @@
                      </HBox.margin>
                   </HBox>
                </children>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                     </color>
+                  </DropShadow>
+               </effect>
             </HBox>
          </children>
       </VBox>
