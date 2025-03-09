@@ -54,6 +54,9 @@ public class navbarController implements Initializable {
             case "nav":
                 _openPopup(navPopup);
                 break;
+            case "month_select":
+                _openPopup(navPopup);
+                break;
         }
     }
 
@@ -194,7 +197,7 @@ public class navbarController implements Initializable {
         //Inbox
         inbox.setOnMouseClicked(nav::inboxRoute);
 
-
+        withdrawBtn.setOnMouseClicked(nav::withdrawRoute);
 
         //setting
         setting.setOnMouseClicked(nav::settingRoute);

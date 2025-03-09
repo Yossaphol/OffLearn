@@ -40,14 +40,38 @@
                                           <Font name="Noto Sans Thai Bold" size="20.0" />
                                        </font>
                                     </Label>
-                                    <Label text="ภาพรวม" textFill="#a8a8a8">
-                                       <font>
-                                          <Font name="Noto Sans Thai Regular" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <HBox fx:id="dashboard_profile" prefHeight="311.0" prefWidth="1140.0">
+                                    <HBox prefHeight="30.0" prefWidth="1140.0">
+                                       <children>
+                                          <Label prefHeight="26.0" prefWidth="1002.0" text="ภาพรวม" textFill="#a8a8a8">
+                                             <font>
+                                                <Font name="Noto Sans Thai Regular" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Button fx:id="edit_profile" mnemonicParsing="false" onAction="#editProfile" style="-fx-background-color: transparent;">
+                                             <graphic>
+                                                <ImageView fitHeight="24.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../../img/icon/edit.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                          <Button fx:id="save_change" mnemonicParsing="false" onAction="#editProfile" prefHeight="33.0" prefWidth="82.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="บันทึก" textFill="WHITE">
+                                             <font>
+                                                <Font name="Noto Sans Thai Bold" size="14.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                    <HBox fx:id="dashboard_profile" minHeight="-Infinity" prefHeight="311.0" prefWidth="1140.0">
                                        <VBox.margin>
-                                          <Insets top="25.0" />
+                                          <Insets top="20.0" />
                                        </VBox.margin>
                                     </HBox>
                                     <HBox prefHeight="52.0" prefWidth="1140.0">
@@ -87,7 +111,7 @@
                                           </Button>
                                        </children>
                                        <VBox.margin>
-                                          <Insets top="20.0" />
+                                          <Insets top="40.0" />
                                        </VBox.margin>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="217.0" prefWidth="1140.0">
@@ -301,30 +325,269 @@
                                           </VBox>
                                        </children>
                                     </HBox>
-                                    <VBox alignment="TOP_RIGHT" prefHeight="482.0" prefWidth="1140.0">
+                                    <VBox alignment="TOP_RIGHT" prefHeight="545.0" prefWidth="1140.0">
                                        <VBox.margin>
                                           <Insets top="100.0" />
                                        </VBox.margin>
                                        <children>
-                                          <HBox prefHeight="29.0" prefWidth="1140.0">
+                                          <HBox prefHeight="106.0" prefWidth="1140.0">
                                              <children>
-                                                <Label prefHeight="26.0" prefWidth="1087.0" text="รายได้" textFill="#a8a8a8">
+                                                <Label prefHeight="37.0" prefWidth="109.0" text="รายได้" textFill="#a8a8a8">
                                                    <font>
                                                       <Font name="Noto Sans Thai Regular" size="16.0" />
                                                    </font>
+                                                   <padding>
+                                                      <Insets left="50.0" />
+                                                   </padding>
                                                 </Label>
-                                                <Label text="เดือนนี้" textFill="#0675de" underline="true">
+                                                <Pane prefHeight="107.0" prefWidth="712.0" />
+                                                <VBox fx:id="month_selector" alignment="TOP_CENTER" prefHeight="107.0" prefWidth="242.0" visible="false">
+                                                   <children>
+                                                      <HBox alignment="CENTER" prefHeight="30.0" prefWidth="316.0">
+                                                         <children>
+                                                            <Button mnemonicParsing="false" onAction="#month_selected" style="-fx-background-color: white;" styleClass="explore_roadmapOrAddList" stylesheets="@../../../css/Home.css" text="ม.ค.">
+                                                               <HBox.margin>
+                                                                  <Insets right="20.0" />
+                                                               </HBox.margin>
+                                                               <effect>
+                                                                  <DropShadow>
+                                                                     <color>
+                                                                        <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                                                                     </color>
+                                                                  </DropShadow>
+                                                               </effect>
+                                                               <font>
+                                                                  <Font name="Noto Sans Thai Bold" size="12.0" />
+                                                               </font>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </Button>
+                                                            <Button mnemonicParsing="false" onAction="#month_selected" style="-fx-background-color: white;" styleClass="explore_roadmapOrAddList" stylesheets="@../../../css/Home.css" text="ก.พ.">
+                                                               <HBox.margin>
+                                                                  <Insets right="20.0" />
+                                                               </HBox.margin>
+                                                               <effect>
+                                                                  <DropShadow>
+                                                                     <color>
+                                                                        <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                                                                     </color>
+                                                                  </DropShadow>
+                                                               </effect>
+                                                               <font>
+                                                                  <Font name="Noto Sans Thai Bold" size="12.0" />
+                                                               </font>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </Button>
+                                                            <Button mnemonicParsing="false" onAction="#month_selected" style="-fx-background-color: white;" styleClass="explore_roadmapOrAddList" stylesheets="@../../../css/Home.css" text="มี.ค.">
+                                                               <HBox.margin>
+                                                                  <Insets right="20.0" />
+                                                               </HBox.margin>
+                                                               <effect>
+                                                                  <DropShadow>
+                                                                     <color>
+                                                                        <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                                                                     </color>
+                                                                  </DropShadow>
+                                                               </effect>
+                                                               <font>
+                                                                  <Font name="Noto Sans Thai Bold" size="12.0" />
+                                                               </font>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </Button>
+                                                            <Button mnemonicParsing="false" onAction="#month_selected" style="-fx-background-color: white;" styleClass="explore_roadmapOrAddList" stylesheets="@../../../css/Home.css" text="เม.ย.">
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                               <effect>
+                                                                  <DropShadow>
+                                                                     <color>
+                                                                        <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                                                                     </color>
+                                                                  </DropShadow>
+                                                               </effect>
+                                                               <font>
+                                                                  <Font name="Noto Sans Thai Bold" size="12.0" />
+                                                               </font>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </Button>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER" prefHeight="30.0" prefWidth="316.0">
+                                                         <children>
+                                                            <Button mnemonicParsing="false" onAction="#month_selected" style="-fx-background-color: white;" styleClass="explore_roadmapOrAddList" stylesheets="@../../../css/Home.css" text="พ.ค.">
+                                                               <HBox.margin>
+                                                                  <Insets right="20.0" />
+                                                               </HBox.margin>
+                                                               <effect>
+                                                                  <DropShadow>
+                                                                     <color>
+                                                                        <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                                                                     </color>
+                                                                  </DropShadow>
+                                                               </effect>
+                                                               <font>
+                                                                  <Font name="Noto Sans Thai Bold" size="12.0" />
+                                                               </font>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </Button>
+                                                            <Button mnemonicParsing="false" onAction="#month_selected" style="-fx-background-color: white;" styleClass="explore_roadmapOrAddList" stylesheets="@../../../css/Home.css" text="มิ.ย.">
+                                                               <HBox.margin>
+                                                                  <Insets right="20.0" />
+                                                               </HBox.margin>
+                                                               <effect>
+                                                                  <DropShadow>
+                                                                     <color>
+                                                                        <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                                                                     </color>
+                                                                  </DropShadow>
+                                                               </effect>
+                                                               <font>
+                                                                  <Font name="Noto Sans Thai Bold" size="12.0" />
+                                                               </font>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </Button>
+                                                            <Button mnemonicParsing="false" onAction="#month_selected" style="-fx-background-color: white;" styleClass="explore_roadmapOrAddList" stylesheets="@../../../css/Home.css" text="ก.ค.">
+                                                               <HBox.margin>
+                                                                  <Insets right="20.0" />
+                                                               </HBox.margin>
+                                                               <effect>
+                                                                  <DropShadow>
+                                                                     <color>
+                                                                        <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                                                                     </color>
+                                                                  </DropShadow>
+                                                               </effect>
+                                                               <font>
+                                                                  <Font name="Noto Sans Thai Bold" size="12.0" />
+                                                               </font>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </Button>
+                                                            <Button mnemonicParsing="false" onAction="#month_selected" style="-fx-background-color: white;" styleClass="explore_roadmapOrAddList" stylesheets="@../../../css/Home.css" text="ส.ค.">
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                               <effect>
+                                                                  <DropShadow>
+                                                                     <color>
+                                                                        <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                                                                     </color>
+                                                                  </DropShadow>
+                                                               </effect>
+                                                               <font>
+                                                                  <Font name="Noto Sans Thai Bold" size="12.0" />
+                                                               </font>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </Button>
+                                                         </children>
+                                                         <VBox.margin>
+                                                            <Insets top="10.0" />
+                                                         </VBox.margin>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER" prefHeight="30.0" prefWidth="316.0">
+                                                         <children>
+                                                            <Button mnemonicParsing="false" onAction="#month_selected" style="-fx-background-color: white;" styleClass="explore_roadmapOrAddList" stylesheets="@../../../css/Home.css" text="ก.ย.">
+                                                               <HBox.margin>
+                                                                  <Insets right="20.0" />
+                                                               </HBox.margin>
+                                                               <effect>
+                                                                  <DropShadow>
+                                                                     <color>
+                                                                        <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                                                                     </color>
+                                                                  </DropShadow>
+                                                               </effect>
+                                                               <font>
+                                                                  <Font name="Noto Sans Thai Bold" size="12.0" />
+                                                               </font>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </Button>
+                                                            <Button mnemonicParsing="false" onAction="#month_selected" style="-fx-background-color: white;" styleClass="explore_roadmapOrAddList" stylesheets="@../../../css/Home.css" text="ต.ค.">
+                                                               <HBox.margin>
+                                                                  <Insets right="20.0" />
+                                                               </HBox.margin>
+                                                               <effect>
+                                                                  <DropShadow>
+                                                                     <color>
+                                                                        <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                                                                     </color>
+                                                                  </DropShadow>
+                                                               </effect>
+                                                               <font>
+                                                                  <Font name="Noto Sans Thai Bold" size="12.0" />
+                                                               </font>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </Button>
+                                                            <Button mnemonicParsing="false" onAction="#month_selected" style="-fx-background-color: white;" styleClass="explore_roadmapOrAddList" stylesheets="@../../../css/Home.css" text="พ.ย.">
+                                                               <HBox.margin>
+                                                                  <Insets right="20.0" />
+                                                               </HBox.margin>
+                                                               <effect>
+                                                                  <DropShadow>
+                                                                     <color>
+                                                                        <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                                                                     </color>
+                                                                  </DropShadow>
+                                                               </effect>
+                                                               <font>
+                                                                  <Font name="Noto Sans Thai Bold" size="12.0" />
+                                                               </font>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </Button>
+                                                            <Button mnemonicParsing="false" onAction="#month_selected" style="-fx-background-color: white;" styleClass="explore_roadmapOrAddList" stylesheets="@../../../css/Home.css" text="ธ.ค.">
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                               <effect>
+                                                                  <DropShadow>
+                                                                     <color>
+                                                                        <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                                                                     </color>
+                                                                  </DropShadow>
+                                                               </effect>
+                                                               <font>
+                                                                  <Font name="Noto Sans Thai Bold" size="12.0" />
+                                                               </font>
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                            </Button>
+                                                         </children>
+                                                         <VBox.margin>
+                                                            <Insets top="10.0" />
+                                                         </VBox.margin>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                                <Button fx:id="month_select" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#openPopup" style="-fx-background-color: transparent;" text="เดือนนี้" textFill="#0675de" underline="true">
                                                    <font>
                                                       <Font name="Noto Sans Thai Bold" size="16.0" />
                                                    </font>
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
-                                                </Label>
+                                                </Button>
                                              </children>
-                                             <VBox.margin>
-                                                <Insets bottom="40.0" />
-                                             </VBox.margin>
                                           </HBox>
                                           <HBox prefHeight="29.0" prefWidth="1140.0">
                                              <children>
@@ -353,6 +616,9 @@
                                              <padding>
                                                 <Insets left="20.0" right="20.0" />
                                              </padding>
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
                                           </HBox>
                                           <ScrollPane fx:id="courseTableContainer" hbarPolicy="NEVER" prefHeight="323.0" prefWidth="1140.0" styleClass="scroll-panej" stylesheets="@../../../css/Home.css" vbarPolicy="ALWAYS">
                                             <content>
@@ -381,7 +647,7 @@
                                                 </AnchorPane>
                                             </content>
                                           </ScrollPane>
-                                          <Button fx:id="course_manageBtn" mnemonicParsing="false" prefHeight="53.0" prefWidth="203.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="การจัดการคอร์ส" textFill="WHITE">
+                                          <Button fx:id="course_manageBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="203.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="การจัดการคอร์ส" textFill="WHITE">
                                              <font>
                                                 <Font name="Noto Sans Thai Bold" size="17.0" />
                                              </font>
@@ -489,7 +755,7 @@
                                                 <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                                              </padding>
                                           </VBox>
-                                          <Button fx:id="withdrawBtn" mnemonicParsing="false" prefHeight="53.0" prefWidth="184.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="ถอนรายได้" textFill="WHITE">
+                                          <Button fx:id="withdrawBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="184.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="ถอนรายได้" textFill="WHITE">
                                              <font>
                                                 <Font name="Noto Sans Thai Bold" size="17.0" />
                                              </font>

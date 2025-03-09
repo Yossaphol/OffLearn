@@ -591,6 +591,11 @@ public class HomeController implements Initializable {
                 applyHoverEffect1(box);
             }
         }
+        for (Node node : root.lookupAll(".explore_roadmapOrAddList")) {
+            if (node instanceof Button box) {
+                applyHoverEffect1(box);
+            }
+        }
         for (Node node : root.lookupAll(".small-category")) {
             if (node instanceof HBox box) {
                 applyHoverEffect(box);
@@ -637,6 +642,15 @@ public class HomeController implements Initializable {
         });
         categoryBox.setOnMouseExited(event -> {
             categoryBox.setStyle("-fx-background-color: transparent;");
+        });
+    }
+
+    private void applyHoverEffect1(Button categoryBox) {
+        categoryBox.setOnMouseEntered(event -> {
+            categoryBox.setStyle("-fx-background-color: #F4F4F4;");
+        });
+        categoryBox.setOnMouseExited(event -> {
+            categoryBox.setStyle("-fx-background-color: white;");
         });
     }
 
