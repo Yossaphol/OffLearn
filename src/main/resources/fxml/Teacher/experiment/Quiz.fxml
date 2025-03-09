@@ -24,7 +24,7 @@
             <Insets left="100.0" top="100.0" />
          </VBox.margin>
       </HBox>
-      <ScrollPane prefHeight="943.0" prefWidth="1440.0">
+      <ScrollPane fitToHeight="true" prefHeight="943.0" prefWidth="1440.0">
          <content>
             <VBox prefHeight="1232.0" prefWidth="1422.0">
                <children>
@@ -133,22 +133,22 @@
                         <Insets top="50.0" />
                      </VBox.margin>
                   </HBox>
-                  <VBox fx:id="showProblem" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <VBox fx:id="showProblem" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin></VBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" prefHeight="91.0" prefWidth="1422.0" VBox.vgrow="NEVER">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="50.0" prefWidth="790.0" style="-fx-border-color: black;" text="เพิ่มโจทย์">
+                        <Label fx:id="addProblem" alignment="CENTER" contentDisplay="TOP" minHeight="50.0" minWidth="790.0" prefHeight="50.0" prefWidth="790.0" style="-fx-border-color: black;" text="เพิ่มโจทย์">
                            <font>
                               <Font name="Kodchasan Regular" size="12.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="TOP_RIGHT" prefHeight="0.0" prefWidth="1422.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="165.0" style="-fx-background-color: &quot;0675DE&quot;; -fx-background-radius: 10;" text="Button" textFill="WHITE">
+                        <Button fx:id="save" minHeight="50.0" minWidth="165.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="165.0" style="-fx-background-color: &quot;0675DE&quot;; -fx-background-radius: 10;" text="Button" textFill="WHITE" HBox.hgrow="NEVER">
                            <font>
                               <Font name="Kodchasan Bold" size="12.0" />
                            </font>
@@ -157,6 +157,9 @@
                            </HBox.margin>
                         </Button>
                      </children>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
                   </HBox>
                </children>
             </VBox>

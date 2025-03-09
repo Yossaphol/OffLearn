@@ -1,10 +1,10 @@
 package Database;
 
 public class test {
-    static UserDB con = new UserDB();
+    static QuestionDB con = new QuestionDB();
 
     public static void main(String[] args) {
-        con.testConnect();
+        con.saveQuestion("test", "test", 5);
     }
 
 }
