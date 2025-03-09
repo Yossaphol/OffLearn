@@ -14,11 +14,12 @@
          <content>
             <VBox prefHeight="1057.0" prefWidth="1440.0" style="-fx-background-color: white;">
                <children>
-                  <Pane prefHeight="32.0" prefWidth="1440.0" />
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <Pane prefHeight="32.0" prefWidth="1440.0" style="-fx-background-color: #FBFBFB;" />
+                  <VBox prefHeight="100.0" prefWidth="1447.0">
                      <children>
-                        <VBox fx:id="teachernavbarcontainer" prefHeight="100.0" prefWidth="1447.0" />
-                     </children></HBox>
+                        <HBox fx:id="teachernavbarcontainer" prefHeight="100.0" prefWidth="200.0" />
+                     </children>
+                  </VBox>
                   <Pane layoutX="10.0" layoutY="10.0" prefHeight="32.0" prefWidth="1440.0" />
                   <VBox prefHeight="892.0" prefWidth="1440.0" style="-fx-background-color: white;">
                      <children>
@@ -116,7 +117,7 @@
                                                             </HBox>
                                                             <HBox prefHeight="79.0" prefWidth="51.0">
                                                                <children>
-                                                                  <Button fx:id="toedit" mnemonicParsing="false" prefHeight="33.0" prefWidth="32.0" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-radius: 10; -fx-cursor: hand;" textFill="TRANSPARENT">
+                                                                  <Button fx:id="toedit" mnemonicParsing="false" onAction="#toedit" prefHeight="33.0" prefWidth="32.0" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-radius: 10; -fx-cursor: hand;" textFill="TRANSPARENT">
                                                                      <graphic>
                                                                         <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                                                            <image>
