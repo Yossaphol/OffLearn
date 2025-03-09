@@ -131,9 +131,9 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox fx:id="navPopup" alignment="CENTER" maxWidth="900.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 20;" visible="false">
+            <HBox fx:id="navPopup" alignment="CENTER" maxHeight="50.0" maxWidth="970.0" minHeight="43.0" prefHeight="54.0" prefWidth="900.0" style="-fx-background-color: white; -fx-background-radius: 20;" visible="false">
                <children>
-                  <HBox fx:id="dashboard" alignment="CENTER" prefHeight="19.0" prefWidth="280.0" style="-fx-background-color: transparent;" styleClass="navT">
+                  <HBox fx:id="dashboard" alignment="CENTER" prefHeight="45.0" prefWidth="215.0" style="-fx-background-color: transparent;" styleClass="navT">
                      <children>
                         <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -262,9 +262,6 @@
                      </HBox.margin>
                   </HBox>
                </children>
-               <padding>
-                  <Insets bottom="10.0" top="10.0" />
-               </padding>
                <effect>
                   <DropShadow>
                      <color>

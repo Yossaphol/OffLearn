@@ -32,7 +32,7 @@
                      <children>
                         <VBox prefHeight="2269.0" prefWidth="1440.0" style="-fx-background-color: #FBFBFB;">
                            <children>
-                              <Pane prefHeight="40.0" prefWidth="1440.0" />
+                              <Pane prefHeight="107.0" prefWidth="1440.0" />
                               <HBox fx:id="searhbar_container" alignment="CENTER" prefHeight="65.0" prefWidth="1139.0" style="-fx-background-color: #FBFBFB;" />
                               <VBox prefHeight="2305.0" prefWidth="1440.0">
                                  <children>
