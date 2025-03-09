@@ -1,17 +1,26 @@
 package Teacher.videoDetail;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -20,7 +29,7 @@ public class videoDetailController implements Initializable {
     private ScrollPane mainscrollpane; // tbd
 
     @FXML
-    private VBox teachernavbarcontainer;
+    private HBox teachernavbarcontainer;
 
     @FXML
     private Button backbutton;  // tbd
@@ -90,11 +99,12 @@ public class videoDetailController implements Initializable {
         countLike.setText(CommaFormat(likeCountNum));
         countDislike.setText(CommaFormat(dislikeCountNum));
         commentcount.setText(CommaFormat(commentCountNum));
+        displayNavbar();
     }
     private void displayNavbar(){
         try {
             FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/navBar/navBar.fxml"));
-            VBox navContent = calendarLoader.load();
+            HBox navContent = calendarLoader.load();
             teachernavbarcontainer.getChildren().setAll(navContent);
         } catch (IOException e) {
             e.printStackTrace();
@@ -119,4 +129,52 @@ public class videoDetailController implements Initializable {
             label.setStyle("-fx-font-size: 28; -fx-font-weight: bold;");
         }
     }
+    @FXML
+    private void toedit() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Teacher/somethingWithVideo/videoDetailEdit.fxml"));
+            Parent root = loader.load();
+
+            videoDetailEditController editController = loader.getController();
+
+            editController.setSubjectName(subjectname.getText());
+            editController.setDescription(viddescription.getText());
+
+            Image currentThumb = videothumbnail.getImage();
+            if (currentThumb != null) {
+                editController.setThumbnail(currentThumb);
+            }
+
+            List<String> currentAttachments = new ArrayList<>();
+            attachmentcontainer.getChildren().forEach(node -> {
+                if (node instanceof Hyperlink link) {
+                    currentAttachments.add(link.getText());
+                }
+            });
+            editController.setAttachments(currentAttachments);
+
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setTitle("Edit Video Details");
+            popupStage.setScene(new Scene(root));
+
+            popupStage.showAndWait();
+            attachmentcontainer.getChildren().clear();
+
+            if (editController.isSaved()) {
+                subjectname.setText(editController.getSubjectName());
+                viddescription.setText(editController.getDescription());
+                videothumbnail.setImage(editController.getThumbnail());
+                for (String filePath : editController.getAttachments()) {
+                    Hyperlink link = new Hyperlink(filePath);
+                    // (Optional) link.setOnAction(...) to open or handle file
+                    attachmentcontainer.getChildren().add(link);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

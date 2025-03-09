@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="411.0" prefWidth="862.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.videoDetail.videoDetailEditController">
+   <children>
+      <VBox prefHeight="14.0" prefWidth="862.0" />
+      <VBox prefHeight="385.0" prefWidth="862.0">
+         <children>
+            <HBox prefHeight="393.0" prefWidth="862.0">
+               <children>
+                  <HBox prefHeight="202.0" prefWidth="21.0" />
+                  <HBox prefHeight="385.0" prefWidth="776.0">
+                     <children>
+                        <VBox prefHeight="375.0" prefWidth="202.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets right="15.0" top="10.0" />
+                           </HBox.margin>
+                           <children>
+                              <HBox alignment="TOP_CENTER" prefHeight="210.0" prefWidth="189.0" style="-fx-background-radius: 25; -fx-border-radius: 25;">
+                                 <children>
+                                    <ImageView fx:id="videothumbnail" fitHeight="175.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../img/icon/chronometer.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="39.0" prefWidth="235.0">
+                                 <children>
+                                    <Button fx:id="changePic" mnemonicParsing="false" onAction="#handleChangePic" prefHeight="33.0" prefWidth="82.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="เปลี่ยน" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="45.0" />
+                                       </HBox.margin>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                    <Button fx:id="deletePic" mnemonicParsing="false" onAction="#handleDeletePic" prefHeight="33.0" prefWidth="77.0" style="-fx-background-color: #FF0000; -fx-background-radius: 10;" text="ลบ" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="BOTTOM_LEFT" prefHeight="127.0" prefWidth="249.0">
+                                 <children>
+                                    <Button fx:id="handleSave" alignment="CENTER" mnemonicParsing="false" onAction="#handleSave" prefHeight="40.0" prefWidth="132.0" style="-fx-background-radius: 10; -fx-border-color: #0675de; -fx-border-radius: 10; -fx-background-color: #0675de; -fx-cursor: hand;" text="บันทึก" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold Italic" size="16.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="202.0" prefWidth="512.0">
+                           <children>
+                              <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="738.0">
+                                 <children>
+                                    <Label prefHeight="39.0" prefWidth="364.0" text="Subject Name" textFill="#0675de">
+                                       <font>
+                                          <Font name="System Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="subjectnamebox" minWidth="50.0" prefHeight="27.0" promptText="Enter subject name" style="-fx-border-color: #0675DE; -fx-border-radius: 20; -fx-background-color: 20; -fx-background-color: white;" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="113.0" prefWidth="500.0">
+                                 <children>
+                                    <Label prefHeight="39.0" prefWidth="364.0" text="Subject Description" textFill="#0675de">
+                                       <font>
+                                          <Font name="System Bold" size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <TextArea fx:id="viddescriptionbox" prefHeight="200.0" prefWidth="200.0" promptText="Enter description here" style="-fx-border-color: #0675DE; -fx-background-color: transparent; -fx-background-radius: 20; -fx-border-radius: 0;" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="170.0" prefWidth="500.0">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="500.0">
+                                       <children>
+                                          <Label prefHeight="32.0" prefWidth="140.0" text="Attachment" textFill="#0675de">
+                                             <font>
+                                                <Font name="System Bold" size="22.0" />
+                                             </font>
+                                          </Label>
+                                          <Button fx:id="choosefile" alignment="CENTER" mnemonicParsing="false" onAction="#handleChooseFiles" prefHeight="23.0" prefWidth="73.0" style="-fx-background-radius: 10; -fx-border-color: #0675de; -fx-border-radius: 10; -fx-cursor: hand;" text="Choose Files">
+                                             <font>
+                                                <Font size="10.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <ListView fx:id="attachmentlist" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="385.0" prefWidth="64.0">
+                     <children>
+                        <Button fx:id="closebtn" alignment="CENTER" mnemonicParsing="false" onAction="#handleCloseWindow" prefHeight="37.0" prefWidth="49.0" style="-fx-background-color: transparent; -fx-cursor: hand;">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../img/icon/close.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</VBox>
