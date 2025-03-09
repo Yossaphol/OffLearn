@@ -3,10 +3,10 @@ package Teacher.QuizDetail;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BubbleChart;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-import javax.swing.text.html.ImageView;
-import java.awt.*;
+import javafx.scene.control.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,7 +15,7 @@ public class quiz_detailController implements Initializable {
 
     public HBox searhbar_container;
     public HBox quiz_container;
-    public Label goback;
+    public HBox goback;
     public Label quiz_name;
     public Label min_score;
     public Label max_score;

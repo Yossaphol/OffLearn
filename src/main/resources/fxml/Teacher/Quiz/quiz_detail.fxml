@@ -19,7 +19,7 @@
                   <HBox fx:id="goback" prefHeight="55.0" prefWidth="1450.0">
                      <children>
                         <HBox prefHeight="27.0" prefWidth="77.0" />
-                        <Label fx:id="goback" prefHeight="27.0" prefWidth="76.0" text="ย้อนกลับ" textFill="#007bff">
+                        <Label prefHeight="27.0" prefWidth="76.0" text="ย้อนกลับ" textFill="#007bff">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
