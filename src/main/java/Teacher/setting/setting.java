@@ -1,6 +1,6 @@
-package Student.leaderboard;
+package Teacher.setting;
 
-import Student.dashboard.dashboard;
+import Student.roadmap.myroadmap;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class leaderboard extends Application {
+public class setting extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -16,7 +16,7 @@ public class leaderboard extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(leaderboard.class.getResource("/fxml/Student/statistics/leaderboard.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(setting.class.getResource("/fxml/Teacher/setting/setting.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         primaryStage.setTitle("Offlearn");
         primaryStage.setMaximized(true);

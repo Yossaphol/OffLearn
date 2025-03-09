@@ -23,7 +23,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class navbarController implements Initializable {
-    public VBox navPopup;
+    public HBox navPopup;
     public Button nav;
     public ImageView nav_icon;
 
@@ -97,7 +97,7 @@ public class navbarController implements Initializable {
         fade.play();
     }
 
-    public void applyHoverEffectToInside(VBox root) {
+    public void applyHoverEffectToInside(HBox root) {
         for (Node node : root.lookupAll(".navT")) {
             if (node instanceof HBox p) {
                 hoverEffect(p);

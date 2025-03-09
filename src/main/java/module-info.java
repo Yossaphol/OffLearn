@@ -14,6 +14,7 @@ module com.example.offlearn {
     requires okhttp3;
     requires javafx.media;
     requires com.azure.storage.blob;
+    requires com.azure.core;
 
     opens Student.mainApp to javafx.fxml;
     exports Student.mainApp;
@@ -71,16 +72,17 @@ module com.example.offlearn {
     exports Teacher.dashboard to javafx.fxml;
     opens Teacher.dashboard;
 
-    exports Teacher.LoginAndSignup to javafx.fxml;
-    opens Teacher.LoginAndSignup;
-
-    exports Teacher.showBalance to javafx.fxml;
-    opens Teacher.showBalance;
     exports Teacher.navigator to javafx.fxml;
     opens Teacher.navigator;
 
-    exports Student.leaderboard to javafx.fxml;
-    opens Student.leaderboard;
+    exports Teacher.somethingWithVideo to javafx.fxml;
+    opens Teacher.somethingWithVideo;
+
+    exports Teacher.QuizDetail to javafx.fxml;
+    opens Teacher.QuizDetail;
+
+    exports Teacher.setting to javafx.fxml;
+    opens Teacher.setting;
 
     exports Teacher.experiment to javafx.fxml;
     opens Teacher.experiment;
