@@ -1,5 +1,6 @@
 package Student.mainPage;
 
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,6 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import Student.HomeAndNavigation.Navigator;
+import javafx.util.Duration;
 
 public class mainPageController implements Initializable {
     @FXML
@@ -52,7 +54,21 @@ public class mainPageController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
             HBox contentComponent = loader.load();
-            content.getChildren().setAll(contentComponent);
+
+
+            FadeTransition fadeOut = new FadeTransition(Duration.millis(300), content);
+            fadeOut.setFromValue(1.0);
+            fadeOut.setToValue(0.0);
+            fadeOut.setOnFinished(event -> {
+                content.getChildren().setAll(contentComponent);
+
+                FadeTransition fadeIn = new FadeTransition(Duration.millis(300), content);
+                fadeIn.setFromValue(0.0);
+                fadeIn.setToValue(1.0);
+                fadeIn.play();
+            });
+
+            fadeOut.play();
         } catch (IOException e) {
             e.printStackTrace();
         }
