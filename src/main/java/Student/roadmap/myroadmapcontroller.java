@@ -101,26 +101,6 @@ public class myroadmapcontroller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        displayNavbar();
-        displaySearchBar();
-    }
-    private void displayNavbar(){
-        try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/navBar.fxml"));
-            VBox navContent = calendarLoader.load();
-            sideBar.getChildren().setAll(navContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
-    private void displaySearchBar(){
-        try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/searchBar.fxml"));
-            HBox searchbarContent = calendarLoader.load();
-            searchBar.getChildren().setAll(searchbarContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

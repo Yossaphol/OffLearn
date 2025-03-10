@@ -101,6 +101,14 @@ public class dashboardController implements Initializable {
     public LineChart score_development;
     public CategoryAxis xAxis_scoreDev;
     public NumberAxis yAxis_scoreDev;
+    public Button save_edit;
+    public Button edit;
+    public Button saved_roadmap;
+    public Label allMyCourse;
+    public HBox taskContainer;
+    public Button selected_subject;
+    public VBox subject_to_select;
+    public VBox score_analyze;
 
     @FXML
     private StackedBarChart<String, Number> courseProgressionChart;
@@ -115,15 +123,12 @@ public class dashboardController implements Initializable {
         FontLoader fontLoader = new FontLoader();
         fontLoader.loadFonts();
 
-        //Routing navbar
-        Navigator nav = new Navigator();
-
+        route();
+    displayTask();
 
         HomeController method_home = new HomeController();
 
         //Set img container
-        method_home.loadAndSetImage(userpfp, "/img/Picture/bg.jpg");
-        method_home.loadAndSetImage(trophy,"/img/icon/trophy-star.png" );
         method_home.loadAndSetImage(category_pic,"/img/icon/code.png" );
 
         //Hover effect
@@ -139,10 +144,9 @@ public class dashboardController implements Initializable {
         method_home.hoverEffect(btn_continue);
         method_home.hoverEffect(btn_otherCourse);
 
+        save_edit.setVisible(false);
 
 
-
-        //closePopupAuto();
 
 
 
@@ -152,6 +156,7 @@ public class dashboardController implements Initializable {
         roadmap_progress.setProgress(Double.parseDouble(roadmap_value.getText().replace("%", "").trim()) / 100);
         roadmap_progress1.setProgress(Double.parseDouble(roadmap_value1.getText().replace("%", "").trim()) / 100);
 
+        displayProfileBox();
         //Call chart
         courseProgressionChart();
         scoreChart();
@@ -161,8 +166,67 @@ public class dashboardController implements Initializable {
 
 
 
+    public void route(){
+        Navigator nav = new Navigator();
+        saved_roadmap.setOnMouseClicked(nav::myRoadmapRoute);
+        allMyCourse.setOnMouseClicked(nav::myCourseRoute);
+        studyTable.setOnMouseClicked(nav::myCourseRoute);
+        btn_continue.setOnMouseClicked(nav::myCourseRoute);
+        btn_otherCourse.setOnMouseClicked(nav::courseRoute);
+    }
 
 
+    @FXML
+    private void editProfile(ActionEvent event){
+        Button btn = (Button) event.getSource();
+        switch (btn.getId()){
+            case "edit":
+                edit.setVisible(false);
+                save_edit.setVisible(true);
+                displayProfileBoxEdit();
+                break;
+            case "save_edit":
+                save_edit.setVisible(false);
+                edit.setVisible(true);
+                displayProfileBox();
+                break;
+            default:
+                save_edit.setVisible(false);
+                edit.setVisible(true);
+                displayProfileBox();
+        }
+    }
+
+    private void displayProfileBox() {
+        loadWithTransition("/fxml/Student/statistics/dashboardProfile.fxml");
+    }
+
+    private void displayProfileBoxEdit() {
+        loadWithTransition("/fxml/Student/statistics/dashboardProfileEdit.fxml");
+    }
+
+    private void loadWithTransition(String fxmlPath) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Pane newContent = loader.load();
+
+            FadeTransition fadeOut = new FadeTransition(Duration.millis(200), user_profile);
+            fadeOut.setFromValue(1.0);
+            fadeOut.setToValue(0.0);
+            fadeOut.setOnFinished(event -> {
+                user_profile.getChildren().setAll(newContent);
+
+                FadeTransition fadeIn = new FadeTransition(Duration.millis(200), user_profile);
+                fadeIn.setFromValue(0.0);
+                fadeIn.setToValue(1.0);
+                fadeIn.play();
+            });
+
+            fadeOut.play();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
@@ -177,6 +241,16 @@ public class dashboardController implements Initializable {
             case "btnpopup1":
                 _openPopup(popup1);
                 break;
+        }
+    }
+
+    private void displayTask() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/statistics/dashboardTaskElement.fxml"));
+            HBox searchbarContent = loader.load();
+            taskContainer.getChildren().setAll(searchbarContent);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

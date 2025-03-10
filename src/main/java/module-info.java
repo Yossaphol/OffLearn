@@ -31,7 +31,6 @@ module com.example.offlearn {
     opens Student.HomeAndNavigation to javafx.fxml;
     exports Student.HomeAndNavigation;
 
-    opens Student.dashboard to javafx.fxml;
     exports Student.dashboard;
 
     opens Student.roadmap to javafx.fxml;
@@ -107,4 +106,5 @@ module com.example.offlearn {
 
     exports Teacher.showBalance to javafx.fxml;
     opens Teacher.showBalance;
+    opens Student.dashboard;
 }

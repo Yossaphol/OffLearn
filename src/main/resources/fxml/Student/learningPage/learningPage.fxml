@@ -6,43 +6,68 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="bg" fillHeight="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2093.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.learningPage.learningPageController">
+<HBox fx:id="bg" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2093.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.learningPage.learningPageController">
    <children>
-      <HBox fx:id="rootpage" prefHeight="2094.0" prefWidth="1136.0">
+      <HBox fx:id="rootpage" maxWidth="1.7976931348623157E308" prefHeight="2094.0" prefWidth="1136.0">
          <children>
             <VBox prefHeight="2094.0" prefWidth="1136.0" style="-fx-background-color: #FBFBFB;">
                <children>
                   <Pane prefHeight="62.0" prefWidth="1139.0" />
-                  <HBox fx:id="content" alignment="TOP_CENTER" prefHeight="2017.0" prefWidth="1136.0">
+                  <HBox fx:id="content" prefHeight="2017.0" prefWidth="1136.0">
+                     <VBox.margin>
+                        <Insets left="25.0" right="25.0" />
+                     </VBox.margin>
                      <children>
-                        <VBox prefHeight="2017.0" prefWidth="519.0">
+                        <VBox prefHeight="1989.0" prefWidth="701.0">
                            <children>
-                              <AnchorPane prefHeight="480.0" prefWidth="848.0">
+                              <StackPane fx:id="videocontainer" prefHeight="300.0" prefWidth="701.0">
                                  <children>
                                     <MediaView fx:id="mediaView" fitHeight="480.0" fitWidth="848.0" />
-                                    <HBox alignment="CENTER" layoutY="444.0" prefHeight="35.0" prefWidth="848.0">
+                                    <HBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="848.0" spacing="5.0">
+                                       <padding>
+                                          <Insets bottom="5.0" right="25.0" />
+                                       </padding>
+                                       <StackPane.margin>
+                                          <Insets />
+                                       </StackPane.margin>
                                        <children>
                                           <Button fx:id="btnPlay" text="▶ Play" />
                                           <Button fx:id="btnPause" text="⏸ Pause" />
                                           <Button fx:id="btnStop" text="⏹ Stop" />
-                                          <Slider fx:id="sliderTime" max="100" min="0" />
+                                          <Slider fx:id="sliderTime" max="100" min="0" prefHeight="14.0" prefWidth="406.0" />
                                           <Label fx:id="lblTime" text="00:00 / 00:00" />
+                                          <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="0.0" prefWidth="13.0" style="-fx-background-color: transparent;" textFill="WHITE">
+                                             <graphic>
+                                                <ImageView fitHeight="17.0" fitWidth="18.0" pickOnBounds="true">
+                                                   <image>
+                                                      <Image url="@../../../img/icon/expand-solid.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </Button>
                                        </children>
                                     </HBox>
                                  </children>
-                              </AnchorPane>
-                              <HBox prefHeight="51.0" prefWidth="848.0">
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </StackPane>
+                              <HBox prefHeight="85.0" prefWidth="848.0">
                                  <children>
                                     <HBox prefHeight="59.0" prefWidth="848.0">
                                        <children>
@@ -50,23 +75,38 @@
                                              <children>
                                                 <Label fx:id="subject_name" text="Subject name" textFill="#8100cc">
                                                    <font>
-                                                      <Font name="System Bold" size="18.0" />
+                                                      <Font name="System Bold" size="24.0" />
                                                    </font>
                                                 </Label>
                                                 <Label fx:id="ep" text="Episode" textFill="#a4a4a4">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font size="15.0" />
                                                    </font>
                                                 </Label>
+                                                <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="15.0" prefWidth="80.0" style="-fx-background-color: #8800cc50; -fx-background-radius: 5;">
+                                                   <children>
+                                                      <Label fx:id="currentvideocategory" layoutX="3.0" layoutY="-2.0" text="&lt;/&gt;" textFill="#8100cc">
+                                                         <padding>
+                                                            <Insets right="5.0" />
+                                                         </padding>
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets top="5.0" />
+                                                   </VBox.margin>
+                                                </Pane>
                                              </children>
                                           </VBox>
                                        </children>
                                     </HBox>
-                                    <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Button fx:id="btnOffLoad" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-radius: 10;" textFill="TRANSPARENT">
+                                          <Button fx:id="btnOffLoad" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-radius: 10; -fx-cursor: hand;" textFill="TRANSPARENT">
                                              <graphic>
-                                                <ImageView fitHeight="35.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                <ImageView fitHeight="31.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../../../img/icon/download.png" />
                                                    </image>
@@ -77,14 +117,20 @@
                                     </HBox>
                                  </children>
                               </HBox>
-                              <HBox prefHeight="232.0" prefWidth="848.0">
+                              <HBox prefHeight="354.0" prefWidth="848.0">
                                  <children>
-                                    <VBox prefHeight="100.0" prefWidth="415.0">
+                                    <VBox prefHeight="349.0" prefWidth="415.0">
                                        <children>
                                           <HBox prefHeight="67.0" prefWidth="415.0">
+                                             <VBox.margin>
+                                                <Insets top="25.0" />
+                                             </VBox.margin>
                                              <children>
                                                 <Circle fx:id="teacherImg" fill="DODGERBLUE" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
                                                 <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="51.0" prefWidth="368.0">
+                                                   <HBox.margin>
+                                                      <Insets left="15.0" />
+                                                   </HBox.margin>
                                                    <children>
                                                       <Label fx:id="teacherName" text="Teacher Name">
                                                          <font>
@@ -96,13 +142,24 @@
                                                 </VBox>
                                              </children>
                                           </HBox>
-                                          <Label fx:id="clipDescription" alignment="TOP_LEFT" prefWidth="415.0" style="-fx-border-radius: 100;" text="Description" />
+                                          <VBox minHeight="77.0" prefWidth="415.0">
+                                             <children>
+                                                <Label fx:id="clipDescription" alignment="TOP_LEFT" lineSpacing="3.0" minHeight="73.0" prefWidth="415.0" style="-fx-border-radius: 15; -fx-background-color: EFEFEF; -fx-background-radius: 15;" text="description" textFill="#979191" textOverrun="CLIP" wrapText="true">
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                   <padding>
+                                                      <Insets left="15.0" top="8.0" />
+                                                   </padding>
+                                                </Label>
+                                             </children>
+                                          </VBox>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                              <VBox.margin>
-                                                <Insets />
+                                                <Insets top="15.0" />
                                              </VBox.margin>
                                              <children>
-                                                <Button fx:id="btnContectTeacher" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #8800cc; -fx-background-radius: 10;" text="ติดต่อผู้สอน" textAlignment="CENTER" textFill="WHITE">
+                                                <Button fx:id="btnContectTeacher" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #8800cc; -fx-background-radius: 10; -fx-cursor: hand;" text="ติดต่อผู้สอน" textAlignment="CENTER" textFill="WHITE">
                                                    <HBox.margin>
                                                       <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                                                    </HBox.margin>
@@ -110,7 +167,7 @@
                                                       <Font name="System Bold" size="18.0" />
                                                    </font>
                                                 </Button>
-                                                <Button fx:id="btnGloblalChat" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #fff; -fx-background-radius: 10; -fx-border-color: #000;" text="เข้าร่วมแชทสาธารณะ">
+                                                <Button fx:id="btnGloblalChat" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #fff; -fx-background-radius: 10; -fx-border-color: #000; -fx-border-radius: 10; -fx-cursor: hand;" text="เข้าร่วมแชทสาธารณะ">
                                                    <HBox.margin>
                                                       <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                                                    </HBox.margin>
@@ -122,13 +179,16 @@
                                           </HBox>
                                        </children>
                                     </VBox>
-                                    <VBox prefHeight="232.0" prefWidth="431.0">
+                                    <VBox prefHeight="354.0" prefWidth="380.0">
                                        <children>
                                           <HBox alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="200.0">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
                                              <children>
-                                                <Button fx:id="btnLike" mnemonicParsing="false" style="-fx-background-color: transparent;" textFill="TRANSPARENT">
+                                                <Button fx:id="btnLike" maxHeight="30.0" maxWidth="30.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" textFill="TRANSPARENT">
                                                    <graphic>
-                                                      <ImageView fitHeight="33.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../../../img/icon/like.png" />
                                                          </image>
@@ -140,14 +200,17 @@
                                                       <Font size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <Button fx:id="btnDislike" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                                                <Button fx:id="btnDislike" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;">
                                                    <graphic>
-                                                      <ImageView fitHeight="33.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../../../img/icon/dislike.png" />
                                                          </image>
                                                       </ImageView>
                                                    </graphic>
+                                                   <HBox.margin>
+                                                      <Insets left="15.0" />
+                                                   </HBox.margin>
                                                 </Button>
                                                 <Label fx:id="countDislike" text="Dislike">
                                                    <font>
@@ -156,27 +219,126 @@
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <Label text="เอกสารประกอบการสอน">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Label>
+                                          <VBox prefHeight="200.0" prefWidth="378.0">
+                                             <children>
+                                                <Label text="เอกสารประกอบการสอน">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets left="25.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <VBox fx:id="attachmentcontainer" prefHeight="200.0" prefWidth="431.0">
+                                                   <VBox.margin>
+                                                      <Insets left="25.0" top="10.0" />
+                                                   </VBox.margin>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
                                        </children>
                                     </VBox>
                                  </children>
                               </HBox>
+                              <VBox prefHeight="1057.0" prefWidth="848.0">
+                                 <children>
+                                    <HBox prefHeight="58.0" prefWidth="753.0">
+                                       <children>
+                                          <Circle fx:id="userimg" fill="DODGERBLUE" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+                                          <VBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="776.0">
+                                             <children>
+                                                <TextArea fx:id="commentinput" prefHeight="58.0" prefWidth="754.0" promptText="comment here" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 15; -fx-background-radius: 15;">
+                                                   <VBox.margin>
+                                                      <Insets left="25.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </TextArea>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <VBox prefHeight="63.0" prefWidth="848.0">
+                                       <children>
+                                          <HBox prefHeight="23.0" prefWidth="494.0">
+                                             <children>
+                                                <Label prefHeight="27.0" prefWidth="106.0" text="ความคิดเห็น" textFill="#a8a8a8">
+                                                   <font>
+                                                      <Font name="System Bold" size="18.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="15.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <HBox alignment="CENTER" prefHeight="35.0">
+                                                   <children>
+                                                      <Label fx:id="commentcount" contentDisplay="CENTER" prefHeight="35.0" text="commentcount" textFill="#a8a8a8">
+                                                         <font>
+                                                            <Font name="System Bold" size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="25.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="25.0" />
+                                       </VBox.margin>
+                                    </VBox>
+                                    <VBox fx:id="commentcontainer" prefHeight="924.0" prefWidth="848.0" />
+                                 </children>
+                              </VBox>
                            </children>
                         </VBox>
                         <VBox alignment="TOP_CENTER" maxHeight="-Infinity" prefHeight="1000.0" prefWidth="369.0">
                            <children>
                               <VBox maxWidth="-Infinity" prefHeight="480.0" prefWidth="306.0">
                                  <children>
-                                    <Label fx:id="countPlaylist" text="countPlaylist" textFill="#8800cc">
-                                       <font>
-                                          <Font name="System Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <ScrollPane prefHeight="480.0" prefWidth="306.0" style="-fx-background-color: transparent;">
+                                    <HBox prefHeight="23.0" prefWidth="494.0">
+                                       <children>
+                                          <Label prefHeight="35.0" prefWidth="91.0" text="countPlaylist" textFill="#8800cc">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="15.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <HBox alignment="CENTER_RIGHT" prefHeight="35.0">
+                                             <children>
+                                                <Label alignment="CENTER" prefHeight="46.0" prefWidth="12.0" text="(" textFill="#8800cc">
+                                                   <font>
+                                                      <Font name="System Bold" size="24.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="35.0">
+                                             <children>
+                                                <Label fx:id="playlistcount" contentDisplay="CENTER" prefHeight="35.0" text="playlistcount" textFill="#8800cc">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="15.0">
+                                             <children>
+                                                <Label text=")" textFill="#8800cc">
+                                                   <font>
+                                                      <Font name="System Bold" size="24.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                    <ScrollPane fx:id="playlistcontainer" prefHeight="480.0" prefWidth="306.0" style="-fx-background-color: transparent;">
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
@@ -217,7 +379,7 @@
                                           </HBox>
                                        </children>
                                     </HBox>
-                                    <ProgressBar fx:id="progressBar" prefHeight="6.0" prefWidth="306.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../../../css/Home.css" />
+                                    <ProgressBar fx:id="progressBar" prefHeight="8.0" prefWidth="306.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../../../css/Home.css" />
                                  </children>
                               </VBox>
                               <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="306.0">
@@ -259,7 +421,11 @@
                                                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                                      </VBox.margin>
                                                                      <children>
-                                                                        <Label fx:id="category" layoutX="26.0" layoutY="-1.0" text="&lt;/&gt;" />
+                                                                        <Label fx:id="category" layoutX="3.0" layoutY="-2.0" text="&lt;/&gt;">
+                                                                           <padding>
+                                                                              <Insets right="5.0" />
+                                                                           </padding>
+                                                                        </Label>
                                                                      </children>
                                                                   </Pane>
                                                                   <Label fx:id="nextCourseName" text="courseName">
