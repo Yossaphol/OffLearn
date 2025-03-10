@@ -4,6 +4,7 @@ import Student.FontLoader.FontLoader;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
@@ -23,22 +24,18 @@ public class CourseEditController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         FontLoader fontLoader = new  FontLoader();
         fontLoader.loadFonts();
+        displayNavBar();
     }
 
     @FXML
-    private void displayNavBar() {
+    private void displayNavbar(){
         try {
-            FXMLLoader navBarLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/navBar/navBar.fxml"));
-            Pane navBarContent = navBarLoader.load();
+            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/navBar/navBar.fxml"));
+            HBox navContent = calendarLoader.load();
+            searhbar_container.getChildren().setAll(navContent);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    @FXML
-    private Rectangle myRectangle; // เชื่อมกับ fx:id ของ Rectangle
-
-    public void initialize() {
-        myRectangle.setFill(Color.TRANSPARENT); // ทำให้โปร่งใส
-    }
 }
