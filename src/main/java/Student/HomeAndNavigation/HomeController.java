@@ -322,16 +322,8 @@ public class HomeController implements Initializable {
 
     public void route(){
         Navigator nav = new Navigator();
-
-
-
         //Dashboard
         btn_dashboard_atStatistics.setOnMouseClicked(nav::dashboardRoute);
-
-
-
-
-
         //Leaderboard
         topLeaderboard.setOnMouseClicked(nav::leaderboardRoute);
 

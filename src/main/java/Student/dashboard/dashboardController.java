@@ -141,12 +141,6 @@ public class dashboardController implements Initializable {
 
 
 
-        //Adjust size
-        mainScrollPane.requestLayout();
-        mainScrollPane.prefWidthProperty().bind(rootpage.widthProperty());
-        mainScrollPane.prefHeightProperty().bind(rootpage.heightProperty());
-        mainScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        mainScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
         //closePopupAuto();
 
@@ -163,32 +157,13 @@ public class dashboardController implements Initializable {
         scoreChart();
         scoreDevelopmentChart();
 
-        displayNavbar();
-        displaySearchBar();
     }
 
 
 
 
-    private void displayNavbar(){
-        try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/navBar.fxml"));
-            VBox navContent = calendarLoader.load();
-            leftWrapper.getChildren().setAll(navContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
-    private void displaySearchBar(){
-        try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/searchBar.fxml"));
-            HBox searchbarContent = calendarLoader.load();
-            searhbar_container.getChildren().setAll(searchbarContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 
 
 

@@ -59,39 +59,45 @@
          <HBox.margin>
             <Insets left="10.0" />
          </HBox.margin>
+         <graphic>
+            <StackPane prefHeight="133.0" prefWidth="37.0">
+               <children>
+                  <Circle fill="WHITE" radius="16.0" stroke="#898989" strokeType="INSIDE" />
+                  <ImageView fitHeight="22.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../img/icon/grocery-store.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </StackPane>
+         </graphic>
       </Button>
-      <StackPane prefHeight="133.0" prefWidth="37.0">
-         <children>
-            <Circle fill="WHITE" radius="16.0" stroke="#898989" strokeType="INSIDE" />
-            <ImageView fitHeight="22.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../img/icon/grocery-store.png" />
-               </image>
+      <Button fx:id="setting" mnemonicParsing="false" style="-fx-background-color: transparent;">
+         <graphic>
+            <StackPane prefHeight="65.0" prefWidth="47.0">
+               <children>
+                  <Circle fill="WHITE" radius="16.0" stroke="#898989" strokeType="INSIDE" />
+                  <ImageView fx:id="setting_btn" fitHeight="22.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../img/icon/settings.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
-         </children>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </StackPane>
-      <StackPane prefHeight="65.0" prefWidth="47.0">
-         <children>
-            <Circle fill="WHITE" radius="16.0" stroke="#898989" strokeType="INSIDE" />
-            <ImageView fx:id="setting_btn" fitHeight="22.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../img/icon/settings.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-         </children>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </StackPane>
+            </StackPane>
+         </graphic>
+      </Button>
       <Line endX="95.0" endY="-63.70000457763672" layoutX="95.0" layoutY="100.0" opacity="0.19" startX="95.0" startY="-100.0">
          <HBox.margin>
             <Insets left="20.0" right="20.0" />

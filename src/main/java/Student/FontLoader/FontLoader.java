@@ -12,6 +12,7 @@ public class FontLoader {
     private final List<Font> loadedFonts = new ArrayList<>();
 
     public void loadFonts() {
+        boolean loadable = false;
         try {
             File fontsFolder = new File(getClass().getResource("/fonts").toURI());
 
@@ -22,12 +23,13 @@ public class FontLoader {
 
                     if (font != null) {
                         loadedFonts.add(font);
-                        System.out.println("Loaded font: " + fontFile.getName());
+                        loadable = true;
                     } else {
                         System.err.println("Failed to load font: " + fontFile.getName());
                     }
                 }
             }
+
         } catch (URISyntaxException | NullPointerException e) {
             e.printStackTrace();
             System.err.println("Error loading fonts: " + e.getMessage());

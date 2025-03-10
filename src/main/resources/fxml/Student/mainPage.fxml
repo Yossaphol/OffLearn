@@ -6,21 +6,21 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox fx:id="bg" fillHeight="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.mainPage.mainPageController">
+<HBox fx:id="bg" fillHeight="false" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.mainPage.mainPageController">
    <children>
-      <VBox fx:id="leftWrapper" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="300.0" prefHeight="1024.0" prefWidth="293.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;" />
+      <VBox fx:id="leftWrapper" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="300.0" prefWidth="293.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;" />
       <ScrollPane fx:id="mainScrollPane" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../../css/Home.css" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
          <content>
-            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1028.0" prefWidth="1118.0">
+            <AnchorPane maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1118.0">
                <children>
-                  <VBox prefHeight="1075.0" prefWidth="1136.0" style="-fx-background-color: #FBFBFB;">
+                  <VBox maxHeight="1.7976931348623157E308" prefWidth="1136.0" style="-fx-background-color: #FBFBFB;">
                      <children>
                         <HBox fx:id="searchbar_container" alignment="CENTER" prefHeight="65.0" prefWidth="1139.0" style="-fx-background-color: #FBFBFB;">
                            <VBox.margin>
                               <Insets bottom="30.0" top="30.0" />
                            </VBox.margin>
                         </HBox>
-                        <HBox fx:id="content" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="920.0" prefWidth="1139.0" />
+                        <HBox fx:id="content" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="1139.0" />
                      </children>
                   </VBox>
                </children>

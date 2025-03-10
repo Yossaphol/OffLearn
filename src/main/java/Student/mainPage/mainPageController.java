@@ -1,6 +1,8 @@
 package Student.mainPage;
 
+import Student.navBarAndSearchbar.navBarController;
 import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,6 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import Student.HomeAndNavigation.Navigator;
 import javafx.util.Duration;
+import Student.FontLoader.FontLoader;
 
 public class mainPageController implements Initializable {
     @FXML
@@ -30,11 +33,16 @@ public class mainPageController implements Initializable {
         displayContent("/fxml/Student/HomePage/home.fxml");
     }
 
-    private void displayNavbar() {
+
+    public void displayNavbar() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/navBar.fxml"));
             VBox navContent = loader.load();
+
+            navBarController navCtrl = loader.getController();
             leftWrapper.getChildren().setAll(navContent);
+            navCtrl.changeFontColor();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,20 +62,18 @@ public class mainPageController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
             HBox contentComponent = loader.load();
-
-
+            FontLoader font = new FontLoader();
+            font.loadFonts();
             FadeTransition fadeOut = new FadeTransition(Duration.millis(300), content);
             fadeOut.setFromValue(1.0);
             fadeOut.setToValue(0.0);
             fadeOut.setOnFinished(event -> {
                 content.getChildren().setAll(contentComponent);
-
                 FadeTransition fadeIn = new FadeTransition(Duration.millis(300), content);
                 fadeIn.setFromValue(0.0);
                 fadeIn.setToValue(1.0);
                 fadeIn.play();
             });
-
             fadeOut.play();
         } catch (IOException e) {
             e.printStackTrace();
