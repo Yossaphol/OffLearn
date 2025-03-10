@@ -61,7 +61,7 @@ public class signupController implements Initializable {
         }
 
         if (userDB.signupConnect(fullname, username, password, email)) {
-            showAlert("Success", "Account created successfully!", Alert.AlertType.INFORMATION);
+            showAlert("Signup Successful", "Account created successfully!", Alert.AlertType.INFORMATION);
             backToLogin();
         } else {
             showAlert("Sign Up Failed", "The username or Gmail already exists.", Alert.AlertType.ERROR);

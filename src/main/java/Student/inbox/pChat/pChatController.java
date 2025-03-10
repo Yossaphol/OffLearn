@@ -43,12 +43,6 @@ public class pChatController implements Initializable {
     private ListView<String> teacherList;
 
     @FXML
-    private Button allCourse;
-
-    @FXML
-    private Button myCourse;
-
-    @FXML
     private HBox currentTeacher;
 
     @FXML
@@ -57,16 +51,8 @@ public class pChatController implements Initializable {
     @FXML
     private Label currentTeacherName;
 
-    @FXML
-    private HBox MainFrame;
 
     @FXML
-    public HBox dashboard;
-    public HBox home;
-    public HBox course;
-    public HBox inbox;
-    public HBox task;
-    public HBox roadmap;
     public BorderPane borderPane;
     public VBox privateBar;
     public VBox pChatDisplay;
@@ -82,16 +68,9 @@ public class pChatController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        route();
         switchToGlobal();
-        hoverEffect();
 
         spMain.vvalueProperty().bind(vboxMessage.heightProperty());
-        allCourse.setStyle("-fx-background-color: linear-gradient(to bottom, #410066, #8100CC);" +
-                "-fx-background-radius: 10px 10px 10px 10px;");
-        myCourse.setStyle("-fx-background-color: linear-gradient(to right, #410066, #8100CC);" +
-                "-fx-background-radius: 15px 15px 15px 15px;");
-
         teacherDb = new TeacherDBConnect();
         chatHistoryDB = new ChatHistoryDB();
         studentDBConnect = new StudentDBConnect();
@@ -116,8 +95,8 @@ public class pChatController implements Initializable {
 
         globalButton.setOnMouseClicked(mouseEvent -> {
             try {
-                FXMLLoader globalRoute = new FXMLLoader(getClass().getResource("/fxml/Student/Teacher.inbox/routeToPChat.fxml"));
-                FXMLLoader globalChatDisplay = new FXMLLoader(getClass().getResource("/fxml/Student/Teacher.inbox/gChat.fxml"));
+                FXMLLoader globalRoute = new FXMLLoader(getClass().getResource("/fxml/Student/inbox/routeToPChat.fxml"));
+                FXMLLoader globalChatDisplay = new FXMLLoader(getClass().getResource("/fxml/Student/inbox/gChat.fxml"));
 
                 borderPane.setLeft(globalRoute.load());
                 borderPane.setCenter(globalChatDisplay.load());
@@ -136,26 +115,6 @@ public class pChatController implements Initializable {
     public void switchBackToDefault() {
         borderPane.setLeft(privateBar);
         borderPane.setCenter(pChatDisplay);
-    }
-
-    public void hoverEffect(){
-        HomeController method = new HomeController();
-        method.hoverEffect(dashboard);
-        method.hoverEffect(home);
-        method.hoverEffect(course);
-        method.hoverEffect(inbox);
-        method.hoverEffect(task);
-        method.hoverEffect(roadmap);
-    }
-
-    public void route(){
-        Navigator nav = new Navigator();
-        dashboard.setOnMouseClicked(nav::dashboardRoute);
-        home.setOnMouseClicked(nav::homeRoute);
-        course.setOnMouseClicked(nav::courseRoute);
-        inbox.setOnMouseClicked(nav::inboxRoute);
-        task.setOnMouseClicked(nav::taskRoute);
-        roadmap.setOnMouseClicked(nav::roadmapRoute);
     }
 
     public void switchTeacher(String newTeacher) {
