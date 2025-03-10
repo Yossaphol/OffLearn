@@ -101,4 +101,10 @@ module com.example.offlearn {
 
     exports Teacher.courseManagement to javafx.fxml;
     opens Teacher.courseManagement;
+
+    exports Teacher.LoginAndSignup to javafx.fxml;
+    opens Teacher.LoginAndSignup;
+
+    exports Teacher.showBalance to javafx.fxml;
+    opens Teacher.showBalance;
 }

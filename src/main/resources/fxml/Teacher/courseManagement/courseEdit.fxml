@@ -1,116 +1,223 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="2093.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="Teacher.courseManagement.CourseEditController">
-   <Pane fx:id="navBarContent" prefHeight="200.0" prefWidth="200.0">
-      <VBox fx:id="searhbar_container" layoutX="-1.0" layoutY="-4.0" prefHeight="205.0" prefWidth="1442.0"/>
-   </Pane>
-   <Pane prefHeight="200.0" prefWidth="200.0">
-      <Label layoutX="142.0" layoutY="59.0" text="Course Management" textFill="#0675de">
-         <font>
-            <Font name="System Bold" size="32.0"/>
-         </font>
-      </Label>
-      <Label layoutX="147.0" layoutY="97.0" text="การจัดการคอร์ส">
-         <font>
-            <Font size="24.0"/>
-         </font>
-      </Label>
-   </Pane>
-   <HBox prefHeight="400.0" prefWidth="1440.0">
-      <Pane prefHeight="200.0" prefWidth="200.0"/>
-      <GridPane prefHeight="233.0" prefWidth="345.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="129.28106689453125" minHeight="10.0" prefHeight="79.58319091796875"
-                            vgrow="SOMETIMES"/>
-            <RowConstraints maxHeight="312.565673828125" minHeight="10.0" prefHeight="253.41680908203125"
-                            vgrow="SOMETIMES"/>
-            <RowConstraints maxHeight="77.22479248046875" minHeight="10.0" prefHeight="50.79852294921875"
-                            vgrow="SOMETIMES"/>
-         </rowConstraints>
-         <ImageView fitHeight="166.0" fitWidth="312.0" pickOnBounds="true" preserveRatio="true"
-                    GridPane.rowIndex="1">
-            <image>
-               <Image url="@../../../img/Picture/DSA.jpg"/>
-            </image>
-         </ImageView>
-         <Label text="รายละเอียดคอร์ส" textFill="#0675de">
-            <font>
-               <Font size="24.0"/>
-            </font>
-         </Label>
-         <Label alignment="CENTER" prefHeight="17.0" prefWidth="350.0" text="เปลี่ยนรูป" textAlignment="CENTER"
-                GridPane.rowIndex="2">
-            <font>
-               <Font size="18.0"/>
-            </font>
-         </Label>
-      </GridPane>
-      <Pane prefHeight="400.0" prefWidth="148.0"/>
-      <VBox prefHeight="400.0" prefWidth="800.0">
-         <Pane prefHeight="50.0" prefWidth="673.0"/>
-         <Label alignment="TOP_CENTER" prefHeight="29.0" prefWidth="34.0" text="ชื่อ">
-            <font>
-               <Font size="24.0"/>
-            </font>
-         </Label>
-         <Pane prefHeight="20.0" prefWidth="673.0"/>
-         <HBox prefHeight="30.0" prefWidth="673.0">
-            <TextField fx:id="courseName" prefHeight="30.0" prefWidth="575.0"/>
-         </HBox>
-         <Pane prefHeight="50.0" prefWidth="673.0"/>
-         <HBox prefHeight="121.0" prefWidth="750.0">
-            <VBox prefHeight="100.0" prefWidth="250.0">
-               <Label text="หมวดหมู่">
-                  <font>
-                     <Font size="24.0"/>
-                  </font>
-               </Label>
-               <Pane prefHeight="20.0" prefWidth="200.0"/>
-               <ChoiceBox fx:id="courseCategoty" prefHeight="26.0" prefWidth="210.0"/>
+
+<VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.CourseEditController">
+   <children>
+      <VBox fx:id="searhbar_container" prefHeight="205.0" prefWidth="1442.0" />
+      <ScrollPane>
+         <content>
+            <VBox prefHeight="2093.0" prefWidth="1440.0">
+               <VBox>
+                  <children>
+                     <VBox prefHeight="86.0" prefWidth="1440.0" />
+                     <HBox prefHeight="100.0" prefWidth="200.0">
+                        <children>
+                           <VBox prefHeight="200.0" prefWidth="100.0" />
+                           <VBox prefHeight="100.0" prefWidth="1001.0">
+                              <children>
+                                 <Label text="Course Management" textFill="#0675de">
+                                    <font>
+                                       <Font name="Kodchasan Bold" size="32.0" />
+                                    </font>
+                                 </Label>
+                                 <VBox prefHeight="18.0" prefWidth="1001.0" />
+                                 <Label text="การจัดการคอร์ส">
+                                    <font>
+                                       <Font name="Noto Sans Thai Regular" size="24.0" />
+                                    </font>
+                                 </Label>
+                              </children>
+                           </VBox>
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+               <VBox prefHeight="486.0" prefWidth="1440.0">
+                  <children>
+                     <VBox prefHeight="50.0" prefWidth="1440.0" />
+                     <GridPane>
+                       <columnConstraints>
+                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="354.5816955566406" minWidth="10.0" prefWidth="201.87298583984375" />
+                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="333.92181396484375" minWidth="10.0" prefWidth="333.92181396484375" />
+                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="764.3512573242188" minWidth="10.0" prefWidth="495.07818603515625" />
+                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="289.05078125" minWidth="0.0" prefWidth="286.7344970703125" />
+                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="121.3724365234375" minWidth="10.0" prefWidth="121.3724365234375" />
+                       </columnConstraints>
+                       <rowConstraints>
+                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                       </rowConstraints>
+                        <children>
+                           <Label alignment="CENTER" prefHeight="39.0" prefWidth="334.0" text="รายละเอียดคอร์ส" textFill="#0675de" GridPane.columnIndex="1">
+                              <font>
+                                 <Font name="Noto Sans Thai Bold" size="24.0" />
+                              </font>
+                           </Label>
+                           <Label alignment="CENTER_RIGHT" prefHeight="29.0" prefWidth="289.0" text="คลิกกล่องข้อความเพื่อแก้ไข" GridPane.columnIndex="3">
+                              <font>
+                                 <Font name="Noto Sans Thai Regular" size="18.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </GridPane>
+                     <GridPane>
+                        <columnConstraints>
+                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="1385.4591064453125" minWidth="10.0" prefWidth="208.79234313964844" />
+                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="777.6853637695312" minWidth="10.0" prefWidth="336.59637451171875" />
+                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="827.9190063476562" minWidth="10.0" prefWidth="73.3388671875" />
+                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="827.9190063476562" minWidth="10.0" prefWidth="705.3699951171875" />
+                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="827.9190063476562" minWidth="10.0" prefWidth="120.6300048828125" />
+                        </columnConstraints>
+                        <rowConstraints>
+                           <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        </rowConstraints>
+                        <children>
+                           <GridPane prefHeight="300.0" prefWidth="331.0" GridPane.columnIndex="1">
+                             <columnConstraints>
+                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                             </columnConstraints>
+                             <rowConstraints>
+                               <RowConstraints maxHeight="271.9285888671875" minHeight="10.0" prefHeight="271.9285888671875" vgrow="SOMETIMES" />
+                               <RowConstraints maxHeight="77.0980224609375" minHeight="3.268798828125" prefHeight="28.5714111328125" vgrow="SOMETIMES" />
+                             </rowConstraints>
+                              <children>
+                                 <ImageView fx:id="coursePicture" fitHeight="158.0" fitWidth="352.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../../../img/Picture/DSA.jpg" />
+                                    </image>
+                                 </ImageView>
+                                 <Label fx:id="changeCoursePicture" alignment="CENTER" prefHeight="17.0" prefWidth="350.0" text="เปลี่ยนรูป" GridPane.rowIndex="1">
+                                    <font>
+                                       <Font name="Noto Sans Thai Regular" size="18.0" />
+                                    </font>
+                                 </Label>
+                              </children>
+                           </GridPane>
+                           <GridPane GridPane.columnIndex="3">
+                             <columnConstraints>
+                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                             </columnConstraints>
+                             <rowConstraints>
+                               <RowConstraints maxHeight="95.6859130859375" minHeight="10.0" prefHeight="65.5208740234375" vgrow="SOMETIMES" />
+                               <RowConstraints maxHeight="225.4840087890625" minHeight="10.0" prefHeight="174.89813232421875" vgrow="SOMETIMES" />
+                               <RowConstraints maxHeight="68.56982421875" minHeight="10.0" prefHeight="58.60186767578125" vgrow="SOMETIMES" />
+                             </rowConstraints>
+                              <children>
+                                 <GridPane>
+                                   <columnConstraints>
+                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                   </columnConstraints>
+                                   <rowConstraints>
+                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                   </rowConstraints>
+                                    <children>
+                                       <Label text="ชื่อ">
+                                          <font>
+                                             <Font name="Noto Sans Thai SemiBold" size="13.0" />
+                                          </font>
+                                       </Label>
+                                       <HBox GridPane.rowIndex="1">
+                                          <children>
+                                             <TextField prefHeight="27.0" prefWidth="401.0" text="Data Structure and Algorithms">
+                                                <font>
+                                                   <Font name="Kodchasan Regular" size="13.0" />
+                                                </font>
+                                             </TextField>
+                                          </children>
+                                       </HBox>
+                                    </children>
+                                 </GridPane>
+                                 <GridPane GridPane.rowIndex="1">
+                                   <columnConstraints>
+                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="344.82330322265625" minWidth="10.0" prefWidth="206.4912109375" />
+                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="532.6134033203125" minWidth="10.0" prefWidth="498.0087890625" />
+                                   </columnConstraints>
+                                   <rowConstraints>
+                                     <RowConstraints maxHeight="85.21551513671875" minHeight="10.0" prefHeight="43.35150146484375" vgrow="SOMETIMES" />
+                                     <RowConstraints maxHeight="141.4329833984375" minHeight="10.0" prefHeight="136.64849853515625" vgrow="SOMETIMES" />
+                                   </rowConstraints>
+                                    <children>
+                                       <Label text="หมวดหมู่">
+                                          <font>
+                                             <Font name="Noto Sans Thai SemiBold" size="13.0" />
+                                          </font>
+                                       </Label>
+                                       <VBox GridPane.rowIndex="1">
+                                          <children>
+                                             <ComboBox editable="true" prefWidth="150.0" promptText="IT" />
+                                          </children>
+                                       </VBox>
+                                       <Label text="คำอธิบายคอร์ส" GridPane.columnIndex="1">
+                                          <font>
+                                             <Font name="Noto Sans Thai SemiBold" size="13.0" />
+                                          </font>
+                                       </Label>
+                                       <VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                          <children>
+                                             <TextField prefHeight="115.0" prefWidth="499.0" />
+                                          </children>
+                                       </VBox>
+                                    </children>
+                                 </GridPane>
+                                 <GridPane GridPane.rowIndex="2">
+                                   <columnConstraints>
+                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                   </columnConstraints>
+                                   <rowConstraints>
+                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                   </rowConstraints>
+                                    <children>
+                                       <Label text="ราคา">
+                                          <font>
+                                             <Font name="Noto Sans Thai SemiBold" size="13.0" />
+                                          </font>
+                                       </Label>
+                                       <GridPane GridPane.rowIndex="1">
+                                         <columnConstraints>
+                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="349.48193359375" minWidth="10.0" prefWidth="156.97711181640625" />
+                                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="549.0374145507812" minWidth="10.0" prefWidth="13.2127685546875" />
+                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="549.0374145507812" minWidth="10.0" prefWidth="535.2872314453125" />
+                                         </columnConstraints>
+                                         <rowConstraints>
+                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                         </rowConstraints>
+                                          <children>
+                                             <TextField prefHeight="27.0" prefWidth="163.0" text="1500">
+                                                <font>
+                                                   <Font name="Kodchasan SemiBold" size="13.0" />
+                                                </font>
+                                             </TextField>
+                                             <Label prefHeight="17.0" prefWidth="136.0" text="บาท" GridPane.columnIndex="2">
+                                                <font>
+                                                   <Font name="Kodchasan SemiBold" size="13.0" />
+                                                </font>
+                                             </Label>
+                                          </children>
+                                       </GridPane>
+                                    </children>
+                                 </GridPane>
+                              </children>
+                           </GridPane>
+                        </children>
+                     </GridPane>
+                  </children>
+               </VBox>
             </VBox>
-            <VBox prefHeight="100.0" prefWidth="511.0">
-               <Label text="คำอธิบายคอร์ส">
-                  <font>
-                     <Font size="24.0"/>
-                  </font>
-               </Label>
-               <Pane prefHeight="20.0" prefWidth="200.0"/>
-               <TextArea fx:id="courseDetail" prefHeight="60.0" prefWidth="200.0"/>
-            </VBox>
-         </HBox>
-         <Pane prefHeight="20.0" prefWidth="200.0"/>
-         <VBox prefHeight="80.0" prefWidth="750.0">
-            <Label text="ราคา">
-               <font>
-                  <Font size="24.0"/>
-               </font>
-            </Label>
-            <Pane prefHeight="20.0" prefWidth="200.0"/>
-            <HBox prefHeight="33.0" prefWidth="750.0">
-               <TextField fx:id="coursePrice" prefHeight="30.0" prefWidth="214.0"/>
-            </HBox>
-         </VBox>
-      </VBox>
-      <Pane prefHeight="200.0" prefWidth="200.0"/>
-   </HBox>
-   <ListView prefHeight="836.0" prefWidth="1440.0"/>
+         </content>
+      </ScrollPane>
+   </children>
 </VBox>

@@ -12,7 +12,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox prefHeight="135.0" prefWidth="1440.0" />
+      <HBox fx:id="navbarContainer" prefHeight="135.0" prefWidth="1440.0" />
       <HBox prefHeight="910.0" prefWidth="1440.0">
          <children>
             <VBox prefHeight="900.0" prefWidth="982.0">
