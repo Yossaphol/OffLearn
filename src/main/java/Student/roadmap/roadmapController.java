@@ -19,28 +19,8 @@ public class roadmapController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         FontLoader fontLoader = new  FontLoader();
         fontLoader.loadFonts();
-        displayNavbar();
-        displaySearchBar();
 
     }
 
-    private void displayNavbar(){
-        try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/navBar.fxml"));
-            VBox navContent = calendarLoader.load();
-            LeftWrapper.getChildren().setAll(navContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
-    private void displaySearchBar(){
-        try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/searchBar.fxml"));
-            HBox searchbarContent = calendarLoader.load();
-            searhbar_container.getChildren().setAll(searchbarContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

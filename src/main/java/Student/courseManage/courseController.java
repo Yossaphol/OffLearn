@@ -17,26 +17,7 @@ public class courseController implements Initializable {
     public HBox searchbar_container;
 
     public void initialize(URL location, ResourceBundle resources) {
-        displayNavbar();
-        displaySearchBar();
-    }
-    private void displayNavbar(){
-        try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/navBar.fxml"));
-            VBox navContent = calendarLoader.load();
-            leftWrapper.getChildren().setAll(navContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
-    private void displaySearchBar(){
-        try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/searchBar.fxml"));
-            HBox searchbarContent = calendarLoader.load();
-            searchbar_container.getChildren().setAll(searchbarContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

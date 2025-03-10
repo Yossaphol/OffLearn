@@ -1,371 +1,368 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<HBox fx:id="bg" fillHeight="false" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.myCourse.myCourseController">
+<HBox fx:id="bg" fillHeight="false" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1136.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.myCourse.myCourseController">
    <children>
-      <VBox fx:id="leftWrapper" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="300.0" prefHeight="1024.0" prefWidth="293.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;" />
-      <ScrollPane fx:id="mainScrollPane" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="2103.0" stylesheets="@../../../../../../../../OffLearn-client/src/main/resources/css/Home.css" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
-         <content>
-            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="2094.0">
+      <HBox fx:id="rootpage" prefHeight="2093.0">
+         <children>
+            <VBox prefHeight="1950.0" style="-fx-background-color: #FBFBFB;">
                <children>
-                  <HBox fx:id="rootpage" prefHeight="2093.0">
+                  <HBox prefHeight="1978.0">
                      <children>
-                        <VBox prefHeight="1950.0" style="-fx-background-color: #FBFBFB;">
+                        <VBox alignment="TOP_CENTER" prefHeight="1943.0">
                            <children>
-                              <Pane prefHeight="62.0" />
-                              <HBox fx:id="searchbarcontainer" alignment="CENTER" prefHeight="65.0" style="-fx-background-color: #FBFBFB;" />
-                              <HBox prefHeight="1978.0">
+                              <HBox prefHeight="575.0">
                                  <children>
-                                    <VBox alignment="TOP_CENTER" prefHeight="1943.0">
+                                    <VBox prefHeight="575.0">
                                        <children>
-                                          <HBox prefHeight="575.0">
+                                          <VBox fx:id="category" prefHeight="66.0" prefWidth="594.0">
                                              <children>
-                                                <VBox prefHeight="575.0">
+                                                <HBox prefHeight="59.0" prefWidth="594.0">
                                                    <children>
-                                                      <VBox fx:id="category" prefHeight="66.0" prefWidth="594.0">
+                                                      <Pane prefHeight="59.0" prefWidth="514.0">
                                                          <children>
-                                                            <HBox prefHeight="59.0" prefWidth="594.0">
-                                                               <children>
-                                                                  <Pane prefHeight="59.0" prefWidth="514.0">
-                                                                     <children>
-                                                                        <Label prefHeight="36.0" prefWidth="183.0" text="Your Course" textFill="#9700b5">
-                                                                           <font>
-                                                                              <Font size="25.0" />
-                                                                           </font>
-                                                                        </Label>
-                                                                        <ToggleButton fx:id="allcoursebutton" layoutX="232.0" layoutY="32.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="51.0" style="-fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: transparent; -fx-text-fill: #6A0DAD;" text="ทั้งหมด" />
-                                                                        <ToggleButton fx:id="ongoingcoursebutton" layoutX="291.0" layoutY="32.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="62.0" style="-fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: transparent; -fx-text-fill: #6A0DAD;" text="เรียนต่อ" />
-                                                                        <ToggleButton fx:id="offlinecoursebutton" layoutX="463.0" layoutY="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="58.0" style="-fx-background-color: transparent; -fx-border-radius: 10; -fx-underline: true;" text="ออฟไลน์" />
-                                                                        <ToggleButton fx:id="finishedcoursebutton" layoutX="363.0" layoutY="33.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="51.0" style="-fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: transparent; -fx-text-fill: #6A0DAD;" text="จบแล้ว" />
-                                                                        <Label layoutX="402.0" layoutY="-8.0" prefHeight="17.0" prefWidth="205.0" text="เปลี่ยน design scrollbar/silder ไม่เป็น ;w;" />
-                                                                        <Label layoutX="412.0" layoutY="2.0" prefHeight="17.0" prefWidth="205.0">
-                                                                           <padding>
-                                                                              <Insets top="5.0" />
-                                                                           </padding>
-                                                                        </Label>
-                                                                     </children>
-                                                                  </Pane>
-                                                               </children>
-                                                            </HBox>
-                                                         </children>
-                                                      </VBox>
-                                                      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="509.0" prefWidth="558.0" style="-fx-background-color: transparent; -fx-border-color: transparent;">
-                                                         <content>
-                                                            <VBox fx:id="coursecardContainer" minHeight="0.0" prefWidth="498.0" spacing="25.0" style="-fx-background-color: transparent; -fx-border-color: transparent;">
-                                                               <fx:include source="CourseCard.fxml" />
-                                                               <fx:include source="CourseCard.fxml" />
-                                                               <fx:include source="CourseCard.fxml" />
-                                                               <fx:include source="CourseCard.fxml" />
-                                                            </VBox>
-                                                         </content>
-                                                         <opaqueInsets>
-                                                            <Insets />
-                                                         </opaqueInsets>
-                                                      </ScrollPane>
-                                                   </children>
-                                                </VBox>
-                                                <Pane fx:id="previewContainer" prefHeight="575.0" prefWidth="502.0">
-                                                   <fx:include source="cardpreview.fxml" />
-                                                </Pane>
-                                             </children>
-                                          </HBox>
-                                          <VBox fx:id="statistics_data" prefHeight="880.0" prefWidth="1096.0">
-                                             <children>
-                                                <VBox prefHeight="393.0" prefWidth="1038.0">
-                                                   <children>
-                                                      <VBox fx:id="studyTable" prefHeight="385.0" prefWidth="1039.0">
-                                                         <children>
-                                                            <HBox prefHeight="447.0" prefWidth="1039.0" style="-fx-background-color: white; -fx-background-radius: 20;">
-                                                               <effect>
-                                                                  <DropShadow>
-                                                                     <color>
-                                                                        <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
-                                                                     </color>
-                                                                  </DropShadow>
-                                                               </effect>
+                                                            <Label prefHeight="36.0" prefWidth="183.0" text="Your Course" textFill="#9700b5">
+                                                               <font>
+                                                                  <Font size="25.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <ToggleButton fx:id="allcoursebutton" layoutX="232.0" layoutY="32.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="51.0" style="-fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: transparent; -fx-text-fill: #6A0DAD;" text="ทั้งหมด" />
+                                                            <ToggleButton fx:id="ongoingcoursebutton" layoutX="291.0" layoutY="32.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="62.0" style="-fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: transparent; -fx-text-fill: #6A0DAD;" text="เรียนต่อ" />
+                                                            <ToggleButton fx:id="offlinecoursebutton" layoutX="463.0" layoutY="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="58.0" style="-fx-background-color: transparent; -fx-border-radius: 10; -fx-underline: true;" text="ออฟไลน์" />
+                                                            <ToggleButton fx:id="finishedcoursebutton" layoutX="363.0" layoutY="33.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="51.0" style="-fx-background-color: transparent; -fx-border-radius: 10; -fx-border-color: transparent; -fx-text-fill: #6A0DAD;" text="จบแล้ว" />
+                                                            <Label layoutX="402.0" layoutY="-8.0" prefHeight="17.0" prefWidth="205.0" text="เปลี่ยน design scrollbar/silder ไม่เป็น ;w;" />
+                                                            <Label layoutX="412.0" layoutY="2.0" prefHeight="17.0" prefWidth="205.0">
                                                                <padding>
-                                                                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                                                  <Insets top="5.0" />
                                                                </padding>
-                                                               <children>
-                                                                  <VBox prefHeight="328.0" prefWidth="1018.0">
-                                                                     <children>
-                                                                        <Label prefHeight="29.0" prefWidth="1017.0" text="Study table -- TEMPLATE --" textFill="#8100cc">
-                                                                           <font>
-                                                                              <Font name="Noto Sans Thai Bold" size="18.0" />
-                                                                           </font>
-                                                                        </Label>
-                                                                        <VBox fx:id="Time" prefHeight="50.0" prefWidth="999.0">
-                                                                           <children>
-                                                                              <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="998.0">
-                                                                                 <children>
-                                                                                    <Pane prefHeight="39.0" prefWidth="113.0" />
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="9:00-10:00">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                    </Label>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="10:00-11:00">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                    </Label>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="11:00-12:00">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                    </Label>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="12:00-13:00">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                    </Label>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="13:00-14:00">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                    </Label>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="14:00-15:00">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                    </Label>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="15:00-16:00">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                    </Label>
-                                                                                 </children>
-                                                                              </HBox>
-                                                                              <Line endX="897.2929077148438" endY="-1.4142135381698608" startX="-100.0" stroke="#e8cdf7" />
-                                                                           </children>
-                                                                        </VBox>
-                                                                        <VBox fx:id="Sunday" prefHeight="50.0" prefWidth="999.0">
-                                                                           <children>
-                                                                              <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="998.0">
-                                                                                 <children>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="อาทิตย์">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                    </Label>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                    </Label>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="202.0" style="-fx-background-color: #0675DE; -fx-background-radius: 10;" text="Data Structures and Algorithms" textFill="WHITE">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                       <cursor>
-                                                                                          <Cursor fx:constant="HAND" />
-                                                                                       </cursor>
-                                                                                    </Label>
-                                                                                 </children>
-                                                                              </HBox>
-                                                                              <Line endX="897.2929077148438" endY="-1.4142135381698608" startX="-100.0" stroke="#e8cdf7" />
-                                                                           </children>
-                                                                        </VBox>
-                                                                        <VBox fx:id="Time1" prefHeight="50.0" prefWidth="999.0">
-                                                                           <children>
-                                                                              <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="998.0">
-                                                                                 <children>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="จันทร์">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                    </Label>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                    </Label>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="116.0">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                    </Label>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="219.0" style="-fx-background-color: brown; -fx-background-radius: 10;" text="Problem Solving for Computer Programming" textFill="WHITE">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                       <cursor>
-                                                                                          <Cursor fx:constant="HAND" />
-                                                                                       </cursor>
-                                                                                    </Label>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                    </Label>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="244.0" style="-fx-background-color: green; -fx-background-radius: 10;" text="Business Fundamental" textFill="WHITE">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                       <cursor>
-                                                                                          <Cursor fx:constant="HAND" />
-                                                                                       </cursor>
-                                                                                    </Label>
-                                                                                 </children>
-                                                                              </HBox>
-                                                                              <Line endX="897.2929077148438" endY="-1.4142135381698608" startX="-100.0" stroke="#e8cdf7" />
-                                                                           </children>
-                                                                        </VBox>
-                                                                        <VBox fx:id="Time2" prefHeight="50.0" prefWidth="999.0">
-                                                                           <children>
-                                                                              <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="998.0">
-                                                                                 <children>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="อังคาร">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                    </Label>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                    </Label>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                    </Label>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="231.0">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                    </Label>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="80.0" style="-fx-background-color: green; -fx-background-radius: 10;" text="Business Fundamental" textFill="WHITE">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                       <cursor>
-                                                                                          <Cursor fx:constant="HAND" />
-                                                                                       </cursor>
-                                                                                    </Label>
-                                                                                 </children>
-                                                                              </HBox>
-                                                                              <Line endX="897.2929077148438" endY="-1.4142135381698608" startX="-100.0" stroke="#e8cdf7" />
-                                                                           </children>
-                                                                        </VBox>
-                                                                        <VBox fx:id="Time3" prefHeight="50.0" prefWidth="999.0">
-                                                                           <children>
-                                                                              <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="998.0">
-                                                                                 <children>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="พุทธ">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                    </Label>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="218.0" style="-fx-background-color: #0675DE; -fx-background-radius: 10;" text="Data Structures and Algorithms" textFill="WHITE">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                       <cursor>
-                                                                                          <Cursor fx:constant="HAND" />
-                                                                                       </cursor>
-                                                                                    </Label>
-                                                                                 </children>
-                                                                              </HBox>
-                                                                              <Line endX="897.2929077148438" endY="-1.4142135381698608" startX="-100.0" stroke="#e8cdf7" />
-                                                                           </children>
-                                                                        </VBox>
-                                                                        <VBox fx:id="Time4" prefHeight="50.0" prefWidth="999.0">
-                                                                           <children>
-                                                                              <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="998.0">
-                                                                                 <children>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="พฤหัส">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                    </Label>
-                                                                                 </children>
-                                                                              </HBox>
-                                                                              <Line endX="897.2929077148438" endY="-1.4142135381698608" startX="-100.0" stroke="#e8cdf7" />
-                                                                           </children>
-                                                                        </VBox>
-                                                                        <VBox fx:id="Time5" prefHeight="50.0" prefWidth="999.0">
-                                                                           <children>
-                                                                              <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="998.0">
-                                                                                 <children>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="ศุกร์">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                    </Label>
-                                                                                 </children>
-                                                                              </HBox>
-                                                                              <Line endX="897.2929077148438" endY="-1.4142135381698608" startX="-100.0" stroke="#e8cdf7" />
-                                                                           </children>
-                                                                        </VBox>
-                                                                        <VBox fx:id="Time6" prefHeight="50.0" prefWidth="999.0">
-                                                                           <children>
-                                                                              <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="998.0">
-                                                                                 <children>
-                                                                                    <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="เสาร์">
-                                                                                       <font>
-                                                                                          <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                                                       </font>
-                                                                                    </Label>
-                                                                                 </children>
-                                                                              </HBox>
-                                                                              <Line endX="897.2929077148438" endY="-1.4142135381698608" startX="-100.0" stroke="#e8cdf7" />
-                                                                           </children>
-                                                                        </VBox>
-                                                                     </children>
-                                                                  </VBox>
-                                                               </children>
-                                                            </HBox>
+                                                            </Label>
                                                          </children>
-                                                      </VBox>
+                                                      </Pane>
                                                    </children>
-                                                   <VBox.margin>
-                                                      <Insets top="30.0" />
-                                                   </VBox.margin>
-                                                </VBox>
-                                                <HBox prefHeight="68.0" prefWidth="1096.0">
-                                                   <children>
-                                                      <Label prefHeight="22.0" prefWidth="463.0" text="กำหนดการ" textFill="#a8a8a8">
-                                                         <font>
-                                                            <Font name="Noto Sans Thai Regular" size="13.0" />
-                                                         </font>
-                                                         <HBox.margin>
-                                                            <Insets left="20.0" top="20.0" />
-                                                         </HBox.margin>
-                                                      </Label>
-                                                   </children>
-                                                   <VBox.margin>
-                                                      <Insets top="20.0" />
-                                                   </VBox.margin>
                                                 </HBox>
-                                                <VBox fx:id="bigcalendarContainer" prefHeight="868.0" prefWidth="1096.0" style="-fx-border-color: purple; -fx-border-radius: 15;" />
                                              </children>
-                                             <VBox.margin>
-                                                <Insets top="25.0" />
-                                             </VBox.margin>
                                           </VBox>
+                                          <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="509.0" prefWidth="558.0" style="-fx-background-color: transparent; -fx-border-color: transparent;">
+                                             <content>
+                                                <VBox fx:id="coursecardContainer" minHeight="0.0" prefWidth="498.0" spacing="25.0" style="-fx-background-color: transparent; -fx-border-color: transparent;">
+                                                   <children>
+                                                      <fx:include source="CourseCard.fxml" />
+                                                      <fx:include source="CourseCard.fxml" />
+                                                      <fx:include source="CourseCard.fxml" />
+                                                      <fx:include source="CourseCard.fxml" />
+                                                   </children>
+                                                </VBox>
+                                             </content>
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                          </ScrollPane>
                                        </children>
-                                       <padding>
-                                          <Insets left="50.0" right="50.0" top="25.0" />
-                                       </padding>
                                     </VBox>
+                                    <Pane fx:id="previewContainer" prefHeight="575.0" prefWidth="502.0">
+                                       <children>
+                                          <fx:include source="cardpreview.fxml" />
+                                       </children>
+                                    </Pane>
                                  </children>
                               </HBox>
+                              <VBox fx:id="statistics_data" prefHeight="880.0" prefWidth="1096.0">
+                                 <children>
+                                    <VBox prefHeight="393.0" prefWidth="1038.0">
+                                       <children>
+                                          <VBox fx:id="studyTable" prefHeight="385.0" prefWidth="1039.0">
+                                             <children>
+                                                <HBox prefHeight="447.0" prefWidth="1039.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                                                   <effect>
+                                                      <DropShadow>
+                                                         <color>
+                                                            <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                                                         </color>
+                                                      </DropShadow>
+                                                   </effect>
+                                                   <padding>
+                                                      <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                                   </padding>
+                                                   <children>
+                                                      <VBox prefHeight="328.0" prefWidth="1018.0">
+                                                         <children>
+                                                            <Label prefHeight="29.0" prefWidth="1017.0" text="Study table -- TEMPLATE --" textFill="#8100cc">
+                                                               <font>
+                                                                  <Font name="Noto Sans Thai Bold" size="18.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <VBox fx:id="Time" prefHeight="50.0" prefWidth="999.0">
+                                                               <children>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="998.0">
+                                                                     <children>
+                                                                        <Pane prefHeight="39.0" prefWidth="113.0" />
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="9:00-10:00">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="10:00-11:00">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="11:00-12:00">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="12:00-13:00">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="13:00-14:00">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="14:00-15:00">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="15:00-16:00">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <Line endX="897.2929077148438" endY="-1.4142135381698608" startX="-100.0" stroke="#e8cdf7" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox fx:id="Sunday" prefHeight="50.0" prefWidth="999.0">
+                                                               <children>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="998.0">
+                                                                     <children>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="อาทิตย์">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="202.0" style="-fx-background-color: #0675DE; -fx-background-radius: 10;" text="Data Structures and Algorithms" textFill="WHITE">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                           <cursor>
+                                                                              <Cursor fx:constant="HAND" />
+                                                                           </cursor>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <Line endX="897.2929077148438" endY="-1.4142135381698608" startX="-100.0" stroke="#e8cdf7" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox fx:id="Time1" prefHeight="50.0" prefWidth="999.0">
+                                                               <children>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="998.0">
+                                                                     <children>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="จันทร์">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="116.0">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="219.0" style="-fx-background-color: brown; -fx-background-radius: 10;" text="Problem Solving for Computer Programming" textFill="WHITE">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                           <cursor>
+                                                                              <Cursor fx:constant="HAND" />
+                                                                           </cursor>
+                                                                        </Label>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="244.0" style="-fx-background-color: green; -fx-background-radius: 10;" text="Business Fundamental" textFill="WHITE">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                           <cursor>
+                                                                              <Cursor fx:constant="HAND" />
+                                                                           </cursor>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <Line endX="897.2929077148438" endY="-1.4142135381698608" startX="-100.0" stroke="#e8cdf7" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox fx:id="Time2" prefHeight="50.0" prefWidth="999.0">
+                                                               <children>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="998.0">
+                                                                     <children>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="อังคาร">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="231.0">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="80.0" style="-fx-background-color: green; -fx-background-radius: 10;" text="Business Fundamental" textFill="WHITE">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                           <cursor>
+                                                                              <Cursor fx:constant="HAND" />
+                                                                           </cursor>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <Line endX="897.2929077148438" endY="-1.4142135381698608" startX="-100.0" stroke="#e8cdf7" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox fx:id="Time3" prefHeight="50.0" prefWidth="999.0">
+                                                               <children>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="998.0">
+                                                                     <children>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="พุทธ">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="218.0" style="-fx-background-color: #0675DE; -fx-background-radius: 10;" text="Data Structures and Algorithms" textFill="WHITE">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                           <cursor>
+                                                                              <Cursor fx:constant="HAND" />
+                                                                           </cursor>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <Line endX="897.2929077148438" endY="-1.4142135381698608" startX="-100.0" stroke="#e8cdf7" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox fx:id="Time4" prefHeight="50.0" prefWidth="999.0">
+                                                               <children>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="998.0">
+                                                                     <children>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="พฤหัส">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <Line endX="897.2929077148438" endY="-1.4142135381698608" startX="-100.0" stroke="#e8cdf7" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox fx:id="Time5" prefHeight="50.0" prefWidth="999.0">
+                                                               <children>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="998.0">
+                                                                     <children>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="ศุกร์">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <Line endX="897.2929077148438" endY="-1.4142135381698608" startX="-100.0" stroke="#e8cdf7" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox fx:id="Time6" prefHeight="50.0" prefWidth="999.0">
+                                                               <children>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="998.0">
+                                                                     <children>
+                                                                        <Label alignment="CENTER" prefHeight="24.0" prefWidth="134.0" text="เสาร์">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <Line endX="897.2929077148438" endY="-1.4142135381698608" startX="-100.0" stroke="#e8cdf7" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="30.0" />
+                                       </VBox.margin>
+                                    </VBox>
+                                    <HBox prefHeight="68.0" prefWidth="1096.0">
+                                       <children>
+                                          <Label prefHeight="22.0" prefWidth="463.0" text="กำหนดการ" textFill="#a8a8a8">
+                                             <font>
+                                                <Font name="Noto Sans Thai Regular" size="13.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="20.0" top="20.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="20.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <VBox fx:id="bigcalendarContainer" prefHeight="868.0" prefWidth="1096.0" style="-fx-border-color: purple; -fx-border-radius: 15;" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="25.0" />
+                                 </VBox.margin>
+                              </VBox>
                            </children>
+                           <padding>
+                              <Insets left="50.0" right="50.0" top="25.0" />
+                           </padding>
                         </VBox>
                      </children>
                   </HBox>
                </children>
-            </AnchorPane>
-         </content>
-      </ScrollPane>
+            </VBox>
+         </children>
+      </HBox>
    </children>
 </HBox>

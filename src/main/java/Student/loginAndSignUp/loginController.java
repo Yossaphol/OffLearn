@@ -82,7 +82,7 @@ public class loginController implements Initializable {
     @FXML
     private void openHomePage() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/statistics/dashboard.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/mainPage.fxml"));
             root = loader.load();
 
             Stage stage = (Stage) getUsername.getScene().getWindow();

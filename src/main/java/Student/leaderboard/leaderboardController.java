@@ -21,31 +21,12 @@ public class leaderboardController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         welcomeText.setText("Want to see your name on the leaderboard?\n" +
                 "Join a course and test your skills!");
-    displayNavbar();
-    displaySearchBar();
+
     displayLeaderboardTable();
     }
 
 
-    private void displayNavbar(){
-        try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/navBar.fxml"));
-            VBox navContent = calendarLoader.load();
-            leftWrapper.getChildren().setAll(navContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
-    private void displaySearchBar(){
-        try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/searchBar.fxml"));
-            HBox searchbarContent = calendarLoader.load();
-            searhbar_container.getChildren().setAll(searchbarContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     private void displayLeaderboardTable(){
         try {

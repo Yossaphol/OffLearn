@@ -47,8 +47,6 @@ public class taskController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        displayNavbar();
-        displaySearchBar();
 
         HomeController method_home = new HomeController();
         method_home.hoverEffect(task);
@@ -82,24 +80,5 @@ public class taskController implements Initializable {
         point2.setText("-1,000,000 pst");
     }
 
-    private void displayNavbar(){
-        try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/navBar.fxml"));
-            VBox navContent = calendarLoader.load();
-            navBar.getChildren().setAll(navContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void displaySearchBar(){
-        try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/searchBar.fxml"));
-            HBox searchbarContent = calendarLoader.load();
-            searhbar_container.getChildren().setAll(searchbarContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
 }
