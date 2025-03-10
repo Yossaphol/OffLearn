@@ -1,53 +1,80 @@
 package Student.mainPage;
 
+import javafx.animation.FadeTransition;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import Student.HomeAndNavigation.Navigator;
+import javafx.util.Duration;
 
 public class mainPageController implements Initializable {
+    @FXML
     public HBox searchbar_container;
+    @FXML
     public VBox leftWrapper;
+    @FXML
     public HBox content;
+
+    private Navigator navigator;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Navigator.setController(this);
         displayNavbar();
         displaySearchBar();
-        displayContent();
+        displayContent("/fxml/Student/HomePage/home.fxml");
     }
-    private void displayNavbar(){
+
+    private void displayNavbar() {
         try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/navBar.fxml"));
-            VBox navContent = calendarLoader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/navBar.fxml"));
+            VBox navContent = loader.load();
             leftWrapper.getChildren().setAll(navContent);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void displaySearchBar(){
+    private void displaySearchBar() {
         try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/searchBar.fxml"));
-            HBox searchbarContent = calendarLoader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/searchBar.fxml"));
+            HBox searchbarContent = loader.load();
             searchbar_container.getChildren().setAll(searchbarContent);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void displayContent(){
+    public void displayContent(String path) {
         try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/HomePage/home.fxml"));
-            HBox searchbarContent = calendarLoader.load();
-            content.getChildren().setAll(searchbarContent);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+            HBox contentComponent = loader.load();
+
+
+            FadeTransition fadeOut = new FadeTransition(Duration.millis(300), content);
+            fadeOut.setFromValue(1.0);
+            fadeOut.setToValue(0.0);
+            fadeOut.setOnFinished(event -> {
+                content.getChildren().setAll(contentComponent);
+
+                FadeTransition fadeIn = new FadeTransition(Duration.millis(300), content);
+                fadeIn.setFromValue(0.0);
+                fadeIn.setToValue(1.0);
+                fadeIn.play();
+            });
+
+            fadeOut.play();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    public Navigator getNavigator() {
+        return navigator;
+    }
 }

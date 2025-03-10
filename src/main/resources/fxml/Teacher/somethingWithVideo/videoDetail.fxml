@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1055.0" prefWidth="1440.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.videoDetail.videoDetailController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1055.0" prefWidth="1440.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.videoDetail.videoDetailController">
    <children>
       <ScrollPane fx:id="mainscrollpane" hbarPolicy="NEVER" prefHeight="1055.0" prefWidth="1440.0" style="-fx-background-color: white;" vbarPolicy="NEVER">
          <content>
@@ -33,10 +38,10 @@
                               </Button>
                            </children>
                         </HBox>
-                        <HBox prefHeight="316.0" prefWidth="1440.0">
+                        <HBox minHeight="316.0" prefWidth="1440.0">
                            <children>
                               <HBox prefHeight="351.0" prefWidth="289.0" />
-                              <VBox prefHeight="316.0" prefWidth="908.0">
+                              <VBox maxHeight="370.0" minHeight="322.0" prefWidth="908.0">
                                  <children>
                                     <VBox prefHeight="87.0" prefWidth="826.0">
                                        <children>
@@ -58,83 +63,12 @@
                                           </Label>
                                        </children>
                                     </VBox>
-                                    <HBox prefHeight="239.0" prefWidth="890.0" style="-fx-background-radius: 30; -fx-background-color: white; -fx-border-radius: 30;">
+                                    <HBox minHeight="239.0" prefWidth="908.0" style="-fx-background-radius: 30; -fx-background-color: white; -fx-border-radius: 30;">
                                        <children>
-                                          <VBox prefHeight="234.0" prefWidth="862.0">
+                                          <VBox minHeight="234.0" prefWidth="896.0">
                                              <children>
                                                 <VBox prefHeight="21.0" prefWidth="826.0" />
-                                                <VBox prefHeight="202.0" prefWidth="826.0">
-                                                   <children>
-                                                      <HBox prefHeight="202.0" prefWidth="846.0">
-                                                         <children>
-                                                            <HBox prefHeight="202.0" prefWidth="21.0" />
-                                                            <HBox prefHeight="202.0" prefWidth="704.0">
-                                                               <children>
-                                                                  <HBox alignment="CENTER" prefHeight="192.0" prefWidth="257.0" style="-fx-background-radius: 25; -fx-border-radius: 25;" HBox.hgrow="ALWAYS">
-                                                                     <HBox.margin>
-                                                                        <Insets right="15.0" top="10.0" />
-                                                                     </HBox.margin>
-                                                                     <children>
-                                                                        <ImageView fx:id="videothumbnail" fitHeight="175.0" fitWidth="419.0" pickOnBounds="true" preserveRatio="true">
-                                                                           <image>
-                                                                              <Image url="@../../../img/icon/chronometer.png" />
-                                                                           </image>
-                                                                        </ImageView>
-                                                                     </children>
-                                                                  </HBox>
-                                                                  <VBox prefHeight="202.0" prefWidth="512.0">
-                                                                     <children>
-                                                                        <Label fx:id="subjectname" prefHeight="17.0" prefWidth="462.0" text="Subject name" textFill="#0675de">
-                                                                           <font>
-                                                                              <Font name="System Bold" size="24.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="10.0" />
-                                                                           </VBox.margin>
-                                                                        </Label>
-                                                                        <Label text="คำอธิบาย" textFill="#0675de">
-                                                                           <font>
-                                                                              <Font size="18.0" />
-                                                                           </font>
-                                                                        </Label>
-                                                                        <Label fx:id="viddescription" alignment="TOP_LEFT" prefHeight="51.0" prefWidth="466.0" text="placeholder description" wrapText="true">
-                                                                           <font>
-                                                                              <Font size="15.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="5.0" top="5.0" />
-                                                                           </VBox.margin>
-                                                                        </Label>
-                                                                        <Label text="แนบไฟล์" textFill="#0675de">
-                                                                           <font>
-                                                                              <Font size="18.0" />
-                                                                           </font>
-                                                                        </Label>
-                                                                        <VBox fx:id="attachmentcontainer" prefHeight="43.0" prefWidth="501.0" />
-                                                                     </children>
-                                                                  </VBox>
-                                                               </children>
-                                                            </HBox>
-                                                            <HBox prefHeight="79.0" prefWidth="51.0">
-                                                               <children>
-                                                                  <Button fx:id="toedit" mnemonicParsing="false" onAction="#toedit" prefHeight="33.0" prefWidth="32.0" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-border-radius: 10; -fx-cursor: hand;" textFill="TRANSPARENT">
-                                                                     <graphic>
-                                                                        <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                                                                           <image>
-                                                                              <Image url="@../../../img/icon/edit.png" />
-                                                                           </image>
-                                                                        </ImageView>
-                                                                     </graphic>
-                                                                  </Button>
-                                                               </children>
-                                                               <HBox.margin>
-                                                                  <Insets left="80.0" />
-                                                               </HBox.margin>
-                                                            </HBox>
-                                                         </children>
-                                                      </HBox>
-                                                   </children>
-                                                </VBox>
+                                                <VBox fx:id="videoprofilecontainer" minHeight="202.0" prefWidth="896.0" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -150,7 +84,6 @@
                               </VBox>
                            </children>
                         </HBox>
-                        <VBox prefHeight="44.0" prefWidth="1440.0" />
                         <HBox prefHeight="70.0" prefWidth="1440.0">
                            <children>
                               <HBox prefHeight="70.0" prefWidth="321.0" />
@@ -184,7 +117,7 @@
                               </HBox>
                            </children>
                         </HBox>
-                        <HBox prefHeight="322.0" prefWidth="1440.0">
+                        <HBox minHeight="322.0" prefHeight="322.0" prefWidth="3.0">
                            <children>
                               <HBox prefHeight="377.0" prefWidth="277.0" />
                               <HBox prefHeight="322.0" prefWidth="512.0" style="-fx-background-radius: 15; -fx-background-color: white; -fx-border-radius: 15;">

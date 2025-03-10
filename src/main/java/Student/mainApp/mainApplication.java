@@ -12,6 +12,6 @@ public class mainApplication extends Application {
     @Override
     public void start(Stage primaryStage) {
         Navigator navigator = new Navigator();
-        navigator.navigateTo("/fxml/Student/HomePage/home.fxml", primaryStage);
+      //  navigator.navigateTo("/fxml/Student/HomePage/home.fxml", primaryStage);
     }
 }
