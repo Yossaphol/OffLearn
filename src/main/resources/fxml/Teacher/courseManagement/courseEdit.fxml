@@ -15,116 +15,102 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="2093.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.CourseEditController">
-   <children>
-      <Pane fx:id="navBarContent" prefHeight="200.0" prefWidth="200.0" />
-      <Pane prefHeight="200.0" prefWidth="200.0">
-         <children>
-            <Label layoutX="142.0" layoutY="59.0" text="Course Management" textFill="#0675de">
-               <font>
-                  <Font name="System Bold" size="32.0" />
-               </font>
-            </Label>
-            <Label layoutX="147.0" layoutY="97.0" text="การจัดการคอร์ส">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <HBox prefHeight="400.0" prefWidth="1440.0">
-         <children>
-            <Pane prefHeight="200.0" prefWidth="200.0" />
-            <GridPane prefHeight="233.0" prefWidth="345.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="129.28106689453125" minHeight="10.0" prefHeight="79.58319091796875" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="312.565673828125" minHeight="10.0" prefHeight="253.41680908203125" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="77.22479248046875" minHeight="10.0" prefHeight="50.79852294921875" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <ImageView fitHeight="166.0" fitWidth="312.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
-                     <image>
-                        <Image url="@../../../img/Picture/DSA.jpg" />
-                     </image>
-                  </ImageView>
-                  <Label text="รายละเอียดคอร์ส" textFill="#0675de">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" prefHeight="17.0" prefWidth="350.0" text="เปลี่ยนรูป" textAlignment="CENTER" GridPane.rowIndex="2">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-            </GridPane>
-            <Pane prefHeight="400.0" prefWidth="148.0" />
-            <VBox prefHeight="400.0" prefWidth="800.0">
-               <children>
-                  <Pane prefHeight="50.0" prefWidth="673.0" />
-                  <Label alignment="TOP_CENTER" prefHeight="29.0" prefWidth="34.0" text="ชื่อ">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Pane prefHeight="20.0" prefWidth="673.0" />
-                  <HBox prefHeight="30.0" prefWidth="673.0">
-                     <children>
-                        <TextField fx:id="courseName" prefHeight="30.0" prefWidth="575.0" />
-                     </children>
-                  </HBox>
-                  <Pane prefHeight="50.0" prefWidth="673.0" />
-                  <HBox prefHeight="121.0" prefWidth="750.0">
-                     <children>
-                        <VBox prefHeight="100.0" prefWidth="250.0">
-                           <children>
-                              <Label text="หมวดหมู่">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                              <Pane prefHeight="20.0" prefWidth="200.0" />
-                              <ChoiceBox fx:id="courseCategoty" prefHeight="26.0" prefWidth="210.0" />
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="100.0" prefWidth="511.0">
-                           <children>
-                              <Label text="คำอธิบายคอร์ส">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                              <Pane prefHeight="20.0" prefWidth="200.0" />
-                              <TextArea fx:id="courseDetail" prefHeight="60.0" prefWidth="200.0" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-                  <Pane prefHeight="20.0" prefWidth="200.0" />
-                  <VBox prefHeight="80.0" prefWidth="750.0">
-                     <children>
-                        <Label text="ราคา">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Pane prefHeight="20.0" prefWidth="200.0" />
-                        <HBox prefHeight="33.0" prefWidth="750.0">
-                           <children>
-                              <TextField fx:id="coursePrice" prefHeight="30.0" prefWidth="214.0" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </children>
+<VBox prefHeight="2093.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Teacher.courseManagement.CourseEditController">
+   <Pane fx:id="navBarContent" prefHeight="200.0" prefWidth="200.0">
+      <VBox fx:id="searhbar_container" layoutX="-1.0" layoutY="-4.0" prefHeight="205.0" prefWidth="1442.0"/>
+   </Pane>
+   <Pane prefHeight="200.0" prefWidth="200.0">
+      <Label layoutX="142.0" layoutY="59.0" text="Course Management" textFill="#0675de">
+         <font>
+            <Font name="System Bold" size="32.0"/>
+         </font>
+      </Label>
+      <Label layoutX="147.0" layoutY="97.0" text="การจัดการคอร์ส">
+         <font>
+            <Font size="24.0"/>
+         </font>
+      </Label>
+   </Pane>
+   <HBox prefHeight="400.0" prefWidth="1440.0">
+      <Pane prefHeight="200.0" prefWidth="200.0"/>
+      <GridPane prefHeight="233.0" prefWidth="345.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="129.28106689453125" minHeight="10.0" prefHeight="79.58319091796875"
+                            vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="312.565673828125" minHeight="10.0" prefHeight="253.41680908203125"
+                            vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="77.22479248046875" minHeight="10.0" prefHeight="50.79852294921875"
+                            vgrow="SOMETIMES"/>
+         </rowConstraints>
+         <ImageView fitHeight="166.0" fitWidth="312.0" pickOnBounds="true" preserveRatio="true"
+                    GridPane.rowIndex="1">
+            <image>
+               <Image url="@../../../img/Picture/DSA.jpg"/>
+            </image>
+         </ImageView>
+         <Label text="รายละเอียดคอร์ส" textFill="#0675de">
+            <font>
+               <Font size="24.0"/>
+            </font>
+         </Label>
+         <Label alignment="CENTER" prefHeight="17.0" prefWidth="350.0" text="เปลี่ยนรูป" textAlignment="CENTER"
+                GridPane.rowIndex="2">
+            <font>
+               <Font size="18.0"/>
+            </font>
+         </Label>
+      </GridPane>
+      <Pane prefHeight="400.0" prefWidth="148.0"/>
+      <VBox prefHeight="400.0" prefWidth="800.0">
+         <Pane prefHeight="50.0" prefWidth="673.0"/>
+         <Label alignment="TOP_CENTER" prefHeight="29.0" prefWidth="34.0" text="ชื่อ">
+            <font>
+               <Font size="24.0"/>
+            </font>
+         </Label>
+         <Pane prefHeight="20.0" prefWidth="673.0"/>
+         <HBox prefHeight="30.0" prefWidth="673.0">
+            <TextField fx:id="courseName" prefHeight="30.0" prefWidth="575.0"/>
+         </HBox>
+         <Pane prefHeight="50.0" prefWidth="673.0"/>
+         <HBox prefHeight="121.0" prefWidth="750.0">
+            <VBox prefHeight="100.0" prefWidth="250.0">
+               <Label text="หมวดหมู่">
+                  <font>
+                     <Font size="24.0"/>
+                  </font>
+               </Label>
+               <Pane prefHeight="20.0" prefWidth="200.0"/>
+               <ChoiceBox fx:id="courseCategoty" prefHeight="26.0" prefWidth="210.0"/>
             </VBox>
-            <Pane prefHeight="200.0" prefWidth="200.0" />
-         </children>
-      </HBox>
-      <ListView prefHeight="836.0" prefWidth="1440.0" />
-   </children>
+            <VBox prefHeight="100.0" prefWidth="511.0">
+               <Label text="คำอธิบายคอร์ส">
+                  <font>
+                     <Font size="24.0"/>
+                  </font>
+               </Label>
+               <Pane prefHeight="20.0" prefWidth="200.0"/>
+               <TextArea fx:id="courseDetail" prefHeight="60.0" prefWidth="200.0"/>
+            </VBox>
+         </HBox>
+         <Pane prefHeight="20.0" prefWidth="200.0"/>
+         <VBox prefHeight="80.0" prefWidth="750.0">
+            <Label text="ราคา">
+               <font>
+                  <Font size="24.0"/>
+               </font>
+            </Label>
+            <Pane prefHeight="20.0" prefWidth="200.0"/>
+            <HBox prefHeight="33.0" prefWidth="750.0">
+               <TextField fx:id="coursePrice" prefHeight="30.0" prefWidth="214.0"/>
+            </HBox>
+         </VBox>
+      </VBox>
+      <Pane prefHeight="200.0" prefWidth="200.0"/>
+   </HBox>
+   <ListView prefHeight="836.0" prefWidth="1440.0"/>
 </VBox>

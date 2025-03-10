@@ -4,12 +4,10 @@ import Student.FontLoader.FontLoader;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
@@ -20,11 +18,18 @@ import java.util.ResourceBundle;
 
 public class CourseEditController implements Initializable {
 
+    public VBox searhbar_container;
+    public TextField courseName;
+    public ChoiceBox courseCategoty;
+    public TextArea courseDetail;
+    public TextField coursePrice;
+    public Pane navBarContent;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         FontLoader fontLoader = new  FontLoader();
         fontLoader.loadFonts();
-        displayNavBar();
+        displayNavbar();
     }
 
     @FXML
