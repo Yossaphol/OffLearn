@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -19,11 +20,12 @@ import java.util.ResourceBundle;
 public class CourseEditController implements Initializable {
 
     public VBox searhbar_container;
-    public TextField courseName;
-    public ChoiceBox courseCategoty;
-    public TextArea courseDetail;
-    public TextField coursePrice;
-    public Pane navBarContent;
+    public ImageView coursePicture;
+    public Label changeCoursePicture;
+    public TextField nameEdit;
+    public ComboBox categoryEdit;
+    public TextField detailEdit;
+    public TextField priceEdit;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
