@@ -29,11 +29,9 @@ public class UserDB extends ConnectDB{
         String query = "INSERT INTO studentdb.user (Fullname, Username, Password, Email) VALUES (?, ?, ?, ?)";
 
         if (isUsernameExist(username)) {
-            System.out.println("This username is already registered. please use another username to register.");
             return false;
         }
         if (isEmailExist(email)) {
-            System.out.println("The email is already registered. Please use another email address to register.");
             return false;
         }
 
