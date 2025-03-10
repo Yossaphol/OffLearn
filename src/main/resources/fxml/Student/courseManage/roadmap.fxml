@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="MainFrame" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2093.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.roadmap.roadmapController">
+<HBox fx:id="MainFrame" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="991.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.roadmap.roadmapController">
    <BorderPane prefHeight="2093.0" prefWidth="1440.0">
       <center>
          <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">

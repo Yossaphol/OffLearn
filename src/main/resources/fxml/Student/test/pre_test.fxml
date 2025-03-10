@@ -4,11 +4,9 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -16,187 +14,180 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="bg" fillHeight="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2093.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.test.pre_testController">
+<HBox fx:id="bg" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2093.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.test.pre_testController">
    <children>
-      <VBox fx:id="leftWrapper" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="300.0" prefHeight="1024.0" prefWidth="293.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;" />
-      <ScrollPane fx:id="mainScrollPane" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="2103.0" prefWidth="1140.0" stylesheets="@../../../css/Home.css" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
-         <content>
-            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="2094.0" prefWidth="1118.0">
+      <HBox fx:id="rootpage" prefHeight="2093.0" prefWidth="1440.0">
+         <children>
+            <VBox fx:id="element_inside" prefHeight="1950.0" prefWidth="1139.0" style="-fx-background-color: #FBFBFB;">
                <children>
-                  <HBox fx:id="rootpage" prefHeight="2093.0" prefWidth="1440.0">
+                  <VBox fx:id="subject_card_space" prefHeight="623.0" prefWidth="1139.0">
                      <children>
-                        <VBox fx:id="element_inside" prefHeight="1950.0" prefWidth="1139.0" style="-fx-background-color: #FBFBFB;">
+                        <VBox fx:id="subject_card" prefHeight="286.0" prefWidth="939.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color red="0.7699999809265137" green="0.7699999809265137" blue="0.7699999809265137" opacity="0.25" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
                            <children>
-                              <Pane prefHeight="62.0" prefWidth="1139.0" />
-                              <HBox fx:id="searchbar_container" alignment="CENTER" prefHeight="65.0" prefWidth="1139.0" style="-fx-background-color: #FBFBFB;">
+                              <Label alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="953.0" text="Pre test" textFill="#8100cc">
+                                 <font>
+                                    <Font name="Noto Sans Thai Bold" size="13.0" />
+                                 </font>
                                  <VBox.margin>
-                                    <Insets bottom="60.0" />
-                                 </VBox.margin></HBox>
-                              <VBox fx:id="subject_card_space" prefHeight="623.0" prefWidth="1139.0">
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="selected_subject_name" text="Data Scientist / AI">
+                                 <font>
+                                    <Font name="Noto Sans Thai Bold" size="64.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="selected_subject_description" text="Pre-test ก่อนเริ่มต้น Roadmap เพื่อหาคอร์สที่เหมาะกับคุณ">
+                                 <font>
+                                    <Font name="Noto Sans Thai Regular" size="16.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <VBox fx:id="subject_card" prefHeight="286.0" prefWidth="939.0" style="-fx-background-color: white; -fx-background-radius: 20;">
-                                       <effect>
-                                          <DropShadow>
-                                             <color>
-                                                <Color red="0.7699999809265137" green="0.7699999809265137" blue="0.7699999809265137" opacity="0.25" />
-                                             </color>
-                                          </DropShadow>
-                                       </effect>
+                                    <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <Label alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="953.0" text="Pre test" textFill="#8100cc">
+                                          <Label fx:id="selected_subject_dif_header" text="ความยาก">
                                              <font>
-                                                <Font name="Noto Sans Thai Bold" size="13.0" />
-                                             </font>
-                                             <VBox.margin>
-                                                <Insets />
-                                             </VBox.margin>
-                                          </Label>
-                                          <Label fx:id="selected_subject_name" text="Data Scientist / AI">
-                                             <font>
-                                                <Font name="Noto Sans Thai Bold" size="64.0" />
+                                                <Font name="Noto Sans Thai Bold" size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="selected_subject_description" text="Pre-test ก่อนเริ่มต้น Roadmap เพื่อหาคอร์สที่เหมาะกับคุณ">
+                                          <Label fx:id="selected_subject_dif" text="ปานกลาง" textFill="#8100cc">
                                              <font>
-                                                <Font name="Noto Sans Thai Regular" size="16.0" />
+                                                <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label fx:id="selected_subject_amount_header" text="จำนวน">
+                                             <font>
+                                                <Font name="Noto Sans Thai Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="selected_subject_amount" text="100 ข้อ" textFill="#8100cc">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="377.0">
+                                       <children>
+                                          <Label fx:id="selected_subject_time_header" text="เวลา">
+                                             <font>
+                                                <Font name="Noto Sans Thai Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="selected_subject_time" text="2 ชม. 30 นาที" textFill="#8100cc">
+                                             <font>
+                                                <Font name="Noto Sans Thai Regular" size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="262.0">
+                                       <children>
+                                          <Circle fx:id="selected_subject_teacher_picture" fill="DODGERBLUE" radius="30.0" stroke="BLACK" strokeType="INSIDE">
+                                             <HBox.margin>
+                                                <Insets right="10.0" />
+                                             </HBox.margin>
+                                          </Circle>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="78.0" prefWidth="167.0">
                                              <children>
-                                                <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                                                <Label text="สร้างโดย" textFill="#a8a8a8">
+                                                   <font>
+                                                      <Font name="Noto Sans Thai Regular" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="selected_subject_teacher_name" prefHeight="0.0" prefWidth="102.0" text="Bobby Lovecat" textFill="#8100cc">
+                                                   <font>
+                                                      <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="selected_subject_teacher_description" prefHeight="0.0" prefWidth="136.0" text="นายกสมาคม Programmer" textFill="#a8a8a8">
+                                                   <font>
+                                                      <Font name="Noto Sans Thai Regular" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="192.0">
                                                    <children>
-                                                      <Label fx:id="selected_subject_dif_header" text="ความยาก">
+                                                      <ImageView fitHeight="17.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../img/icon/like.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label fx:id="selected_subject_teacher_like_count" text="13.3k">
                                                          <font>
-                                                            <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                            <Font name="Noto Sans Thai Regular" size="12.0" />
                                                          </font>
-                                                      </Label>
-                                                      <Label fx:id="selected_subject_dif" text="ปานกลาง" textFill="#8100cc">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                </VBox>
-                                                <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
-                                                   <children>
-                                                      <Label fx:id="selected_subject_amount_header" text="จำนวน">
-                                                         <font>
-                                                            <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label fx:id="selected_subject_amount" text="100 ข้อ" textFill="#8100cc">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                </VBox>
-                                                <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="377.0">
-                                                   <children>
-                                                      <Label fx:id="selected_subject_time_header" text="เวลา">
-                                                         <font>
-                                                            <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label fx:id="selected_subject_time" text="2 ชม. 30 นาที" textFill="#8100cc">
-                                                         <font>
-                                                            <Font name="Noto Sans Thai Regular" size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                </VBox>
-                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="262.0">
-                                                   <children>
-                                                      <Circle fx:id="selected_subject_teacher_picture" fill="DODGERBLUE" radius="30.0" stroke="BLACK" strokeType="INSIDE">
                                                          <HBox.margin>
-                                                            <Insets right="10.0" />
+                                                            <Insets left="5.0" />
                                                          </HBox.margin>
-                                                      </Circle>
-                                                      <VBox alignment="CENTER_LEFT" prefHeight="78.0" prefWidth="167.0">
-                                                         <children>
-                                                            <Label text="สร้างโดย" textFill="#a8a8a8">
-                                                               <font>
-                                                                  <Font name="Noto Sans Thai Regular" size="12.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label fx:id="selected_subject_teacher_name" prefHeight="0.0" prefWidth="102.0" text="Bobby Lovecat" textFill="#8100cc">
-                                                               <font>
-                                                                  <Font name="Noto Sans Thai Bold" size="14.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label fx:id="selected_subject_teacher_description" prefHeight="0.0" prefWidth="136.0" text="นายกสมาคม Programmer" textFill="#a8a8a8">
-                                                               <font>
-                                                                  <Font name="Noto Sans Thai Regular" size="12.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="192.0">
-                                                               <children>
-                                                                  <ImageView fitHeight="17.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                                                     <image>
-                                                                        <Image url="@../../../img/icon/like.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                                  <Label fx:id="selected_subject_teacher_like_count" text="13.3k">
-                                                                     <font>
-                                                                        <Font name="Noto Sans Thai Regular" size="12.0" />
-                                                                     </font>
-                                                                     <HBox.margin>
-                                                                        <Insets left="5.0" />
-                                                                     </HBox.margin>
-                                                                  </Label>
-                                                               </children>
-                                                            </HBox>
-                                                         </children>
-                                                      </VBox>
+                                                      </Label>
                                                    </children>
                                                 </HBox>
                                              </children>
-                                          </HBox>
+                                          </VBox>
                                        </children>
-                                       <padding>
-                                          <Insets bottom="10.0" left="70.0" right="30.0" top="10.0" />
-                                       </padding>
-                                    </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="100.0">
-                                       <VBox.margin>
-                                          <Insets top="30.0" />
-                                       </VBox.margin>
-                                       <children>
-                                          <Label text="คำอธิบาย">
-                                             <font>
-                                                <Font name="Noto Sans Thai Regular" size="14.0" />
-                                             </font></Label>
-                                          <Label fx:id="pretestDescription" alignment="TOP_LEFT" prefHeight="206.0" prefWidth="955.0" />
-                                       </children>
-                                    </VBox>
-                                    <Pane fx:id="do_container" prefHeight="30.0" prefWidth="882.0">
-                                       <children>
-                                          <HBox fx:id="do_box" alignment="CENTER" layoutX="14.0" layoutY="-6.0" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: #8100CC; -fx-background-radius: 30;" stylesheets="@../../../css/Home.css">
-                                             <children>
-                                                <Button fx:id="do_button_text" mnemonicParsing="false" style="-fx-background-color: transparent;" text="เริ่มทำ" textFill="WHITE">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </Button>
-                                             </children>
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                          </HBox>
-                                       </children>
-                                    </Pane>
+                                    </HBox>
                                  </children>
-                                 <padding>
-                                    <Insets left="150.0" right="150.0" />
-                                 </padding>
-                              </VBox>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="70.0" right="30.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <VBox.margin>
+                              <Insets top="30.0" />
+                           </VBox.margin>
+                           <children>
+                              <Label text="คำอธิบาย">
+                                 <font>
+                                    <Font name="Noto Sans Thai Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="pretestDescription" alignment="TOP_LEFT" prefHeight="206.0" prefWidth="955.0" />
                            </children>
                         </VBox>
+                        <Pane fx:id="do_container" prefHeight="30.0" prefWidth="882.0">
+                           <children>
+                              <HBox fx:id="do_box" alignment="CENTER" layoutX="14.0" layoutY="-6.0" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: #8100CC; -fx-background-radius: 30;" stylesheets="@../../../css/Home.css">
+                                 <children>
+                                    <Button fx:id="do_button_text" mnemonicParsing="false" style="-fx-background-color: transparent;" text="เริ่มทำ" textFill="WHITE">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </HBox>
+                           </children>
+                        </Pane>
                      </children>
-                  </HBox>
+                     <padding>
+                        <Insets left="150.0" right="150.0" />
+                     </padding>
+                  </VBox>
                </children>
-            </AnchorPane>
-         </content>
-      </ScrollPane>
+               <padding>
+                  <Insets top="150.0" />
+               </padding>
+            </VBox>
+         </children>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+      </HBox>
    </children>
 </HBox>

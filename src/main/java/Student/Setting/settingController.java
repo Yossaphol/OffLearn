@@ -31,8 +31,8 @@ public class settingController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        route();
-        hover();
+       // route();
+       // hover();
     }
 
     public void hover(){
@@ -47,7 +47,6 @@ public class settingController implements Initializable {
 
     public void route(){
         Navigator nav = new Navigator();
-        dashboard.setOnMouseClicked(nav::dashboardRoute);
         home.setOnMouseClicked(nav::homeRoute);
         course.setOnMouseClicked(nav::courseRoute);
         inbox.setOnMouseClicked(nav::inboxRoute);
