@@ -44,7 +44,7 @@
                     <children>
                         <ImageView fitHeight="423.0" fitWidth="686.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../../img/icon/Group%2027.png" />
+                                <Image url="@../../../img/icon/Group%2027.png" />
                             </image>
                         </ImageView>
                     </children>
@@ -59,7 +59,7 @@
                             <children>
                                 <ImageView fitHeight="96.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../../img/icon/Group%2022.png" />
+                                        <Image url="@../../../img/icon/Group%2022.png" />
                                     </image>
                                 </ImageView>
                                 <Label contentDisplay="CENTER" text="Signup to get started! ">
@@ -74,12 +74,12 @@
                      <children>
                         <VBox prefHeight="124.0" prefWidth="193.0">
                            <children>
-                                      <Label contentDisplay="TOP" text="Name">
+                                      <Label contentDisplay="TOP" text="Firstname">
                                           <font>
                                               <Font name="Kodchasan Regular" size="20.0" />
                                           </font>
                                       </Label>
-                                      <TextField prefHeight="43.0" prefWidth="224.0" style="-fx-border-radius: 10; -fx-background-color: transparent; -fx-border-color: black;">
+                                      <TextField fx:id="getFirstName" prefHeight="43.0" prefWidth="224.0" style="-fx-border-radius: 10; -fx-background-color: transparent; -fx-border-color: black;">
                                  <cursor>
                                     <Cursor fx:constant="TEXT" />
                                  </cursor>
@@ -96,7 +96,7 @@
                                     <Font name="Kodchasan Regular" size="20.0" />
                                  </font>
                               </Label>
-                              <TextField prefHeight="44.0" prefWidth="224.0" style="-fx-border-radius: 10; -fx-background-color: transparent; -fx-border-color: black;">
+                              <TextField fx:id="getLastName" prefHeight="44.0" prefWidth="224.0" style="-fx-border-radius: 10; -fx-background-color: transparent; -fx-border-color: black;">
                                  <cursor>
                                     <Cursor fx:constant="TEXT" />
                                  </cursor>
@@ -114,7 +114,7 @@
                               <Font name="Kodchasan Regular" size="20.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="44.0" prefWidth="489.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 10;">
+                        <TextField fx:id="getUsername" prefHeight="44.0" prefWidth="489.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 10;">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor>
@@ -126,7 +126,7 @@
                                         <Font name="Kodchasan Regular" size="20.0" />
                                     </font>
                                 </Label>
-                                <TextField prefHeight="44.0" prefWidth="489.0" style="-fx-border-radius: 10; -fx-background-color: transparetn; -fx-border-color: black;">
+                                <TextField fx:id="getPassword" prefHeight="44.0" prefWidth="489.0" style="-fx-border-radius: 10; -fx-background-color: transparetn; -fx-border-color: black;">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor>
@@ -138,7 +138,7 @@
                               <Font name="Kodchasan Regular" size="20.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="44.0" prefWidth="489.0" promptText="Example@gmail.com" style="-fx-border-radius: 10; -fx-background-color: transparent; -fx-border-color: black;">
+                        <TextField fx:id="getEmail" prefHeight="44.0" prefWidth="489.0" promptText="Example@gmail.com" style="-fx-border-radius: 10; -fx-background-color: transparent; -fx-border-color: black;">
                            <cursor>
                               <Cursor fx:constant="TEXT" />
                            </cursor>
@@ -149,7 +149,7 @@
                         </VBox>
                           <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="489.0">
                               <children>
-                                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="132.0" style="-fx-background-color: black; -fx-border-radius: 10; -fx-background-radius: 10;" text="Sign up" textFill="WHITE">
+                                  <Button mnemonicParsing="false" onAction="#handleSignup" prefHeight="40.0" prefWidth="132.0" style="-fx-background-color: black; -fx-border-radius: 10; -fx-background-radius: 10;" text="Sign up" textFill="WHITE">
                                       <font>
                                           <Font name="Kodchasan Regular" size="20.0" />
                                       </font>
