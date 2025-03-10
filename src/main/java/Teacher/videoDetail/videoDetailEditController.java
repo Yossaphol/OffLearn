@@ -4,14 +4,12 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
@@ -32,12 +30,13 @@ public class videoDetailEditController implements Initializable {
     @FXML
     private ListView<String> attachmentlist;
 
-    private boolean saved = false;
+    private videoDetailController parentController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         attachmentlist.setItems(FXCollections.observableArrayList());
 
+        // Drag-and-drop logic
         attachmentlist.setOnDragOver(event -> {
             if (event.getDragboard().hasFiles()) {
                 event.acceptTransferModes(javafx.scene.input.TransferMode.COPY_OR_MOVE);
@@ -56,10 +55,16 @@ public class videoDetailEditController implements Initializable {
             }
             event.consume();
         });
-
     }
 
-    // ========== SETTERS  ==========
+    public void setParentController(videoDetailController parent) {
+        this.parentController = parent;
+    }
+
+    public void setThumbnail(Image image) {
+        videothumbnail.setImage(image);
+    }
+
     public void setSubjectName(String subject) {
         subjectnamebox.setText(subject);
     }
@@ -68,43 +73,17 @@ public class videoDetailEditController implements Initializable {
         viddescriptionbox.setText(description);
     }
 
-    public void setThumbnail(Image image) {
-        videothumbnail.setImage(image);
-    }
-
     public void setAttachments(List<String> existingAttachments) {
         attachmentlist.getItems().clear();
         attachmentlist.getItems().addAll(existingAttachments);
-    }
-
-    // ========== GETTERS  ==========
-    public String getSubjectName() {
-        return subjectnamebox.getText();
-    }
-
-    public String getDescription() {
-        return viddescriptionbox.getText();
-    }
-
-    public Image getThumbnail() {
-        return videothumbnail.getImage();
-    }
-
-    public List<String> getAttachments() {
-        return attachmentlist.getItems();
-    }
-
-    public boolean isSaved() {
-        return saved;
     }
 
     @FXML
     private void handleChooseFiles(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Attachment(s)");
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        List<File> selectedFiles = fileChooser.showOpenMultipleDialog(stage);
+        List<File> selectedFiles = fileChooser.showOpenMultipleDialog(subjectnamebox.getScene().getWindow());
         if (selectedFiles != null) {
             for (File file : selectedFiles) {
                 attachmentlist.getItems().add(file.getAbsolutePath());
@@ -116,9 +95,8 @@ public class videoDetailEditController implements Initializable {
     private void handleChangePic(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Thumbnail");
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        File file = fileChooser.showOpenDialog(subjectnamebox.getScene().getWindow());
 
-        File file = fileChooser.showOpenDialog(stage);
         if (file != null) {
             videothumbnail.setImage(new Image(file.toURI().toString()));
         }
@@ -131,18 +109,19 @@ public class videoDetailEditController implements Initializable {
 
     @FXML
     private void handleSave(ActionEvent event) {
-        saved = true;
-        closeWindow(event);
+        if (parentController != null) {
+            parentController.setCurrentThumbnail(videothumbnail.getImage());
+            parentController.setCurrentSubjectName(subjectnamebox.getText());
+            parentController.setCurrentDescription(viddescriptionbox.getText());
+            parentController.setCurrentAttachments(attachmentlist.getItems());
+            parentController.showVideoProfile();
+        }
     }
 
     @FXML
-    private void handleCloseWindow(ActionEvent event) {
-        closeWindow(event);
+    private void handleCancel(ActionEvent event) {
+        if (parentController != null) {
+            parentController.showVideoProfile();
+        }
     }
-
-    private void closeWindow(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
-    }
-
 }
