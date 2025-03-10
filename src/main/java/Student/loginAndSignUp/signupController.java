@@ -64,7 +64,7 @@ public class signupController implements Initializable {
             showAlert("Success", "Account created successfully!", Alert.AlertType.INFORMATION);
             backToLogin();
         } else {
-            showAlert("Sign Up Failed", "Username already exists!", Alert.AlertType.ERROR);
+            showAlert("Sign Up Failed", "The username or Gmail already exists.", Alert.AlertType.ERROR);
         }
     }
     private void showAlert(String title, String message, Alert.AlertType type) {
