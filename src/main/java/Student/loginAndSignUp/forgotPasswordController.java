@@ -52,27 +52,34 @@ public class forgotPasswordController implements Initializable {
         String confirmPassword = getConfirmPassword.getText();
 
         if (gmail.isEmpty() || username.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Please complete all fields.");
+            showAlert("Update Password Failed", "Please complete all fields.", Alert.AlertType.WARNING);
             return;
         }
         if (!userDB.isUserValid(username, gmail)) {
-            showAlert(Alert.AlertType.ERROR, "Username or Gmail is incorrect.");
+            showAlert("Update Password Failed", "Username or Gmail is incorrect.", Alert.AlertType.ERROR);
             return;
         }
         if (!newPassword.equals(confirmPassword)) {
-            showAlert(Alert.AlertType.ERROR, "New password and confirm password do not match. Please try again.");
+            showAlert("Update Password Failed", "New password and confirm password do not match. Please try again.", Alert.AlertType.ERROR);
             return;
         }
 
         if (userDB.updatePasswordConnect(gmail, username, newPassword)) {
-            showAlert(Alert.AlertType.INFORMATION, "Updated password successfully!");
+            showAlert("Update Password Successful", "Updated password successfully!", Alert.AlertType.INFORMATION);
             backToLogin();
         } else {
-            showAlert(Alert.AlertType.ERROR, "An error occurred while changing your password.");
+            showAlert("Update Password Failed", "An error occurred while changing your password.", Alert.AlertType.ERROR);
         }
     }
     private void showAlert(Alert.AlertType alertType, String message) {
         Alert alert = new Alert(alertType);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    private void showAlert(String title, String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
