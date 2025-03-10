@@ -29,9 +29,6 @@ public class loginController implements Initializable {
     private Scene scene;
     private Parent root;
 
-//    private TextField username;
-//    private PasswordField password;
-
     @FXML
     private TextField username;
     @FXML
@@ -152,7 +149,7 @@ public class loginController implements Initializable {
 
         fadeOut.setOnFinished(e -> {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Teacher/LoginSingup/login.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Teacher/LoginAndSignup/login.fxml"));
                 root = loader.load();
 
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

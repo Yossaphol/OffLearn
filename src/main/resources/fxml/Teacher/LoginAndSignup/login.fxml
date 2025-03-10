@@ -32,7 +32,7 @@
                                         <Font name="Kodchasan Bold" size="96.0" />
                                     </font>
                                 </Label>
-                                <Label text="Start your learning journey.">
+                                <Label text="Start your course">
                                     <font>
                                         <Font name="Kodchasan Regular" size="24.0" />
                                     </font>
@@ -139,7 +139,7 @@
                     </effect>
                 </VBox>
                 <Pane prefHeight="15.0" prefWidth="631.0" />
-                <Button mnemonicParsing="false" style="-fx-background-color: none; -fx-underline: true;" text="I’m a Student">
+                <Button mnemonicParsing="false" onAction="#switchtoStudentLogin" style="-fx-background-color: none; -fx-underline: true;" text="I’m a Student">
                     <font>
                         <Font name="Kodchasan Regular" size="16.0" />
                     </font>

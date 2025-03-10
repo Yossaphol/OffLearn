@@ -4,11 +4,10 @@ import Student.FontLoader.FontLoader;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
@@ -19,26 +18,29 @@ import java.util.ResourceBundle;
 
 public class CourseEditController implements Initializable {
 
+    public VBox searhbar_container;
+    public TextField courseName;
+    public ChoiceBox courseCategoty;
+    public TextArea courseDetail;
+    public TextField coursePrice;
+    public Pane navBarContent;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         FontLoader fontLoader = new  FontLoader();
         fontLoader.loadFonts();
+        displayNavbar();
     }
 
     @FXML
-    private void displayNavBar() {
+    private void displayNavbar(){
         try {
-            FXMLLoader navBarLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/navBar/navBar.fxml"));
-            Pane navBarContent = navBarLoader.load();
+            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/navBar/navBar.fxml"));
+            HBox navContent = calendarLoader.load();
+            searhbar_container.getChildren().setAll(navContent);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    @FXML
-    private Rectangle myRectangle; // เชื่อมกับ fx:id ของ Rectangle
-
-    public void initialize() {
-        myRectangle.setFill(Color.TRANSPARENT); // ทำให้โปร่งใส
-    }
 }
