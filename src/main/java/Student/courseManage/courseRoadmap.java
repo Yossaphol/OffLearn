@@ -16,7 +16,7 @@ public class courseRoadmap extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(courseRoadmap.class.getResource("/fxml/Student/courseManage/courseRoadmap.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
+        Scene scene = new Scene(fxmlLoader.load(), 330, 54);
         primaryStage.setTitle("Offlearn");
         primaryStage.setScene(scene);
         primaryStage.show();

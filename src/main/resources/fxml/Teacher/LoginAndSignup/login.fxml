@@ -77,7 +77,7 @@
                                         <Font name="Kodchasan Regular" size="20.0" />
                                     </font>
                                 </Label>
-                                <TextField prefHeight="40.0" prefWidth="489.0" style="-fx-border-radius: 10; -fx-border-color: black; -fx-background-color: transparent;">
+                                <TextField fx:id="getUsername" prefHeight="40.0" prefWidth="489.0" style="-fx-border-radius: 10; -fx-border-color: black; -fx-background-color: transparent;">
                                     <cursor>
                                         <Cursor fx:constant="TEXT" />
                                     </cursor>
@@ -89,7 +89,7 @@
                                         <Font name="Kodchasan Regular" size="20.0" />
                                     </font>
                                 </Label>
-                                <PasswordField prefHeight="40.0" prefWidth="489.0" style="-fx-border-radius: 10; -fx-border-color: black; -fx-background-color: transparent;">
+                                <PasswordField fx:id="getPassword" prefHeight="40.0" prefWidth="489.0" style="-fx-border-radius: 10; -fx-border-color: black; -fx-background-color: transparent;">
                                     <font>
                                         <Font name="Kodchasan Regular" size="16.0" />
                                     </font>
@@ -108,7 +108,7 @@
                                 </VBox>
                                 <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="489.0">
                                     <children>
-                                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="132.0" style="-fx-background-color: black; -fx-border-radius: 10; -fx-border-color: black; -fx-background-radius: 10;" text="Login" textFill="WHITE">
+                                        <Button mnemonicParsing="false" onAction="#handleLogin" prefHeight="40.0" prefWidth="132.0" style="-fx-background-color: black; -fx-border-radius: 10; -fx-border-color: black; -fx-background-radius: 10;" text="Login" textFill="WHITE">
                                             <font>
                                                 <Font name="Kodchasan Regular" size="20.0" />
                                             </font>
@@ -117,7 +117,7 @@
                                             </cursor>
                                         </Button>
                                         <Pane prefHeight="40.0" prefWidth="15.0" />
-                                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: none; -fx-border-radius: 10;" text="I don't have account">
+                                        <Button mnemonicParsing="false" onAction="#forgotPassword" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: none; -fx-border-radius: 10;" text="I don't have account">
                                             <font>
                                                 <Font name="Kodchasan Regular" size="16.0" />
                                             </font>
