@@ -25,8 +25,14 @@ public class topicDB extends ConnectDB{
 
         VBox vbox = new VBox(20);
 
+        String sql = """
+            SELECT t.topicID, t.posterName, t.topic_messages, t.time_stamp, t.favourite_count, u.Profile
+            FROM topicdb t
+            JOIN user u ON t.posterName = u.username
+        """;
+
         try (Connection conn = this.connectToDB();
-             PreparedStatement stmt = conn.prepareStatement("SELECT topicID, posterName, topic_messages, time_stamp, favourite_count FROM topicdb");
+             PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
@@ -39,6 +45,13 @@ public class topicDB extends ConnectDB{
                 controller.setMessages(rs.getString("topic_messages"));
                 controller.setTime(rs.getString("time_stamp"));
                 controller.setFavourite_count(rs.getInt("favourite_count"));
+
+                if (rs.getString("Profile") == null){
+                    controller.setProfile("/img/Profile/user.png");
+                } else {
+                    System.out.println(rs.getString("Profile"));
+                    controller.setProfile(rs.getString("Profile"));
+                }
 
 
                 vbox.getChildren().addFirst(messageBox);

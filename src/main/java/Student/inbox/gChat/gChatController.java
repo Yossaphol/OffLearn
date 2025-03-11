@@ -37,6 +37,11 @@ public class gChatController implements Initializable, SessionHadler {
     @FXML
     private Label Name;
 
+    @FXML
+    private Label profile;
+
+    private String name;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         handleSession();
@@ -51,7 +56,8 @@ public class gChatController implements Initializable, SessionHadler {
 
     @Override
     public void handleSession() {
-        Name.setText(SessionManager.getInstance().getUsername());
+        this.name = SessionManager.getInstance().getUsername();
+        Name.setText(name);
     }
 
     public void refreshContent() {

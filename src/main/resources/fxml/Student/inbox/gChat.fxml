@@ -11,17 +11,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <VBox fx:id="main" prefHeight="890.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.inbox.gChat.gChatController">
    <children>
       <HBox alignment="CENTER" prefHeight="140.0" prefWidth="870.0">
          <children>
-            <ImageView fx:id="imh" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../img/Profile/bussiness-man.png" />
-               </image>
-            </ImageView>
+            <Circle fx:id="profile" fill="DODGERBLUE" radius="38.0" stroke="BLACK" strokeType="INSIDE" />
             <VBox prefHeight="71.0" prefWidth="230.0">
                <children>
                   <Label fx:id="Name" text="StudentTest" textFill="#8100cc">

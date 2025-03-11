@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
@@ -16,11 +17,7 @@
    <children>
       <HBox prefHeight="58.0" prefWidth="800.0" style="-fx-background-color: &quot;F8F3D9&quot;; -fx-background-radius: 25 25 0 0; -fx-border-radius: 25 25 0 0; -fx-border-color: &quot;C2C2C2&quot;;">
          <children>
-            <ImageView fx:id="profile" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../img/Profile/man.png" />
-               </image>
-            </ImageView>
+            <Circle fx:id="profile" fill="DODGERBLUE" radius="24.0" stroke="BLACK" strokeType="INSIDE" />
             <VBox prefHeight="45.0" prefWidth="214.0">
                <children>
                   <Label fx:id="name" text="Students" textFill="#8100cc">

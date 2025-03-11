@@ -7,6 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -18,7 +21,7 @@ public class topicContent implements Initializable {
     private Label name;
 
     @FXML
-    private ImageView profile;
+    private Circle profile;
 
     @FXML
     private Label time;
@@ -65,6 +68,18 @@ public class topicContent implements Initializable {
 
     public void setFavourite_count(int count){
         this.favourite_count.setText(count + "");
+    }
+
+    public void setProfile(String Url){
+        Image img;
+        if (Url.startsWith("http") || Url.startsWith("https")) {
+            img = new Image(Url);
+        } else {
+            img = new Image(getClass().getResource(Url).toExternalForm());
+        }
+
+        this.profile.setStroke(Color.TRANSPARENT);
+        this.profile.setFill(new ImagePattern(img));
     }
 
     public void fav_clicked(){
