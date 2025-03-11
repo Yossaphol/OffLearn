@@ -1,6 +1,7 @@
 package Teacher.videoDetail;
 
-import javafx.animation.FadeTransition;
+import Student.HomeAndNavigation.HomeController;
+import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,11 +13,13 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,13 +36,6 @@ public class videoDetailController implements Initializable {
 
     @FXML
     private Button backbutton;  // tbd
-
-
-    @FXML
-    private VBox attachmentcontainer;  // tbd
-
-    @FXML
-    private Button toedit;  //
 
     @FXML
     private Label videoduration;
@@ -74,6 +70,8 @@ public class videoDetailController implements Initializable {
     @FXML
     private VBox videoprofilecontainer;
 
+    private static final DecimalFormat DF_2 = new DecimalFormat("#.##");
+
     // Example data
 
     private Image currentThumbnail;
@@ -94,15 +92,15 @@ public class videoDetailController implements Initializable {
         dateadded.setText("01/01/2568");
         percentage.setText("64%");
 
-        viewcount.setText(CommaFormat(viewCountNum));
+        viewcount.setText(NumFormat(viewCountNum));
         FontScale(viewcount);
 
-        usercount.setText(CommaFormat(userCountNum));
+        usercount.setText(NumFormat(userCountNum));
         FontScale(usercount);
 
-        countLike.setText(CommaFormat(likeCountNum));
-        countDislike.setText(CommaFormat(dislikeCountNum));
-        commentcount.setText(CommaFormat(commentCountNum));
+        countLike.setText(NumFormat(likeCountNum));
+        countDislike.setText(NumFormat(dislikeCountNum));
+        commentcount.setText(NumFormat(commentCountNum));
 
         displayNavbar();
         loadWithTransition("/fxml/Teacher/somethingWithVideo/VideoProfile.fxml");
@@ -122,24 +120,35 @@ public class videoDetailController implements Initializable {
     }
 
     // --------------------- FORMAT UTILS ---------------------
-    private String CommaFormat(int number) {
-        NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
-        return nf.format(number);
+    private String NumFormat(long value) {
+        double absValue = Math.abs(value);
+
+        if (absValue < 1_000) {
+            return String.valueOf(value);
+        } else if (absValue < 1_000_000) {
+            double val = value / 1_000.0;
+            return DF_2.format(val) + "K";
+        } else if (absValue < 1_000_000_000) {
+            double val = value / 1_000_000.0;
+            return DF_2.format(val) + "M";
+        } else {
+            double val = value / 1_000_000_000.0;
+            return DF_2.format(val) + "B";
+        }
     }
 
     private void FontScale(Label label) {
         String text = label.getText();
         int length = text.length();
 
-        // not final, might scrap to use something like (312.3K) Instead
         if (length <= 4) {
             label.setStyle("-fx-font-size: 48; -fx-font-weight: bold;");
+        } else if (length <= 5) {
+            label.setStyle("-fx-font-size: 46; -fx-font-weight: bold;");
         } else if (length <= 6) {
             label.setStyle("-fx-font-size: 44; -fx-font-weight: bold;");
-        } else if (length <= 8) {
-            label.setStyle("-fx-font-size: 32; -fx-font-weight: bold;");
         } else {
-            label.setStyle("-fx-font-size: 28; -fx-font-weight: bold;");
+            label.setStyle("-fx-font-size: 42; -fx-font-weight: bold;");
         }
     }
 
@@ -177,25 +186,69 @@ public class videoDetailController implements Initializable {
                 editCtrl.setAttachments(currentAttachments);
             }
 
-            FadeTransition fadeOut = new FadeTransition(Duration.millis(200), videoprofilecontainer);
-            fadeOut.setFromValue(1.0);
-            fadeOut.setToValue(0.0);
+            Node oldContent = null;
+            if (!videoprofilecontainer.getChildren().isEmpty()) {
+                oldContent = videoprofilecontainer.getChildren().get(0);
+            }
 
-            fadeOut.setOnFinished(event -> {
+            if (oldContent == null) {
                 videoprofilecontainer.getChildren().setAll(newContent);
-
-                FadeTransition fadeIn = new FadeTransition(Duration.millis(200), videoprofilecontainer);
+                FadeTransition fadeIn = new FadeTransition(Duration.millis(400), videoprofilecontainer);
                 fadeIn.setFromValue(0.0);
                 fadeIn.setToValue(1.0);
                 fadeIn.play();
+                return;
+            }
+
+            double oldHeight = 0.0;
+            if (oldContent instanceof Parent) {
+                Parent oldParent = (Parent) oldContent;
+                oldParent.applyCss();
+                oldParent.layout();
+                oldHeight = oldParent.getBoundsInParent().getHeight();
+            }
+
+            double newHeight = 0.0;
+            if (newContent instanceof Parent) {
+                Parent newParent = (Parent) newContent;
+                newParent.applyCss();
+                newParent.layout();
+                newHeight = newParent.prefHeight(-1);
+            }
+
+            Timeline heightTransition = new Timeline(
+                    new KeyFrame(Duration.ZERO,
+                            new KeyValue(videoprofilecontainer.prefHeightProperty(), oldHeight)),
+                    new KeyFrame(Duration.millis(400),
+                            new KeyValue(videoprofilecontainer.prefHeightProperty(), newHeight))
+            );
+
+            FadeTransition fadeOut = new FadeTransition(Duration.millis(100), videoprofilecontainer);
+            fadeOut.setFromValue(1.0);
+            fadeOut.setToValue(0.0);
+
+            ParallelTransition outTransition = new ParallelTransition(heightTransition, fadeOut);
+
+            outTransition.setOnFinished(e -> {
+                videoprofilecontainer.getChildren().setAll(newContent);
+
+                FadeTransition fadeIn = new FadeTransition(Duration.millis(350), videoprofilecontainer);
+                fadeIn.setFromValue(0.0);
+                fadeIn.setToValue(1.0);
+                fadeIn.setOnFinished(evt -> {
+                    videoprofilecontainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+                });
+
+                fadeIn.play();
             });
 
-            fadeOut.play();
+            outTransition.play();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     // ====================== Setters ======================
     public void setCurrentThumbnail(Image thumbnail) {

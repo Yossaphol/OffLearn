@@ -39,7 +39,7 @@
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="39.0" prefWidth="235.0">
                                  <children>
-                                    <Button fx:id="changePic" mnemonicParsing="false" onAction="#handleChangePic" prefHeight="33.0" prefWidth="82.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="เปลี่ยน" textFill="WHITE">
+                                    <Button fx:id="changePic" mnemonicParsing="false" onAction="#handleChangePic" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="เปลี่ยน" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
@@ -50,7 +50,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Button>
-                                    <Button fx:id="deletePic" mnemonicParsing="false" onAction="#handleDeletePic" prefHeight="33.0" prefWidth="77.0" style="-fx-background-color: #FF0000; -fx-background-radius: 10;" text="ลบ" textFill="WHITE">
+                                    <Button fx:id="deletePic" mnemonicParsing="false" onAction="#handleDeletePic" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: #FF0000; -fx-background-radius: 10;" text="ลบ" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
@@ -105,10 +105,18 @@
                                                 <Font name="System Bold" size="22.0" />
                                              </font>
                                           </Label>
-                                          <Button fx:id="choosefile" alignment="CENTER" mnemonicParsing="false" onAction="#handleChooseFiles" prefHeight="23.0" prefWidth="73.0" style="-fx-background-radius: 10; -fx-border-color: #0675de; -fx-border-radius: 10; -fx-cursor: hand;" text="Choose Files">
+                                          <Button fx:id="choosefile" alignment="CENTER" mnemonicParsing="false" onAction="#handleChooseFiles" prefHeight="23.0" prefWidth="85.0" style="-fx-background-radius: 10; -fx-border-color: #0675de; -fx-border-radius: 10; -fx-cursor: hand; -fx-background-color: #0675de;" text="Choose Files" textFill="WHITE">
                                              <font>
-                                                <Font size="10.0" />
+                                                <Font name="System Bold" size="10.0" />
                                              </font>
+                                          </Button>
+                                          <Button fx:id="deletefile" alignment="CENTER" mnemonicParsing="false" onAction="#handleDeleteFiles" prefHeight="23.0" prefWidth="73.0" style="-fx-background-radius: 10; -fx-border-color: #FF0000; -fx-border-radius: 10; -fx-cursor: hand; -fx-background-color: #FF0000;" text="Delete Files" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold Italic" size="10.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="25.0" />
+                                             </HBox.margin>
                                           </Button>
                                        </children>
                                        <VBox.margin>

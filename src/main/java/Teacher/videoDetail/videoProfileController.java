@@ -1,5 +1,6 @@
 package Teacher.videoDetail;
 
+import Student.HomeAndNavigation.HomeController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -35,6 +36,8 @@ public class videoProfileController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        HomeController effect = new HomeController();
+        effect.hoverEffect(toedit);
     }
 
     public void setParentController(videoDetailController parent) {

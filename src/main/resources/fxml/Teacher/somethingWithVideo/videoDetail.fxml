@@ -28,7 +28,7 @@
                   <Pane layoutX="10.0" layoutY="10.0" prefHeight="32.0" prefWidth="1440.0" />
                   <VBox prefHeight="892.0" prefWidth="1440.0" style="-fx-background-color: white;">
                      <children>
-                        <HBox prefHeight="70.0" prefWidth="1440.0">
+                        <HBox prefHeight="32.0" prefWidth="1440.0">
                            <children>
                               <HBox prefHeight="100.0" prefWidth="200.0" />
                               <Button fx:id="backbutton" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="ย้อนกลับ" textFill="#0675de">
@@ -41,9 +41,9 @@
                         <HBox minHeight="316.0" prefWidth="1440.0">
                            <children>
                               <HBox prefHeight="351.0" prefWidth="289.0" />
-                              <VBox maxHeight="370.0" minHeight="322.0" prefWidth="908.0">
+                              <VBox maxHeight="401.0" minHeight="322.0" prefWidth="908.0">
                                  <children>
-                                    <VBox prefHeight="87.0" prefWidth="826.0">
+                                    <VBox prefHeight="63.0" prefWidth="908.0">
                                        <children>
                                           <Label text="Video Detail" textFill="#0675de">
                                              <font>
@@ -63,12 +63,12 @@
                                           </Label>
                                        </children>
                                     </VBox>
-                                    <HBox minHeight="239.0" prefWidth="908.0" style="-fx-background-radius: 30; -fx-background-color: white; -fx-border-radius: 30;">
+                                    <HBox minHeight="237.0" prefWidth="908.0" style="-fx-background-radius: 30; -fx-background-color: white; -fx-border-radius: 30;">
                                        <children>
-                                          <VBox minHeight="234.0" prefWidth="896.0">
+                                          <VBox fx:id="dynamicbox" minHeight="234.0" prefWidth="896.0">
                                              <children>
-                                                <VBox prefHeight="21.0" prefWidth="826.0" />
-                                                <VBox fx:id="videoprofilecontainer" minHeight="202.0" prefWidth="896.0" />
+                                                <VBox minHeight="21.0" prefHeight="21.0" prefWidth="826.0" />
+                                                <VBox fx:id="videoprofilecontainer" minHeight="250.0" minWidth="900.0" prefWidth="896.0" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -86,7 +86,10 @@
                         </HBox>
                         <HBox prefHeight="70.0" prefWidth="1440.0">
                            <children>
-                              <HBox prefHeight="70.0" prefWidth="321.0" />
+                              <HBox prefHeight="70.0" prefWidth="321.0">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin></HBox>
                               <HBox prefHeight="55.0" prefWidth="246.0">
                                  <children>
                                     <Label prefHeight="55.0" prefWidth="94.0" text="ความยาว :">
@@ -100,6 +103,9 @@
                                        </font>
                                     </Label>
                                  </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
                               </HBox>
                               <HBox prefHeight="55.0" prefWidth="219.0">
                                  <children>
@@ -116,6 +122,9 @@
                                  </children>
                               </HBox>
                            </children>
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
                         </HBox>
                         <HBox minHeight="322.0" prefHeight="322.0" prefWidth="3.0">
                            <children>
@@ -197,27 +206,27 @@
                                                             </HBox>
                                                             <HBox prefHeight="100.0" prefWidth="200.0">
                                                                <children>
-                                                                  <HBox prefHeight="100.0" prefWidth="200.0">
+                                                                  <HBox prefHeight="94.0" prefWidth="216.0">
                                                                      <children>
-                                                                        <Label fx:id="usercount" alignment="CENTER" prefHeight="62.0" text="UserCount">
+                                                                        <Label fx:id="usercount" prefHeight="70.0" text="UserCount">
                                                                            <font>
                                                                               <Font name="System Bold" size="48.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <Label alignment="BOTTOM_CENTER" prefHeight="62.0" prefWidth="33.0" text="คน">
+                                                                        <Label alignment="BOTTOM_LEFT" prefHeight="57.0" prefWidth="26.0" text="คน">
                                                                            <font>
                                                                               <Font name="System Bold" size="16.0" />
                                                                            </font>
                                                                            <HBox.margin>
-                                                                              <Insets left="5.0" />
+                                                                              <Insets left="8.0" />
                                                                            </HBox.margin>
                                                                         </Label>
                                                                      </children>
                                                                   </HBox>
-                                                                  <HBox prefHeight="94.0" prefWidth="46.0" />
+                                                                  <HBox prefHeight="94.0" prefWidth="26.0" />
                                                                   <VBox prefHeight="94.0" prefWidth="238.0">
                                                                      <children>
-                                                                        <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="238.0">
+                                                                        <HBox alignment="CENTER_LEFT" prefHeight="73.0" prefWidth="238.0">
                                                                            <children>
                                                                               <Button fx:id="btnLike" alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: transparent;" textFill="TRANSPARENT">
                                                                                  <graphic>
