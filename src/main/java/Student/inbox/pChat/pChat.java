@@ -13,7 +13,7 @@ public class pChat extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("/fxml/Student/Teacher.inbox/pChat.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Home.class.getResource("/fxml/Student/inbox/pChat.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         primaryStage.setTitle("Offlearn");
         primaryStage.setMaximized(true);

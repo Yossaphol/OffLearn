@@ -16,9 +16,6 @@ module com.example.offlearn {
     requires com.azure.storage.blob;
     requires com.azure.core;
 
-    opens Student.mainApp to javafx.fxml;
-    exports Student.mainApp;
-
     opens Student.inbox to javafx.fxml;
     exports Student.inbox;
 

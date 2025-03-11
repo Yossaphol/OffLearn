@@ -4,6 +4,8 @@ import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
 import Student.inbox.Client;
 import Database.*;
+import a_Session.SessionHadler;
+import a_Session.SessionManager;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,7 +27,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class pChatController implements Initializable {
+public class pChatController implements Initializable, SessionHadler {
 
     @FXML
     private Button sendButton;
@@ -64,10 +66,11 @@ public class pChatController implements Initializable {
     private TeacherDBConnect teacherDb;
     private ChatHistoryDB chatHistoryDB;
     private StudentDBConnect studentDBConnect;
-    private String studentName = "StudentTest";
+    private String studentName;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        handleSession();
         switchToGlobal();
 
         spMain.vvalueProperty().bind(vboxMessage.heightProperty());
@@ -86,6 +89,11 @@ public class pChatController implements Initializable {
 
         sendButton.setOnAction(event -> sendMessage());
         tfMessage.setOnAction(event -> sendMessage());
+    }
+
+    @Override
+    public void handleSession() {
+        this.studentName = SessionManager.getInstance().getUsername();
     }
 
 
@@ -110,7 +118,6 @@ public class pChatController implements Initializable {
             }
         });
     }
-
 
     public void switchBackToDefault() {
         borderPane.setLeft(privateBar);
@@ -232,7 +239,7 @@ public class pChatController implements Initializable {
     );
 
     private void loadTeacherList() {
-        List<String> teacherNames = teacherDb.getTeacherNames(); // เรียกจาก TeacherDBConnect ที่รวมแล้ว
+        List<String> teacherNames = teacherDb.getTeacherNames();
         ObservableList<String> observableList = FXCollections.observableArrayList(teacherNames);
         teacherList.setItems(observableList);
 
@@ -266,5 +273,6 @@ public class pChatController implements Initializable {
             }
         });
     }
+
 
 }
