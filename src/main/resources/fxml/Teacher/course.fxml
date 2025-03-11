@@ -14,22 +14,23 @@
    <children>
       <VBox layoutX="1.0" layoutY="-5.0" prefHeight="1422.0" prefWidth="1444.0">
          <children>
-            <Pane prefHeight="197.0" prefWidth="1444.0" />
+            <HBox prefHeight="172.0" prefWidth="1444.0" />
+            <Pane prefHeight="99.0" prefWidth="1444.0" />
             <HBox prefHeight="74.0" prefWidth="1444.0">
                <children>
                   <HBox prefHeight="52.0" prefWidth="1444.0">
                      <children>
-                        <Pane prefHeight="100.0" prefWidth="276.0" />
-                        <VBox prefHeight="100.0" prefWidth="224.0">
+                        <Pane prefHeight="55.0" prefWidth="161.0" />
+                        <VBox prefHeight="51.0" prefWidth="375.0">
                            <children>
-                              <Label text="Course management" textFill="#0675de">
+                              <Label text="Course Management" textFill="#0675de">
                                  <font>
-                                    <Font name="System Bold" size="24.0" />
+                                    <Font name="Kodchasan Bold" size="24.0" />
                                  </font>
                               </Label>
                               <Label text="การจัดการคอร์ส" textFill="#a8a8a8">
                                  <font>
-                                    <Font size="15.0" />
+                                    <Font name="Noto Sans Thai Regular" size="16.0" />
                                  </font>
                               </Label>
                            </children>
@@ -48,54 +49,75 @@
                            <children>
                               <Label text="ยอดการลงทะเบียน" textFill="#0675de">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="Noto Sans Thai Condensed ExtraBold" size="24.0" />
                                  </font>
                               </Label>
                               <Pane prefHeight="0.0" prefWidth="478.0" />
-                              <HBox alignment="CENTER_LEFT" prefHeight="105.0" prefWidth="478.0">
+                              <HBox alignment="CENTER" prefHeight="105.0" prefWidth="478.0">
                                  <children>
-                                    <Pane prefHeight="62.0" prefWidth="89.0" />
-                                    <Label prefHeight="88.0" prefWidth="267.0" text="ทั้งหมด 1,350 คนในเดือนนี้">
+                                    <Label prefHeight="86.0" prefWidth="81.0" text="ทั้งหมด ">
                                        <font>
-                                          <Font size="24.0" />
+                                          <Font name="Noto Sans Thai Regular" size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="86.0" prefWidth="76.0" text=" 1,350 ">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="86.0" prefWidth="126.0" text="  ในเดือนนี้">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="24.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </HBox>
                               <HBox prefHeight="47.0" prefWidth="478.0">
                                  <children>
-                                    <Pane prefHeight="220.0" prefWidth="134.0" />
+                                    <Pane prefHeight="81.0" prefWidth="83.0" />
+                                    <Rectangle fx:id="arrow" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="81.0" stroke="BLACK" strokeType="INSIDE" width="33.0" />
+                                    <Pane prefHeight="81.0" prefWidth="28.0" />
                                     <VBox prefHeight="220.0" prefWidth="139.0">
                                        <children>
                                           <Pane prefHeight="200.0" prefWidth="139.0" />
                                           <Pane prefHeight="117.0" prefWidth="139.0" />
                                           <Label text="35%" textFill="#0675de">
                                              <font>
-                                                <Font size="64.0" />
+                                                <Font name="Kodchasan Bold" size="64.0" />
                                              </font>
                                           </Label>
                                        </children>
                                     </VBox>
-                                    <VBox alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="100.0">
+                                    <VBox alignment="CENTER" prefHeight="51.0" prefWidth="100.0">
                                        <children>
                                           <Label text="เพิ่มขึ้น">
                                              <font>
-                                                <Font size="24.0" />
+                                                <Font name="Noto Sans Thai Regular" size="24.0" />
                                              </font>
                                           </Label>
                                        </children>
                                     </VBox>
                                  </children>
                               </HBox>
-                              <VBox alignment="CENTER" prefHeight="38.0" prefWidth="478.0">
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Label text="จาก 1,000 คน เดือนที่แล้ว">
+                                    <Label text="จาก ">
                                        <font>
-                                          <Font size="20.0" />
+                                          <Font name="Noto Sans Thai Regular" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text=" 1,000 ">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text=" คน เดือนที่แล้ว">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="20.0" />
                                        </font>
                                     </Label>
                                  </children>
-                              </VBox>
+                              </HBox>
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
@@ -107,13 +129,13 @@
                   </HBox>
                </children>
             </HBox>
-            <Pane prefHeight="200.0" prefWidth="200.0" />
+            <Pane prefHeight="121.0" prefWidth="1444.0" />
             <HBox prefHeight="73.0" prefWidth="1444.0">
                <children>
                   <Pane prefHeight="61.0" prefWidth="241.0" />
                   <Label text="การจัดการคอร์ส" textFill="#a8a8a8">
                      <font>
-                        <Font size="16.0" />
+                        <Font name="Noto Sans Thai Regular" size="16.0" />
                      </font>
                   </Label>
                </children>
@@ -125,19 +147,19 @@
                         <Pane prefHeight="32.0" prefWidth="272.0" />
                         <Label text="คอร์ส(2)">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="Noto Sans Thai Regular" size="16.0" />
                            </font>
                         </Label>
-                        <Pane prefHeight="32.0" prefWidth="457.0" />
+                        <Pane prefHeight="32.0" prefWidth="492.0" />
                         <Label text="หมวดหมู่">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="Noto Sans Thai Regular" size="16.0" />
                            </font>
                         </Label>
-                        <Pane prefHeight="32.0" prefWidth="221.0" />
+                        <Pane prefHeight="32.0" prefWidth="192.0" />
                         <Label text="จำนวนผู้เรียน">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="Noto Sans Thai Regular" size="16.0" />
                            </font>
                         </Label>
                      </children>
@@ -153,15 +175,15 @@
                                           <Pane prefHeight="95.0" prefWidth="29.0" />
                                           <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="76.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />
                                           <Pane prefHeight="95.0" prefWidth="21.0" />
-                                          <VBox alignment="CENTER_LEFT" prefHeight="95.0" prefWidth="355.0">
+                                          <VBox alignment="CENTER_LEFT" prefHeight="95.0" prefWidth="399.0">
                                              <children>
-                                                <Label prefHeight="20.0" prefWidth="249.0" text="Each indrustry in economic system ">
+                                                <Label prefHeight="22.0" prefWidth="352.0" text="Each indrustry in economic system ">
                                                    <font>
-                                                      <Font name="System Bold" size="16.0" />
+                                                      <Font name="Kodchasan Bold" size="16.0" />
                                                    </font>
                                                 </Label>
                                                 <Pane prefHeight="4.0" prefWidth="380.0" />
-                                                <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="380.0">
+                                                <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="361.0">
                                                    <children>
                                                       <ImageView fitHeight="21.0" fitWidth="24.0">
                                                          <image>
@@ -171,7 +193,7 @@
                                                       <Pane prefHeight="35.0" prefWidth="6.0" />
                                                       <Label text="324">
                                                          <font>
-                                                            <Font size="12.0" />
+                                                            <Font name="Kodchasan Regular" size="12.0" />
                                                          </font>
                                                       </Label>
                                                       <Pane prefHeight="35.0" prefWidth="25.0" />
@@ -183,40 +205,63 @@
                                                       <Pane prefHeight="35.0" prefWidth="6.0" />
                                                       <Label text="5">
                                                          <font>
-                                                            <Font size="12.0" />
+                                                            <Font name="Kodchasan Regular" size="12.0" />
                                                          </font>
                                                       </Label>
-                                                      <Pane prefHeight="35.0" prefWidth="47.0" />
-                                                      <Label text="รับชม 13.2K ครั้ง">
-                                                         <font>
-                                                            <Font size="12.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Pane prefHeight="35.0" prefWidth="25.0" />
-                                                      <Label text="4,304 enrolled">
-                                                         <font>
-                                                            <Font size="12.0" />
-                                                         </font>
-                                                      </Label>
+                                                      <Pane prefHeight="35.0" prefWidth="18.0" />
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="111.0">
+                                                         <children>
+                                                            <Label text="รับชม ">
+                                                               <font>
+                                                                  <Font size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="countview" prefHeight="15.0" prefWidth="37.0" text=" 13.2K ">
+                                                               <font>
+                                                                  <Font size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label text=" ครั้ง">
+                                                               <font>
+                                                                  <Font size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <Pane prefHeight="35.0" prefWidth="13.0" />
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="99.0">
+                                                         <children>
+                                                            <Label fx:id="countenrolled" text="4,304 ">
+                                                               <font>
+                                                                  <Font size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label text=" enrolled">
+                                                               <font>
+                                                                  <Font size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
                                                    </children>
                                                 </HBox>
                                              </children>
                                           </VBox>
-                                          <VBox alignment="CENTER" prefHeight="95.0" prefWidth="170.0">
+                                          <VBox alignment="CENTER" prefHeight="95.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="Business" textFill="#0675de">
+                                                <Label fx:id="category" text="Business" textFill="#0675de">
                                                    <font>
-                                                      <Font size="16.0" />
+                                                      <Font name="Kodchasan Bold" size="16.0" />
                                                    </font>
                                                 </Label>
                                              </children>
                                           </VBox>
                                           <Pane prefHeight="95.0" prefWidth="134.0" />
-                                          <VBox alignment="CENTER" prefHeight="95.0" prefWidth="165.0">
+                                          <VBox alignment="CENTER" prefHeight="95.0" prefWidth="151.0">
                                              <children>
-                                                <Label text="4,000" textFill="#0675de">
+                                                <Label fx:id="countstudent" text="4,000" textFill="#0675de">
                                                    <font>
-                                                      <Font size="16.0" />
+                                                      <Font name="Kodchasan Bold" size="16.0" />
                                                    </font>
                                                 </Label>
                                              </children>
