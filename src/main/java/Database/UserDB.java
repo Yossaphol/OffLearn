@@ -7,6 +7,31 @@ import java.sql.SQLException;
 
 public class UserDB extends ConnectDB{
 
+//    public User getUserInfo(String username) {
+//        String query = "SELECT User_ID, Username, Fullname, Password, Profile, Email FROM studentdb.user WHERE Username = ?";
+//
+//        try (Connection conn = this.connectToDB();
+//             PreparedStatement pstmt = conn.prepareStatement(query)) {
+//
+//            pstmt.setString(1, username);
+//            ResultSet rs = pstmt.executeQuery();
+//
+//            if (rs.next()) {
+//                int userID = rs.getInt("User_ID");
+//                String user = rs.getString("Username");
+//                String fullname = rs.getString("Fullname");
+//                String email = rs.getString("Email");
+//                String password = rs.getString("Password");
+//                byte[] profile = rs.getBytes("Profile");
+//                return new User(userID, user, fullname, email, password, profile);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
+
+
 
     public boolean loginConnect(String username, String password){
         String query = "SELECT Username, Password FROM studentdb.user WHERE Username = ? AND Password = ?";
