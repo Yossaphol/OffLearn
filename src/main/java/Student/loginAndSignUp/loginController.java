@@ -4,6 +4,7 @@ import Database.ConnectDB;
 import Database.UserDB;
 import Student.FontLoader.FontLoader;
 
+import a_Session.SessionManager;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,7 +38,6 @@ public class loginController implements Initializable {
     @FXML
     private PasswordField getPassword;
 
-
     FontLoader fontLoader;
 
     @FXML
@@ -63,13 +63,13 @@ public class loginController implements Initializable {
         }
 
         if (userDB.loginConnect(username, password)) {
+            SessionManager.getInstance().setUsername(username);
             showAlert("Login Successful", "Welcome, " + username, Alert.AlertType.INFORMATION);
             openHomePage();
         } else {
             showAlert("Login Failed", "Invalid username or password.", Alert.AlertType.ERROR);
         }
     }
-
 
     private void showAlert(String title, String message, Alert.AlertType type) {
         Alert alert = new Alert(type);
