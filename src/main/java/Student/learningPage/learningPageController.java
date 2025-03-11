@@ -56,7 +56,6 @@ public class learningPageController implements Initializable {
     public ProgressBar nextCourseProgressBar;
     public Rectangle nextImgCourse;
 
-
     public void initialize(URL url, ResourceBundle resourceBundle) {
         FontLoader fontLoader = new FontLoader();
         fontLoader.loadFonts();
@@ -75,8 +74,6 @@ public class learningPageController implements Initializable {
 
         displayNavbar();
         displaySearchBar();
-
-
 
         subject_name.setText("Test Subject");
         ep.setText("Test Episode : 0");
@@ -104,8 +101,6 @@ public class learningPageController implements Initializable {
 
         countLike.setText("0");
         countDislike.setText("0");
-
-
 
         // ปรับ Seekbar ตามเวลาวิดีโอ
         mediaPlayer.setOnReady(() -> {
