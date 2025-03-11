@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox  prefHeight="257.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.dashboard.scoreChartController">
+    <children>
+        <LineChart fx:id="score_development" prefHeight="249.0" prefWidth="531.0">
+            <xAxis>
+                <CategoryAxis side="BOTTOM" fx:id="xAxis_scoreDev" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="yAxis_scoreDev" side="LEFT" />
+            </yAxis>
+        </LineChart>
+        <VBox fx:id="score_analyze" prefHeight="249.0" prefWidth="149.0">
+            <children>
+                <Pane prefHeight="31.0" prefWidth="97.0" />
+                <HBox prefHeight="23.0" prefWidth="147.0">
+                    <children>
+                        <Label prefHeight="24.0" prefWidth="78.0" text="คะแนนสอบ:">
+                            <font>
+                                <Font name="Noto Sans Thai Bold" size="13.0" />
+                            </font>
+                        </Label>
+                        <Label prefHeight="24.0" prefWidth="78.0" text="พัฒนาขึ้น" textFill="#8100cc">
+                            <font>
+                                <Font name="Noto Sans Thai Bold" size="13.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="23.0" prefWidth="147.0">
+                    <children>
+                        <Label prefHeight="23.0" prefWidth="93.0" text="เกณฑ์คะแนน:">
+                            <font>
+                                <Font name="Noto Sans Thai Bold" size="13.0" />
+                            </font>
+                        </Label>
+                        <Label prefHeight="24.0" prefWidth="78.0" text="ผ่าน" textFill="#8100cc">
+                            <font>
+                                <Font name="Noto Sans Thai Bold" size="13.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="23.0" prefWidth="147.0">
+                    <children>
+                        <Label prefHeight="24.0" prefWidth="78.0" text="คะแนนเฉลี่ย:">
+                            <font>
+                                <Font name="Noto Sans Thai Bold" size="13.0" />
+                            </font>
+                        </Label>
+                        <Label prefHeight="24.0" prefWidth="78.0" text="8100" textFill="#8100cc">
+                            <font>
+                                <Font name="Noto Sans Thai Bold" size="13.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</HBox>

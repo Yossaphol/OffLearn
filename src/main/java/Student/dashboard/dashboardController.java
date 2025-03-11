@@ -98,17 +98,17 @@ public class dashboardController implements Initializable {
     public HBox searhbar_container;
     public ScrollPane interest_cat;
     public VBox interestC;
-    public LineChart score_development;
-    public CategoryAxis xAxis_scoreDev;
-    public NumberAxis yAxis_scoreDev;
     public Button save_edit;
     public Button edit;
     public Button saved_roadmap;
     public Label allMyCourse;
     public HBox taskContainer;
     public Button selected_subject;
-    public VBox scoreAnalyze;
-    public Button cyberSecurity;
+    public HBox scoreDetail;
+    public Pane subjectSelector;
+    public Label selectedName;
+    public Label subjectName1;
+    public Label subjectName0;
 
     @FXML
     private StackedBarChart<String, Number> courseProgressionChart;
@@ -124,7 +124,7 @@ public class dashboardController implements Initializable {
         fontLoader.loadFonts();
 
         route();
-    displayTask();
+        displayTask();
 
         HomeController method_home = new HomeController();
 
@@ -146,8 +146,7 @@ public class dashboardController implements Initializable {
 
         save_edit.setVisible(false);
 
-
-
+        displayScore();
 
 
         us_st.setViewOrder(-1);
@@ -160,7 +159,7 @@ public class dashboardController implements Initializable {
         //Call chart
         courseProgressionChart();
         scoreChart();
-        scoreDevelopmentChart();
+
 
 
 
@@ -256,6 +255,51 @@ public class dashboardController implements Initializable {
             e.printStackTrace();
         }
     }
+
+
+    @FXML
+    private void selectSubject(ActionEvent event) {
+        Button clickedBtn = (Button) event.getSource();
+        if (clickedBtn.getId().equals("selected_subject")) {
+            _openSubject(subjectSelector);
+            return;
+        }
+        selected_subject.setText(clickedBtn.getText());
+    }
+
+    @FXML
+    private void _openSubject(Node popup) {
+        popup.setViewOrder(-1);
+        FadeTransition fade = new FadeTransition(Duration.millis(300), popup);
+
+        if (!popup.isVisible()) {
+            popup.setVisible(true);
+            popup.setOpacity(0);
+            fade.setFromValue(0);
+            fade.setToValue(1);
+
+
+        } else {
+            fade.setFromValue(1);
+            fade.setToValue(0);
+            fade.setOnFinished(e -> popup.setVisible(false));
+        }
+
+        fade.play();
+    }
+
+
+
+    private void displayScore() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/statistics/scoreDetail.fxml"));
+            HBox searchbarContent = loader.load();
+            scoreDetail.getChildren().setAll(searchbarContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 
@@ -414,32 +458,7 @@ public class dashboardController implements Initializable {
 
 
 
-    public void scoreDevelopmentChart() {
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
 
-        series.getData().add(new XYChart.Data<>("Quiz1", 100));
-        series.getData().add(new XYChart.Data<>("Quiz2", 300));
-        series.getData().add(new XYChart.Data<>("Quiz3", 200));
-        series.getData().add(new XYChart.Data<>("Quiz4", 500));
-        series.getData().add(new XYChart.Data<>("Quiz5", 480));
-
-        score_development.getData().add(series);
-        score_development.setLegendVisible(false);
-
-        Platform.runLater(() -> {
-            Node line = series.getNode().lookup(".chart-series-line");
-            if (line != null) {
-                line.setStyle("-fx-stroke: #8100cc; -fx-stroke-width: 2px;");
-            }
-
-            for (XYChart.Data<String, Number> data : series.getData()) {
-                Node node = data.getNode();
-                if (node != null) {
-                    node.setStyle("-fx-background-color: transparent; -fx-shape: none;");
-                }
-            }
-        });
-    }
 
 
 

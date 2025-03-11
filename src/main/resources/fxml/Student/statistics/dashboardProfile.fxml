@@ -3,9 +3,10 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -47,6 +48,10 @@
             <Font name="Noto Sans Thai Bold" size="18.0" />
          </font>
       </Label>
-      <Circle fx:id="trophy" fill="DODGERBLUE" layoutX="385.0" layoutY="170.0" radius="11.0" stroke="#ffffff00" strokeType="INSIDE" />
+      <ImageView fitHeight="33.0" fitWidth="25.0" layoutX="368.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../img/icon/trophy-star.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
