@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1419.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1419.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.CourseController">
    <children>
       <VBox layoutX="1.0" layoutY="-5.0" prefHeight="1422.0" prefWidth="1444.0">
          <children>
@@ -187,7 +187,7 @@
                                                    <children>
                                                       <ImageView fitHeight="21.0" fitWidth="24.0">
                                                          <image>
-                                                            <Image url="@../../img/icon/like.png" />
+                                                            <Image url="@../../../img/icon/like.png" />
                                                          </image>
                                                       </ImageView>
                                                       <Pane prefHeight="35.0" prefWidth="6.0" />
@@ -199,7 +199,7 @@
                                                       <Pane prefHeight="35.0" prefWidth="25.0" />
                                                       <ImageView fitHeight="21.0" fitWidth="24.0">
                                                          <image>
-                                                            <Image url="@../../img/icon/dislike.png" />
+                                                            <Image url="@../../../img/icon/dislike.png" />
                                                          </image>
                                                       </ImageView>
                                                       <Pane prefHeight="35.0" prefWidth="6.0" />
