@@ -32,7 +32,6 @@
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="921.0" prefWidth="1029.0">
                            <children>
-                              <Pane prefHeight="39.0" prefWidth="1162.0" />
                               <Pane maxHeight="290.0" maxWidth="700.0" prefHeight="350.0" prefWidth="649.0" style="-fx-background-color: black; -fx-background-radius: 20;" styleClass="overflow-img" stylesheets="@../../../css/Home.css">
                                  <effect>
                                     <DropShadow>

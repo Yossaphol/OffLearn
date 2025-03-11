@@ -107,8 +107,8 @@ public class dashboardController implements Initializable {
     public Label allMyCourse;
     public HBox taskContainer;
     public Button selected_subject;
-    public VBox subject_to_select;
-    public VBox score_analyze;
+    public VBox scoreAnalyze;
+    public Button cyberSecurity;
 
     @FXML
     private StackedBarChart<String, Number> courseProgressionChart;
@@ -161,6 +161,8 @@ public class dashboardController implements Initializable {
         courseProgressionChart();
         scoreChart();
         scoreDevelopmentChart();
+
+
 
     }
 
@@ -231,6 +233,7 @@ public class dashboardController implements Initializable {
 
 
 
+
     @FXML
     private void openPopup(ActionEvent event){
         Button clickedbtn = (Button) event.getSource();
@@ -253,6 +256,8 @@ public class dashboardController implements Initializable {
             e.printStackTrace();
         }
     }
+
+
 
     @FXML
     private void _openPopup(Node popup) {

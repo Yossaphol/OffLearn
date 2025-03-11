@@ -15,9 +15,9 @@
                <children>
                   <VBox maxHeight="1.7976931348623157E308" prefWidth="1136.0" style="-fx-background-color: #FBFBFB;">
                      <children>
-                        <HBox fx:id="searchbar_container" alignment="CENTER" prefHeight="65.0" prefWidth="1139.0" style="-fx-background-color: #FBFBFB;">
+                        <HBox fx:id="searchbar_container" alignment="CENTER" style="-fx-background-color: #FBFBFB;">
                            <VBox.margin>
-                              <Insets bottom="30.0" top="30.0" />
+                              <Insets top="30.0" />
                            </VBox.margin>
                         </HBox>
                         <HBox fx:id="content" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="1139.0" />

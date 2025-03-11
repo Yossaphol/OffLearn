@@ -18,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,6 +32,7 @@ public class navbarController implements Initializable {
     public HBox course;
     public HBox inbox;
     public HBox setting;
+    public Circle userPfp;
 
 
     @Override
