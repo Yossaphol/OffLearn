@@ -9,11 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.chart.*;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import Student.HomeAndNavigation.Navigator;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -26,6 +23,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -109,6 +107,7 @@ public class dashboardController implements Initializable {
     public Label selectedName;
     public Label subjectName1;
     public Label subjectName0;
+    public DatePicker date;
 
     @FXML
     private StackedBarChart<String, Number> courseProgressionChart;
@@ -160,12 +159,15 @@ public class dashboardController implements Initializable {
         courseProgressionChart();
         scoreChart();
 
-
+        setDate();
 
 
     }
 
 
+    public void setDate(){
+        date.setValue(LocalDate.now());
+    }
 
     public void route(){
         Navigator nav = new Navigator();

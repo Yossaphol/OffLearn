@@ -110,3 +110,53 @@
 .scroll-pane{
     -fx-background-color: transparent;
 }
+
+.date-picker {
+    -fx-background-color: #8100cc;
+    -fx-border-color: #8100cc;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-text-fill: white;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: #8100cc;
+}
+
+.date-picker .arrow-button:hover {
+    -fx-background-color: #8100cc;
+}
+
+.date-picker .text-field {
+    -fx-text-fill: black;
+}
+
+.date-picker .popup-content {
+    -fx-background-color: #8100cc;
+}
+
+.date-picker .calendar-grid {
+    -fx-text-fill: white;
+    -fx-background-color: #8100cc;
+}
+
+.date-picker .cell {
+    -fx-text-fill: black;
+}
+
+.date-picker .cell:hover {
+    -fx-text-fill: white;
+    -fx-background-color: #8100cc;
+}
+
+.date-picker .selected {
+    -fx-background-color: white;
+    -fx-text-fill: #8100cc;
+    -fx-font-weight: bold;
+}
+
+.date-picker .day-name-cell {
+    -fx-background-color: #8100cc;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
