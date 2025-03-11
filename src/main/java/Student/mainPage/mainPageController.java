@@ -1,11 +1,13 @@
 package Student.mainPage;
 
 import Student.navBarAndSearchbar.navBarController;
+import a_Session.SessionManager;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
@@ -22,6 +24,8 @@ public class mainPageController implements Initializable {
     public VBox leftWrapper;
     @FXML
     public HBox content;
+//    @FXML
+//    public Label user;
 
     private Navigator navigator;
 
@@ -31,6 +35,14 @@ public class mainPageController implements Initializable {
         displayNavbar();
         displaySearchBar();
         displayContent("/fxml/Student/HomePage/home.fxml");
+
+        //ได้แล้ววุ้ววววว เดี๋ยวหา label มาใส่ username แล้วถ้ามีรูปโปรไฟล์ก็ไปดึงมาจากdbโดยหาจากusername เน้อออ
+//        String username = SessionManager.getInstance().getUsername();
+//        if (username != null) {
+//            user.setText(username + "!");
+//        } else {
+//            user.setText("Welcome, Guest!");
+//        }
     }
 
 
