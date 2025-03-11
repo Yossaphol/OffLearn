@@ -1,21 +1,30 @@
 package Student.swing;
 
 import Database.*;
+import a_Session.SessionHadler;
+import a_Session.SessionManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class postTopic implements ActionListener {
+public class postTopic implements ActionListener, SessionHadler {
 
     private JFrame jFrame;
     private JPanel contentPanel;
     private JButton cancel, post;
     private JTextArea jTextArea;
     private JLabel yourTopic;
+    private String name;
+
+    @Override
+    public void handleSession() {
+        this.name = SessionManager.getInstance().getUsername();
+    }
 
     public void openSwingWindow() {
+        handleSession();
         SwingUtilities.invokeLater(() -> {
 
             try {
@@ -78,7 +87,7 @@ public class postTopic implements ActionListener {
         } else if (e.getSource() == post){
             String messages = jTextArea.getText();
             topicDB topic = new topicDB();
-            topic.saveTopic(messages, "test");
+            topic.saveTopic(messages, name);
             jFrame.dispose();
         }
     }

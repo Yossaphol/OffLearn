@@ -38,6 +38,7 @@ public class topicContent implements Initializable {
     @FXML
     private VBox topicView;
 
+
     private boolean fav;
     private int topicId;
     private topicDB database = new topicDB();

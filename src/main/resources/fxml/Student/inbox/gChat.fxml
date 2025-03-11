@@ -17,14 +17,14 @@
    <children>
       <HBox alignment="CENTER" prefHeight="140.0" prefWidth="870.0">
          <children>
-            <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imh" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../img/Profile/bussiness-man.png" />
                </image>
             </ImageView>
             <VBox prefHeight="71.0" prefWidth="230.0">
                <children>
-                  <Label text="StudentTest" textFill="#8100cc">
+                  <Label fx:id="Name" text="StudentTest" textFill="#8100cc">
                      <font>
                         <Font name="Kodchasan Regular" size="18.0" />
                      </font>
