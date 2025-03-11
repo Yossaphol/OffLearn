@@ -1,14 +1,20 @@
 package Student.navBarAndSearchbar;
 
 import Student.HomeAndNavigation.*;
+import a_Session.SessionManager;
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -17,8 +23,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,6 +41,7 @@ public class searchBarC implements Initializable {
     public Label settingLabel;
     public Label cartLabel;
     public Circle userPfp;
+    @FXML
     public Label username;
 
     @Override
@@ -43,6 +52,13 @@ public class searchBarC implements Initializable {
         hoverEffect1(profileBox);
         setImg();
         route();
+
+        String username = SessionManager.getInstance().getUsername();
+        if (username != null) {
+            this.username.setText(username);
+        } else {
+            this.username.setText("Guest");
+        }
     }
 
     public void setImg(){
@@ -72,7 +88,26 @@ public class searchBarC implements Initializable {
     }
 
     public void handleLogout(ActionEvent event){
-        System.out.println("You are loging out naja jubjub");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to sign out?");
+
+        if (alert.showAndWait().get() == ButtonType.OK){
+            SessionManager.getInstance().clearSession();
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/LoginSingup/login.fxml"));
+                Parent root = loader.load();
+
+                Stage stage = (Stage) username.getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.setTitle("Login Page");
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void hoverEffect(){

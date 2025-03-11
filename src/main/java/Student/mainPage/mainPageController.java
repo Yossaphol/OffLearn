@@ -41,7 +41,7 @@ public class mainPageController implements Initializable {
 //        if (username != null) {
 //            user.setText(username + "!");
 //        } else {
-//            user.setText("Welcome, Guest!");
+//            user.setText("Guest!");
 //        }
     }
 
