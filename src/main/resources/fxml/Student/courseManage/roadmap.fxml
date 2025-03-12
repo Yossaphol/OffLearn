@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
@@ -10,6 +12,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <HBox fx:id="MainFrame" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="991.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.roadmap.roadmapController">
@@ -17,8 +21,11 @@
       <center>
          <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <children>
-               <GridPane prefHeight="400.0" prefWidth="1147.0">
+               <GridPane prefHeight="400.0" prefWidth="1147.0" style="-fx-background-color: white;" stylesheets="@../../../css/Home.css">
                   <columnConstraints>
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                   </columnConstraints>
                   <rowConstraints>
@@ -36,22 +43,36 @@
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
+                     <left>
+                        <Circle fill="#7e00cc52" radius="162.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" BorderPane.alignment="CENTER" />
+                     </left>
+                     <right>
+                        <Circle fill="#7e00cc52" radius="96.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" BorderPane.alignment="CENTER" />
+                     </right>
                   </BorderPane>
-                  <Label alignment="CENTER" prefHeight="93.0" prefWidth="1389.0" text="Roadmap" GridPane.rowIndex="2">
+                  <Label alignment="CENTER" prefHeight="93.0" prefWidth="1389.0" text="Roadmap" GridPane.rowIndex="1">
                      <font>
-                        <Font name="System Bold" size="64.0" />
+                        <Font name="Noto Sans Thai Bold" size="64.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="63.0" prefWidth="1458.0" text=" Browse the ever-growing list of up-to-date roadmaps" GridPane.rowIndex="3">
+                  <Label alignment="CENTER" prefHeight="63.0" prefWidth="1458.0" text=" Browse the ever-growing list of up-to-date roadmaps" GridPane.rowIndex="2">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Noto Sans Thai Regular" size="18.0" />
                      </font>
                   </Label>
-                  <BorderPane prefHeight="79.0" prefWidth="1087.0" GridPane.rowIndex="4">
+                  <BorderPane prefHeight="79.0" prefWidth="1087.0" GridPane.rowIndex="3">
                      <center>
-                        <Button fx:id="yourRoadmap" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Roadmap ของคุณ" BorderPane.alignment="CENTER" />
+                        <Button fx:id="yourRoadmap" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="155.0" style="-fx-background-color: #8100cc; -fx-background-radius: 10;" text="Roadmap ของคุณ" textFill="WHITE" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="Noto Sans Thai Regular" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
                      </center>
                   </BorderPane>
+                  <Circle fill="#7e00cc52" radius="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                </GridPane>
                <GridPane prefHeight="474.0" prefWidth="1147.0">
                   <columnConstraints>
@@ -63,7 +84,7 @@
                      <RowConstraints maxHeight="367.1653137207031" minHeight="10.0" prefHeight="40.430419921875" vgrow="SOMETIMES" />
                      <RowConstraints maxHeight="476.39959716796875" minHeight="10.0" prefHeight="420.069580078125" vgrow="SOMETIMES" />
                   </rowConstraints>
-                  <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.rowIndex="2">
+                  <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="rightBorder" stylesheets="@../../../css/Home.css" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
@@ -75,113 +96,242 @@
                      </opaqueInsets>
                      <Label fx:id="category01" text="Web Development" textAlignment="RIGHT">
                         <font>
-                           <Font size="18.0" />
+                           <Font name="Noto Sans Thai Regular" size="18.0" />
                         </font>
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor>
                      </Label>
                      <Label fx:id="category02" text="Personal Development" textAlignment="RIGHT">
                         <font>
-                           <Font size="18.0" />
+                           <Font name="Noto Sans Thai Regular" size="18.0" />
                         </font>
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor>
                      </Label>
                      <Label fx:id="category03" text="Financial" textAlignment="RIGHT">
                         <font>
-                           <Font size="18.0" />
+                           <Font name="Noto Sans Thai Regular" size="18.0" />
                         </font>
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor>
                      </Label>
                      <Label fx:id="category04" text="Artificial Intelligence (AI)" textAlignment="RIGHT">
                         <font>
-                           <Font size="18.0" />
+                           <Font name="Noto Sans Thai Regular" size="18.0" />
                         </font>
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor>
                      </Label>
                      <Label fx:id="category05" text="Game Development" textAlignment="RIGHT">
                         <font>
-                           <Font size="18.0" />
+                           <Font name="Noto Sans Thai Regular" size="18.0" />
                         </font>
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor>
                      </Label>
                      <Label fx:id="category06" text="Design" textAlignment="RIGHT">
                         <font>
-                           <Font size="18.0" />
+                           <Font name="Noto Sans Thai Regular" size="18.0" />
                         </font>
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor>
                      </Label>
                      <Label fx:id="category07" text="Business" textAlignment="RIGHT">
                         <font>
-                           <Font size="18.0" />
+                           <Font name="Noto Sans Thai Regular" size="18.0" />
                         </font>
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor>
                      </Label>
                      <Label fx:id="category08" text="Psychology" textAlignment="RIGHT">
                         <font>
-                           <Font size="18.0" />
+                           <Font name="Noto Sans Thai Regular" size="18.0" />
                         </font>
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor>
                      </Label>
                   </VBox>
                   <FlowPane hgap="25.0" prefHeight="200.0" prefWidth="200.0" vgap="15.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <padding>
                         <Insets bottom="25.0" left="50.0" right="100.0" top="25.0" />
                      </padding>
-                     <Button fx:id="sub_category_btn01" mnemonicParsing="false" text="Front-end">
+                     <Button fx:id="sub_category_btn01" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="Front-end">
                         <font>
-                           <Font name="System Bold" size="18.0" />
+                           <Font name="Noto Sans Thai Bold" size="18.0" />
                         </font>
+                        <effect>
+                           <DropShadow>
+                              <color>
+                                 <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                              </color>
+                           </DropShadow>
+                        </effect>
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor>
                      </Button>
-                     <Button fx:id="sub_category_btn02" layoutX="60.0" layoutY="35.0" mnemonicParsing="false" text="Back-end">
+                     <Button fx:id="sub_category_btn02" layoutX="60.0" layoutY="35.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="Back-end">
                         <font>
-                           <Font name="System Bold" size="18.0" />
+                           <Font name="Noto Sans Thai Bold" size="18.0" />
                         </font>
+                        <effect>
+                           <DropShadow>
+                              <color>
+                                 <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                              </color>
+                           </DropShadow>
+                        </effect>
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor>
                      </Button>
-                     <Button fx:id="sub_category_btn03" mnemonicParsing="false" text="Full-Stack">
+                     <Button fx:id="sub_category_btn03" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="Full-Stack">
                         <font>
-                           <Font name="System Bold" size="18.0" />
+                           <Font name="Noto Sans Thai Bold" size="18.0" />
                         </font>
+                        <effect>
+                           <DropShadow>
+                              <color>
+                                 <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                              </color>
+                           </DropShadow>
+                        </effect>
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor>
                      </Button>
-                     <Button fx:id="sub_category_btn04" mnemonicParsing="false" text="Dev ops">
+                     <Button fx:id="sub_category_btn04" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="Dev ops">
                         <font>
-                           <Font name="System Bold" size="18.0" />
+                           <Font name="Noto Sans Thai Bold" size="18.0" />
                         </font>
+                        <effect>
+                           <DropShadow>
+                              <color>
+                                 <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                              </color>
+                           </DropShadow>
+                        </effect>
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor>
                      </Button>
-                     <Button fx:id="sub_category_btn05" mnemonicParsing="false" text="Security">
+                     <Button fx:id="sub_category_btn05" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="Security">
                         <font>
-                           <Font name="System Bold" size="18.0" />
+                           <Font name="Noto Sans Thai Bold" size="18.0" />
                         </font>
+                        <effect>
+                           <DropShadow>
+                              <color>
+                                 <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                              </color>
+                           </DropShadow>
+                        </effect>
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor>
                      </Button>
-                     <Button fx:id="sub_category_btn06" mnemonicParsing="false" text="UX UI">
+                     <Button fx:id="sub_category_btn06" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="UX UI">
                         <font>
-                           <Font name="System Bold" size="18.0" />
+                           <Font name="Noto Sans Thai Bold" size="18.0" />
                         </font>
+                        <effect>
+                           <DropShadow>
+                              <color>
+                                 <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                              </color>
+                           </DropShadow>
+                        </effect>
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor>
                      </Button>
-                     <Button fx:id="sub_category_btn07" mnemonicParsing="false" text="Deploy">
+                     <Button fx:id="sub_category_btn07" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="Deploy">
                         <font>
-                           <Font name="System Bold" size="18.0" />
+                           <Font name="Noto Sans Thai Bold" size="18.0" />
                         </font>
+                        <effect>
+                           <DropShadow>
+                              <color>
+                                 <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                              </color>
+                           </DropShadow>
+                        </effect>
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor>
                      </Button>
-                     <Button fx:id="sub_category_btn08" mnemonicParsing="false" text="Network">
+                     <Button fx:id="sub_category_btn08" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="Network">
                         <font>
-                           <Font name="System Bold" size="18.0" />
+                           <Font name="Noto Sans Thai Bold" size="18.0" />
                         </font>
+                        <effect>
+                           <DropShadow>
+                              <color>
+                                 <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                              </color>
+                           </DropShadow>
+                        </effect>
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor>
                      </Button>
-                     <Button fx:id="sub_category_btn09" mnemonicParsing="false" text="Web Architecture">
+                     <Button fx:id="sub_category_btn09" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="Web Architecture">
                         <font>
-                           <Font name="System Bold" size="18.0" />
+                           <Font name="Noto Sans Thai Bold" size="18.0" />
                         </font>
+                        <effect>
+                           <DropShadow>
+                              <color>
+                                 <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                              </color>
+                           </DropShadow>
+                        </effect>
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor>
                      </Button>
-                     <Button fx:id="sub_category_btn10" mnemonicParsing="false" text="GIT">
+                     <Button fx:id="sub_category_btn10" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="GIT">
                         <font>
-                           <Font name="System Bold" size="18.0" />
+                           <Font name="Noto Sans Thai Bold" size="18.0" />
                         </font>
+                        <effect>
+                           <DropShadow>
+                              <color>
+                                 <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                              </color>
+                           </DropShadow>
+                        </effect>
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor>
                      </Button>
                   </FlowPane>
                   <Label alignment="CENTER" prefHeight="23.0" prefWidth="458.0" text="Category-based roadmap" textFill="#5e00ff">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Noto Sans Thai Regular" size="18.0" />
                      </font>
                   </Label>
                   <Label alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="411.0" text="หมวดหมู่" GridPane.rowIndex="1">
                      <font>
-                        <Font name="Courier New Bold" size="18.0" />
+                        <Font name="Noto Sans Thai Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="570.0" text="ระดับ: เริ่มต้น" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Label alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="570.0" text="ระดับ: " textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
-                        <Font name="Thonburi" size="18.0" />
+                        <Font name="Noto Sans Thai Regular" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" prefHeight="29.0" prefWidth="644.0" text="ปานกลาง" textAlignment="RIGHT" textFill="#8100cc" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Noto Sans Thai Bold" size="18.0" />
                      </font>
                   </Label>
                </GridPane>
