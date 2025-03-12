@@ -11,6 +11,7 @@ public class globalButtonController extends pChatController implements Initializ
 
     @FXML
     private HBox privateButton;
+
     private Runnable privateButtonClickListener;
 
     @Override
