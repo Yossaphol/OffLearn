@@ -146,5 +146,27 @@ public class UserDB extends ConnectDB{
             return false;
         }
     }
+
+    public String getProfile(String name) {
+        String sql = "SELECT Profile FROM studentdb.user WHERE Username = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstm = conn.prepareStatement(sql)) {
+
+            pstm.setString(1, name);
+
+            try (ResultSet rs = pstm.executeQuery()) {
+                if (rs.next()) {
+                    String profilePath = rs.getString("Profile");
+                    return (profilePath != null) ? profilePath : "/img/Profile/user.png";
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return "/img/Profile/user.png";
+    }
+
 }
 
