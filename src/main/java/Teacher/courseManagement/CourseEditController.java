@@ -30,6 +30,9 @@ public class CourseEditController implements Initializable {
     @FXML
     private VBox courseSpace;
 
+    @FXML
+    private Label addQuiz;
+
     private HBox newCourse;
 
     @Override
@@ -62,6 +65,12 @@ public class CourseEditController implements Initializable {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        });
+    }
+
+    public void addQuizButton(){
+        addQuiz.setOnMouseClicked(mouseEvent -> {
+
         });
     }
 

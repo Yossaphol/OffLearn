@@ -88,6 +88,9 @@
             <image>
                 <Image url="@../../../img/icon/trash-solid%20(1).png" />
             </image>
+         <HBox.margin>
+            <Insets left="20.0" />
+         </HBox.margin>
         </ImageView>
     </children>
 </HBox>

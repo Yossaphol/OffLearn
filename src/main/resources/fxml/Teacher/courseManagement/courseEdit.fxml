@@ -163,15 +163,26 @@
                      </children>
                   </HBox>
                   <VBox fx:id="courseSpace" prefHeight="129.0" prefWidth="1190.0" />
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" fillHeight="false" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="addCourse" alignment="CENTER" contentDisplay="BOTTOM" minWidth="790.0" prefHeight="50.0" prefWidth="790.0" style="-fx-border-color: &quot;0675DE&quot;;" text="เพิ่มวิดีโอ / ข้อสอบ">
+                        <Label fx:id="addCourse" alignment="CENTER" contentDisplay="BOTTOM" minWidth="350.0" prefHeight="50.0" prefWidth="350.0" style="-fx-border-color: &quot;0675DE&quot;;" text="เพิ่มวิดีโอ">
                            <font>
                               <Font name="Kodchasan Regular" size="16.0" />
                            </font>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                        </Label>
+                        <Label fx:id="addQuiz" alignment="CENTER" contentDisplay="BOTTOM" minWidth="350.0" prefHeight="50.0" prefWidth="350.0" style="-fx-border-color: &quot;0675DE&quot;;" text="เพิ่มแบบทดสอบ">
+                           <font>
+                              <Font name="Kodchasan Regular" size="16.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets left="50.0" />
+                           </HBox.margin>
                         </Label>
                      </children>
                   </HBox>
