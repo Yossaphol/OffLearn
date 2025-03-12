@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import Student.swing.postTopic;
+import javafx.scene.shape.Circle;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -38,7 +39,7 @@ public class gChatController implements Initializable, SessionHadler {
     private Label Name;
 
     @FXML
-    private Label profile;
+    private Circle profile;
 
     private String name;
 
@@ -76,6 +77,8 @@ public class gChatController implements Initializable, SessionHadler {
     public VBox getMain(){
         return this.main;
     }
+
+
 
 }
 

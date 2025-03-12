@@ -36,9 +36,6 @@ public class topicContent implements Initializable {
     private Label favourite_count;
 
     @FXML
-    private ImageView comment;
-
-    @FXML
     private VBox topicView;
 
 
