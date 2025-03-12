@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -19,19 +20,25 @@ import java.util.ResourceBundle;
 
 public class CourseEditController implements Initializable {
 
-    public VBox searhbar_container;
-    public ImageView coursePicture;
-    public Label changeCoursePicture;
-    public TextField nameEdit;
-    public ComboBox categoryEdit;
-    public TextField detailEdit;
-    public TextField priceEdit;
+    @FXML
+    private VBox searhbar_container;
+
+
+    @FXML
+    private Label addCourse;
+
+    @FXML
+    private VBox courseSpace;
+
+    private HBox newCourse;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         FontLoader fontLoader = new  FontLoader();
         fontLoader.loadFonts();
         displayNavbar();
+
+        addCourseButton();
     }
 
     @FXML
@@ -45,4 +52,18 @@ public class CourseEditController implements Initializable {
         }
     }
 
+    public void addCourseButton(){
+        addCourse.setOnMouseClicked(mouseEvent -> {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/courseManagement/courseContent.fxml"));
+            try {
+                newCourse = fxmlLoader.load();
+                VBox.setVgrow(newCourse, Priority.ALWAYS);
+                courseSpace.getChildren().add(newCourse);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
 }
+;
