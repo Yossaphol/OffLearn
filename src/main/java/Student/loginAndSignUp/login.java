@@ -20,6 +20,7 @@ public class login extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/icon/_.png")));
         primaryStage.setTitle("Offlearn");
+        primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

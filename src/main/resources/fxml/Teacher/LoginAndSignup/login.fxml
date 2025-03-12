@@ -96,7 +96,7 @@
                                 </PasswordField>
                                 <VBox alignment="TOP_RIGHT" prefHeight="37.0" prefWidth="489.0">
                                     <children>
-                                        <Button alignment="TOP_RIGHT" contentDisplay="TOP" mnemonicParsing="false" style="-fx-background-color: none;" text="Forgot your password?">
+                                        <Button alignment="TOP_RIGHT" contentDisplay="TOP" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Forgot your password?">
                                             <font>
                                                 <Font name="Kodchasan Regular" size="14.0" />
                                             </font>
@@ -117,7 +117,7 @@
                                             </cursor>
                                         </Button>
                                         <Pane prefHeight="40.0" prefWidth="15.0" />
-                                        <Button mnemonicParsing="false" onAction="#forgotPassword" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: none; -fx-border-radius: 10;" text="I don't have account">
+                                        <Button mnemonicParsing="false" onAction="#forgotPassword" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: transparent; -fx-border-radius: 10;" text="I don't have account">
                                             <font>
                                                 <Font name="Kodchasan Regular" size="16.0" />
                                             </font>
@@ -139,7 +139,7 @@
                     </effect>
                 </VBox>
                 <Pane prefHeight="15.0" prefWidth="631.0" />
-                <Button mnemonicParsing="false" onAction="#switchtoStudentLogin" style="-fx-background-color: none; -fx-underline: true;" text="I’m a Student">
+                <Button mnemonicParsing="false" onAction="#switchtoStudentLogin" style="-fx-background-color: transparent; -fx-underline: true;" text="I’m a Student">
                     <font>
                         <Font name="Kodchasan Regular" size="16.0" />
                     </font>
