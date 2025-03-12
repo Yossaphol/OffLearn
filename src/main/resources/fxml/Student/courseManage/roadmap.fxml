@@ -16,13 +16,15 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="MainFrame" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="991.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.roadmap.roadmapController">
+<HBox fx:id="MainFrame" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1150.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.roadmap.roadmapController">
    <BorderPane prefHeight="2093.0" prefWidth="1440.0">
       <center>
          <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <children>
                <GridPane prefHeight="400.0" prefWidth="1147.0" style="-fx-background-color: white;" stylesheets="@../../../css/Home.css">
                   <columnConstraints>
+                     <ColumnConstraints />
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -39,32 +41,33 @@
                   <padding>
                      <Insets left="30.0" right="30.0" />
                   </padding>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                  <BorderPane prefHeight="103.0" prefWidth="748.0" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
                      <left>
-                        <Circle fill="#7e00cc52" radius="162.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" BorderPane.alignment="CENTER" />
+                        <Circle fill="#7e00cc52" radius="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets left="100.0" />
+                           </BorderPane.margin>
+                        </Circle>
                      </left>
-                     <right>
-                        <Circle fill="#7e00cc52" radius="96.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" BorderPane.alignment="CENTER" />
-                     </right>
                   </BorderPane>
-                  <Label alignment="CENTER" prefHeight="93.0" prefWidth="1389.0" text="Roadmap" GridPane.rowIndex="1">
+                  <Label alignment="CENTER" prefHeight="93.0" prefWidth="1389.0" text="Roadmap" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font name="Noto Sans Thai Bold" size="64.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="63.0" prefWidth="1458.0" text=" Browse the ever-growing list of up-to-date roadmaps" GridPane.rowIndex="2">
+                  <Label alignment="CENTER" prefHeight="63.0" prefWidth="1458.0" text=" Browse the ever-growing list of up-to-date roadmaps" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font name="Noto Sans Thai Regular" size="18.0" />
                      </font>
                   </Label>
-                  <BorderPane prefHeight="79.0" prefWidth="1087.0" GridPane.rowIndex="3">
+                  <BorderPane prefHeight="79.0" prefWidth="1087.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <center>
-                        <Button fx:id="yourRoadmap" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="155.0" style="-fx-background-color: #8100cc; -fx-background-radius: 10;" text="Roadmap ของคุณ" textFill="WHITE" BorderPane.alignment="CENTER">
+                        <Button fx:id="myRoadmap" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="155.0" style="-fx-background-color: #8100cc; -fx-background-radius: 10;" text="Roadmap ของคุณ" textFill="WHITE" BorderPane.alignment="CENTER">
                            <font>
-                              <Font name="Noto Sans Thai Regular" size="14.0" />
+                              <Font name="Noto Sans Thai Bold" size="16.0" />
                            </font>
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -72,7 +75,36 @@
                         </Button>
                      </center>
                   </BorderPane>
-                  <Circle fill="#7e00cc52" radius="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <right>
+                        <Circle fill="#7e00cc52" radius="33.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" BorderPane.alignment="CENTER" />
+                     </right>
+                     <left>
+                        <Circle fill="#7e00cc52" radius="44.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets left="170.0" />
+                           </BorderPane.margin></Circle>
+                     </left>
+                  </BorderPane>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <right>
+                        <Circle fill="#7e00cc52" radius="72.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets right="100.0" />
+                           </BorderPane.margin></Circle>
+                     </right>
+                  </BorderPane>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <effect>
+                     <DropShadow>
+                        <color>
+                           <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                        </color>
+                     </DropShadow>
+                  </effect>
+                  <VBox.margin>
+                     <Insets bottom="40.0" />
+                  </VBox.margin>
                </GridPane>
                <GridPane prefHeight="474.0" prefWidth="1147.0">
                   <columnConstraints>
@@ -84,7 +116,7 @@
                      <RowConstraints maxHeight="367.1653137207031" minHeight="10.0" prefHeight="40.430419921875" vgrow="SOMETIMES" />
                      <RowConstraints maxHeight="476.39959716796875" minHeight="10.0" prefHeight="420.069580078125" vgrow="SOMETIMES" />
                   </rowConstraints>
-                  <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="rightBorder" stylesheets="@../../../css/Home.css" GridPane.rowIndex="2">
+                  <VBox fx:id="categoryContainer" alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="rightBorder" stylesheets="@../../../css/Home.css" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
@@ -94,76 +126,100 @@
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
-                     <Label fx:id="category01" text="Web Development" textAlignment="RIGHT">
+                     <Label fx:id="category01" styleClass="forHover1" stylesheets="@../../../css/roadmap.css" text="Web Development" textAlignment="RIGHT">
                         <font>
                            <Font name="Noto Sans Thai Regular" size="18.0" />
                         </font>
                         <cursor>
                            <Cursor fx:constant="HAND" />
                         </cursor>
+                        <padding>
+                           <Insets left="20.0" right="20.0" />
+                        </padding>
                      </Label>
-                     <Label fx:id="category02" text="Personal Development" textAlignment="RIGHT">
+                     <Label fx:id="category02" styleClass="forHover1" stylesheets="@../../../css/roadmap.css" text="Personal Development" textAlignment="RIGHT">
                         <font>
                            <Font name="Noto Sans Thai Regular" size="18.0" />
                         </font>
                         <cursor>
                            <Cursor fx:constant="HAND" />
                         </cursor>
+                        <padding>
+                           <Insets left="20.0" right="20.0" />
+                        </padding>
                      </Label>
-                     <Label fx:id="category03" text="Financial" textAlignment="RIGHT">
+                     <Label fx:id="category03" styleClass="forHover1" stylesheets="@../../../css/roadmap.css" text="Financial" textAlignment="RIGHT">
                         <font>
                            <Font name="Noto Sans Thai Regular" size="18.0" />
                         </font>
                         <cursor>
                            <Cursor fx:constant="HAND" />
                         </cursor>
+                        <padding>
+                           <Insets left="20.0" right="20.0" />
+                        </padding>
                      </Label>
-                     <Label fx:id="category04" text="Artificial Intelligence (AI)" textAlignment="RIGHT">
+                     <Label fx:id="category04" styleClass="forHover1" stylesheets="@../../../css/roadmap.css" text="Artificial Intelligence (AI)" textAlignment="RIGHT">
                         <font>
                            <Font name="Noto Sans Thai Regular" size="18.0" />
                         </font>
                         <cursor>
                            <Cursor fx:constant="HAND" />
                         </cursor>
+                        <padding>
+                           <Insets left="20.0" right="20.0" />
+                        </padding>
                      </Label>
-                     <Label fx:id="category05" text="Game Development" textAlignment="RIGHT">
+                     <Label fx:id="category05" styleClass="forHover1" stylesheets="@../../../css/roadmap.css" text="Game Development" textAlignment="RIGHT">
                         <font>
                            <Font name="Noto Sans Thai Regular" size="18.0" />
                         </font>
                         <cursor>
                            <Cursor fx:constant="HAND" />
                         </cursor>
+                        <padding>
+                           <Insets left="20.0" right="20.0" />
+                        </padding>
                      </Label>
-                     <Label fx:id="category06" text="Design" textAlignment="RIGHT">
+                     <Label fx:id="category06" styleClass="forHover1" stylesheets="@../../../css/roadmap.css" text="Design" textAlignment="RIGHT">
                         <font>
                            <Font name="Noto Sans Thai Regular" size="18.0" />
                         </font>
                         <cursor>
                            <Cursor fx:constant="HAND" />
                         </cursor>
+                        <padding>
+                           <Insets left="20.0" right="20.0" />
+                        </padding>
                      </Label>
-                     <Label fx:id="category07" text="Business" textAlignment="RIGHT">
+                     <Label fx:id="category07" styleClass="forHover1" stylesheets="@../../../css/roadmap.css" text="Business" textAlignment="RIGHT">
                         <font>
                            <Font name="Noto Sans Thai Regular" size="18.0" />
                         </font>
                         <cursor>
                            <Cursor fx:constant="HAND" />
                         </cursor>
+                        <padding>
+                           <Insets left="20.0" right="20.0" />
+                        </padding>
                      </Label>
-                     <Label fx:id="category08" text="Psychology" textAlignment="RIGHT">
+                     <Label fx:id="category08" styleClass="forHover1" stylesheets="@../../../css/roadmap.css" text="Psychology" textAlignment="RIGHT">
                         <font>
                            <Font name="Noto Sans Thai Regular" size="18.0" />
                         </font>
                         <cursor>
                            <Cursor fx:constant="HAND" />
                         </cursor>
+                        <padding>
+                           <Insets left="20.0" right="20.0" />
+                        </padding>
                      </Label>
                   </VBox>
-                  <FlowPane hgap="25.0" prefHeight="200.0" prefWidth="200.0" vgap="15.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <FlowPane fx:id="btn_cotainer" hgap="25.0" prefHeight="200.0" prefWidth="200.0" vgap="15.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <padding>
                         <Insets bottom="25.0" left="50.0" right="100.0" top="25.0" />
                      </padding>
-                     <Button fx:id="sub_category_btn01" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="Front-end">
+                     <Button fx:id="sub_category_btn01" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="forHover" stylesheets="@../../../css/roadmap.css" text="Front-end">
                         <font>
                            <Font name="Noto Sans Thai Bold" size="18.0" />
                         </font>
@@ -178,7 +234,7 @@
                            <Cursor fx:constant="HAND" />
                         </cursor>
                      </Button>
-                     <Button fx:id="sub_category_btn02" layoutX="60.0" layoutY="35.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="Back-end">
+                     <Button fx:id="sub_category_btn02" layoutX="60.0" layoutY="35.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="forHover" stylesheets="@../../../css/roadmap.css" text="Back-end">
                         <font>
                            <Font name="Noto Sans Thai Bold" size="18.0" />
                         </font>
@@ -193,7 +249,7 @@
                            <Cursor fx:constant="HAND" />
                         </cursor>
                      </Button>
-                     <Button fx:id="sub_category_btn03" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="Full-Stack">
+                     <Button fx:id="sub_category_btn03" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="forHover" stylesheets="@../../../css/roadmap.css" text="Full-Stack">
                         <font>
                            <Font name="Noto Sans Thai Bold" size="18.0" />
                         </font>
@@ -208,7 +264,7 @@
                            <Cursor fx:constant="HAND" />
                         </cursor>
                      </Button>
-                     <Button fx:id="sub_category_btn04" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="Dev ops">
+                     <Button fx:id="sub_category_btn04" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="forHover" stylesheets="@../../../css/roadmap.css" text="Dev ops">
                         <font>
                            <Font name="Noto Sans Thai Bold" size="18.0" />
                         </font>
@@ -223,7 +279,7 @@
                            <Cursor fx:constant="HAND" />
                         </cursor>
                      </Button>
-                     <Button fx:id="sub_category_btn05" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="Security">
+                     <Button fx:id="sub_category_btn05" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="forHover" stylesheets="@../../../css/roadmap.css" text="Security">
                         <font>
                            <Font name="Noto Sans Thai Bold" size="18.0" />
                         </font>
@@ -238,7 +294,7 @@
                            <Cursor fx:constant="HAND" />
                         </cursor>
                      </Button>
-                     <Button fx:id="sub_category_btn06" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="UX UI">
+                     <Button fx:id="sub_category_btn06" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="forHover" stylesheets="@../../../css/roadmap.css" text="UX UI">
                         <font>
                            <Font name="Noto Sans Thai Bold" size="18.0" />
                         </font>
@@ -253,7 +309,7 @@
                            <Cursor fx:constant="HAND" />
                         </cursor>
                      </Button>
-                     <Button fx:id="sub_category_btn07" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="Deploy">
+                     <Button fx:id="sub_category_btn07" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="forHover" stylesheets="@../../../css/roadmap.css" text="Deploy">
                         <font>
                            <Font name="Noto Sans Thai Bold" size="18.0" />
                         </font>
@@ -268,7 +324,7 @@
                            <Cursor fx:constant="HAND" />
                         </cursor>
                      </Button>
-                     <Button fx:id="sub_category_btn08" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="Network">
+                     <Button fx:id="sub_category_btn08" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="forHover" stylesheets="@../../../css/roadmap.css" text="Network">
                         <font>
                            <Font name="Noto Sans Thai Bold" size="18.0" />
                         </font>
@@ -283,7 +339,7 @@
                            <Cursor fx:constant="HAND" />
                         </cursor>
                      </Button>
-                     <Button fx:id="sub_category_btn09" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="Web Architecture">
+                     <Button fx:id="sub_category_btn09" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="forHover" stylesheets="@../../../css/roadmap.css" text="Web Architecture">
                         <font>
                            <Font name="Noto Sans Thai Bold" size="18.0" />
                         </font>
@@ -298,7 +354,7 @@
                            <Cursor fx:constant="HAND" />
                         </cursor>
                      </Button>
-                     <Button fx:id="sub_category_btn10" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="GIT">
+                     <Button fx:id="sub_category_btn10" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="forHover" stylesheets="@../../../css/roadmap.css" text="GIT">
                         <font>
                            <Font name="Noto Sans Thai Bold" size="18.0" />
                         </font>
@@ -324,16 +380,51 @@
                         <Font name="Noto Sans Thai Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="570.0" text="ระดับ: " textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="Noto Sans Thai Regular" size="18.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER_RIGHT" prefHeight="29.0" prefWidth="644.0" text="ปานกลาง" textAlignment="RIGHT" textFill="#8100cc" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="Noto Sans Thai Bold" size="18.0" />
-                     </font>
-                  </Label>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="51.0" prefWidth="570.0" text="ระดับ: " textAlignment="RIGHT">
+                           <font>
+                              <Font name="Noto Sans Thai Regular" size="18.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="selectedLevel" mnemonicParsing="false" onAction="#selectLevel" style="-fx-background-color: transparent;" text="ปานกลาง" textFill="#8100cc" underline="true">
+                           <font>
+                              <Font name="Noto Sans Thai Bold" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="levelContainer" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" visible="false" GridPane.columnIndex="1">
+                     <children>
+                        <Button fx:id="beginner" mnemonicParsing="false" onAction="#selectLevel" style="-fx-background-color: transparent;" styleClass="forHover" stylesheets="@../../../css/roadmap.css" text="เริ่มต้น" textFill="#8100cc">
+                           <font>
+                              <Font name="Noto Sans Thai Bold" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="mid" mnemonicParsing="false" onAction="#selectLevel" style="-fx-background-color: transparent;" styleClass="forHover" stylesheets="@../../../css/roadmap.css" text="ปานกลาง" textFill="#8100cc">
+                           <font>
+                              <Font name="Noto Sans Thai Bold" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="pro" mnemonicParsing="false" onAction="#selectLevel" style="-fx-background-color: transparent;" styleClass="forHover" stylesheets="@../../../css/roadmap.css" text="มืออาชีพ" textFill="#8100cc">
+                           <font>
+                              <Font name="Noto Sans Thai Bold" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </HBox>
                </GridPane>
             </children>
          </VBox>
