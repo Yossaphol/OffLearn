@@ -1,6 +1,7 @@
 package Student.task;
 
 import Student.HomeAndNavigation.HomeController;
+import javafx.animation.ScaleTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -9,6 +10,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -38,20 +40,21 @@ public class taskController implements Initializable {
     public Label taskDetail1;
     public Label point1;
     public VBox boxUpComing2;
-    public Label labelUpComingDate2;
     public Button task2;
     public Label taskInformation2;
     public Label taskDetail2;
     public Label point2;
+    public Label labelLateDate;
+    public Label labelDone;
+    public Label labelUpComingDay;
     //พวกที่มีเลขตามหลังเช่น task1 point2 1 คือแท็บหน้าเลยกำหนด 2 คือแท็บหน้าเสร็จ ส่วนที่ไม่มีเลขคือแท็บกำลังจะมาถึง
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        HomeController method_home = new HomeController();
-        method_home.hoverEffect(task);
-        method_home.hoverEffect(task1);
-        method_home.hoverEffect(task2);
+       hoverEffect(task);
+       hoverEffect(task1);
+       hoverEffect(task2);
 
         setUpComing();
         setLate();
@@ -67,17 +70,38 @@ public class taskController implements Initializable {
     }
 
     private void setLate(){
-        labelUpComingDate1.setText("เสาร์ 5 มีนาคม 2568");
+        labelLateDate.setText("เสาร์ 5 มีนาคม 2568");
         taskInformation1.setText("ส่งหน้า GUI ไคแอ้น");
         taskDetail1.setText("คุณต้องส่งงานเดี๋ยวนี้");
         point1.setText("0.5 pst");
     }
 
     private void setComplete(){
-        labelUpComingDate2.setText("เสาร์ 5 มีนาคม 2568");
+        labelDone.setText("เสาร์ 5 มีนาคม 2568");
         taskInformation2.setText("ยังส่งกันไม่ครบ!!");
         taskDetail2.setText("คุณต้องส่งงานเดี๋ยวนี้!!!");
         point2.setText("-1,000,000 pst");
+    }
+
+
+    public void hoverEffect(Button btn) {
+        ScaleTransition scaleUp = new ScaleTransition(Duration.millis(200), btn);
+        scaleUp.setFromX(1);
+        scaleUp.setFromY(1);
+        scaleUp.setToX(1.02);
+        scaleUp.setToY(1.02);
+        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(200), btn);
+        scaleDown.setFromX(1.02);
+        scaleDown.setFromY(1.02);
+        scaleDown.setToX(1);
+        scaleDown.setToY(1);
+
+        btn.setOnMouseEntered(mouseEvent -> {
+            scaleUp.play();
+        });
+        btn.setOnMouseExited(mouseEvent -> {
+            scaleDown.play();
+        });
     }
 
 

@@ -55,4 +55,11 @@ public class loginController implements Initializable {
 
         fadeOut.play();
     }
+
+    public void handleLogin(ActionEvent e){
+
+    }
+    public void forgotPassword(ActionEvent e){
+
+    }
 }

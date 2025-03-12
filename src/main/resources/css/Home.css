@@ -160,3 +160,15 @@
     -fx-text-fill: white;
     -fx-font-weight: bold;
 }
+
+
+.rightBorder{
+    -fx-border-width: 0 2px 0 0;
+    -fx-border-color: #8100cc;
+}
+.setBg {
+    -fx-background-image: url("/img/Picture/Rectangle_178.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
