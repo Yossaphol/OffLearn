@@ -143,7 +143,6 @@ public class dashboardController implements Initializable {
         method_home.hoverEffect(btn_continue);
         method_home.hoverEffect(btn_otherCourse);
 
-        save_edit.setVisible(false);
 
         displayScore();
 
@@ -179,34 +178,12 @@ public class dashboardController implements Initializable {
     }
 
 
-    @FXML
-    private void editProfile(ActionEvent event){
-        Button btn = (Button) event.getSource();
-        switch (btn.getId()){
-            case "edit":
-                edit.setVisible(false);
-                save_edit.setVisible(true);
-                displayProfileBoxEdit();
-                break;
-            case "save_edit":
-                save_edit.setVisible(false);
-                edit.setVisible(true);
-                displayProfileBox();
-                break;
-            default:
-                save_edit.setVisible(false);
-                edit.setVisible(true);
-                displayProfileBox();
-        }
-    }
 
     private void displayProfileBox() {
         loadWithTransition("/fxml/Student/statistics/dashboardProfile.fxml");
     }
 
-    private void displayProfileBoxEdit() {
-        loadWithTransition("/fxml/Student/statistics/dashboardProfileEdit.fxml");
-    }
+
 
     private void loadWithTransition(String fxmlPath) {
         try {

@@ -267,6 +267,30 @@ public class HomeController implements Initializable {
         });
     }
 
+    public void hoverEffect(Node vBox) {
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(10);
+        dropShadow.setColor(Color.TRANSPARENT);
+        vBox.setEffect(dropShadow);
+
+        vBox.setOnMouseEntered(mouseEvent -> {
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.ZERO, new KeyValue(dropShadow.colorProperty(), Color.TRANSPARENT)),
+                    new KeyFrame(Duration.millis(200), new KeyValue(dropShadow.colorProperty(), Color.web("#8100CC", 0.25)))
+            );
+            timeline.play();
+        });
+
+        vBox.setOnMouseExited(mouseEvent -> {
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.ZERO, new KeyValue(dropShadow.colorProperty(), dropShadow.getColor())),
+                    new KeyFrame(Duration.millis(200), new KeyValue(dropShadow.colorProperty(), Color.TRANSPARENT))
+            );
+            timeline.play();
+        });
+    }
+
+
     public void hoverEffect(HBox hBox) {
         // Scale transition
         ScaleTransition scaleUp = new ScaleTransition(Duration.millis(150), hBox);
@@ -439,7 +463,7 @@ public class HomeController implements Initializable {
 
     private void setImgContainer() {
         loadAndSetImage(imgContainer, "/img/Picture/bg.jpg");
-        loadAndSetImage(teacherBanner, "/img/Picture/อาจารย์ แบงค์.jpg");
+        loadAndSetImage(teacherBanner, "/img/Profile/man.png");
 
         loadAndSetImage(pfp_statistic, "/img/Profile/doctor.png");
         loadAndSetImage(teacher_pfp, "/img/Profile/man.png");
@@ -521,6 +545,14 @@ public class HomeController implements Initializable {
 
     public void applyHoverEffectToInside(AnchorPane root) {
         for (Node node : root.lookupAll(".continueCourse")) {
+            if (node instanceof Pane p) {
+                hoverEffect(p);
+            }
+        }
+    }
+
+    public void applyHoverEffectToInside(GridPane root) {
+        for (Node node : root.lookupAll(".forHover")) {
             if (node instanceof Pane p) {
                 hoverEffect(p);
             }

@@ -13,8 +13,6 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -63,34 +61,11 @@
                                                       <Insets bottom="20.0" top="20.0" />
                                                    </padding>
                                                 </Pane>
-                                                <Button fx:id="save_edit" mnemonicParsing="false" onAction="#editProfile" prefHeight="35.0" prefWidth="106.0" style="-fx-background-color: #8100cc; -fx-background-radius: 10;" text="บันทึก" textFill="WHITE">
-                                                   <font>
-                                                      <Font name="Noto Sans Thai Bold" size="15.0" />
-                                                   </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
-                                                </Button>
                                              </children>
                                              <HBox.margin>
                                                 <Insets right="10.0" />
                                              </HBox.margin>
                                           </VBox>
-                                          <Button fx:id="edit" mnemonicParsing="false" onAction="#editProfile" style="-fx-background-color: transparent;">
-                                             <graphic>
-                                                <ImageView fitHeight="25.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../../../img/icon/edit.png" />
-                                                   </image>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
-                                                </ImageView>
-                                             </graphic>
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                          </Button>
                                           <VBox fx:id="interestC" prefHeight="247.0" prefWidth="267.0" style="-fx-background-color: white; -fx-background-radius: 20;" stylesheets="@../../../css/Home.css">
                                              <padding>
                                                 <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
