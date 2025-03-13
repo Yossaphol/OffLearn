@@ -7,13 +7,16 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -30,43 +33,98 @@
                         <Insets left="25.0" right="25.0" />
                      </VBox.margin>
                      <children>
-                        <VBox prefHeight="1989.0" prefWidth="701.0">
+                        <VBox prefHeight="2017.0" prefWidth="775.0">
                            <children>
-                              <StackPane fx:id="videocontainer" prefHeight="300.0" prefWidth="701.0">
-                                 <children>
-                                    <MediaView fx:id="mediaView" fitHeight="480.0" fitWidth="848.0" />
-                                    <HBox alignment="BOTTOM_CENTER" prefHeight="35.0" prefWidth="848.0" spacing="5.0">
-                                       <padding>
-                                          <Insets bottom="5.0" right="25.0" />
-                                       </padding>
-                                       <StackPane.margin>
-                                          <Insets />
-                                       </StackPane.margin>
-                                       <children>
-                                          <Button fx:id="btnPlay" text="▶ Play" />
-                                          <Button fx:id="btnPause" text="⏸ Pause" />
-                                          <Button fx:id="btnStop" text="⏹ Stop" />
-                                          <Slider fx:id="sliderTime" max="100" min="0" prefHeight="14.0" prefWidth="406.0" />
-                                          <Label fx:id="lblTime" text="00:00 / 00:00" />
-                                          <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" prefHeight="0.0" prefWidth="13.0" style="-fx-background-color: transparent;" textFill="WHITE">
-                                             <graphic>
-                                                <ImageView fitHeight="17.0" fitWidth="18.0" pickOnBounds="true">
-                                                   <image>
-                                                      <Image url="@../../../img/icon/expand-solid.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin>
-                                          </Button>
-                                       </children>
-                                    </HBox>
-                                 </children>
+                              <VBox fx:id="mediacontainer">
                                  <VBox.margin>
                                     <Insets top="30.0" />
                                  </VBox.margin>
-                              </StackPane>
+                                 <children>
+                                    <StackPane fx:id="videocontainer" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="720.0">
+                                       <children>
+                                          <MediaView fx:id="mediaView" fitHeight="405.0" fitWidth="720.0" />
+                                          <AnchorPane fx:id="controlPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="746.0">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" layoutX="11.0" layoutY="357.0" prefHeight="48.0" prefWidth="720.0" style="-fx-background-color: linear-gradient(    from 0% 100% to 0% 0%,    #00000080 0%,   /* semi-transparent black at the bottom */    #00000000 100%  /* fully transparent at the top */);">
+                                                   <children>
+                                                      <Button fx:id="btnPlay" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                                                         <HBox.margin>
+                                                            <Insets left="30.0" right="30.0" />
+                                                         </HBox.margin>
+                                                         <graphic>
+                                                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../../../img/icon/play-button-arrowhead-solid.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                      <Button fx:id="btnSound" maxHeight="36.0" maxWidth="28.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                                                         <graphic>
+                                                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../../../img/icon/volume-solid-stage1.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                         <HBox.margin>
+                                                            <Insets right="15.0" />
+                                                         </HBox.margin>
+                                                      </Button>
+                                                      <Slider fx:id="sliderVolume" prefHeight="30.0" prefWidth="152.0">
+                                                         <HBox.margin>
+                                                            <Insets right="15.0" />
+                                                         </HBox.margin>
+                                                      </Slider>
+                                                      <HBox prefHeight="43.0" prefWidth="303.0">
+                                                         <children>
+                                                            <Label fx:id="lblTime" prefHeight="48.0" prefWidth="144.0" text="00:00 / 00:00" textFill="WHITE">
+                                                               <font>
+                                                                  <Font name="System Italic" size="19.0" />
+                                                               </font>
+                                                               <effect>
+                                                                  <DropShadow spread="0.01">
+                                                                     <color>
+                                                                        <Color red="0.5" green="0.5" blue="0.5" />
+                                                                     </color>
+                                                                  </DropShadow>
+                                                               </effect>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                      <Button fx:id="btnSetting" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                                                         <graphic>
+                                                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../../../img/icon/settings-solid.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                         <HBox.margin>
+                                                            <Insets right="15.0" />
+                                                         </HBox.margin>
+                                                      </Button>
+                                                      <Button fx:id="btnFullscreen" mnemonicParsing="false" prefHeight="32.0" prefWidth="35.0" style="-fx-background-color: transparent;">
+                                                         <graphic>
+                                                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
+                                                               <image>
+                                                                  <Image url="@../../../img/icon/expand-solid.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets top="5.0" />
+                                                   </padding>
+                                                </HBox>
+                                                <Slider fx:id="sliderTime" layoutX="11.0" layoutY="353.0" prefHeight="14.0" prefWidth="725.0" />
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </VBox>
                               <HBox prefHeight="85.0" prefWidth="848.0">
                                  <children>
                                     <HBox prefHeight="59.0" prefWidth="848.0">
