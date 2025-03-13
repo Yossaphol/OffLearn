@@ -15,10 +15,6 @@ import java.util.ResourceBundle;
 public class CourseEditController implements Initializable {
 
     @FXML
-    private VBox searhbar_container;
-
-
-    @FXML
     private Label addCourse;
 
     @FXML
@@ -28,10 +24,14 @@ public class CourseEditController implements Initializable {
     private Label addQuiz;
 
     @FXML
-    private ScrollPane wrapper;
+    private VBox courseManagement;
 
     @FXML
-    private VBox courseManagement;
+    private Button save;
+
+    private VBox courseList;
+
+    private ScrollPane wrapper;
 
     private HBox newCourse;
     private VBox newQuiz;
@@ -40,21 +40,10 @@ public class CourseEditController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         FontLoader fontLoader = new  FontLoader();
         fontLoader.loadFonts();
-        displayNavbar();
 
         addCourseButton();
         addQuizButton();
-    }
-
-    @FXML
-    private void displayNavbar(){
-        try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/navBar/navBar.fxml"));
-            HBox navContent = calendarLoader.load();
-            searhbar_container.getChildren().setAll(navContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        saveButton();
     }
 
     public void addCourseButton(){
@@ -78,6 +67,14 @@ public class CourseEditController implements Initializable {
         quizController.recieveCourseManagement(courseManagement);
     }
 
+    public void recieveWrapper(ScrollPane wrapper){
+        this.wrapper = wrapper;
+    }
+
+    public void recieveCourseList(VBox courseList) {
+        this.courseList = courseList;
+    }
+
     public void addQuizButton() {
         addQuiz.setOnMouseClicked(mouseEvent -> {
             try {
@@ -95,6 +92,11 @@ public class CourseEditController implements Initializable {
         });
     }
 
+    public void saveButton(){
+        save.setOnAction(actionEvent -> {
+            wrapper.setContent(courseList);
+        });
+    }
 
 }
 ;
