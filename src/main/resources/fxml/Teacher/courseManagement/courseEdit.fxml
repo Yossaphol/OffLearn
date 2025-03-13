@@ -14,8 +14,8 @@
 
 <VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.CourseEditController">
    <VBox fx:id="searhbar_container" prefHeight="124.0" prefWidth="1442.0" />
-   <ScrollPane style="-fx-background-color: white;">
-      <VBox prefHeight="2093.0" prefWidth="1440.0" style="-fx-background-color: white;">
+   <ScrollPane fx:id="wrapper" fitToHeight="true" fitToWidth="true" style="-fx-background-color: white;">
+      <VBox fx:id="courseManagement" prefHeight="2093.0" prefWidth="1440.0" style="-fx-background-color: white;">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
@@ -53,7 +53,8 @@
                         <Label text="คลิกกล่องข้อความเพื่อแก้ไข" textFill="#a8a8a8">
                            <font>
                               <Font name="Kodchasan Regular" size="13.0" />
-                           </font></Label>
+                           </font>
+                        </Label>
                      </children>
                      <VBox.margin>
                         <Insets left="250.0" />
@@ -77,7 +78,8 @@
                                  </font>
                                  <VBox.margin>
                                     <Insets top="20.0" />
-                                 </VBox.margin></Label>
+                                 </VBox.margin>
+                              </Label>
                            </children>
                         </VBox>
                         <VBox prefHeight="342.0" prefWidth="912.0">
@@ -99,7 +101,8 @@
                                           <Label text="หมวดหมู่">
                                              <font>
                                                 <Font name="Kodchasan Regular" size="16.0" />
-                                             </font></Label>
+                                             </font>
+                                          </Label>
                                           <ComboBox prefWidth="200.0" style="-fx-border-color: &quot;0675DE&quot;; -fx-background-color: white; -fx-border-radius: 15;" />
                                        </children>
                                     </VBox>
@@ -108,7 +111,8 @@
                                           <Label text="คำอธิบายคอร์ส">
                                              <font>
                                                 <Font name="Kodchasan Regular" size="16.0" />
-                                             </font></Label>
+                                             </font>
+                                          </Label>
                                           <TextField prefHeight="76.0" prefWidth="562.0" style="-fx-border-color: &quot;0675DE&quot;; -fx-background-color: white; -fx-border-radius: 15;" />
                                        </children>
                                     </VBox>
@@ -122,14 +126,16 @@
                                     <Label text="ราคา">
                                        <font>
                                           <Font name="Kodchasan Regular" size="16.0" />
-                                       </font></Label>
+                                       </font>
+                                    </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0">
                                        <children>
                                           <TextField style="-fx-border-color: &quot;0675DE&quot;; -fx-background-color: white; -fx-border-radius: 15;" />
                                           <Label text="บาท">
                                              <font>
                                                 <Font name="Kodchasan Regular" size="16.0" />
-                                             </font></Label>
+                                             </font>
+                                          </Label>
                                        </children>
                                     </HBox>
                                  </children>
@@ -165,7 +171,7 @@
                   <VBox fx:id="courseSpace" prefHeight="129.0" prefWidth="1190.0" />
                   <HBox alignment="CENTER" fillHeight="false" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="addCourse" alignment="CENTER" contentDisplay="BOTTOM" minWidth="350.0" prefHeight="50.0" prefWidth="350.0" style="-fx-border-color: &quot;0675DE&quot;;" text="เพิ่มวิดีโอ">
+                        <Label fx:id="addCourse" alignment="CENTER" contentDisplay="BOTTOM" minHeight="50.0" minWidth="350.0" prefHeight="50.0" prefWidth="350.0" style="-fx-border-color: &quot;0675DE&quot;;" text="เพิ่มวิดีโอ">
                            <font>
                               <Font name="Kodchasan Regular" size="16.0" />
                            </font>
@@ -173,7 +179,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Label>
-                        <Label fx:id="addQuiz" alignment="CENTER" contentDisplay="BOTTOM" minWidth="350.0" prefHeight="50.0" prefWidth="350.0" style="-fx-border-color: &quot;0675DE&quot;;" text="เพิ่มแบบทดสอบ">
+                        <Label fx:id="addQuiz" alignment="CENTER" contentDisplay="BOTTOM" minHeight="50.0" minWidth="350.0" prefHeight="50.0" prefWidth="350.0" style="-fx-border-color: &quot;0675DE&quot;;" text="เพิ่มแบบทดสอบ">
                            <font>
                               <Font name="Kodchasan Regular" size="16.0" />
                            </font>
@@ -185,6 +191,9 @@
                            </HBox.margin>
                         </Label>
                      </children>
+                     <VBox.margin>
+                        <Insets bottom="100.0" />
+                     </VBox.margin>
                   </HBox>
                </children>
                <VBox.margin>

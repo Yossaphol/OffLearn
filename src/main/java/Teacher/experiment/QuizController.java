@@ -1,11 +1,12 @@
 package Teacher.experiment;
 
+import Teacher.courseManagement.CourseEditController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -15,32 +16,48 @@ import java.util.ResourceBundle;
 public class QuizController implements Initializable {
 
     @FXML
-    private VBox showProblem;
+    private VBox problemSpace;
 
     @FXML
     private Label addProblem;
 
-    private HBox newProblemContent;
+    @FXML
+    private Label back;
+
+    private ScrollPane wrapper;
+    private VBox courseManagement;
+    private HBox problemContent;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            addProblem();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        addProblemButton();
+        backButton();
     }
 
-    public void addProblem() throws IOException {
+    public void addProblemButton(){
         addProblem.setOnMouseClicked(mouseEvent -> {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/experiment/problemContent.fxml"));
             try {
-                newProblemContent = fxmlLoader.load();
-                VBox.setVgrow(newProblemContent, Priority.ALWAYS);
-                showProblem.getChildren().add(newProblemContent);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/experiment/problemContent.fxml"));
+            problemContent = fxmlLoader.load();
+                problemSpace.getChildren().add(problemContent);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         });
     }
+
+    public void backButton(){
+        back.setOnMouseClicked(mouseEvent -> {
+            wrapper.setContent(courseManagement);
+        });
+    }
+
+    public void recieveWrapper(ScrollPane wrapper){
+        this.wrapper = wrapper;
+    }
+
+    public void recieveCourseManagement(VBox courseManagement){
+        this.courseManagement = courseManagement;
+    }
 }
+

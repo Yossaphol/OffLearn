@@ -1,18 +1,12 @@
 package Teacher.courseManagement;
 
 import Student.FontLoader.FontLoader;
+import Teacher.experiment.QuizController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,7 +27,14 @@ public class CourseEditController implements Initializable {
     @FXML
     private Label addQuiz;
 
+    @FXML
+    private ScrollPane wrapper;
+
+    @FXML
+    private VBox courseManagement;
+
     private HBox newCourse;
+    private VBox newQuiz;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -42,6 +43,7 @@ public class CourseEditController implements Initializable {
         displayNavbar();
 
         addCourseButton();
+        addQuizButton();
     }
 
     @FXML
@@ -63,16 +65,36 @@ public class CourseEditController implements Initializable {
                 VBox.setVgrow(newCourse, Priority.ALWAYS);
                 courseSpace.getChildren().add(newCourse);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         });
     }
 
-    public void addQuizButton(){
-        addQuiz.setOnMouseClicked(mouseEvent -> {
+    public void passWrapper(QuizController quizController){
+        quizController.recieveWrapper(wrapper);
+    }
 
+    public void passCourseManagement(QuizController quizController){
+        quizController.recieveCourseManagement(courseManagement);
+    }
+
+    public void addQuizButton() {
+        addQuiz.setOnMouseClicked(mouseEvent -> {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/experiment/Quiz.fxml"));
+                VBox quizContent = fxmlLoader.load();
+                wrapper.setContent(quizContent);
+
+                QuizController quizController = fxmlLoader.getController();
+
+                passCourseManagement(quizController);
+                passWrapper(quizController);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
     }
+
 
 }
 ;
