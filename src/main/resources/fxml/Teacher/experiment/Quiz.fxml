@@ -4,166 +4,134 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1440.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.experiment.QuizController">
+<VBox alignment="TOP_CENTER" prefHeight="1267.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.experiment.QuizController">
    <children>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox prefHeight="74.0" prefWidth="1114.0">
          <children>
-            <Label text="ย้อนกลับ" textFill="#0675de">
+            <Label fx:id="back" text="ย้อนกลับ" textFill="#0675de">
                <font>
                   <Font name="Kodchasan Bold" size="16.0" />
                </font>
+               <HBox.margin>
+                  <Insets top="50.0" />
+               </HBox.margin>
             </Label>
          </children>
          <VBox.margin>
-            <Insets left="100.0" top="100.0" />
-         </VBox.margin>
-      </HBox>
-      <ScrollPane fitToHeight="true" prefHeight="943.0" prefWidth="1440.0">
-         <content>
-            <VBox prefHeight="1232.0" prefWidth="1422.0">
+            <Insets left="150.0" />
+         </VBox.margin></HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="1035.0">
+         <children>
+            <VBox fillWidth="false" prefHeight="53.0" prefWidth="285.0">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Label />
-                        <VBox prefHeight="50.0" prefWidth="302.0">
-                           <children>
-                              <Label text="Add Quiz/Test" textFill="#0675de">
-                                 <font>
-                                    <Font name="Kodchasan Bold" size="24.0" />
-                                 </font>
-                              </Label>
-                              <Label text="เพิ่มข้อสอบ" textFill="#a8a8a8">
-                                 <font>
-                                    <Font name="Kodchasan Regular" size="16.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </VBox>
-                     </children>
+                  <Label text="ชื่อ" textFill="#0675de">
+                     <font>
+                        <Font name="Kodchasan Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField prefHeight="40.0" prefWidth="280.0" style="-fx-background-radius: 10;">
                      <VBox.margin>
-                        <Insets left="200.0" top="50.0" />
+                        <Insets top="10.0" />
                      </VBox.margin>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="101.0" prefWidth="1190.0">
-                     <children>
-                        <VBox fillWidth="false" prefHeight="53.0" prefWidth="285.0">
-                           <children>
-                              <Label text="ชื่อ" textFill="#0675de">
-                                 <font>
-                                    <Font name="Kodchasan Bold" size="20.0" />
-                                 </font>
-                              </Label>
-                              <TextField prefHeight="40.0" prefWidth="280.0" style="-fx-background-radius: 10;">
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
-                              </TextField>
-                           </children>
-                        </VBox>
-                        <VBox fillWidth="false" prefHeight="53.0" prefWidth="285.0">
-                           <children>
-                              <Label text="คะแนนขั้นต่ำ" textFill="#0675de">
-                                 <font>
-                                    <Font name="Kodchasan Bold" size="20.0" />
-                                 </font>
-                              </Label>
-                              <TextField prefHeight="40.0" prefWidth="280.0" style="-fx-background-radius: 10;">
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
-                              </TextField>
-                           </children>
-                           <HBox.margin>
-                              <Insets left="50.0" />
-                           </HBox.margin>
-                        </VBox>
-                        <VBox prefHeight="53.0" prefWidth="368.0">
-                           <children>
-                              <Label text="ระดับความยาก" textFill="#0675de">
-                                 <font>
-                                    <Font name="Kodchasan Bold" size="20.0" />
-                                 </font>
-                              </Label>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <RadioButton mnemonicParsing="false" text="ยาก" />
-                                    <RadioButton mnemonicParsing="false" text="ปานกลาง">
-                                       <HBox.margin>
-                                          <Insets left="10.0" />
-                                       </HBox.margin>
-                                    </RadioButton>
-                                    <RadioButton mnemonicParsing="false" text="ง่าย">
-                                       <HBox.margin>
-                                          <Insets left="20.0" />
-                                       </HBox.margin>
-                                    </RadioButton>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
-                              </HBox>
-                           </children>
-                           <HBox.margin>
-                              <Insets left="50.0" />
-                           </HBox.margin>
-                        </VBox>
-                     </children>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox fillWidth="false" prefHeight="53.0" prefWidth="285.0">
+               <children>
+                  <Label text="คะแนนขั้นต่ำ" textFill="#0675de">
+                     <font>
+                        <Font name="Kodchasan Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField prefHeight="40.0" prefWidth="280.0" style="-fx-background-radius: 10;">
                      <VBox.margin>
-                        <Insets left="250.0" top="50.0" />
+                        <Insets top="10.0" />
                      </VBox.margin>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  </TextField>
+               </children>
+               <HBox.margin>
+                  <Insets left="50.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox prefHeight="53.0" prefWidth="368.0">
+               <children>
+                  <Label text="ระดับความยาก" textFill="#0675de">
+                     <font>
+                        <Font name="Kodchasan Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="ลำดับเนื้อหา" textFill="#0675de">
-                           <font>
-                              <Font name="Kodchasan Bold" size="16.0" />
-                           </font>
+                        <RadioButton mnemonicParsing="false" text="ยาก" />
+                        <RadioButton mnemonicParsing="false" text="ปานกลาง">
                            <HBox.margin>
-                              <Insets left="280.0" />
+                              <Insets left="10.0" />
                            </HBox.margin>
-                        </Label>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="50.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <VBox fx:id="showProblem" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin></VBox>
-                  <HBox alignment="CENTER" prefHeight="91.0" prefWidth="1422.0" VBox.vgrow="NEVER">
-                     <children>
-                        <Label fx:id="addProblem" alignment="CENTER" contentDisplay="TOP" minHeight="50.0" minWidth="790.0" prefHeight="50.0" prefWidth="790.0" style="-fx-border-color: black;" text="เพิ่มโจทย์">
-                           <font>
-                              <Font name="Kodchasan Regular" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox alignment="TOP_RIGHT" prefHeight="0.0" prefWidth="1422.0" VBox.vgrow="ALWAYS">
-                     <children>
-                        <Button fx:id="save" minHeight="50.0" minWidth="165.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="165.0" style="-fx-background-color: &quot;0675DE&quot;; -fx-background-radius: 10;" text="Button" textFill="WHITE" HBox.hgrow="NEVER">
-                           <font>
-                              <Font name="Kodchasan Bold" size="12.0" />
-                           </font>
+                        </RadioButton>
+                        <RadioButton mnemonicParsing="false" text="ง่าย">
                            <HBox.margin>
-                              <Insets right="300.0" />
+                              <Insets left="20.0" />
                            </HBox.margin>
-                        </Button>
+                        </RadioButton>
                      </children>
                      <VBox.margin>
-                        <Insets top="20.0" />
+                        <Insets top="10.0" />
                      </VBox.margin>
                   </HBox>
                </children>
+               <HBox.margin>
+                  <Insets left="50.0" />
+               </HBox.margin>
             </VBox>
-         </content>
-      </ScrollPane>
+         </children>
+         <VBox.margin>
+            <Insets left="200.0" top="50.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox prefHeight="23.0" prefWidth="1440.0">
+         <children>
+            <Label text="ลำดับเนื้อหา" textFill="#0675de">
+               <font>
+                  <Font name="Kodchasan Bold" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+         <VBox.margin>
+            <Insets left="200.0" top="50.0" />
+         </VBox.margin>
+      </HBox>
+      <VBox fx:id="problemSpace" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" />
+      <HBox alignment="CENTER" prefHeight="91.0" prefWidth="1422.0" VBox.vgrow="NEVER">
+         <children>
+            <Label fx:id="addProblem" alignment="CENTER" contentDisplay="TOP" minHeight="50.0" minWidth="790.0" prefHeight="50.0" prefWidth="790.0" style="-fx-border-color: black;" text="เพิ่มโจทย์">
+               <font>
+                  <Font name="Kodchasan Regular" size="12.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="20.0" top="50.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="save" minHeight="50.0" minWidth="165.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="165.0" style="-fx-background-color: &quot;0675DE&quot;; -fx-background-radius: 10;" text="บันทึก" textFill="WHITE">
+               <font>
+                  <Font name="Kodchasan Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets bottom="100.0" right="150.0" />
+         </VBox.margin>
+      </HBox>
    </children>
 </VBox>
