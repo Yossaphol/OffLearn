@@ -32,8 +32,8 @@ public class topicDB extends ConnectDB{
         """;
 
         try (Connection conn = this.connectToDB();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement ptmt = conn.prepareStatement(sql);
+             ResultSet rs = ptmt.executeQuery()) {
 
             while (rs.next()) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/inbox/topicContent.fxml"));

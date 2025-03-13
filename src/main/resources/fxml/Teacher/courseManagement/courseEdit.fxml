@@ -91,7 +91,7 @@
                                           <Font name="Kodchasan Regular" size="16.0" />
                                        </font>
                                     </Label>
-                                    <TextField prefHeight="30.0" prefWidth="270.0" style="-fx-border-color: &quot;0675DE&quot;; -fx-background-color: white; -fx-border-radius: 15;" />
+                                    <TextField fx:id="courseName" prefHeight="30.0" prefWidth="270.0" style="-fx-border-color: &quot;0675DE&quot;; -fx-background-color: white; -fx-border-radius: 15;" />
                                  </children>
                               </VBox>
                               <HBox prefHeight="95.0" prefWidth="692.0">
@@ -103,7 +103,7 @@
                                                 <Font name="Kodchasan Regular" size="16.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox prefWidth="200.0" style="-fx-border-color: &quot;0675DE&quot;; -fx-background-color: white; -fx-border-radius: 15;" />
+                                          <ComboBox fx:id="type" prefWidth="200.0" style="-fx-border-color: &quot;0675DE&quot;; -fx-background-color: white; -fx-border-radius: 15;" />
                                        </children>
                                     </VBox>
                                     <VBox prefHeight="118.0" prefWidth="561.0">
@@ -113,7 +113,7 @@
                                                 <Font name="Kodchasan Regular" size="16.0" />
                                              </font>
                                           </Label>
-                                          <TextField prefHeight="76.0" prefWidth="562.0" style="-fx-border-color: &quot;0675DE&quot;; -fx-background-color: white; -fx-border-radius: 15;" />
+                                          <TextField fx:id="desc" prefHeight="76.0" prefWidth="562.0" style="-fx-border-color: &quot;0675DE&quot;; -fx-background-color: white; -fx-border-radius: 15;" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -130,7 +130,7 @@
                                     </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <TextField style="-fx-border-color: &quot;0675DE&quot;; -fx-background-color: white; -fx-border-radius: 15;" />
+                                          <TextField fx:id="price" style="-fx-border-color: &quot;0675DE&quot;; -fx-background-color: white; -fx-border-radius: 15;" />
                                           <Label text="บาท">
                                              <font>
                                                 <Font name="Kodchasan Regular" size="16.0" />

@@ -1,7 +1,10 @@
 package Teacher.courseManagement;
 
+import Database.Category;
+import Database.CourseDB;
 import Student.FontLoader.FontLoader;
 import Teacher.experiment.QuizController;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,12 +32,27 @@ public class CourseEditController implements Initializable {
     @FXML
     private Button save;
 
+    @FXML
+    private TextField courseName;
+
+    @FXML
+    private TextField desc;
+
+    @FXML
+    private ComboBox<String> type;
+
+    @FXML
+    private TextField price;
+
     private VBox courseList;
 
     private ScrollPane wrapper;
 
     private HBox newCourse;
     private VBox newQuiz;
+    private CourseDB courseDB;
+    private Category category;
+    private int userID;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -44,6 +62,8 @@ public class CourseEditController implements Initializable {
         addCourseButton();
         addQuizButton();
         saveButton();
+
+        setType();
     }
 
     public void addCourseButton(){
@@ -94,8 +114,23 @@ public class CourseEditController implements Initializable {
 
     public void saveButton(){
         save.setOnAction(actionEvent -> {
+            category = new Category();
+            courseDB = new CourseDB();
+
+            int catID = category.getCatID(type.getValue());
+            String name = courseName.getText();
+            userID = 908108;
+            String des = desc.getText();
+            int priceValue = Integer.parseInt(price.getText());
+
+            courseDB.saveCourse(catID, name, userID, des, priceValue);
             wrapper.setContent(courseList);
         });
+    }
+
+    public void setType(){
+        category = new Category();
+        type.setItems(FXCollections.observableArrayList(category.getCatList()));
     }
 
 }
