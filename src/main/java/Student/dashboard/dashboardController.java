@@ -145,7 +145,7 @@ public class dashboardController implements Initializable {
 
 
         displayScore();
-
+        displayStudyTable();
 
         us_st.setViewOrder(-1);
 
@@ -436,6 +436,15 @@ public class dashboardController implements Initializable {
     }
 
 
+    public void displayStudyTable(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/statistics/studyTable.fxml"));
+            VBox searchbarContent = loader.load();
+            studyTable.getChildren().setAll(searchbarContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 

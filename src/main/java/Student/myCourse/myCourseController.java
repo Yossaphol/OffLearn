@@ -16,6 +16,7 @@ public class myCourseController implements Initializable {
     public VBox leftWrapper;
     public HBox searchbarcontainer;
     public VBox bigcalendarContainer;
+    public VBox studyTable;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -24,6 +25,7 @@ public class myCourseController implements Initializable {
 
         Navigator nav = new Navigator();
         calendarDisplay();
+        displayStudyTable();
     }
 
 
@@ -32,6 +34,16 @@ public class myCourseController implements Initializable {
             FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/customBigCalendar.fxml"));
             VBox calendarContent = calendarLoader.load();
             bigcalendarContainer.getChildren().setAll(calendarContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void displayStudyTable(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/statistics/studyTable.fxml"));
+            VBox searchbarContent = loader.load();
+            studyTable.getChildren().setAll(searchbarContent);
         } catch (IOException e) {
             e.printStackTrace();
         }

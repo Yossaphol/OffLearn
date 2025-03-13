@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Effect;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -236,7 +237,6 @@ public class courseController implements Initializable {
                 controller.setCourseImg("/img/Picture/bg.jpg");
 
 
-                //Effect and Margin
                 ef.hoverEffect(courseItem);
                 allCourseContainer.add(courseItem, col, row);
                 GridPane.setMargin(courseItem, new Insets(10, 30, 10, 30));

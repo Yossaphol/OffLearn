@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.media.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="520.0" prefWidth="483.0" spacing="7.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.myCourse.coursePreviewController">
+<VBox prefHeight="503.0" prefWidth="483.0" spacing="7.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.myCourse.coursePreviewController">
 
     <children>
         <!-- Title or header label -->
-        <Label prefHeight="36.0" prefWidth="107.0" text="Preview | " textFill="#6500a4">
+        <Label prefHeight="36.0" prefWidth="472.0" text="Preview | Name " textFill="#6500a4">
             <font>
-                <Font size="25.0" />
+                <Font name="Noto Sans Thai Bold" size="25.0" />
             </font>
             <VBox.margin>
                 <Insets bottom="20.0" />
@@ -30,24 +37,47 @@
               <!-- New HBox for QoL controls: current time, volume, total time, fullscreen button -->
               <HBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="458.0" spacing="3.0">
                   <children>
-                  <Button fx:id="pausebutton" layoutX="372.0" layoutY="315.0" prefHeight="25.0" prefWidth="31.0" text="TemplateButton for pause" />
+                  <Button fx:id="pausebutton" layoutX="372.0" layoutY="315.0" prefHeight="24.0" prefWidth="37.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="14.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/icon/play-button-arrowhead.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
 
                       <!-- Volume slider (0..100%) -->
-                      <Slider fx:id="volumeSlider" prefHeight="14.0" prefWidth="227.0" />
+                      <Slider fx:id="volumeSlider" prefHeight="23.0" prefWidth="227.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Slider>
 
                       <!-- Show total duration -->
-                      <Label fx:id="totalTimeLabel" text="00:00">
+                      <Label fx:id="totalTimeLabel" prefHeight="23.0" prefWidth="24.0" text="00:00">
                      <font>
                         <Font size="10.0" />
                      </font></Label>
-                  <Label text="/" />
-                  <Label prefWidth="29.0" text="00:00">
+                  <Label prefHeight="23.0" text="/" />
+                  <Label prefHeight="23.0" prefWidth="29.0" text="00:00">
                      <font>
                         <Font size="10.0" />
                      </font></Label>
 
                       <!-- Button to toggle fullscreen -->
-                      <Button fx:id="fullscreenButton" prefHeight="25.0" prefWidth="31.0" text="TemplateButton for fullscreen" />
+                      <Button fx:id="fullscreenButton" prefHeight="25.0" prefWidth="17.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="17.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/icon/expand.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   </children>
                <StackPane.margin>
                   <Insets />
@@ -72,28 +102,31 @@
 
                         <Circle fill="DODGERBLUE" layoutX="25.0" layoutY="107.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
 
-                        <Label layoutX="56.0" layoutY="87.0" prefHeight="17.0" prefWidth="298.0" text="Label">
+                        <Label layoutX="56.0" layoutY="87.0" prefHeight="17.0" prefWidth="298.0" text="Teacher name">
                             <font>
-                                <Font size="21.0" />
+                                <Font name="Noto Sans Thai Bold" size="14.0" />
                             </font>
                         </Label>
 
-                        <Label layoutX="56.0" layoutY="110.0" prefHeight="20.0" prefWidth="105.0" text="Label">
+                        <Label layoutX="56.0" layoutY="110.0" prefHeight="20.0" prefWidth="105.0" text="ผู้สอน" textFill="#c6c6c6">
                             <padding>
                                 <Insets top="3.0" />
                             </padding>
                         </Label>
 
-                        <Label fx:id="chaptername" layoutY="14.0" prefHeight="17.0" prefWidth="147.0" text="LORUM IPSUM">
+                        <Label fx:id="chaptername" layoutY="14.0" prefHeight="17.0" prefWidth="147.0" text="Name">
                             <font>
-                                <Font size="22.0" />
+                                <Font name="Noto Sans Thai Bold" size="22.0" />
                             </font>
                         </Label>
 
-                        <Label fx:id="chapterdescription" layoutY="46.0" text="Lorem ipsum blablabla">
+                        <Label fx:id="chapterdescription" layoutY="46.0" text="Description">
                             <padding>
                                 <Insets top="5.0" />
                             </padding>
+                     <font>
+                        <Font name="Noto Sans Thai Regular" size="12.0" />
+                     </font>
                         </Label>
                     </children>
                 </Pane>

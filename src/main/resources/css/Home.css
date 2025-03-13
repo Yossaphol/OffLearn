@@ -172,3 +172,32 @@
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
+
+
+.scroll-panej > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-panej .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+.scroll-panej .scroll-bar:vertical .thumb {
+    -fx-background-color: #8100cc;
+    -fx-background-radius: 0px;
+}
+
+.scroll-panej .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #8100cc;
+}
+
+.scroll-panej .scroll-bar:vertical .increment-button,
+.scroll-panej .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+
+.scroll-panej{
+    -fx-background-color: transparent;
+}
+
+

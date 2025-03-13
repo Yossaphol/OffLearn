@@ -9,8 +9,8 @@
 }
 
 .tab {
--fx-cursor: hand;
     -fx-background-color: transparent;
+    -fx-cursor: hand;
     -fx-text-fill: black;
     -fx-border-radius: 0;
     -fx-font-size: 16px;
@@ -31,4 +31,8 @@
 
 .tab-header-area {
     -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical {
+    -fx-pref-width: 8px;
 }
