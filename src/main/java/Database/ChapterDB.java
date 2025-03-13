@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class chapterDB extends ConnectDB{
+public class ChapterDB extends ConnectDB{
     public void saveChapter(int course_id, String chapName, String desc){
         String sql = "INSERT INTO chapter (Course_ID, chapterName, chapterDescription) VALUES (?, ?, ?)";
         try (

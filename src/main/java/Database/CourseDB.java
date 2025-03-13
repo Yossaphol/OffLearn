@@ -2,6 +2,7 @@ package Database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CourseDB extends ConnectDB{
@@ -21,5 +22,25 @@ public class CourseDB extends ConnectDB{
         }catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    public int getCourseID(String name){
+        String sql = "SELECT Course_ID FROM studentdb.course WHERE courseName = ? ";
+
+        try {
+            Connection conn = this.connectToDB();
+            PreparedStatement pstm = conn.prepareStatement(sql);
+
+            pstm.setString(1, name);
+            ResultSet rs = pstm.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("Course_ID");
+            }
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return 0;
     }
 }
