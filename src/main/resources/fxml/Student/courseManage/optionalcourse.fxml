@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="optional_course_container" prefHeight="41.0" prefWidth="280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.roadmap.optionalcoursecontroller">
+   <children>
+      <HBox fx:id="optional_course_namebutton_container" minHeight="20.0" prefHeight="20.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="optional_course_name" prefHeight="22.0" prefWidth="277.0" text="Software Engineer" textFill="#8100cc">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </Label>
+            <ImageView fx:id="optional_course_button" fitHeight="32.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../img/icon/right-purple.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </ImageView>
+         </children>
+      </HBox>
+      <Label fx:id="optional_course_description" prefHeight="20.0" prefWidth="412.0" text="For embed AI on APP/WEB">
+         <VBox.margin>
+            <Insets left="20.0" />
+         </VBox.margin>
+      </Label>
+   </children>
+</VBox>

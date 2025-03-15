@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="related_roadmap_box" maxHeight="350.0" maxWidth="713.0" prefHeight="50.0" prefWidth="713.0" style="-fx-background-color: white; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.roadmap.relatedroadmap">
+   <effect>
+      <DropShadow>
+         <color>
+            <Color red="0.7764706015586853" green="0.7764706015586853" blue="0.7764706015586853" opacity="0.25" />
+         </color>
+      </DropShadow>
+   </effect>
+   <children>
+      <Label fx:id="related_roadmap_description" layoutX="114.0" layoutY="4.0" prefHeight="42.0" prefWidth="227.0" text="เรียนรู้การเป็น Python  developer ในปี 2025" textFill="#767676" />
+      <Label fx:id="related_roadmap_time" layoutX="413.0" layoutY="4.0" prefHeight="42.0" prefWidth="85.0" text="ระยะเวลา 80 ชม." />
+      <Label fx:id="related_roadmap_progressfraction" layoutX="555.0" layoutY="4.0" prefHeight="42.0" prefWidth="73.0" text="เนื้อหา 11/120" />
+      <ImageView fx:id="related_roadmap_button" fitHeight="32.0" fitWidth="22.0" layoutX="663.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../img/icon/right-purple.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <Label fx:id="related_roadmap_name" layoutX="23.0" layoutY="4.0" prefHeight="42.0" prefWidth="151.0" text="Python">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

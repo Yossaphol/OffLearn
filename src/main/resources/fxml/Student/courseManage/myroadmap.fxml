@@ -264,13 +264,13 @@
                                  <children>
                                     <HBox fx:id="roadmap_node_container" alignment="TOP_CENTER" prefHeight="42.0" prefWidth="1077.0">
                                        <children>
-                                          <VBox fx:id="raodmap_node_column1" prefHeight="54.0" prefWidth="510.0">
+                                          <VBox fx:id="roadmap_node_column1" prefHeight="54.0" prefWidth="510.0">
                                              <children>
-                                                <VBox fx:id="raodmap_node_1" prefHeight="200.0" prefWidth="400.0">
+                                                <VBox fx:id="roadmap_node_1" prefHeight="200.0" prefWidth="400.0">
                                                    <children>
-                                                      <HBox fx:id="raodmap_node_node_box_1" alignment="CENTER" maxWidth="150.0" prefHeight="50.0" prefWidth="150.0" style="-fx-border-color: Purple;">
+                                                      <HBox fx:id="roadmap_node_node_box_1" alignment="CENTER" maxWidth="150.0" prefHeight="50.0" prefWidth="150.0" style="-fx-border-color: Purple;">
                                                          <children>
-                                                            <Label fx:id="raodmap_node_header_1" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="170.0" text="Mathematics">
+                                                            <Label fx:id="roadmap_node_header_1" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="170.0" text="Mathematics">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
@@ -280,14 +280,14 @@
                                                             <Insets bottom="10.0" />
                                                          </VBox.margin>
                                                       </HBox>
-                                                      <Label fx:id="raodmap_node_discription" prefHeight="20.0" prefWidth="412.0" text="Linear algebra, Calculus, Mathematical analysis, Differential Calculus">
+                                                      <Label fx:id="roadmap_node_description" prefHeight="20.0" prefWidth="412.0" text="Linear algebra, Calculus, Mathematical analysis, Differential Calculus">
                                                          <VBox.margin>
                                                             <Insets bottom="10.0" />
                                                          </VBox.margin>
                                                       </Label>
-                                                      <HBox fx:id="raodmap_node_button_box_1" alignment="CENTER" maxWidth="100.0" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #8100CC; -fx-background-radius: 30;" stylesheets="@../../../css/Home.css">
+                                                      <HBox fx:id="roadmap_node_button_box_1" alignment="CENTER" maxWidth="100.0" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #8100CC; -fx-background-radius: 30;" stylesheets="@../../../css/Home.css">
                                                          <children>
-                                                            <Button fx:id="raodmap_node_button_1" mnemonicParsing="false" style="-fx-background-color: transparent;" text="คอร์ส" textFill="WHITE">
+                                                            <Button fx:id="roadmap_node_button_1" mnemonicParsing="false" style="-fx-background-color: transparent;" text="คอร์ส" textFill="WHITE">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
@@ -304,33 +304,33 @@
                                                 </VBox>
                                              </children>
                                           </VBox>
-                                          <VBox fx:id="raodmap_node_column_2" prefHeight="54.0" prefWidth="573.0">
+                                          <VBox fx:id="roadmap_node_column_2" prefHeight="54.0" prefWidth="573.0">
                                              <children>
-                                                <VBox fx:id="raodmap_node_2" prefHeight="200.0" prefWidth="400.0">
+                                                <VBox fx:id="roadmap_node_2" prefHeight="200.0" prefWidth="400.0">
                                                    <children>
-                                                      <HBox fx:id="raodmap_node_header_container_2" alignment="CENTER" maxWidth="150.0" prefHeight="50.0" prefWidth="150.0" style="-fx-border-color: Purple;">
+                                                      <HBox fx:id="roadmap_node_header_container_2" alignment="CENTER" maxWidth="150.0" prefHeight="50.0" prefWidth="150.0" style="-fx-border-color: Purple;">
                                                          <VBox.margin>
                                                             <Insets bottom="10.0" />
                                                          </VBox.margin>
                                                          <children>
-                                                            <Label fx:id="raodmap_node_header_2" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="170.0" text="Statistics">
+                                                            <Label fx:id="roadmap_node_header_2" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="170.0" text="Statistics">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
                                                          </children>
                                                       </HBox>
-                                                      <Label fx:id="raodmap_node_discription_2" prefHeight="20.0" prefWidth="412.0" text="Linear algebra, Calculus, Mathematical analysis, Differential Calculus">
+                                                      <Label fx:id="roadmap_node_description_2" prefHeight="20.0" prefWidth="412.0" text="Linear algebra, Calculus, Mathematical analysis, Differential Calculus">
                                                          <VBox.margin>
                                                             <Insets bottom="10.0" />
                                                          </VBox.margin>
                                                       </Label>
-                                                      <HBox fx:id="raodmap_node_button_box_2" alignment="CENTER" maxWidth="100.0" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #8100CC; -fx-background-radius: 30;" stylesheets="@../../../css/Home.css">
+                                                      <HBox fx:id="roadmap_node_button_box_2" alignment="CENTER" maxWidth="100.0" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #8100CC; -fx-background-radius: 30;" stylesheets="@../../../css/Home.css">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
                                                          <children>
-                                                            <Button fx:id="raodmap_node_button_2" mnemonicParsing="false" style="-fx-background-color: transparent;" text="คอร์ส" textFill="WHITE">
+                                                            <Button fx:id="roadmap_node_button_2" mnemonicParsing="false" style="-fx-background-color: transparent;" text="คอร์ส" textFill="WHITE">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
@@ -349,9 +349,9 @@
                                           <Insets bottom="20.0" />
                                        </VBox.margin>
                                     </HBox>
-                                    <HBox fx:id="optinal_course_container" alignment="CENTER_RIGHT" minHeight="100.0" prefHeight="100.0" prefWidth="1010.0">
+                                    <HBox fx:id="optional_course_container" alignment="CENTER_RIGHT" minHeight="100.0" prefHeight="100.0" prefWidth="1010.0">
                                        <children>
-                                          <Pane fx:id="optinal_course_box" maxHeight="350.0" maxWidth="700.0" prefHeight="100.0" prefWidth="279.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                                          <Pane fx:id="optional_course_box" maxHeight="350.0" maxWidth="700.0" prefHeight="100.0" prefWidth="279.0" style="-fx-background-color: white; -fx-background-radius: 20;">
                                              <effect>
                                                 <DropShadow>
                                                    <color>
@@ -360,41 +360,45 @@
                                                 </DropShadow>
                                              </effect>
                                              <children>
-                                                <VBox fx:id="optinal_course_content_container" alignment="TOP_CENTER" layoutX="-1.0" prefHeight="100.0" prefWidth="280.0">
+                                                <VBox fx:id="optional_course_content_container" alignment="TOP_CENTER" layoutX="-1.0" prefHeight="100.0" prefWidth="280.0">
                                                    <children>
-                                                      <Label fx:id="optinal_course_header" prefHeight="27.0" prefWidth="159.0" text="OPTIONAL COURSE">
+                                                      <Label fx:id="optional_course_header" prefHeight="27.0" prefWidth="159.0" text="OPTIONAL COURSE">
                                                          <font>
                                                             <Font size="18.0" />
                                                          </font>
                                                       </Label>
-                                                      <HBox minHeight="20.0" prefHeight="20.0" prefWidth="200.0">
+                                                      <VBox fx:id="optional_course_node" prefHeight="41.0" prefWidth="280.0">
                                                          <children>
-                                                            <Label fx:id="optinal_course_name_1" prefHeight="22.0" prefWidth="277.0" text="Software Engineer" textFill="#8100cc">
-                                                               <font>
-                                                                  <Font size="18.0" />
-                                                               </font>
-                                                               <HBox.margin>
+                                                            <HBox minHeight="20.0" prefHeight="20.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <Label fx:id="optional_course_name_1" prefHeight="22.0" prefWidth="277.0" text="Software Engineer" textFill="#8100cc">
+                                                                     <font>
+                                                                        <Font size="18.0" />
+                                                                     </font>
+                                                                     <HBox.margin>
+                                                                        <Insets left="20.0" />
+                                                                     </HBox.margin>
+                                                                  </Label>
+                                                                  <ImageView fx:id="optional_course_button" fitHeight="32.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="@../../../img/icon/right-purple.png" />
+                                                                     </image>
+                                                                     <cursor>
+                                                                        <Cursor fx:constant="HAND" />
+                                                                     </cursor>
+                                                                     <HBox.margin>
+                                                                        <Insets right="10.0" />
+                                                                     </HBox.margin>
+                                                                  </ImageView>
+                                                               </children>
+                                                            </HBox>
+                                                            <Label fx:id="optional_course_description_1" prefHeight="20.0" prefWidth="412.0" text="For embed AI on APP/WEB">
+                                                               <VBox.margin>
                                                                   <Insets left="20.0" />
-                                                               </HBox.margin>
+                                                               </VBox.margin>
                                                             </Label>
-                                                            <ImageView fx:id="optinal_course_button" fitHeight="32.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                                                               <image>
-                                                                  <Image url="@../../../img/icon/right-purple.png" />
-                                                               </image>
-                                                               <cursor>
-                                                                  <Cursor fx:constant="HAND" />
-                                                               </cursor>
-                                                               <HBox.margin>
-                                                                  <Insets right="10.0" />
-                                                               </HBox.margin>
-                                                            </ImageView>
                                                          </children>
-                                                      </HBox>
-                                                      <Label fx:id="optinal_course_description_1" prefHeight="20.0" prefWidth="412.0" text="For embed AI on APP/WEB">
-                                                         <VBox.margin>
-                                                            <Insets left="20.0" />
-                                                         </VBox.margin>
-                                                      </Label>
+                                                      </VBox>
                                                    </children>
                                                 </VBox>
                                              </children>

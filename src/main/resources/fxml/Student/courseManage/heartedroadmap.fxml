@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="hearted_roadmap_pane" maxHeight="350.0" maxWidth="700.0" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.roadmap.heartedroadmapcontroller">
+   <effect>
+      <DropShadow>
+         <color>
+            <Color red="0.7764706015586853" green="0.7764706015586853" blue="0.7764706015586853" opacity="0.25" />
+         </color>
+      </DropShadow>
+   </effect>
+   <children>
+      <HBox fx:id="hearted_roadmap_container" alignment="CENTER" prefHeight="62.0" prefWidth="150.0">
+         <children>
+            <VBox fx:id="hearted_roadmap_nameprobar_container" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label fx:id="hearted_roadmap" text="Front-end">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <ProgressBar fx:id="hearted_roadmap_probar" prefHeight="6.0" prefWidth="100.0" progress="0.0" styleClass="smallProgressbar" stylesheets="@../../../css/Home.css" />
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </VBox>
+            <Circle fx:id="heart_Button" fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+               <HBox.margin>
+                  <Insets bottom="20.0" left="7.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Circle>
+         </children>
+      </HBox>
+   </children>
+</Pane>
