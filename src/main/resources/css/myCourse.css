@@ -1,27 +1,30 @@
 
 
 .tab-pane {
-    -fx-background-color: #fbfbfb;
+    -fx-background-color: white;
+    -fx-padding: 20px;
+
+    -fx-background-radius: 20px;
 }
 
 .tab-content-area {
-    -fx-background-color: #fbfbfb;
+    -fx-background-color: white;
 }
 
 .tab {
     -fx-background-color: transparent;
     -fx-cursor: hand;
 
-    -fx-font-weight: bold;
     -fx-border-radius: 0;
     -fx-font-size: 16px;
 }
 
 .tab-label{
--fx-text-fill: #8100cc;
+-fx-text-fill: black;
 }
 
 .tab:selected {
+    -fx-font-weight: bold;
 -fx-border-width: 0 0 2px 0;
    -fx-border-color: #8100cc;
       -fx-focus-color: transparent;
@@ -32,6 +35,8 @@
 .tab:selected .tab-label{
    -fx-text-fill: #8100cc;
 }
+
+
 
 .tab:focus-visible {
     -fx-focus-color: transparent;
@@ -45,7 +50,9 @@
     -fx-pref-width: 8px;
 }
 
+
+
 .tab-header-background{
-    -fx-background-color:  #fbfbfb;
+    -fx-background-color:  white;
 
 }

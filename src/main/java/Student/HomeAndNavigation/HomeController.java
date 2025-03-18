@@ -267,6 +267,29 @@ public class HomeController implements Initializable {
         });
     }
 
+    public void hoverEffectPane(Pane vBox) {
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(10);
+        dropShadow.setColor(Color.TRANSPARENT);
+        vBox.setEffect(dropShadow);
+
+        vBox.setOnMouseEntered(mouseEvent -> {
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.ZERO, new KeyValue(dropShadow.colorProperty(), Color.TRANSPARENT)),
+                    new KeyFrame(Duration.millis(200), new KeyValue(dropShadow.colorProperty(), Color.web("#8100CC", 0.25)))
+            );
+            timeline.play();
+        });
+
+        vBox.setOnMouseExited(mouseEvent -> {
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.ZERO, new KeyValue(dropShadow.colorProperty(), dropShadow.getColor())),
+                    new KeyFrame(Duration.millis(200), new KeyValue(dropShadow.colorProperty(), Color.TRANSPARENT))
+            );
+            timeline.play();
+        });
+    }
+
     public void hoverEffect(Node vBox) {
         DropShadow dropShadow = new DropShadow();
         dropShadow.setRadius(10);

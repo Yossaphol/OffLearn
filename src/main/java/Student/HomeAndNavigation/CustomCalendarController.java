@@ -47,7 +47,7 @@ public class CustomCalendarController {
         addEventBlock(13, 4, 5);
     }
 
-    private void addEventBlock(int startDay, int startCol, int duration) {
+    private void addEventBlock(int startDay, int startCol, int duration) { //Function นี้ยังทำงานผิดอยู่ เดะมาแก้น้า
         Label eventBlock = new Label("Event");
         eventBlock.setStyle("-fx-background-color: rgba(6, 117, 222);");
 

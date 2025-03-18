@@ -1,6 +1,7 @@
 package Student.myCourse;
 
 import Student.FontLoader.FontLoader;
+import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -11,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
@@ -25,6 +27,7 @@ public class myCourseController implements Initializable {
     public VBox bigcalendarContainer;
     public VBox studyTable;
     public TabPane tabPane;
+    public Pane courseContainer;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -35,8 +38,14 @@ public class myCourseController implements Initializable {
         calendarDisplay();
         displayStudyTable();
         setTabSelectionAnimation();
+        setEffect();
     }
 
+    private void setEffect(){
+        HomeController ef = new HomeController();
+        ef.hoverEffect(studyTable);
+        ef.hoverEffectPane(courseContainer);
+    }
 
     private void calendarDisplay(){
         try {
@@ -68,13 +77,13 @@ public class myCourseController implements Initializable {
                     content.setOpacity(0);
 
                     Timeline translateAnimation = new Timeline(
-                            new KeyFrame(Duration.millis(450), // Smooth vertical movement
+                            new KeyFrame(Duration.millis(450),
                                     new KeyValue(content.translateYProperty(), 0, Interpolator.EASE_OUT)
                             )
                     );
 
                     Timeline opacityAnimation = new Timeline(
-                            new KeyFrame(Duration.millis(550), // Faster fade-in effect
+                            new KeyFrame(Duration.millis(550),
                                     new KeyValue(content.opacityProperty(), 1, Interpolator.EASE_OUT)
                             )
                     );
