@@ -170,6 +170,7 @@ public class pChatController implements Initializable, SessionHadler {
     private void sendMessage() {
         if (selectedTeacher != null) {
             String messageToSend = tfMessage.getText();
+
             if (!messageToSend.isEmpty()) {
                 addMessage(messageToSend, Pos.CENTER_RIGHT, "#DB9DFF");
 

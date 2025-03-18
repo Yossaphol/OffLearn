@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <HBox fx:id="bg" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1748.0" prefWidth="1136.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.Setting.settingController">
@@ -15,119 +16,241 @@
          <children>
             <Label text="การตั้งค่า" textFill="#a8a8a8">
                <font>
-                  <Font name="Kodchasan Regular" size="16.0" />
+                  <Font name="Noto Sans Thai Regular" size="16.0" />
                </font>
             </Label>
-            <VBox fillWidth="false" prefHeight="306.0" prefWidth="1074.0">
+            <VBox fillWidth="false" prefHeight="318.0" prefWidth="986.0">
                <children>
                   <Label text="ข้อมูลส่วนตัว" textFill="#8100cc">
                      <font>
-                        <Font name="Kodchasan Bold" size="20.0" />
+                        <Font name="Noto Sans Thai Bold" size="20.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
                   </Label>
-                  <HBox prefHeight="85.0" prefWidth="1124.0">
+                  <HBox prefHeight="295.0" prefWidth="981.0">
                      <children>
-                        <VBox prefHeight="200.0" prefWidth="310.0">
+                        <VBox prefHeight="285.0" prefWidth="179.0">
                            <children>
-                              <Label text="ชื่อ">
-                                 <font>
-                                    <Font name="Kodchasan Regular" size="20.0" />
-                                 </font>
-                              </Label>
-                              <TextField prefHeight="40.0" style="-fx-background-radius: 10;" />
+                              <VBox prefHeight="285.0" prefWidth="222.0">
+                                 <children>
+                                    <HBox prefHeight="44.0" prefWidth="222.0">
+                                       <children>
+                                          <Label text="รูปโปรไฟล์">
+                                             <font>
+                                                <Font name="Noto Sans Thai Regular" size="20.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="168.0" prefWidth="214.0">
+                                       <children>
+                                          <HBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="183.0">
+                                             <children>
+                                                <Circle fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
                            </children>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
                         </VBox>
-                        <VBox prefHeight="200.0" prefWidth="310.0">
+                        <VBox prefHeight="285.0" prefWidth="660.0">
                            <children>
-                              <Label text="นามสกุล">
-                                 <font>
-                                    <Font name="Kodchasan Regular" size="20.0" />
-                                 </font>
-                              </Label>
-                              <TextField prefHeight="40.0" style="-fx-background-radius: 10;" />
+                              <HBox prefHeight="85.0" prefWidth="1124.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="310.0">
+                                       <children>
+                                          <Label text="ชื่อจริง">
+                                             <font>
+                                                <Font name="Noto Sans Thai Regular" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField prefHeight="40.0" style="-fx-background-radius: 10;">
+                                             <font>
+                                                <Font name="Kodchasan Regular" size="16.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="310.0">
+                                       <children>
+                                          <Label text="นามสกุล">
+                                             <font>
+                                                <Font name="Noto Sans Thai Regular" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField prefHeight="40.0" style="-fx-background-radius: 10;">
+                                             <font>
+                                                <Font name="Kodchasan Regular" size="16.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="85.0" prefWidth="1124.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="310.0">
+                                       <children>
+                                          <Label text="Username">
+                                             <font>
+                                                <Font name="Noto Sans Thai Regular" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField prefHeight="40.0" style="-fx-background-radius: 10;">
+                                             <font>
+                                                <Font name="Kodchasan Regular" size="16.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="310.0">
+                                       <children>
+                                          <Label text="Gmail">
+                                             <font>
+                                                <Font name="Noto Sans Thai Regular" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField prefHeight="40.0" style="-fx-background-radius: 10;">
+                                             <font>
+                                                <Font name="Kodchasan Regular" size="16.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="37.0" prefWidth="690.0">
+                                 <children>
+                                    <HBox alignment="CENTER_RIGHT" prefHeight="37.0" prefWidth="138.0" />
+                                 </children>
+                              </HBox>
                            </children>
-                           <HBox.margin>
-                              <Insets left="50.0" />
-                           </HBox.margin>
                         </VBox>
                      </children>
-                     <VBox.margin>
-                        <Insets top="50.0" />
-                     </VBox.margin>
                   </HBox>
-                  <VBox prefHeight="84.0" prefWidth="310.0">
-                     <children>
-                        <Label text="Gmail">
-                           <font>
-                              <Font name="Kodchasan Regular" size="20.0" />
-                           </font>
-                        </Label>
-                        <TextField prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" />
-                     </children>
-                     <VBox.margin>
-                        <Insets left="20.0" top="50.0" />
-                     </VBox.margin>
-                  </VBox>
                </children>
                <VBox.margin>
                   <Insets left="20.0" top="30.0" />
                </VBox.margin>
             </VBox>
-            <VBox fillWidth="false" prefHeight="193.0" prefWidth="1074.0">
+            <VBox fillWidth="false" prefHeight="318.0" prefWidth="986.0">
                <children>
                   <Label text="ความปลอดภัย" textFill="#8100cc">
                      <font>
-                        <Font name="Kodchasan Bold" size="20.0" />
+                        <Font name="Noto Sans Thai Bold" size="20.0" />
                      </font>
                   </Label>
-                  <HBox prefHeight="120.0" prefWidth="1124.0">
+                  <VBox prefHeight="219.0" prefWidth="986.0">
                      <children>
-                        <VBox fillWidth="false" prefHeight="200.0" prefWidth="310.0">
+                        <HBox prefHeight="74.0" prefWidth="986.0">
                            <children>
-                              <Label text="ชื่อ">
-                                 <font>
-                                    <Font name="Kodchasan Regular" size="20.0" />
-                                 </font>
-                              </Label>
-                              <TextField prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" />
-                           </children>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </VBox>
-                        <VBox prefHeight="200.0" prefWidth="310.0">
-                           <children>
-                              <Label text="รหัสผ่าน">
-                                 <font>
-                                    <Font name="Kodchasan Regular" size="20.0" />
-                                 </font>
-                              </Label>
-                              <TextField prefHeight="40.0" style="-fx-background-radius: 10;" />
-                              <HBox alignment="CENTER_RIGHT" prefHeight="49.0" prefWidth="310.0">
+                              <VBox alignment="BOTTOM_LEFT" fillWidth="false" prefHeight="81.0" prefWidth="310.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="เปลี่ยน" textFill="WHITE">
+                                    <Label text="Username">
                                        <font>
-                                          <Font name="Kodchasan Bold" size="16.0" />
+                                          <Font name="Kodchasan Regular" size="20.0" />
                                        </font>
-                                       <HBox.margin>
-                                          <Insets top="10.0" />
-                                       </HBox.margin>
-                                    </Button>
+                                       <VBox.margin>
+                                          <Insets bottom="3.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField prefHeight="36.0" prefWidth="310.0" style="-fx-background-radius: 10;">
+                                       <font>
+                                          <Font name="Kodchasan Regular" size="16.0" />
+                                       </font></TextField>
                                  </children>
-                              </HBox>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox fillWidth="false" prefHeight="44.0" prefWidth="310.0">
+                                 <children>
+                                    <Label text="รหัสผ่านเดิม">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;">
+                                       <font>
+                                          <Font name="Kodchasan Regular" size="16.0" />
+                                       </font></TextField>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="50.0" />
+                                 </HBox.margin>
+                              </VBox>
                            </children>
-                           <HBox.margin>
-                              <Insets left="50.0" />
-                           </HBox.margin>
-                        </VBox>
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="85.0" prefWidth="1124.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="310.0">
+                                 <children>
+                                    <Label text="รหัสผ่านใหม่">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField prefHeight="40.0" style="-fx-background-radius: 10;">
+                                       <font>
+                                          <Font name="Kodchasan Regular" size="16.0" />
+                                       </font></TextField>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="310.0">
+                                 <children>
+                                    <Label text="ยืนยันรหัสผ่านใหม่">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField prefHeight="40.0" style="-fx-background-radius: 10;">
+                                       <font>
+                                          <Font name="Kodchasan Regular" size="16.0" />
+                                       </font></TextField>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="50.0" />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </HBox>
                      </children>
-                     <VBox.margin>
-                        <Insets top="50.0" />
-                     </VBox.margin>
-                  </HBox>
+                  </VBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="37.0" prefWidth="691.0" />
                </children>
                <VBox.margin>
                   <Insets left="20.0" top="30.0" />
@@ -137,7 +260,7 @@
                <children>
                   <Label text="การแจ้งเตือน" textFill="#8100cc">
                      <font>
-                        <Font name="Kodchasan Bold" size="20.0" />
+                        <Font name="Noto Sans Thai Bold" size="20.0" />
                      </font>
                   </Label>
                   <HBox prefHeight="122.0" prefWidth="1054.0">
@@ -146,19 +269,19 @@
                            <children>
                               <Label text="แบบทดสอบ">
                                  <font>
-                                    <Font name="Kodchasan Regular" size="20.0" />
+                                    <Font name="Noto Sans Thai Regular" size="20.0" />
                                  </font>
                               </Label>
                               <HBox prefHeight="77.0" prefWidth="342.0">
                                  <children>
                                     <RadioButton mnemonicParsing="false" text="เปิด">
                                        <font>
-                                          <Font name="Kodchasan Regular" size="15.0" />
+                                          <Font name="Noto Sans Thai Regular" size="15.0" />
                                        </font>
                                     </RadioButton>
                                     <RadioButton mnemonicParsing="false" text="ปิด">
                                        <font>
-                                          <Font name="Kodchasan Regular" size="15.0" />
+                                          <Font name="Noto Sans Thai Regular" size="15.0" />
                                        </font>
                                        <HBox.margin>
                                           <Insets left="10.0" />
@@ -175,19 +298,19 @@
                            <children>
                               <Label text="กล่องข้อความ">
                                  <font>
-                                    <Font name="Kodchasan Regular" size="20.0" />
+                                    <Font name="Noto Sans Thai Regular" size="20.0" />
                                  </font>
                               </Label>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <RadioButton mnemonicParsing="false" text="เปิด">
                                        <font>
-                                          <Font name="Kodchasan Regular" size="15.0" />
+                                          <Font name="Noto Sans Thai Regular" size="15.0" />
                                        </font>
                                     </RadioButton>
                                     <RadioButton mnemonicParsing="false" text="ปิด">
                                        <font>
-                                          <Font name="Kodchasan Regular" size="15.0" />
+                                          <Font name="Noto Sans Thai Regular" size="15.0" />
                                        </font>
                                        <HBox.margin>
                                           <Insets left="10.0" />
@@ -208,23 +331,23 @@
                         <Insets left="20.0" top="50.0" />
                      </VBox.margin>
                   </HBox>
-                  <VBox prefHeight="93.0" prefWidth="1054.0">
+                  <VBox prefHeight="93.0" prefWidth="558.0">
                      <children>
                         <Label text="แบบทดสอบ">
                            <font>
-                              <Font name="Kodchasan Regular" size="20.0" />
+                              <Font name="Noto Sans Thai Regular" size="20.0" />
                            </font>
                         </Label>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <RadioButton mnemonicParsing="false" text="เปิด">
                                  <font>
-                                    <Font name="Kodchasan Regular" size="15.0" />
+                                    <Font name="Noto Sans Thai Regular" size="15.0" />
                                  </font>
                               </RadioButton>
                               <RadioButton mnemonicParsing="false" text="ปิด">
                                  <font>
-                                    <Font name="Kodchasan Regular" size="15.0" />
+                                    <Font name="Noto Sans Thai Regular" size="15.0" />
                                  </font>
                                  <HBox.margin>
                                     <Insets left="10.0" />
@@ -245,107 +368,120 @@
                   <Insets left="20.0" top="50.0" />
                </VBox.margin>
             </VBox>
-            <VBox prefHeight="423.0" prefWidth="1074.0">
+            <VBox prefHeight="371.0" prefWidth="986.0">
                <children>
                   <Label text="การชำระเงิน" textFill="#8100cc">
                      <font>
-                        <Font name="Kodchasan Bold" size="20.0" />
+                        <Font name="Noto Sans Thai Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label text="บัญชีธนาคาร">
+                  <Label text="บัญชีธนาคาร" textFill="#9e9e9e">
                      <font>
-                        <Font name="Kodchasan Regular" size="20.0" />
+                        <Font name="Noto Sans Thai Regular" size="20.0" />
                      </font>
                      <VBox.margin>
                         <Insets left="20.0" top="30.0" />
                      </VBox.margin>
                   </Label>
-                  <HBox prefHeight="75.0" prefWidth="1054.0">
+                  <VBox prefHeight="208.0" prefWidth="986.0">
                      <children>
-                        <VBox prefHeight="200.0" prefWidth="310.0">
+                        <HBox prefHeight="75.0" prefWidth="1054.0">
                            <children>
-                              <Label text="ชื่อ">
-                                 <font>
-                                    <Font name="Kodchasan Regular" size="20.0" />
-                                 </font>
-                              </Label>
-                              <TextField prefHeight="40.0" style="-fx-background-radius: 10;" />
+                              <VBox prefHeight="200.0" prefWidth="310.0">
+                                 <children>
+                                    <Label text="ชื่อจริง">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField prefHeight="40.0" style="-fx-background-radius: 10;">
+                                       <font>
+                                          <Font name="Kodchasan Regular" size="16.0" />
+                                       </font></TextField>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="310.0">
+                                 <children>
+                                    <Label text="นามสกุล">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField prefHeight="40.0" style="-fx-background-radius: 10;">
+                                       <font>
+                                          <Font name="Kodchasan Regular" size="16.0" />
+                                       </font></TextField>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="50.0" />
+                                 </HBox.margin>
+                              </VBox>
                            </children>
-                        </VBox>
-                        <VBox prefHeight="200.0" prefWidth="310.0">
+                           <VBox.margin>
+                              <Insets left="20.0" top="30.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="85.0" prefWidth="1124.0">
                            <children>
-                              <Label text="นามสกุล">
-                                 <font>
-                                    <Font name="Kodchasan Regular" size="20.0" />
-                                 </font>
-                              </Label>
-                              <TextField prefHeight="40.0" style="-fx-background-radius: 10;" />
+                              <VBox prefHeight="200.0" prefWidth="310.0">
+                                 <children>
+                                    <Label text="เลขที่บัญชี">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField prefHeight="40.0" style="-fx-background-radius: 10;">
+                                       <font>
+                                          <Font name="Kodchasan Regular" size="16.0" />
+                                       </font></TextField>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="310.0">
+                                 <children>
+                                    <Label text="ธนาคาร">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField prefHeight="40.0" style="-fx-background-radius: 10;">
+                                       <font>
+                                          <Font name="Kodchasan Regular" size="16.0" />
+                                       </font></TextField>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="50.0" />
+                                 </HBox.margin>
+                              </VBox>
                            </children>
-                           <HBox.margin>
-                              <Insets left="50.0" />
-                           </HBox.margin>
-                        </VBox>
+                           <VBox.margin>
+                              <Insets left="20.0" top="20.0" />
+                           </VBox.margin>
+                        </HBox>
                      </children>
-                     <VBox.margin>
-                        <Insets left="20.0" top="30.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox prefHeight="85.0" prefWidth="1124.0">
+                  </VBox>
+                  <HBox prefHeight="45.0" prefWidth="671.0">
                      <children>
-                        <VBox prefHeight="200.0" prefWidth="310.0">
-                           <children>
-                              <Label text="เลขที่บัญชี">
-                                 <font>
-                                    <Font name="Kodchasan Regular" size="20.0" />
-                                 </font>
-                              </Label>
-                              <TextField prefHeight="40.0" style="-fx-background-radius: 10;" />
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="200.0" prefWidth="310.0">
-                           <children>
-                              <Label text="ธนาคาร">
-                                 <font>
-                                    <Font name="Kodchasan Regular" size="20.0" />
-                                 </font>
-                              </Label>
-                              <TextField prefHeight="40.0" style="-fx-background-radius: 10;" />
-                           </children>
-                           <HBox.margin>
-                              <Insets left="50.0" />
-                           </HBox.margin>
-                        </VBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="689.0" />
                      </children>
-                     <VBox.margin>
-                        <Insets left="20.0" top="20.0" />
-                     </VBox.margin>
                   </HBox>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="เปลี่ยน" textFill="WHITE">
-                     <font>
-                        <Font name="Kodchasan Bold" size="16.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="20.0" />
-                     </VBox.margin>
-                  </Button>
                </children>
                <VBox.margin>
                   <Insets left="20.0" top="50.0" />
                </VBox.margin>
             </VBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="108.0" prefWidth="741.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="110.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-border-radius: 10; -fx-border-color: &quot;C2C2C2&quot;;" text="ยกเลิก">
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-color: &quot;C2C2C2&quot;; -fx-border-radius: 10;" text="ยกเลิก">
                      <font>
-                        <Font name="System Bold" size="16.0" />
+                        <Font name="Noto Sans Thai Bold" size="16.0" />
                      </font>
                      <HBox.margin>
-                        <Insets right="20.0" />
+                        <Insets right="120.0" />
                      </HBox.margin>
                   </Button>
-                  <Button layoutX="913.0" layoutY="35.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="110.0" style="-fx-background-radius: 10; -fx-background-color: &quot;8100CC&quot;;" text="บันทึก" textFill="WHITE">
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: &quot;8100CC&quot;; -fx-background-radius: 10;" text="ยืนยัน" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="16.0" />
+                        <Font name="Noto Sans Thai Bold" size="16.0" />
                      </font>
                   </Button>
                </children>

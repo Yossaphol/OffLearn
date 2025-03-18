@@ -42,7 +42,7 @@
                                  <children>
                                     <ImageView fitHeight="347.0" fitWidth="231.0">
                                        <image>
-                                          <Image url="@../../../../../src/main/resources/img/Picture/trimmed_bg.jpg" />
+                                          <Image url="@../../../img/Picture/bg.jpg" />
                                        </image>
                                     </ImageView>
                                  </children>
@@ -209,19 +209,19 @@
                               <HBox prefHeight="238.0" prefWidth="77.0" />
                               <ImageView fitHeight="217.0" fitWidth="303.0">
                                  <image>
-                                    <Image url="@../../../../../src/main/resources/img/Picture/dsa.png" />
+                                    <Image url="@../../../img/Picture/DSA.jpg" />
                                  </image>
                               </ImageView>
                               <HBox prefHeight="267.0" prefWidth="46.0" />
                               <ImageView fitHeight="217.0" fitWidth="303.0">
                                  <image>
-                                    <Image url="@../../../../../src/main/resources/img/Picture/bg.jpg" />
+                                    <Image url="@../../../img/Picture/bg.jpg" />
                                  </image>
                               </ImageView>
                               <HBox prefHeight="238.0" prefWidth="46.0" />
                               <ImageView fitHeight="217.0" fitWidth="303.0">
                                  <image>
-                                    <Image url="@../../../../../src/main/resources/img/Picture/alvaro-reyes-qWwpHwip31M-unsplash.jpg" />
+                                    <Image url="@../../../img/Picture/alvaro-reyes-qWwpHwip31M-unsplash.jpg" />
                                  </image>
                               </ImageView>
                            </children>

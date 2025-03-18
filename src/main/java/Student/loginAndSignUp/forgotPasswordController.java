@@ -71,11 +71,7 @@ public class forgotPasswordController implements Initializable {
             showAlert("Update Password Failed", "An error occurred while changing your password.", Alert.AlertType.ERROR);
         }
     }
-    private void showAlert(Alert.AlertType alertType, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+    
     private void showAlert(String title, String message, Alert.AlertType type) {
         Alert alert = new Alert(type);
         alert.setTitle(title);

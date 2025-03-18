@@ -88,9 +88,9 @@ public class signupController implements Initializable {
             e.printStackTrace();
         }
     }
-    // Link to login
+    // Link to login switchToLogin
     @FXML
-    private void switchToLogin(ActionEvent event) throws IOException {
+    public void switchToLogin(ActionEvent event) throws IOException {
         FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.5));
         fadeOut.setNode(((Node) event.getSource()).getScene().getRoot());
         fadeOut.setFromValue(1);

@@ -52,6 +52,7 @@ public class paymentController implements Initializable {
                 boolean isApproved = Paypal.waitForApproval(accessToken, orderId);
                 if (!isApproved) {
                     Platform.runLater(() -> status.setText("Payment not approved"));
+                    status.setStyle("-fx-text-fill: red;");
                     return;
                 }
 
@@ -59,6 +60,7 @@ public class paymentController implements Initializable {
                 String paymentMessage = isCaptured ? "Payment successful" : "Payment failed";
 
                 Platform.runLater(() -> status.setText(paymentMessage));
+                status.setStyle(isCaptured ? "-fx-text-fill: green;" : "-fx-text-fill: red;");
 
             } catch (IOException | WriterException e) {
                 e.printStackTrace();
