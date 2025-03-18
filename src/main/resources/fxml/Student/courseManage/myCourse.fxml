@@ -23,7 +23,7 @@
                            <children>
                               <HBox prefHeight="618.0" prefWidth="1036.0">
                                  <children>
-                                    <VBox prefHeight="575.0">
+                                    <VBox prefHeight="618.0" prefWidth="1062.0">
                                        <children>
                                           <VBox fx:id="category" prefHeight="66.0" prefWidth="594.0">
                                              <children>
@@ -47,13 +47,13 @@
                                                 </HBox>
                                              </children>
                                           </VBox>
-                                          <TabPane prefHeight="530.0" prefWidth="564.0" stylesheets="@../../../css/myCourse.css" tabClosingPolicy="UNAVAILABLE">
+                                          <TabPane fx:id="tabPane" prefHeight="530.0" prefWidth="564.0" stylesheets="@../../../css/myCourse.css" tabClosingPolicy="UNAVAILABLE">
                                             <tabs>
                                               <Tab text="ทั้งหมด">
                                                 <content>
                                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                          <children>
-                                                            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="4.0" prefHeight="509.0" prefWidth="558.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" styleClass="scroll-panej" stylesheets="@../../../css/Home.css">
+                                                            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="4.0" prefHeight="509.0" prefWidth="1033.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" styleClass="scroll-panej" stylesheets="@../../../css/Home.css">
                                                                <content>
                                                                   <VBox fx:id="coursecardContainer" minHeight="0.0" prefWidth="498.0" spacing="25.0" style="-fx-background-color: transparent; -fx-border-color: transparent;">
                                                                      <children>
@@ -62,6 +62,9 @@
                                                                         <fx:include source="CourseCard.fxml" />
                                                                         <fx:include source="CourseCard.fxml" />
                                                                      </children>
+                                                                     <padding>
+                                                                        <Insets top="20.0" />
+                                                                     </padding>
                                                                   </VBox>
                                                                </content>
                                                                <opaqueInsets>
@@ -76,7 +79,7 @@
                                                    <content>
                                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                          <children>
-                                                            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="4.0" prefHeight="509.0" prefWidth="558.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" styleClass="scroll-panej" stylesheets="@../../../css/Home.css">
+                                                            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="4.0" prefHeight="509.0" prefWidth="1033.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" styleClass="scroll-panej" stylesheets="@../../../css/Home.css">
                                                                <content>
                                                                   <VBox fx:id="coursecardContainer1" minHeight="0.0" prefWidth="498.0" spacing="25.0" style="-fx-background-color: transparent; -fx-border-color: transparent;">
                                                                      <children>
@@ -85,6 +88,9 @@
                                                                         <fx:include source="CourseCard.fxml" />
                                                                         <fx:include source="CourseCard.fxml" />
                                                                      </children>
+                                                                     <padding>
+                                                                        <Insets top="20.0" />
+                                                                     </padding>
                                                                   </VBox>
                                                                </content>
                                                                <opaqueInsets>
@@ -99,7 +105,7 @@
                                                    <content>
                                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                          <children>
-                                                            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="4.0" prefHeight="509.0" prefWidth="558.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" styleClass="scroll-panej" stylesheets="@../../../css/Home.css">
+                                                            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="4.0" prefHeight="509.0" prefWidth="1033.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" styleClass="scroll-panej" stylesheets="@../../../css/Home.css">
                                                                <content>
                                                                   <VBox fx:id="coursecardContainer2" minHeight="0.0" prefWidth="498.0" spacing="25.0" style="-fx-background-color: transparent; -fx-border-color: transparent;">
                                                                      <children>
@@ -108,6 +114,9 @@
                                                                         <fx:include source="CourseCard.fxml" />
                                                                         <fx:include source="CourseCard.fxml" />
                                                                      </children>
+                                                                     <padding>
+                                                                        <Insets top="20.0" />
+                                                                     </padding>
                                                                   </VBox>
                                                                </content>
                                                                <opaqueInsets>
@@ -122,15 +131,18 @@
                                                    <content>
                                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                          <children>
-                                                            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="4.0" prefHeight="509.0" prefWidth="558.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" styleClass="scroll-panej" stylesheets="@../../../css/Home.css">
+                                                            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="4.0" prefHeight="509.0" prefWidth="1033.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" styleClass="scroll-panej" stylesheets="@../../../css/Home.css">
                                                                <content>
-                                                                  <VBox fx:id="coursecardContainer21" minHeight="0.0" prefWidth="498.0" spacing="25.0" style="-fx-background-color: transparent; -fx-border-color: transparent;">
+                                                                  <VBox fx:id="coursecardContainer21" alignment="TOP_CENTER" minHeight="0.0" prefHeight="925.0" prefWidth="498.0" spacing="25.0" style="-fx-background-color: transparent; -fx-border-color: transparent;">
                                                                      <children>
                                                                         <fx:include source="CourseCard.fxml" />
                                                                         <fx:include source="CourseCard.fxml" />
                                                                         <fx:include source="CourseCard.fxml" />
                                                                         <fx:include source="CourseCard.fxml" />
                                                                      </children>
+                                                                     <padding>
+                                                                        <Insets top="20.0" />
+                                                                     </padding>
                                                                   </VBox>
                                                                </content>
                                                                <opaqueInsets>
@@ -145,11 +157,6 @@
                                           </TabPane>
                                        </children>
                                     </VBox>
-                                    <Pane fx:id="previewContainer" prefHeight="575.0" prefWidth="502.0">
-                                       <children>
-                                          <fx:include source="cardpreview.fxml" />
-                                       </children>
-                                    </Pane>
                                  </children>
                               </HBox>
                               <VBox fx:id="statistics_data" prefHeight="1088.0" prefWidth="1039.0">

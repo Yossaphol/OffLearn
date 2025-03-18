@@ -2,10 +2,17 @@ package Student.myCourse;
 
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.Navigator;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,6 +24,7 @@ public class myCourseController implements Initializable {
     public HBox searchbarcontainer;
     public VBox bigcalendarContainer;
     public VBox studyTable;
+    public TabPane tabPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -26,6 +34,7 @@ public class myCourseController implements Initializable {
         Navigator nav = new Navigator();
         calendarDisplay();
         displayStudyTable();
+        setTabSelectionAnimation();
     }
 
 
@@ -48,4 +57,34 @@ public class myCourseController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    private void setTabSelectionAnimation() {
+        tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
+            if (newTab != null) {
+                Node content = newTab.getContent();
+                if (content != null) {
+
+                    content.setTranslateY(15);
+                    content.setOpacity(0);
+
+                    Timeline translateAnimation = new Timeline(
+                            new KeyFrame(Duration.millis(450), // Smooth vertical movement
+                                    new KeyValue(content.translateYProperty(), 0, Interpolator.EASE_OUT)
+                            )
+                    );
+
+                    Timeline opacityAnimation = new Timeline(
+                            new KeyFrame(Duration.millis(550), // Faster fade-in effect
+                                    new KeyValue(content.opacityProperty(), 1, Interpolator.EASE_OUT)
+                            )
+                    );
+
+                    translateAnimation.play();
+                    opacityAnimation.play();
+                }
+            }
+        });
+    }
+
+
 }

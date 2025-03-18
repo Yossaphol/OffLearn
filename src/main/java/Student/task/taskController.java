@@ -1,7 +1,7 @@
 package Student.task;
 
 import Student.HomeAndNavigation.HomeController;
-import javafx.animation.ScaleTransition;
+import javafx.animation.*;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -59,7 +59,7 @@ public class taskController implements Initializable {
         setUpComing();
         setLate();
         setComplete();
-
+        setTabAnimation();
     }
 
     private void setUpComing(){
@@ -101,6 +101,29 @@ public class taskController implements Initializable {
         });
         btn.setOnMouseExited(mouseEvent -> {
             scaleDown.play();
+        });
+    }
+
+    public void setTabAnimation() {
+        tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
+            if (newTab != null && newTab.getContent() != null) {
+                newTab.getContent().getStyleClass().add("tab-content");
+
+                newTab.getContent().setTranslateX(10);
+                newTab.getContent().setOpacity(0);
+
+                TranslateTransition slide = new TranslateTransition(Duration.millis(300), newTab.getContent());
+                slide.setFromX(10);
+                slide.setToX(0);
+
+                Timeline opacityAnimation = new Timeline(
+                        new KeyFrame(Duration.ZERO, new KeyValue(newTab.getContent().opacityProperty(), 0)),
+                        new KeyFrame(Duration.millis(500), new KeyValue(newTab.getContent().opacityProperty(), 1))
+                );
+
+                ParallelTransition animation = new ParallelTransition(slide, opacityAnimation);
+                animation.play();
+            }
         });
     }
 

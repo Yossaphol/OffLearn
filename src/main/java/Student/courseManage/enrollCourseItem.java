@@ -24,7 +24,6 @@ public class enrollCourseItem implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-    setProgressBar();
     setEffect();
     }
 
@@ -34,9 +33,6 @@ public class enrollCourseItem implements Initializable {
 
 
 
-    private void setProgressBar() {
-        course.setProgress(Double.parseDouble(courseVal.getText().replace("%", "").trim()) / 100);
-    }
 
     public void setCourseName(String name){
         courseName.setText(name);

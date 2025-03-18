@@ -1,26 +1,36 @@
 
 
 .tab-pane {
-    -fx-background-color: white;
+    -fx-background-color: #fbfbfb;
 }
 
 .tab-content-area {
-    -fx-background-color: white;
+    -fx-background-color: #fbfbfb;
 }
 
 .tab {
     -fx-background-color: transparent;
     -fx-cursor: hand;
-    -fx-text-fill: black;
+
+    -fx-font-weight: bold;
     -fx-border-radius: 0;
     -fx-font-size: 16px;
 }
 
+.tab-label{
+-fx-text-fill: #8100cc;
+}
+
 .tab:selected {
-    -fx-background-color: white;
-    -fx-text-fill: black;
-    -fx-border-width: 0 0 2px 0;
-    -fx-border-color: #8100cc;
+-fx-border-width: 0 0 2px 0;
+   -fx-border-color: #8100cc;
+      -fx-focus-color: transparent;
+        -fx-faint-focus-color: transparent;
+       -fx-transition: background-color 0.3s ease-in-out;
+}
+
+.tab:selected .tab-label{
+   -fx-text-fill: #8100cc;
 }
 
 .tab:focus-visible {
@@ -29,10 +39,13 @@
     -fx-border-color: transparent;
 }
 
-.tab-header-area {
-    -fx-background-color: transparent;
-}
+
 
 .scroll-bar:vertical {
     -fx-pref-width: 8px;
+}
+
+.tab-header-background{
+    -fx-background-color:  #fbfbfb;
+
 }

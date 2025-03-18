@@ -1053,10 +1053,29 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <HBox alignment="CENTER_RIGHT" maxWidth="120.0" prefHeight="46.0" prefWidth="120.0">
+                  <HBox alignment="CENTER_RIGHT" maxWidth="-Infinity" prefHeight="46.0" prefWidth="252.0">
                      <children>
-                        <HBox alignment="TOP_CENTER" prefHeight="46.0" prefWidth="158.0">
+                        <HBox alignment="TOP_CENTER" prefHeight="46.0" prefWidth="202.0">
                            <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label fx:id="currentPage" text="0" textFill="#8100cc">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="/" textFill="#8100cc">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="lastPage" text="5" textFill="#8100cc">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
                               <Button fx:id="previous" mnemonicParsing="false" style="-fx-background-color: transparent;">
                                  <graphic>
                                     <ImageView fitHeight="43.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
@@ -1109,6 +1128,9 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
                   </GridPane>
                </children>
             </VBox>

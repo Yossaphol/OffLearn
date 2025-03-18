@@ -213,15 +213,9 @@ public class courseController implements Initializable {
         try {
             List<String> courseList = new ArrayList<>();
             courseList.add("Math");
-            courseList.add("Science");
-            courseList.add("History");
-            courseList.add("English");
 
             List<String> description = new ArrayList<>();
             description.add("Math for IT");
-            description.add("Science for IT");
-            description.add("History for IT");
-            description.add("English for IT");
 
             int col = 0, row = 0;
             for (String courseName : courseList) {

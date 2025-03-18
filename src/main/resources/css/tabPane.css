@@ -1,4 +1,6 @@
-
+.tab-header-background{
+    -fx-background-color:  #fbfbfb;
+}
 
 .tab-pane {
     -fx-background-color: white;
@@ -9,26 +11,22 @@
 }
 
 .tab {
--fx-cursor: hand;
+    -fx-cursor: hand;
     -fx-background-color: transparent;
-    -fx-text-fill: black;
     -fx-border-radius: 0;
     -fx-font-size: 16px;
 }
 
 .tab:selected {
-    -fx-background-color: white;
-    -fx-text-fill: black;
     -fx-border-width: 0 0 2px 0;
-    -fx-border-color: #8100cc;
-}
-
-.tab:focus-visible {
+   -fx-border-color: #8100cc;
     -fx-focus-color: transparent;
+    -fx-background-color: white;
     -fx-faint-focus-color: transparent;
-    -fx-border-color: transparent;
 }
 
-.tab-header-area {
-    -fx-background-color: transparent;
+.tab:selected .tab-label{
+   -fx-text-fill: #8100cc;
 }
+
+
