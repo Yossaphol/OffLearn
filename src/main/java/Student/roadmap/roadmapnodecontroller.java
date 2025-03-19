@@ -16,7 +16,24 @@ public class roadmapnodecontroller implements Initializable {
     public Label roadmap_node_discription;
     public HBox roadmap_node_button_box;
     public Button roadmap_node_button;
+    public Label subjectName;
+    public Label subjectDescription;
+    public Label orderNumber;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
+    public void setOrderNumber(int num){
+        orderNumber.setText(String.valueOf(num));
+    }
+
+    public void setDescription(String txt){
+        subjectName.setText(txt);
+    }
+
+    public void setSubjectName(String name){
+        subjectName.setText(name);
     }
 }

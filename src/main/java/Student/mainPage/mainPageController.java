@@ -76,12 +76,12 @@ public class mainPageController implements Initializable {
             HBox contentComponent = loader.load();
             FontLoader font = new FontLoader();
             font.loadFonts();
-            FadeTransition fadeOut = new FadeTransition(Duration.millis(300), content);
+            FadeTransition fadeOut = new FadeTransition(Duration.millis(200), content);
             fadeOut.setFromValue(1.0);
             fadeOut.setToValue(0.0);
             fadeOut.setOnFinished(event -> {
                 content.getChildren().setAll(contentComponent);
-                FadeTransition fadeIn = new FadeTransition(Duration.millis(300), content);
+                FadeTransition fadeIn = new FadeTransition(Duration.millis(200), content);
                 fadeIn.setFromValue(0.0);
                 fadeIn.setToValue(1.0);
                 fadeIn.play();

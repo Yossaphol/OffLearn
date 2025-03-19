@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="selected_roadmap_box" maxHeight="338.0" maxWidth="772.0" prefHeight="271.0" prefWidth="772.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-color: #A8A8A8; -fx-border-radius: 20;" styleClass="overflow-img" stylesheets="@../../../css/Home.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.roadmap.myRoadmapCard">
+    <children>
+        <VBox alignment="CENTER_LEFT" prefHeight="272.0" prefWidth="774.0">
+            <children>
+                <Label fx:id="name" prefHeight="70.0" prefWidth="723.0" text="Name">
+                    <font>
+                        <Font name="Noto Sans Thai Bold" size="48.0" />
+                    </font>
+                </Label>
+                <Label fx:id="shortDescription" prefHeight="43.0" prefWidth="622.0" text="Short description">
+                    <font>
+                        <Font name="Noto Sans Thai Regular" size="24.0" />
+                    </font>
+                </Label>
+                <HBox prefHeight="97.0" prefWidth="774.0" spacing="30.0">
+                    <children>
+                        <VBox alignment="CENTER_LEFT" prefHeight="97.0" prefWidth="79.0">
+                            <children>
+                                <Label fx:id="selected_roadmap_progrgresspercent_header" prefHeight="22.0" prefWidth="79.0" text="ความคืบหน้า">
+                                    <font>
+                                        <Font name="Noto Sans Thai Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="progression" prefHeight="22.0" prefWidth="97.0" text="40%" textFill="#8100cc">
+                                    <font>
+                                        <Font name="Noto Sans Thai Regular" size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <VBox alignment="CENTER_LEFT" prefHeight="97.0" prefWidth="53.0">
+                            <children>
+                                <Label fx:id="selected_roadmap_progrgressfraction_header" prefHeight="22.0" prefWidth="79.0" text="เนื้อหา">
+                                    <font>
+                                        <Font name="Noto Sans Thai Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="finish" prefHeight="22.0" prefWidth="50.0" text="48/120" textFill="#8100cc">
+                                    <font>
+                                        <Font name="Noto Sans Thai Regular" size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <VBox alignment="CENTER_LEFT" prefHeight="97.0" prefWidth="174.0">
+                            <children>
+                                <Label fx:id="selected_roadmap_time_header" prefHeight="24.0" prefWidth="179.0" text="ระยะเวลาของ Roadmap">
+                                    <font>
+                                        <Font name="Noto Sans Thai Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="duration" prefHeight="22.0" prefWidth="56.0" text="210 ชม." textFill="#8100cc">
+                                    <font>
+                                        <Font name="Noto Sans Thai Regular" size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="97.0" prefWidth="253.0">
+                            <children>
+                                <Circle fx:id="teacherPic" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE">
+                                    <HBox.margin>
+                                        <Insets right="7.0" />
+                                    </HBox.margin>
+                                </Circle>
+                                <VBox alignment="CENTER_LEFT" prefHeight="97.0" prefWidth="180.0">
+                                    <children>
+                                        <Label fx:id="selected_roadmap_createby_text" prefHeight="22.0" prefWidth="277.0" text="สร้างโดย" textFill="#a8a8a8">
+                                            <font>
+                                                <Font name="Noto Sans Thai Regular" size="13.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="teacherName" prefHeight="22.0" prefWidth="277.0" text="Teacher Name" textFill="#8100cc">
+                                            <font>
+                                                <Font name="Noto Sans Thai Bold" size="16.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="expertIn" prefHeight="22.0" prefWidth="277.0" text="Title" textFill="#a8a8a8">
+                                            <font>
+                                                <Font name="Noto Sans Thai Regular" size="13.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </children>
+                </HBox>
+            </children>
+            <padding>
+                <Insets left="50.0" right="50.0" />
+            </padding>
+        </VBox>
+    </children>
+</Pane>

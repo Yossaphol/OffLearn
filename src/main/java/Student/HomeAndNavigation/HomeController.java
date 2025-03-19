@@ -346,6 +346,13 @@ public class HomeController implements Initializable {
                                     "-fx-background-color: linear-gradient(to right, #8100CC, #A000FF);"
                     );
                     break;
+                case "pre_test":
+                    hBox.setEffect(glow);
+                    hBox.setStyle(
+                            "-fx-background-radius: 30; " +
+                                    "-fx-background-color:  linear-gradient(from 0% 0% to 100% 100%, #8100cc, #410066);"
+                    );
+                    break;
                 default:
                     hBox.setStyle("-fx-background-color: #F7E9FF;");
                     break;
@@ -358,6 +365,10 @@ public class HomeController implements Initializable {
                 case "learn_now":
                     hBox.setEffect(null);
                     hBox.setStyle("-fx-background-radius: 30;" + "-fx-background-color: #8100CC;");
+                    break;
+                case "pre_test":
+                    hBox.setEffect(null);
+                    hBox.setStyle("-fx-background-radius: 30;" + "-fx-background-color:  linear-gradient(from 0% 0% to 100% 100%, #8100cc, #410066);");
                     break;
                 default :
                     hBox.setStyle("-fx-background-color: transparent;");

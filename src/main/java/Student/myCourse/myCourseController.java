@@ -3,14 +3,17 @@ package Student.myCourse;
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
+import Student.courseManage.enrollCourseItem;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -18,6 +21,8 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class myCourseController implements Initializable {
@@ -39,6 +44,7 @@ public class myCourseController implements Initializable {
         displayStudyTable();
         setTabSelectionAnimation();
         setEffect();
+
     }
 
     private void setEffect(){
@@ -94,6 +100,7 @@ public class myCourseController implements Initializable {
             }
         });
     }
+
 
 
 }
