@@ -1,108 +1,133 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" prefHeight="229.0" prefWidth="1222.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="183.0" stroke="BLACK" strokeType="INSIDE" width="276.0" />
-      <Pane prefHeight="229.0" prefWidth="64.0" />
-      <VBox alignment="CENTER_LEFT" prefHeight="182.0" prefWidth="600.0">
+<HBox alignment="CENTER" prefHeight="229.0" prefWidth="1222.0" style="-fx-border-color: #8100cc; -fx-border-width: 0px 0px 1px 0px;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.courseManage.cartCardController">
+    <children>
+      <Rectangle fx:id="picture" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="184.0" stroke="BLACK" strokeType="INSIDE" width="276.0" />
+        <Pane prefHeight="228.0" prefWidth="25.0" />
+        <VBox alignment="CENTER_LEFT" prefHeight="182.0" prefWidth="600.0">
+            <children>
+                <Label fx:id="name" prefHeight="44.0" prefWidth="486.0" text="Name">
+                    <font>
+                        <Font name="Noto Sans Thai Bold" size="36.0" />
+                    </font>
+                </Label>
+                <Label fx:id="description" text="Description">
+                    <font>
+                        <Font name="Noto Sans Thai Regular" size="17.0" />
+                    </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+                </Label>
+                <HBox alignment="CENTER_LEFT" prefHeight="16.0" prefWidth="430.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="83.0">
+                            <children>
+                        <Circle fx:id="categoryPic" fill="DODGERBLUE" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                                <Label fx:id="category" prefHeight="20.0" prefWidth="45.0" text="Category" textFill="#8100cc">
+                                    <font>
+                                        <Font name="Noto Sans Thai Regular" size="10.0" />
+                                    </font>
+                           <HBox.margin>
+                              <Insets left="3.0" />
+                           </HBox.margin>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="16.0" prefWidth="14.0" />
+                  <HBox fx:id="rateContainer" alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="58.0">
+                     <children>
+                              <ImageView fx:id="one" fitHeight="13.0" fitWidth="15.0">
+                                  <image>
+                                      <Image url="@../../../img/icon/star%20(2).png" />
+                                  </image>
+                              </ImageView>
+                              <ImageView fx:id="two" fitHeight="13.0" fitWidth="15.0">
+                                  <image>
+                                      <Image url="@../../../img/icon/star%20(2).png" />
+                                  </image>
+                              </ImageView>
+                              <ImageView fx:id="three" fitHeight="13.0" fitWidth="15.0">
+                                  <image>
+                                      <Image url="@../../../img/icon/star%20(2).png" />
+                                  </image>
+                              </ImageView>
+                        <ImageView fx:id="four" fitHeight="13.0" fitWidth="15.0">
+                           <image>
+                              <Image url="@../../../img/icon/star%20(2).png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                        <HBox prefHeight="24.0" prefWidth="8.0" />
+                        <Label fx:id="review" text="4.0 (2,430)" textFill="#a8a8a8">
+                            <font>
+                                <Font name="Noto Sans Thai Regular" size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" prefHeight="18.0" prefWidth="600.0">
+                    <children>
+                        <Spinner fx:id="amount" editable="true" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="87.0" stylesheets="@../../../css/cart.css" />
+                        <Pane prefHeight="29.0" prefWidth="30.0" />
+                        <Label fx:id="price" text="1,750  บาท" textFill="#a8a8a8">
+                            <font>
+                                <Font name="Noto Sans Thai Bold" size="16.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox prefHeight="9.0" prefWidth="600.0" />
+                <HBox prefHeight="33.0" prefWidth="600.0">
+                    <children>
+                        <Button fx:id="enrollBtn" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefHeight="40.0" prefWidth="167.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #410066, #8100CC); -fx-background-radius: 10;" text="Enroll" textFill="WHITE">
+                            <font>
+                                <Font name="Noto Sans Thai Bold" size="20.0" />
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+      <VBox prefHeight="200.0" prefWidth="58.0">
          <children>
-            <Label prefHeight="44.0" prefWidth="486.0" text="Data Structures and Algorithms">
-               <font>
-                  <Font name="System Bold" size="36.0" />
-               </font>
-            </Label>
-            <Label text="Learn all Data structure and Algorithm concepts">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <HBox alignment="CENTER_LEFT" prefHeight="16.0" prefWidth="430.0">
-               <children>
-                  <ImageView fitHeight="10.0" fitWidth="13.0">
+            <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#deleteCourse" prefHeight="238.0" prefWidth="148.0" style="-fx-background-color: red; -fx-background-radius: 0;">
+               <graphic>
+                  <ImageView fitHeight="21.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../img/icon/_.png" />
+                        <Image url="@../../../img/icon/trash-solid%20(2).png" />
                      </image>
                   </ImageView>
-                  <Label prefHeight="20.0" prefWidth="28.0" text="  Coding" textFill="#8100cc">
-                     <font>
-                        <Font size="8.0" />
-                     </font>
-                  </Label>
-                  <HBox prefHeight="16.0" prefWidth="14.0" />
-                  <ImageView fitHeight="13.0" fitWidth="15.0">
-                     <image>
-                        <Image url="@../../../../../../target/classes/img/icon/star.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="13.0" fitWidth="15.0">
-                     <image>
-                        <Image url="@../../../../../../target/classes/img/icon/star.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="13.0" fitWidth="15.0">
-                     <image>
-                        <Image url="@../../../../../../target/classes/img/icon/star.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="13.0" fitWidth="15.0">
-                     <image>
-                        <Image url="@../../../../../../target/classes/img/icon/star.png" />
-                     </image>
-                  </ImageView>
-                  <HBox prefHeight="16.0" prefWidth="16.0" />
-                  <Label text="4.0 (2,430)" textFill="#a8a8a8">
-                     <font>
-                        <Font name="Noto Sans Thai Regular" size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="29.0" prefWidth="600.0">
-               <children>
-                  <ImageView fitHeight="24.0" fitWidth="91.0">
-                     <image>
-                        <Image url="@../../../img/icon/amount.png" />
-                     </image>
-                  </ImageView>
-                  <Pane prefHeight="29.0" prefWidth="30.0" />
-                  <Label text="1,750  บาท" textFill="#a8a8a8">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
-                  <Pane prefHeight="29.0" prefWidth="28.0" />
-                  <Label text="ฟรี" textFill="#68a400">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox prefHeight="9.0" prefWidth="600.0" />
-            <HBox prefHeight="37.0" prefWidth="600.0">
-               <children>
-                  <Button fx:id="enrollBtn" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="167.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #410066, #8100CC); -fx-background-radius: 10;" text="Enroll" textFill="WHITE">
-                     <font>
-                        <Font name="Noto Sans Thai Bold" size="20.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-               </children>
-            </HBox>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
+         <HBox.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </HBox.margin>
       </VBox>
-   </children>
+    </children>
 </HBox>

@@ -1,0 +1,8 @@
+.spinner {
+
+}
+.increment-arrow-button,
+.decrement-arrow-button {
+    -fx-background-radius: 0px;
+    -fx-padding: 5px;
+}

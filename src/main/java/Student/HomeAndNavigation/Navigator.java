@@ -57,6 +57,11 @@ public class Navigator {
     public void preTestRoute(MouseEvent event) {
         navigateTo("/fxml/Student/test/preTest.fxml");
     }
+
+    public void courseEnrollRoute(MouseEvent event) {
+        navigateTo("/fxml/Student/courseManage/courseEnroll.fxml");
+    }
+
     public void testRoute(MouseEvent event) {
         navigateTo("/fxml/Student/test/testPage.fxml");
     }

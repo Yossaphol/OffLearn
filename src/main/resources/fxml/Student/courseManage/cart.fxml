@@ -3,18 +3,18 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="1021.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="1021.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.courseManage.cartController">
    <children>
       <VBox prefHeight="1036.0" prefWidth="1444.0">
          <children>
@@ -51,126 +51,34 @@
                            </children>
                         </StackPane>
                         <Pane prefHeight="90.0" prefWidth="77.0" />
-                        <ImageView fitHeight="26.0" fitWidth="26.0">
-                           <image>
-                              <Image url="@../../../img/icon/edit.png" />
-                           </image>
-                        </ImageView>
+                        <Button fx:id="edit" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="26.0" fitWidth="26.0">
+                                 <image>
+                                    <Image url="@../../../img/icon/edit.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
                      </children>
                   </HBox>
                </children>
             </VBox>
-            <HBox alignment="CENTER" prefHeight="229.0" prefWidth="1222.0">
-               <children>
-                  <ImageView fitHeight="183.0" fitWidth="276.0">
-                     <image>
-                        <Image url="@../../../img/Picture/bg.jpg" />
-                     </image>
-                  </ImageView>
-                  <Pane prefHeight="229.0" prefWidth="64.0" />
-                  <VBox alignment="CENTER_LEFT" prefHeight="182.0" prefWidth="600.0">
+            <ScrollPane hbarPolicy="NEVER" prefHeight="736.0" prefWidth="1136.0" styleClass="scroll-panej" stylesheets="@../../../css/Home.css" vbarPolicy="NEVER">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="847.0" prefWidth="1093.0">
                      <children>
-                        <Label prefHeight="44.0" prefWidth="486.0" text="Data Structures and Algorithms">
-                           <font>
-                              <Font name="System Bold" size="36.0" />
-                           </font>
-                        </Label>
-                        <Label text="Learn all Data structure and Algorithm concepts">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <HBox alignment="CENTER_LEFT" prefHeight="16.0" prefWidth="430.0">
-                           <children>
-                              <ImageView fitHeight="10.0" fitWidth="13.0">
-                                 <image>
-                                    <Image url="@../../../img/icon/_.png" />
-                                 </image>
-                              </ImageView>
-                              <Label prefHeight="20.0" prefWidth="28.0" text="  Coding" textFill="#8100cc">
-                                 <font>
-                                    <Font size="8.0" />
-                                 </font>
-                              </Label>
-                              <HBox prefHeight="16.0" prefWidth="14.0" />
-                              <ImageView fitHeight="13.0" fitWidth="15.0">
-                                 <image>
-                                    <Image url="@../../../../../../target/classes/img/icon/star.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="13.0" fitWidth="15.0">
-                                 <image>
-                                    <Image url="@../../../../../../target/classes/img/icon/star.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="13.0" fitWidth="15.0">
-                                 <image>
-                                    <Image url="@../../../../../../target/classes/img/icon/star.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="13.0" fitWidth="15.0">
-                                 <image>
-                                    <Image url="@../../../../../../target/classes/img/icon/star.png" />
-                                 </image>
-                              </ImageView>
-                              <HBox prefHeight="16.0" prefWidth="16.0" />
-                              <Label text="4.0 (2,430)" textFill="#a8a8a8">
-                                 <font>
-                                    <Font name="Noto Sans Thai Regular" size="14.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="29.0" prefWidth="600.0">
-                           <children>
-                              <ImageView fitHeight="24.0" fitWidth="91.0">
-                                 <image>
-                                    <Image url="@../../../img/icon/amount.png" />
-                                 </image>
-                              </ImageView>
-                              <Pane prefHeight="29.0" prefWidth="30.0" />
-                              <Label text="1,750  บาท" textFill="#a8a8a8">
-                                 <font>
-                                    <Font name="System Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                              <Pane prefHeight="29.0" prefWidth="28.0" />
-                              <Label text="ฟรี" textFill="#68a400">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="9.0" prefWidth="600.0" />
-                        <HBox prefHeight="37.0" prefWidth="600.0">
-                           <children>
-                              <Button fx:id="enrollBtn" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="167.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #410066, #8100CC); -fx-background-radius: 10;" text="Enroll" textFill="WHITE">
-                                 <font>
-                                    <Font name="Noto Sans Thai Bold" size="20.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Button>
-                           </children>
-                        </HBox>
+                        <VBox fx:id="courseContainer" prefHeight="1087.0" prefWidth="1094.0" />
                      </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <Pane prefHeight="12.0" prefWidth="1132.0">
-               <children>
-                  <HBox alignment="CENTER" layoutX="-500.0" prefHeight="3.0" prefWidth="2403.0">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8100cc" height="1.0" stroke="#8100cc" strokeType="INSIDE" width="994.0" />
-                     </children>
-                  </HBox>
-               </children>
-            </Pane>
-            <HBox alignment="CENTER" prefHeight="20.0" prefWidth="969.0" />
-            <HBox prefHeight="10.0" prefWidth="1132.0" />
-            <HBox alignment="CENTER" prefHeight="20.0" prefWidth="969.0" />
+                  </AnchorPane>
+              </content>
+               <padding>
+                  <Insets left="40.0" right="40.0" />
+               </padding>
+            </ScrollPane>
          </children>
       </VBox>
    </children>
