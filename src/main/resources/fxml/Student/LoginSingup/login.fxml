@@ -70,7 +70,7 @@
                         </Label>
                      </children>
                   </VBox>
-                  <VBox prefHeight="200.0" prefWidth="811.0">
+                  <VBox prefHeight="217.0" prefWidth="489.0">
                      <children>
                         <Label contentDisplay="TOP" text="Username">
                            <font>
