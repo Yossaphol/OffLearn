@@ -1,5 +1,6 @@
 package Teacher.experiment;
 
+import com.beust.ah.A;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -12,9 +13,10 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class problemContent implements Initializable {
+public class ProblemContent implements Initializable {
 
     @FXML
     private TextField problem;
@@ -40,14 +42,25 @@ public class problemContent implements Initializable {
     @FXML
     private ImageView img;
 
+    @FXML
+    private ImageView save;
+
     private int count = 0;
     private ToggleGroup group;
-
+    private QuizItem quizItem;
+    private ArrayList<TextField> txtGroup;
+    private ArrayList<QuizItem> itm;
+    private VBox parentContainer;
+    private HBox problemContent;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         addChoice();
         addImage();
+        saveButton();
+        deleteButton();
+
+        txtGroup = new ArrayList<TextField>();
     }
 
     public void addChoice(){
@@ -67,6 +80,8 @@ public class problemContent implements Initializable {
                 choice.getChildren().addAll(radioButton, choiceMessage);
 
                 choiceSpace.getChildren().add(choice);
+
+                txtGroup.add(choiceMessage);
 
                 count++;
             }
@@ -89,6 +104,57 @@ public class problemContent implements Initializable {
                 System.out.println("No file selected.");
             }
         });
+    }
+
+    public void saveButton(){
+        save.setOnMouseClicked(mouseEvent -> {
+            this.setQuizItem();
+            itm.add(this.getQuizItem());
+
+            save.setVisible(false);
+        });
+    }
+
+    public void setQuizItem(){
+        String p = problem.getText();
+        int po;
+        if (point.getText().isEmpty()){
+            po = 0;
+        } else {
+            po = Integer.parseInt(point.getText());
+        }
+        String corr = correctAns.getText();
+        quizItem = new QuizItem(p, po, corr);
+        for (TextField t: txtGroup){
+            quizItem.setChoices(t.getText());
+        }
+    }
+
+    public void deleteButton(){
+        delete.setOnMouseClicked(mouseEvent -> {
+            itm.remove(this.quizItem); // ลบออกจาก ArrayList
+
+            if (parentContainer != null && problemContent != null) {
+                parentContainer.getChildren().remove(problemContent); // ลบออกจาก VBox
+            }
+        });
+    }
+
+
+    public QuizItem getQuizItem(){
+        return this.quizItem;
+    }
+
+    public void recieveQuizItemList(ArrayList<QuizItem> itm){
+        this.itm = itm;
+    }
+
+    public void setParentContainer(VBox parentContainer) {
+        this.parentContainer = parentContainer;
+    }
+
+    public void setProblemContent(HBox problemContent) {
+        this.problemContent = problemContent;
     }
 
 }

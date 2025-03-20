@@ -15,6 +15,7 @@ module com.example.offlearn {
     requires javafx.media;
     requires com.azure.storage.blob;
     requires com.azure.core;
+    requires jcommander;
 
     opens Student.inbox to javafx.fxml;
     exports Student.inbox;
