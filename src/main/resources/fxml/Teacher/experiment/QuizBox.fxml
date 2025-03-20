@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="quizBox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="146.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.experiment.quizBoxContent">
+    <children>
+        <HBox prefHeight="100.0" prefWidth="800.0" style="-fx-background-radius: 30;">
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="137.0" prefWidth="382.0">
+               <children>
+                  <Label text="Quiz | " textFill="#0675de">
+                     <font>
+                        <Font name="Kodchasan Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="quizName" text="Label" textFill="#0675de">
+                     <font>
+                        <Font name="Kodchasan Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="100.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="137.0" prefWidth="118.0">
+               <children>
+                  <Label fx:id="count" text="label">
+                     <font>
+                        <Font name="Kodchasan Regular" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label text=" ข้อ">
+                     <font>
+                        <Font name="Kodchasan Regular" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="ขั้นต่ำ ">
+                     <font>
+                        <Font name="Kodchasan Regular" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="minScore" text=" ข้อ">
+                     <font>
+                        <Font name="Kodchasan Regular" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label text=" คะแนน">
+                     <font>
+                        <Font name="Kodchasan Regular" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text=" คะแนนเต็ม ">
+                     <font>
+                        <Font name="Kodchasan Regular" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="maxScore" text=" คะแนน">
+                     <font>
+                        <Font name="Kodchasan Regular" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+        </HBox>
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+            <children>
+                <ImageView fx:id="delete" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../img/icon/trash-solid%20(1).png" />
+                    </image>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </ImageView>
+            </children>
+        </VBox>
+    </children>
+</HBox>

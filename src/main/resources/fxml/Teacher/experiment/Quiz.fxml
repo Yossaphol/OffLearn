@@ -34,7 +34,7 @@
                         <Font name="Kodchasan Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="40.0" prefWidth="280.0" style="-fx-background-radius: 10;">
+                  <TextField fx:id="quizName" prefHeight="40.0" prefWidth="280.0" style="-fx-background-radius: 10;">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -48,7 +48,7 @@
                         <Font name="Kodchasan Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="40.0" prefWidth="280.0" style="-fx-background-radius: 10;">
+                  <TextField fx:id="minScore" prefHeight="40.0" prefWidth="280.0" style="-fx-background-radius: 10;">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>

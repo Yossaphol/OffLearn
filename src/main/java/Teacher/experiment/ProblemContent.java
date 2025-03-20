@@ -45,13 +45,15 @@ public class ProblemContent implements Initializable {
     @FXML
     private ImageView save;
 
+    @FXML
+    private HBox problemContent;
+
     private int count = 0;
     private ToggleGroup group;
     private QuizItem quizItem;
     private ArrayList<TextField> txtGroup;
     private ArrayList<QuizItem> itm;
     private VBox parentContainer;
-    private HBox problemContent;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -132,14 +134,13 @@ public class ProblemContent implements Initializable {
 
     public void deleteButton(){
         delete.setOnMouseClicked(mouseEvent -> {
-            itm.remove(this.quizItem); // ลบออกจาก ArrayList
+            itm.remove(this.quizItem);
 
             if (parentContainer != null && problemContent != null) {
-                parentContainer.getChildren().remove(problemContent); // ลบออกจาก VBox
+                parentContainer.getChildren().remove(problemContent);
             }
         });
     }
-
 
     public QuizItem getQuizItem(){
         return this.quizItem;
