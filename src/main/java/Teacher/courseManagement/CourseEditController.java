@@ -5,6 +5,7 @@ import Database.ChapterDB;
 import Database.CourseDB;
 import Student.FontLoader.FontLoader;
 import Teacher.experiment.QuizController;
+import Teacher.experiment.QuizItem;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +17,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -63,6 +63,7 @@ public class CourseEditController implements Initializable {
     private int userID;
     private int courseID;
     private ArrayList<CourseContent> chapterList = new ArrayList<>();
+    private ArrayList<ArrayList<QuizItem>> lastQuizGroup = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -111,6 +112,10 @@ public class CourseEditController implements Initializable {
         quizController.recieveCourseManagement(courseManagement);
     }
 
+    public void passCourseSpace(QuizController q){ q.recieveCourseSpace(courseSpace);}
+
+    public void passLQG(QuizController q){q.recieveLastQuizGroup(lastQuizGroup);}
+
     public void recieveWrapper(ScrollPane wrapper){
         this.wrapper = wrapper;
     }
@@ -129,7 +134,9 @@ public class CourseEditController implements Initializable {
                 QuizController quizController = fxmlLoader.getController();
 
                 passCourseManagement(quizController);
+                passCourseSpace(quizController);
                 passWrapper(quizController);
+                passLQG(quizController);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -174,6 +181,10 @@ public class CourseEditController implements Initializable {
             chapterDB.saveChapter(courseID, chapterName, chapDesc);
 
         }
+    }
+
+    public void showLQG(){
+        System.out.println(lastQuizGroup.size() + "");
     }
 }
 ;

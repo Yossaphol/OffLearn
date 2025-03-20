@@ -1,13 +1,12 @@
 package Teacher.experiment;
 
-import Teacher.courseManagement.CourseEditController;
-import com.beust.ah.A;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -15,6 +14,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import java.util.Optional;
 
 public class QuizController implements Initializable {
 
@@ -30,10 +32,18 @@ public class QuizController implements Initializable {
     @FXML
     private Button saveAll;
 
+    @FXML
+    private TextField quizName;
+
+    @FXML
+    private TextField minScore;
+
     private ScrollPane wrapper;
     private VBox courseManagement;
     private HBox problemContent;
     private ArrayList<QuizItem> quizItemsList;
+    private ArrayList<ArrayList<QuizItem>> lqg;
+    private VBox courseSpace;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -74,18 +84,66 @@ public class QuizController implements Initializable {
         this.courseManagement = courseManagement;
     }
 
+    public void recieveCourseSpace(VBox courseSpace){ this.courseSpace = courseSpace;}
+
+    public void recieveLastQuizGroup(ArrayList<ArrayList<QuizItem>> lqg){ this.lqg = lqg;}
+
     public void passQuizItemList(ProblemContent p){
         p.recieveQuizItemList(quizItemsList);
     }
 
     public void saveAllButton(){
         saveAll.setOnAction(actionEvent -> {
-            for (QuizItem i : quizItemsList){
-                System.out.println(i.toString());
-            }
-
-            wrapper.setContent(courseManagement);
+            showConfirmDialog();
         });
+    }
+
+    public void setQuizBox(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/experiment/QuizBox.fxml"));
+            HBox quizBox = fxmlLoader.load();
+            quizBoxContent q = fxmlLoader.getController();
+
+            int cnt = 0;
+            for (QuizItem i : quizItemsList){
+                cnt += i.getPoint();
+            }
+            q.setParentContainer(courseSpace);
+            q.setProblemContent(quizBox);
+            q.setQuizName(quizName.getText());
+            q.setCount(quizItemsList.size() + "");
+            q.setMinScore(minScore.getText());
+            q.setMaxScore(cnt + "");
+            q.recieveLQG(lqg);
+            q.recieveQuizItemList(quizItemsList);
+
+            courseSpace.getChildren().add(quizBox);
+            wrapper.setContent(courseManagement);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addToLQG(){
+        lqg.add(quizItemsList);
+    }
+
+
+    public void showConfirmDialog() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("ยืนยันการทำรายการ");
+        alert.setHeaderText("คุณแน่ใจหรือไม่?");
+
+        alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.YES) {
+            setQuizBox();
+            addToLQG();
+        } else {
+            System.out.println("ผู้ใช้กด No หรือปิดหน้าต่าง");
+        }
     }
 
 
