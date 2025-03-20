@@ -84,7 +84,7 @@ public class CourseEditController implements Initializable {
 
                 int catID = category.getCatID(type.getValue());
                 String name = courseName.getText();
-                userID = 908108;
+                userID = 00000001;
                 String des = desc.getText();
                 int priceValue = Integer.parseInt(price.getText());
 
@@ -143,7 +143,7 @@ public class CourseEditController implements Initializable {
 
             int catID = category.getCatID(type.getValue());
             String name = courseName.getText();
-            userID = 908108;
+            userID = 00000001;
             String des = desc.getText();
             int priceValue = Integer.parseInt(price.getText());
 

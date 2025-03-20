@@ -6,23 +6,34 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CourseDB extends ConnectDB{
-    public void saveCourse(int cat, String courseName, int userId, String desc, int price){
-        String sql = "INSERT INTO course (Cat_ID, courseName, User_ID, courseDescription, price) VALUES (?, ?, ?, ?, ?)";
+    public void saveCourse(int cat, String courseName, int userId, String desc, int price) {
+        String checkSql = "SELECT COUNT(*) FROM course WHERE courseName = ? AND User_ID = ?";
+        String insertSql = "INSERT INTO course (Cat_ID, courseName, User_ID, courseDescription, price) VALUES (?, ?, ?, ?, ?)";
+
         try (
                 Connection conn = this.connectToDB();
-                PreparedStatement pstm = conn.prepareStatement(sql);
-        ){
-            pstm.setInt(1, cat);
-            pstm.setString(2, courseName);
-            pstm.setInt(3, userId);
-            pstm.setString(4, desc);
-            pstm.setInt(5, price);
-            pstm.executeUpdate();
+                PreparedStatement checkStmt = conn.prepareStatement(checkSql);
+                PreparedStatement insertStmt = conn.prepareStatement(insertSql);
+        ) {
+            checkStmt.setString(1, courseName);
+            checkStmt.setInt(2, userId);
+            ResultSet rs = checkStmt.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                return;
+            }
 
-        }catch (SQLException e){
+            insertStmt.setInt(1, cat);
+            insertStmt.setString(2, courseName);
+            insertStmt.setInt(3, userId);
+            insertStmt.setString(4, desc);
+            insertStmt.setInt(5, price);
+            insertStmt.executeUpdate();
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     public int getCourseID(String name){
         String sql = "SELECT Course_ID FROM offlearn.course WHERE courseName = ? ";
