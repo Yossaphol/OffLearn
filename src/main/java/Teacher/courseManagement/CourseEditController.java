@@ -15,12 +15,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class CourseEditController implements Initializable {
@@ -52,6 +52,9 @@ public class CourseEditController implements Initializable {
     @FXML
     private TextField price;
 
+    @FXML
+    private ImageView saveChap;
+
     private VBox courseList;
 
     private ScrollPane wrapper;
@@ -62,7 +65,7 @@ public class CourseEditController implements Initializable {
     private ChapterDB chapterDB;
     private int userID;
     private int courseID;
-    private ArrayList<CourseContent> chapterList = new ArrayList<>();
+    private ArrayList<ChapterItem> chapterList = new ArrayList<>();
     private ArrayList<ArrayList<QuizItem>> lastQuizGroup = new ArrayList<>();
 
     @Override
@@ -81,20 +84,14 @@ public class CourseEditController implements Initializable {
         addCourse.setOnMouseClicked(mouseEvent -> {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/courseManagement/courseContent.fxml"));
             try {
-                courseDB = new CourseDB();
-
-                int catID = category.getCatID(type.getValue());
-                String name = courseName.getText();
-                userID = 00000001;
-                String des = desc.getText();
-                int priceValue = Integer.parseInt(price.getText());
-
-                courseDB.saveCourse(catID, name, userID, des, priceValue);
-
                 newCourse = fxmlLoader.load();
-                CourseContent courseContent = fxmlLoader.getController();
 
-                chapterList.add(courseContent);
+                preSave();
+
+                CourseContent c = fxmlLoader.getController();
+                passChapList(c);
+                c.setParentContainer(courseSpace);
+                c.setProblemContent(newCourse);
 
                 VBox.setVgrow(newCourse, Priority.ALWAYS);
                 courseSpace.getChildren().add(newCourse);
@@ -102,6 +99,18 @@ public class CourseEditController implements Initializable {
                 e.printStackTrace();
             }
         });
+    }
+
+    public void preSave(){
+        courseDB = new CourseDB();
+
+        int catID = category.getCatID(type.getValue());
+        String name = courseName.getText();
+        userID = 00000001;
+        String des = desc.getText();
+        int priceValue = Integer.parseInt(price.getText());
+
+        courseDB.saveCourse(catID, name, userID, des, priceValue);
     }
 
     public void passWrapper(QuizController quizController){
@@ -115,6 +124,8 @@ public class CourseEditController implements Initializable {
     public void passCourseSpace(QuizController q){ q.recieveCourseSpace(courseSpace);}
 
     public void passLQG(QuizController q){q.recieveLastQuizGroup(lastQuizGroup);}
+
+    public void passChapList(CourseContent c){ c.recieveChapList(chapterList);}
 
     public void recieveWrapper(ScrollPane wrapper){
         this.wrapper = wrapper;
@@ -172,18 +183,10 @@ public class CourseEditController implements Initializable {
 
         courseID = courseDB.getCourseID(courseName.getText());
 
-        for (int i = 0; i < chapterList.size(); i++) {
-            CourseContent course = chapterList.get(i);
-
-            Map<String, String> data = course.getChapterData();
-            String chapterName = data.get("chapterName");
-            String chapDesc = data.get("chapDesc");
-            chapterDB.saveChapter(courseID, chapterName, chapDesc);
-
-        }
     }
 
     public void showLQG(){
+//        เอาไว้เก็บลง database
         System.out.println(lastQuizGroup.size() + "");
     }
 }
