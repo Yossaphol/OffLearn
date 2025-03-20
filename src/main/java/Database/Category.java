@@ -15,7 +15,7 @@ public class Category extends ConnectDB{
     }
 
     public void insertCatList(){
-        String sql = "SELECT catName FROM studentdb.category";
+        String sql = "SELECT catName FROM offlearn.category";
 
         try {
             Connection conn = this.connectToDB();
@@ -32,7 +32,7 @@ public class Category extends ConnectDB{
     }
 
     public int getCatID(String name){
-        String sql = "SELECT Cat_ID FROM studentdb.category WHERE catName = ?";
+        String sql = "SELECT Cat_ID FROM offlearn.category WHERE catName = ?";
 
         try {
             Connection conn = this.connectToDB();

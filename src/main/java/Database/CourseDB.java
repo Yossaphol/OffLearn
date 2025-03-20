@@ -25,7 +25,7 @@ public class CourseDB extends ConnectDB{
     }
 
     public int getCourseID(String name){
-        String sql = "SELECT Course_ID FROM studentdb.course WHERE courseName = ? ";
+        String sql = "SELECT Course_ID FROM offlearn.course WHERE courseName = ? ";
 
         try {
             Connection conn = this.connectToDB();

@@ -9,7 +9,7 @@ public class StudentDBConnect extends ConnectDB {
 
     public ArrayList<String> getStudentNames() {
         ArrayList<String> studentNames = new ArrayList<>();
-        String query = "SELECT name FROM studentdb.studentlist";
+        String query = "SELECT name FROM offlearn.studentlist";
 
         try (Connection conn = this.connectToDB();
              Statement stmt = conn.createStatement();
@@ -26,7 +26,7 @@ public class StudentDBConnect extends ConnectDB {
     }
 
     public int getStudentID(String studentName) {
-        String query = "SELECT StudentID FROM studentdb.studentlist WHERE name = ?";
+        String query = "SELECT StudentID FROM offlearn.studentlist WHERE name = ?";
         int studentId = -1;
 
         try (Connection conn = this.connectToDB();

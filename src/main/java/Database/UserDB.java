@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class UserDB extends ConnectDB{
 
 //    public User getUserInfo(String username) {
-//        String query = "SELECT User_ID, Username, Fullname, Password, Profile, Email FROM studentdb.user WHERE Username = ?";
+//        String query = "SELECT User_ID, Username, Fullname, Password, Profile, Email FROM offlearn.user WHERE Username = ?";
 //
 //        try (Connection conn = this.connectToDB();
 //             PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -34,7 +34,7 @@ public class UserDB extends ConnectDB{
 
 
     public boolean loginConnect(String username, String password){
-        String query = "SELECT Username, Password FROM studentdb.user WHERE Username = ? AND Password = ?";
+        String query = "SELECT Username, Password FROM offlearn.user WHERE Username = ? AND Password = ?";
 
         try (Connection conn = this.connectToDB();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -51,7 +51,7 @@ public class UserDB extends ConnectDB{
     }
 
     public boolean signupConnect(String fullname, String username, String password, String email) {
-        String query = "INSERT INTO studentdb.user (Fullname, Username, Password, Email) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO offlearn.user (Fullname, Username, Password, Email) VALUES (?, ?, ?, ?)";
 
         if (isUsernameExist(username)) {
             return false;
@@ -76,7 +76,7 @@ public class UserDB extends ConnectDB{
         }
     }
     private boolean isUsernameExist(String username) {
-        String query = "SELECT COUNT(*) FROM studentdb.user WHERE Username = ?";
+        String query = "SELECT COUNT(*) FROM offlearn.user WHERE Username = ?";
 
         try (Connection conn = this.connectToDB();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -93,7 +93,7 @@ public class UserDB extends ConnectDB{
         return false;
     }
     private boolean isEmailExist(String email) {
-        String query = "SELECT COUNT(*) FROM studentdb.user WHERE Email = ?";
+        String query = "SELECT COUNT(*) FROM offlearn.user WHERE Email = ?";
 
         try (Connection conn = this.connectToDB();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -111,7 +111,7 @@ public class UserDB extends ConnectDB{
     }
 
     public boolean isUserValid(String username, String email) {
-        String query = "SELECT COUNT(*) FROM studentdb.user WHERE Username = ? AND Email = ?";
+        String query = "SELECT COUNT(*) FROM offlearn.user WHERE Username = ? AND Email = ?";
 
         try (Connection conn = this.connectToDB();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -130,7 +130,7 @@ public class UserDB extends ConnectDB{
     }
 
     public boolean updatePasswordConnect(String email, String username, String newPassword) {
-        String query = "UPDATE studentdb.user SET Password = ? WHERE Username = ? AND Email = ?";
+        String query = "UPDATE offlearn.user SET Password = ? WHERE Username = ? AND Email = ?";
 
         try (Connection conn = this.connectToDB();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -148,7 +148,7 @@ public class UserDB extends ConnectDB{
     }
 
     public String getProfile(String name) {
-        String sql = "SELECT Profile FROM studentdb.user WHERE Username = ?";
+        String sql = "SELECT Profile FROM offlearn.user WHERE Username = ?";
 
         try (Connection conn = this.connectToDB();
              PreparedStatement pstm = conn.prepareStatement(sql)) {
