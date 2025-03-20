@@ -54,6 +54,13 @@ public class Navigator {
         controller.displayNavbar();
     }
 
+    public void preTestRoute(MouseEvent event) {
+        navigateTo("/fxml/Student/test/preTest.fxml");
+    }
+    public void testRoute(MouseEvent event) {
+        navigateTo("/fxml/Student/test/testPage.fxml");
+    }
+
     public void myCourseRoute(MouseEvent event) {
         navigateTo("/fxml/Student/courseManage/myCourse.fxml");
     }

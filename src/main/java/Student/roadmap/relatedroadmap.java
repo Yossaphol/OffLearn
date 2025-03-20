@@ -9,13 +9,25 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class relatedroadmap implements Initializable {
-    public Pane related_roadmap_box;
-    public Label related_roadmap_description;
-    public Label related_roadmap_time;
-    public Label related_roadmap_progressfraction;
-    public ImageView related_roadmap_button;
-    public Label related_roadmap_name;
+    public Label name;
+    public Label description;
+    public Label duration;
+    public Label contentProgression;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+    }
+
+
+    public void setRealatedRoadmapName(String n){
+        name.setText(n);
+    }
+    public void setRelatedRoadmapDescription(String n){
+        description.setText(n);
+    }public void setContentProgression(int n, int total){
+        contentProgression.setText("เนื้อหา "+String.valueOf(n)+"/"+String.valueOf(total));
+    }public void setRelatedroadmapDuration(int n){
+        duration.setText("ระยะเวลา "+String.valueOf(n)+" ชม.");
     }
 }

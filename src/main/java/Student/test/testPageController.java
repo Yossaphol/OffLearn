@@ -10,26 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class testPageController implements Initializable {
-    public VBox leftWrapper;
-    public HBox searchbarContent;
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {displayNavbar();}
-    private void displayNavbar(){
-        try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/navBar.fxml"));
-            VBox navContent = calendarLoader.load();
-            leftWrapper.getChildren().setAll(navContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    public void initialize(URL url, ResourceBundle resourceBundle) {}
 
-    private void displaySearchBar(){
-        try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/searchBar.fxml"));
-            HBox searchbarContent = calendarLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
