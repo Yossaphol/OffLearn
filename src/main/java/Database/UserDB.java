@@ -50,8 +50,8 @@ public class UserDB extends ConnectDB{
         }
     }
 
-    public boolean signupConnect(String fullname, String username, String password, String email) {
-        String query = "INSERT INTO offlearn.user (Fullname, Username, Password, Email) VALUES (?, ?, ?, ?)";
+    public boolean signupConnect(String firstname, String lastname, String username, String password, String email) {
+        String query = "INSERT INTO offlearn.user (firstname, lastname, Username, Password, Email) VALUES (?, ?, ?, ?, ?)";
 
         if (isUsernameExist(username)) {
             return false;
@@ -63,10 +63,11 @@ public class UserDB extends ConnectDB{
         try (Connection conn = this.connectToDB();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-            pstmt.setString(1, fullname);
-            pstmt.setString(2, username);
-            pstmt.setString(3, password);
-            pstmt.setString(4, email);
+            pstmt.setString(1, firstname);
+            pstmt.setString(2, lastname);
+            pstmt.setString(3, username);
+            pstmt.setString(4, password);
+            pstmt.setString(5, email);
 
             int affectedRows = pstmt.executeUpdate();
             return affectedRows > 0;

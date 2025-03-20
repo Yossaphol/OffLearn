@@ -3,11 +3,12 @@ package Teacher.courseManagement;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CourseContent implements Initializable {
@@ -21,15 +22,56 @@ public class CourseContent implements Initializable {
     @FXML
     private TextField chapDesc;
 
+    @FXML
+    private ImageView saveChap;
+
+    @FXML
+    private ImageView delete;
+
+    private ChapterItem chapterItem;
+    private ArrayList<ChapterItem> chapList;
+    private VBox parentContainer;
+    private HBox chapContainer;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        saveButton();
+        deleteButton();
     }
 
-    public Map<String, String> getChapterData() {
-        Map<String, String> data = new HashMap<>();
-        data.put("chapterName", chapterName.getText());
-        data.put("chapDesc", chapDesc.getText());
-        return data;
+    public void recieveChapList(ArrayList<ChapterItem> chapList){ this.chapList = chapList; }
+
+    public void saveToChapList(){
+        String c = chapterName.getText();
+        String d = chapDesc.getText();
+        chapterItem = new ChapterItem(c, d);
+
+        System.out.println(chapterItem.toString());
     }
+
+    public void saveButton(){
+        saveChap.setOnMouseClicked(mouseEvent -> {
+            saveToChapList();
+
+            saveChap.setVisible(false);
+        });
+    }
+
+    public void deleteButton(){
+        delete.setOnMouseClicked(mouseEvent -> {
+            chapList.remove(this.chapterItem);
+            if (parentContainer != null && chapContainer != null) {
+                parentContainer.getChildren().remove(chapContainer);
+            }
+        });
+    }
+
+    public void setParentContainer(VBox parentContainer) {
+        this.parentContainer = parentContainer;
+    }
+
+    public void setProblemContent(HBox chapContainer) {
+        this.chapContainer = chapContainer;
+    }
+
 }

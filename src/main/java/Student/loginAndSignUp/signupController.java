@@ -50,7 +50,6 @@ public class signupController implements Initializable {
     private void handleSignup() {
         String firstName = getFirstName.getText();
         String lastName = getLastName.getText();
-        String fullname = firstName + " " + lastName;
         String username = getUsername.getText();
         String password = getPassword.getText();
         String email = getEmail.getText();
@@ -60,7 +59,7 @@ public class signupController implements Initializable {
             return;
         }
 
-        if (userDB.signupConnect(fullname, username, password, email)) {
+        if (userDB.signupConnect(firstName, lastName, username, password, email)) {
             showAlert("Signup Successful", "Account created successfully!", Alert.AlertType.INFORMATION);
             backToLogin();
         } else {
