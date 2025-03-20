@@ -4,18 +4,22 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox prefHeight="2497.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.courseManage.courseEnrollController">
+<HBox prefHeight="2343.0" prefWidth="1138.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.courseManage.courseEnrollController">
    <children>
-      <VBox prefHeight="2503.0" prefWidth="1443.0">
+      <VBox prefHeight="2341.0" prefWidth="1138.0">
          <children>
             <VBox prefHeight="1036.0" prefWidth="1132.0">
                <children>
@@ -36,61 +40,56 @@
                            <children>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fitHeight="347.0" fitWidth="231.0">
-                                       <image>
-                                          <Image url="@../../../img/Picture/bg.jpg" />
-                                       </image>
-                                    </ImageView>
+                                    <Rectangle fx:id="courseImg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="348.0" stroke="BLACK" strokeType="INSIDE" width="239.0" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="347.0" prefWidth="30.0" />
                               <VBox prefHeight="347.0" prefWidth="781.0">
                                  <children>
-                                    <Label text="Data Structures and Algorithms">
+                                    <Label fx:id="couseName" text="Name">
                                        <font>
                                           <Font name="Noto Sans Thai Bold" size="37.0" />
                                        </font>
                                     </Label>
-                                    <Label text="Learn all Data structure and Algorithm concepts">
+                                    <Label fx:id="shortDescription" text="Description">
                                        <font>
                                           <Font name="Noto Sans Thai Regular" size="23.0" />
                                        </font>
                                     </Label>
                                     <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="781.0">
                                        <children>
-                                          <ImageView fitHeight="10.0" fitWidth="13.0">
-                                             <image>
-                                                <Image url="@../../../img/icon/_.png" />
-                                             </image>
-                                          </ImageView>
-                                          <Label prefHeight="20.0" prefWidth="28.0" text="  Coding" textFill="#8100cc">
+                                          <Circle fx:id="categoryPic" fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE">
+                                             <HBox.margin>
+                                                <Insets right="5.0" />
+                                             </HBox.margin></Circle>
+                                          <Label fx:id="category" prefHeight="20.0" text="  Coding" textFill="#8100cc">
                                              <font>
-                                                <Font name="Noto Sans Thai Regular" size="8.0" />
+                                                <Font name="Noto Sans Thai Bold" size="12.0" />
                                              </font>
                                           </Label>
                                           <HBox prefHeight="16.0" prefWidth="14.0" />
-                                          <ImageView fitHeight="13.0" fitWidth="15.0">
+                                          <ImageView fx:id="one" fitHeight="13.0" fitWidth="15.0">
                                              <image>
-                                                <Image url="@../../../img/icon/star.png" />
+                                                <Image url="@../../../img/icon/star%20(2).png" />
                                              </image>
                                           </ImageView>
-                                          <ImageView fitHeight="13.0" fitWidth="15.0">
+                                          <ImageView fx:id="two" fitHeight="13.0" fitWidth="15.0">
                                              <image>
-                                                <Image url="@../../../img/icon/star.png" />
+                                                <Image url="@../../../img/icon/star%20(2).png" />
                                              </image>
                                           </ImageView>
-                                          <ImageView fitHeight="13.0" fitWidth="15.0">
+                                          <ImageView fx:id="three" fitHeight="13.0" fitWidth="15.0">
                                              <image>
-                                                <Image url="@../../../img/icon/star.png" />
+                                                <Image url="@../../../img/icon/star%20(2).png" />
                                              </image>
                                           </ImageView>
-                                          <ImageView fitHeight="13.0" fitWidth="15.0">
+                                          <ImageView fx:id="four" fitHeight="13.0" fitWidth="15.0">
                                              <image>
-                                                <Image url="@../../../img/icon/star.png" />
+                                                <Image url="@../../../img/icon/star%20(2).png" />
                                              </image>
                                           </ImageView>
                                           <HBox prefHeight="16.0" prefWidth="16.0" />
-                                          <Label text="4.0 (2,430)" textFill="#a8a8a8">
+                                          <Label fx:id="rating" text="4.0 (2,430)" textFill="#a8a8a8">
                                              <font>
                                                 <Font name="Noto Sans Thai Regular" size="14.0" />
                                              </font>
@@ -100,46 +99,40 @@
                                     <Pane prefHeight="8.0" prefWidth="781.0" />
                                     <HBox prefHeight="43.0" prefWidth="781.0">
                                        <children>
-                                          <HBox prefHeight="75.0" prefWidth="47.0" />
-                                          <Label text="1,750 บาท" textFill="#a8a8a8">
+                                          <HBox prefHeight="46.0" prefWidth="21.0" />
+                                          <Label fx:id="price" prefHeight="19.0" text="1,750 บาท">
                                              <font>
-                                                <Font size="24.0" />
-                                             </font>
-                                          </Label>
-                                          <HBox prefHeight="75.0" prefWidth="44.0" />
-                                          <Label text="ฟรี" textFill="#68a400">
-                                             <font>
-                                                <Font size="24.0" />
+                                                <Font name="Noto Sans Thai Bold" size="28.0" />
                                              </font>
                                           </Label>
                                        </children>
                                     </HBox>
                                     <VBox prefHeight="88.0" prefWidth="675.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." wrappingWidth="676.13671875" />
+                                          <Text fx:id="description" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." wrappingWidth="676.13671875" />
                                        </children></VBox>
                                     <HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="781.0">
                                        <children>
                                           <HBox prefHeight="59.0" prefWidth="5.0" />
                                           <ImageView fitHeight="31.0" fitWidth="34.0">
                                              <image>
-                                                <Image url="@../../../../../src/main/resources/img/icon/teaching.png" />
+                                                <Image url="@../../../img/icon/teaching.png" />
                                              </image>
                                           </ImageView>
                                           <HBox prefHeight="35.0" prefWidth="10.0" />
-                                          <Label text="13 บท" textFill="#a8a8a8">
+                                          <Label fx:id="totalLesson" text="13 บท" textFill="#a8a8a8">
                                              <font>
                                                 <Font name="Noto Sans Thai Regular" size="20.0" />
                                              </font>
                                           </Label>
-                                          <HBox prefHeight="35.0" prefWidth="80.0" />
+                                          <HBox prefHeight="54.0" prefWidth="37.0" />
                                           <ImageView fitHeight="31.0" fitWidth="34.0">
                                              <image>
-                                                <Image url="@../../../../../src/main/resources/img/icon/chronometer.png" />
+                                                <Image url="@../../../img/icon/chronometer.png" />
                                              </image>
                                           </ImageView>
                                           <HBox prefHeight="35.0" prefWidth="10.0" />
-                                          <Label text="22 ชม." textFill="#a8a8a8">
+                                          <Label fx:id="duration" text="22 ชม." textFill="#a8a8a8">
                                              <font>
                                                 <Font name="Noto Sans Thai Regular" size="20.0" />
                                              </font>
@@ -189,182 +182,276 @@
                            </children>
                         </VBox>
                         <VBox prefHeight="14.0" prefWidth="1132.0" />
-                        <HBox alignment="CENTER_LEFT" prefHeight="267.0" prefWidth="1132.0">
+                        <HBox alignment="CENTER" prefHeight="267.0" prefWidth="1132.0" spacing="20.0">
                            <children>
-                              <HBox prefHeight="238.0" prefWidth="77.0" />
-                              <ImageView fitHeight="217.0" fitWidth="303.0">
-                                 <image>
-                                    <Image url="@../../../img/Picture/DSA.jpg" />
-                                 </image>
-                              </ImageView>
-                              <HBox prefHeight="267.0" prefWidth="46.0" />
-                              <ImageView fitHeight="217.0" fitWidth="303.0">
-                                 <image>
-                                    <Image url="@../../../img/Picture/bg.jpg" />
-                                 </image>
-                              </ImageView>
-                              <HBox prefHeight="238.0" prefWidth="46.0" />
-                              <ImageView fitHeight="217.0" fitWidth="303.0">
-                                 <image>
-                                    <Image url="@../../../img/Picture/alvaro-reyes-qWwpHwip31M-unsplash.jpg" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="17.0" prefWidth="1132.0">
-                           <children>
-                              <HBox prefHeight="93.0" prefWidth="186.0" />
-                              <Label text="แนวคิด">
-                                 <font>
-                                    <Font size="25.0" />
-                                 </font>
-                              </Label>
-                              <HBox prefHeight="30.0" prefWidth="273.0" />
-                              <Label text="ปฏิบัติ">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                              <HBox prefHeight="30.0" prefWidth="280.0" />
-                              <Label text="โปรเจคต์">
-                                 <font>
-                                    <Font size="25.0" />
-                                 </font>
-                              </Label>
+                              <VBox alignment="CENTER" prefHeight="254.0" prefWidth="225.0">
+                                 <children>
+                                    <Rectangle fx:id="pic1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="226.0" />
+                                    <Label fx:id="label1" text="Label">
+                                       <font>
+                                          <Font name="Noto Sans Thai Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <Line endX="-25.707107543945312" endY="0.7928932309150696" startX="-100.0" stroke="#8100cc" />
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="120.0">
+                                 <children>
+                                    <Rectangle fx:id="pic2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="226.0" />
+                                    <Label fx:id="label2" text="Label">
+                                       <font>
+                                          <Font name="Noto Sans Thai Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <Line endX="-25.707107543945312" endY="0.7928932309150696" startX="-100.0" stroke="#8100cc" />
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="120.0">
+                                 <children>
+                                    <Rectangle fx:id="pic3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="226.0" />
+                                    <Label fx:id="label3" text="Label">
+                                       <font>
+                                          <Font name="Noto Sans Thai Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
                            </children>
                         </HBox>
                      </children>
                   </VBox>
                </children>
             </VBox>
-            <HBox prefHeight="368.0" prefWidth="1135.0" style="-fx-background-color: eeeeee;">
+            <HBox alignment="TOP_CENTER" prefHeight="368.0" prefWidth="1135.0" style="-fx-background-color: #F5F5F5;">
                <children>
-                  <HBox prefHeight="340.0" prefWidth="79.0" />
-                  <VBox prefHeight="458.0" prefWidth="523.0">
+                  <VBox maxWidth="-Infinity" prefHeight="362.0" prefWidth="563.0" style="-fx-border-color: #c0c0c0; -fx-border-width: 0px 1px 0px 0px;">
                      <children>
-                        <VBox alignment="BOTTOM_CENTER" prefHeight="102.0" prefWidth="301.0">
+                        <VBox alignment="CENTER" prefHeight="102.0" prefWidth="301.0">
                            <children>
-                              <Label prefHeight="79.0" prefWidth="201.0" text="คอร์สนี้เหมาะสำหรับ">
+                              <Label prefHeight="79.0" text="คอร์สนี้เหมาะสำหรับ">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="Noto Sans Thai Bold" size="24.0" />
                                  </font>
                               </Label>
                            </children>
                         </VBox>
-                        <VBox prefHeight="200.0" prefWidth="497.0">
-                           <children>
-                              <Label text="- ผู้ที่ต้องการเรียนพื้นฐานการพัฒนาโปรแกรมอย่างจริงจัง">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label text="- ผู้ที่ต้องการเตรียมย้ายสายงานสู่การพัฒนาโปรแกรมและนักวิเคราะห์ข้อมูล">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label text="- ผู้ที่ต้องการเริ่มต้นเข้าสู่ด้าน Tech Startup">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label text="- นักเรียน / นิสิต / นักศึกษา และ ผู้สนใจที่ต้องการเริ่มพื้นฐานการพัฒนาโปรแกรม">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </VBox>
+                        <Text fx:id="thisCourseFor" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                           <font>
+                              <Font name="Noto Sans Thai Regular" size="16.0" />
+                           </font>
+                        </Text>
                      </children>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
                   </VBox>
-                  <Pane prefHeight="340.0" prefWidth="90.0">
+                  <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="362.0" prefWidth="530.0">
                      <children>
-                        <Rectangle arcHeight="1.0" arcWidth="1.0" height="265.0" layoutX="51.0" layoutY="20.0" stroke="BLACK" strokeType="INSIDE" width="1.0" />
-                     </children>
-                  </Pane>
-                  <VBox prefHeight="299.0" prefWidth="408.0">
-                     <children>
-                        <VBox alignment="BOTTOM_CENTER" prefHeight="111.0" prefWidth="408.0">
+                        <VBox alignment="CENTER" prefHeight="111.0" prefWidth="408.0">
                            <children>
-                              <Label prefHeight="92.0" prefWidth="308.0" text="พื้นฐาน / ความต้องการเบื้องต้น">
+                              <Label prefHeight="92.0" text="พื้นฐาน / ความต้องการเบื้องต้น" textAlignment="CENTER">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="Noto Sans Thai Bold" size="24.0" />
                                  </font>
                               </Label>
                            </children>
                         </VBox>
-                        <Label text="- ทักษะการเขียนโปรแกรมเบื้องต้น อย่างน้อย 1 ภาษา (รู้จักตัวแปร">
+                        <Text fx:id="requirement" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="415.1599998474121">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="Noto Sans Thai Regular" size="16.0" />
                            </font>
-                        </Label>
-                        <Label text="เงื่อนไข การวนซ้ำ และ ฟังก์ชัน)">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="- ทักษะคอมพิวเตอร์เบื้องต้น (ใช้งานโปรแกรมพื้นฐาน และ ">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="อินเทอร์เน็ต)">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="- ทักษะคณิตศาสตร์เบื้องต้น (บวก ลบ คูณ หาร – แก้สมการเบื้องต้น)">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="- Computer หรือ Notebook ที่สามารถใช้งาน Internet ได้">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="(Windows 7, mac OS 10.9 ขึ้นไป หรือ เทียบเท่า)">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="- ความใฝ่ฝันในการเริ่มต้นเส้นทางนักพัฒนาโปรแกรม">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
+                        </Text>
                      </children>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
                   </VBox>
                </children>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="30.0" left="20.0" right="20.0" top="30.0" />
+               </padding>
             </HBox>
-            <VBox alignment="BOTTOM_CENTER" prefHeight="74.0" prefWidth="227.0" />
-            <VBox prefHeight="1012.0" prefWidth="1139.0">
+            <HBox fx:id="reviewContainer" alignment="CENTER" prefHeight="65.0" prefWidth="1138.0" spacing="40.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 20;" styleClass="forHover" stylesheets="@../../../css/course.css">
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                     <children>
+                        <Circle fx:id="reviewer1" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label fx:id="reviewerName1" text="Jojy">
+                                 <font>
+                                    <Font name="Noto Sans Thai Bold" size="17.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT" prefHeight="21.0" prefWidth="100.0">
+                                 <children>
+                                    <ImageView fitHeight="19.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../img/icon/star%20(2).png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="19.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../img/icon/star%20(2).png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="19.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../img/icon/star%20(2).png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="19.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../img/icon/star%20(2).png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 20;" styleClass="forHover" stylesheets="@../../../css/course.css">
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                     <children>
+                        <Circle fx:id="reviewer2" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label fx:id="reviewerName2" text="Bobby">
+                                 <font>
+                                    <Font name="Noto Sans Thai Bold" size="17.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT" prefHeight="21.0" prefWidth="100.0">
+                                 <children>
+                                    <ImageView fitHeight="19.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../img/icon/star%20(2).png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="19.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../img/icon/star%20(2).png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="19.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../img/icon/star%20(2).png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="19.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../img/icon/star%20(2).png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 20;" styleClass="forHover" stylesheets="@../../../css/course.css">
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                     <children>
+                        <Circle fx:id="reviewer3" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label fx:id="reviewerName3" text="Ant">
+                                 <font>
+                                    <Font name="Noto Sans Thai Bold" size="17.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT" prefHeight="21.0" prefWidth="100.0">
+                                 <children>
+                                    <ImageView fitHeight="19.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../img/icon/star%20(2).png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="19.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../img/icon/star%20(2).png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="19.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../img/icon/star%20(2).png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="19.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../img/icon/star%20(2).png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </HBox>
+            <VBox prefHeight="767.0" prefWidth="1138.0">
                <children>
                   <Pane prefHeight="37.0" prefWidth="1139.0" />
-                  <HBox alignment="CENTER" prefHeight="63.0" prefWidth="1139.0">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="56.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" width="182.0" />
-                        <Pane prefHeight="132.0" prefWidth="33.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="56.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" width="182.0" />
-                        <Pane prefHeight="132.0" prefWidth="33.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="56.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" width="182.0" />
-                     </children>
-                  </HBox>
                   <VBox alignment="CENTER" prefHeight="21.0" prefWidth="1139.0">
                      <children>
-                        <Label text="200+ รีวิว" textFill="#8100cc">
+                        <Label text="มากกว่า 200 รีวิว" textFill="#8100cc">
                            <font>
-                              <Font size="15.0" />
+                              <Font name="Noto Sans Thai Regular" size="15.0" />
                            </font>
                         </Label>
                      </children>
                   </VBox>
-                  <Pane prefHeight="339.0" prefWidth="1139.0" />
+                  <Pane prefHeight="272.0" prefWidth="1138.0" />
                   <VBox alignment="CENTER" prefHeight="69.0" prefWidth="1139.0">
                      <children>
                         <Label text="เริ่มต้นจุดประกายความคิดสร้างสรรค์ สร้างผลงานไปพร้อมกันกับผู้เรียนคนอื่นๆ ได้เลย">
                            <font>
-                              <Font size="21.0" />
+                              <Font name="Noto Sans Thai Regular" size="21.0" />
                            </font>
                         </Label>
                      </children>
@@ -381,11 +468,14 @@
                            </cursor>
                         </Button>
                         <Pane prefHeight="51.0" prefWidth="113.0" />
-                        <Label text="ดูคอร์สอื่นๆ">
+                        <Button fx:id="otherCourse" mnemonicParsing="false" prefHeight="55.0" prefWidth="233.0" style="-fx-background-color: transparent;" text="ดูคอร์สอื่นๆ">
                            <font>
-                              <Font size="20.0" />
+                              <Font name="Noto Sans Thai Bold" size="24.0" />
                            </font>
-                        </Label>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
                      </children>
                   </HBox>
                </children>

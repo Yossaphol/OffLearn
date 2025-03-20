@@ -1,5 +1,6 @@
 package Student.courseManage;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,6 +25,7 @@ public class cartController implements Initializable {
     @FXML
     public Button edit;
     private boolean isDeleteVisible = true;
+    private boolean isClick = false;
 
     public void initialize(URL location, ResourceBundle resources) {
         displayCourseList();
@@ -82,6 +84,13 @@ public class cartController implements Initializable {
     }
 
 
-
-
+    public void changeColor(ActionEvent event) {
+        if(!isClick){
+            edit.setStyle("-fx-background-color: #E8E8E8;"+"-fx-background-radius: 30px;"+"-fx-padding: 5px;");
+            isClick = true;
+        }else{
+            edit.setStyle("-fx-background-color: transparent;"+"-fx-background-radius: 30px;"+"-fx-padding: 5px;");
+            isClick = false;
+        }
+    }
 }

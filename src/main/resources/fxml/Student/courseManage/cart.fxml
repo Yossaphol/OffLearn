@@ -51,7 +51,7 @@
                            </children>
                         </StackPane>
                         <Pane prefHeight="90.0" prefWidth="77.0" />
-                        <Button fx:id="edit" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                        <Button fx:id="edit" mnemonicParsing="false" onAction="#changeColor" style="-fx-background-color: transparent;">
                            <graphic>
                               <ImageView fitHeight="26.0" fitWidth="26.0">
                                  <image>
