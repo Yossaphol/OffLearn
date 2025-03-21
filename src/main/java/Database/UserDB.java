@@ -33,8 +33,8 @@ public class UserDB extends ConnectDB{
 
 
 
-    public boolean loginConnect(String username, String password){
-        String query = "SELECT Username, Password FROM offlearn.user WHERE Username = ? AND Password = ?";
+    public String loginConnect(String username, String password) {
+        String query = "SELECT type FROM offlearn.user WHERE Username = ? AND Password = ?";
 
         try (Connection conn = this.connectToDB();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -43,11 +43,13 @@ public class UserDB extends ConnectDB{
             pstmt.setString(2, password);
             ResultSet rs = pstmt.executeQuery();
 
-            return rs.next();
+            if (rs.next()) {
+                return rs.getString("type");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+        return null;
     }
 
     public boolean signupConnect(String firstname, String lastname, String username, String password, String email) {
