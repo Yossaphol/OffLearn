@@ -4,6 +4,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -48,7 +49,7 @@
                                           <Circle fx:id="picture" fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
                                           <Button fx:id="uploadPic" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#uploadImg" prefHeight="33.0" prefWidth="98.0" style="-fx-background-color: #8100cc; -fx-background-radius: 10;" text="เปลี่ยน" textFill="WHITE">
                                              <font>
-                                                <Font name="Noto Sans Thai Bold" size="13.0" />
+                                                <Font name="Noto Sans Thai Bold" size="15.0" />
                                              </font>
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
@@ -113,26 +114,6 @@
                                  <children>
                                     <VBox prefHeight="200.0" prefWidth="310.0">
                                        <children>
-                                          <Label text="Username">
-                                             <font>
-                                                <Font name="Noto Sans Thai Regular" size="20.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField fx:id="username" disable="true" editable="false" prefHeight="40.0" style="-fx-background-radius: 10; -fx-border-color: #C2C2C2; -fx-border-radius: 10;" stylesheets="@../../../css/setting.css" text="Wirayabovorn">
-                                             <font>
-                                                <Font name="Kodchasan Regular" size="16.0" />
-                                             </font>
-                                             <cursor>
-                                                <Cursor fx:constant="TEXT" />
-                                             </cursor>
-                                          </TextField>
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets left="20.0" />
-                                       </HBox.margin>
-                                    </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="310.0">
-                                       <children>
                                           <Label text="Gmail">
                                              <font>
                                                 <Font name="Noto Sans Thai Regular" size="20.0" />
@@ -148,7 +129,7 @@
                                           </TextField>
                                        </children>
                                        <HBox.margin>
-                                          <Insets left="50.0" />
+                                          <Insets left="20.0" />
                                        </HBox.margin>
                                     </VBox>
                                  </children>
@@ -182,7 +163,7 @@
                               <Font name="Noto Sans Thai Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:id="cancleEditProfile" mnemonicParsing="false" onAction="#cancelProfileEdit" prefHeight="58.0" prefWidth="102.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="ยกเลิก" textFill="WHITE">
+                        <Button fx:id="cancelEditProfile" mnemonicParsing="false" onAction="#cancelProfileEdit" prefHeight="58.0" prefWidth="102.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="ยกเลิก" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -197,39 +178,74 @@
                   </HBox>
                </children>
                <VBox.margin>
-                  <Insets left="20.0" top="30.0" />
+                  <Insets top="30.0" />
                </VBox.margin>
             </VBox>
-            <VBox fillWidth="false" prefHeight="318.0" prefWidth="986.0">
+            <VBox fillWidth="false" prefWidth="1056.0">
                <children>
                   <Label text="ความปลอดภัย" textFill="#8100cc">
                      <font>
                         <Font name="Noto Sans Thai Bold" size="20.0" />
                      </font>
                   </Label>
-                  <VBox prefHeight="219.0" prefWidth="986.0">
+                  <VBox prefHeight="409.0" prefWidth="1056.0">
                      <children>
-                        <HBox prefHeight="74.0" prefWidth="986.0">
+                        <HBox prefHeight="145.0" prefWidth="1056.0" spacing="40.0">
                            <children>
-                              <VBox alignment="BOTTOM_LEFT" fillWidth="false" prefHeight="81.0" prefWidth="310.0">
+                              <VBox fillWidth="false" prefHeight="126.0" prefWidth="310.0">
                                  <children>
-                                    <Label text="Username">
+                                    <Label text="ชื่อผู้ใช้">
                                        <font>
-                                          <Font name="Kodchasan Regular" size="20.0" />
+                                          <Font name="Noto Sans Thai Regular" size="20.0" />
                                        </font>
                                        <VBox.margin>
                                           <Insets bottom="3.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField prefHeight="36.0" prefWidth="310.0" style="-fx-background-radius: 10;">
+                                    <TextField fx:id="username1" disable="true" prefHeight="36.0" prefWidth="310.0" style="-fx-background-radius: 10;">
                                        <font>
-                                          <Font name="Kodchasan Regular" size="16.0" />
+                                          <Font name="Kodchasan Regular" size="15.0" />
                                        </font></TextField>
                                  </children>
                                  <HBox.margin>
-                                    <Insets left="20.0" />
+                                    <Insets />
                                  </HBox.margin>
                               </VBox>
+                              <VBox alignment="TOP_RIGHT" fillWidth="false" prefHeight="44.0" prefWidth="310.0">
+                                 <children>
+                                    <Label prefHeight="33.0" prefWidth="322.0" text="รหัสผ่าน">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <PasswordField disable="true" minHeight="-Infinity" prefHeight="36.0" prefWidth="332.0" style="-fx-background-radius: 10;" text="wirayabovorn">
+                                       <font>
+                                          <Font name="Kodchasan Regular" size="12.0" />
+                                       </font>
+                                    </PasswordField>
+                                    <Button fx:id="changePasswordBtn" mnemonicParsing="false" onAction="#changePassword" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="เปลี่ยน" textFill="WHITE">
+                                       <font>
+                                          <Font name="Noto Sans Thai Bold" size="15.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox fx:id="changePasswordField" prefHeight="191.0" prefWidth="1056.0" spacing="40.0" visible="false">
+                           <children>
                               <VBox fillWidth="false" prefHeight="44.0" prefWidth="310.0">
                                  <children>
                                     <Label text="รหัสผ่านเดิม">
@@ -240,19 +256,10 @@
                                     <TextField prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;">
                                        <font>
                                           <Font name="Kodchasan Regular" size="16.0" />
-                                       </font></TextField>
+                                       </font>
+                                    </TextField>
                                  </children>
-                                 <HBox.margin>
-                                    <Insets left="50.0" />
-                                 </HBox.margin>
                               </VBox>
-                           </children>
-                           <VBox.margin>
-                              <Insets top="50.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <HBox prefHeight="85.0" prefWidth="1124.0">
-                           <children>
                               <VBox prefHeight="200.0" prefWidth="310.0">
                                  <children>
                                     <Label text="รหัสผ่านใหม่">
@@ -266,7 +273,7 @@
                                        </font></TextField>
                                  </children>
                                  <HBox.margin>
-                                    <Insets left="20.0" />
+                                    <Insets />
                                  </HBox.margin>
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="310.0">
@@ -280,9 +287,32 @@
                                        <font>
                                           <Font name="Kodchasan Regular" size="16.0" />
                                        </font></TextField>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                       <children>
+                                          <Button fx:id="savePassword" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #8100cc; -fx-background-radius: 10;" text="ยืนยัน" textFill="WHITE">
+                                             <font>
+                                                <Font name="Noto Sans Thai Bold" size="15.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                          <Button fx:id="cancelPassword" mnemonicParsing="false" onAction="#cancelChangePass" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="ยกเลิก" textFill="WHITE">
+                                             <font>
+                                                <Font name="Noto Sans Thai Bold" size="15.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
                                  </children>
                                  <HBox.margin>
-                                    <Insets left="50.0" />
+                                    <Insets />
                                  </HBox.margin>
                               </VBox>
                            </children>
@@ -292,10 +322,9 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="37.0" prefWidth="691.0" />
                </children>
                <VBox.margin>
-                  <Insets left="20.0" top="30.0" />
+                  <Insets top="30.0" />
                </VBox.margin>
             </VBox>
             <VBox prefHeight="311.0" prefWidth="1074.0">
@@ -316,18 +345,24 @@
                               </Label>
                               <HBox prefHeight="77.0" prefWidth="342.0">
                                  <children>
-                                    <RadioButton mnemonicParsing="false" text="เปิด">
+                                    <RadioButton fx:id="quizTrue" mnemonicParsing="false" styleClass="radio" stylesheets="@../../../css/setting.css" text="เปิด">
                                        <font>
                                           <Font name="Noto Sans Thai Regular" size="15.0" />
                                        </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </RadioButton>
-                                    <RadioButton mnemonicParsing="false" text="ปิด">
+                                    <RadioButton fx:id="quizFalse" mnemonicParsing="false" styleClass="radio" stylesheets="@../../../css/setting.css" text="ปิด">
                                        <font>
                                           <Font name="Noto Sans Thai Regular" size="15.0" />
                                        </font>
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </RadioButton>
                                  </children>
                                  <VBox.margin>
@@ -345,18 +380,24 @@
                               </Label>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <RadioButton mnemonicParsing="false" text="เปิด">
+                                    <RadioButton fx:id="mTrue" mnemonicParsing="false" styleClass="radio" stylesheets="@../../../css/setting.css" text="เปิด">
                                        <font>
                                           <Font name="Noto Sans Thai Regular" size="15.0" />
                                        </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </RadioButton>
-                                    <RadioButton mnemonicParsing="false" text="ปิด">
+                                    <RadioButton fx:id="mFalse" mnemonicParsing="false" styleClass="radio" stylesheets="@../../../css/setting.css" text="ปิด">
                                        <font>
                                           <Font name="Noto Sans Thai Regular" size="15.0" />
                                        </font>
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </RadioButton>
                                  </children>
                                  <VBox.margin>
@@ -375,25 +416,31 @@
                   </HBox>
                   <VBox prefHeight="93.0" prefWidth="558.0">
                      <children>
-                        <Label text="แบบทดสอบ">
+                        <Label text="คอร์สที่กำลังจะเริ่ม">
                            <font>
                               <Font name="Noto Sans Thai Regular" size="20.0" />
                            </font>
                         </Label>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <RadioButton mnemonicParsing="false" text="เปิด">
+                              <RadioButton fx:id="cTrue" mnemonicParsing="false" styleClass="radio" stylesheets="@../../../css/setting.css" text="เปิด">
                                  <font>
                                     <Font name="Noto Sans Thai Regular" size="15.0" />
                                  </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </RadioButton>
-                              <RadioButton mnemonicParsing="false" text="ปิด">
+                              <RadioButton fx:id="cFalse" mnemonicParsing="false" styleClass="radio" stylesheets="@../../../css/setting.css" text="ปิด">
                                  <font>
                                     <Font name="Noto Sans Thai Regular" size="15.0" />
                                  </font>
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </RadioButton>
                            </children>
                            <VBox.margin>
@@ -407,7 +454,7 @@
                   </VBox>
                </children>
                <VBox.margin>
-                  <Insets left="20.0" top="50.0" />
+                  <Insets top="50.0" />
                </VBox.margin>
             </VBox>
             <VBox prefHeight="371.0" prefWidth="986.0">
@@ -436,7 +483,7 @@
                                           <Font name="Noto Sans Thai Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField prefHeight="40.0" style="-fx-background-radius: 10;">
+                                    <TextField fx:id="name1" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;">
                                        <font>
                                           <Font name="Kodchasan Regular" size="16.0" />
                                        </font></TextField>
@@ -449,7 +496,7 @@
                                           <Font name="Noto Sans Thai Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField prefHeight="40.0" style="-fx-background-radius: 10;">
+                                    <TextField fx:id="lastName1" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;">
                                        <font>
                                           <Font name="Kodchasan Regular" size="16.0" />
                                        </font></TextField>
@@ -472,7 +519,7 @@
                                           <Font name="Noto Sans Thai Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField prefHeight="40.0" style="-fx-background-radius: 10;">
+                                    <TextField fx:id="accountNo" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;">
                                        <font>
                                           <Font name="Kodchasan Regular" size="16.0" />
                                        </font></TextField>
@@ -485,7 +532,7 @@
                                           <Font name="Noto Sans Thai Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField prefHeight="40.0" style="-fx-background-radius: 10;">
+                                    <TextField fx:id="bankName" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;">
                                        <font>
                                           <Font name="Kodchasan Regular" size="16.0" />
                                        </font></TextField>
@@ -501,43 +548,56 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <HBox prefHeight="45.0" prefWidth="671.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="671.0">
                      <children>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="689.0" />
+                        <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="689.0">
+                           <children>
+                              <Button fx:id="editPaymentBtn" mnemonicParsing="false" onAction="#editPaymentInfo" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="แก้ไข" textFill="WHITE">
+                                 <font>
+                                    <Font name="Noto Sans Thai Bold" size="15.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding></HBox>
+                        <HBox fx:id="editPaymentBox" prefHeight="100.0" prefWidth="200.0" visible="false">
+                           <children>
+                              <Button fx:id="savePayment" mnemonicParsing="false" onAction="#savePaymentinfo" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #8100cc; -fx-background-radius: 10;" text="ยืนยัน" textFill="WHITE">
+                                 <font>
+                                    <Font name="Noto Sans Thai Bold" size="15.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="cancelPaymentChange" mnemonicParsing="false" onAction="#cancelPaymentInfo" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="ยกเลิก" textFill="WHITE">
+                                 <font>
+                                    <Font name="Noto Sans Thai Bold" size="15.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
                </children>
                <VBox.margin>
-                  <Insets left="20.0" top="50.0" />
+                  <Insets top="50.0" />
                </VBox.margin>
             </VBox>
-            <HBox alignment="CENTER" prefHeight="108.0" prefWidth="741.0">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-color: &quot;C2C2C2&quot;; -fx-border-radius: 10;" text="ยกเลิก">
-                     <font>
-                        <Font name="Noto Sans Thai Bold" size="16.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="120.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: &quot;8100CC&quot;; -fx-background-radius: 10;" text="ยืนยัน" textFill="WHITE">
-                     <font>
-                        <Font name="Noto Sans Thai Bold" size="16.0" />
-                     </font>
-                  </Button>
-               </children>
-               <VBox.margin>
-                  <Insets right="200.0" />
-               </VBox.margin>
-            </HBox>
          </children>
          <padding>
-            <Insets left="30.0" top="30.0" />
+            <Insets left="40.0" right="40.0" top="30.0" />
          </padding>
       </VBox>
     </children>
-   <padding>
-      <Insets left="100.0" />
-   </padding>
 </HBox>
