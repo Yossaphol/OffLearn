@@ -5,22 +5,23 @@ import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Side;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.control.Slider;
 
@@ -72,15 +73,25 @@ public class learningPageController implements Initializable {
     private Image volumeLow;
     private Image volumeMed;
     private Image volumeHigh;
+    private Image playIcon;
+    private Image pauseIcon;
+    private Image replayIcon;
     public StackPane videocontainer;
     public AnchorPane controlPane;
     private Timeline hideTimeline;
 
-
+    private Stage fullscreenStage = null;
+    private boolean isFullscreen = false;
     private boolean isMouseInStackPane = false;
-
+    private double originalPrefWidth;
+    private double originalPrefHeight;
+    private Pane originalParent;
+    private int originalIndex;
+    private PauseTransition inactivityTimer;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        originalPrefWidth = videocontainer.getPrefWidth();
+        originalPrefHeight = videocontainer.getPrefHeight();
         FontLoader fontLoader = new FontLoader();
         fontLoader.loadFonts();
         settingsMenu = new ContextMenu();
@@ -89,9 +100,11 @@ public class learningPageController implements Initializable {
         String videoPath = getClass().getResource("/videos/Test.mp4").toExternalForm();
         Media media = new Media(videoPath);
         MediaPlayer mediaPlayer = new MediaPlayer(media);
-
-        volumeLow  = new Image(getClass().getResource("/img/icon/volume-solid-stage1.png").toExternalForm());
-        volumeMed  = new Image(getClass().getResource("/img/icon/volume-solid-stage2.png").toExternalForm());
+        playIcon = new Image(getClass().getResource("/img/icon/play-button-arrowhead-solid.png").toExternalForm());
+        pauseIcon = new Image(getClass().getResource("/img/icon/pause-solid.png").toExternalForm());
+        replayIcon = new Image(getClass().getResource("/img/icon/replay-solid.png").toExternalForm());
+        volumeLow = new Image(getClass().getResource("/img/icon/volume-solid-stage1.png").toExternalForm());
+        volumeMed = new Image(getClass().getResource("/img/icon/volume-solid-stage2.png").toExternalForm());
         volumeHigh = new Image(getClass().getResource("/img/icon/volume-solid-stage3.png").toExternalForm());
 
         sliderVolume.setMin(0.0);
@@ -100,8 +113,10 @@ public class learningPageController implements Initializable {
 
         mediaPlayer.setVolume(0.5);
 
+        // ปรับ volume
         sliderVolume.valueProperty().addListener((obs, oldVal, newVal) -> {
             double volume = newVal.doubleValue();
+            userIsActive();
             mediaPlayer.setVolume(volume);
             updateVolumeIcon(volume);
         });
@@ -109,15 +124,19 @@ public class learningPageController implements Initializable {
 
         // ตั้งค่าให้เล่นใน MediaView
         mediaView.setMediaPlayer(mediaPlayer);
-        // play/pause on video click
-        videocontainer.setOnMouseClicked(e -> {
-            if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
-                mediaPlayer.pause();
-            } else {
-                mediaPlayer.play();
+        mediaView.setPreserveRatio(true);
+        mediaView.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                mediaView.fitWidthProperty().bind(videocontainer.widthProperty());
+                mediaView.fitHeightProperty().bind(videocontainer.heightProperty());
             }
         });
-//        mediaPlayer.setAutoPlay(true);
+
+        // play/pause
+        videocontainer.setOnMouseClicked(e -> {
+            togglePlayPause(mediaPlayer);
+            userIsActive(); // <-- NEW
+        });
 
         // settings
         settingsMenu = new ContextMenu();
@@ -167,9 +186,21 @@ public class learningPageController implements Initializable {
         speed05.setToggleGroup(speedGroup);
         speed1.setToggleGroup(speedGroup);
         speed15.setToggleGroup(speedGroup);
-        speed05.setOnAction(e -> { if (speed05.isSelected()) { mediaPlayer.setRate(0.5); }});
-        speed1.setOnAction(e -> { if (speed1.isSelected()) { mediaPlayer.setRate(1.0); }});
-        speed15.setOnAction(e -> { if (speed15.isSelected()) { mediaPlayer.setRate(1.5); }});
+        speed05.setOnAction(e -> {
+            if (speed05.isSelected()) {
+                mediaPlayer.setRate(0.5);
+            }
+        });
+        speed1.setOnAction(e -> {
+            if (speed1.isSelected()) {
+                mediaPlayer.setRate(1.0);
+            }
+        });
+        speed15.setOnAction(e -> {
+            if (speed15.isSelected()) {
+                mediaPlayer.setRate(1.5);
+            }
+        });
         speed1.setSelected(true);
         menuSpeed.getItems().addAll(speed05, speed1, speed15);
         settingsMenu.getItems().addAll(menuQuality, menuSpeed);
@@ -180,9 +211,7 @@ public class learningPageController implements Initializable {
         });
 
         settingsMenu.setOnShown(e -> {
-            // The user opened the menu, so definitely keep the controlPane visible
             fadeInControlPane();
-            // Also cancel any pending hide
             if (hideTimeline != null) hideTimeline.stop();
         });
 
@@ -190,38 +219,10 @@ public class learningPageController implements Initializable {
             DelayFadeOut();
         });
 
+        btnFullscreen.setOnAction(e -> toggleFullscreen());
 
 
-        subject_name.setText("Test Subject");
-        ep.setText("Test Episode : 0");
-        teacherName.setText("Puwanas Chaichitchaem");
-        role.setText("ศาสตราจารย์");
-        clipDescription.setText("ความรักกันไม่ได้หรอก ฉันชอบแอบมานานแล้ว พี่พรรลบ เขาเทอไม่รักฉัน เขาไม่แย่งเธอหรอก. 7 yrs. 2. ยะศิษย์ แดน เพ็งเซ้ง. คนอื่นไม่รู้ แต่กรูดูจนจบฮ่าๆๆ แหวงเเป๊ก เย๊กกะไฟฟ้า");
-        method_home.loadAndSetImage(teacherImg, "/img/Profile/user.png");
 
-        method_home.hoverEffect(btnContectTeacher);
-        method_home.hoverEffect(btnGloblalChat);
-        method_home.hoverEffect(btnLike);
-        method_home.hoverEffect(btnDislike);
-        method_home.hoverEffect(btnOffLoad);
-        method_home.hoverEffect(bntEp);
-        method_home.hoverEffect(nextCourse);
-        method_home.hoverEffect(btnSound);
-        method_home.hoverEffect(btnFullscreen);
-        method_home.hoverEffect(btnPlay);
-        method_home.hoverEffect(btnSetting);
-
-        bntEp.setText("Episode : 69");
-
-        labelPercent.setText("69%");
-
-        nextCourseName.setText("DSA");
-        nextTeacherName.setText("อาจารย์ขิม ใจดี");
-        category.setText("</>coding");
-        method_home.loadAndSetImage(nextImgCourse, "/img/Profile/user.png");
-
-        countLike.setText("0");
-        countDislike.setText("0");
 
         // ปรับ Seekbar ตามเวลาวิดีโอ
         mediaPlayer.setOnReady(() -> {
@@ -236,18 +237,12 @@ public class learningPageController implements Initializable {
         });
 
         // Replay
-        btnPlay.setOnAction(e -> {
-            Duration total = mediaPlayer.getTotalDuration();
-            Duration current = mediaPlayer.getCurrentTime();
-            if (current.toSeconds() + 0.1 >= total.toSeconds()) {
-                mediaPlayer.seek(Duration.ZERO);  // rewind
-            }
+        btnPlay.setOnAction(e -> togglePlayPause(mediaPlayer));
 
-            mediaPlayer.play();
-        });
 
         // Seekbar ปรับตำแหน่งวิดีโอ
         sliderTime.setOnMousePressed(e -> {
+            userIsActive();
             if (mediaPlayer != null) {
                 mediaPlayer.pause();
             }
@@ -263,17 +258,148 @@ public class learningPageController implements Initializable {
 
         controlPane.setOpacity(1.0);
 
+        setupInactivityTimer();
+
         videocontainer.setOnMouseEntered(e -> {
             isMouseInStackPane = true;
             fadeInControlPane();
             if (hideTimeline != null) hideTimeline.stop();
+            inactivityTimer.playFromStart();
         });
 
         videocontainer.setOnMouseExited(e -> {
             isMouseInStackPane = false;
-            DelayFadeOut(); // start 1s delay
+            DelayFadeOut();
+            inactivityTimer.stop();
         });
+
+        videocontainer.setOnMouseMoved(e -> {
+            inactivityTimer.playFromStart();
+            fadeInControlPane();
+        });
+        mediaPlayer.setOnEndOfMedia(() -> {
+            btnPlay.setGraphic(createIconView(replayIcon));
+        });
+
+
+        subject_name.setText("Test Subject");
+        ep.setText("Test Episode : 0");
+        teacherName.setText("Puwanas Chaichitchaem");
+        role.setText("ศาสตราจารย์");
+        clipDescription.setText("ความรักกันไม่ได้หรอก ฉันชอบแอบมานานแล้ว พี่พรรลบ เขาเทอไม่รักฉัน เขาไม่แย่งเธอหรอก. 7 yrs. 2. ยะศิษย์ แดน เพ็งเซ้ง. คนอื่นไม่รู้ แต่กรูดูจนจบฮ่าๆๆ แหวงเเป๊ก เย๊กกะไฟฟ้า");
+        method_home.loadAndSetImage(teacherImg, "/img/Profile/user.png");
+        bntEp.setText("Episode : 69");
+
+        labelPercent.setText("69%");
+
+        nextCourseName.setText("DSA");
+        nextTeacherName.setText("อาจารย์ขิม ใจดี");
+        category.setText("</>coding");
+        method_home.loadAndSetImage(nextImgCourse, "/img/Profile/user.png");
+
+        countLike.setText("0");
+        countDislike.setText("0");
+        method_home.hoverEffect(btnContectTeacher);
+        method_home.hoverEffect(btnGloblalChat);
+        method_home.hoverEffect(btnLike);
+        method_home.hoverEffect(btnDislike);
+        method_home.hoverEffect(btnOffLoad);
+        method_home.hoverEffect(bntEp);
+        method_home.hoverEffect(nextCourse);
+        method_home.hoverEffect(btnSound);
+        method_home.hoverEffect(btnFullscreen);
+        method_home.hoverEffect(btnPlay);
+        method_home.hoverEffect(btnSetting);
+
     }
+
+    private void togglePlayPause(MediaPlayer mediaPlayer) {
+        Duration total = mediaPlayer.getTotalDuration();
+        Duration current = mediaPlayer.getCurrentTime();
+
+        if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
+            mediaPlayer.pause();
+            btnPlay.setGraphic(createIconView(playIcon));
+        } else {
+            if (current.toSeconds() + 0.1 >= total.toSeconds()) {
+                mediaPlayer.seek(Duration.ZERO);
+            }
+            mediaPlayer.play();
+            btnPlay.setGraphic(createIconView(pauseIcon));
+        }
+    }
+
+
+    private void setupInactivityTimer() {
+        inactivityTimer = new PauseTransition(Duration.seconds(2));
+        inactivityTimer.setOnFinished(e -> fadeOutControlPane());
+    }
+
+    private void toggleFullscreen() {
+        if (!isFullscreen) {
+            goFullscreen();
+        } else {
+            exitFullscreen();
+        }
+
+    }
+    private void userIsActive() {
+        fadeInControlPane();
+        inactivityTimer.stop();
+        inactivityTimer.playFromStart();
+    }
+
+    private void goFullscreen() {
+        originalParent = (Pane) videocontainer.getParent();
+        originalIndex = originalParent.getChildren().indexOf(videocontainer);
+        originalParent.getChildren().remove(videocontainer);
+
+        StackPane fsRoot = new StackPane();
+        mediaView.fitWidthProperty().bind(fsRoot.widthProperty());
+        mediaView.fitHeightProperty().bind(fsRoot.heightProperty());
+
+        fsRoot.getChildren().add(videocontainer);
+
+        fullscreenStage = new Stage();
+        Scene fsScene = new Scene(fsRoot);
+        fullscreenStage.setScene(fsScene);
+        fullscreenStage.setFullScreenExitHint("");
+        fullscreenStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        fullscreenStage.setFullScreen(true);
+        fullscreenStage.show();
+        isFullscreen = true;
+
+        fullscreenStage.fullScreenProperty().addListener((obs, wasFull, isNowFull) -> {
+            if (isNowFull) {
+                videocontainer.setPrefWidth(Region.USE_COMPUTED_SIZE);
+                videocontainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+                videocontainer.setMaxWidth(Double.MAX_VALUE);
+                videocontainer.setMaxHeight(Double.MAX_VALUE);
+            } else {
+                exitFullscreen();
+            }
+        });
+
+        // Also handle close request
+        fullscreenStage.setOnCloseRequest(e -> exitFullscreen());
+    }
+
+
+    private void exitFullscreen() {
+        if (!isFullscreen) return;
+        if (fullscreenStage != null && fullscreenStage.isShowing()) {
+            fullscreenStage.close();
+        }
+
+        mediaView.fitWidthProperty().unbind();
+        mediaView.fitHeightProperty().unbind();
+        videocontainer.setPrefWidth(originalPrefWidth);
+        videocontainer.setPrefHeight(originalPrefHeight);
+        originalParent.getChildren().add(originalIndex, videocontainer);
+        fullscreenStage = null;
+        isFullscreen = false;
+    }
+
 
     private String formatTime(Duration newTime) {
         int minutes = (int) newTime.toMinutes();
@@ -300,20 +426,26 @@ public class learningPageController implements Initializable {
             e.printStackTrace();
         }
     }
-    private void updateVolumeIcon(double volume) {
-        ImageView iv;
-        if (volume < 0.3) {
-            iv = new ImageView(volumeLow);
-        } else if (volume < 0.7) {
-            iv = new ImageView(volumeMed);
-        } else {
-            iv = new ImageView(volumeHigh);
-        }
 
+    private ImageView createIconView(Image icon) {
+        ImageView iv = new ImageView(icon);
         iv.setFitWidth(20);
         iv.setFitHeight(20);
-        btnSound.setGraphic(iv);
-      }
+        return iv;
+    }
+
+    private void updateVolumeIcon(double volume) {
+        Image chosenImage;
+        if (volume < 0.3) {
+            chosenImage = volumeLow;
+        } else if (volume < 0.7) {
+            chosenImage = volumeMed;
+        } else {
+            chosenImage = volumeHigh;
+        }
+
+        btnSound.setGraphic(createIconView(chosenImage));
+    }
     private void fadeInControlPane() {
         controlPane.setVisible(true);
 
