@@ -1,6 +1,5 @@
 package Teacher.experiment;
 
-import com.beust.ah.A;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -50,9 +49,9 @@ public class ProblemContent implements Initializable {
 
     private int count = 0;
     private ToggleGroup group;
-    private QuizItem quizItem;
+    private QuestionItem questionItem;
     private ArrayList<TextField> txtGroup;
-    private ArrayList<QuizItem> itm;
+    private ArrayList<QuestionItem> itm;
     private VBox parentContainer;
 
     @Override
@@ -126,15 +125,15 @@ public class ProblemContent implements Initializable {
             po = Integer.parseInt(point.getText());
         }
         String corr = correctAns.getText();
-        quizItem = new QuizItem(p, po, corr);
+        questionItem = new QuestionItem(p, po, corr);
         for (TextField t: txtGroup){
-            quizItem.setChoices(t.getText());
+            questionItem.setChoices(t.getText());
         }
     }
 
     public void deleteButton(){
         delete.setOnMouseClicked(mouseEvent -> {
-            itm.remove(this.quizItem);
+            itm.remove(this.questionItem);
 
             if (parentContainer != null && problemContent != null) {
                 parentContainer.getChildren().remove(problemContent);
@@ -142,11 +141,11 @@ public class ProblemContent implements Initializable {
         });
     }
 
-    public QuizItem getQuizItem(){
-        return this.quizItem;
+    public QuestionItem getQuizItem(){
+        return this.questionItem;
     }
 
-    public void recieveQuizItemList(ArrayList<QuizItem> itm){
+    public void recieveQuizItemList(ArrayList<QuestionItem> itm){
         this.itm = itm;
     }
 

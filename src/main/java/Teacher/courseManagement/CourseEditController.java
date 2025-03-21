@@ -5,7 +5,7 @@ import Database.ChapterDB;
 import Database.CourseDB;
 import Student.FontLoader.FontLoader;
 import Teacher.experiment.QuizController;
-import Teacher.experiment.QuizItem;
+import Teacher.experiment.QuestionItem;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -66,7 +66,7 @@ public class CourseEditController implements Initializable {
     private int userID;
     private int courseID;
     private ArrayList<ChapterItem> chapterList = new ArrayList<>();
-    private ArrayList<ArrayList<QuizItem>> lastQuizGroup = new ArrayList<>();
+    private ArrayList<ArrayList<QuestionItem>> lastQuizGroup = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

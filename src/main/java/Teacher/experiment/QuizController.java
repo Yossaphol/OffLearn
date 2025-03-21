@@ -1,5 +1,7 @@
 package Teacher.experiment;
 
+import Database.ChapterDB;
+import Database.QuizDB;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -45,15 +47,22 @@ public class QuizController implements Initializable {
     private ScrollPane wrapper;
     private VBox courseManagement;
     private HBox problemContent;
-    private ArrayList<QuizItem> quizItemsList;
-    private ArrayList<ArrayList<QuizItem>> lqg;
+    private ArrayList<QuestionItem> questionItemsList;
+    private ArrayList<ArrayList<QuestionItem>> lqg;
     private VBox courseSpace;
+
+    private QuizDB quizDB;
+    private ChapterDB chapterDB;
+    private boolean first;
+    private QuizItem quizItem;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        first = true;
+
         addProblemButton();
         backButton();
-        quizItemsList = new ArrayList<QuizItem>();
+        questionItemsList = new ArrayList<QuestionItem>();
         saveAllButton();
         setLevelGroup();
     }
@@ -72,6 +81,12 @@ public class QuizController implements Initializable {
                 problemContent = fxmlLoader.load();
 
                 ProblemContent p = fxmlLoader.getController();
+
+                if (first){
+                    first = false;
+                    this.saveQuiz();
+                }
+
                 p.setParentContainer(problemSpace);
                 p.setProblemContent(problemContent);
                 problemSpace.getChildren().add(problemContent);
@@ -98,10 +113,10 @@ public class QuizController implements Initializable {
 
     public void recieveCourseSpace(VBox courseSpace){ this.courseSpace = courseSpace;}
 
-    public void recieveLastQuizGroup(ArrayList<ArrayList<QuizItem>> lqg){ this.lqg = lqg;}
+    public void recieveLastQuizGroup(ArrayList<ArrayList<QuestionItem>> lqg){ this.lqg = lqg;}
 
     public void passQuizItemList(ProblemContent p){
-        p.recieveQuizItemList(quizItemsList);
+        p.recieveQuizItemList(questionItemsList);
     }
 
     public void saveAllButton(){
@@ -117,17 +132,18 @@ public class QuizController implements Initializable {
             quizBoxContent q = fxmlLoader.getController();
 
             int cnt = 0;
-            for (QuizItem i : quizItemsList){
+            for (QuestionItem i : questionItemsList){
                 cnt += i.getPoint();
             }
             q.setParentContainer(courseSpace);
             q.setProblemContent(quizBox);
             q.setQuizName(quizName.getText());
-            q.setCount(quizItemsList.size() + "");
+            q.setCount(questionItemsList.size() + "");
             q.setMinScore(minScore.getText());
             q.setMaxScore(cnt + "");
             q.recieveLQG(lqg);
-            q.recieveQuizItemList(quizItemsList);
+            q.recieveQuizItemList(questionItemsList);
+            q.setQuizItem(quizItem);
 
             courseSpace.getChildren().add(quizBox);
             wrapper.setContent(courseManagement);
@@ -137,7 +153,7 @@ public class QuizController implements Initializable {
     }
 
     public void addToLQG(){
-        lqg.add(quizItemsList);
+        lqg.add(questionItemsList);
     }
 
 
@@ -158,8 +174,32 @@ public class QuizController implements Initializable {
         }
     }
 
+    public void saveQuiz(){
+        quizDB = new QuizDB();
+        chapterDB = new ChapterDB();
 
+        String name = quizName.getText();
+        int mini = Integer.parseInt(minScore.getText());
+        String lev = this.getLevel();
 
+        int id = quizDB.saveQuiz(chapterDB.getCurrentChapterId(), name, mini, lev);
+        quizItem = new QuizItem(id);
+    }
+
+    public void saveQuestion(){
+
+    }
+
+    public String getLevel(){
+        if (hard.isSelected()){
+            return "hard";
+        } else if (normal.isSelected()){
+            return "normal";
+        } else if (easy.isSelected()){
+            return "easy";
+        }
+        return "";
+    }
 
 }
 

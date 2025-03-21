@@ -39,4 +39,21 @@ public class ChapterDB extends ConnectDB{
             e.printStackTrace();
         }
     }
+
+    public int getCurrentChapterId() {
+        String sql = "SELECT chapter_ID FROM chapter ORDER BY chapter_ID DESC LIMIT 1";
+        try (
+                Connection conn = this.connectToDB();
+                PreparedStatement pstm = conn.prepareStatement(sql);
+                ResultSet rs = pstm.executeQuery()
+        ) {
+            if (rs.next()) {
+                return rs.getInt("chapter_ID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
 }

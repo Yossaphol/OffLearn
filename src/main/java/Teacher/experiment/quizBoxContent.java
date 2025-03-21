@@ -1,8 +1,8 @@
 package Teacher.experiment;
 
+import Database.QuizDB;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -33,8 +33,10 @@ public class quizBoxContent implements Initializable {
     private HBox quizBox;
 
     private VBox parentContainer;
-    private ArrayList<ArrayList<QuizItem>> lqg;
-    private ArrayList<QuizItem> quizItemsList;
+    private ArrayList<ArrayList<QuestionItem>> lqg;
+    private ArrayList<QuestionItem> questionItemsList;
+    private QuizItem quizItem;
+    private QuizDB quizDB;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -57,9 +59,13 @@ public class quizBoxContent implements Initializable {
         this.maxScore.setText(maxScore);
     }
 
+    public void setQuizItem(QuizItem q) { this.quizItem = q;}
+
     public void deleteButton(){
+        quizDB = new QuizDB();
         delete.setOnMouseClicked(mouseEvent -> {
-            lqg.remove(this.quizItemsList);
+            lqg.remove(this.questionItemsList);
+            quizDB.deleteQuiz(quizItem.getQuizID());
             if (parentContainer != null && quizBox != null) {
                 parentContainer.getChildren().remove(quizBox);
             }
@@ -74,7 +80,7 @@ public class quizBoxContent implements Initializable {
         this.quizBox = quizBox;
     }
 
-    public void recieveLQG(ArrayList<ArrayList<QuizItem>> lqg){ this.lqg = lqg;}
+    public void recieveLQG(ArrayList<ArrayList<QuestionItem>> lqg){ this.lqg = lqg;}
 
-    public void recieveQuizItemList(ArrayList<QuizItem> quizItemsList){ this.quizItemsList = quizItemsList;}
+    public void recieveQuizItemList(ArrayList<QuestionItem> questionItemsList){ this.questionItemsList = questionItemsList;}
 }
