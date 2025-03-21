@@ -3,10 +3,7 @@ package Teacher.experiment;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -14,8 +11,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import java.util.Optional;
 
 public class QuizController implements Initializable {
@@ -38,6 +33,15 @@ public class QuizController implements Initializable {
     @FXML
     private TextField minScore;
 
+    @FXML
+    private RadioButton hard;
+
+    @FXML
+    private RadioButton normal;
+
+    @FXML
+    private RadioButton easy;
+
     private ScrollPane wrapper;
     private VBox courseManagement;
     private HBox problemContent;
@@ -51,6 +55,14 @@ public class QuizController implements Initializable {
         backButton();
         quizItemsList = new ArrayList<QuizItem>();
         saveAllButton();
+        setLevelGroup();
+    }
+
+    public void setLevelGroup(){
+        ToggleGroup t = new ToggleGroup();
+        hard.setToggleGroup(t);
+        normal.setToggleGroup(t);
+        easy.setToggleGroup(t);
     }
 
     public void addProblemButton(){

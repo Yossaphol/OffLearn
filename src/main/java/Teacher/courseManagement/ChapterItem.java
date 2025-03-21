@@ -1,12 +1,22 @@
 package Teacher.courseManagement;
 
 public class ChapterItem {
+    private int chapId;
     private String chapterName;
     private String desc;
 
-    public ChapterItem(String name, String desc){
+    public ChapterItem(int chapId, String name, String desc){
+        this.setChapId(chapId);
         this.setChapterName(name);
         this.setDesc(desc);
+    }
+
+    public int getChapId(){
+        return this.chapId;
+    }
+
+    public void setChapId(int chapId){
+        this.chapId = chapId;
     }
 
     public void setChapterName(String name){

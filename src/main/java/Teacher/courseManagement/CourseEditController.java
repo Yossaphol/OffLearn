@@ -38,7 +38,7 @@ public class CourseEditController implements Initializable {
     private VBox courseManagement;
 
     @FXML
-    private Button save;
+    private Button saveAll;
 
     @FXML
     private TextField courseName;
@@ -75,7 +75,7 @@ public class CourseEditController implements Initializable {
 
         addCourseButton();
         addQuizButton();
-        saveButton();
+        saveAllButton();
 
         setType();
     }
@@ -90,6 +90,7 @@ public class CourseEditController implements Initializable {
 
                 CourseContent c = fxmlLoader.getController();
                 passChapList(c);
+                passCourseName(c);
                 c.setParentContainer(courseSpace);
                 c.setProblemContent(newCourse);
 
@@ -127,6 +128,8 @@ public class CourseEditController implements Initializable {
 
     public void passChapList(CourseContent c){ c.recieveChapList(chapterList);}
 
+    public void passCourseName(CourseContent c){ c.recieveCourseName(courseName);}
+
     public void recieveWrapper(ScrollPane wrapper){
         this.wrapper = wrapper;
     }
@@ -154,8 +157,8 @@ public class CourseEditController implements Initializable {
         });
     }
 
-    public void saveButton(){
-        save.setOnAction(actionEvent -> {
+    public void saveAllButton(){
+        saveAll.setOnAction(actionEvent -> {
             category = new Category();
             courseDB = new CourseDB();
 
@@ -182,6 +185,10 @@ public class CourseEditController implements Initializable {
         courseDB = new CourseDB();
 
         courseID = courseDB.getCourseID(courseName.getText());
+
+        for (ChapterItem c : chapterList){
+            chapterDB.saveChapter(courseID, c.getChapterName(), c.getDesc());
+        }
 
     }
 

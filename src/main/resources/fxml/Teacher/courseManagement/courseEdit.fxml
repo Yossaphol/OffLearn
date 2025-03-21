@@ -197,7 +197,7 @@
                   </HBox>
                   <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="save" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: &quot;0675DE&quot;; -fx-background-radius: 10;" text="บันทึก" textFill="WHITE">
+                        <Button fx:id="saveAll" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: &quot;0675DE&quot;; -fx-background-radius: 10;" text="บันทึก" textFill="WHITE">
                            <font>
                               <Font name="Kodchasan Bold" size="16.0" />
                            </font>

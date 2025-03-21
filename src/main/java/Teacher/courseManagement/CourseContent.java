@@ -1,5 +1,7 @@
 package Teacher.courseManagement;
 
+import Database.ChapterDB;
+import Database.CourseDB;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -32,6 +34,9 @@ public class CourseContent implements Initializable {
     private ArrayList<ChapterItem> chapList;
     private VBox parentContainer;
     private HBox chapContainer;
+    private ChapterDB chapterDB;
+    private CourseDB courseDB;
+    private TextField courseName;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -41,12 +46,22 @@ public class CourseContent implements Initializable {
 
     public void recieveChapList(ArrayList<ChapterItem> chapList){ this.chapList = chapList; }
 
+    public void recieveCourseName(TextField courseName) { this.courseName = courseName; }
+
     public void saveToChapList(){
         String c = chapterName.getText();
         String d = chapDesc.getText();
-        chapterItem = new ChapterItem(c, d);
 
-        System.out.println(chapterItem.toString());
+        courseDB =  new CourseDB();
+        chapterDB = new ChapterDB();
+        int courseID = courseDB.getCourseID(courseName.getText());
+        int chapterID = chapterDB.saveChapter(courseID, c, d);
+
+        if (chapterID != -1) {
+            chapterItem = new ChapterItem(chapterID, c, d);
+            chapList.add(chapterItem);
+            System.out.println(chapterItem.toString());
+        }
     }
 
     public void saveButton(){
@@ -58,11 +73,18 @@ public class CourseContent implements Initializable {
     }
 
     public void deleteButton(){
+        courseDB =  new CourseDB();
+        chapterDB = new ChapterDB();
         delete.setOnMouseClicked(mouseEvent -> {
-            chapList.remove(this.chapterItem);
-            if (parentContainer != null && chapContainer != null) {
-                parentContainer.getChildren().remove(chapContainer);
+            if (chapterItem != null) {
+                chapterDB.deleteChapter(chapterItem.getChapId());
+                chapList.remove(chapterItem);
+
+                if (parentContainer != null && chapContainer != null) {
+                    parentContainer.getChildren().remove(chapContainer);
+                }
             }
+
         });
     }
 
