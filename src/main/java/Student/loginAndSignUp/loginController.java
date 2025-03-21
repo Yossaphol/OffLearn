@@ -50,7 +50,7 @@ public class loginController implements Initializable {
         String username = getUsername.getText();
         String password = getPassword.getText();
 
-        if (username.isEmpty() & password.isEmpty()) {
+        if (username.isEmpty() && password.isEmpty()) {
             showAlert("Login Failed", "Please enter username and password.", Alert.AlertType.WARNING);
             return;
         } else if (username.isEmpty()) {
@@ -61,14 +61,26 @@ public class loginController implements Initializable {
             return;
         }
 
-        if (userDB.loginConnect(username, password)) {
+        String userType = userDB.loginConnect(username, password);
+
+        if (userType != null) {
             SessionManager.getInstance().setUsername(username);
-            showAlert("Login Successful", "Welcome, " + username, Alert.AlertType.INFORMATION);
-            openHomePage();
+//            System.out.println(userType);
+            if (userType.equals("student")) {
+                showAlert("Login Successful", "Welcome, " + username, Alert.AlertType.INFORMATION);
+                openHomePage();
+            } else if (userType.equals("teacher")) {
+                showAlert("Login Successful", "Welcome, " + username, Alert.AlertType.INFORMATION);
+                openTeacherDashboard();
+            }
+            else {
+                showAlert("Login Failed", "Unknown user type.", Alert.AlertType.ERROR);
+            }
         } else {
             showAlert("Login Failed", "Invalid username or password.", Alert.AlertType.ERROR);
         }
     }
+
 
     private void showAlert(String title, String message, Alert.AlertType type) {
         Alert alert = new Alert(type);
@@ -82,6 +94,21 @@ public class loginController implements Initializable {
     private void openHomePage() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/mainPage.fxml"));
+            root = loader.load();
+
+            Stage stage = (Stage) getUsername.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Home Page");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Cannot load home page.", Alert.AlertType.ERROR);
+        }
+    }
+    @FXML
+    private void openTeacherDashboard() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Teacher/statistics/dashboard.fxml"));
             root = loader.load();
 
             Stage stage = (Stage) getUsername.getScene().getWindow();
