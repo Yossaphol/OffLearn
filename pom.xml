@@ -27,6 +27,19 @@
             <version>3.5.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>s3</artifactId>
+            <version>2.20.40</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.6</version>
+        </dependency>
+
+
+
         <!-- Environment Variables -->
         <dependency>
             <groupId>io.github.cdimascio</groupId>

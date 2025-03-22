@@ -16,6 +16,9 @@ module com.example.offlearn {
     requires com.azure.storage.blob;
     requires com.azure.core;
     requires jcommander;
+    requires software.amazon.awssdk.auth;
+    requires software.amazon.awssdk.regions;
+    requires software.amazon.awssdk.services.s3;
 
     opens Student.inbox to javafx.fxml;
     exports Student.inbox;
@@ -105,4 +108,7 @@ module com.example.offlearn {
     exports Teacher.showBalance to javafx.fxml;
     opens Teacher.showBalance;
     opens Student.dashboard;
+
+    exports mediaUpload to javafx.fxml;
+    opens mediaUpload;
 }
