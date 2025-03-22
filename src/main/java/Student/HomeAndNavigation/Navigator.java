@@ -54,6 +54,19 @@ public class Navigator {
         controller.displayNavbar();
     }
 
+    public void learningPageRoute(MouseEvent event) {
+        navigateTo("/fxml/Student/learningPage/learningPage.fxml");
+        controller.displayNavbar();
+    }
+
+
+    public void testResult() {
+        navigateTo("/fxml/Student/test/test_result.fxml");
+        controller.stopHideNavbar();
+        controller.stopHideSearchBar();
+    }
+
+
     public void preTestRoute(MouseEvent event) {
         navigateTo("/fxml/Student/test/preTest.fxml");
     }
@@ -64,11 +77,19 @@ public class Navigator {
 
     public void testRoute(MouseEvent event) {
         navigateTo("/fxml/Student/test/testPage.fxml");
+        controller.hideNavbar();
+        controller.hideSearchBar();
+    }
+
+    public void seeAnswer(MouseEvent event) {
+        navigateTo("/fxml/Student/test/answerPage.fxml");
     }
 
     public void myCourseRoute(MouseEvent event) {
         navigateTo("/fxml/Student/courseManage/myCourse.fxml");
     }
+
+
 
     public void myRoadmapRoute(MouseEvent event) {
         navigateTo("/fxml/Student/courseManage/myroadmap.fxml");

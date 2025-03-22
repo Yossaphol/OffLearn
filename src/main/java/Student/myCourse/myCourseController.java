@@ -33,18 +33,25 @@ public class myCourseController implements Initializable {
     public VBox studyTable;
     public TabPane tabPane;
     public Pane courseContainer;
+    public HBox continueCourse1;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         FontLoader fontLoader = new FontLoader();
         fontLoader.loadFonts();
 
-        Navigator nav = new Navigator();
+
         calendarDisplay();
         displayStudyTable();
         setTabSelectionAnimation();
         setEffect();
+        route();
 
+    }
+
+    private void route(){
+        Navigator nav = new Navigator();
+        continueCourse1.setOnMouseClicked(nav::learningPageRoute);
     }
 
     private void setEffect(){

@@ -14,24 +14,7 @@ public class answerPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-    displayNavbar();
-    }
-    private void displayNavbar(){
-        try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/navBar.fxml"));
-            VBox navContent = calendarLoader.load();
-            leftWrapper.getChildren().setAll(navContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
-    private void displaySearchBar(){
-        try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/searchBar.fxml"));
-            HBox searchbarContent = calendarLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

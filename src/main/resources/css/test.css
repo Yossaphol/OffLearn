@@ -1,0 +1,14 @@
+.toggle-button{
+    -fx-background-color: transparent;
+    -fx-border-color: #A8A8A8;
+    -fx-border-radius: 10px;
+      -fx-margin: 10px;
+}
+
+.toggle-button:selected{
+    -fx-background-color: #8100cc;
+    -fx-border-color: #8100cc;
+    -fx-text-fill: white;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
