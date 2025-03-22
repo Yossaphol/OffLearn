@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="problemContent" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.experiment.ProblemContent">
+<HBox fx:id="problemContent" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.experiment.QuestionContent">
     <children>
         <HBox prefHeight="100.0" prefWidth="800.0" style="-fx-background-radius: 30;">
             <children>
@@ -25,7 +25,7 @@
                                 <Insets bottom="20.0" />
                             </VBox.margin>
                         </ImageView>
-                        <Button fx:id="addImg" mnemonicParsing="false" prefHeight="30.0" prefWidth="105.0" text="Button" />
+                        <Button fx:id="addImg" mnemonicParsing="false" prefHeight="30.0" prefWidth="105.0" text="เพิ่มรูปภาพ" />
                     </children>
                     <padding>
                         <Insets left="20.0" right="20.0" />
@@ -39,7 +39,7 @@
                                   <Font name="Kodchasan Bold" size="20.0" />
                               </font>
                           </Label>
-                     <TextField fx:id="problem" />
+                     <TextField fx:id="problem" prefHeight="26.0" prefWidth="229.0" />
                   </children>
                </HBox>
                     <VBox fx:id="choiceSpace" prefHeight="172.0" prefWidth="315.0" />

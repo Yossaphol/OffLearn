@@ -1,5 +1,8 @@
 package Teacher.experiment;
 
+import Database.QuestionDB;
+import Database.QuizDB;
+import Database.ChoicesDB;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -9,13 +12,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import mediaUpload.MediaUpload;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ProblemContent implements Initializable {
+public class QuestionContent implements Initializable {
 
     @FXML
     private TextField problem;
@@ -53,6 +57,12 @@ public class ProblemContent implements Initializable {
     private ArrayList<TextField> txtGroup;
     private ArrayList<QuestionItem> itm;
     private VBox parentContainer;
+    private MediaUpload m;
+    private QuestionDB questionDB;
+    private String imgUrl;
+    private QuizDB quizDB;
+    private int questionID;
+    private ChoicesDB choicesDB;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -90,6 +100,7 @@ public class ProblemContent implements Initializable {
     }
 
     public void addImage() {
+        m = new MediaUpload();
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
@@ -97,6 +108,7 @@ public class ProblemContent implements Initializable {
 
         addImg.setOnMouseClicked(mouseEvent -> {
             File selectedFile = fileChooser.showOpenDialog(null);
+            imgUrl = m.uploadImg(selectedFile);
 
             if (selectedFile != null) {
                 Image image = new Image(selectedFile.toURI().toString());
@@ -108,12 +120,30 @@ public class ProblemContent implements Initializable {
     }
 
     public void saveButton(){
+        questionDB = new QuestionDB();
+        quizDB = new QuizDB();
+
         save.setOnMouseClicked(mouseEvent -> {
             this.setQuizItem();
             itm.add(this.getQuizItem());
 
+            int quiz_id = quizDB.getLatestQuizID();
+            String question = problem.getText();
+            String corr = correctAns.getText();
+            int point = Integer.parseInt(this.point.getText());
+
+            questionID = questionDB.saveQuestion(quiz_id, question, corr, point, imgUrl);
+            saveChoices();
+
             save.setVisible(false);
         });
+    }
+
+    public void saveChoices(){
+        choicesDB = new ChoicesDB();
+        for (TextField t : txtGroup){
+            choicesDB.saveChoices( this.questionID, t.getText());
+        }
     }
 
     public void setQuizItem(){
@@ -132,8 +162,11 @@ public class ProblemContent implements Initializable {
     }
 
     public void deleteButton(){
+        questionDB = new QuestionDB();
+
         delete.setOnMouseClicked(mouseEvent -> {
             itm.remove(this.questionItem);
+            questionDB.deleteQuestion(questionID);
 
             if (parentContainer != null && problemContent != null) {
                 parentContainer.getChildren().remove(problemContent);

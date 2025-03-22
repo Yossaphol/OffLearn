@@ -60,7 +60,7 @@ public class QuizController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         first = true;
 
-        addProblemButton();
+        addQuestionButton();
         backButton();
         questionItemsList = new ArrayList<QuestionItem>();
         saveAllButton();
@@ -74,13 +74,13 @@ public class QuizController implements Initializable {
         easy.setToggleGroup(t);
     }
 
-    public void addProblemButton(){
+    public void addQuestionButton(){
         addProblem.setOnMouseClicked(mouseEvent -> {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/experiment/problemContent.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/experiment/questionContent.fxml"));
                 problemContent = fxmlLoader.load();
 
-                ProblemContent p = fxmlLoader.getController();
+                QuestionContent p = fxmlLoader.getController();
 
                 if (first){
                     first = false;
@@ -115,7 +115,7 @@ public class QuizController implements Initializable {
 
     public void recieveLastQuizGroup(ArrayList<ArrayList<QuestionItem>> lqg){ this.lqg = lqg;}
 
-    public void passQuizItemList(ProblemContent p){
+    public void passQuizItemList(QuestionContent p){
         p.recieveQuizItemList(questionItemsList);
     }
 
@@ -184,10 +184,6 @@ public class QuizController implements Initializable {
 
         int id = quizDB.saveQuiz(chapterDB.getCurrentChapterId(), name, mini, lev);
         quizItem = new QuizItem(id);
-    }
-
-    public void saveQuestion(){
-
     }
 
     public String getLevel(){

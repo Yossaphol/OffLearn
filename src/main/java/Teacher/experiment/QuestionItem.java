@@ -8,13 +8,21 @@ public class QuestionItem {
     private int point;
     private String correctChoice;
     private ArrayList<String> choices;
-    private int quizID;
+    private int questionID;
 
     public QuestionItem(String quizName, int point, String correctChoice){
         this.setQuizName(quizName);
         this.setPoint(point);
         this.setCorrectChoice(correctChoice);
         choices = new ArrayList<String>();
+    }
+
+    public void setQuestionID(int questionID){
+        this.questionID = questionID;
+    }
+
+    public int getQuestionID(){
+        return this.questionID;
     }
 
     public String getCorrectChoice() {

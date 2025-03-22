@@ -32,6 +32,25 @@ public class QuizDB extends ConnectDB{
         return -1;
     }
 
+    public int getLatestQuizID() {
+        String sql = "SELECT Quiz_ID FROM quiz ORDER BY Quiz_ID DESC LIMIT 1";
+
+        try (
+                Connection conn = this.connectToDB();
+                PreparedStatement pstm = conn.prepareStatement(sql);
+                ResultSet rs = pstm.executeQuery()
+        ) {
+            if (rs.next()) {
+                return rs.getInt("Quiz_ID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return -1;
+    }
+
+
     public void deleteQuiz(int quizID) {
         String sql = "DELETE FROM quiz WHERE Quiz_ID = ?";
         try (
