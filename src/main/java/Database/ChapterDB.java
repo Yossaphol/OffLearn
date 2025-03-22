@@ -3,8 +3,8 @@ package Database;
 import java.sql.*;
 
 public class ChapterDB extends ConnectDB{
-    public int saveChapter(int course_id, String chapName, String desc){
-        String sql = "INSERT INTO chapter (Course_ID, chapterName, chapterDescription) VALUES (?, ?, ?)";
+    public int saveChapter(int course_id, String chapName, String desc, String chapImg, String chapMaterial){
+        String sql = "INSERT INTO chapter (Course_ID, chapterName, chapterDescription, chapter_image, chapter_material) VALUES (?, ?, ?, ?, ?)";
         try (
                 Connection conn = this.connectToDB();
                 PreparedStatement pstm = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -12,6 +12,8 @@ public class ChapterDB extends ConnectDB{
             pstm.setInt(1, course_id);
             pstm.setString(2, chapName);
             pstm.setString(3, desc);
+            pstm.setString(4, chapImg);
+            pstm.setString(5, chapMaterial);
             pstm.executeUpdate();
 
             try (ResultSet rs = pstm.getGeneratedKeys()) {

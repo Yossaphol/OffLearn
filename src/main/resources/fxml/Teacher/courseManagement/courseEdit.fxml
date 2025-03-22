@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.CourseEditController">
+<VBox fx:id="main" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.CourseEditController">
    <ScrollPane fx:id="wrapper" fitToHeight="true" fitToWidth="true" style="-fx-background-color: white;">
       <VBox fx:id="courseManagement" prefHeight="2093.0" prefWidth="1440.0" style="-fx-background-color: white;">
          <children>
@@ -67,12 +67,12 @@
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="img" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../img/Picture/bg.jpg" />
                                  </image>
                               </ImageView>
-                              <Label text="เปลี่ยนรูป" underline="true">
+                              <Label fx:id="addCourseImg" text="เปลี่ยนรูป" underline="true">
                                  <font>
                                     <Font name="Kodchasan Regular" size="16.0" />
                                  </font>

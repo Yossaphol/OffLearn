@@ -4,6 +4,7 @@ public class ChapterItem {
     private int chapId;
     private String chapterName;
     private String desc;
+    private String imrUrl;
 
     public ChapterItem(int chapId, String name, String desc){
         this.setChapId(chapId);
@@ -17,6 +18,14 @@ public class ChapterItem {
 
     public void setChapId(int chapId){
         this.chapId = chapId;
+    }
+
+    public void setImrUrl(String url){
+        this.imrUrl = url;
+    }
+
+    public String getImrUrl(){
+        return this.imrUrl;
     }
 
     public void setChapterName(String name){

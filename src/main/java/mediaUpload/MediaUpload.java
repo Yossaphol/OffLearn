@@ -68,4 +68,31 @@ public class MediaUpload {
         }
     }
 
+    public String uploadMaterial(File file) {
+        try {
+            String accessKey = env.get("AWS_AC_KEY");
+            String secretKey = env.get("AWS_SC_KEY");
+
+            S3Client s3 = S3Client.builder()
+                    .region(Region.of(REGION))
+                    .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(accessKey, secretKey)))
+                    .build();
+
+            String fileKey = "materials/" + file.getName();
+
+            PutObjectRequest request = PutObjectRequest.builder()
+                    .bucket(BUCKET_NAME)
+                    .key(fileKey)
+                    .build();
+
+            s3.putObject(request, Paths.get(file.getAbsolutePath()));
+
+            return "https://" + BUCKET_NAME + ".s3." + REGION + ".amazonaws.com/" + fileKey;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

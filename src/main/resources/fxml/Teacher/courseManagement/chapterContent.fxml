@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="courseContent" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.CourseContent">
+<HBox fx:id="courseContent" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.ChapterContent">
     <children>
         <HBox prefHeight="100.0" prefWidth="800.0" style="-fx-background-radius: 30;">
             <children>
@@ -24,7 +24,7 @@
                                 <Insets bottom="20.0" />
                             </VBox.margin>
                         </ImageView>
-                        <Button fx:id="addImg" mnemonicParsing="false" prefHeight="30.0" prefWidth="105.0" text="Button" />
+                        <Button fx:id="addImg" mnemonicParsing="false" prefHeight="30.0" prefWidth="105.0" text="เพิ่มวิดิโอ" />
                     </children>
                     <padding>
                         <Insets left="20.0" right="20.0" />
@@ -60,7 +60,7 @@
                            <Insets top="20.0" />
                         </VBox.margin>
                      </Label>
-                     <Button mnemonicParsing="false" text="แนบไฟล์" />
+                     <Button fx:id="addFile" mnemonicParsing="false" text="แนบไฟล์" />
                   </children>
                   <VBox.margin>
                      <Insets top="20.0" />
