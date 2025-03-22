@@ -43,8 +43,8 @@ public class MediaUpload {
 
     public String uploadVideo(File file) {
         try {
-            String accessKey = env.get("AWS_ACCESS_KEY_ID");
-            String secretKey = env.get("AWS_SECRET_ACCESS_KEY");
+            String accessKey = env.get("AWS_AC_KEY");
+            String secretKey = env.get("AWS_SC_KEY");
 
             S3Client s3 = S3Client.builder()
                     .region(Region.of(REGION))
