@@ -60,7 +60,7 @@ public class mainPageController implements Initializable {
         }
     }
 
-    private void displaySearchBar() {
+    public void displaySearchBar() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/searchBar.fxml"));
             HBox searchbarContent = loader.load();
@@ -68,6 +68,26 @@ public class mainPageController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void hideNavbar() {
+        leftWrapper.setVisible(false);
+        leftWrapper.setManaged(false);
+    }
+
+    public void hideSearchBar() {
+        searchbar_container.setVisible(false);
+        searchbar_container.setManaged(false);
+    }
+
+    public void stopHideNavbar() {
+        leftWrapper.setVisible(true);
+        leftWrapper.setManaged(true);
+    }
+
+    public void stopHideSearchBar() {
+        searchbar_container.setVisible(true);
+        searchbar_container.setManaged(true);
     }
 
     public void displayContent(String path) {

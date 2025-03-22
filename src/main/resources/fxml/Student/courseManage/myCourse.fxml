@@ -87,7 +87,7 @@
                                                                      <content>
                                                                         <VBox fx:id="coursecardContainer1" minHeight="0.0" prefWidth="498.0" spacing="25.0" style="-fx-background-color: transparent; -fx-border-color: transparent;">
                                                                            <children>
-                                                                              <fx:include source="CourseCard.fxml" />
+                                                                              <fx:include fx:id="continueCourse1" source="CourseCard.fxml" />
                                                                               <fx:include source="CourseCard.fxml" />
                                                                               <fx:include source="CourseCard.fxml" />
                                                                               <fx:include source="CourseCard.fxml" />
