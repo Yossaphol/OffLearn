@@ -15,11 +15,11 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="131.0" prefWidth="1440.0" style="-fx-background-color: #FBFBFB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.navBarAndSearchbar.searchBarC">
+<HBox alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FBFBFB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.navBarAndSearchbar.searchBarC">
    <children>
-      <VBox alignment="TOP_RIGHT" prefHeight="317.0" prefWidth="1440.0">
+      <VBox alignment="TOP_RIGHT">
          <children>
-            <HBox alignment="TOP_CENTER" prefHeight="59.0" prefWidth="1440.0">
+            <HBox alignment="TOP_CENTER" prefHeight="61.0">
                <children>
                   <StackPane alignment="TOP_LEFT" maxHeight="50.0" prefHeight="50.0" prefWidth="538.0" style="-fx-border-radius: 27px;">
                      <children>
@@ -203,7 +203,7 @@
                   </DropShadow>
                </effect>
                <VBox.margin>
-                  <Insets right="100.0" top="10.0" />
+                  <Insets bottom="20.0" right="100.0" top="10.0" />
                </VBox.margin>
             </HBox>
          </children>

@@ -29,12 +29,15 @@ public class answerCardController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
+    //ยังเหลือเช็คเงื่อนไขอื่นๆ และกำหนดสี
+
     public void setProblemCard1(int number, String question, String choice1, String choice2, String choice3, String choice4, String Correctness, String selectedChoice, String CorrectedAns) {
         questionAndNumber.setText(number + ". " + question);
         ans1.setText(choice1);
         ans2.setText(choice2);
         ans3.setText(choice3);
         ans4.setText(choice4);
+
 
         ToggleGroup ansGroup = new ToggleGroup();
         ans1.setToggleGroup(ansGroup);

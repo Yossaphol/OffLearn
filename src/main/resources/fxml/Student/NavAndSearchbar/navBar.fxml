@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="300.0" prefHeight="1024.0" prefWidth="293.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.navBarAndSearchbar.navBarController">
+<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="300.0" prefWidth="293.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.navBarAndSearchbar.navBarController">
    <children>
       <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" prefWidth="200.0">
          <children>
@@ -256,6 +256,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </VBox>
-      <Pane maxHeight="1.7976931348623157E308" prefWidth="298.0" />
+      <Pane maxHeight="1.7976931348623157E308" prefHeight="171.0" prefWidth="298.0" />
    </children>
 </VBox>
