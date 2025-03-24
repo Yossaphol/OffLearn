@@ -40,8 +40,6 @@ public class myCourseController implements Initializable {
         FontLoader fontLoader = new FontLoader();
         fontLoader.loadFonts();
 
-
-        calendarDisplay();
         displayStudyTable();
         setTabSelectionAnimation();
         setEffect();
@@ -58,16 +56,6 @@ public class myCourseController implements Initializable {
         HomeController ef = new HomeController();
         ef.hoverEffect(studyTable);
         ef.hoverEffectPane(courseContainer);
-    }
-
-    private void calendarDisplay(){
-        try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/customBigCalendar.fxml"));
-            VBox calendarContent = calendarLoader.load();
-            bigcalendarContainer.getChildren().setAll(calendarContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void displayStudyTable(){

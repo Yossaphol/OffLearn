@@ -3,15 +3,21 @@ package Student.navBarAndSearchbar;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
 import Student.mainPage.mainPageController;
+import a_Session.SessionManager;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,6 +46,10 @@ public class navBarController implements Initializable {
     public String currentPage;
     public ArrayList<Button> buttons = new ArrayList<>();
     private static navBarController instance;
+    public HBox logoutBtn;
+    public Button logoutBtn1;
+    public HBox settingBtn;
+    public Button settingBtn1;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -52,10 +62,10 @@ public class navBarController implements Initializable {
         method_home.hoverEffect(roadmap);
         method_home.hoverEffect(home);
         method_home.hoverEffect(yourCoursebtn);
-        method_home.hoverEffect(calendarContainer);
+        method_home.hoverEffect(settingBtn);
+        method_home.hoverEffect(logoutBtn);
 
         route();
-        calendarDisplay();
         Navigator.setNavBarController(this);
 
         buttons.add(home_btn);
@@ -88,7 +98,6 @@ public class navBarController implements Initializable {
 
         // My Course
         yourCoursebtn.setOnMouseClicked(nav::myCourseRoute);
-        calendarContainer.setOnMouseClicked(nav::myCourseRoute);
 
         // Inbox
         inbox.setOnMouseClicked(nav::inboxRoute);
@@ -101,17 +110,36 @@ public class navBarController implements Initializable {
         // Roadmap
         roadmap.setOnMouseClicked(nav::roadmapRoute);
         roadmap_btn.setOnMouseClicked(nav::roadmapRoute);
+
+        //Setting
+        settingBtn.setOnMouseClicked(nav::settingRoute);
+        settingBtn1.setOnMouseClicked(nav::settingRoute);
+
     }
 
-    private void calendarDisplay() {
-        try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Student/HomePage/CustomCalendar.fxml"));
-            VBox calendarContent = calendarLoader.load();
-            calendarContainer.getChildren().setAll(calendarContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
+//    public void handleLogout(ActionEvent event){
+//        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+//        alert.setTitle("Warning");
+//        alert.setHeaderText(null);
+//        alert.setContentText("Are you sure you want to sign out?");
+//
+//        if (alert.showAndWait().get() == ButtonType.OK){
+//            SessionManager.getInstance().clearSession();
+//
+//            try {
+//                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/LoginSingup/login.fxml"));
+//                Parent root = loader.load();
+//
+//                stage.setScene(new Scene(root));
+//                stage.setTitle("Login Page");
+//                stage.show();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+
 
     @FXML
     public void changeFontColor() {

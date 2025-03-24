@@ -46,7 +46,7 @@
             <Insets bottom="40.0" top="40.0" />
          </VBox.margin>
       </HBox>
-      <VBox maxHeight="1.7976931348623157E308" prefWidth="298.0">
+      <VBox maxHeight="1.7976931348623157E308" prefHeight="373.0" prefWidth="300.0" spacing="5.0">
          <children>
             <Label text="ภาพรวม" textFill="#c2c2c2">
                <font>
@@ -243,19 +243,72 @@
             <Insets bottom="10.0" />
          </VBox.margin>
       </Button>
-      <Label maxHeight="1.7976931348623157E308" prefHeight="25.0" prefWidth="171.0" text="กำหนดการ" textFill="#c2c2c2">
-         <font>
-            <Font name="Noto Sans Thai Regular" size="16.0" />
-         </font>
-         <VBox.margin>
-            <Insets bottom="10.0" />
-         </VBox.margin>
-      </Label>
-      <VBox fx:id="calendarContainer" maxHeight="1.7976931348623157E308" maxWidth="200.0" prefWidth="200.0" style="-fx-border-radius: 10; -fx-background-radius: 10;">
+      <Pane maxHeight="1.7976931348623157E308" prefHeight="64.0" prefWidth="300.0">
+         <children>
+            <Label layoutY="37.0" text="การตั้งค่า" textFill="#c2c2c2">
+               <font>
+                  <Font name="Noto Sans Thai Regular" size="16.0" />
+               </font>
+               <padding>
+                  <Insets left="60.0" />
+               </padding>
+            </Label>
+         </children></Pane>
+      <HBox fx:id="settingBtn" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
+         <children>
+            <Button fx:id="settingBtn1" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="40.0" prefWidth="352.0" style="-fx-background-color: transparent;" text="Setting">
+               <font>
+                  <Font name="Kodchasan Bold" size="20.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../img/icon/settings.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets bottom="10.0" left="60.0" top="10.0" />
+               </padding>
+            </Button>
+         </children>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
-      </VBox>
-      <Pane maxHeight="1.7976931348623157E308" prefHeight="171.0" prefWidth="298.0" />
+         <VBox.margin>
+            <Insets bottom="5.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox fx:id="logoutBtn" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
+         <children>
+            <Button fx:id="logoutBtn1" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="40.0" prefWidth="338.0" style="-fx-background-color: transparent;" text="Logout" textFill="RED">
+               <font>
+                  <Font name="Kodchasan Bold" size="20.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../img/icon/logout.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets bottom="10.0" left="60.0" top="10.0" />
+               </padding>
+            </Button>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </HBox>
    </children>
+   <padding>
+      <Insets bottom="60.0" />
+   </padding>
 </VBox>

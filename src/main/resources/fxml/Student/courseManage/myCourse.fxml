@@ -13,7 +13,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="bg" fillHeight="false" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1136.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.myCourse.myCourseController">
+<HBox fx:id="bg" fillHeight="false" minWidth="-Infinity" prefWidth="1136.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.myCourse.myCourseController">
    <children>
       <HBox fx:id="rootpage" prefHeight="2093.0">
          <children>
@@ -204,22 +204,6 @@
                                           <Insets top="30.0" />
                                        </VBox.margin>
                                     </VBox>
-                                    <HBox prefHeight="68.0" prefWidth="1096.0">
-                                       <children>
-                                          <Label prefHeight="22.0" prefWidth="463.0" text="กำหนดการ" textFill="#a8a8a8">
-                                             <font>
-                                                <Font name="Noto Sans Thai Regular" size="13.0" />
-                                             </font>
-                                             <HBox.margin>
-                                                <Insets left="20.0" top="20.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets top="20.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                    <VBox fx:id="bigcalendarContainer" />
                                  </children>
                                  <VBox.margin>
                                     <Insets top="25.0" />

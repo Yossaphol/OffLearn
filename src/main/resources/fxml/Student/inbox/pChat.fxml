@@ -141,7 +141,7 @@
                   </HBox>
                   <ScrollPane fx:id="spMain" hbarPolicy="NEVER" prefHeight="600.0" prefWidth="1140.0" style="-fx-background-color: white;" styleClass="scroll-panej" stylesheets="@../../../css/Home.css" vbarPolicy="ALWAYS">
                      <content>
-                        <VBox fx:id="vboxMessage" />
+                        <VBox fx:id="vboxMessage" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="595.0" prefWidth="1127.0" />
                      </content>
                      <effect>
                         <InnerShadow>

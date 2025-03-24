@@ -99,7 +99,6 @@ public class Navigator {
         navigateTo("/fxml/Student/courseManage/myroadmap.fxml");
     }
 
-
     public void cartRoute(MouseEvent event) {
         navigateTo("/fxml/Student/courseManage/cart.fxml");
     }
