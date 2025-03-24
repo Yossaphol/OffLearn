@@ -1,4 +1,4 @@
-package Teacher.experiment;
+package Teacher.quiz;
 
 import Database.QuestionDB;
 import Database.QuizDB;
@@ -124,6 +124,11 @@ public class QuestionContent implements Initializable {
         quizDB = new QuizDB();
 
         save.setOnMouseClicked(mouseEvent -> {
+
+            if (!isReadyToSave()) {
+                return;
+            }
+
             this.setQuizItem();
             itm.add(this.getQuizItem());
 
@@ -173,6 +178,62 @@ public class QuestionContent implements Initializable {
             }
         });
     }
+
+    private boolean isReadyToSave() {
+        String questionText = problem.getText().trim();
+        String pointText = point.getText().trim();
+        String correctAnswer = correctAns.getText().trim();
+
+        if (questionText.isEmpty()) {
+            showAlert("", "กรุณากรอกคำถาม", Alert.AlertType.ERROR);
+            return false;
+        }
+
+        if (txtGroup.size() < 2) {
+            showAlert("", "ต้องมีตัวเลือกอย่างน้อย 2 ตัวเลือก", Alert.AlertType.ERROR);
+            return false;
+        }
+
+        int pointValue;
+        try {
+            pointValue = Integer.parseInt(pointText);
+            if (pointValue < 0) {
+                showAlert("", "คะแนนต้องเป็นค่ามากกว่าหรือเท่ากับ 0", Alert.AlertType.ERROR);
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            showAlert("", "กรุณากรอกคะแนนเป็นตัวเลข", Alert.AlertType.ERROR);
+            return false;
+        }
+
+        if (correctAnswer.isEmpty()) {
+            showAlert("", "กรุณากรอกคำตอบที่ถูกต้อง", Alert.AlertType.ERROR);
+            return false;
+        }
+
+        boolean isCorrectInChoices = false;
+        for (TextField choice : txtGroup) {
+            if (correctAnswer.equals(choice.getText().trim())) {
+                isCorrectInChoices = true;
+                break;
+            }
+        }
+        if (!isCorrectInChoices) {
+            showAlert("", "คำตอบที่ถูกต้องต้องอยู่ในตัวเลือก", Alert.AlertType.ERROR);
+            return false;
+        }
+
+        return true;
+    }
+
+    public void showAlert(String title, String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
     public QuestionItem getQuizItem(){
         return this.questionItem;

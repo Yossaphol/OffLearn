@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="1267.0" prefWidth="1119.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.experiment.QuizController">
+<VBox alignment="TOP_CENTER" prefHeight="1267.0" prefWidth="1119.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.quiz.QuizController">
    <children>
       <HBox prefHeight="74.0" prefWidth="1114.0">
          <children>

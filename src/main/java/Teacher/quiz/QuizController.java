@@ -1,4 +1,4 @@
-package Teacher.experiment;
+package Teacher.quiz;
 
 import Database.ChapterDB;
 import Database.QuizDB;
@@ -53,12 +53,10 @@ public class QuizController implements Initializable {
 
     private QuizDB quizDB;
     private ChapterDB chapterDB;
-    private boolean first;
     private QuizItem quizItem;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        first = true;
 
         addQuestionButton();
         backButton();
@@ -77,14 +75,13 @@ public class QuizController implements Initializable {
     public void addQuestionButton(){
         addProblem.setOnMouseClicked(mouseEvent -> {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/experiment/questionContent.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/quiz/questionContent.fxml"));
                 problemContent = fxmlLoader.load();
 
                 QuestionContent p = fxmlLoader.getController();
 
-                if (first){
-                    first = false;
-                    this.saveQuiz();
+                if (! preSaveQuiz()){
+                    return;
                 }
 
                 p.setParentContainer(problemSpace);
@@ -122,12 +119,15 @@ public class QuizController implements Initializable {
     public void saveAllButton(){
         saveAll.setOnAction(actionEvent -> {
             showConfirmDialog();
+            if (!saveQuiz()){
+                return;
+            }
         });
     }
 
     public void setQuizBox(){
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/experiment/QuizBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/quiz/QuizBox.fxml"));
             HBox quizBox = fxmlLoader.load();
             quizBoxContent q = fxmlLoader.getController();
 
@@ -174,16 +174,88 @@ public class QuizController implements Initializable {
         }
     }
 
-    public void saveQuiz(){
+    public boolean saveQuiz() {
         quizDB = new QuizDB();
         chapterDB = new ChapterDB();
 
-        String name = quizName.getText();
-        int mini = Integer.parseInt(minScore.getText());
+        String name = quizName.getText().trim();
+        if (name.isEmpty()) {
+            showAlert("", "กรุณากรอกชื่อแบบทดสอบ", Alert.AlertType.ERROR);
+            return false;
+        }
+
+        int mini;
+        try {
+            mini = Integer.parseInt(minScore.getText().trim());
+            if (mini < 0) {
+                showAlert("", "คะแนนขั้นต่ำต้องเป็นค่ามากกว่าหรือเท่ากับ 0", Alert.AlertType.ERROR);
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            showAlert("", "กรุณากรอกคะแนนขั้นต่ำเป็นตัวเลข", Alert.AlertType.ERROR);
+            return false;
+        }
+
         String lev = this.getLevel();
+        if (lev == null || lev.isEmpty()) {
+            showAlert("", "กรุณาเลือกระดับของแบบทดสอบ", Alert.AlertType.ERROR);
+            return false;
+        }
 
         int id = quizDB.saveQuiz(chapterDB.getCurrentChapterId(), name, mini, lev);
-        quizItem = new QuizItem(id);
+        if (id == -1) {
+            showAlert("", "เกิดข้อผิดพลาดในการบันทึกแบบทดสอบ", Alert.AlertType.ERROR);
+        } else {
+            quizItem = new QuizItem(id);
+        }
+        return true;
+    }
+
+
+    public boolean preSaveQuiz() {
+        quizDB = new QuizDB();
+        chapterDB = new ChapterDB();
+
+        String name = quizName.getText().trim();
+        if (name.isEmpty()) {
+            showAlert("", "กรุณากรอกชื่อแบบทดสอบ", Alert.AlertType.ERROR);
+            return false;
+        }
+
+        int mini;
+        try {
+            mini = Integer.parseInt(minScore.getText().trim());
+            if (mini < 0) {
+                showAlert("", "คะแนนขั้นต่ำต้องเป็นค่ามากกว่าหรือเท่ากับ 0", Alert.AlertType.ERROR);
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            showAlert("", "กรุณากรอกคะแนนขั้นต่ำเป็นตัวเลข", Alert.AlertType.ERROR);
+            return false;
+        }
+
+        String lev = this.getLevel();
+        if (lev == null || lev.isEmpty()) {
+            showAlert("", "กรุณาเลือกระดับของแบบทดสอบ", Alert.AlertType.ERROR);
+            return false;
+        }
+
+        int id = quizDB.saveQuiz(chapterDB.getCurrentChapterId(), name, mini, lev);
+        if (id == -1) {
+            showAlert("", "เกิดข้อผิดพลาดในการบันทึกแบบทดสอบ", Alert.AlertType.ERROR);
+        } else {
+            quizItem = new QuizItem(id);
+        }
+
+        return true;
+    }
+
+    public void showAlert(String title, String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     public String getLevel(){

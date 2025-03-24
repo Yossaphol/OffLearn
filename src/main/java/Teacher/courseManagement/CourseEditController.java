@@ -4,8 +4,8 @@ import Database.Category;
 import Database.ChapterDB;
 import Database.CourseDB;
 import Student.FontLoader.FontLoader;
-import Teacher.experiment.QuizController;
-import Teacher.experiment.QuestionItem;
+import Teacher.quiz.QuizController;
+import Teacher.quiz.QuestionItem;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +20,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import mediaUpload.MediaUpload;
-
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -99,7 +100,9 @@ public class CourseEditController implements Initializable {
             try {
                 newCourse = fxmlLoader.load();
 
-                preSave();
+                if (! saveCourse()){
+                    return;
+                }
 
                 ChapterContent c = fxmlLoader.getController();
                 passChapList(c);
@@ -136,17 +139,54 @@ public class CourseEditController implements Initializable {
         });
     }
 
-    public void preSave(){
+    public boolean saveCourse() {
         courseDB = new CourseDB();
         m = new MediaUpload();
 
-        int catID = category.getCatID(type.getValue());
-        String name = courseName.getText();
-        String des = desc.getText();
-        int priceValue = Integer.parseInt(price.getText());
+        String typeValue = type.getValue();
+        String name = courseName.getText().trim();
+        String des = desc.getText().trim();
+        String priceText = price.getText().trim();
+
+        if (typeValue == null || typeValue.isEmpty()) {
+            showAlert("", "กรุณาเลือกประเภทของคอร์สเรียน", AlertType.ERROR);
+            return false;
+        }
+        if (name.isEmpty()) {
+            showAlert("", "กรุณากรอกชื่อคอร์สเรียน", AlertType.ERROR);
+            return false;
+        }
+        if (des.isEmpty()) {
+            showAlert("", "กรุณากรอกคำอธิบายคอร์สเรียน", AlertType.ERROR);
+            return false;
+        }
+        if (priceText.isEmpty()) {
+            showAlert("", "กรุณากรอกราคาคอร์สเรียน", AlertType.ERROR);
+            return false;
+        }
+
+        int catID = category.getCatID(typeValue);
+        int priceValue;
+
+        try {
+            priceValue = Integer.parseInt(priceText);
+        } catch (NumberFormatException e) {
+            showAlert("", "ราคาต้องเป็นตัวเลขเท่านั้น!!!", AlertType.ERROR);
+            return false;
+        }
 
         courseDB.saveCourse(catID, name, userID, des, priceValue, imgUrl);
+        return true;
     }
+
+    public void showAlert(String title, String message, AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
     public void passWrapper(QuizController quizController){
         quizController.recieveWrapper(wrapper);
@@ -175,7 +215,7 @@ public class CourseEditController implements Initializable {
     public void addQuizButton() {
         addQuiz.setOnMouseClicked(mouseEvent -> {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/experiment/Quiz.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/quiz/Quiz.fxml"));
                 VBox quizContent = fxmlLoader.load();
                 wrapper.setContent(quizContent);
 
@@ -193,6 +233,9 @@ public class CourseEditController implements Initializable {
 
     public void saveAllButton(){
         saveAll.setOnAction(actionEvent -> {
+            if (! saveCourse()){
+                return;
+            }
             wrapper.setContent(courseList);
         });
     }
