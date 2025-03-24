@@ -14,12 +14,12 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="main" prefHeight="890.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.inbox.gChat.gChatController">
+<VBox fx:id="main" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.inbox.gChat.gChatController">
    <children>
-      <HBox alignment="CENTER" prefHeight="140.0" prefWidth="870.0">
+      <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="136.0" prefWidth="692.0">
          <children>
             <Circle fx:id="profile" fill="DODGERBLUE" radius="38.0" stroke="BLACK" strokeType="INSIDE" />
-            <VBox prefHeight="71.0" prefWidth="230.0">
+            <VBox prefHeight="76.0" prefWidth="405.0">
                <children>
                   <Label fx:id="Name" text="StudentTest" textFill="#8100cc">
                      <font>
@@ -42,7 +42,7 @@
                   <Insets left="10.0" />
                </HBox.margin>
             </VBox>
-            <Pane fx:id="pane" prefHeight="71.0" prefWidth="443.0" HBox.hgrow="ALWAYS" />
+            <Pane fx:id="pane" prefHeight="76.0" prefWidth="261.0" HBox.hgrow="ALWAYS" />
             <ImageView fx:id="refresh" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../img/icon/rotate-left.png" />
@@ -51,7 +51,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
                <HBox.margin>
-                  <Insets right="200.0" />
+                  <Insets right="40.0" />
                </HBox.margin>
             </ImageView>
          </children>
@@ -59,9 +59,9 @@
             <Insets bottom="30.0" left="30.0" top="30.0" />
          </padding>
       </HBox>
-      <StackPane prefHeight="765.0" prefWidth="870.0">
+      <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
          <children>
-            <ScrollPane fx:id="scrollPane" prefHeight="404.0" prefWidth="870.0" vbarPolicy="ALWAYS" StackPane.alignment="CENTER">
+            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" styleClass="scroll-panej" stylesheets="@../../../css/Home.css" vbarPolicy="ALWAYS" StackPane.alignment="CENTER">
                <StackPane.margin>
                   <Insets />
                </StackPane.margin>

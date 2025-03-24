@@ -3,19 +3,20 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<VBox fx:id="topicView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="265.0" prefWidth="800.0" style="-fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: &quot;C2C2C2&quot;; -fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.inbox.gChat.topicContent">
+<VBox fx:id="topicView" minHeight="-Infinity" minWidth="-Infinity" prefHeight="265.0" prefWidth="800.0" style="-fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: &quot;C2C2C2&quot;; -fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.inbox.gChat.topicContent">
    <children>
-      <HBox prefHeight="58.0" prefWidth="800.0" style="-fx-background-color: &quot;F8F3D9&quot;; -fx-background-radius: 25 25 0 0; -fx-border-radius: 25 25 0 0; -fx-border-color: &quot;C2C2C2&quot;;">
+      <HBox prefHeight="58.0" prefWidth="800.0" style="-fx-background-color: &quot;F8F3D9&quot;; -fx-background-radius: 25 25 0 0; -fx-border-width: 0 0 1 0; -fx-border-color: &quot;C2C2C2&quot;;">
          <children>
             <Circle fx:id="profile" fill="DODGERBLUE" radius="24.0" stroke="BLACK" strokeType="INSIDE" />
             <VBox prefHeight="45.0" prefWidth="214.0">
@@ -40,19 +41,27 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </HBox>
-      <TextFlow prefHeight="86.0" prefWidth="758.0">
-         <children>
-            <Text fx:id="messages" strokeType="OUTSIDE" strokeWidth="0.0" text="แอปไคลเอ็นต์สามารถสมัครรับหัวข้อที่มีอยู่หรือสร้างหัวข้อใหม่ก็ได้ เมื่อแอปไคลเอ็นต์ติดตามชื่อหัวข้อใหม่ (หัวข้อที่ไม่มีอยู่ในโปรเจ็กต์ Firebase ของคุณ) ระบบจะสร้างหัวข้อใหม่ชื่อนั้นใน FCM และไคลเอ็นต์ทุกรายจะติดตามหัวข้อดังกล่าวได้ในภายหลัง" wrappingWidth="745.28955078125">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-         </children>
-         <VBox.margin>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </VBox.margin>
-      </TextFlow>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-border-color: &quot;C2C2C2&quot;; -fx-border-radius: 0 0 25 25;">
+      <ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="133.0" styleClass="scroll-panej" stylesheets="@../../../css/Home.css">
+        <content>
+          <AnchorPane>
+               <children>
+                  <TextFlow maxHeight="-Infinity" prefHeight="41.0" prefWidth="758.0">
+                     <children>
+                        <Text fx:id="messages" strokeType="OUTSIDE" strokeWidth="0.0" text="แอปไคลเอ็นต์สามารถสมัครรับหัวข้อที่มีอยู่หรือสร้างหัวข้อใหม่ก็ได้ เมื่อแอปไคลเอ็นต์ติดตามชื่อหัวข้อใหม่ (หัวข้อที่ไม่มีอยู่ในโปรเจ็กต์ Firebase ของคุณ) ระบบจะสร้างหัวข้อใหม่ชื่อนั้นใน FCM และไคลเอ็นต์ทุกรายจะติดตามหัวข้อดังกล่าวได้ในภายหลัง" wrappingWidth="703.8916015625">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </TextFlow>
+               </children>
+            </AnchorPane>
+        </content>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </ScrollPane>
+      <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="798.0" style="-fx-border-color: &quot;C2C2C2&quot;; -fx-border-width: 1 0 0 0;">
          <children>
             <Label fx:id="favourite_count" text="0">
                <font>
@@ -70,8 +79,13 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Pane prefHeight="75.0" prefWidth="662.0" />
          </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="10.0" left="40.0" />
+         </padding>
       </HBox>
    </children>
 </VBox>
