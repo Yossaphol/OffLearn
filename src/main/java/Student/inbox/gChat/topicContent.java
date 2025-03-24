@@ -48,9 +48,17 @@ public class topicContent implements Initializable {
         fav_clicked();
     }
 
-    public void setTopicId(int id){
+    public void setTopicId(int id) {
         this.topicId = id;
+        boolean wasFavorited = database.isTopicFavorited(id);
+        this.setFav(wasFavorited);
+        this.setLike(wasFavorited);
+        int storedCount = database.getFavoriteCount(id);
+        if (storedCount > 0) {
+            this.setFavourite_count(storedCount);
+        }
     }
+
     public void setMessages(String messages) {
         this.messages.setText(messages);
     }
@@ -63,8 +71,11 @@ public class topicContent implements Initializable {
         this.time.setText(time);
     }
 
-    public void setFavourite_count(int count){
+    public void setFavourite_count(int count) {
         this.favourite_count.setText(count + "");
+        if (this.topicId > 0) {
+            database.initializeFavoriteCount(this.topicId, count);
+        }
     }
 
     public void setProfile(String Url){
@@ -114,14 +125,13 @@ public class topicContent implements Initializable {
 
     public void updateFavouriteCount() {
         database.updateFavCount(topicId);
-        int currentCount = Integer.parseInt(favourite_count.getText()) + 1;
+        int currentCount = database.getFavoriteCount(topicId);
         favourite_count.setText(String.valueOf(currentCount));
     }
 
-    public void decreaseFavouriteCount(){
+    public void decreaseFavouriteCount() {
         database.decreseFavCount(topicId);
-        int currentCount = Integer.parseInt(favourite_count.getText()) - 1;
+        int currentCount = database.getFavoriteCount(topicId);
         favourite_count.setText(String.valueOf(currentCount));
     }
-
 }
