@@ -61,12 +61,12 @@
                     <children>
                         <Label text="รศ.ดร. โชติพัชร์ ภรณวลัย">
                             <font>
-                                <Font name="Kodchasan Bold" size="16.0" />
+                                <Font name="Noto Sans Thai Bold" size="16.0" />
                             </font>
                         </Label>
                         <Label text="ผู้สอน" textFill="#9a9a9a">
                             <font>
-                                <Font name="Kodchasan Regular" size="10.0" />
+                                <Font name="Noto Sans Thai Regular" size="11.0" />
                             </font>
                         </Label>
                     </children>
@@ -75,9 +75,9 @@
         </HBox>
         <HBox alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="280.0">
             <children>
-                <Button mnemonicParsing="false" style="-fx-background-color: #8100CC; -fx-background-radius: 10;" text="Enroll" textFill="WHITE">
+                <Button mnemonicParsing="false" style="-fx-background-color: #8100CC; -fx-background-radius: 10;" text="รายละเอียด" textFill="WHITE">
                     <font>
-                        <Font name="Kodchasan Regular" size="13.0" />
+                        <Font name="Noto Sans Thai Bold" size="12.0" />
                     </font></Button>
             </children>
         </HBox>

@@ -66,6 +66,10 @@ public class Navigator {
         controller.stopHideSearchBar();
     }
 
+    public void testResult(MouseEvent event) {
+        navigateTo("/fxml/Student/test/test_result.fxml");
+    }
+
 
     public void preTestRoute(MouseEvent event) {
         navigateTo("/fxml/Student/test/preTest.fxml");
@@ -115,5 +119,7 @@ public class Navigator {
         } else {
             System.out.println("Navigator Error");
         }
+
     }
 }
+

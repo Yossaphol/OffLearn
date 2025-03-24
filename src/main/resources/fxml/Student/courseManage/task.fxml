@@ -16,7 +16,7 @@
    <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="2094.0" prefWidth="1143.0" style="-fx-background-color: #fbfbfb;">
       <VBox prefHeight="1034.0" prefWidth="1136.0" style="-fx-background-color: transparent;">
          <TabPane fx:id="tabPane" prefHeight="1086.0" prefWidth="1136.0" stylesheets="@../../../css/tabPane.css" tabClosingPolicy="UNAVAILABLE">
-            <Tab fx:id="btnUpComing" style="-fx-padding: 10px 20px 10px 20px; -fx-font-weight: bold; -fx-font-size: 18;" text="กำลังจะมาถึง">
+            <Tab fx:id="btnUpComing" style="-fx-padding: 10px 20px 10px 20px; -fx-font-weight: bold; -fx-font-size: 18;" text="ที่ต้องทำ">
                <VBox fx:id="containerUpComing" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="1142.0" style="-fx-background-color: white;">
                   <VBox fx:id="boxUpComing" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="1004.0">
                      <VBox.margin>
@@ -62,78 +62,6 @@
                                     <Insets />
                                  </HBox.margin>
                               </VBox>
-                              <padding>
-                                 <Insets left="40.0" right="40.0" />
-                              </padding>
-                           </HBox>
-                        </graphic>
-                        <font>
-                           <Font name="Noto Sans Thai Regular" size="12.0" />
-                        </font>
-                        <effect>
-                           <DropShadow>
-                              <color>
-                                 <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
-                              </color>
-                           </DropShadow>
-                        </effect>
-                        <cursor>
-                           <Cursor fx:constant="HAND" />
-                        </cursor>
-                     </Button>
-                  </VBox>
-               </VBox>
-            </Tab>
-            <Tab fx:id="btnLate" style="-fx-padding: 10px 20px 10px 20px; -fx-font-weight: bold; -fx-font-size: 18;" text="เลยกำหนด">
-               <VBox fx:id="containerLate" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: white;">
-                  <VBox fx:id="boxUpComing1" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="1004.0">
-                     <HBox alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="41.0" prefWidth="311.0">
-                        <Label fx:id="labelLateDate" prefHeight="27.0" prefWidth="365.0" text="&lt;Late date&gt;">
-                           <font>
-                              <Font name="Noto Sans Thai Bold" size="22.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <HBox.margin>
-                              <Insets left="5.0" top="5.0" />
-                           </HBox.margin>
-                        </Label>
-                        <VBox.margin>
-                           <Insets bottom="20.0" top="20.0" />
-                        </VBox.margin>
-                     </HBox>
-                     <Button fx:id="task1" mnemonicParsing="false" prefHeight="66.0" prefWidth="1004.0" style="-fx-background-color: white; -fx-background-radius: 10;">
-                        <graphic>
-                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                              <children>
-                                 <VBox alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="58.0" prefWidth="813.0">
-                                    <children>
-                                       <Label fx:id="taskInformation1" text="taskInformation" textFill="#8800cc">
-                                          <font>
-                                             <Font name="Noto Sans Thai Bold" size="16.0" />
-                                          </font>
-                                       </Label>
-                                       <Label fx:id="taskDetail1" text="taskDetail" textFill="#a8a8a8">
-                                          <font>
-                                             <Font name="Noto Sans Thai Regular" size="14.0" />
-                                          </font>
-                                       </Label>
-                                    </children>
-                                 </VBox>
-                                 <VBox alignment="CENTER_RIGHT" prefHeight="58.0">
-                                    <children>
-                                       <Label fx:id="point1" alignment="CENTER" prefHeight="20.0" text="point" textAlignment="RIGHT">
-                                          <font>
-                                             <Font name="Noto Sans Thai Bold" size="14.0" />
-                                          </font>
-                                       </Label>
-                                    </children>
-                                    <HBox.margin>
-                                       <Insets />
-                                    </HBox.margin>
-                                 </VBox>
-                              </children>
                               <padding>
                                  <Insets left="40.0" right="40.0" />
                               </padding>

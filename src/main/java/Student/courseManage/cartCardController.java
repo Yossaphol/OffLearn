@@ -35,7 +35,6 @@ public class cartCardController implements Initializable {
     public Button enrollBtn;
     @FXML
     public Button deleteBtn;
-    public Spinner amount;
     HomeController ef = new HomeController();
 
     @Override
@@ -47,7 +46,6 @@ public class cartCardController implements Initializable {
 
         ef.hoverEffect(enrollBtn);
         deleteBtn.setVisible(false);
-        setupSpinner();
         route();
     }
 
@@ -118,16 +116,6 @@ public class cartCardController implements Initializable {
     }
 
 
-    private void setupSpinner() {
-        amount.setEditable(true);
-        amount.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE, 1));
-
-        amount.getEditor().textProperty().addListener((obs, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*")) {
-                amount.getEditor().setText(oldValue);
-            }
-        });
-    }
 
     public void deleteCourse(ActionEvent e){  //ยังไม่ได้ทำให้ลบได้
         System.out.println("Delete success!");

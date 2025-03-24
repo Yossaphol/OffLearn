@@ -4,7 +4,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -16,7 +15,10 @@
 
 <HBox alignment="CENTER" prefHeight="229.0" prefWidth="1222.0" style="-fx-border-color: #8100cc; -fx-border-width: 0px 0px 1px 0px;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.courseManage.cartCardController">
     <children>
-      <Rectangle fx:id="picture" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="184.0" stroke="BLACK" strokeType="INSIDE" width="276.0" />
+      <Rectangle fx:id="picture" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="184.0" stroke="BLACK" strokeType="INSIDE" width="276.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Rectangle>
         <Pane prefHeight="228.0" prefWidth="25.0" />
         <VBox alignment="CENTER_LEFT" prefHeight="182.0" prefWidth="600.0">
             <children>
@@ -24,6 +26,9 @@
                     <font>
                         <Font name="Noto Sans Thai Bold" size="36.0" />
                     </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                 </Label>
                 <Label fx:id="description" text="Description">
                     <font>
@@ -32,6 +37,9 @@
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                 </Label>
                 <HBox alignment="CENTER_LEFT" prefHeight="16.0" prefWidth="430.0">
                     <children>
@@ -86,8 +94,6 @@
                 </HBox>
                 <HBox alignment="CENTER_LEFT" prefHeight="18.0" prefWidth="600.0">
                     <children>
-                        <Spinner fx:id="amount" editable="true" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="87.0" stylesheets="@../../../css/cart.css" />
-                        <Pane prefHeight="29.0" prefWidth="30.0" />
                         <Label fx:id="price" text="1,750  บาท" textFill="#a8a8a8">
                             <font>
                                 <Font name="Noto Sans Thai Bold" size="16.0" />

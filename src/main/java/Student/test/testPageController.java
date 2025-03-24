@@ -43,9 +43,9 @@ public class testPageController implements Initializable {
         setEffect();
 
 
-        questions.add(new Question(1,"What is Love?", "Chemical reaction", "Feeling", "Money", "Understanding each other"));
-        questions.add(new Question(2,"What is 2 + 2?", "1", "2", "3", "4"));
-        questions.add(new Question(1,"What is Java?", "Programming language", "Coffee", "Planet", "Game"));
+        questions.add(new Question(1,"What is Love?", "Chemical reaction", "Feeling", "Money", "Understanding each other", "ถูก", "Feeling", "Feeling"));
+        questions.add(new Question(2,"What is 2 + 2?", "1", "2", "3", "4", "ผิด", "1", "4"));
+        questions.add(new Question(1,"What is Java?", "Programming language", "Coffee", "Planet", "Game" , "ถูก", "Planet", "Planet"));
 
         setProblems(questions);
     }
@@ -81,8 +81,9 @@ public class testPageController implements Initializable {
         }
     }
 
-
-
+    public List<Question> getQuestions() {
+        return questions;
+    }
 
     public void setTimeCounter(int minutes) {
         remainingTime = minutes * 60;

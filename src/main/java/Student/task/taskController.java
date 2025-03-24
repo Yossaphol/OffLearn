@@ -53,11 +53,9 @@ public class taskController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
        hoverEffect(task);
-       hoverEffect(task1);
        hoverEffect(task2);
 
         setUpComing();
-        setLate();
         setComplete();
         setTabAnimation();
     }
@@ -69,12 +67,6 @@ public class taskController implements Initializable {
         point.setText("0.5 pst");
     }
 
-    private void setLate(){
-        labelLateDate.setText("เสาร์ 5 มีนาคม 2568");
-        taskInformation1.setText("ส่งหน้า GUI ไคแอ้น");
-        taskDetail1.setText("คุณต้องส่งงานเดี๋ยวนี้");
-        point1.setText("0.5 pst");
-    }
 
     private void setComplete(){
         labelDone.setText("เสาร์ 5 มีนาคม 2568");

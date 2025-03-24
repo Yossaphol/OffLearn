@@ -15,7 +15,7 @@
 
 <VBox fx:id="container" alignment="TOP_CENTER" prefHeight="331.0" prefWidth="320.0" style="-fx-background-color: white; -fx-background-radius: 20;" styleClass="forHover" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.courseManage.enrollCourseItem">
    <children>
-      <Rectangle fx:id="course_image" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="130.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 40; -fx-arc-width: 40;" width="331.0">
+      <Rectangle fx:id="course_image" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="124.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 40; -fx-arc-width: 40;" width="331.0">
          <VBox.margin>
             <Insets />
          </VBox.margin></Rectangle>
@@ -85,7 +85,7 @@
       </HBox>
       <HBox alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="280.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: #8100cc; -fx-background-radius: 10;" text="Enroll" textFill="WHITE">
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="96.0" style="-fx-background-color: #8100cc; -fx-background-radius: 10;" text="รายละเอียด" textFill="WHITE">
                <font>
                   <Font name="Noto Sans Thai Bold" size="12.0" />
                </font>
@@ -107,6 +107,6 @@
       </DropShadow>
    </effect>
    <padding>
-      <Insets bottom="20.0" />
+      <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
    </padding>
 </VBox>
