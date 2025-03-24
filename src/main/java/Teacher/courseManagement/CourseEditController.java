@@ -80,6 +80,7 @@ public class CourseEditController implements Initializable {
     private ArrayList<ArrayList<QuestionItem>> lastQuizGroup = new ArrayList<>();
     private MediaUpload m;
     private String imgUrl;
+    private CourseController courseController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -117,7 +118,6 @@ public class CourseEditController implements Initializable {
             }
         });
     }
-
 
     public void addImage() {
         m = new MediaUpload();
@@ -164,6 +164,11 @@ public class CourseEditController implements Initializable {
             showAlert("", "กรุณากรอกราคาคอร์สเรียน", AlertType.ERROR);
             return false;
         }
+        if (imgUrl == null || imgUrl.isEmpty()) {
+            showAlert("", "กรุณาเพิ่มรูปภาพสำหรับคอร์สเรียน", AlertType.ERROR);
+            return false;
+        }
+
 
         int catID = category.getCatID(typeValue);
         int priceValue;
@@ -186,7 +191,6 @@ public class CourseEditController implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
 
     public void passWrapper(QuizController quizController){
         quizController.recieveWrapper(wrapper);
@@ -211,6 +215,8 @@ public class CourseEditController implements Initializable {
     public void recieveCourseList(VBox courseList) {
         this.courseList = courseList;
     }
+
+    public void recieveMethod(CourseController courseController){this.courseController = courseController;}
 
     public void addQuizButton() {
         addQuiz.setOnMouseClicked(mouseEvent -> {
@@ -237,6 +243,7 @@ public class CourseEditController implements Initializable {
                 return;
             }
             wrapper.setContent(courseList);
+            courseController.showCourseOnListview();
         });
     }
 

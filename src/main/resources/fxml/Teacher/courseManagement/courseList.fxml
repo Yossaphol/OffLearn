@@ -9,14 +9,14 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER_LEFT" prefHeight="89.0" prefWidth="973.0" style="-fx-border-radius: 10; -fx-border-color: #000000;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="CENTER_LEFT" prefHeight="89.0" prefWidth="973.0" style="-fx-border-radius: 10; -fx-border-color: #000000;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.CourseListController">
    <children>
       <Pane prefHeight="95.0" prefWidth="29.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="76.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />
+      <Rectangle fx:id="courseImg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="76.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />
       <Pane prefHeight="95.0" prefWidth="21.0" />
       <VBox alignment="CENTER_LEFT" prefHeight="95.0" prefWidth="355.0">
          <children>
-            <Label prefHeight="20.0" prefWidth="353.0" text="Each indrustry in economic system ">
+            <Label fx:id="courseName" prefHeight="20.0" prefWidth="353.0" text="Each indrustry in economic system ">
                <font>
                   <Font name="Kodchasan Bold" size="16.0" />
                </font>
@@ -65,7 +65,7 @@
       </VBox>
       <VBox alignment="CENTER" prefHeight="95.0" prefWidth="170.0">
          <children>
-            <Label text="Business" textFill="#0675de">
+            <Label fx:id="courseCat" text="Business" textFill="#0675de">
                <font>
                   <Font name="Kodchasan Bold" size="16.0" />
                </font>
@@ -75,7 +75,7 @@
       <Pane prefHeight="95.0" prefWidth="134.0" />
       <VBox alignment="CENTER" prefHeight="95.0" prefWidth="165.0">
          <children>
-            <Label text="4,000" textFill="#0675de">
+            <Label fx:id="coursePrice" text="4,000" textFill="#0675de">
                <font>
                   <Font name="Kodchasan Bold" size="16.0" />
                </font>
