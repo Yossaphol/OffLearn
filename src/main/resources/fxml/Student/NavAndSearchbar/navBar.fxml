@@ -284,7 +284,7 @@
       </HBox>
       <HBox fx:id="logoutBtn" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
          <children>
-            <Button fx:id="logoutBtn1" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="40.0" prefWidth="338.0" style="-fx-background-color: transparent;" text="Logout" textFill="RED">
+            <Button fx:id="logoutBtn1" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleLogout" prefHeight="40.0" prefWidth="338.0" style="-fx-background-color: transparent;" text="Logout" textFill="RED">
                <font>
                   <Font name="Kodchasan Bold" size="20.0" />
                </font>
