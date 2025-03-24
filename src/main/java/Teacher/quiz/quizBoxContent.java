@@ -1,4 +1,4 @@
-package Teacher.experiment;
+package Teacher.quiz;
 
 import Database.QuizDB;
 import javafx.fxml.FXML;

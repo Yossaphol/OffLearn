@@ -8,23 +8,35 @@ import java.sql.ResultSet;
 
 public class QuizDB extends ConnectDB{
     public int saveQuiz(int chapterID, String quizName, int minScore, String level) {
-        String sql = "INSERT IGNORE INTO quiz (Chapter_ID, header, minScore, level) VALUES (?, ?, ?, ?)";
+        String checkSql = "SELECT Quiz_ID FROM quiz WHERE Chapter_ID = ? AND header = ?";
+        String insertSql = "INSERT INTO quiz (Chapter_ID, header, minScore, level) VALUES (?, ?, ?, ?)";
 
         try (
                 Connection conn = this.connectToDB();
-                PreparedStatement pstm = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
+                PreparedStatement checkPstm = conn.prepareStatement(checkSql)
         ) {
-            pstm.setInt(1, chapterID);
-            pstm.setString(2, quizName);
-            pstm.setInt(3, minScore);
-            pstm.setString(4, level);
-            pstm.executeUpdate();
-
-            try (ResultSet rs = pstm.getGeneratedKeys()) {
+            checkPstm.setInt(1, chapterID);
+            checkPstm.setString(2, quizName);
+            try (ResultSet rs = checkPstm.executeQuery()) {
                 if (rs.next()) {
                     return rs.getInt(1);
                 }
             }
+
+            try (PreparedStatement insertPstm = conn.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS)) {
+                insertPstm.setInt(1, chapterID);
+                insertPstm.setString(2, quizName);
+                insertPstm.setInt(3, minScore);
+                insertPstm.setString(4, level);
+                insertPstm.executeUpdate();
+
+                try (ResultSet generatedKeys = insertPstm.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        return generatedKeys.getInt(1);
+                    }
+                }
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

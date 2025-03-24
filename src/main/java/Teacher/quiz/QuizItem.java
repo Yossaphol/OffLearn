@@ -1,4 +1,4 @@
-package Teacher.experiment;
+package Teacher.quiz;
 
 public class QuizItem {
     private int quizID;

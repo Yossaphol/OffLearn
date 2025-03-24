@@ -4,6 +4,7 @@ import Database.ChapterDB;
 import Database.CourseDB;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -39,7 +40,7 @@ public class ChapterContent implements Initializable {
     private Button addImg;
 
     @FXML
-    private ImageView img;
+    private ImageView video;
 
     @FXML
     private Button addFile;
@@ -93,11 +94,19 @@ public class ChapterContent implements Initializable {
 
             if (selectedFile != null) {
                 Image image = new Image(selectedFile.toURI().toString());
-                img.setImage(image);
+                video.setImage(image);
             } else {
                 System.out.println("No file selected.");
             }
         });
+    }
+
+    public void showAlert(String title, String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     public void addMaterials(){
@@ -112,6 +121,9 @@ public class ChapterContent implements Initializable {
 
     public void saveButton(){
         saveChap.setOnMouseClicked(mouseEvent -> {
+            if (!isReadyToSave()){
+                return;
+            }
             saveToChapList();
 
             saveChap.setVisible(false);
@@ -141,5 +153,29 @@ public class ChapterContent implements Initializable {
     public void setProblemContent(HBox chapContainer) {
         this.chapContainer = chapContainer;
     }
+
+    private boolean isReadyToSave() {
+        String c = chapterName.getText().trim();
+        String d = chapDesc.getText().trim();
+
+        if (c.isEmpty()) {
+            showAlert("", "กรุณาใส่ชื่อบทเรียน", Alert.AlertType.ERROR);
+            return false;
+        }
+        if (d.isEmpty()) {
+            showAlert("", "กรุณาใส่คำอธิบายบทเรียน", Alert.AlertType.ERROR);
+            return false;
+        }
+        if (chapImgUrl == null || chapImgUrl.isEmpty()) {
+            showAlert("", "กรุณาเพิ่มวิดีโอก่อนบันทึก", Alert.AlertType.ERROR);
+            return false;
+        }
+        if (chapMatUrl == null || chapMatUrl.isEmpty()) {
+            showAlert("", "กรุณาเพิ่มเอกสารก่อนบันทึก", Alert.AlertType.ERROR);
+            return false;
+        }
+        return true;
+    }
+
 
 }

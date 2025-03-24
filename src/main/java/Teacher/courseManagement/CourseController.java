@@ -1,6 +1,5 @@
 package Teacher.courseManagement;
 
-import Teacher.experiment.QuizController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
