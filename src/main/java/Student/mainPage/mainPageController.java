@@ -24,6 +24,9 @@ public class mainPageController implements Initializable {
     public VBox leftWrapper;
     @FXML
     public HBox content;
+
+    private navBarController navCtrl;
+
 //    @FXML
 //    public Label user;
 
@@ -48,11 +51,13 @@ public class mainPageController implements Initializable {
 
     public void displayNavbar() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/navBar.fxml"));
-            VBox navContent = loader.load();
+            if (navCtrl == null) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/navBar.fxml"));
+                VBox navContent = loader.load();
 
-            navBarController navCtrl = loader.getController();
-            leftWrapper.getChildren().setAll(navContent);
+                navCtrl = loader.getController();
+                leftWrapper.getChildren().setAll(navContent);
+            }
             navCtrl.changeFontColor();
 
         } catch (IOException e) {

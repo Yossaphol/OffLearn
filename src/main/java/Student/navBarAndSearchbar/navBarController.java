@@ -75,6 +75,11 @@ public class navBarController implements Initializable {
         buttons.add(course_btn);
         buttons.add(task_btn);
         buttons.add(roadmap_btn);
+        buttons.add(settingBtn1);
+
+        currentPage = "home_btn";
+        changeFontColor();
+
     }
 
     public static navBarController getInstance() {

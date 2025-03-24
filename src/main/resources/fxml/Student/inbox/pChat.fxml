@@ -59,7 +59,7 @@
                         </StackPane>
                      </children>
                   </VBox>
-                  <HBox prefHeight="76.0" prefWidth="339.0">
+                  <HBox prefHeight="75.0" prefWidth="292.0">
                      <children>
                         <VBox prefHeight="76.0" prefWidth="278.0">
                            <children>

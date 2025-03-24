@@ -336,7 +336,7 @@ public class HomeController implements Initializable {
         hBox.setOnMouseEntered(mouseEvent -> {
             scaleUp.play();
             switch (hBox.getId()) {
-                case "logout":
+                case "logoutBtn":
                     hBox.setStyle("-fx-background-color: #FFEBEB;");
                     break;
                 case "learn_now":

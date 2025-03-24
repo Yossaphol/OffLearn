@@ -6,6 +6,7 @@ import Student.inbox.Client;
 import Database.*;
 import a_Session.SessionHadler;
 import a_Session.SessionManager;
+import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +23,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -89,6 +91,33 @@ public class pChatController implements Initializable, SessionHadler {
 
         sendButton.setOnAction(event -> sendMessage());
         tfMessage.setOnAction(event -> sendMessage());
+
+
+        setEffect();
+    }
+
+    public void setEffect(){
+        hoverEffect(globalButton);
+    }
+
+    public void hoverEffect(HBox btn) {
+        ScaleTransition scaleUp = new ScaleTransition(Duration.millis(200), btn);
+        scaleUp.setFromX(1);
+        scaleUp.setFromY(1);
+        scaleUp.setToX(1.05);
+        scaleUp.setToY(1.05);
+        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(200), btn);
+        scaleDown.setFromX(1.05);
+        scaleDown.setFromY(1.05);
+        scaleDown.setToX(1);
+        scaleDown.setToY(1);
+
+        btn.setOnMouseEntered(mouseEvent -> {
+            scaleUp.play();
+        });
+        btn.setOnMouseExited(mouseEvent -> {
+            scaleDown.play();
+        });
     }
 
     @Override
@@ -98,8 +127,6 @@ public class pChatController implements Initializable, SessionHadler {
 
 
     public void switchToGlobal() {
-        globalButton.setOnMouseEntered(mouseEvent -> globalButton.setOpacity(0.5));
-        globalButton.setOnMouseExited(mouseEvent -> globalButton.setOpacity(1));
 
         globalButton.setOnMouseClicked(mouseEvent -> {
             try {
@@ -255,11 +282,12 @@ public class pChatController implements Initializable, SessionHadler {
                 profilePic.setFitWidth(40);
 
                 nameLabel = new Label();
-                nameLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+                nameLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;"+"-fx-cursor: hand;");
 
                 content = new HBox(10, profilePic, nameLabel);
                 content.setAlignment(Pos.CENTER_LEFT);
                 content.setPadding(new Insets(5));
+                hoverEffect(content);
             }
 
             @Override

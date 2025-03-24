@@ -64,6 +64,7 @@ public class settingController implements Initializable {
     String userName = "Wiraya606";
     String gmailUser = "wirayabovorn606@gmail.com";
     String imgPath = "/img/Profile/user.png";
+    String defaultPic = "/img/Profile/user.png";
     String selectedimg = "";
 
     //Payment value (temporary use น้า)
@@ -162,6 +163,9 @@ public class settingController implements Initializable {
         realName.setEditable(isEditing);
         lastName.setEditable(isEditing);
         gmail.setEditable(isEditing);
+        realName.setDisable(true);
+        lastName.setDisable(true);
+        gmail.setDisable(true);
         uploadPic.setVisible(isEditing);
 
         if (!isEditing) {
@@ -190,22 +194,26 @@ public class settingController implements Initializable {
 
 
     public void saveProfileEdit(ActionEvent e){
-        imgPath = selectedimg;
+        if(!selectedimg.equals(defaultPic) && !selectedimg.equals("")){
+            imgPath = selectedimg;
+        }
         setProfileValue(realName.getText(), lastName.getText(), gmail.getText());
         closeProfileEdit();
     }
 
     public void cancelProfileEdit(ActionEvent e){
-        loadAndSetUserImage(picture, imgPath);
+        if(!imgPath.equals(defaultPic)){
+            loadAndSetUserImage(picture, imgPath);
+        }
         setProfileValue(name, lastNameUser, gmailUser);
         closeProfileEdit();
     }
 
     public void closeProfileEdit() {
         isEditing = false;
-        realName.setDisable(isEditing);
-        lastName.setDisable(isEditing);
-        gmail.setDisable(isEditing);
+        realName.setDisable(true);
+        lastName.setDisable(true);
+        gmail.setDisable(true);
         editProfile.setVisible(true);
 
         FadeTransition fadeOut = new FadeTransition(Duration.millis(200), editingProfileBtnContainer);
@@ -260,13 +268,10 @@ public class settingController implements Initializable {
     //Start password edit part
     public void changePassword(ActionEvent e){
         if(!isChangePass){
-
             isChangePass = true;
             openPasswordField();
-
         }
         else{
-
             isChangePass = false;
             closePasswordField();
         }
@@ -300,7 +305,6 @@ public class settingController implements Initializable {
     public void editPaymentInfo(ActionEvent e){
         if(!isEditingPayment){
             openEditPaymentField();
-
             isEditingPayment = true;
         }else {
             closeEditPaymentField();

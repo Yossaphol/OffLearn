@@ -70,7 +70,6 @@ public class Navigator {
         navigateTo("/fxml/Student/test/test_result.fxml");
     }
 
-
     public void preTestRoute(MouseEvent event) {
         navigateTo("/fxml/Student/test/preTest.fxml");
     }
@@ -109,6 +108,8 @@ public class Navigator {
 
     public void settingRoute(MouseEvent event) {
         navigateTo("/fxml/Student/setting/setting.fxml");
+        navCtrl.setCurrentPage("settingBtn1");
+        controller.displayNavbar();
     }
 
     private void navigateTo(String fxmlPath) {

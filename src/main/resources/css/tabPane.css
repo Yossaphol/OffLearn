@@ -2,31 +2,28 @@
     -fx-background-color:  #fbfbfb;
 }
 
-.tab-pane {
-    -fx-background-color: white;
-}
-
 .tab-content-area {
     -fx-background-color: white;
 }
 
 .tab {
     -fx-cursor: hand;
-    -fx-background-color: transparent;
+    -fx-background-color: white;
     -fx-border-radius: 0;
     -fx-font-size: 16px;
 }
 
 .tab:selected {
     -fx-border-width: 0 0 2px 0;
-   -fx-border-color: #8100cc;
+    -fx-border-color: #8100cc;
     -fx-focus-color: transparent;
-    -fx-background-color: white;
+    -fx-background-color: white !important;
     -fx-faint-focus-color: transparent;
 }
 
+
+
+
 .tab:selected .tab-label{
-   -fx-text-fill: #8100cc;
+   -fx-text-fill: #8100cc !important;
 }
-
-

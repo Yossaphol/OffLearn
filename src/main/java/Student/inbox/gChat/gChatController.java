@@ -3,6 +3,7 @@ package Student.inbox.gChat;
 import Database.*;
 import a_Session.SessionHadler;
 import a_Session.SessionManager;
+import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,12 +12,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import Student.swing.postTopic;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -60,6 +63,8 @@ public class gChatController implements Initializable, SessionHadler {
         createTopic.setOnAction(actionEvent -> postGui.openSwingWindow());
 
         refresh.setOnMouseClicked(mouseEvent -> refreshContent());
+
+        setEffect();
     }
 
     @Override
@@ -95,6 +100,31 @@ public class gChatController implements Initializable, SessionHadler {
 
         this.profile.setStroke(Color.TRANSPARENT);
         this.profile.setFill(new ImagePattern(img));
+    }
+
+
+    public void setEffect(){
+        hoverEffect(createTopic);
+    }
+
+    public void hoverEffect(Button btn) {
+        ScaleTransition scaleUp = new ScaleTransition(Duration.millis(200), btn);
+        scaleUp.setFromX(1);
+        scaleUp.setFromY(1);
+        scaleUp.setToX(1.05);
+        scaleUp.setToY(1.05);
+        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(200), btn);
+        scaleDown.setFromX(1.05);
+        scaleDown.setFromY(1.05);
+        scaleDown.setToX(1);
+        scaleDown.setToY(1);
+
+        btn.setOnMouseEntered(mouseEvent -> {
+            scaleUp.play();
+        });
+        btn.setOnMouseExited(mouseEvent -> {
+            scaleDown.play();
+        });
     }
 
 }
