@@ -72,6 +72,7 @@ public class learningPageController implements Initializable {
     public Button btnEP;
     public Button btnEP1;
     public Label playlistcount;
+    public Label commentcount;
     private ContextMenu settingsMenu;
     public Button btnSetting;
     public Slider sliderVolume;
@@ -302,6 +303,8 @@ public class learningPageController implements Initializable {
 
         btnLike.setText(String.valueOf(countLike));
         btnDislike.setText(String.valueOf(countDisLike));
+
+        commentcount.setText("2");
 
 
         method_home.hoverEffect(btnContectTeacher);

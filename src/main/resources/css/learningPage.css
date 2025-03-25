@@ -1,0 +1,44 @@
+
+.slider .track {
+    -fx-background-color: #F6E6FF;
+    -fx-background-radius: 5px;
+    -fx-pref-height: 3px;
+}
+
+.slider .thumb {
+    -fx-background-color: #8100cc;
+    -fx-background-radius: 50%;
+    -fx-pref-width: 15px;
+    -fx-pref-height: 15px;
+}
+
+.slider .tick-mark {
+    -fx-stroke: #8100cc;
+}
+
+.slider .minor-tick-mark {
+    -fx-stroke: #b366ff;
+}
+
+.slider .axis {
+    -fx-text-fill: #8100cc;
+}
+
+
+
+.text-area {
+    -fx-border-color: #c4c4c4;
+    -fx-background-color: #ffffff;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.text-area:focused {
+    -fx-background-color: #ffffff;
+}
+
+.text-area .content {
+    -fx-background-color: #ffffff;
+}
+
