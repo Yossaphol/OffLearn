@@ -1,8 +1,15 @@
 package Database;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class ChapterDB extends ConnectDB{
+    ArrayList<String[]> chapterList = new ArrayList<>();
+
+    public ChapterDB() {
+        getAllChapter();
+    }
+
     public int saveChapter(int course_id, String chapName, String desc, String chapImg, String chapMaterial){
         String sql = "INSERT INTO chapter (Course_ID, chapterName, chapterDescription, chapter_image, chapter_material) VALUES (?, ?, ?, ?, ?)";
         try (
@@ -56,6 +63,31 @@ public class ChapterDB extends ConnectDB{
             e.printStackTrace();
         }
         return -1;
+    }
+
+    public void getAllChapter() {
+        String sql = "SELECT chapterName,Chapter_ID FROM offlearn.chapter";
+
+        try {
+            Connection conn = this.connectToDB();
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+
+
+            while (rs.next()){
+                String[] tmpList = new String[2];
+                tmpList[0] = (String.valueOf(rs.getString("Chapter_ID")));
+                tmpList[1] = (rs.getString("chapterName"));
+                chapterList.add(tmpList);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    //Object.getChapterList().get(index)[index]
+    public ArrayList<String[]> getChapterList(){
+        return this.chapterList;
     }
 
 }
