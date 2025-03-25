@@ -3,18 +3,18 @@ package Student.learningPage;
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
-import javafx.animation.FadeTransition;
-import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
-import javafx.animation.Timeline;
+import javafx.animation.*;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.geometry.Side;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCombination;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -33,6 +33,9 @@ public class learningPageController implements Initializable {
     public VBox leftWrapper;
     public HBox rootpage;
     public HBox searhbar_container;
+    public HBox controlpanesection;
+    public HBox timebox;
+    public Region regionpart;
     public MediaView mediaView;
     public Button btnPlay;
     public Button btnPause;
@@ -82,12 +85,19 @@ public class learningPageController implements Initializable {
 
     private Stage fullscreenStage = null;
     private boolean isFullscreen = false;
+    private boolean videoEnded = false;
     private boolean isMouseInStackPane = false;
+    private boolean isFadeInActive = false;
+    private boolean volumeSliderVisible = false;
+    private double originalVolSliderWidth;
     private double originalPrefWidth;
     private double originalPrefHeight;
     private Pane originalParent;
     private int originalIndex;
     private PauseTransition inactivityTimer;
+    private PauseTransition hideDelayTransition;
+    final boolean[] wasPlaying = new boolean[1];
+
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         originalPrefWidth = videocontainer.getPrefWidth();
@@ -97,7 +107,7 @@ public class learningPageController implements Initializable {
         settingsMenu = new ContextMenu();
         HomeController method_home = new HomeController();
         Navigator method_navigator = new Navigator();
-        String videoPath = getClass().getResource("/videos/Test.mp4").toExternalForm();
+        String videoPath = getClass().getResource("/videos/Test.mp4").toExternalForm(); // TEST VIDEO HERE
         Media media = new Media(videoPath);
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         playIcon = new Image(getClass().getResource("/img/icon/play-button-arrowhead-solid.png").toExternalForm());
@@ -110,8 +120,11 @@ public class learningPageController implements Initializable {
         sliderVolume.setMin(0.0);
         sliderVolume.setMax(1.0);
         sliderVolume.setValue(0.5);
-
+        originalVolSliderWidth = sliderVolume.getPrefWidth();
+        sliderVolume.setPrefWidth(0);
+        sliderVolume.setVisible(false);
         mediaPlayer.setVolume(0.5);
+        btnSound.addEventFilter(MouseEvent.MOUSE_ENTERED, e -> showVolumeSlider());
 
         // ปรับ volume
         sliderVolume.valueProperty().addListener((obs, oldVal, newVal) -> {
@@ -138,77 +151,9 @@ public class learningPageController implements Initializable {
             userIsActive(); // <-- NEW
         });
 
-        // settings
-        settingsMenu = new ContextMenu();
-        Menu menuQuality = new Menu("Quality");
-        RadioMenuItem q1 = new RadioMenuItem("tbd1");
-        RadioMenuItem q2 = new RadioMenuItem("tbd2");
-        RadioMenuItem q3 = new RadioMenuItem("tbd3");
-        RadioMenuItem q4 = new RadioMenuItem("tbd4");
 
-        ToggleGroup qualityGroup = new ToggleGroup();
-        q1.setToggleGroup(qualityGroup);
-        q2.setToggleGroup(qualityGroup);
-        q3.setToggleGroup(qualityGroup);
-        q4.setToggleGroup(qualityGroup);
-        q2.setSelected(true);
-        q1.setOnAction(e -> {
-            if (q1.isSelected()) {
-                System.out.println("Switched to __");
-                // e.g., tbd
-            }
-        });
-        q2.setOnAction(e -> {
-            if (q2.isSelected()) {
-                System.out.println("Switched to __");
-                // ... tbd
-            }
-        });
-        q3.setOnAction(e -> {
-            if (q3.isSelected()) {
-                System.out.println("Switched to __");
-                // ... tbd
-            }
-        });
-        q4.setOnAction(e -> {
-            if (q4.isSelected()) {
-                System.out.println("Switched to __");
-                // ... tbd
-            }
-        });
-        menuQuality.getItems().addAll(q1, q2, q3, q4);
 
-        Menu menuSpeed = new Menu("PlaySpeed");
-        RadioMenuItem speed05 = new RadioMenuItem("0.5x");
-        RadioMenuItem speed1 = new RadioMenuItem("1.0x");
-        RadioMenuItem speed15 = new RadioMenuItem("1.5x");
-        ToggleGroup speedGroup = new ToggleGroup();
-        speed05.setToggleGroup(speedGroup);
-        speed1.setToggleGroup(speedGroup);
-        speed15.setToggleGroup(speedGroup);
-        speed05.setOnAction(e -> {
-            if (speed05.isSelected()) {
-                mediaPlayer.setRate(0.5);
-            }
-        });
-        speed1.setOnAction(e -> {
-            if (speed1.isSelected()) {
-                mediaPlayer.setRate(1.0);
-            }
-        });
-        speed15.setOnAction(e -> {
-            if (speed15.isSelected()) {
-                mediaPlayer.setRate(1.5);
-            }
-        });
-        speed1.setSelected(true);
-        menuSpeed.getItems().addAll(speed05, speed1, speed15);
-        settingsMenu.getItems().addAll(menuQuality, menuSpeed);
-
-        // Setting Menu Position
-        btnSetting.setOnAction(ev -> {
-            settingsMenu.show(btnSetting, Side.TOP, 0, -25);
-        });
+        setupSettingsMenu(mediaPlayer);
 
         settingsMenu.setOnShown(e -> {
             fadeInControlPane();
@@ -244,7 +189,10 @@ public class learningPageController implements Initializable {
         sliderTime.setOnMousePressed(e -> {
             userIsActive();
             if (mediaPlayer != null) {
-                mediaPlayer.pause();
+                wasPlaying[0] = (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING);
+                if (wasPlaying[0]) {
+                    mediaPlayer.pause();
+                }
             }
         });
 
@@ -252,14 +200,61 @@ public class learningPageController implements Initializable {
             if (mediaPlayer != null) {
                 double newPos = sliderTime.getValue();
                 mediaPlayer.seek(Duration.seconds(newPos));
-                mediaPlayer.play();
+                if (videoEnded) {
+                    videoEnded = false;
+                    btnPlay.setGraphic(createIconView(pauseIcon));
+                }
+                if (wasPlaying[0]) {
+                    mediaPlayer.play();
+                }
             }
         });
 
         controlPane.setOpacity(1.0);
-
+        consumeClicks(controlpanesection);
+        consumeClicks(timebox);
+        consumeClicks(regionpart);
+        consumeClicks(lblTime);
         setupInactivityTimer();
+        btnSound.addEventFilter(MouseEvent.MOUSE_EXITED, e -> checkVolumeMouseExit(e));
+        sliderVolume.addEventFilter(MouseEvent.MOUSE_EXITED, e -> checkVolumeMouseExit(e));
+        hideDelayTransition = new PauseTransition(Duration.millis(300));
+        hideDelayTransition.setOnFinished(e -> hideVolumeSlider());
 
+        Platform.runLater(() -> {
+            Scene scene = btnSound.getScene();
+            if (scene != null) {
+                scene.addEventFilter(MouseEvent.MOUSE_MOVED, e -> {
+                    Bounds btnBounds = btnSound.localToScene(btnSound.getBoundsInLocal());
+                    Bounds sliderBounds = sliderVolume.localToScene(sliderVolume.getBoundsInLocal());
+                    // Calculate the union of btnSound and sliderVolume bounds.
+                    double minX = Math.min(btnBounds.getMinX(), sliderBounds.getMinX());
+                    double minY = Math.min(btnBounds.getMinY(), sliderBounds.getMinY());
+                    double maxX = Math.max(btnBounds.getMaxX(), sliderBounds.getMaxX());
+                    double maxY = Math.max(btnBounds.getMaxY(), sliderBounds.getMaxY());
+
+                    // If the mouse is outside this union, start the delay.
+                    if (e.getSceneX() < minX || e.getSceneX() > maxX ||
+                            e.getSceneY() < minY || e.getSceneY() > maxY) {
+                        hideDelayTransition.playFromStart();
+                    } else {
+                        // If the mouse is back inside, stop the delay.
+                        hideDelayTransition.stop();
+                    }
+                });
+            }
+        });
+        sliderVolume.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
+            hideDelayTransition.stop();
+        });
+        sliderVolume.addEventFilter(MouseEvent.MOUSE_DRAGGED, e -> {
+            hideDelayTransition.stop();
+        });
+        sliderVolume.addEventFilter(MouseEvent.MOUSE_RELEASED, e -> {
+            // Optionally, restart the hide delay if the mouse is not over the volume area.
+            // This line will restart the delay so the slider can eventually tween away.
+            hideDelayTransition.playFromStart();
+        });
         videocontainer.setOnMouseEntered(e -> {
             isMouseInStackPane = true;
             fadeInControlPane();
@@ -279,8 +274,8 @@ public class learningPageController implements Initializable {
         });
         mediaPlayer.setOnEndOfMedia(() -> {
             btnPlay.setGraphic(createIconView(replayIcon));
+            videoEnded = true;
         });
-
 
         subject_name.setText("Test Subject");
         ep.setText("Test Episode : 0");
@@ -314,22 +309,73 @@ public class learningPageController implements Initializable {
     }
 
     private void togglePlayPause(MediaPlayer mediaPlayer) {
-        Duration total = mediaPlayer.getTotalDuration();
-        Duration current = mediaPlayer.getCurrentTime();
+        if (videoEnded) {
+            mediaPlayer.seek(Duration.ZERO);
+            mediaPlayer.play();
+            videoEnded = false;
+            btnPlay.setGraphic(createIconView(pauseIcon));
+            return;
+        }
 
         if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
             mediaPlayer.pause();
             btnPlay.setGraphic(createIconView(playIcon));
         } else {
-            if (current.toSeconds() + 0.1 >= total.toSeconds()) {
-                mediaPlayer.seek(Duration.ZERO);
-            }
             mediaPlayer.play();
             btnPlay.setGraphic(createIconView(pauseIcon));
         }
     }
 
+    private void setupSettingsMenu(MediaPlayer mediaPlayer) {
+        settingsMenu = new ContextMenu();
 
+        Menu menuQuality = new Menu("Quality");
+        RadioMenuItem q1 = new RadioMenuItem("tbd1");
+        RadioMenuItem q2 = new RadioMenuItem("tbd2");
+        RadioMenuItem q3 = new RadioMenuItem("tbd3");
+        RadioMenuItem q4 = new RadioMenuItem("tbd4");
+
+        ToggleGroup qualityGroup = new ToggleGroup();
+        q1.setToggleGroup(qualityGroup);
+        q2.setToggleGroup(qualityGroup);
+        q3.setToggleGroup(qualityGroup);
+        q4.setToggleGroup(qualityGroup);
+        q2.setSelected(true);
+
+        q1.setOnAction(e -> { if (q1.isSelected()) System.out.println("Switched to __"); });
+        q2.setOnAction(e -> { if (q2.isSelected()) System.out.println("Switched to __"); });
+        q3.setOnAction(e -> { if (q3.isSelected()) System.out.println("Switched to __"); });
+        q4.setOnAction(e -> { if (q4.isSelected()) System.out.println("Switched to __"); });
+        menuQuality.getItems().addAll(q1, q2, q3, q4);
+
+        Menu menuSpeed = new Menu("PlaySpeed");
+        RadioMenuItem speed05 = new RadioMenuItem("0.5x");
+        RadioMenuItem speed075 = new RadioMenuItem("0.75x");
+        RadioMenuItem speed1 = new RadioMenuItem("1.0x");
+        RadioMenuItem speed125 = new RadioMenuItem("1.25x");
+        RadioMenuItem speed15 = new RadioMenuItem("1.5x");
+
+        ToggleGroup speedGroup = new ToggleGroup();
+        speed05.setToggleGroup(speedGroup);
+        speed075.setToggleGroup(speedGroup);
+        speed1.setToggleGroup(speedGroup);
+        speed125.setToggleGroup(speedGroup);
+        speed15.setToggleGroup(speedGroup);
+
+        speed05.setOnAction(e -> { if (speed05.isSelected()) mediaPlayer.setRate(0.5); });
+        speed075.setOnAction(e -> { if (speed075.isSelected()) mediaPlayer.setRate(0.75); });
+        speed1.setOnAction(e -> { if (speed1.isSelected()) mediaPlayer.setRate(1.0); });
+        speed125.setOnAction(e -> { if (speed125.isSelected()) mediaPlayer.setRate(1.25); });
+        speed15.setOnAction(e -> { if (speed15.isSelected()) mediaPlayer.setRate(1.5); });
+        speed1.setSelected(true); // default play speed
+        menuSpeed.getItems().addAll(speed05, speed075, speed1, speed125, speed15);
+
+        settingsMenu.getItems().addAll(menuQuality, menuSpeed);
+
+        btnSetting.setOnAction(ev -> {
+            settingsMenu.show(btnSetting, Side.TOP, 0, -25);
+        });
+    }
     private void setupInactivityTimer() {
         inactivityTimer = new PauseTransition(Duration.seconds(2));
         inactivityTimer.setOnFinished(e -> fadeOutControlPane());
@@ -353,18 +399,29 @@ public class learningPageController implements Initializable {
         originalParent = (Pane) videocontainer.getParent();
         originalIndex = originalParent.getChildren().indexOf(videocontainer);
         originalParent.getChildren().remove(videocontainer);
-
         StackPane fsRoot = new StackPane();
         mediaView.fitWidthProperty().bind(fsRoot.widthProperty());
         mediaView.fitHeightProperty().bind(fsRoot.heightProperty());
-
         fsRoot.getChildren().add(videocontainer);
+        Scene fsScene = new Scene(fsRoot);
+        fsScene.addEventFilter(MouseEvent.MOUSE_MOVED, e -> {
+            Bounds btnBounds = btnSound.localToScene(btnSound.getBoundsInLocal());
+            Bounds sliderBounds = sliderVolume.localToScene(sliderVolume.getBoundsInLocal());
+            double minX = Math.min(btnBounds.getMinX(), sliderBounds.getMinX());
+            double minY = Math.min(btnBounds.getMinY(), sliderBounds.getMinY());
+            double maxX = Math.max(btnBounds.getMaxX(), sliderBounds.getMaxX());
+            double maxY = Math.max(btnBounds.getMaxY(), sliderBounds.getMaxY());
+            if (e.getSceneX() < minX || e.getSceneX() > maxX ||
+                    e.getSceneY() < minY || e.getSceneY() > maxY) {
+                hideDelayTransition.playFromStart();
+            } else {
+                hideDelayTransition.stop();
+            }
+        });
 
         fullscreenStage = new Stage();
-        Scene fsScene = new Scene(fsRoot);
         fullscreenStage.setScene(fsScene);
-        fullscreenStage.setFullScreenExitHint("");
-        fullscreenStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        fullscreenStage.setFullScreenExitHint("Press ESC to exit fullscreen"); // temp
         fullscreenStage.setFullScreen(true);
         fullscreenStage.show();
         isFullscreen = true;
@@ -380,9 +437,9 @@ public class learningPageController implements Initializable {
             }
         });
 
-        // Also handle close request
         fullscreenStage.setOnCloseRequest(e -> exitFullscreen());
     }
+
 
 
     private void exitFullscreen() {
@@ -406,6 +463,11 @@ public class learningPageController implements Initializable {
         int seconds = (int) newTime.toSeconds() % 60;
         return String.format("%02d:%02d", minutes, seconds);
     }
+
+    private void consumeClicks(Node node) {
+        node.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> event.consume());
+    }
+
 
     private void displayNavbar(){
         try {
@@ -436,9 +498,9 @@ public class learningPageController implements Initializable {
 
     private void updateVolumeIcon(double volume) {
         Image chosenImage;
-        if (volume < 0.3) {
+        if (volume < 0.2) {
             chosenImage = volumeLow;
-        } else if (volume < 0.7) {
+        } else if (volume < 0.5) {
             chosenImage = volumeMed;
         } else {
             chosenImage = volumeHigh;
@@ -447,12 +509,18 @@ public class learningPageController implements Initializable {
         btnSound.setGraphic(createIconView(chosenImage));
     }
     private void fadeInControlPane() {
-        controlPane.setVisible(true);
-
-        FadeTransition ftIn = new FadeTransition(Duration.millis(250), controlPane);
-        ftIn.setFromValue(controlPane.getOpacity());
-        ftIn.setToValue(1.0);
-        ftIn.play();
+        // Only start the fade-in if it's not already active
+        if (!isFadeInActive && (controlPane.getOpacity() < 1.0 || !controlPane.isVisible())) {
+            isFadeInActive = true;
+            controlPane.setVisible(true);
+            FadeTransition ftIn = new FadeTransition(Duration.millis(250), controlPane);
+            ftIn.setFromValue(controlPane.getOpacity());
+            ftIn.setToValue(1.0);
+            ftIn.setOnFinished(ev -> {
+                isFadeInActive = false;
+            });
+            ftIn.play();
+        }
     }
 
     private void fadeOutControlPane() {
@@ -477,6 +545,46 @@ public class learningPageController implements Initializable {
             }
         }));
         hideTimeline.play();
+    }
+    private void showVolumeSlider() {
+        if (!volumeSliderVisible) {
+            volumeSliderVisible = true;
+            sliderVolume.setVisible(true);
+            sliderVolume.setPrefWidth(0);
+            Timeline showTimeline = new Timeline(
+                    new KeyFrame(Duration.ZERO, new KeyValue(sliderVolume.prefWidthProperty(), 0)),
+                    new KeyFrame(Duration.millis(250), new KeyValue(sliderVolume.prefWidthProperty(), originalVolSliderWidth))
+            );
+            showTimeline.play();
+        }
+    }
+
+    private void hideVolumeSlider() {
+        if (volumeSliderVisible) {
+            Timeline hideTimeline = new Timeline(
+                    new KeyFrame(Duration.ZERO, new KeyValue(sliderVolume.prefWidthProperty(), sliderVolume.getPrefWidth())),
+                    new KeyFrame(Duration.millis(250), new KeyValue(sliderVolume.prefWidthProperty(), 0))
+            );
+            hideTimeline.setOnFinished(e -> {
+                sliderVolume.setVisible(false);
+                volumeSliderVisible = false;
+            });
+            hideTimeline.play();
+        }
+    }
+    private void checkVolumeMouseExit(MouseEvent e) {
+        Bounds btnBounds = btnSound.localToScene(btnSound.getBoundsInLocal());
+        Bounds sliderBounds = sliderVolume.localToScene(sliderVolume.getBoundsInLocal());
+
+        double minX = Math.min(btnBounds.getMinX(), sliderBounds.getMinX());
+        double minY = Math.min(btnBounds.getMinY(), sliderBounds.getMinY());
+        double maxX = Math.max(btnBounds.getMaxX(), sliderBounds.getMaxX());
+        double maxY = Math.max(btnBounds.getMaxY(), sliderBounds.getMaxY());
+
+        if (e.getSceneX() < minX || e.getSceneX() > maxX ||
+                e.getSceneY() < minY || e.getSceneY() > maxY) {
+            hideVolumeSlider();
+        }
     }
     }
 
