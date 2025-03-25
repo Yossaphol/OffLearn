@@ -1,15 +1,19 @@
 package Database;
 
+import Teacher.quiz.QuestionItem;
+import Teacher.quiz.QuizItem;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class QuizDB extends ConnectDB{
-    public int saveQuiz(int chapterID, String quizName, int minScore, String level) {
+    public int saveQuiz(int chapterID, String quizName, int minScore, int max, String level) {
         String checkSql = "SELECT Quiz_ID FROM quiz WHERE Chapter_ID = ? AND header = ?";
-        String insertSql = "INSERT INTO quiz (Chapter_ID, header, minScore, level) VALUES (?, ?, ?, ?)";
+        String insertSql = "INSERT INTO quiz (Chapter_ID, header, minScore, level, maxScore) VALUES (?, ?, ?, ?, ?)";
 
         try (
                 Connection conn = this.connectToDB();
@@ -28,6 +32,7 @@ public class QuizDB extends ConnectDB{
                 insertPstm.setString(2, quizName);
                 insertPstm.setInt(3, minScore);
                 insertPstm.setString(4, level);
+                insertPstm.setInt(5, max);
                 insertPstm.executeUpdate();
 
                 try (ResultSet generatedKeys = insertPstm.getGeneratedKeys()) {
@@ -75,5 +80,49 @@ public class QuizDB extends ConnectDB{
             e.printStackTrace();
         }
     }
+
+    public boolean isQuizExists(int quizID) {
+        String sql = "SELECT 1 FROM quiz WHERE Quiz_ID = ?";
+        try (
+                Connection conn = this.connectToDB();
+                PreparedStatement pstm = conn.prepareStatement(sql)
+        ) {
+            pstm.setInt(1, quizID);
+            try (ResultSet rs = pstm.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public QuizItem getQuizById(int quizID) {
+        String sql = "SELECT * FROM quiz WHERE Quiz_ID = ?";
+        QuizItem quizItem = null;
+
+        try (
+                Connection conn = this.connectToDB();
+                PreparedStatement pstm = conn.prepareStatement(sql)
+        ) {
+            pstm.setInt(1, quizID);
+            try (ResultSet rs = pstm.executeQuery()) {
+                if (rs.next()) {
+                    String header = rs.getString("header");
+                    int minScore = rs.getInt("minScore");
+                    String level = rs.getString("level");
+                    int maxScore = rs.getInt("maxScore");
+
+                    quizItem = new QuizItem(quizID, header, minScore, maxScore, level);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return quizItem;
+    }
+
+
 
 }

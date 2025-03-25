@@ -10,13 +10,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="courseContent" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.ChapterContent">
+<HBox fx:id="chapterContent" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="850.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.ChapterContent">
     <children>
         <HBox prefHeight="100.0" prefWidth="800.0" style="-fx-background-radius: 30;">
             <children>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                     <children>
-                        <ImageView fx:id="img" fitHeight="125.0" fitWidth="165.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="video" fitHeight="125.0" fitWidth="165.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../../../img/Picture/alvaro-reyes-qWwpHwip31M-unsplash.jpg" />
                             </image>

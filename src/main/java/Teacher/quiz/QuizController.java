@@ -1,6 +1,7 @@
 package Teacher.quiz;
 
 import Database.ChapterDB;
+import Database.QuestionDB;
 import Database.QuizDB;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,6 +45,9 @@ public class QuizController implements Initializable {
     @FXML
     private RadioButton easy;
 
+    @FXML
+    private TextField maxScore;
+
     private ScrollPane wrapper;
     private VBox courseManagement;
     private HBox problemContent;
@@ -52,8 +56,12 @@ public class QuizController implements Initializable {
     private VBox courseSpace;
 
     private QuizDB quizDB;
+    private QuestionDB questionDB;
     private ChapterDB chapterDB;
     private QuizItem quizItem;
+    private int quizId = -1;
+    private QuizBoxContent quizBoxContent;
+    private QuizBoxItem quizBoxItem;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -87,6 +95,7 @@ public class QuizController implements Initializable {
                 p.setParentContainer(problemSpace);
                 p.setProblemContent(problemContent);
                 problemSpace.getChildren().add(problemContent);
+                passMyController(p);
                 passQuizItemList(p);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -99,6 +108,8 @@ public class QuizController implements Initializable {
             wrapper.setContent(courseManagement);
         });
     }
+
+    public void passMyController(QuestionContent q){q.setQuizController(this);}
 
     public void recieveWrapper(ScrollPane wrapper){
         this.wrapper = wrapper;
@@ -116,6 +127,12 @@ public class QuizController implements Initializable {
         p.recieveQuizItemList(questionItemsList);
     }
 
+    public void passMyController(QuizBoxContent quizBoxContent){
+        quizBoxContent.setQuizController(this);
+    }
+
+    public void setQuizItem(QuizBoxItem quizItem){ this.quizBoxItem = quizItem; }
+
     public void saveAllButton(){
         saveAll.setOnAction(actionEvent -> {
             showConfirmDialog();
@@ -125,37 +142,58 @@ public class QuizController implements Initializable {
         });
     }
 
-    public void setQuizBox(){
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/quiz/QuizBox.fxml"));
-            HBox quizBox = fxmlLoader.load();
-            quizBoxContent q = fxmlLoader.getController();
+    public void updateQuizBox(QuizBoxContent q) {
+        int min = Integer.parseInt(minScore.getText());
+        int max = Integer.parseInt(maxScore.getText());
 
-            int cnt = 0;
-            for (QuestionItem i : questionItemsList){
-                cnt += i.getPoint();
+        if (q == null) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/quiz/QuizBox.fxml"));
+                HBox quizBox = fxmlLoader.load();
+                QuizBoxContent quizBoxContent = fxmlLoader.getController();
+
+                this.quizBoxItem = new QuizBoxItem(this.quizName.getText(), this.problemSpace.getChildren().size(), max, Integer.parseInt(this.minScore.getText()));
+
+                quizBoxContent.setQuizBoxItem(quizBoxItem);
+                quizBoxContent.setDisplay();
+                quizBoxContent.recieveLQG(lqg);
+                quizBoxContent.recieveQuizItemList(questionItemsList);
+                quizBoxContent.setWrapper(wrapper);
+                quizBoxContent.setQuizItem(quizItem);
+                quizBoxContent.setCourseManagement(courseManagement);
+                quizBoxContent.setCourseSpace(courseSpace);
+                quizBoxContent.setParentContainer(courseSpace);
+                passMyController(quizBoxContent);
+
+                quizBoxContent.setProblemContent(quizBox);
+                courseSpace.getChildren().add(quizBox);
+                wrapper.setContent(courseManagement);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            q.setParentContainer(courseSpace);
-            q.setProblemContent(quizBox);
-            q.setQuizName(quizName.getText());
-            q.setCount(questionItemsList.size() + "");
-            q.setMinScore(minScore.getText());
-            q.setMaxScore(cnt + "");
+        } else {
+            quizBoxItem.setName(this.quizName.getText());
+            quizBoxItem.setQuestionCount(problemSpace.getChildren().size());
+            quizBoxItem.setMaxScore(max);
+            quizBoxItem.setMinScore(min);
+
+            q.setQuizBoxItem(quizBoxItem);
+            q.setDisplay();
+
             q.recieveLQG(lqg);
             q.recieveQuizItemList(questionItemsList);
+            q.setWrapper(wrapper);
             q.setQuizItem(quizItem);
+            q.setCourseManagement(courseManagement);
+            q.setCourseSpace(courseSpace);
+            q.setParentContainer(courseSpace);
+            passMyController(q);
 
-            courseSpace.getChildren().add(quizBox);
+            HBox quizBoxDisplay = q.getQuizBox();
+            q.setProblemContent(quizBoxDisplay);
             wrapper.setContent(courseManagement);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
-
-    public void addToLQG(){
-        lqg.add(questionItemsList);
-    }
-
 
     public void showConfirmDialog() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -167,8 +205,7 @@ public class QuizController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.YES) {
-            setQuizBox();
-            addToLQG();
+                updateQuizBox(quizBoxContent);
         } else {
             System.out.println("ผู้ใช้กด No หรือปิดหน้าต่าง");
         }
@@ -196,13 +233,25 @@ public class QuizController implements Initializable {
             return false;
         }
 
+        int max;
+        try {
+            max = Integer.parseInt(maxScore.getText().trim());
+            if (max < 0) {
+                showAlert("", "คะแนนเต็มต้องเป็นค่ามากกว่าหรือเท่ากับ 0", Alert.AlertType.ERROR);
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            showAlert("", "กรุณากรอกคะแนนเต็มเป็นตัวเลข", Alert.AlertType.ERROR);
+            return false;
+        }
+
         String lev = this.getLevel();
         if (lev == null || lev.isEmpty()) {
             showAlert("", "กรุณาเลือกระดับของแบบทดสอบ", Alert.AlertType.ERROR);
             return false;
         }
 
-        int id = quizDB.saveQuiz(chapterDB.getCurrentChapterId(), name, mini, lev);
+        int id = quizDB.saveQuiz(chapterDB.getCurrentChapterId(), name, mini, max, lev);
         if (id == -1) {
             showAlert("", "เกิดข้อผิดพลาดในการบันทึกแบบทดสอบ", Alert.AlertType.ERROR);
         } else {
@@ -210,7 +259,6 @@ public class QuizController implements Initializable {
         }
         return true;
     }
-
 
     public boolean preSaveQuiz() {
         quizDB = new QuizDB();
@@ -234,13 +282,25 @@ public class QuizController implements Initializable {
             return false;
         }
 
+        int max;
+        try {
+            max = Integer.parseInt(maxScore.getText().trim());
+            if (max < 0) {
+                showAlert("", "คะแนนเต็มต้องเป็นค่ามากกว่าหรือเท่ากับ 0", Alert.AlertType.ERROR);
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            showAlert("", "กรุณากรอกคะแนนเต็มเป็นตัวเลข", Alert.AlertType.ERROR);
+            return false;
+        }
+
         String lev = this.getLevel();
         if (lev == null || lev.isEmpty()) {
             showAlert("", "กรุณาเลือกระดับของแบบทดสอบ", Alert.AlertType.ERROR);
             return false;
         }
 
-        int id = quizDB.saveQuiz(chapterDB.getCurrentChapterId(), name, mini, lev);
+        int id = quizDB.saveQuiz(chapterDB.getCurrentChapterId(), name, mini, max, lev);
         if (id == -1) {
             showAlert("", "เกิดข้อผิดพลาดในการบันทึกแบบทดสอบ", Alert.AlertType.ERROR);
         } else {
@@ -257,6 +317,60 @@ public class QuizController implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    public void loadQuestion(QuizItem quizItem, QuizController quizCont, QuizBoxContent quizBoxContent){
+        this.quizBoxContent = quizBoxContent;
+        this.quizId = quizItem.getQuizID();
+        quizDB = new QuizDB();
+
+        questionDB = new QuestionDB();
+        ArrayList<QuestionItem> questionList = questionDB.getQuestionsByQuizID(quizItem.getQuizID());
+
+        QuizItem qTemp = quizDB.getQuizById(quizItem.getQuizID());
+
+        this.quizName.setText(qTemp.getHeader());
+        this.minScore.setText(qTemp.getMinScore() + "");
+        this.maxScore.setText(qTemp.getMaxScore() + "");
+        switch (qTemp.getLevel()) {
+            case "hard" -> {
+                hard.setSelected(true);
+            }
+            case "normal" -> {
+                normal.setSelected(true);
+            }
+            case "easy" -> {
+                easy.setSelected(true);
+            }
+            case null, default -> {
+            }
+        }
+
+        for (QuestionItem q : questionList){
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/quiz/questionContent.fxml"));
+                problemContent = fxmlLoader.load();
+
+                QuestionContent questionContent = fxmlLoader.getController();
+                questionContent.setQuizController(quizCont);
+                questionContent.setQuestionID(q.getQuestionID());
+
+                questionContent.setDisplay(q.getQuizName(), q.getPoint(), q.getCorrectChoice(), q.getChoices());
+
+                questionContent.setParentContainer(problemSpace);
+                questionContent.setProblemContent(problemContent);
+                problemSpace.getChildren().add(problemContent);
+                passQuizItemList(questionContent);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void removeQuestion(QuestionContent questionContent) {
+        problemSpace.getChildren().remove(questionContent.getProblemContent());
+        questionItemsList.remove(questionContent.getQuestionItem());
+    }
+
 
     public String getLevel(){
         if (hard.isSelected()){

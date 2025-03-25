@@ -17,6 +17,10 @@ public class QuestionItem {
         choices = new ArrayList<String>();
     }
 
+    public void clearList(){
+        this.choices.clear();
+    }
+
     public void setQuestionID(int questionID){
         this.questionID = questionID;
     }

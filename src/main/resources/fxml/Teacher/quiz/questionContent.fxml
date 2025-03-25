@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="problemContent" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.quiz.QuestionContent">
+<HBox fx:id="problemContent" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="850.0" style="-fx-background-radius: 10; -fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.quiz.QuestionContent">
     <children>
         <HBox prefHeight="100.0" prefWidth="800.0" style="-fx-background-radius: 30;">
             <children>
@@ -42,7 +42,7 @@
                      <TextField fx:id="problem" prefHeight="26.0" prefWidth="229.0" />
                   </children>
                </HBox>
-                    <VBox fx:id="choiceSpace" prefHeight="172.0" prefWidth="315.0" />
+                    <VBox fx:id="choiceSpace" prefHeight="172.0" prefWidth="315.0" spacing="5.0" />
                     <Label fx:id="addChoice" text="เพิ่มคำตอบ" underline="true">
                         <font>
                             <Font name="Kodchasan Regular" size="16.0" />

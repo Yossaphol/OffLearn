@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="1267.0" prefWidth="1119.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.quiz.QuizController">
+<VBox alignment="TOP_CENTER" prefHeight="1267.0" prefWidth="1119.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.quiz.QuizController">
    <children>
       <HBox prefHeight="74.0" prefWidth="1114.0">
          <children>
@@ -49,6 +49,23 @@
                      </font>
                   </Label>
                   <TextField fx:id="minScore" prefHeight="40.0" prefWidth="280.0" style="-fx-background-radius: 10;">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+               <HBox.margin>
+                  <Insets left="50.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox fillWidth="false" prefHeight="53.0" prefWidth="285.0">
+               <children>
+                  <Label text="คะแนนเต็ม" textFill="#0675de">
+                     <font>
+                        <Font name="Kodchasan Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="maxScore" prefHeight="40.0" prefWidth="280.0" style="-fx-background-radius: 10;">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -108,7 +125,7 @@
             <Insets left="200.0" top="50.0" />
          </VBox.margin>
       </HBox>
-      <VBox fx:id="problemSpace" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" />
+      <VBox fx:id="problemSpace" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" />
       <HBox alignment="CENTER" prefHeight="91.0" prefWidth="1422.0" VBox.vgrow="NEVER">
          <children>
             <Label fx:id="addProblem" alignment="CENTER" contentDisplay="TOP" minHeight="50.0" minWidth="790.0" prefHeight="50.0" prefWidth="790.0" style="-fx-border-color: black;" text="เพิ่มโจทย์">
