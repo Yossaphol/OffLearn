@@ -1,5 +1,6 @@
 package Student.navBarAndSearchbar;
 
+import Database.UserDB;
 import Student.HomeAndNavigation.*;
 import a_Session.SessionManager;
 import javafx.animation.FadeTransition;
@@ -22,6 +23,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -60,11 +62,19 @@ public class searchBarC implements Initializable {
             this.username.setText("Guest");
         }
     }
-
+//    public void setImg(){
+//        HomeController hm  = new HomeController();
+//        hm.loadAndSetImage(userPfp, "/img/Profile/user.png");
+//    }
     public void setImg(){
-        HomeController hm  = new HomeController();
-        hm.loadAndSetImage(userPfp, "/img/Profile/user.png");
+        String username = SessionManager.getInstance().getUsername();
+        UserDB userDB = new UserDB();
+        HomeController homeController = new HomeController();
+
+        String profilePath = (username != null) ? userDB.getProfile(username) : "/img/Profile/user.png";
+        homeController.loadAndSetImage(userPfp, profilePath);
     }
+
     private void hoverEffect1(HBox btn) {
         ScaleTransition scaleUp = new ScaleTransition(Duration.millis(200), btn);
         scaleUp.setFromX(1);

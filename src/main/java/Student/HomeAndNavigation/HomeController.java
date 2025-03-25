@@ -1,5 +1,8 @@
 package Student.HomeAndNavigation;
 
+import Database.UserDB;
+import Student.HomeAndNavigation.*;
+import a_Session.SessionManager;
 import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -112,7 +115,8 @@ public class HomeController implements Initializable {
     public HBox rootpage;
     private List<AnchorPane> slides;
     private int slideIndex = 0;
-
+    private UserDB userDB;
+    public Label setname;
 
     @FXML
     private VBox calendarContainer;
@@ -125,6 +129,8 @@ public class HomeController implements Initializable {
     @FXML
     private NumberAxis yAxis;
 
+    String username = SessionManager.getInstance().getUsername();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         progressValue();
@@ -132,7 +138,12 @@ public class HomeController implements Initializable {
         setImgContainer();
         route();
 
-
+//        String username = SessionManager.getInstance().getUsername();
+        if (username != null) {
+            setname.setText(username);
+        } else {
+            setname.setText("Guest");
+        }
 
 
         hoverEffect(topLeaderboard);
@@ -499,7 +510,9 @@ public class HomeController implements Initializable {
         loadAndSetImage(imgContainer, "/img/Picture/bg.jpg");
         loadAndSetImage(teacherBanner, "/img/Profile/man.png");
 
-        loadAndSetImage(pfp_statistic, "/img/Profile/doctor.png");
+//        loadAndSetImage(pfp_statistic, "/img/Profile/doctor.png");
+        setImg();
+//        setProfile(username);
         loadAndSetImage(teacher_pfp, "/img/Profile/man.png");
 
         String studentPfpPath = "/img/Profile/student.png";
@@ -517,6 +530,15 @@ public class HomeController implements Initializable {
         loadAndSetImage(teacher_pfp_Data, "/img/Profile/teacher.png");
         loadAndSetImage(course_pic_Data, "/img/Picture/DSA.jpg");
         loadAndSetImage(course_pic_OOP, "/img/Picture/bg.jpg");
+    }
+
+    public void setImg(){
+        String username = SessionManager.getInstance().getUsername();
+        UserDB userDB = new UserDB();
+        HomeController homeController = new HomeController();
+
+        String profilePath = (username != null) ? userDB.getProfile(username) : "/img/Profile/user.png";
+        homeController.loadAndSetImage(pfp_statistic, profilePath);
     }
 
     public void loadAndSetImage(Shape shape, String path) {

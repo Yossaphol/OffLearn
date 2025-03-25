@@ -1253,7 +1253,7 @@
                                                 <Font name="Noto Sans Thai Bold" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Label prefHeight="48.0" prefWidth="74.0" text="User1" textFill="#8100cc">
+                                          <Label fx:id="setname" prefHeight="29.0" prefWidth="160.0" text="User1" textFill="#8100cc">
                                              <font>
                                                 <Font name="Noto Sans Thai Bold" size="18.0" />
                                              </font>

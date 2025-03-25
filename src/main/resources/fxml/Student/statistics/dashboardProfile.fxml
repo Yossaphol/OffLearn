@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="user_profile" maxHeight="215.0" maxWidth="764.0" prefHeight="209.0" prefWidth="764.0" style="-fx-background-color: transparent; -fx-background-radius: 20;" styleClass="overflow-img" stylesheets="@../../../css/Home.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="user_profile" maxHeight="215.0" maxWidth="764.0" prefHeight="209.0" prefWidth="764.0" style="-fx-background-color: transparent; -fx-background-radius: 20;" styleClass="overflow-img" stylesheets="@../../../css/Home.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.dashboard.dashboardProfileController">
    <effect>
       <DropShadow>
          <color>
@@ -28,7 +28,7 @@
             <Insets bottom="3.0" left="7.0" right="7.0" top="3.0" />
          </padding>
       </Label>
-      <Label layoutX="233.0" layoutY="60.0" text="Wirayabovorn Boonpriam" textFill="#8100cc">
+      <Label fx:id="setfullname" layoutX="233.0" layoutY="60.0" text="Wirayabovorn Boonpriam" textFill="#8100cc">
          <font>
             <Font name="Noto Sans Thai Bold" size="34.0" />
          </font>
