@@ -220,6 +220,10 @@ public class CourseEditController implements Initializable {
 
     public void addQuizButton() {
         addQuiz.setOnMouseClicked(mouseEvent -> {
+            if (courseSpace.getChildren().isEmpty()){
+                showAlert("", "กรุณาเพิ่มบทเรียนก่อนสร้างแบบทดสอบ", AlertType.ERROR);
+                return;
+            }
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/quiz/Quiz.fxml"));
                 VBox quizContent = fxmlLoader.load();

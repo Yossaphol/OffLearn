@@ -7,10 +7,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import mediaUpload.MediaUpload;
 
@@ -51,7 +53,6 @@ public class QuestionContent implements Initializable {
     @FXML
     private HBox problemContent;
 
-    private int count = 0;
     private ToggleGroup group;
     private QuestionItem questionItem;
     private ArrayList<TextField> txtGroup;
@@ -63,6 +64,7 @@ public class QuestionContent implements Initializable {
     private QuizDB quizDB;
     private int questionID;
     private ChoicesDB choicesDB;
+    private QuizController quizController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -71,6 +73,8 @@ public class QuestionContent implements Initializable {
         saveButton();
         deleteButton();
 
+        shadow();
+
         txtGroup = new ArrayList<TextField>();
     }
 
@@ -78,7 +82,7 @@ public class QuestionContent implements Initializable {
         group = new ToggleGroup();
         addChoice.setOnMouseClicked(mouseEvent -> {
 
-            if (count < 6){
+            if (choiceSpace.getChildren().size() < 6){
                 HBox choice = new HBox(10);
                 RadioButton radioButton = new RadioButton();
                 TextField choiceMessage = new TextField();
@@ -94,9 +98,24 @@ public class QuestionContent implements Initializable {
 
                 txtGroup.add(choiceMessage);
 
-                count++;
             }
         });
+    }
+
+    public void setQuestionID(int questionID){
+        this.questionID = questionID;
+    }
+
+    public void setQuizController(QuizController quizController){
+        this.quizController = quizController;
+    }
+
+    public HBox getProblemContent(){
+        return this.problemContent;
+    }
+
+    public QuestionItem getQuestionItem(){
+        return this.questionItem;
     }
 
     public void addImage() {
@@ -129,9 +148,6 @@ public class QuestionContent implements Initializable {
                 return;
             }
 
-            this.setQuizItem();
-            itm.add(this.getQuizItem());
-
             int quiz_id = quizDB.getLatestQuizID();
             String question = problem.getText();
             String corr = correctAns.getText();
@@ -141,6 +157,9 @@ public class QuestionContent implements Initializable {
             saveChoices();
 
             save.setVisible(false);
+
+            itm.add(this.getQuizItem());
+            this.setQuizItem();
         });
     }
 
@@ -172,6 +191,9 @@ public class QuestionContent implements Initializable {
         delete.setOnMouseClicked(mouseEvent -> {
             itm.remove(this.questionItem);
             questionDB.deleteQuestion(questionID);
+            quizController.removeQuestion(this);
+
+            System.out.println(questionID);
 
             if (parentContainer != null && problemContent != null) {
                 parentContainer.getChildren().remove(problemContent);
@@ -232,6 +254,46 @@ public class QuestionContent implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public void shadow(){
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(10);
+        dropShadow.setOffsetX(2.5);
+        dropShadow.setOffsetY(2.5);
+        dropShadow.setColor(Color.GRAY);
+
+        problemContent.setEffect(dropShadow);
+    }
+
+    public void setDisplay(String name, int point, String corrAns, ArrayList<String> choices){
+        problem.setText("");
+        this.point.setText("");
+        correctAns.setText("");
+        choiceSpace.getChildren().clear();
+        txtGroup.clear();
+        group = new ToggleGroup();
+
+        problem.setText(name);
+        this.point.setText(point + "");
+        correctAns.setText(corrAns);
+
+        for (String c : choices){
+            HBox choice = new HBox(10);
+            RadioButton radioButton = new RadioButton();
+            TextField choiceMessage = new TextField(c);
+
+            choice.setAlignment(Pos.CENTER_LEFT);
+            choiceMessage.setPrefWidth(300);
+            radioButton.setText("");
+            radioButton.setToggleGroup(group);
+
+            choice.getChildren().addAll(radioButton, choiceMessage);
+
+            choiceSpace.getChildren().add(choice);
+
+            txtGroup.add(choiceMessage);
+        }
     }
 
 

@@ -7,10 +7,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import mediaUpload.MediaUpload;
 
@@ -22,7 +24,7 @@ import java.util.ResourceBundle;
 public class ChapterContent implements Initializable {
 
     @FXML
-    private HBox courseContent;
+    private HBox chapterContent;
 
     @FXML
     private TextField chapterName;
@@ -62,6 +64,8 @@ public class ChapterContent implements Initializable {
         deleteButton();
         addVideo();
         addMaterials();
+
+        shadow();
     }
 
     public void recieveChapList(ArrayList<ChapterItem> chapList){ this.chapList = chapList; }
@@ -177,5 +181,14 @@ public class ChapterContent implements Initializable {
         return true;
     }
 
+    public void shadow(){
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(10);
+        dropShadow.setOffsetX(2.5);
+        dropShadow.setOffsetY(2.5);
+        dropShadow.setColor(Color.GRAY);
+
+        chapterContent.setEffect(dropShadow);
+    }
 
 }

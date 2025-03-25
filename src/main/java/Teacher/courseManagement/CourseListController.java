@@ -5,12 +5,19 @@ import javafx.fxml.Initializable;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 public class CourseListController implements Initializable {
+    @FXML
+    private HBox mainComp;
+
     @FXML
     private Label courseName;
 
@@ -30,6 +37,7 @@ public class CourseListController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        shadow();
     }
 
     public void setCourseItem(CourseItem courseItem){
@@ -46,6 +54,16 @@ public class CourseListController implements Initializable {
     public void setImageToRectangle(String imageUrl) {
         Image image = new Image(imageUrl);
         courseImg.setFill(new ImagePattern(image));
+    }
+
+    public void shadow(){
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(10);
+        dropShadow.setOffsetX(2.5);
+        dropShadow.setOffsetY(2.5);
+        dropShadow.setColor(Color.GRAY);
+
+        mainComp.setEffect(dropShadow);
     }
 
 
