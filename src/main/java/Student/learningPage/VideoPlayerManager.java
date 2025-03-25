@@ -499,8 +499,8 @@ public class VideoPlayerManager implements Initializable {
     /* resize image */
     private ImageView createIconView(Image icon) {
         ImageView iv = new ImageView(icon);
-        iv.setFitWidth(20);
-        iv.setFitHeight(20);
+        iv.setFitWidth(25);
+        iv.setFitHeight(25);
         return iv;
     }
 

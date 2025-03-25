@@ -36,7 +36,7 @@
                   </Button>
                   <Button fx:id="btnSound" maxHeight="36.0" maxWidth="28.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;">
                      <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../img/icon/volume-solid-stage2.png" />
                            </image>
@@ -97,7 +97,7 @@
                   </Button>
                </children>
                <padding>
-                  <Insets top="5.0" />
+                  <Insets top="2.5" />
                </padding>
             </HBox>
             <Slider fx:id="sliderTime" maxHeight="1.0" minHeight="1.0" minWidth="-Infinity" prefHeight="1.0" prefWidth="720.0" style="-fx-cursor: hand;" stylesheets="@../../../css/learningPage.css" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
