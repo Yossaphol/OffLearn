@@ -2,10 +2,7 @@ package Teacher.setting;
 
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -30,7 +27,6 @@ public class settingController implements Initializable {
     public Label security_username_header;
     public TextField security_username;
     public Label security_password_header;
-    public TextField security_password;
     public Button security_change_button;
     public VBox notification_container;
     public Label notification_header;
@@ -56,10 +52,15 @@ public class settingController implements Initializable {
     public Button bankaccount_change_button;
     public Button cancel_button;
     public Button save_button;
+    public PasswordField security_password;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         displayNavbar();
+
+        security_password.setText("********");
+
+
     }
     private void displayNavbar(){
         try {

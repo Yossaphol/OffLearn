@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -10,12 +11,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane prefHeight="2000.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.setting.settingController">
+<ScrollPane hbarPolicy="NEVER" style="-fx-background-color: #fbfbfb;" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.setting.settingController">
    <content>
-      <VBox prefHeight="2000.0" prefWidth="1440.0" style="-fx-background-color: white;">
+      <VBox prefHeight="2000.0" prefWidth="1440.0" style="-fx-background-color: #fbfbfb;">
          <children>
-            <HBox fx:id="navBar" prefHeight="271.0" prefWidth="1440.0" />
-            <VBox fx:id="setting_container" prefHeight="2000.0" prefWidth="1440.0" style="-fx-background-color: white;">
+            <HBox fx:id="navBar" alignment="TOP_CENTER">
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin></HBox>
+            <VBox fx:id="setting_container" prefHeight="2000.0" prefWidth="1440.0" style="-fx-background-color: #FBFBFB;">
                <children>
                   <Label fx:id="setting_header" text="การตั้งค่า" textFill="#a8a8a8">
                      <font>
@@ -38,7 +42,10 @@
                                           <Font name="Kodchasan Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="privateinfo_firstname" prefHeight="40.0" style="-fx-background-radius: 10;" />
+                                    <TextField fx:id="privateinfo_firstname" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" text="name">
+                                       <font>
+                                          <Font name="Kodchasan Regular" size="16.0" />
+                                       </font></TextField>
                                  </children>
                                  <HBox.margin>
                                     <Insets left="20.0" />
@@ -51,7 +58,10 @@
                                           <Font name="Kodchasan Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="privateinfo_lastname" prefHeight="40.0" style="-fx-background-radius: 10;" />
+                                    <TextField fx:id="privateinfo_lastname" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" text="lastname">
+                                       <font>
+                                          <Font name="Kodchasan Regular" size="16.0" />
+                                       </font></TextField>
                                  </children>
                                  <HBox.margin>
                                     <Insets left="50.0" />
@@ -69,7 +79,10 @@
                                     <Font name="Kodchasan Regular" size="20.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="privateinfo_gmail" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" />
+                              <TextField fx:id="privateinfo_gmail" disable="true" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" text="Example@gmail.com">
+                                 <font>
+                                    <Font name="Kodchasan Regular" size="16.0" />
+                                 </font></TextField>
                            </children>
                            <VBox.margin>
                               <Insets left="20.0" top="50.0" />
@@ -96,7 +109,10 @@
                                           <Font name="Kodchasan Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="security_username" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" />
+                                    <TextField fx:id="security_username" disable="true" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" text="Username">
+                                       <font>
+                                          <Font name="Kodchasan Regular" size="16.0" />
+                                       </font></TextField>
                                  </children>
                                  <HBox.margin>
                                     <Insets left="20.0" />
@@ -109,7 +125,11 @@
                                           <Font name="Kodchasan Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="security_password" prefHeight="40.0" style="-fx-background-radius: 10;" />
+                                    <PasswordField fx:id="security_password" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;">
+                                       <font>
+                                          <Font name="Kodchasan Regular" size="16.0" />
+                                       </font>
+                                    </PasswordField>
                                  </children>
                                  <HBox.margin>
                                     <Insets left="50.0" />
@@ -269,7 +289,10 @@
                                           <Font name="Kodchasan Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="bankaccount_firstname" prefHeight="40.0" style="-fx-background-radius: 10;" />
+                                    <TextField fx:id="bankaccount_firstname" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" text="Wirayabovorn">
+                                       <font>
+                                          <Font name="Kodchasan Regular" size="16.0" />
+                                       </font></TextField>
                                  </children>
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="310.0">
@@ -279,7 +302,10 @@
                                           <Font name="Kodchasan Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="bankaccount_lastname" prefHeight="40.0" style="-fx-background-radius: 10;" />
+                                    <TextField fx:id="bankaccount_lastname" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" text="Boonpriam">
+                                       <font>
+                                          <Font name="Kodchasan Regular" size="16.0" />
+                                       </font></TextField>
                                  </children>
                                  <HBox.margin>
                                     <Insets left="50.0" />
@@ -299,7 +325,10 @@
                                           <Font name="Kodchasan Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="bankaccount_number" prefHeight="40.0" style="-fx-background-radius: 10;" />
+                                    <TextField fx:id="bankaccount_number" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" text="1313880423">
+                                       <font>
+                                          <Font name="Kodchasan Regular" size="16.0" />
+                                       </font></TextField>
                                  </children>
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="310.0">
@@ -309,7 +338,10 @@
                                           <Font name="Kodchasan Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="bankaccount_bank" prefHeight="40.0" style="-fx-background-radius: 10;" />
+                                    <TextField fx:id="bankaccount_bank" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" text="KBANK">
+                                       <font>
+                                          <Font name="Kodchasan Regular" size="16.0" />
+                                       </font></TextField>
                                  </children>
                                  <HBox.margin>
                                     <Insets left="50.0" />
@@ -333,26 +365,6 @@
                         <Insets left="20.0" top="50.0" />
                      </VBox.margin>
                   </VBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="cancel_button" mnemonicParsing="false" prefHeight="50.0" prefWidth="110.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-border-radius: 10; -fx-border-color: &quot;C2C2C2&quot;;" text="ยกเลิก">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets right="20.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button fx:id="save_button" layoutX="913.0" layoutY="35.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="110.0" style="-fx-background-radius: 10; -fx-background-color: &quot;0675DE&quot;;" text="บันทึก" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Button>
-                     </children>
-                     <VBox.margin>
-                        <Insets right="200.0" />
-                     </VBox.margin>
-                  </HBox>
                </children>
                <padding>
                   <Insets left="200.0" top="30.0" />

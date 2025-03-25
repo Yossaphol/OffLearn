@@ -102,33 +102,21 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <HBox alignment="CENTER_LEFT" prefHeight="261.0" prefWidth="203.0">
-                     <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="261.0" prefWidth="202.0">
-                           <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="324.0">
-                                 <children>
-                                    <Button fx:id="logout" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="45.0" prefWidth="147.0" style="-fx-background-color: transparent;" text="Logout" textFill="#f40000">
-                                       <font>
-                                          <Font name="Kodchasan Bold" size="20.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fx:id="logout_btn" fitHeight="26.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../../img/icon/logout.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                 </children>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </HBox>
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
+                  <Button fx:id="logout" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="49.0" prefWidth="147.0" style="-fx-background-color: transparent;" text="Logout" textFill="#f40000">
+                     <font>
+                        <Font name="Kodchasan Bold" size="20.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fx:id="logout_btn" fitHeight="26.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/icon/logout.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                </children>
             </HBox>
             <HBox fx:id="navPopup" alignment="CENTER" maxHeight="50.0" maxWidth="970.0" minHeight="43.0" prefHeight="54.0" prefWidth="900.0" style="-fx-background-color: white; -fx-background-radius: 20;" visible="false">

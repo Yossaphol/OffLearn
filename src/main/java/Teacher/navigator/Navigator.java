@@ -27,7 +27,7 @@ public class Navigator {
     }
 
     public void inboxRoute(MouseEvent event){
-       navigateTo("/fxml/Teacher/inbox/pChat.fxml", event);
+       navigateTo("/fxml/Teacher/pChat.fxml", event);
        navCtrl.setCurrentPage("inboxLabel");
     }
 

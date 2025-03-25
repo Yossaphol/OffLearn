@@ -85,7 +85,7 @@ public class dashboardController implements Initializable {
             stage.setWidth(stage.getWidth() + 1);
             stage.setHeight(stage.getHeight() + 1);
             searhbar_container.getScene().getRoot().requestLayout();
-            searhbar_container.getScene().getRoot().applyCss(); 
+            searhbar_container.getScene().getRoot().applyCss();
         });
 
     }
