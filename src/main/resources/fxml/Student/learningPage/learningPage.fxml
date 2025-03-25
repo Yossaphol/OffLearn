@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -81,7 +82,7 @@
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
                                                       </Button>
-                                                      <Slider fx:id="sliderVolume" minWidth="0.0" prefHeight="30.0" prefWidth="152.0">
+                                                      <Slider fx:id="sliderVolume" minWidth="0.0" prefHeight="30.0" prefWidth="152.0" stylesheets="@../../../css/learningPage.css">
                                                          <HBox.margin>
                                                             <Insets />
                                                          </HBox.margin>
@@ -141,7 +142,7 @@
                                                       <Insets top="5.0" />
                                                    </padding>
                                                 </HBox>
-                                                <Slider fx:id="sliderTime" maxHeight="1.0" minHeight="1.0" minWidth="-Infinity" prefHeight="1.0" prefWidth="720.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                                <Slider fx:id="sliderTime" maxHeight="1.0" minHeight="1.0" minWidth="-Infinity" prefHeight="1.0" prefWidth="720.0" stylesheets="@../../../css/learningPage.css" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                                              </children>
                                           </AnchorPane>
                                        </children>
@@ -173,6 +174,9 @@
                                                       </Circle>
                                                       <Label fx:id="catName" text="catName" />
                                                    </children>
+                                                   <VBox.margin>
+                                                      <Insets top="4.0" />
+                                                   </VBox.margin>
                                                 </HBox>
                                              </children>
                                           </VBox>
@@ -317,7 +321,7 @@
                                                       <Insets left="25.0" />
                                                    </VBox.margin>
                                                 </Label>
-                                                <ScrollPane hbarPolicy="NEVER" prefHeight="240.0" prefWidth="331.0" styleClass="scroll-panej" stylesheets="@../../../css/Home.css">
+                                                <ScrollPane hbarPolicy="NEVER" prefHeight="240.0" prefWidth="331.0" styleClass="scroll-panej" stylesheets="@../../../css/Home.css" vbarPolicy="NEVER">
                                                   <content>
                                                     <AnchorPane minHeight="0.0" minWidth="0.0">
                                                          <children>
@@ -371,21 +375,24 @@
                               </HBox>
                               <VBox prefHeight="1057.0" prefWidth="848.0">
                                  <children>
-                                    <HBox prefHeight="58.0" prefWidth="753.0">
+                                    <HBox prefHeight="115.0" prefWidth="746.0">
                                        <children>
                                           <Circle fx:id="userimg" fill="DODGERBLUE" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
                                           <VBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="776.0">
                                              <children>
-                                                <TextArea fx:id="commentinput" prefHeight="129.0" prefWidth="671.0" promptText="comment here" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 15; -fx-background-radius: 15;" stylesheets="@../../../css/Home.css">
-                                                   <VBox.margin>
-                                                      <Insets left="25.0" />
-                                                   </VBox.margin>
+                                                <TextArea fx:id="commentinput" prefHeight="200.0" prefWidth="200.0" promptText="แสดงความคิดเห็น" style="-fx-border-color: #c4c4c4;" styleClass="scroll-panej" wrapText="true">
                                                    <font>
                                                       <Font name="Noto Sans Thai Regular" size="16.0" />
                                                    </font>
+                                                   <VBox.margin>
+                                                      <Insets left="5.0" />
+                                                   </VBox.margin>
+                                                   <stylesheets>
+                                                      <URL value="@../../../css/learningPage.css" />
+                                                      <URL value="@../../../css/Home.css" />
+                                                   </stylesheets>
                                                 </TextArea>
-                                             </children>
-                                          </VBox>
+                                             </children></VBox>
                                        </children>
                                     </HBox>
                                     <VBox prefHeight="63.0" prefWidth="848.0">

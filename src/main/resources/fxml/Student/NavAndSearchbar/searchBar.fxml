@@ -23,7 +23,7 @@
                <children>
                   <StackPane alignment="TOP_LEFT" maxHeight="50.0" prefHeight="50.0" prefWidth="538.0" style="-fx-border-radius: 27px;">
                      <children>
-                        <TextField prefHeight="47.0" prefWidth="670.0" promptText="เริ่มต้นการเรียนรู้......" style="-fx-background-radius: 27; -fx-border-color: #C2C2C2; -fx-background-color: white; -fx-border-radius: 27;">
+                        <TextField prefHeight="47.0" prefWidth="670.0" promptText="เริ่มต้นการเรียนรู้......" styleClass="text-field" stylesheets="@../../../css/searchBar.css">
                            <font>
                               <Font name="Noto Sans Thai Regular" size="16.0" />
                            </font>
