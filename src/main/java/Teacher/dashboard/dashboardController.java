@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
@@ -44,7 +45,6 @@ public class dashboardController implements Initializable {
     public VBox overview_revenue_container;
     public VBox month_selector;
     public Button month_select;
-    public Button edit_profile;
     public Button save_change;
 
 
@@ -56,7 +56,6 @@ public class dashboardController implements Initializable {
         effectMethod.hoverEffect(withdrawBtn);
         effectMethod.hoverEffect(course_btn);
         effectMethod.hoverEffect(withdraw_btn1);
-        effectMethod.hoverEffect(save_change);
 
         effectMethod.applyHoverEffectToInside(month_selector);
 
@@ -68,7 +67,6 @@ public class dashboardController implements Initializable {
         hoverEffect(course_container_table);
         hoverEffect(overview_revenue_container);
 
-        save_change.setVisible(false);
         closePopupAuto();
 
         displayNavbar();
@@ -284,53 +282,22 @@ public class dashboardController implements Initializable {
     }
 
 
-    @FXML
-    private void editProfile(ActionEvent event){
-        Button btn = (Button) event.getSource();
-        switch (btn.getId()){
-            case "edit_profile":
-                edit_profile.setVisible(false);
-                save_change.setVisible(true);
-                displayProfileBoxEdit();
-                break;
-            case "save_change":
-                save_change.setVisible(false);
-                edit_profile.setVisible(true);
-                displayProfileBox();
-                break;
-            default:
-                save_change.setVisible(false);
-                edit_profile.setVisible(true);
-                displayProfileBox();
-        }
-    }
 
     private void displayProfileBox() {
-        loadWithTransition("/fxml/Teacher/statistics/dashboardProfile.fxml");
-    }
-
-    private void displayProfileBoxEdit() {
-        loadWithTransition("/fxml/Teacher/statistics/dashboardProfileEdit.fxml");
-    }
-
-    private void loadWithTransition(String fxmlPath) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            HBox newContent = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Teacher/statistics/dashboardProfile.fxml"));
+            Parent root = loader.load();
+            dashboardProfileController controller = loader.getController();
 
-            FadeTransition fadeOut = new FadeTransition(Duration.millis(200), dashboard_profile);
-            fadeOut.setFromValue(1.0);
-            fadeOut.setToValue(0.0);
-            fadeOut.setOnFinished(event -> {
-                dashboard_profile.getChildren().setAll(newContent);
+            controller.setProfileDetail(
+                    "Wirayabovorn Boonpriam",
+                    "Junior software developer",
+                    "/img/Picture/computer.jpg",
+                    674,
+                    210,
+                    4);
 
-                FadeTransition fadeIn = new FadeTransition(Duration.millis(200), dashboard_profile);
-                fadeIn.setFromValue(0.0);
-                fadeIn.setToValue(1.0);
-                fadeIn.play();
-            });
-
-            fadeOut.play();
+            dashboard_profile.getChildren().add(root);
         } catch (IOException e) {
             e.printStackTrace();
         }

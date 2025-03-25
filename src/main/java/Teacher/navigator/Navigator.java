@@ -1,6 +1,8 @@
 package Teacher.navigator;
 
+import Student.navBarAndSearchbar.navBarController;
 import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -11,22 +13,32 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 
+
+
 public class Navigator {
 
+    private static navbarController navCtrl;
+    public static void setNavBarController(navbarController navController) {
+        navCtrl = navController;
+    }
     public void dashboardRoute(MouseEvent event){
         navigateTo("/fxml/Teacher/statistics/dashboard.fxml", event);
+        navCtrl.setCurrentPage("dashboardLabel");
     }
 
     public void inboxRoute(MouseEvent event){
-    //    navigateTo("/fxml/Teacher/inbox/pChat.fxml", event);
+       navigateTo("/fxml/Teacher/inbox/pChat.fxml", event);
+       navCtrl.setCurrentPage("inboxLabel");
     }
 
     public void courseRoute(MouseEvent event){
-        navigateTo("/fxml/Teacher/course.fxml", event);
+        navigateTo("/fxml/Teacher/courseManagement/course.fxml", event);
+        navCtrl.setCurrentPage("courseLabel");
     }
 
     public void withdrawRoute(MouseEvent event){
         navigateTo("/fxml/Teacher/showBalance/withdraw.fxml", event);
+
     }
 
     public void courseEditRoute(MouseEvent event){
@@ -51,6 +63,7 @@ public class Navigator {
 
     public void settingRoute(MouseEvent event){
         navigateTo("/fxml/Teacher/setting/setting.fxml", event);
+        navCtrl.setCurrentPage("settingLabel");
     }
 
 
@@ -65,30 +78,33 @@ public class Navigator {
 
             root.setOpacity(0);
             stage.setScene(scene);
-
-            stage.setFullScreen(true);
-            stage.setFullScreenExitHint("");
-
-            stage.fullScreenProperty().addListener((obs, wasFullScreen, isNowFullScreen) -> {
-                if (!isNowFullScreen) {
-                    stage.setFullScreen(false);
-                    stage.setMaximized(true);
-                }
-            });
-
             stage.show();
+
+
+            //Refresh layout when page change
+            Platform.runLater(() -> {
+                stage.setWidth(stage.getWidth() - 1);
+                stage.setHeight(stage.getHeight() - 1);
+                stage.setWidth(stage.getWidth() + 1);
+                stage.setHeight(stage.getHeight() + 1);
+            });
 
             FadeTransition fadeIn = new FadeTransition(Duration.millis(300), root);
             fadeIn.setFromValue(0);
             fadeIn.setToValue(1);
             fadeIn.play();
 
+            stage.setFullScreen(false);
+            stage.setMaximized(true);
+
         } catch (IOException e) {
+            System.err.println("Error loading FXML file: " + fxmlPath);
             e.printStackTrace();
         }
     }
 
-    public void navigateTo(String fxmlPath, Stage stage) {
+
+  /*  public void navigateTo(String fxmlPath, Stage stage) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
@@ -108,6 +124,6 @@ public class Navigator {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 }

@@ -32,34 +32,6 @@
             </Label>
             <HBox alignment="CENTER_LEFT" prefHeight="21.0" prefWidth="766.0">
                <children>
-                  <ImageView fx:id="oneStar" fitHeight="29.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../img/icon/star%20(2).png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="twoStar" fitHeight="29.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../img/icon/star%20(2).png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="threeStar" fitHeight="29.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../img/icon/star%20(2).png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="fourStar" fitHeight="29.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="total_review" text="total review amount ex.12,300" textFill="#a8a8a8">
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="21.0" prefWidth="766.0">
-               <children>
                   <Button fx:id="like_btn" mnemonicParsing="false" style="-fx-background-color: transparent;" text="like amount">
                      <graphic>
                         <ImageView fitHeight="70.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -69,7 +41,7 @@
                         </ImageView>
                      </graphic>
                      <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="DEFAULT" />
                      </cursor>
                   </Button>
                   <Button fx:id="dislike_btn" mnemonicParsing="false" style="-fx-background-color: transparent;" text="dislike amount">
@@ -81,7 +53,7 @@
                         </ImageView>
                      </graphic>
                      <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="DEFAULT" />
                      </cursor>
                   </Button>
                </children>
@@ -89,7 +61,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </HBox>
-            <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Course amount" textFill="#0675de">
+            <Button fx:id="courseAmount" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Course amount" textFill="#0675de">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>
@@ -109,5 +81,17 @@
             </Button>
          </children>
       </VBox>
+      <Button fx:id="editProfile" mnemonicParsing="false" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="46.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../img/icon/edit.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </HBox>

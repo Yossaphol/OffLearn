@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" style="-fx-background-color: #FBFBFB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.showBalance.withdrawController">
    <children>
       <HBox fx:id="navbarContainer" prefHeight="135.0" prefWidth="1440.0" />
       <HBox prefHeight="910.0" prefWidth="1440.0">
@@ -35,7 +36,7 @@
                                  <children>
                                     <HBox alignment="BOTTOM_LEFT" prefHeight="102.0" prefWidth="648.0">
                                        <children>
-                                          <Label text="20,0000.00">
+                                          <Label fx:id="totalMoney" text="20,0000.00">
                                              <font>
                                                 <Font name="Kodchasan Bold" size="64.0" />
                                              </font>
@@ -61,7 +62,7 @@
                                                 <Font name="Noto Sans Thai Bold" size="24.0" />
                                              </font>
                                           </Label>
-                                          <Label text="111-9600-11559-9" textFill="#0675de">
+                                          <Label fx:id="accountNo" text="111-9600-11559-9" textFill="#0675de">
                                              <font>
                                                 <Font name="Kodchasan Bold" size="24.0" />
                                              </font>
@@ -75,18 +76,25 @@
                                                 <Font name="Noto Sans Thai Bold" size="24.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Wirayabovorn Boonpriam" textFill="#0675de">
+                                          <Label fx:id="AccountName" text="Wirayabovorn Boonpriam" textFill="#0675de">
                                              <font>
                                                 <Font name="Kodchasan Bold" size="24.0" />
                                              </font>
                                           </Label>
                                        </children>
                                     </VBox>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../img/icon/edit.png" />
-                                       </image>
-                                    </ImageView>
+                                    <Button fx:id="edit" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../img/icon/edit.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0">
@@ -108,10 +116,13 @@
                                  </children>
                               </HBox>
                               <Pane prefHeight="49.0" prefWidth="853.0" />
-                              <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="162.0" style="-fx-background-color: #0675DE; -fx-background-radius: 8;" text="ถอนเงิน" textFill="WHITE">
+                              <Button fx:id="withdrawBtn" mnemonicParsing="false" prefHeight="45.0" prefWidth="162.0" style="-fx-background-color: #0675DE; -fx-background-radius: 8;" text="ถอนเงิน" textFill="WHITE">
                                  <font>
                                     <Font name="Noto Sans Thai Bold" size="20.0" />
                                  </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                               <Label text="*โปรดตรวจสอบความถูกต้องของบันชีรับเงิน" textFill="#868686">
                                  <font>

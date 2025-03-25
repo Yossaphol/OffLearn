@@ -52,6 +52,7 @@ public class navBarController implements Initializable {
     public HBox settingBtn;
     public Button settingBtn1;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         instance = this;
