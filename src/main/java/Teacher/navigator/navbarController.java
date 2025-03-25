@@ -39,6 +39,7 @@ public class navbarController implements Initializable {
     public Label courseLabel;
     public Label inboxLabel;
     public Label settingLabel;
+    public HBox logo;
 
 
     private String currentPage;
@@ -210,6 +211,7 @@ public class navbarController implements Initializable {
 
         //Dashboard
         dashboard.setOnMouseClicked(nav::dashboardRoute);
+        logo.setOnMouseClicked(nav::dashboardRoute);
 
         //Course
         course.setOnMouseClicked(nav::courseRoute);

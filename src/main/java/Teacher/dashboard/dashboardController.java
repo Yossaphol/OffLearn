@@ -23,6 +23,7 @@ import Student.HomeAndNavigation.HomeController;
 import Teacher.navigator.Navigator;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class dashboardController implements Initializable {
@@ -76,6 +77,16 @@ public class dashboardController implements Initializable {
         setupLinechartEnroll();
         setupStdChart();
         route();
+
+        Platform.runLater(() -> {
+            Stage stage = (Stage) searhbar_container.getScene().getWindow();
+            stage.setWidth(stage.getWidth() - 1);
+            stage.setHeight(stage.getHeight() - 1);
+            stage.setWidth(stage.getWidth() + 1);
+            stage.setHeight(stage.getHeight() + 1);
+            searhbar_container.getScene().getRoot().requestLayout();
+            searhbar_container.getScene().getRoot().applyCss(); 
+        });
 
     }
 
