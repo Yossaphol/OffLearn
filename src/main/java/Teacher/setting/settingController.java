@@ -1,5 +1,8 @@
 package Teacher.setting;
 
+import Student.HomeAndNavigation.HomeController;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -53,6 +56,17 @@ public class settingController implements Initializable {
     public Button cancel_button;
     public Button save_button;
     public PasswordField security_password;
+    public HBox saveCancelBtn;
+    public HBox saveCancelBtn1;
+    public Button cancelChange1;
+    public Button saveChange1;
+    public Button saveChange;
+    public Button cancelChange;
+
+    private boolean isProfileEditing = false;
+    private boolean isPaymentEditing = false;
+
+    HomeController ef = new HomeController();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -60,8 +74,23 @@ public class settingController implements Initializable {
 
         security_password.setText("********");
 
+        setRadioGroup();
+
+        setEffect();
 
     }
+
+    private void setEffect(){
+        ef.hoverEffect(security_change_button);
+        ef.hoverEffect(saveChange);
+        ef.hoverEffect(cancelChange);
+
+        ef.hoverEffect(bankaccount_change_button);
+        ef.hoverEffect(saveChange1);
+        ef.hoverEffect(cancelChange1);
+
+    }
+
     private void displayNavbar(){
         try {
             FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/navBar/navBar.fxml"));
@@ -71,4 +100,136 @@ public class settingController implements Initializable {
             e.printStackTrace();
         }
     }
+
+
+
+    //เปิด-ปิด การแก้ไข TextField Profile
+    public void editProfile(ActionEvent event){
+        if(!isProfileEditing){
+            privateinfo_firstname.setDisable(isProfileEditing);
+            privateinfo_lastname.setDisable(isProfileEditing);
+            privateinfo_gmail.setDisable(isProfileEditing);
+            security_username.setDisable(isProfileEditing);
+            security_password.setDisable(isProfileEditing);
+            security_change_button.setVisible(isProfileEditing);
+
+            isProfileEditing = true;
+            saveCancelBtn.setVisible(isProfileEditing);
+        }else{
+            privateinfo_firstname.setDisable(isProfileEditing);
+            privateinfo_lastname.setDisable(isProfileEditing);
+            privateinfo_gmail.setDisable(isProfileEditing);
+            security_username.setDisable(isProfileEditing);
+            security_password.setDisable(isProfileEditing);
+            security_change_button.setVisible(isProfileEditing);
+
+            isProfileEditing = false;
+            saveCancelBtn.setVisible(isProfileEditing);
+        }
+    }
+    //เปิด-ปิด การแก้ไข TextField Profile
+    public void editProfile(){
+        if(!isProfileEditing){
+            privateinfo_firstname.setDisable(isProfileEditing);
+            privateinfo_lastname.setDisable(isProfileEditing);
+            privateinfo_gmail.setDisable(isProfileEditing);
+            security_username.setDisable(isProfileEditing);
+            security_password.setDisable(isProfileEditing);
+            security_change_button.setVisible(isProfileEditing);
+
+            isProfileEditing = true;
+            saveCancelBtn.setVisible(isProfileEditing);
+        }else{
+            privateinfo_firstname.setDisable(isProfileEditing);
+            privateinfo_lastname.setDisable(isProfileEditing);
+            privateinfo_gmail.setDisable(isProfileEditing);
+            security_username.setDisable(isProfileEditing);
+            security_password.setDisable(isProfileEditing);
+            security_change_button.setVisible(isProfileEditing);
+
+            isProfileEditing = false;
+            saveCancelBtn.setVisible(isProfileEditing);
+        }
+    }
+
+
+    //เปิด-ปิด การแก้ไข TextField Payment
+    public void editPayment(ActionEvent event){
+        if(!isPaymentEditing){
+            bankaccount_firstname.setDisable(isPaymentEditing);
+            bankaccount_lastname.setDisable(isPaymentEditing);
+            bankaccount_number.setDisable(isPaymentEditing);
+            bankaccount_bank.setDisable(isPaymentEditing);
+            bankaccount_change_button.setVisible(isProfileEditing);
+
+            isPaymentEditing = true;
+            saveCancelBtn1.setVisible(isPaymentEditing);
+        }else{
+            bankaccount_firstname.setDisable(isPaymentEditing);
+            bankaccount_lastname.setDisable(isPaymentEditing);
+            bankaccount_number.setDisable(isPaymentEditing);
+            bankaccount_bank.setDisable(isPaymentEditing);
+            bankaccount_change_button.setVisible(isPaymentEditing);
+
+            isPaymentEditing = false;
+            saveCancelBtn1.setVisible(isPaymentEditing);
+        }
+    }
+    //เปิด-ปิด การแก้ไข TextField Payment
+    public void editPayment() {
+        if (!isPaymentEditing) {
+            bankaccount_firstname.setDisable(isPaymentEditing);
+            bankaccount_lastname.setDisable(isPaymentEditing);
+            bankaccount_number.setDisable(isPaymentEditing);
+            bankaccount_bank.setDisable(isPaymentEditing);
+            bankaccount_change_button.setVisible(isPaymentEditing);
+
+            isPaymentEditing = true;
+            saveCancelBtn1.setVisible(isPaymentEditing);
+        } else {
+            bankaccount_firstname.setDisable(isPaymentEditing);
+            bankaccount_lastname.setDisable(isPaymentEditing);
+            bankaccount_number.setDisable(isPaymentEditing);
+            bankaccount_bank.setDisable(isPaymentEditing);
+            bankaccount_change_button.setVisible(isPaymentEditing);
+
+            isPaymentEditing = false;
+            saveCancelBtn1.setVisible(isPaymentEditing);
+        }
+    }
+
+    @FXML
+    private void cancelChangeOnPaymentEdit(ActionEvent event){
+        editPayment();
+    }
+
+
+    @FXML
+    private void saveProfileEdit(ActionEvent event){
+
+        editProfile();
+    }
+
+    //Group radio button
+    private void setRadioGroup(){
+        ToggleGroup notification = new ToggleGroup();
+        notification_quiz_y.setToggleGroup(notification);
+        notification_quiz_n.setToggleGroup(notification);
+
+
+        ToggleGroup messageGroup = new ToggleGroup();
+        notification_message_y.setToggleGroup(messageGroup);
+        notification_message_n.setToggleGroup(messageGroup);
+
+        ToggleGroup upComingCourse = new ToggleGroup();
+        notification_startingcourse_y.setToggleGroup(upComingCourse);
+        notification_startingcourse_n.setToggleGroup(upComingCourse);
+
+
+        //Set default
+        notification_quiz_y.setSelected(true);
+        notification_message_y.setSelected(true);
+        notification_startingcourse_y.setSelected(true);
+    }
+
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -13,143 +14,23 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.inbox.pChat.pChatServerController">
+<HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.inbox.pChat.pChatServerController">
    <children>
       <BorderPane fx:id="borderPane" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="SOMETIMES">
          <top>
-            <HBox alignment="CENTER" prefHeight="134.0" prefWidth="200.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;" BorderPane.alignment="CENTER_LEFT">
-               <children>
-                  <ImageView fitHeight="72.0" fitWidth="79.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../img/icon/Group%2022%20(2).png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets left="-50.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Off">
-                           <font>
-                              <Font name="Kodchasan Bold" size="24.0" />
-                           </font>
-                        </Label>
-                        <Label text="Learn" textFill="#0675de">
-                           <font>
-                              <Font name="Kodchasan Bold" size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </VBox>
-                  <StackPane alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="630.0" style="-fx-background-radius: 27;">
-                     <children>
-                        <TextField prefHeight="60.0" prefWidth="560.0" promptText="เริ่มต้นการเรียนรู้......" style="-fx-background-radius: 27;">
-                           <font>
-                              <Font name="Kodchasan Regular" size="16.0" />
-                           </font>
-                           <StackPane.margin>
-                              <Insets left="100.0" right="15.0" />
-                           </StackPane.margin>
-                           <padding>
-                              <Insets left="80.0" />
-                           </padding>
-                        </TextField>
-                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../img/icon/magnifying-glass-solid.png" />
-                           </image>
-                           <StackPane.margin>
-                              <Insets left="120.0" />
-                           </StackPane.margin>
-                        </ImageView>
-                     </children>
-                  </StackPane>
-                  <HBox alignment="CENTER" prefHeight="133.0" prefWidth="118.0">
-                     <children>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../img/icon/inbox.png" />
-                           </image>
-                        </ImageView>
-                        <Label text="Inbox">
-                           <font>
-                              <Font name="Kodchasan Bold" size="20.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <Button fx:id="myCourse" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" style="-fx-background-color: &quot;8100CC&quot;; -fx-background-radius: 10;" text="คอร์สของคุณ" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Kodchasan Bold" size="16.0" />
-                     </font>
-                  </Button>
-                  <StackPane prefHeight="133.0" prefWidth="37.0">
-                     <children>
-                        <Circle fill="WHITE" radius="16.0" stroke="#898989" strokeType="INSIDE" />
-                        <ImageView fitHeight="22.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../img/icon/grocery-store.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                     <HBox.margin>
-                        <Insets left="30.0" />
-                     </HBox.margin>
-                  </StackPane>
-                  <ImageView fitHeight="22.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../img/icon/settings.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets left="15.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <Line endX="95.0" endY="-63.70000457763672" layoutX="95.0" layoutY="100.0" opacity="0.19" startX="95.0" startY="-100.0">
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                  </Line>
-                  <HBox alignment="CENTER" prefHeight="25.0" prefWidth="110.0">
-                     <children>
-                        <ImageView fitHeight="24.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../img/icon/right-from-bracket-solid.png" />
-                           </image>
-                        </ImageView>
-                        <Label text="Logout" textFill="RED">
-                           <font>
-                              <Font name="Kodchasan Bold" size="20.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="5.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </HBox>
-               </children>
+            <HBox fx:id="navBarContainer" alignment="CENTER" prefHeight="134.0" prefWidth="200.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: #FBFBFB;" BorderPane.alignment="CENTER_LEFT">
                <BorderPane.margin>
                   <Insets />
                </BorderPane.margin>
+               <padding>
+                  <Insets bottom="10.0" top="30.0" />
+               </padding>
             </HBox>
          </top>
          <left>
-            <VBox fx:id="privateBar" prefHeight="890.0" prefWidth="300.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;" BorderPane.alignment="CENTER">
+            <VBox fx:id="privateBar" prefHeight="890.0" prefWidth="300.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-border-width: 0px 1px 0px 0px; -fx-background-color: #FBFBFB;" BorderPane.alignment="CENTER">
                <children>
                   <VBox prefHeight="98.0" prefWidth="298.0">
                      <children>
@@ -164,9 +45,9 @@
                               <Insets top="20.0" />
                            </padding>
                         </Label>
-                        <StackPane alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="298.0" style="-fx-background-radius: 10;">
+                        <StackPane alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="62.0" prefWidth="298.0" style="-fx-background-radius: 10;">
                            <children>
-                              <TextField prefHeight="27.0" prefWidth="238.0" promptText="ค้นหาบทสนทนา" style="-fx-background-radius: 10;">
+                              <TextField prefHeight="27.0" prefWidth="238.0" promptText="ค้นหาบทสนทนา" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../css/Home.css">
                                  <StackPane.margin>
                                     <Insets left="30.0" right="30.0" top="10.0" />
                                  </StackPane.margin>
@@ -186,7 +67,7 @@
                         </StackPane>
                      </children>
                   </VBox>
-                  <VBox prefHeight="50.0" prefWidth="298.0">
+                  <VBox minHeight="-Infinity" prefHeight="75.0" prefWidth="298.0">
                      <children>
                         <Label text="สาธารณะ" textFill="#0675de">
                            <font>
@@ -221,13 +102,16 @@
                            <VBox.margin>
                               <Insets left="20.0" top="10.0" />
                            </VBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </HBox>
                      </children>
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
                   </VBox>
-                  <Pane prefHeight="28.0" prefWidth="298.0" />
+                  <Pane minHeight="-Infinity" prefHeight="28.0" prefWidth="298.0" style="-fx-background-color: #FBFBFB;" />
                   <Label text="ส่วนตัว" textFill="#0675de">
                      <font>
                         <Font name="Kodchasan Bold" size="14.0" />
@@ -236,14 +120,14 @@
                         <Insets bottom="10.0" left="20.0" />
                      </VBox.margin>
                   </Label>
-                  <ListView fx:id="studentList" prefHeight="568.0" prefWidth="298.0" />
+                  <ListView fx:id="studentList" prefHeight="568.0" prefWidth="298.0" style="-fx-background-color: #FBFBFB;" />
                </children>
             </VBox>
          </left>
          <center>
             <VBox fx:id="pChatDisplay" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="155.0" prefWidth="1140.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="155.0" prefWidth="1140.0" style="-fx-background-color: #FBFBFB; -fx-border-color: &quot;D8D9DA&quot;; -fx-border-width: 0px 0px  1px 0px;">
                      <children>
                         <ImageView fx:id="currStudentImg" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
@@ -260,17 +144,20 @@
                         </Label>
                      </children>
                   </HBox>
-                  <ScrollPane fx:id="spMain" prefHeight="482.0" prefWidth="1140.0" vbarPolicy="ALWAYS">
+                  <ScrollPane fx:id="spMain" hbarPolicy="NEVER" prefHeight="482.0" prefWidth="1140.0" style="-fx-background-color: #FBFBFB;" stylesheets="@../../css/Home.css" vbarPolicy="ALWAYS">
                      <content>
-                        <VBox fx:id="vboxMessage" prefHeight="155.0" prefWidth="1124.0" />
+                        <VBox fx:id="vboxMessage" prefHeight="155.0" prefWidth="1124.0" style="-fx-background-color: #FBFBFB;" />
                      </content>
                   </ScrollPane>
-                  <HBox alignment="CENTER" prefHeight="253.0" prefWidth="1140.0" style="-fx-background-color: white;">
+                  <HBox alignment="CENTER" prefHeight="253.0" prefWidth="1140.0" style="-fx-background-color: #fbfbfb; -fx-border-color: &quot;D8D9DA&quot;; -fx-border-width: 1px 0px 0px 0px;">
                      <children>
                         <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="32.0" style="-fx-background-color: &quot;0675DE&quot;; -fx-background-radius: 15 0 0 15;" text="+" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                         <TextField fx:id="tfMessage" prefHeight="51.0" prefWidth="320.0" promptText="เขียนข้อความ" style="-fx-background-radius: 0 15 15 0; -fx-border-color: &quot;0675DE&quot;; -fx-border-radius: 0 15 15 0;">
                            <HBox.margin>
@@ -279,14 +166,30 @@
                            <padding>
                               <Insets left="30.0" />
                            </padding>
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                           <font>
+                              <Font name="Noto Sans Thai Regular" size="14.0" />
+                           </font>
                         </TextField>
-                        <Button fx:id="sendButton" mnemonicParsing="false" style="-fx-background-color: &quot;0675DE&quot;; -fx-background-radius: 15;" text="SEND" textFill="WHITE">
+                        <Button fx:id="sendButton" mnemonicParsing="false" style="-fx-background-color: &quot;0675DE&quot;; -fx-background-radius: 15;" textFill="WHITE">
                            <font>
                               <Font name="Kodchasan Bold" size="18.0" />
                            </font>
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../img/icon/caret-right-solid.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                      </children>
                   </HBox>
