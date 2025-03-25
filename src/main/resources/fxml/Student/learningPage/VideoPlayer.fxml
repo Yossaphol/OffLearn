@@ -22,7 +22,7 @@
          <children>
             <HBox fx:id="controlpanesection" alignment="CENTER_LEFT" minHeight="48.0" minWidth="746.0" prefHeight="48.0" prefWidth="746.0" style="-fx-background-color: linear-gradient(    from 0% 100% to 0% 0%,    #00000080 0%,   /* semi-transparent black at the bottom */    #00000000 100%  /* fully transparent at the top */);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
-                  <Button fx:id="btnPlay" layoutX="10.0" layoutY="19.0" maxHeight="36.0" maxWidth="28.0" minHeight="36.0" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                  <Button fx:id="btnPlay" layoutX="10.0" layoutY="19.0" maxHeight="36.0" maxWidth="28.0" minHeight="36.0" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -34,7 +34,7 @@
                         <Insets left="20.0" right="15.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnSound" maxHeight="36.0" maxWidth="28.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                  <Button fx:id="btnSound" maxHeight="36.0" maxWidth="28.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -46,7 +46,7 @@
                         <Insets left="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Slider fx:id="sliderVolume" minWidth="0.0" prefHeight="30.0" prefWidth="152.0">
+                  <Slider fx:id="sliderVolume" minWidth="0.0" prefHeight="30.0" prefWidth="152.0" style="-fx-cursor: hand;" stylesheets="@../../../css/learningPage.css">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -71,7 +71,7 @@
                      </children>
                   </HBox>
                   <Region fx:id="regionpart" minHeight="43.0" minWidth="191.0" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="btnSetting" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                  <Button fx:id="btnSetting" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -83,7 +83,7 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnFullscreen" mnemonicParsing="false" prefHeight="32.0" prefWidth="35.0" style="-fx-background-color: transparent;">
+                  <Button fx:id="btnFullscreen" mnemonicParsing="false" prefHeight="32.0" prefWidth="35.0" style="-fx-background-color: transparent; -fx-cursor: hand;">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
                            <image>
@@ -100,7 +100,7 @@
                   <Insets top="5.0" />
                </padding>
             </HBox>
-            <Slider fx:id="sliderTime" maxHeight="1.0" minHeight="1.0" minWidth="-Infinity" prefHeight="1.0" prefWidth="720.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Slider fx:id="sliderTime" maxHeight="1.0" minHeight="1.0" minWidth="-Infinity" prefHeight="1.0" prefWidth="720.0" style="-fx-cursor: hand;" stylesheets="@../../../css/learningPage.css" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
          </children>
       </AnchorPane>
    </children>

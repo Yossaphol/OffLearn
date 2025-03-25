@@ -97,6 +97,7 @@ public class VideoPlayerManager implements Initializable {
         originalVolSliderWidth = sliderVolume.getPrefWidth();
         sliderVolume.setPrefWidth(0);     // collapsed by default
         sliderVolume.setVisible(false);
+        sliderVolume.getStyleClass().add("slider");
 
         mediaPlayer.setVolume(0.5);
 
@@ -105,10 +106,26 @@ public class VideoPlayerManager implements Initializable {
         // volume icon
         sliderVolume.valueProperty().addListener((obs, oldVal, newVal) -> {
             double volume = newVal.doubleValue();
-            userIsActive();          // keep panel visible
-            mediaPlayer.setVolume(volume);
-            updateVolumeIcon(volume);
+
+            userIsActive();                      // your method to keep controls visible
+            mediaPlayer.setVolume(volume);      // set volume
+            updateVolumeIcon(volume);           // update icon
+
+            // Dynamic fill using linear gradient
+            Platform.runLater(() -> {
+                Node track = sliderVolume.lookup(".track");
+                if (track != null) {
+                    double percent = volume * 100;
+                    String style = String.format(
+                            "-fx-background-color: linear-gradient(to right, #8100cc %.2f%%, #F6E6FF %.2f%%); " +
+                                    "-fx-background-radius: 5px; -fx-pref-height: 3px;",
+                            percent, percent
+                    );
+                    track.setStyle(style);
+                }
+            });
         });
+
 
         // binding
         mediaView.setMediaPlayer(mediaPlayer);
@@ -140,22 +157,38 @@ public class VideoPlayerManager implements Initializable {
 
         // Fullscreen button
         btnFullscreen.setOnAction(e -> toggleFullscreen());
-
+        sliderTime.getStyleClass().add("slider");
         // get duration
         mediaPlayer.setOnReady(() -> {
             sliderTime.setMax(mediaPlayer.getTotalDuration().toSeconds());
             lblTime.setText("00:00 / " + formatTime(mediaPlayer.getTotalDuration()));
+
+            // Initial fill
+            Platform.runLater(this::updateSliderTimeFill);
         });
 
         // Update time
         mediaPlayer.currentTimeProperty().addListener((obs, oldTime, newTime) -> {
             sliderTime.setValue(newTime.toSeconds());
             lblTime.setText(formatTime(newTime) + " / " + formatTime(mediaPlayer.getTotalDuration()));
+            updateSliderTimeFill(); // update fill
         });
+        sliderTime.valueChangingProperty().addListener((obs, wasChanging, isChanging) -> {
+            if (isChanging) {
+                updateSliderTimeFill();
+            }
+        });
+        sliderTime.valueProperty().addListener((obs, oldVal, newVal) -> {
+            if (sliderTime.isValueChanging()) {
+                updateSliderTimeFill();
+            }
+        });
+
 
         btnPlay.setOnAction(e -> togglePlayPause(mediaPlayer));
 
         // Seeking logic
+
         sliderTime.setOnMousePressed(e -> {
             userIsActive();
             if (mediaPlayer != null) {
@@ -214,6 +247,20 @@ public class VideoPlayerManager implements Initializable {
                         hideDelayTransition.stop();
                     }
                 });
+            }
+        });
+
+        Platform.runLater(() -> {
+            Node track = sliderVolume.lookup(".track");
+            if (track != null) {
+                double volume = sliderVolume.getValue();
+                double percent = volume * 100;
+                String style = String.format(
+                        "-fx-background-color: linear-gradient(to right, #8100cc %.2f%%, #F6E6FF %.2f%%); " +
+                                "-fx-background-radius: 5px; -fx-pref-height: 3px;",
+                        percent, percent
+                );
+                track.setStyle(style);
             }
         });
         sliderVolume.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> hideDelayTransition.stop());
@@ -322,6 +369,21 @@ public class VideoPlayerManager implements Initializable {
 
         btnSetting.setOnAction(ev -> {
             settingsMenu.show(btnSetting, Side.TOP, 0, -25);
+        });
+    }
+
+    private void updateSliderTimeFill() {
+        Platform.runLater(() -> {
+            Node track = sliderTime.lookup(".track");
+            if (track != null && sliderTime.getMax() > 0) {
+                double percent = sliderTime.getValue() / sliderTime.getMax() * 100;
+                String style = String.format(
+                        "-fx-background-color: linear-gradient(to right, #8100cc %.2f%%, #F6E6FF %.2f%%); " +
+                                "-fx-background-radius: 5px; -fx-pref-height: 3px;",
+                        percent, percent
+                );
+                track.setStyle(style);
+            }
         });
     }
 
