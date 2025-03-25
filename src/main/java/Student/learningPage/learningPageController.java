@@ -21,6 +21,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.control.Slider;
@@ -47,15 +48,12 @@ public class learningPageController implements Initializable {
     public HBox content;
     public Circle teacherImg;
     public Label teacherName;
-    public Label clipDescription;
     public Label role;
     public ScrollPane mainScrollPane;
     public Button btnLike;
     public Button btnDislike;
     public Button btnContectTeacher;
     public Button btnGloblalChat;
-    public Label countLike;
-    public Label countDislike;
     public Button btnOffLoad;
     public Label countPlaylist;
     public Button bntEp;
@@ -70,6 +68,10 @@ public class learningPageController implements Initializable {
     public Rectangle nextImgCourse;
     public Button btnSound;
     public Button btnFullscreen;
+    public Text clipDescription;
+    public Button btnEP;
+    public Button btnEP1;
+    public Label playlistcount;
     private ContextMenu settingsMenu;
     public Button btnSetting;
     public Slider sliderVolume;
@@ -98,6 +100,10 @@ public class learningPageController implements Initializable {
     private PauseTransition hideDelayTransition;
     final boolean[] wasPlaying = new boolean[1];
 
+    private int countLike = 224;
+    private int countDisLike = 17;
+
+
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         originalPrefWidth = videocontainer.getPrefWidth();
@@ -107,7 +113,7 @@ public class learningPageController implements Initializable {
         settingsMenu = new ContextMenu();
         HomeController method_home = new HomeController();
         Navigator method_navigator = new Navigator();
-        String videoPath = getClass().getResource("/videos/Test.mp4").toExternalForm(); // TEST VIDEO HERE
+        String videoPath = getClass().getResource("/videos/test.mp4").toExternalForm(); // TEST VIDEO HERE
         Media media = new Media(videoPath);
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         playIcon = new Image(getClass().getResource("/img/icon/play-button-arrowhead-solid.png").toExternalForm());
@@ -279,32 +285,38 @@ public class learningPageController implements Initializable {
 
         subject_name.setText("Test Subject");
         ep.setText("Test Episode : 0");
-        teacherName.setText("Puwanas Chaichitchaem");
+        teacherName.setText("Wirayabovorn Boonpriam");
         role.setText("ศาสตราจารย์");
         clipDescription.setText("ความรักกันไม่ได้หรอก ฉันชอบแอบมานานแล้ว พี่พรรลบ เขาเทอไม่รักฉัน เขาไม่แย่งเธอหรอก. 7 yrs. 2. ยะศิษย์ แดน เพ็งเซ้ง. คนอื่นไม่รู้ แต่กรูดูจนจบฮ่าๆๆ แหวงเเป๊ก เย๊กกะไฟฟ้า");
         method_home.loadAndSetImage(teacherImg, "/img/Profile/user.png");
-        bntEp.setText("Episode : 69");
+        btnEP.setText("Episode : 69");
+        btnEP1.setText("Episode : 70");
+
+        playlistcount.setText("("+2+")");
 
         labelPercent.setText("69%");
 
         nextCourseName.setText("DSA");
         nextTeacherName.setText("อาจารย์ขิม ใจดี");
-        category.setText("</>coding");
         method_home.loadAndSetImage(nextImgCourse, "/img/Profile/user.png");
 
-        countLike.setText("0");
-        countDislike.setText("0");
+        btnLike.setText(String.valueOf(countLike));
+        btnDislike.setText(String.valueOf(countDisLike));
+
+
         method_home.hoverEffect(btnContectTeacher);
         method_home.hoverEffect(btnGloblalChat);
         method_home.hoverEffect(btnLike);
         method_home.hoverEffect(btnDislike);
         method_home.hoverEffect(btnOffLoad);
-        method_home.hoverEffect(bntEp);
+        method_home.hoverEffect(btnEP);
+        method_home.hoverEffect(btnEP1);
         method_home.hoverEffect(nextCourse);
         method_home.hoverEffect(btnSound);
         method_home.hoverEffect(btnFullscreen);
         method_home.hoverEffect(btnPlay);
         method_home.hoverEffect(btnSetting);
+        method_home.hoverEffect(nextCourse);
 
     }
 

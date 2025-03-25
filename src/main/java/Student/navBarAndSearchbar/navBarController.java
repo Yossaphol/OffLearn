@@ -124,20 +124,19 @@ public class navBarController implements Initializable {
     }
 
 
-    public void handleLogout(ActionEvent event) {
+    public void handleLogout(ActionEvent event){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Warning");
         alert.setHeaderText(null);
         alert.setContentText("Are you sure you want to sign out?");
 
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
+        if (alert.showAndWait().get() == ButtonType.OK){
             SessionManager.getInstance().clearSession();
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/LoginSignup/login.fxml"));
-                Parent root = loader.load();
 
-                Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/LoginSingup/login.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) logoutBtn1.getScene().getWindow();
                 stage.setScene(new Scene(root));
                 stage.setTitle("Login Page");
                 stage.show();

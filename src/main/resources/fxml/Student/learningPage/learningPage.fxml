@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
@@ -21,6 +22,8 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
 <HBox fx:id="bg" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2093.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.learningPage.learningPageController">
    <children>
@@ -59,6 +62,9 @@
                                                          <HBox.margin>
                                                             <Insets left="20.0" right="15.0" />
                                                          </HBox.margin>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
                                                       </Button>
                                                       <Button fx:id="btnSound" maxHeight="36.0" maxWidth="28.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
                                                          <graphic>
@@ -71,6 +77,9 @@
                                                          <HBox.margin>
                                                             <Insets left="5.0" />
                                                          </HBox.margin>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
                                                       </Button>
                                                       <Slider fx:id="sliderVolume" minWidth="0.0" prefHeight="30.0" prefWidth="152.0">
                                                          <HBox.margin>
@@ -108,6 +117,9 @@
                                                          <HBox.margin>
                                                             <Insets right="15.0" />
                                                          </HBox.margin>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
                                                       </Button>
                                                       <Button fx:id="btnFullscreen" mnemonicParsing="false" prefHeight="32.0" prefWidth="35.0" style="-fx-background-color: transparent;">
                                                          <graphic>
@@ -120,6 +132,9 @@
                                                          <HBox.margin>
                                                             <Insets right="15.0" />
                                                          </HBox.margin>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
                                                       </Button>
                                                    </children>
                                                    <padding>
@@ -149,21 +164,16 @@
                                                       <Font size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="15.0" prefWidth="80.0" style="-fx-background-color: #8800cc50; -fx-background-radius: 5;">
+                                                <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="183.0">
                                                    <children>
-                                                      <Label fx:id="currentvideocategory" layoutX="3.0" layoutY="-2.0" text="&lt;/&gt;" textFill="#8100cc">
-                                                         <padding>
-                                                            <Insets right="5.0" />
-                                                         </padding>
-                                                         <font>
-                                                            <Font name="System Bold" size="12.0" />
-                                                         </font>
-                                                      </Label>
+                                                      <Circle fx:id="catPic" fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                         <HBox.margin>
+                                                            <Insets right="3.0" />
+                                                         </HBox.margin>
+                                                      </Circle>
+                                                      <Label fx:id="catName" text="catName" />
                                                    </children>
-                                                   <VBox.margin>
-                                                      <Insets top="5.0" />
-                                                   </VBox.margin>
-                                                </Pane>
+                                                </HBox>
                                              </children>
                                           </VBox>
                                        </children>
@@ -178,6 +188,9 @@
                                                    </image>
                                                 </ImageView>
                                              </graphic>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </Button>
                                        </children>
                                     </HBox>
@@ -185,7 +198,7 @@
                               </HBox>
                               <HBox prefHeight="354.0" prefWidth="848.0">
                                  <children>
-                                    <VBox prefHeight="349.0" prefWidth="415.0">
+                                    <VBox prefHeight="354.0" prefWidth="400.0">
                                        <children>
                                           <HBox prefHeight="67.0" prefWidth="415.0">
                                              <VBox.margin>
@@ -208,42 +221,55 @@
                                                 </VBox>
                                              </children>
                                           </HBox>
-                                          <VBox minHeight="77.0" prefWidth="415.0">
+                                          <VBox minHeight="77.0" minWidth="-Infinity" prefWidth="415.0" style="-fx-background-color: EFEFEF; -fx-background-radius: 15;">
                                              <children>
-                                                <Label fx:id="clipDescription" alignment="TOP_LEFT" lineSpacing="3.0" minHeight="73.0" prefWidth="415.0" style="-fx-border-radius: 15; -fx-background-color: EFEFEF; -fx-background-radius: 15;" text="description" textFill="#979191" textOverrun="CLIP" wrapText="true">
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                   <padding>
-                                                      <Insets left="15.0" top="8.0" />
-                                                   </padding>
-                                                </Label>
+                                                <TextFlow maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="132.0" prefWidth="395.0">
+                                                   <children>
+                                                      <Text fx:id="clipDescription" fill="#979191" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="528.13671875">
+                                                         <font>
+                                                            <Font name="Noto Sans Thai Regular" size="12.0" />
+                                                         </font>
+                                                      </Text>
+                                                   </children>
+                                                </TextFlow>
                                              </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
                                           </VBox>
                                           <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                              <VBox.margin>
                                                 <Insets top="15.0" />
                                              </VBox.margin>
                                              <children>
-                                                <Button fx:id="btnContectTeacher" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #8800cc; -fx-background-radius: 10; -fx-cursor: hand;" text="ติดต่อผู้สอน" textAlignment="CENTER" textFill="WHITE">
+                                                <Button fx:id="btnContectTeacher" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" prefWidth="184.0" style="-fx-background-color: #8800cc; -fx-background-radius: 10; -fx-cursor: hand;" text="ติดต่อผู้สอน" textAlignment="CENTER" textFill="WHITE">
                                                    <HBox.margin>
                                                       <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                                                    </HBox.margin>
                                                    <font>
-                                                      <Font name="System Bold" size="18.0" />
+                                                      <Font name="Noto Sans Thai Bold" size="17.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </Button>
-                                                <Button fx:id="btnGloblalChat" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #fff; -fx-background-radius: 10; -fx-border-color: #000; -fx-border-radius: 10; -fx-cursor: hand;" text="เข้าร่วมแชทสาธารณะ">
+                                                <Button fx:id="btnGloblalChat" mnemonicParsing="false" prefHeight="50.0" prefWidth="184.0" style="-fx-background-color: #fff; -fx-background-radius: 10; -fx-border-color: #000; -fx-border-radius: 10; -fx-cursor: hand;" text="เข้าร่วมแชทสาธารณะ">
                                                    <HBox.margin>
                                                       <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                                                    </HBox.margin>
                                                    <font>
-                                                      <Font size="18.0" />
+                                                      <Font name="Noto Sans Thai Bold" size="17.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </Button>
                                              </children>
                                           </HBox>
                                        </children>
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
                                     </VBox>
                                     <VBox prefHeight="354.0" prefWidth="380.0">
                                        <children>
@@ -252,54 +278,91 @@
                                                 <Insets top="10.0" />
                                              </VBox.margin>
                                              <children>
-                                                <Button fx:id="btnLike" maxHeight="30.0" maxWidth="30.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" textFill="TRANSPARENT">
+                                                <Button fx:id="btnLike" maxHeight="31.0" mnemonicParsing="false" prefHeight="31.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="&lt;Count Like Variable&gt;">
                                                    <graphic>
-                                                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fitHeight="22.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../../../img/icon/like.png" />
                                                          </image>
                                                       </ImageView>
                                                    </graphic>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </Button>
-                                                <Label fx:id="countLike" text="Like">
-                                                   <font>
-                                                      <Font size="15.0" />
-                                                   </font>
-                                                </Label>
-                                                <Button fx:id="btnDislike" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;">
+                                                <Button fx:id="btnDislike" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="&lt;Dislike count Variable&gt;">
                                                    <graphic>
-                                                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fitHeight="22.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../../../img/icon/dislike.png" />
                                                          </image>
                                                       </ImageView>
                                                    </graphic>
                                                    <HBox.margin>
-                                                      <Insets left="15.0" />
+                                                      <Insets left="5.0" />
                                                    </HBox.margin>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </Button>
-                                                <Label fx:id="countDislike" text="Dislike">
-                                                   <font>
-                                                      <Font size="15.0" />
-                                                   </font>
-                                                </Label>
                                              </children>
                                           </HBox>
-                                          <VBox prefHeight="200.0" prefWidth="378.0">
+                                          <VBox prefHeight="260.0" prefWidth="317.0">
                                              <children>
                                                 <Label text="เอกสารประกอบการสอน">
                                                    <font>
-                                                      <Font name="System Bold" size="16.0" />
+                                                      <Font name="Noto Sans Thai Bold" size="16.0" />
                                                    </font>
                                                    <VBox.margin>
                                                       <Insets left="25.0" />
                                                    </VBox.margin>
                                                 </Label>
-                                                <VBox fx:id="attachmentcontainer" prefHeight="200.0" prefWidth="431.0">
-                                                   <VBox.margin>
-                                                      <Insets left="25.0" top="10.0" />
-                                                   </VBox.margin>
-                                                </VBox>
+                                                <ScrollPane hbarPolicy="NEVER" prefHeight="240.0" prefWidth="331.0" styleClass="scroll-panej" stylesheets="@../../../css/Home.css">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0">
+                                                         <children>
+                                                            <VBox fx:id="attachmentcontainer" minHeight="-Infinity" minWidth="-Infinity" prefHeight="234.0" prefWidth="313.0">
+                                                               <children>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="313.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                                                                     <effect>
+                                                                        <DropShadow>
+                                                                           <color>
+                                                                              <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                                                                           </color>
+                                                                        </DropShadow>
+                                                                     </effect>
+                                                                     <children>
+                                                                        <Label prefHeight="24.0" prefWidth="231.0" text="File name">
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Regular" size="14.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+                                                                           <graphic>
+                                                                              <ImageView fitHeight="18.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                                                 <image>
+                                                                                    <Image url="@../../../img/icon/download.png" />
+                                                                                 </image>
+                                                                              </ImageView>
+                                                                           </graphic>
+                                                                           <cursor>
+                                                                              <Cursor fx:constant="HAND" />
+                                                                           </cursor>
+                                                                        </Button>
+                                                                     </children>
+                                                                     <padding>
+                                                                        <Insets left="20.0" right="20.0" />
+                                                                     </padding>
+                                                                  </HBox>
+                                                               </children>
+                                                               <padding>
+                                                                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                                               </padding>
+                                                            </VBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                  </content>
+                                                </ScrollPane>
                                              </children>
                                           </VBox>
                                        </children>
@@ -313,12 +376,12 @@
                                           <Circle fx:id="userimg" fill="DODGERBLUE" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
                                           <VBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="776.0">
                                              <children>
-                                                <TextArea fx:id="commentinput" prefHeight="58.0" prefWidth="754.0" promptText="comment here" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 15; -fx-background-radius: 15;">
+                                                <TextArea fx:id="commentinput" prefHeight="129.0" prefWidth="671.0" promptText="comment here" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 15; -fx-background-radius: 15;" stylesheets="@../../../css/Home.css">
                                                    <VBox.margin>
                                                       <Insets left="25.0" />
                                                    </VBox.margin>
                                                    <font>
-                                                      <Font size="18.0" />
+                                                      <Font name="Noto Sans Thai Regular" size="16.0" />
                                                    </font>
                                                 </TextArea>
                                              </children>
@@ -329,9 +392,9 @@
                                        <children>
                                           <HBox prefHeight="23.0" prefWidth="494.0">
                                              <children>
-                                                <Label prefHeight="27.0" prefWidth="106.0" text="ความคิดเห็น" textFill="#a8a8a8">
+                                                <Label prefHeight="25.0" prefWidth="78.0" text="ความคิดเห็น" textFill="#a8a8a8">
                                                    <font>
-                                                      <Font name="System Bold" size="18.0" />
+                                                      <Font name="Noto Sans Thai Regular" size="15.0" />
                                                    </font>
                                                    <HBox.margin>
                                                       <Insets left="15.0" />
@@ -341,7 +404,7 @@
                                                    <children>
                                                       <Label fx:id="commentcount" contentDisplay="CENTER" prefHeight="35.0" text="commentcount" textFill="#a8a8a8">
                                                          <font>
-                                                            <Font name="System Bold" size="18.0" />
+                                                            <Font name="Noto Sans Thai Regular" size="15.0" />
                                                          </font>
                                                       </Label>
                                                    </children>
@@ -356,7 +419,32 @@
                                           <Insets top="25.0" />
                                        </VBox.margin>
                                     </VBox>
-                                    <VBox fx:id="commentcontainer" prefHeight="924.0" prefWidth="848.0" />
+                                    <VBox fx:id="commentcontainer" prefHeight="924.0" prefWidth="848.0">
+                                       <children>
+                                          <HBox alignment="CENTER_LEFT">
+                                             <children>
+                                                <Circle fill="DODGERBLUE" radius="19.0" stroke="BLACK" strokeType="INSIDE">
+                                                   <HBox.margin>
+                                                      <Insets right="10.0" />
+                                                   </HBox.margin>
+                                                </Circle>
+                                                <VBox alignment="CENTER_LEFT">
+                                                   <children>
+                                                      <Label text="Username" textFill="#8100cc">
+                                                         <font>
+                                                            <Font name="Noto Sans Thai Bold" size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="113.13000106811523">
+                                                         <font>
+                                                            <Font name="Noto Sans Thai Regular" size="13.0" />
+                                                         </font>
+                                                      </Text>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children></VBox>
                                  </children>
                               </VBox>
                            </children>
@@ -367,56 +455,70 @@
                                  <children>
                                     <HBox prefHeight="23.0" prefWidth="494.0">
                                        <children>
-                                          <Label prefHeight="35.0" prefWidth="91.0" text="countPlaylist" textFill="#8800cc">
+                                          <Label prefHeight="25.0" prefWidth="65.0" text="เพลย์ลิสต์" textFill="#8800cc">
                                              <font>
-                                                <Font name="System Bold" size="15.0" />
+                                                <Font name="Noto Sans Thai Bold" size="15.0" />
                                              </font>
                                              <HBox.margin>
                                                 <Insets left="15.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <HBox alignment="CENTER_RIGHT" prefHeight="35.0">
-                                             <children>
-                                                <Label alignment="CENTER" prefHeight="46.0" prefWidth="12.0" text="(" textFill="#8800cc">
-                                                   <font>
-                                                      <Font name="System Bold" size="24.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="35.0">
-                                             <children>
-                                                <Label fx:id="playlistcount" contentDisplay="CENTER" prefHeight="35.0" text="playlistcount" textFill="#8800cc">
-                                                   <font>
-                                                      <Font name="System Bold" size="15.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="15.0">
-                                             <children>
-                                                <Label text=")" textFill="#8800cc">
-                                                   <font>
-                                                      <Font name="System Bold" size="24.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </HBox>
+                                          <Label fx:id="playlistcount" contentDisplay="CENTER" prefHeight="35.0" text="(playlistcount)" textFill="#8800cc">
+                                             <font>
+                                                <Font name="Noto Sans Thai Bold" size="15.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </Label>
                                        </children>
                                     </HBox>
-                                    <ScrollPane fx:id="playlistcontainer" prefHeight="480.0" prefWidth="306.0" style="-fx-background-color: transparent;">
+                                    <ScrollPane fx:id="playlistcontainer" prefHeight="480.0" prefWidth="306.0" style="-fx-background-color: transparent;" styleClass="scroll-panej" stylesheets="@../../../css/Home.css" vbarPolicy="ALWAYS">
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                        <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                                        </padding>
                                        <content>
-                                          <Button fx:id="bntEp" mnemonicParsing="false" prefHeight="50.0" prefWidth="280.0" style="-fx-background-color: #ffffff55; -fx-background-radius: 20;" text="bntEp" textFill="WHITE">
-                                             <font>
-                                                <Font name="System Bold" size="18.0" />
-                                             </font>
-                                          </Button>
+                                          <AnchorPane prefWidth="200.0">
+                                             <children>
+                                                <VBox alignment="TOP_CENTER" minWidth="-Infinity" prefWidth="271.0" spacing="10.0">
+                                                   <children>
+                                                      <Button fx:id="btnEP" mnemonicParsing="false" prefHeight="50.0" prefWidth="233.0" style="-fx-background-color: #8100cc; -fx-background-radius: 10;" text="EP&lt;count&gt;: Watching ep" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="Noto Sans Thai Bold" size="15.0" />
+                                                         </font>
+                                                         <effect>
+                                                            <DropShadow>
+                                                               <color>
+                                                                  <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                                                               </color>
+                                                            </DropShadow>
+                                                         </effect>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </Button>
+                                                      <Button fx:id="btnEP1" mnemonicParsing="false" prefHeight="50.0" prefWidth="233.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="EP&lt;count&gt;: Watching ep">
+                                                         <font>
+                                                            <Font name="Noto Sans Thai Bold" size="15.0" />
+                                                         </font>
+                                                         <effect>
+                                                            <DropShadow>
+                                                               <color>
+                                                                  <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                                                               </color>
+                                                            </DropShadow>
+                                                         </effect>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </Button>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </AnchorPane>
                                        </content>
                                     </ScrollPane>
                                  </children>
@@ -438,7 +540,7 @@
                                              <children>
                                                 <Label fx:id="labelPercent" text="Percent" textFill="#737373">
                                                    <font>
-                                                      <Font size="15.0" />
+                                                      <Font name="Noto Sans Thai Regular" size="13.0" />
                                                    </font>
                                                 </Label>
                                              </children>
@@ -457,54 +559,64 @@
                                        <children>
                                           <Label text="คอร์สต่อเนื่อง" textFill="#8800cc">
                                              <font>
-                                                <Font name="System Bold" size="15.0" />
+                                                <Font name="Noto Sans Thai Bold" size="15.0" />
                                              </font>
                                           </Label>
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Label fx:id="btnRoadmap" text="Roadmap" textAlignment="CENTER" textFill="#8800cc" />
+                                          <Label fx:id="btnRoadmap" text="Roadmap" textAlignment="CENTER" textFill="#8800cc" underline="true">
+                                             <font>
+                                                <Font name="Noto Sans Thai Regular" size="12.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor></Label>
                                        </children>
                                     </HBox>
                                  </children>
                               </HBox>
                               <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="306.0">
                                  <children>
-                                    <ScrollPane prefHeight="395.0" prefWidth="306.0">
+                                    <ScrollPane hbarPolicy="NEVER" prefHeight="395.0" prefWidth="306.0" stylesheets="@../../../css/Home.css">
                                        <content>
                                           <VBox alignment="TOP_CENTER" prefHeight="384.0" prefWidth="292.0">
                                              <children>
-                                                <Button fx:id="nextCourse" mnemonicParsing="false" prefHeight="100.0" prefWidth="280.0" style="-fx-background-radius: 20; -fx-background-color: #ffffff55;">
+                                                <Button fx:id="nextCourse" mnemonicParsing="false" prefHeight="95.0" prefWidth="280.0" style="-fx-background-radius: 20; -fx-background-color: white;">
                                                    <graphic>
                                                       <HBox alignment="CENTER" prefHeight="92.0" prefWidth="282.0">
                                                          <children>
-                                                            <Rectangle fx:id="nextImgCourse" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="77.0" stroke="BLACK" strokeType="INSIDE" width="77.0" />
-                                                            <VBox prefHeight="92.0" prefWidth="159.0">
+                                                            <Rectangle fx:id="nextImgCourse" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="77.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="77.0">
+                                                               <HBox.margin>
+                                                                  <Insets right="5.0" />
+                                                               </HBox.margin></Rectangle>
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="92.0" prefWidth="159.0">
                                                                <children>
-                                                                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="15.0" prefWidth="80.0" style="-fx-background-color: #8800cc50; -fx-background-radius: 5;">
-                                                                     <VBox.margin>
-                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                                     </VBox.margin>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="18.0" prefWidth="159.0">
                                                                      <children>
-                                                                        <Label fx:id="category" layoutX="3.0" layoutY="-2.0" text="&lt;/&gt;">
-                                                                           <padding>
-                                                                              <Insets right="5.0" />
-                                                                           </padding>
+                                                                        <Circle fx:id="categoryPic" fill="DODGERBLUE" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
+                                                                        <Label fx:id="categoryName" text="Label">
+                                                                           <HBox.margin>
+                                                                              <Insets left="5.0" />
+                                                                           </HBox.margin>
+                                                                           <font>
+                                                                              <Font name="Noto Sans Thai Regular" size="11.0" />
+                                                                           </font>
                                                                         </Label>
                                                                      </children>
-                                                                  </Pane>
+                                                                  </HBox>
                                                                   <Label fx:id="nextCourseName" text="courseName">
                                                                      <VBox.margin>
-                                                                        <Insets bottom="2.0" left="5.0" right="2.0" top="2.0" />
+                                                                        <Insets />
                                                                      </VBox.margin>
                                                                      <font>
-                                                                        <Font name="System Bold" size="12.0" />
+                                                                        <Font name="Noto Sans Thai Bold" size="14.0" />
                                                                      </font>
                                                                   </Label>
                                                                   <Label fx:id="nextTeacherName" text="teacherName">
                                                                      <VBox.margin>
-                                                                        <Insets bottom="2.0" left="5.0" right="2.0" />
+                                                                        <Insets />
                                                                      </VBox.margin>
                                                                   </Label>
                                                                   <ProgressBar fx:id="nextCourseProgressBar" prefHeight="7.0" prefWidth="159.0" progress="0.0" styleClass="smallestProgressbar" stylesheets="@../../../css/Home.css" />
@@ -513,8 +625,21 @@
                                                          </children>
                                                       </HBox>
                                                    </graphic>
+                                                   <effect>
+                                                      <DropShadow>
+                                                         <color>
+                                                            <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                                                         </color>
+                                                      </DropShadow>
+                                                   </effect>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </Button>
                                              </children>
+                                             <padding>
+                                                <Insets bottom="10.0" top="10.0" />
+                                             </padding>
                                           </VBox>
                                        </content>
                                     </ScrollPane>

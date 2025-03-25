@@ -51,7 +51,7 @@ public class MediaUpload {
                     .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(accessKey, secretKey)))
                     .build();
 
-            String fileKey = "video/" + file.getName();
+            String fileKey = "videos/" + file.getName();
 
             PutObjectRequest request = PutObjectRequest.builder()
                     .bucket(BUCKET_NAME)

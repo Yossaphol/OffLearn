@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<HBox alignment="CENTER_LEFT" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Circle fill="DODGERBLUE" radius="19.0" stroke="BLACK" strokeType="INSIDE">
+            <HBox.margin>
+                <Insets right="10.0" />
+            </HBox.margin>
+        </Circle>
+        <VBox alignment="CENTER_LEFT">
+            <children>
+                <Label text="Username" textFill="#8100cc">
+                    <font>
+                        <Font name="Noto Sans Thai Bold" size="15.0" />
+                    </font>
+                </Label>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="113.13000106811523">
+                    <font>
+                        <Font name="Noto Sans Thai Regular" size="13.0" />
+                    </font>
+                </Text>
+            </children>
+        </VBox>
+    </children>
+</HBox>

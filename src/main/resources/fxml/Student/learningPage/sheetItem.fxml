@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+
+<HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="313.0" style="-fx-background-color: white; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <effect>
+        <DropShadow>
+            <color>
+                <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+            </color>
+        </DropShadow>
+    </effect>
+    <children>
+        <Label prefHeight="24.0" prefWidth="231.0" text="File name">
+            <font>
+                <Font name="Noto Sans Thai Regular" size="14.0" />
+            </font>
+        </Label>
+        <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+            <graphic>
+                <ImageView fitHeight="18.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../img/icon/download.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+    </children>
+    <padding>
+        <Insets left="20.0" right="20.0" />
+    </padding>
+</HBox>
