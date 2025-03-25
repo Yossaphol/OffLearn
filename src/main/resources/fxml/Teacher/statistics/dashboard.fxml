@@ -21,7 +21,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="bg" fillHeight="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2579.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.dashboard.dashboardController">
+<HBox fx:id="bg" fillHeight="false" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2579.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.dashboard.dashboardController">
    <children>
       <ScrollPane fx:id="mainScrollPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="2587.0" prefWidth="1440.0" stylesheets="@../../../css/Home.css" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
          <content>
@@ -47,26 +47,6 @@
                                                 <Font name="Noto Sans Thai Regular" size="16.0" />
                                              </font>
                                           </Label>
-                                          <Button fx:id="edit_profile" mnemonicParsing="false" onAction="#editProfile" style="-fx-background-color: transparent;">
-                                             <graphic>
-                                                <ImageView fitHeight="24.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../../../img/icon/edit.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                          </Button>
-                                          <Button fx:id="save_change" mnemonicParsing="false" onAction="#editProfile" prefHeight="33.0" prefWidth="82.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="บันทึก" textFill="WHITE">
-                                             <font>
-                                                <Font name="Noto Sans Thai Bold" size="14.0" />
-                                             </font>
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                          </Button>
                                        </children>
                                     </HBox>
                                     <HBox fx:id="dashboard_profile" minHeight="-Infinity" prefHeight="311.0" prefWidth="1140.0">
@@ -620,7 +600,7 @@
                                                 <Insets top="10.0" />
                                              </VBox.margin>
                                           </HBox>
-                                          <ScrollPane fx:id="courseTableContainer" hbarPolicy="NEVER" prefHeight="323.0" prefWidth="1140.0" styleClass="scroll-panej" stylesheets="@../../../css/Home.css" vbarPolicy="ALWAYS">
+                                          <ScrollPane fx:id="courseTableContainer" hbarPolicy="NEVER" prefHeight="323.0" prefWidth="1140.0" stylesheets="@../../../css/Home.css" vbarPolicy="ALWAYS">
                                             <content>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="308.0" prefWidth="1102.0">
                                                    <children>

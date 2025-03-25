@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,6 +22,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class navbarController implements Initializable {
@@ -33,16 +35,34 @@ public class navbarController implements Initializable {
     public HBox inbox;
     public HBox setting;
     public Circle userPfp;
+    public Label dashboardLabel;
+    public Label courseLabel;
+    public Label inboxLabel;
+    public Label settingLabel;
+    public HBox logo;
+
+
+    private String currentPage;
+    public ArrayList<Label> buttons = new ArrayList<>();
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
+        Navigator.setNavBarController(this);
         closePopupAuto();
         applyHoverEffectToInside(navPopup);
         hoverEffect(withdrawBtn);
         route();
+
+
+        buttons.add(dashboardLabel);
+        buttons.add(courseLabel);
+        buttons.add(inboxLabel);
+        buttons.add(settingLabel);
+
+        setCurrentPage("dashboardLabel");
+        changeFontColor();
 
 
 
@@ -191,6 +211,7 @@ public class navbarController implements Initializable {
 
         //Dashboard
         dashboard.setOnMouseClicked(nav::dashboardRoute);
+        logo.setOnMouseClicked(nav::dashboardRoute);
 
         //Course
         course.setOnMouseClicked(nav::courseRoute);
@@ -204,6 +225,25 @@ public class navbarController implements Initializable {
         //setting
         setting.setOnMouseClicked(nav::settingRoute);
 
+    }
+
+
+    @FXML
+    public void changeFontColor() {
+        if (!buttons.isEmpty()) {
+            for (Label btn : buttons) {
+                if (btn.getId().equals(currentPage)) {
+                    btn.setTextFill(Color.web("#0675DE"));
+                } else {
+                    btn.setTextFill(Color.BLACK);
+                }
+            }
+        }
+    }
+
+    public void setCurrentPage(String id) {
+        currentPage = id;
+        changeFontColor();
     }
 
 }
