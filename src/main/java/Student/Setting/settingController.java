@@ -1,7 +1,10 @@
 package Student.Setting;
 
+import Database.User;
+import Database.UserDB;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
+import a_Session.SessionManager;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -53,25 +56,23 @@ public class settingController implements Initializable {
     public Button cancelPassword;
     public Button savePayment;
     public Button cancelPaymentChange;
+    public TextField oldpw;
+    public TextField newpwfirst;
+    public TextField newpwsecond;
     private boolean isChangePass = false;
     HomeController hm = new HomeController();
-    private boolean isEditingPayment = false;
 
+    UserDB userDB = new UserDB();
+    String sessionUsername = SessionManager.getInstance().getUsername();
+    User user = userDB.getUserInfo(sessionUsername);
 
-    //Default value (temporary use น้า)
-    String name = "Wiraya";
-    String lastNameUser = "Boonpriam";
-    String userName = "Wiraya606";
-    String gmailUser = "wirayabovorn606@gmail.com";
-    String imgPath = "/img/Profile/user.png";
-    String defaultPic = "/img/Profile/user.png";
+    String name = user.getFirstname();
+    String lastNameUser = user.getLastname();
+    String userName = user.getUsername();
+    String gmailUser = user.getEmail();
+    String imgPath = (user.getProfile() != null) ? user.getProfile().toString() : "/img/Profile/user.png";
+//    String imgPath = "/img/Profile/user.png";
     String selectedimg = "";
-
-    //Payment value (temporary use น้า)
-    String namep = "Wirayabovorn";
-    String lastnamep = "Boonpriam";
-    String accountN = "1313880423";
-    String bank = "KBANK";
 
     private boolean isEditing = false;
 
@@ -83,8 +84,6 @@ public class settingController implements Initializable {
         loadAndSetUserImage(picture, imgPath);
         username1.setText(userName);
         setRadioGroup();
-        setBankDetail(namep, lastnamep, accountN, bank);
-
         setEffect();
     }
 
@@ -95,9 +94,6 @@ public class settingController implements Initializable {
         hm.hoverEffect(changePasswordBtn);
         hm.hoverEffect(savePassword);
         hm.hoverEffect(cancelEditProfile);
-        hm.hoverEffect(editPaymentBtn);
-        hm.hoverEffect(savePayment);
-        hm.hoverEffect(cancelPaymentChange);
     }
 
     private void setRadioGroup(){
@@ -124,7 +120,7 @@ public class settingController implements Initializable {
 
     //Start profile edit part
     public void editProfile(ActionEvent e){
-        if(!isEditing){
+        if (!isEditing) {
 
             realName.setDisable(isEditing);
             lastName.setDisable(isEditing);
@@ -134,7 +130,7 @@ public class settingController implements Initializable {
             isEditing = true;
             openEditProfile(true);
         }
-        else{
+        else {
             closeProfileEdit();
         }
     }
@@ -163,9 +159,6 @@ public class settingController implements Initializable {
         realName.setEditable(isEditing);
         lastName.setEditable(isEditing);
         gmail.setEditable(isEditing);
-        realName.setDisable(true);
-        lastName.setDisable(true);
-        gmail.setDisable(true);
         uploadPic.setVisible(isEditing);
 
         if (!isEditing) {
@@ -194,26 +187,37 @@ public class settingController implements Initializable {
 
 
     public void saveProfileEdit(ActionEvent e){
-        if(!selectedimg.equals(defaultPic) && !selectedimg.equals("")){
+        String newFirstname = realName.getText();
+        String newLastname = lastName.getText();
+        String newEmail = gmail.getText();
+
+        UserDB userDB = new UserDB();
+        boolean isUpdated = userDB.updateUserInfo(sessionUsername, newFirstname, newLastname, newEmail);
+        if (isUpdated) {
+            showAlert("Update Successful", "Success", Alert.AlertType.INFORMATION);
             imgPath = selectedimg;
+            setProfileValue(newFirstname, newLastname, newEmail);
+            closeProfileEdit();
+        } else {
+            showAlert("Update Failed", "Fail", Alert.AlertType.ERROR);
         }
-        setProfileValue(realName.getText(), lastName.getText(), gmail.getText());
-        closeProfileEdit();
+//        imgPath = selectedimg;
+//        setProfileValue(realName.getText(), lastName.getText(), gmail.getText());
+//        closeProfileEdit();
+
     }
 
     public void cancelProfileEdit(ActionEvent e){
-        if(!imgPath.equals(defaultPic)){
-            loadAndSetUserImage(picture, imgPath);
-        }
+        loadAndSetUserImage(picture, imgPath);
         setProfileValue(name, lastNameUser, gmailUser);
         closeProfileEdit();
     }
 
     public void closeProfileEdit() {
         isEditing = false;
-        realName.setDisable(true);
-        lastName.setDisable(true);
-        gmail.setDisable(true);
+        realName.setDisable(isEditing);
+        lastName.setDisable(isEditing);
+        gmail.setDisable(isEditing);
         editProfile.setVisible(true);
 
         FadeTransition fadeOut = new FadeTransition(Duration.millis(200), editingProfileBtnContainer);
@@ -234,17 +238,24 @@ public class settingController implements Initializable {
         );
 
         File selectedFile = fileChooser.showOpenDialog(new Stage());
-
-        if (selectedFile != null) {
-            selectedimg = selectedFile.getAbsolutePath();
-            loadAndSetUserImage(picture, selectedimg);
-        }
+//
+//        if (selectedFile != null) {
+//            // ตั้งค่าตำแหน่งของไฟล์ที่เลือก
+//            selectedimg = selectedFile.getAbsolutePath();
+//
+//            // อัปโหลดไฟล์ไปยังฐานข้อมูล
+//            boolean isUploaded = userDB.updateProfileImage(sessionUsername, selectedFile);
+//
+//            if (isUploaded) {
+//                // ถ้าอัปโหลดสำเร็จ ให้แสดงรูปใหม่ใน UI
+//                loadAndSetUserImage(picture, selectedimg);
+//            }
+//        }
     }
 
     public void loadAndSetUserImage(Shape shape, String path) {
         try {
             Image img;
-
             if (path.startsWith("/") || getClass().getResource(path) != null) {
                 img = new Image(getClass().getResource(path).toExternalForm());
             } else {
@@ -266,6 +277,32 @@ public class settingController implements Initializable {
 
 
     //Start password edit part
+    public void updatepw(ActionEvent e){
+        String username = SessionManager.getInstance().getUsername();
+        String oldpwfromdb = userDB.getOldPasswordFromDB(username);
+        String oldPassword = oldpw.getText();
+        String newPasswordFirst = newpwfirst.getText();
+        String confirmNewPassword = newpwsecond.getText();
+        if (oldPassword.isEmpty() || newPasswordFirst.isEmpty() || confirmNewPassword.isEmpty()) {
+            showAlert("Update Password Failed", "Please complete all fields.", Alert.AlertType.WARNING);
+            return;
+        }
+        if (!newPasswordFirst.equals(confirmNewPassword)) {
+            showAlert("Passwords do not match", "Please fill in the information to match.", Alert.AlertType.ERROR);
+            return;
+        }
+        if (!oldpwfromdb.equals(oldPassword)) {
+            showAlert("Error", "Old Password does not match.", Alert.AlertType.ERROR);
+            return;
+        }
+        if (userDB.updatePassword(username, newPasswordFirst)) {
+            showAlert("Success", "เปลี่ยนรหัสผ่านสำเร็จ!", Alert.AlertType.INFORMATION);
+            closePasswordField();
+        } else {
+            showAlert("Error", "เกิดข้อผิดพลาดในการเปลี่ยนรหัสผ่าน!", Alert.AlertType.ERROR);
+        }
+    }
+
     public void changePassword(ActionEvent e){
         if(!isChangePass){
             isChangePass = true;
@@ -302,15 +339,16 @@ public class settingController implements Initializable {
         closePasswordField();
     }
 
-    public void editPaymentInfo(ActionEvent e){
-        if(!isEditingPayment){
-            openEditPaymentField();
-            isEditingPayment = true;
-        }else {
-            closeEditPaymentField();
-            isEditingPayment = false;
-        }
-    }
+//    public void editPaymentInfo(ActionEvent e){
+//        if(!isEditingPayment){
+//            openEditPaymentField();
+//
+//            isEditingPayment = true;
+//        }else {
+//            closeEditPaymentField();
+//            isEditingPayment = false;
+//        }
+//    }
 
 
 
@@ -330,39 +368,39 @@ public class settingController implements Initializable {
         fadeIn.play();
     }
 
-    private void closeEditPaymentField() {
-        editPaymentBtn.setVisible(true);
+//    private void closeEditPaymentField() {
+//        editPaymentBtn.setVisible(true);
+//
+//        FadeTransition fadeOut = new FadeTransition(Duration.millis(200), editPaymentBox);
+//        fadeOut.setFromValue(1);
+//        fadeOut.setToValue(0);
+//        fadeOut.setOnFinished(event -> {
+//            editPaymentBox.setVisible(false);
+//
+//            name1.setDisable(true);
+//            lastName1.setDisable(true);
+//            accountNo.setDisable(true);
+//            bankName.setDisable(true);
+//        });
+//
+//        fadeOut.play();
+//    }
 
-        FadeTransition fadeOut = new FadeTransition(Duration.millis(200), editPaymentBox);
-        fadeOut.setFromValue(1);
-        fadeOut.setToValue(0);
-        fadeOut.setOnFinished(event -> {
-            editPaymentBox.setVisible(false);
-
-            name1.setDisable(true);
-            lastName1.setDisable(true);
-            accountNo.setDisable(true);
-            bankName.setDisable(true);
-        });
-
-        fadeOut.play();
-    }
-
-    public void savePaymentinfo(ActionEvent e){
-        this.namep = name1.getText();
-        this.lastnamep = lastName1.getText();
-        this.accountN = accountNo.getText();
-        this.bank = bankName.getText();
-
-        setBankDetail(namep, lastnamep, accountN, bank);
-        closeEditPaymentField();
-    }
+//    public void savePaymentinfo(ActionEvent e){
+//        this.namep = name1.getText();
+//        this.lastnamep = lastName1.getText();
+//        this.accountN = accountNo.getText();
+//        this.bank = bankName.getText();
+//
+//        setBankDetail(namep, lastnamep, accountN, bank);
+//        closeEditPaymentField();
+//    }
 
 
-    public void cancelPaymentInfo(ActionEvent e){
-        setBankDetail(namep, lastnamep, accountN, bank);
-        closeEditPaymentField();
-    }
+//    public void cancelPaymentInfo(ActionEvent e){
+//        setBankDetail(namep, lastnamep, accountN, bank);
+//        closeEditPaymentField();
+//    }
 
     public void setBankDetail(String name, String lastname, String acctNo, String bank) {
         acctNo = acctNo.replace("-", "");
@@ -380,5 +418,13 @@ public class settingController implements Initializable {
         bankName.setText(bank);
     }
     //End edit payment part
+
+    private void showAlert(String title, String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
 }

@@ -1,5 +1,8 @@
 package Student.dashboard;
 
+import Database.User;
+import Database.UserDB;
+import a_Session.SessionManager;
 import Student.FontLoader.FontLoader;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
@@ -32,7 +35,7 @@ public class dashboardController implements Initializable {
     public Circle trophy;
     public ScrollPane mainScrollPane;
     public HBox rootpage;
-
+    public Label setfullname;
 
     //Nav element
     public HBox dashboard;
@@ -119,6 +122,17 @@ public class dashboardController implements Initializable {
     private NumberAxis yAxis;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+//        UserDB userDB = new UserDB();
+//        String sessionUsername = SessionManager.getInstance().getUsername();
+//        User user = userDB.getUserInfo(sessionUsername);
+//
+//        String name = user.getFirstname();
+//        String lastNameUser = user.getLastname();
+//        String sessionfirstname = SessionManager.getInstance().getFirstname();
+//        String sessionlastname = SessionManager.getInstance().getLastname();
+//        String fullname = name + " " + lastNameUser;
+//        setfullname.setText(fullname);
+
         FontLoader fontLoader = new FontLoader();
         fontLoader.loadFonts();
 

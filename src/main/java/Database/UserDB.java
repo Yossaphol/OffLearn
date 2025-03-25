@@ -4,35 +4,88 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.io.*;
 public class UserDB extends ConnectDB{
 
-//    public User getUserInfo(String username) {
-//        String query = "SELECT User_ID, Username, Fullname, Password, Profile, Email FROM offlearn.user WHERE Username = ?";
-//
-//        try (Connection conn = this.connectToDB();
-//             PreparedStatement pstmt = conn.prepareStatement(query)) {
-//
-//            pstmt.setString(1, username);
-//            ResultSet rs = pstmt.executeQuery();
-//
-//            if (rs.next()) {
-//                int userID = rs.getInt("User_ID");
-//                String user = rs.getString("Username");
-//                String fullname = rs.getString("Fullname");
-//                String email = rs.getString("Email");
-//                String password = rs.getString("Password");
-//                byte[] profile = rs.getBytes("Profile");
-//                return new User(userID, user, fullname, email, password, profile);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
+    //setting page
+    public User getUserInfo(String username) {
+        String query = "SELECT Firstname, Lastname, Username, Email, Password, Profile FROM offlearn.user WHERE Username = ?";
 
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
 
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
 
+            if (rs.next()) {
+                String firstname = rs.getString("Firstname");
+                String lastname = rs.getString("Lastname");
+                String user = rs.getString("Username");
+                String email = rs.getString("Email");
+                String password = rs.getString("Password");
+                byte[] profile = rs.getBytes("Profile");
+                return new User(firstname, lastname, user, email, password, profile);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean updateUserInfo(String username, String firstname, String lastname, String email) {
+        String query = "UPDATE offlearn.user SET Firstname = ?, Lastname = ?, Email = ? WHERE Username = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, firstname);
+            pstmt.setString(2, lastname);
+            pstmt.setString(3, email);
+            pstmt.setString(4, username);
+
+            int affectedRows = pstmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public String getOldPasswordFromDB(String username) {
+        String query = "SELECT Password FROM offlearn.user WHERE Username = ?";
+
+        try (Connection conn = connectToDB();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, username);
+
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("Password");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    //update password
+    public boolean updatePassword(String username, String newPassword) {
+        String query = "UPDATE offlearn.user SET Password = ? WHERE Username = ?";
+
+        try (Connection conn = connectToDB();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, newPassword);
+            pstmt.setString(2, username);
+
+            int affectedRows = pstmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    //login page
     public String loginConnect(String username, String password) {
         String query = "SELECT type FROM offlearn.user WHERE Username = ? AND Password = ?";
 
@@ -52,6 +105,7 @@ public class UserDB extends ConnectDB{
         return null;
     }
 
+    //signup page
     public boolean signupConnect(String firstname, String lastname, String username, String password, String email) {
         String query = "INSERT INTO offlearn.user (firstname, lastname, Username, Password, Email) VALUES (?, ?, ?, ?, ?)";
 
@@ -78,6 +132,7 @@ public class UserDB extends ConnectDB{
             return false;
         }
     }
+    //check in signup page that doesn't have same username in db
     private boolean isUsernameExist(String username) {
         String query = "SELECT COUNT(*) FROM offlearn.user WHERE Username = ?";
 
@@ -95,6 +150,7 @@ public class UserDB extends ConnectDB{
         }
         return false;
     }
+    //check in signup page that doesn't have same email in db
     private boolean isEmailExist(String email) {
         String query = "SELECT COUNT(*) FROM offlearn.user WHERE Email = ?";
 
@@ -112,7 +168,7 @@ public class UserDB extends ConnectDB{
         }
         return false;
     }
-
+    //forgotpassword page
     public boolean isUserValid(String username, String email) {
         String query = "SELECT COUNT(*) FROM offlearn.user WHERE Username = ? AND Email = ?";
 
@@ -131,7 +187,7 @@ public class UserDB extends ConnectDB{
         }
         return false;
     }
-
+//forgotpassword page
     public boolean updatePasswordConnect(String email, String username, String newPassword) {
         String query = "UPDATE offlearn.user SET Password = ? WHERE Username = ? AND Email = ?";
 
@@ -150,13 +206,14 @@ public class UserDB extends ConnectDB{
         }
     }
 
-    public String getProfile(String name) {
+    //searchbarController and gchat user profile
+    public String getProfile(String username) {
         String sql = "SELECT Profile FROM offlearn.user WHERE Username = ?";
 
         try (Connection conn = this.connectToDB();
              PreparedStatement pstm = conn.prepareStatement(sql)) {
 
-            pstm.setString(1, name);
+            pstm.setString(1, username);
 
             try (ResultSet rs = pstm.executeQuery()) {
                 if (rs.next()) {
