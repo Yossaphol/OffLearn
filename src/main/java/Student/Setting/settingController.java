@@ -54,8 +54,6 @@ public class settingController implements Initializable {
     public Button cancelEditProfile;
     public Button savePassword;
     public Button cancelPassword;
-    public Button savePayment;
-    public Button cancelPaymentChange;
     public TextField oldpw;
     public TextField newpwfirst;
     public TextField newpwsecond;
@@ -339,19 +337,6 @@ public class settingController implements Initializable {
         closePasswordField();
     }
 
-//    public void editPaymentInfo(ActionEvent e){
-//        if(!isEditingPayment){
-//            openEditPaymentField();
-//
-//            isEditingPayment = true;
-//        }else {
-//            closeEditPaymentField();
-//            isEditingPayment = false;
-//        }
-//    }
-
-
-
     private void openEditPaymentField() {
         editPaymentBtn.setVisible(false);
 
@@ -367,40 +352,6 @@ public class settingController implements Initializable {
         fadeIn.setToValue(1);
         fadeIn.play();
     }
-
-//    private void closeEditPaymentField() {
-//        editPaymentBtn.setVisible(true);
-//
-//        FadeTransition fadeOut = new FadeTransition(Duration.millis(200), editPaymentBox);
-//        fadeOut.setFromValue(1);
-//        fadeOut.setToValue(0);
-//        fadeOut.setOnFinished(event -> {
-//            editPaymentBox.setVisible(false);
-//
-//            name1.setDisable(true);
-//            lastName1.setDisable(true);
-//            accountNo.setDisable(true);
-//            bankName.setDisable(true);
-//        });
-//
-//        fadeOut.play();
-//    }
-
-//    public void savePaymentinfo(ActionEvent e){
-//        this.namep = name1.getText();
-//        this.lastnamep = lastName1.getText();
-//        this.accountN = accountNo.getText();
-//        this.bank = bankName.getText();
-//
-//        setBankDetail(namep, lastnamep, accountN, bank);
-//        closeEditPaymentField();
-//    }
-
-
-//    public void cancelPaymentInfo(ActionEvent e){
-//        setBankDetail(namep, lastnamep, accountN, bank);
-//        closeEditPaymentField();
-//    }
 
     public void setBankDetail(String name, String lastname, String acctNo, String bank) {
         acctNo = acctNo.replace("-", "");
