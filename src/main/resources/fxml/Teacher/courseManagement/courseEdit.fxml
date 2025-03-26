@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,9 +14,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="main" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.CourseEditController">
-   <ScrollPane fx:id="wrapper" fitToHeight="true" fitToWidth="true" style="-fx-background-color: white;">
-      <VBox fx:id="courseManagement" prefHeight="2093.0" prefWidth="1440.0" style="-fx-background-color: white;">
+<VBox fx:id="main" alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.CourseEditController">
+   <ScrollPane fx:id="wrapper" fitToHeight="true" fitToWidth="true" style="-fx-background-color: #FBFBFB;">
+      <VBox fx:id="courseManagement" alignment="TOP_CENTER" style="-fx-background-color: #FBFBFB;">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
@@ -23,7 +24,7 @@
                      <children>
                         <Label text="Course Management" textFill="#0675de">
                            <font>
-                              <Font name="Kodchasan Bold" size="32.0" />
+                              <Font name="Noto Sans Thai Bold" size="28.0" />
                            </font>
                         </Label>
                         <Label text="การจัดการคอร์ส" textFill="#a8a8a8">
@@ -38,47 +39,50 @@
                   </VBox>
                </children>
                <VBox.margin>
-                  <Insets left="200.0" top="100.0" />
+                  <Insets top="100.0" />
                </VBox.margin>
             </HBox>
-            <VBox prefHeight="338.0" prefWidth="1440.0">
+            <VBox alignment="TOP_CENTER" prefHeight="338.0">
                <children>
                   <HBox prefHeight="21.0" prefWidth="1190.0">
                      <children>
                         <Label prefHeight="27.0" prefWidth="838.0" text="รายละเอียดคอร์ส" textFill="#0675de">
                            <font>
-                              <Font name="Kodchasan Bold" size="20.0" />
+                              <Font name="Noto Sans Thai Bold" size="21.0" />
                            </font>
                         </Label>
                         <Label text="คลิกกล่องข้อความเพื่อแก้ไข" textFill="#a8a8a8">
                            <font>
-                              <Font name="Kodchasan Regular" size="13.0" />
+                              <Font name="Noto Sans Thai Regular" size="13.0" />
                            </font>
                         </Label>
                      </children>
                      <VBox.margin>
-                        <Insets left="250.0" />
+                        <Insets />
                      </VBox.margin>
                   </HBox>
                   <HBox prefHeight="342.0" prefWidth="1190.0">
                      <VBox.margin>
-                        <Insets left="250.0" top="10.0" />
+                        <Insets top="10.0" />
                      </VBox.margin>
                      <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="231.0">
                            <children>
-                              <ImageView fx:id="img" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="img" fitHeight="279.0" fitWidth="259.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../img/Picture/bg.jpg" />
                                  </image>
                               </ImageView>
                               <Label fx:id="addCourseImg" text="เปลี่ยนรูป" underline="true">
                                  <font>
-                                    <Font name="Kodchasan Regular" size="16.0" />
+                                    <Font name="Noto Sans Thai Regular" size="16.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets top="20.0" />
                                  </VBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Label>
                            </children>
                         </VBox>
@@ -88,10 +92,16 @@
                                  <children>
                                     <Label text="ชื่อ">
                                        <font>
-                                          <Font name="Kodchasan Regular" size="16.0" />
+                                          <Font name="Noto Sans Thai Regular" size="16.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="courseName" prefHeight="30.0" prefWidth="270.0" style="-fx-border-color: &quot;0675DE&quot;; -fx-background-color: white; -fx-border-radius: 15;" />
+                                    <TextField fx:id="courseName" prefHeight="30.0" prefWidth="270.0" promptText="ชื่อคอร์ส" style="-fx-border-color: &quot;0675DE&quot;; -fx-background-color: white; -fx-border-radius: 5;">
+                                       <cursor>
+                                          <Cursor fx:constant="TEXT" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="12.0" />
+                                       </font></TextField>
                                  </children>
                               </VBox>
                               <HBox prefHeight="95.0" prefWidth="692.0">
@@ -100,20 +110,27 @@
                                        <children>
                                           <Label text="หมวดหมู่">
                                              <font>
-                                                <Font name="Kodchasan Regular" size="16.0" />
+                                                <Font name="Noto Sans Thai Regular" size="16.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox fx:id="type" prefWidth="200.0" style="-fx-border-color: &quot;0675DE&quot;; -fx-background-color: white; -fx-border-radius: 15;" />
+                                          <ComboBox fx:id="type" prefHeight="36.0" prefWidth="201.0" promptText="เลือกหมวดหมู่" style="-fx-border-color: &quot;0675DE&quot;; -fx-background-color: white; -fx-border-radius: 5;">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor></ComboBox>
                                        </children>
                                     </VBox>
                                     <VBox prefHeight="118.0" prefWidth="561.0">
                                        <children>
                                           <Label text="คำอธิบายคอร์ส">
                                              <font>
-                                                <Font name="Kodchasan Regular" size="16.0" />
+                                                <Font name="Noto Sans Thai Regular" size="16.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="desc" prefHeight="76.0" prefWidth="562.0" style="-fx-border-color: &quot;0675DE&quot;; -fx-background-color: white; -fx-border-radius: 15;" />
+                                          <TextArea fx:id="desc" prefHeight="200.0" prefWidth="200.0" promptText="คอร์สนี้เกี่ยวกับอะไร..." style="-fx-border-color: &quot;0675DE&quot;; -fx-background-color: white; -fx-border-radius: 5; -fx-background-radius: 5;" stylesheets="@../../../css/learningPage.css">
+                                             <font>
+                                                <Font name="Noto Sans Thai Regular" size="12.0" />
+                                             </font>
+                                          </TextArea>
                                        </children>
                                     </VBox>
                                  </children>
@@ -125,15 +142,24 @@
                                  <children>
                                     <Label text="ราคา">
                                        <font>
-                                          <Font name="Kodchasan Regular" size="16.0" />
+                                          <Font name="Noto Sans Thai Regular" size="16.0" />
                                        </font>
                                     </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <TextField fx:id="price" style="-fx-border-color: &quot;0675DE&quot;; -fx-background-color: white; -fx-border-radius: 15;" />
+                                          <TextField fx:id="price" promptText="ราคาที่คุณต้องการ" style="-fx-border-color: &quot;0675DE&quot;; -fx-background-color: white; -fx-border-radius: 5;">
+                                             <cursor>
+                                                <Cursor fx:constant="TEXT" />
+                                             </cursor>
+                                             <font>
+                                                <Font name="Noto Sans Thai Regular" size="12.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets right="10.0" />
+                                             </HBox.margin></TextField>
                                           <Label text="บาท">
                                              <font>
-                                                <Font name="Kodchasan Regular" size="16.0" />
+                                                <Font name="Noto Sans Thai Regular" size="16.0" />
                                              </font>
                                           </Label>
                                        </children>
@@ -152,18 +178,18 @@
                   <Insets top="50.0" />
                </VBox.margin>
             </VBox>
-            <VBox prefHeight="1494.0" prefWidth="1440.0">
+            <VBox alignment="TOP_CENTER">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="1190.0">
                      <children>
                         <Label text="ลำดับเนื้อหา" textFill="#0675de">
                            <font>
-                              <Font name="Kodchasan Regular" size="20.0" />
+                              <Font name="Noto Sans Thai Bold" size="22.0" />
                            </font>
                         </Label>
                         <Label text=" (ระบบจะแสดงผลเรียงจากบนลงล่าง)">
                            <font>
-                              <Font name="Kodchasan Regular" size="16.0" />
+                              <Font name="Noto Sans Thai Regular" size="17.0" />
                            </font>
                         </Label>
                      </children>
@@ -174,17 +200,17 @@
                      </VBox.margin></VBox>
                   <HBox alignment="CENTER" fillHeight="false" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="addCourse" alignment="CENTER" contentDisplay="BOTTOM" minHeight="50.0" minWidth="350.0" prefHeight="50.0" prefWidth="350.0" style="-fx-border-color: &quot;0675DE&quot;;" text="เพิ่มวิดีโอ">
+                        <Label fx:id="addCourse" alignment="CENTER" contentDisplay="BOTTOM" minHeight="50.0" minWidth="350.0" prefHeight="50.0" prefWidth="350.0" style="-fx-border-color: &quot;0675DE&quot;; -fx-border-style: dotted;" text="เพิ่มวิดีโอ">
                            <font>
-                              <Font name="Kodchasan Regular" size="16.0" />
+                              <Font name="Noto Sans Thai Bold" size="17.0" />
                            </font>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Label>
-                        <Label fx:id="addQuiz" alignment="CENTER" contentDisplay="BOTTOM" minHeight="50.0" minWidth="350.0" prefHeight="50.0" prefWidth="350.0" style="-fx-border-color: &quot;0675DE&quot;;" text="เพิ่มแบบทดสอบ">
+                        <Label fx:id="addQuiz" alignment="CENTER" contentDisplay="BOTTOM" minHeight="50.0" minWidth="350.0" prefHeight="50.0" prefWidth="350.0" style="-fx-border-color: &quot;0675DE&quot;; -fx-border-style: dotted;" text="เพิ่มแบบทดสอบ">
                            <font>
-                              <Font name="Kodchasan Regular" size="16.0" />
+                              <Font name="Noto Sans Thai Bold" size="17.0" />
                            </font>
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -198,24 +224,36 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="TOP_RIGHT" prefHeight="100.0">
                      <children>
-                        <Button fx:id="saveAll" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: &quot;0675DE&quot;; -fx-background-radius: 10;" text="บันทึก" textFill="WHITE">
+                        <Button fx:id="saveAll" mnemonicParsing="false" prefHeight="50.0" prefWidth="151.0" style="-fx-background-color: &quot;0675DE&quot;; -fx-background-radius: 10;" text="บันทึก" textFill="WHITE">
                            <font>
-                              <Font name="Kodchasan Bold" size="16.0" />
+                              <Font name="Noto Sans Thai Bold" size="16.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                      </children>
                      <VBox.margin>
-                        <Insets right="220.0" />
+                        <Insets />
                      </VBox.margin>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
                   </HBox>
                </children>
                <VBox.margin>
-                  <Insets left="200.0" top="50.0" />
+                  <Insets top="50.0" />
                </VBox.margin>
             </VBox>
          </children>
       </VBox>
+      <VBox.margin>
+         <Insets />
+      </VBox.margin>
+      <padding>
+         <Insets left="200.0" right="200.0" />
+      </padding>
    </ScrollPane>
 </VBox>

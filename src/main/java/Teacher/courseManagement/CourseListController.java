@@ -54,6 +54,9 @@ public class CourseListController implements Initializable {
     public void setImageToRectangle(String imageUrl) {
         Image image = new Image(imageUrl);
         courseImg.setFill(new ImagePattern(image));
+        courseImg.setStroke(Color.TRANSPARENT);
+        courseImg.setArcHeight(10);
+        courseImg.setArcWidth(10);
     }
 
     public void shadow(){

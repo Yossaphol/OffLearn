@@ -4,6 +4,8 @@ import Database.Category;
 import Database.ChapterDB;
 import Database.CourseDB;
 import Student.FontLoader.FontLoader;
+import Student.HomeAndNavigation.HomeController;
+import Teacher.dashboard.dashboardController;
 import Teacher.quiz.QuizController;
 import Teacher.quiz.QuestionItem;
 import javafx.collections.FXCollections;
@@ -49,7 +51,7 @@ public class CourseEditController implements Initializable {
     private TextField courseName;
 
     @FXML
-    private TextField desc;
+    private TextArea desc;
 
     @FXML
     private ComboBox<String> type;
@@ -81,6 +83,8 @@ public class CourseEditController implements Initializable {
     private MediaUpload m;
     private String imgUrl;
     private CourseController courseController;
+    dashboardController d = new dashboardController();
+    HomeController ef = new HomeController();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -93,6 +97,14 @@ public class CourseEditController implements Initializable {
         addImage();
 
         setType();
+
+        setEffect();
+    }
+
+    private void setEffect(){
+        ef.hoverEffect(saveAll);
+        d.hoverEffect(addCourse);
+        d.hoverEffect(addQuiz);
     }
 
     public void addCourseButton(){

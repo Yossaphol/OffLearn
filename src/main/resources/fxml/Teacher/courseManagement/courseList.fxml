@@ -68,7 +68,7 @@
          <children>
             <Label fx:id="courseCat" text="Business" textFill="#0675de">
                <font>
-                  <Font name="Kodchasan Bold" size="16.0" />
+                  <Font name="Noto Sans Thai Bold" size="16.0" />
                </font>
             </Label>
          </children>
@@ -78,7 +78,7 @@
          <children>
             <Label fx:id="coursePrice" text="4,000" textFill="#0675de">
                <font>
-                  <Font name="Kodchasan Bold" size="16.0" />
+                  <Font name="Noto Sans Thai Bold" size="16.0" />
                </font>
             </Label>
          </children>
