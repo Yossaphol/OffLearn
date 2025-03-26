@@ -47,6 +47,8 @@ public class VideoPlayerManager implements Initializable {
     @FXML private Slider sliderTime;   // timeline slider
     @FXML private Label lblTime;       // "00:00 / 00:00"
     @FXML private Button btnSound;     // volume button
+    @FXML private Button btnSkipBack;
+    @FXML private Button btnSkipFront;
     @FXML private Button btnFullscreen; // fullscreen button
     @FXML private Button btnSetting;   // opens a context menu for speed/quality
     @FXML private Slider sliderVolume; // volume slider
@@ -58,6 +60,7 @@ public class VideoPlayerManager implements Initializable {
     private Timeline hideTimeline;         // for delayed fade
     private PauseTransition inactivityTimer;
     private PauseTransition hideDelayTransition;
+    private Node trackNode;
 
     private Stage fullscreenStage = null;
     private boolean isFullscreen = false;
@@ -99,6 +102,7 @@ public class VideoPlayerManager implements Initializable {
         String videoPath = getClass().getResource("/videos/test.mp4").toExternalForm();
         Media media = new Media(videoPath);
         mediaPlayer = new MediaPlayer(media);
+
 
         // volume slider
         sliderVolume.setMin(0.0);
@@ -185,9 +189,16 @@ public class VideoPlayerManager implements Initializable {
         sliderTime.getStyleClass().add("slider");
         // get duration
         mediaPlayer.setOnReady(() -> {
+            // Keep your existing code:
             sliderTime.setMax(mediaPlayer.getTotalDuration().toSeconds());
             lblTime.setText("00:00 / " + formatTime(mediaPlayer.getTotalDuration()));
             Platform.runLater(this::updateSliderTimeFill);
+
+            // Now add a listener for buffering:
+            mediaPlayer.bufferProgressTimeProperty().addListener((obs, oldVal, newVal) -> {
+                // You can call the same method or a separate method:
+                updateSliderTimeFill();
+            });
         });
 
         // Update time
@@ -195,6 +206,9 @@ public class VideoPlayerManager implements Initializable {
             sliderTime.setValue(newTime.toSeconds());
             lblTime.setText(formatTime(newTime) + " / " + formatTime(mediaPlayer.getTotalDuration()));
             updateSliderTimeFill(); // update fill
+        });
+        mediaPlayer.bufferProgressTimeProperty().addListener((obs, oldVal, newVal) -> {
+            updateSliderTimeFill();
         });
         sliderTime.valueProperty().addListener((obs, oldVal, newVal) -> {
             updateSliderTimeFill();
@@ -247,6 +261,16 @@ public class VideoPlayerManager implements Initializable {
         // Inactivity fade
         setupInactivityTimer();
 
+        btnSkipBack.setOnAction(e -> {
+            skipBackward(5);
+            userIsActive();
+            videocontainer.requestFocus();
+        });
+        btnSkipFront.setOnAction(e -> {
+            skipForward(5);
+            userIsActive();
+            videocontainer.requestFocus();
+        });
         // Volume slider hide logic
         sliderVolume.setFocusTraversable(false);
         btnSound.addEventFilter(MouseEvent.MOUSE_EXITED, this::checkVolumeMouseExit);
@@ -456,19 +480,35 @@ public class VideoPlayerManager implements Initializable {
     }
 
     private void updateSliderTimeFill() {
-        Platform.runLater(() -> {
-            Node track = sliderTime.lookup(".track");
-            if (track != null && sliderTime.getMax() > 0) {
-                double percent = sliderTime.getValue() / sliderTime.getMax() * 100;
-                String style = String.format(
-                        "-fx-background-color: linear-gradient(to right, #8100cc %.2f%%, #F6E6FF %.2f%%); " +
-                                "-fx-background-radius: 5px; -fx-pref-height: 3px;",
-                        percent, percent
-                );
-                track.setStyle(style);
-            }
-        });
+        double totalSec = sliderTime.getMax();
+        if (totalSec <= 0) return;
+        double playedSec = sliderTime.isValueChanging()
+                ? sliderTime.getValue()
+                : mediaPlayer.getCurrentTime().toSeconds();
+
+        double bufferSec = mediaPlayer.getBufferProgressTime().toSeconds();
+        if (bufferSec < playedSec) bufferSec = playedSec;
+        if (bufferSec > totalSec)  bufferSec = totalSec;
+        double playedPercent  = (playedSec  / totalSec) * 100.0;
+        double bufferPercent  = (bufferSec / totalSec) * 100.0;
+
+        String style = String.format(
+                "-fx-background-color: linear-gradient(to right, " +
+                        "#8100cc %.2f%%, " +
+                        "#AAAAAA %.2f%%, " +
+                        "#FFFFFF %.2f%%" +
+                        ");" +
+                        "-fx-background-radius: 5px; -fx-pref-height: 3px;",
+                playedPercent, playedPercent, bufferPercent
+        );
+        
+        Node track = sliderTime.lookup(".track");
+        if (track != null) {
+            track.setStyle(style);
+        }
     }
+
+
 
     /* Inactivity fade logic */
     private void setupInactivityTimer() {

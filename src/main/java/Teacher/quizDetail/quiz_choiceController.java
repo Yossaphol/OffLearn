@@ -1,4 +1,4 @@
-package Teacher.QuizDetail;
+package Teacher.quizDetail;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;

@@ -1,6 +1,9 @@
 package Teacher.setting;
 
+import Database.User;
+import Database.UserDB;
 import Student.HomeAndNavigation.HomeController;
+import a_Session.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -68,6 +71,17 @@ public class settingController implements Initializable {
     private boolean isPaymentEditing = false;
 
     HomeController ef = new HomeController();
+
+    UserDB userDB = new UserDB();
+    String sessionUsername = SessionManager.getInstance().getUsername();
+    User user = userDB.getUserInfo(sessionUsername);
+
+    String firstname = user.getFirstname();
+    String lastNameUser = user.getLastname();
+    String userName = user.getUsername();
+    String gmailUser = user.getEmail();
+    //    String imgPath = (user.getProfile() != null) ? user.getProfile().toString() : "/img/Profile/user.png";
+    String selectedimg = "";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

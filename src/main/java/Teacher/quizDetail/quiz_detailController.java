@@ -1,4 +1,4 @@
-package Teacher.QuizDetail;
+package Teacher.quizDetail;
 
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -42,7 +42,7 @@ public class quiz_detailController implements Initializable {
     }
     private void quizList(){
         try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/Quiz/quiz_choice.fxml"));
+            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/quiz/quiz_choice.fxml"));
             HBox navContent = calendarLoader.load();
             quiz_container.getChildren().setAll(navContent);
         } catch (IOException e) {

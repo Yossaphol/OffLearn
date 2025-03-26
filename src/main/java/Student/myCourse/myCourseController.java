@@ -43,6 +43,8 @@ public class myCourseController implements Initializable {
         FontLoader fontLoader = new FontLoader();
         fontLoader.loadFonts();
 
+        HomeController homeController = new HomeController();
+
         MyCourseDB myCourseDB = new MyCourseDB();
         Category category = new Category();
         ArrayList<MyCourse> myCourses = myCourseDB.getallMyCourse();
@@ -62,6 +64,7 @@ public class myCourseController implements Initializable {
                 controller.setCourseSubtitle(myCourse.getCourseDescription());
                 controller.setCourseProgress(50);
 
+                homeController.hoverEffect(courseItem);
                 coursecardContainer0.getChildren().add(courseItem);
             } catch (IOException e) {
                 throw new RuntimeException(e);

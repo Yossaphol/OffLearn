@@ -18,11 +18,31 @@
 <StackPane fx:id="videocontainer" minHeight="405.0" minWidth="720.0" prefHeight="405.0" prefWidth="720.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.learningPage.VideoPlayerManager">
    <children>
       <MediaView fx:id="mediaView" fitHeight="405.0" fitWidth="720.0" StackPane.alignment="CENTER" />
+      <ImageView fx:id="loadinggif" fitHeight="158.0" fitWidth="213.0" pickOnBounds="true" preserveRatio="true" visible="false" StackPane.alignment="CENTER">
+         <image>
+            <Image url="@../../../img/icon/loading.gif" />
+         </image>
+         <StackPane.margin>
+            <Insets bottom="25.0" />
+         </StackPane.margin>
+      </ImageView>
       <AnchorPane fx:id="controlPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="720.0">
          <children>
-            <HBox fx:id="controlpanesection" alignment="CENTER_LEFT" minHeight="48.0" minWidth="746.0" prefHeight="48.0" prefWidth="746.0" style="-fx-background-color: linear-gradient(    from 0% 100% to 0% 0%,    #00000080 0%,   /* semi-transparent black at the bottom */    #00000000 100%  /* fully transparent at the top */);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <HBox fx:id="controlpanesection" alignment="CENTER_LEFT" minHeight="48.0" minWidth="746.0" prefHeight="48.0" prefWidth="746.0" style="-fx-background-color: linear-gradient(    from 0% 100% to 0% 0%,    #000000F2 0%,   /* semi-transparent black at the bottom */    #00000000 100%  /* fully transparent at the top */);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
-                  <Button fx:id="btnPlay" layoutX="10.0" layoutY="19.0" maxHeight="36.0" maxWidth="28.0" minHeight="36.0" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;">
+                  <Button fx:id="btnSkipBack" layoutX="10.0" layoutY="19.0" maxHeight="36.0" maxWidth="28.0" minHeight="36.0" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/icon/skip-backward.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnPlay" layoutX="73.0" layoutY="18.0" maxHeight="36.0" maxWidth="28.0" minHeight="36.0" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -31,8 +51,17 @@
                         </ImageView>
                      </graphic>
                      <HBox.margin>
-                        <Insets left="20.0" right="15.0" />
+                        <Insets left="3.0" right="3.0" />
                      </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnSkipFront" layoutX="30.0" layoutY="18.0" maxHeight="36.0" maxWidth="28.0" minHeight="36.0" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/icon/skip-forward.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                   <Button fx:id="btnSound" maxHeight="36.0" maxWidth="28.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;">
                      <graphic>
@@ -100,7 +129,7 @@
                   <Insets top="2.5" />
                </padding>
             </HBox>
-            <Slider fx:id="sliderTime" maxHeight="1.0" minHeight="1.0" minWidth="-Infinity" prefHeight="1.0" prefWidth="720.0" style="-fx-cursor: hand;" stylesheets="@../../../css/learningPage.css" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Slider fx:id="sliderTime" maxHeight="1.0" minHeight="1.0" minWidth="-Infinity" prefHeight="1.0" prefWidth="720.0" style="-fx-cursor: hand;" stylesheets="@../../../css/learningPage.css" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
          </children>
       </AnchorPane>
    </children>
