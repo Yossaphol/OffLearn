@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.chart.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -183,6 +184,29 @@ public class dashboardController implements Initializable {
     }
 
     public void hoverEffect(HBox vBox) {
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(10);
+        dropShadow.setColor(Color.TRANSPARENT);
+        vBox.setEffect(dropShadow);
+
+        vBox.setOnMouseEntered(mouseEvent -> {
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.ZERO, new KeyValue(dropShadow.colorProperty(), Color.TRANSPARENT)),
+                    new KeyFrame(Duration.millis(200), new KeyValue(dropShadow.colorProperty(), Color.web("#0675de", 0.25)))
+            );
+            timeline.play();
+        });
+
+        vBox.setOnMouseExited(mouseEvent -> {
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.ZERO, new KeyValue(dropShadow.colorProperty(), dropShadow.getColor())),
+                    new KeyFrame(Duration.millis(200), new KeyValue(dropShadow.colorProperty(), Color.TRANSPARENT))
+            );
+            timeline.play();
+        });
+    }
+
+    public void hoverEffect(Label vBox) {
         DropShadow dropShadow = new DropShadow();
         dropShadow.setRadius(10);
         dropShadow.setColor(Color.TRANSPARENT);

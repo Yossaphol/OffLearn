@@ -20,6 +20,14 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.scene.control.Label;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import Database.Category;
 
 public class roadmapController implements Initializable {
     public HBox MainFrame;
@@ -50,6 +58,8 @@ public class roadmapController implements Initializable {
     public HBox levelContainer;
     public Button selectedLevel;
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         FontLoader fontLoader = new  FontLoader();
@@ -62,6 +72,31 @@ public class roadmapController implements Initializable {
         closePopupAuto();
 
         route();
+
+        loadCategories();
+    }
+
+    private void loadCategories() {
+        Category category = new Category();
+        ArrayList<String> categories = category.getCatList();
+
+        categoryContainer.getChildren().clear(); // เคลียร์หมวดหมู่เดิมที่ defult
+
+        for (String catName : categories) {
+            Label categoryLabel = new Label(catName);
+            categoryLabel.getStyleClass().add("forHover1");
+
+            hoverEffect(categoryLabel);
+
+            categoryContainer.getChildren().add(categoryLabel);
+
+            // ตรวจสอบว่าเมื่อคลิก จะแสดง catID
+            categoryLabel.setOnMouseClicked(mouseEvent -> {
+                int catID = category.getCatID(catName);
+                System.out.println(catID + " " + catName);
+            });
+        }
+
 
     }
 
@@ -170,6 +205,5 @@ public class roadmapController implements Initializable {
             }
         });
     }
-
 
 }
