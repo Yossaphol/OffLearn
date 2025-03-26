@@ -18,11 +18,11 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<HBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.inbox.pChat.pChatController">
+<HBox minWidth="-Infinity" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.inbox.pChat.pChatController">
    <children>
-      <BorderPane fx:id="borderPane" prefHeight="1024.0">
+      <BorderPane fx:id="borderPane" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="1024.0">
          <left>
-            <VBox fx:id="privateBar" prefHeight="890.0" prefWidth="300.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-background-color: white;" BorderPane.alignment="CENTER">
+            <VBox fx:id="privateBar" prefHeight="890.0" prefWidth="300.0" style="-fx-border-color: &quot;D8D9DA&quot;; -fx-border-width: 0px 1px 0px 0px; -fx-background-color: white;" BorderPane.alignment="CENTER">
                <children>
                   <VBox prefHeight="98.0" prefWidth="298.0">
                      <children>
@@ -65,7 +65,7 @@
                            <children>
                               <Label text="สาธารณะ" textFill="#8100cc">
                                  <font>
-                                    <Font name="Kodchasan Bold" size="14.0" />
+                                    <Font name="Noto Sans Thai Bold" size="14.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets bottom="10.0" />
@@ -109,7 +109,7 @@
                   <Pane prefHeight="39.0" prefWidth="298.0" />
                   <Label text="ส่วนตัว" textFill="#8100cc">
                      <font>
-                        <Font name="Kodchasan Bold" size="14.0" />
+                        <Font name="Noto Sans Thai Bold" size="14.0" />
                      </font>
                      <VBox.margin>
                         <Insets bottom="10.0" left="20.0" />
@@ -122,7 +122,7 @@
          <center>
             <VBox fx:id="pChatDisplay" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                <children>
-                  <HBox fx:id="currentTeacher" alignment="CENTER_LEFT" prefHeight="123.0">
+                  <HBox fx:id="currentTeacher" alignment="CENTER_LEFT" prefHeight="122.0" prefWidth="843.0">
                      <children>
                         <ImageView fx:id="currentTeacherImg" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
@@ -139,9 +139,9 @@
                         </Label>
                      </children>
                   </HBox>
-                  <ScrollPane fx:id="spMain" hbarPolicy="NEVER" prefHeight="600.0" prefWidth="1140.0" style="-fx-background-color: white;" styleClass="scroll-panej" stylesheets="@../../../css/Home.css" vbarPolicy="ALWAYS">
+                  <ScrollPane fx:id="spMain" hbarPolicy="NEVER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="600.0" prefWidth="843.0" style="-fx-background-color: white;" styleClass="scroll-panej" stylesheets="@../../../css/Home.css">
                      <content>
-                        <VBox fx:id="vboxMessage" fillWidth="false" maxHeight="595.0" maxWidth="1000.0" minHeight="595.0" minWidth="1000.0" prefHeight="595.0" prefWidth="1086.0" />
+                        <VBox fx:id="vboxMessage" prefHeight="597.0" prefWidth="819.0" />
                      </content>
                      <effect>
                         <InnerShadow>
@@ -151,7 +151,7 @@
                         </InnerShadow>
                      </effect>
                   </ScrollPane>
-                  <HBox alignment="TOP_CENTER" prefHeight="303.0" prefWidth="1140.0" style="-fx-background-color: white;">
+                  <HBox alignment="TOP_CENTER" prefHeight="303.0" prefWidth="843.0" style="-fx-background-color: white;">
                      <children>
                         <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="51.0" prefWidth="49.0" style="-fx-background-color: &quot;8100CC&quot;; -fx-background-radius: 10 0 0 10;" text="+" textFill="WHITE">
                            <font>

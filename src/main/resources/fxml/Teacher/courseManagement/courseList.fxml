@@ -52,11 +52,6 @@
                            </font>
                         </Label>
                         <Pane prefHeight="35.0" prefWidth="18.0" />
-                        <Label text="รับชม 13.2K ครั้ง">
-                           <font>
-                              <Font name="Noto Sans Thai Regular" size="12.0" />
-                           </font>
-                        </Label>
                         <Pane prefHeight="35.0" prefWidth="16.0" />
                         <Label text="4,304 enrolled">
                            <font>
