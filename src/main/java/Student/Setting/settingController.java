@@ -22,6 +22,7 @@ import javafx.scene.shape.Shape;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.application.Platform;
 
 import java.io.File;
 import java.net.URL;
@@ -167,12 +168,12 @@ public class settingController implements Initializable {
         boolean isUpdated = userDB.updateUserInfo(sessionUsername, newFirstname, newLastname, newEmail);
 
         if (isUpdated) {
-            // อัปโหลดรูปไปที่ Database ถ้ามีการเลือกใหม่
+            // Upload image to database if a new image was selected
             if (!selectedimg.isEmpty()) {
                 boolean isImageUpdated = userDB.updateProfileImage(sessionUsername, selectedimg);
                 if (isImageUpdated) {
-                    user = userDB.getUserInfo(sessionUsername); // ดึงข้อมูล user ใหม่จาก Database
-                    setUserImage(user.getProfile());  // อัปเดต UI ให้แสดงรูปใหม่
+                    user = userDB.getUserInfo(sessionUsername); // Refresh user info
+                    setUserImage(user.getProfile());  // Update UI with the new profile image
                 }
             }
 
@@ -247,27 +248,49 @@ public class settingController implements Initializable {
 //            ex.printStackTrace();
 //        }
 //    }
-    private void setUserImage(String imgPath) {
-        try {
-            if (imgPath == null || imgPath.isEmpty()) {
-                imgPath = "/img/Profile/user.png";
-            }
-            Image img;
+private void setUserImage(String imgPath) {
+    try {
+        if (imgPath == null || imgPath.isEmpty()) {
+            imgPath = "/img/Profile/user.png";
+        }
 
-            if (imgPath.startsWith("http")) { // ตรวจสอบ URL จาก S3
-                img = new Image(imgPath, true); // true = โหลดแบบ async
-            } else if (imgPath.startsWith("/") || getClass().getResource(imgPath) != null) {
-                img = new Image(getClass().getResource(imgPath).toExternalForm());
+        Image img;
+
+        if (imgPath.startsWith("http")) { // Async loading for URLs
+            img = new Image(imgPath, true);
+
+            // Add a listener to set the image when it's loaded
+            img.progressProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue.doubleValue() == 1.0) { // Image is fully loaded
+                    Platform.runLater(() -> {
+                        picture.setFill(new ImagePattern(img));
+                    });
+                }
+            });
+        } else if (imgPath.startsWith("/") || getClass().getResource(imgPath) != null) {
+            img = new Image(getClass().getResource(imgPath).toExternalForm());
+            picture.setFill(new ImagePattern(img));
+        } else {
+            File file = new File(imgPath);
+            if (!file.exists()) {
+                // Fallback to default image if file not found
+                img = new Image(getClass().getResource("/img/Profile/user.png").toExternalForm());
             } else {
-                File file = new File(imgPath);
-                if (!file.exists()) return;
                 img = new Image(file.toURI().toString());
             }
             picture.setFill(new ImagePattern(img));
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        }
+    } catch (Exception ex) {
+        ex.printStackTrace();
+        // Fallback to default image in case of any error
+        try {
+            Image defaultImg = new Image(getClass().getResource("/img/Profile/user.png").toExternalForm());
+            picture.setFill(new ImagePattern(defaultImg));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
+}
     public void uploadImg(ActionEvent e) {
         m = new MediaUpload();
         FileChooser fileChooser = new FileChooser();
@@ -283,12 +306,14 @@ public class settingController implements Initializable {
 
             if (uploadedUrl != null) {
                 selectedimg = uploadedUrl;
-                setUserImage(selectedimg);
+
+                // Ensure image is loaded on JavaFX Application Thread
+                Platform.runLater(() -> {
+                    setUserImage(selectedimg);
+                });
             } else {
-                System.out.println("Upload failed.");
+                showAlert("Upload Failed", "Unable to upload the image.", Alert.AlertType.ERROR);
             }
-        } else {
-            System.out.println("No file selected.");
         }
     }
 
