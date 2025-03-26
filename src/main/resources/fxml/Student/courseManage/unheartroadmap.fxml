@@ -11,7 +11,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Button fx:id="sub_category_btn01" mnemonicParsing="false" prefHeight="41.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="forHover" stylesheets="@../../../css/roadmap.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.roadmap.HeartedRoadmapController">
+<Button fx:id="sub_category_btn01" mnemonicParsing="false" prefHeight="41.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="forHover" stylesheets="@../../../css/roadmap.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <font>
         <Font name="Noto Sans Thai Bold" size="18.0" />
     </font>
@@ -35,7 +35,7 @@
                 </Label>
                 <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../../img/icon/favourite1.png" />
+                        <Image url="@../../../img/icon/favourite.png" />
                     </image>
                     <HBox.margin>
                         <Insets left="5.0" />

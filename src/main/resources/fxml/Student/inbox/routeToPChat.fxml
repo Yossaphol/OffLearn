@@ -29,7 +29,7 @@
             </Label>
             <StackPane alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="298.0" style="-fx-border-radius: 10px;">
                <children>
-                  <TextField prefHeight="27.0" prefWidth="238.0" promptText="ค้นหาบทสนทนา" style="-fx-background-radius: 10;">
+                  <TextField prefHeight="27.0" prefWidth="238.0" promptText="ค้นหาบทสนทนา" style="-fx-background-radius: 10;" stylesheets="@../../../css/Home.css">
                      <StackPane.margin>
                         <Insets left="30.0" right="30.0" top="10.0" />
                      </StackPane.margin>

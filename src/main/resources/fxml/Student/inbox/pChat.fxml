@@ -168,8 +168,11 @@
                            <padding>
                               <Insets left="20.0" />
                            </padding>
+                           <font>
+                              <Font name="Noto Sans Thai Regular" size="14.0" />
+                           </font>
                         </TextField>
-                        <Button fx:id="sendButton" mnemonicParsing="false" prefHeight="45.0" prefWidth="76.0" style="-fx-background-color: &quot;8100CC&quot;; -fx-background-radius: 10;" text="SEND" textFill="WHITE">
+                        <Button fx:id="sendButton" mnemonicParsing="false" prefHeight="45.0" prefWidth="40.0" style="-fx-background-color: &quot;8100CC&quot;; -fx-background-radius: 10;" textFill="WHITE">
                            <font>
                               <Font name="Kodchasan Bold" size="18.0" />
                            </font>
@@ -179,6 +182,13 @@
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <graphic>
+                              <ImageView fitHeight="33.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../img/icon/caret-right-solid.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
                      </children>
                      <padding>

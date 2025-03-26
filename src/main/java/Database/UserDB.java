@@ -23,7 +23,7 @@ public class UserDB extends ConnectDB{
                 String user = rs.getString("Username");
                 String email = rs.getString("Email");
                 String password = rs.getString("Password");
-                byte[] profile = rs.getBytes("Profile");
+                String profile = rs.getString("Profile");
                 return new User(firstname, lastname, user, email, password, profile);
             }
         } catch (SQLException e) {
@@ -42,6 +42,23 @@ public class UserDB extends ConnectDB{
             pstmt.setString(2, lastname);
             pstmt.setString(3, email);
             pstmt.setString(4, username);
+
+            int affectedRows = pstmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateProfileImage(String username, String profilePath) {
+        String query = "UPDATE offlearn.user SET Profile = ? WHERE Username = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, profilePath);
+            pstmt.setString(2, username);
 
             int affectedRows = pstmt.executeUpdate();
             return affectedRows > 0;

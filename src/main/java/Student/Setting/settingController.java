@@ -1,5 +1,7 @@
 package Student.Setting;
 
+import javafx.stage.FileChooser;
+import mediaUpload.MediaUpload;
 import Database.User;
 import Database.UserDB;
 import Student.HomeAndNavigation.HomeController;
@@ -20,6 +22,7 @@ import javafx.scene.shape.Shape;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.application.Platform;
 
 import java.io.File;
 import java.net.URL;
@@ -45,21 +48,14 @@ public class settingController implements Initializable {
     public RadioButton mFalse;
     public RadioButton cTrue;
     public RadioButton cFalse;
-    public TextField name1;
-    public TextField lastName1;
-    public TextField accountNo;
-    public TextField bankName;
-    public HBox editPaymentBox;
-    public Button editPaymentBtn;
     public Button cancelEditProfile;
     public Button savePassword;
     public Button cancelPassword;
-    public Button savePayment;
-    public Button cancelPaymentChange;
     public TextField oldpw;
     public TextField newpwfirst;
     public TextField newpwsecond;
     private boolean isChangePass = false;
+    private MediaUpload m;
     HomeController hm = new HomeController();
 
     UserDB userDB = new UserDB();
@@ -70,7 +66,7 @@ public class settingController implements Initializable {
     String lastNameUser = user.getLastname();
     String userName = user.getUsername();
     String gmailUser = user.getEmail();
-    String imgPath = (user.getProfile() != null) ? user.getProfile().toString() : "/img/Profile/user.png";
+//    String imgPath = (user.getProfile() != null) ? user.getProfile().toString() : "/img/Profile/user.png";
 //    String imgPath = "/img/Profile/user.png";
     String selectedimg = "";
 
@@ -81,9 +77,9 @@ public class settingController implements Initializable {
 
         uploadPic.setVisible(false);
         setProfileValue(name, lastNameUser, gmailUser);
-        loadAndSetUserImage(picture, imgPath);
+//        loadAndSetUserImage(picture, imgPath);
+        setUserImage(user.getProfile());
         username1.setText(userName);
-        setRadioGroup();
         setEffect();
     }
 
@@ -95,28 +91,6 @@ public class settingController implements Initializable {
         hm.hoverEffect(savePassword);
         hm.hoverEffect(cancelEditProfile);
     }
-
-    private void setRadioGroup(){
-        ToggleGroup quizGroup = new ToggleGroup();
-        quizTrue.setToggleGroup(quizGroup);
-        quizFalse.setToggleGroup(quizGroup);
-
-
-        ToggleGroup messageGroup = new ToggleGroup();
-        mTrue.setToggleGroup(messageGroup);
-        mFalse.setToggleGroup(messageGroup);
-
-        ToggleGroup upComing = new ToggleGroup();
-        cTrue.setToggleGroup(upComing);
-        cFalse.setToggleGroup(upComing);
-
-
-        //Set default
-        quizTrue.setSelected(true);
-        mTrue.setSelected(true);
-        cTrue.setSelected(true);
-    }
-
 
     //Start profile edit part
     public void editProfile(ActionEvent e){
@@ -186,29 +160,35 @@ public class settingController implements Initializable {
     }
 
 
-    public void saveProfileEdit(ActionEvent e){
+    public void saveProfileEdit(ActionEvent e) {
         String newFirstname = realName.getText();
         String newLastname = lastName.getText();
         String newEmail = gmail.getText();
 
-        UserDB userDB = new UserDB();
         boolean isUpdated = userDB.updateUserInfo(sessionUsername, newFirstname, newLastname, newEmail);
+
         if (isUpdated) {
+            // Upload image to database if a new image was selected
+            if (!selectedimg.isEmpty()) {
+                boolean isImageUpdated = userDB.updateProfileImage(sessionUsername, selectedimg);
+                if (isImageUpdated) {
+                    user = userDB.getUserInfo(sessionUsername); // Refresh user info
+                    setUserImage(user.getProfile());  // Update UI with the new profile image
+                }
+            }
+
             showAlert("Update Successful", "Success", Alert.AlertType.INFORMATION);
-            imgPath = selectedimg;
             setProfileValue(newFirstname, newLastname, newEmail);
             closeProfileEdit();
         } else {
             showAlert("Update Failed", "Fail", Alert.AlertType.ERROR);
         }
-//        imgPath = selectedimg;
-//        setProfileValue(realName.getText(), lastName.getText(), gmail.getText());
-//        closeProfileEdit();
-
     }
 
+
+
     public void cancelProfileEdit(ActionEvent e){
-        loadAndSetUserImage(picture, imgPath);
+//        loadAndSetUserImage(picture, imgPath);
         setProfileValue(name, lastNameUser, gmailUser);
         closeProfileEdit();
     }
@@ -229,8 +209,90 @@ public class settingController implements Initializable {
         closeEditProfile(isEditing);
     }
 
+//    public void uploadImg(ActionEvent e) {
+//        FileChooser fileChooser = new FileChooser();
+//        fileChooser.setTitle("Select an Image");
+//        fileChooser.getExtensionFilters().addAll(
+//                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+//        );
+//
+//        File selectedFile = fileChooser.showOpenDialog(new Stage());
+//
+//        if (selectedFile != null) {
+//            selectedimg = selectedFile.getAbsolutePath(); // เก็บ path ของรูปที่เลือก
+//            loadAndSetUserImage(picture, selectedimg); // แสดงภาพที่เลือกทันที แต่ยังไม่อัปโหลด
+//        }
+//    }
+//
+//    public void loadAndSetUserImage(Shape shape, String path) {
+//        try {
+//            Image img;
+//            if (path == null || path.isEmpty()) {
+//                path = "/img/Profile/user.png"; // ถ้า path ว่าง ให้ใช้รูป default
+//            }
+//
+//            if (path.startsWith("/") || getClass().getResource(path) != null) {
+//                img = new Image(getClass().getResource(path).toExternalForm());
+//            } else {
+//                File file = new File(path);
+//                if (!file.exists()) {
+//                    System.out.println("File not found: " + path);
+//                    return;
+//                }
+//                img = new Image(file.toURI().toString());
+//            }
+//
+//            shape.setStroke(Color.TRANSPARENT);
+//            shape.setFill(new ImagePattern(img));
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//    }
+private void setUserImage(String imgPath) {
+    try {
+        if (imgPath == null || imgPath.isEmpty()) {
+            imgPath = "/img/Profile/user.png";
+        }
 
+        Image img;
+
+        if (imgPath.startsWith("http")) { // Async loading for URLs
+            img = new Image(imgPath, true);
+
+            // Add a listener to set the image when it's loaded
+            img.progressProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue.doubleValue() == 1.0) { // Image is fully loaded
+                    Platform.runLater(() -> {
+                        picture.setFill(new ImagePattern(img));
+                    });
+                }
+            });
+        } else if (imgPath.startsWith("/") || getClass().getResource(imgPath) != null) {
+            img = new Image(getClass().getResource(imgPath).toExternalForm());
+            picture.setFill(new ImagePattern(img));
+        } else {
+            File file = new File(imgPath);
+            if (!file.exists()) {
+                // Fallback to default image if file not found
+                img = new Image(getClass().getResource("/img/Profile/user.png").toExternalForm());
+            } else {
+                img = new Image(file.toURI().toString());
+            }
+            picture.setFill(new ImagePattern(img));
+        }
+    } catch (Exception ex) {
+        ex.printStackTrace();
+        // Fallback to default image in case of any error
+        try {
+            Image defaultImg = new Image(getClass().getResource("/img/Profile/user.png").toExternalForm());
+            picture.setFill(new ImagePattern(defaultImg));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
     public void uploadImg(ActionEvent e) {
+        m = new MediaUpload();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select an Image");
         fileChooser.getExtensionFilters().addAll(
@@ -238,41 +300,24 @@ public class settingController implements Initializable {
         );
 
         File selectedFile = fileChooser.showOpenDialog(new Stage());
-//
-//        if (selectedFile != null) {
-//            // ตั้งค่าตำแหน่งของไฟล์ที่เลือก
-//            selectedimg = selectedFile.getAbsolutePath();
-//
-//            // อัปโหลดไฟล์ไปยังฐานข้อมูล
-//            boolean isUploaded = userDB.updateProfileImage(sessionUsername, selectedFile);
-//
-//            if (isUploaded) {
-//                // ถ้าอัปโหลดสำเร็จ ให้แสดงรูปใหม่ใน UI
-//                loadAndSetUserImage(picture, selectedimg);
-//            }
-//        }
-    }
 
-    public void loadAndSetUserImage(Shape shape, String path) {
-        try {
-            Image img;
-            if (path.startsWith("/") || getClass().getResource(path) != null) {
-                img = new Image(getClass().getResource(path).toExternalForm());
+        if (selectedFile != null) {
+            String uploadedUrl = m.uploadImg(selectedFile);
+
+            if (uploadedUrl != null) {
+                selectedimg = uploadedUrl;
+
+                // Ensure image is loaded on JavaFX Application Thread
+                Platform.runLater(() -> {
+                    setUserImage(selectedimg);
+                });
             } else {
-                File file = new File(path);
-                if (!file.exists()) {
-                    System.out.println("File not found: " + path);
-                    return;
-                }
-                img = new Image(file.toURI().toString());
+                showAlert("Upload Failed", "Unable to upload the image.", Alert.AlertType.ERROR);
             }
-
-            shape.setStroke(Color.TRANSPARENT);
-            shape.setFill(new ImagePattern(img));
-        } catch (Exception ex) {
-            ex.printStackTrace();
         }
     }
+
+
     //End profile edit part
 
 
@@ -335,89 +380,9 @@ public class settingController implements Initializable {
         fadeOut.play();
     }
     public void cancelChangePass(ActionEvent e){
-
         closePasswordField();
     }
 
-//    public void editPaymentInfo(ActionEvent e){
-//        if(!isEditingPayment){
-//            openEditPaymentField();
-//
-//            isEditingPayment = true;
-//        }else {
-//            closeEditPaymentField();
-//            isEditingPayment = false;
-//        }
-//    }
-
-
-
-    private void openEditPaymentField() {
-        editPaymentBtn.setVisible(false);
-
-        editPaymentBox.setOpacity(0);
-        editPaymentBox.setVisible(true);
-        name1.setDisable(false);
-        lastName1.setDisable(false);
-        accountNo.setDisable(false);
-        bankName.setDisable(false);
-
-        FadeTransition fadeIn = new FadeTransition(Duration.millis(200), editPaymentBox);
-        fadeIn.setFromValue(0);
-        fadeIn.setToValue(1);
-        fadeIn.play();
-    }
-
-//    private void closeEditPaymentField() {
-//        editPaymentBtn.setVisible(true);
-//
-//        FadeTransition fadeOut = new FadeTransition(Duration.millis(200), editPaymentBox);
-//        fadeOut.setFromValue(1);
-//        fadeOut.setToValue(0);
-//        fadeOut.setOnFinished(event -> {
-//            editPaymentBox.setVisible(false);
-//
-//            name1.setDisable(true);
-//            lastName1.setDisable(true);
-//            accountNo.setDisable(true);
-//            bankName.setDisable(true);
-//        });
-//
-//        fadeOut.play();
-//    }
-
-//    public void savePaymentinfo(ActionEvent e){
-//        this.namep = name1.getText();
-//        this.lastnamep = lastName1.getText();
-//        this.accountN = accountNo.getText();
-//        this.bank = bankName.getText();
-//
-//        setBankDetail(namep, lastnamep, accountN, bank);
-//        closeEditPaymentField();
-//    }
-
-
-//    public void cancelPaymentInfo(ActionEvent e){
-//        setBankDetail(namep, lastnamep, accountN, bank);
-//        closeEditPaymentField();
-//    }
-
-    public void setBankDetail(String name, String lastname, String acctNo, String bank) {
-        acctNo = acctNo.replace("-", "");
-        name1.setText(name);
-        lastName1.setText(lastname);
-
-        if (acctNo.length() >= 6) {
-            String formattedAcctNo = acctNo.substring(0, 3) + "-" +
-                    acctNo.substring(3, 6) + "-" +
-                    acctNo.substring(6);
-            accountNo.setText(formattedAcctNo);
-        } else {
-            accountNo.setText(acctNo);
-        }
-        bankName.setText(bank);
-    }
-    //End edit payment part
 
     private void showAlert(String title, String message, Alert.AlertType type) {
         Alert alert = new Alert(type);

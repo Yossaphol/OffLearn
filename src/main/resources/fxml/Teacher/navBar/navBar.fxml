@@ -102,7 +102,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="logout" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="49.0" prefWidth="147.0" style="-fx-background-color: transparent;" text="Logout" textFill="#f40000">
+                  <Button fx:id="logout" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleLogout" prefHeight="49.0" prefWidth="147.0" style="-fx-background-color: transparent;" text="Logout" textFill="#f40000">
                      <font>
                         <Font name="Kodchasan Bold" size="20.0" />
                      </font>

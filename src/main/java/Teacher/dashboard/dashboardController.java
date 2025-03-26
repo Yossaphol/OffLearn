@@ -1,5 +1,8 @@
 package Teacher.dashboard;
 
+import Database.User;
+import Database.UserDB;
+import a_Session.SessionManager;
 import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -10,11 +13,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.chart.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -60,7 +65,6 @@ public class dashboardController implements Initializable {
 
         effectMethod.applyHoverEffectToInside(month_selector);
 
-        hoverEffect(dashboard_profile);
         hoverEffect(linechart_container);
         hoverEffect(piechartContainer);
         hoverEffect(lowScore_container);
@@ -87,6 +91,7 @@ public class dashboardController implements Initializable {
             searhbar_container.getScene().getRoot().requestLayout();
             searhbar_container.getScene().getRoot().applyCss();
         });
+
 
     }
 
@@ -183,6 +188,29 @@ public class dashboardController implements Initializable {
     }
 
     public void hoverEffect(HBox vBox) {
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(10);
+        dropShadow.setColor(Color.TRANSPARENT);
+        vBox.setEffect(dropShadow);
+
+        vBox.setOnMouseEntered(mouseEvent -> {
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.ZERO, new KeyValue(dropShadow.colorProperty(), Color.TRANSPARENT)),
+                    new KeyFrame(Duration.millis(200), new KeyValue(dropShadow.colorProperty(), Color.web("#0675de", 0.25)))
+            );
+            timeline.play();
+        });
+
+        vBox.setOnMouseExited(mouseEvent -> {
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.ZERO, new KeyValue(dropShadow.colorProperty(), dropShadow.getColor())),
+                    new KeyFrame(Duration.millis(200), new KeyValue(dropShadow.colorProperty(), Color.TRANSPARENT))
+            );
+            timeline.play();
+        });
+    }
+
+    public void hoverEffect(Label vBox) {
         DropShadow dropShadow = new DropShadow();
         dropShadow.setRadius(10);
         dropShadow.setColor(Color.TRANSPARENT);

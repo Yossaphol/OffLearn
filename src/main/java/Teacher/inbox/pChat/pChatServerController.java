@@ -1,11 +1,14 @@
 package Teacher.inbox.pChat;
 
 import Database.*;
+import Student.HomeAndNavigation.HomeController;
 import Student.inbox.pChat.pChatController;
+import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,12 +21,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import Teacher.Server;
+import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.URL;
 import java.util.*;
 
 public class pChatServerController extends pChatController implements Initializable {
+    public HBox navBarContainer;
     @FXML
     private Button sendButton;
 
@@ -74,8 +80,6 @@ public class pChatServerController extends pChatController implements Initializa
         switchToGlobal();
 
         spMain.vvalueProperty().bind(vboxMessage.heightProperty());
-        myCourse.setStyle("-fx-background-color: linear-gradient(to right, #0675DE, #033F78); " +
-                "-fx-background-radius: 15px 15px 15px 15px;");
 
         stdDb = new StudentDBConnect();
         chatHistoryDB = new ChatHistoryDB();
@@ -94,6 +98,8 @@ public class pChatServerController extends pChatController implements Initializa
                 profileImage.setFitHeight(50);
                 profileImage.setFitWidth(50);
                 hBox.getChildren().addAll(profileImage, nameLabel);
+                hoverEffect(hBox);
+                hBox.setStyle("-fx-cursor: hand;");
             }
 
             @Override
@@ -144,6 +150,13 @@ public class pChatServerController extends pChatController implements Initializa
         });
 
         tfMessage.setOnAction(event -> sendMessage());
+
+
+
+
+
+        displayNavbar();
+        hoverEffect(globalButton);
 
     }
 
@@ -236,6 +249,37 @@ public class pChatServerController extends pChatController implements Initializa
                 addMessage(msgText, Pos.CENTER_LEFT, "#D9D9D9");
             }
         }
+    }
+
+
+    private void displayNavbar(){
+        try {
+            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/navBar/navBar.fxml"));
+            HBox navContent = calendarLoader.load();
+            navBarContainer.getChildren().setAll(navContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void hoverEffect(HBox btn) {
+        ScaleTransition scaleUp = new ScaleTransition(Duration.millis(200), btn);
+        scaleUp.setFromX(1);
+        scaleUp.setFromY(1);
+        scaleUp.setToX(1.05);
+        scaleUp.setToY(1.05);
+        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(200), btn);
+        scaleDown.setFromX(1.05);
+        scaleDown.setFromY(1.05);
+        scaleDown.setToX(1);
+        scaleDown.setToY(1);
+
+        btn.setOnMouseEntered(mouseEvent -> {
+            scaleUp.play();
+        });
+        btn.setOnMouseExited(mouseEvent -> {
+            scaleDown.play();
+        });
     }
 
 }

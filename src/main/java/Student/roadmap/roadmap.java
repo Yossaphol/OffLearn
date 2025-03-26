@@ -12,7 +12,6 @@ public class roadmap extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
     @Override
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(roadmap.class.getResource("/fxml/Student/courseManage/roadmap.fxml"));

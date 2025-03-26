@@ -1,21 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="1422.0" prefWidth="1444.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.CourseController">
+<VBox prefWidth="1444.0" style="-fx-background-color: #FBFBFB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.CourseController">
    <children>
-      <HBox fx:id="navBar" prefHeight="172.0" prefWidth="1444.0" />
-      <ScrollPane fx:id="wrapper" prefHeight="1254.0" prefWidth="1444.0" style="-fx-background-color: white;">
+      <HBox fx:id="navBar" alignment="CENTER" prefHeight="259.0" prefWidth="1444.0" style="-fx-background-color: #FBFBFB;">
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="10.0" />
+         </padding></HBox>
+      <ScrollPane fx:id="wrapper" hbarPolicy="NEVER" prefWidth="1444.0" style="-fx-background-color: #FBFBFB;" vbarPolicy="NEVER">
          <content>
-            <VBox fx:id="courseManagement" prefHeight="1172.0" prefWidth="1444.0" style="-fx-background-color: white;">
+            <VBox fx:id="courseManagement" prefHeight="1311.0" prefWidth="1444.0" style="-fx-background-color: #FBFBFB;">
                <children>
                   <HBox prefHeight="52.0" prefWidth="1444.0">
                      <children>
@@ -24,7 +36,7 @@
                            <children>
                               <Label text="Course Management" textFill="#0675de">
                                  <font>
-                                    <Font name="Kodchasan Bold" size="24.0" />
+                                    <Font name="Noto Sans Thai Bold" size="24.0" />
                                  </font>
                               </Label>
                               <Label text="การจัดการคอร์ส" textFill="#a8a8a8">
@@ -44,7 +56,7 @@
                                  <children>
                                     <Label text="ยอดการลงทะเบียน" textFill="#0675de">
                                        <font>
-                                          <Font name="Noto Sans Thai Condensed ExtraBold" size="24.0" />
+                                          <Font name="Noto Sans Thai Bold" size="24.0" />
                                        </font>
                                     </Label>
                                     <HBox alignment="CENTER" prefHeight="105.0" prefWidth="478.0">
@@ -69,7 +81,7 @@
                                     <HBox prefHeight="47.0" prefWidth="478.0">
                                        <children>
                                           <Pane prefHeight="81.0" prefWidth="83.0" />
-                                          <Rectangle fx:id="arrow" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="81.0" stroke="BLACK" strokeType="INSIDE" width="33.0" />
+                                          <Rectangle fx:id="arrow" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="81.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
                                           <Pane prefHeight="81.0" prefWidth="28.0" />
                                           <VBox prefHeight="220.0" prefWidth="139.0">
                                              <children>
@@ -77,7 +89,7 @@
                                                 <Pane prefHeight="117.0" prefWidth="139.0" />
                                                 <Label text="35%" textFill="#0675de">
                                                    <font>
-                                                      <Font name="Kodchasan Bold" size="64.0" />
+                                                      <Font name="Noto Sans Thai Bold" size="64.0" />
                                                    </font>
                                                 </Label>
                                              </children>
@@ -114,10 +126,38 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                              <VBox fx:id="chartContainer" alignment="CENTER" prefHeight="298.0" prefWidth="503.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 5;">
                                  <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="292.0" stroke="BLACK" strokeType="INSIDE" width="516.0" />
+                                    <Label prefHeight="25.0" prefWidth="395.0" text="จำนวนการลงทะเบียน" textFill="#0675de">
+                                       <font>
+                                          <Font name="Noto Sans Thai Bold" size="15.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="7.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <LineChart fx:id="enrollmentStatistics" style="-fx-background-color: transparent;">
+                                      <xAxis>
+                                        <CategoryAxis tickLabelFill="#0675de" fx:id="xAxis">
+                                             <tickLabelFont>
+                                                <Font name="Noto Sans Thai Bold" size="12.0" />
+                                             </tickLabelFont></CategoryAxis>
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis fx:id="yAxis" side="LEFT" tickLabelFill="#0675de">
+                                             <tickLabelFont>
+                                                <Font name="Noto Sans Thai Bold" size="12.0" />
+                                             </tickLabelFont></NumberAxis>
+                                      </yAxis>
+                                    </LineChart>
                                  </children>
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
                               </VBox>
                            </children>
                         </HBox>
@@ -133,11 +173,14 @@
                      <children>
                         <Button fx:id="newCourse" mnemonicParsing="false" prefHeight="40.0" prefWidth="135.0" style="-fx-background-radius: 10; -fx-background-color: &quot;0675DE&quot;;" text="สร้างคอร์สใหม่" textFill="WHITE">
                            <font>
-                              <Font name="Kodchasan Regular" size="16.0" />
+                              <Font name="Noto Sans Thai Bold" size="17.0" />
                            </font>
                            <HBox.margin>
                               <Insets right="250.0" />
                            </HBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                      </children>
                   </HBox>
@@ -185,9 +228,9 @@
                         </Label>
                      </children>
                   </HBox>
-                  <VBox fx:id="courseListView" alignment="TOP_CENTER" fillWidth="false" prefHeight="607.0" prefWidth="1444.0" spacing="20.0">
+                  <VBox fx:id="courseListView" alignment="TOP_CENTER" fillWidth="false" minHeight="-Infinity" prefWidth="1200.0" spacing="20.0">
                      <VBox.margin>
-                        <Insets bottom="50.0" />
+                        <Insets bottom="30.0" />
                      </VBox.margin></VBox>
                </children>
                <padding>

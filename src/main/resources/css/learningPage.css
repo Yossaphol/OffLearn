@@ -42,3 +42,33 @@
     -fx-background-color: #ffffff;
 }
 
+.context-menu {
+    -fx-background-color: rgba(0, 0, 0, 0.85);
+    -fx-background-radius: 6;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 8, 0, 0, 2);
+    -fx-padding: 4 0 4 0;
+}
+
+.context-menu .menu-item {
+    -fx-text-fill: white;
+    -fx-padding: 8 16 8 16;
+    -fx-font-size: 14px;
+}
+.context-menu .menu .label,
+.context-menu .menu-item .label {
+    -fx-text-fill: white;
+}
+
+.context-menu .menu-item:armed {
+    -fx-background-color: #444444;
+}
+
+.context-menu .radio-menu-item .label,
+.context-menu .check-menu-item .label {
+    -fx-text-fill: white;
+}
+
+.context-menu .menu-item:focused {
+    -fx-background-color: #555555;
+}

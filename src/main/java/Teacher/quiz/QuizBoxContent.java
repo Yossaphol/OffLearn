@@ -7,8 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
@@ -32,7 +32,7 @@ public class QuizBoxContent implements Initializable {
     private Label quizName;
 
     @FXML
-    private ImageView delete;
+    private VBox delete;
 
     @FXML
     private HBox quizBox;
@@ -82,20 +82,34 @@ public class QuizBoxContent implements Initializable {
     public void deleteButton(){
         quizDB = new QuizDB();
         delete.setOnMouseClicked(mouseEvent -> {
-            lqg.remove(this.questionItemsList);
-            quizDB.deleteQuiz(quizItem.getQuizID());
-            if (parentContainer != null && quizBox != null) {
-                parentContainer.getChildren().remove(quizBox);
+            System.out.println("Delete button clicked.");
+
+            if (quizItem == null) {
+                System.out.println("quizItem is null, cannot delete.");
+                return;
             }
+
+            quizDB.deleteQuiz(quizItem.getQuizID());
+            System.out.println("Quiz deleted from database.");
+
+            if (parentContainer != null && quizBox != null) {
+                System.out.println("Removing from UI...");
+                parentContainer.getChildren().remove(quizBox);
+            } else {
+                System.out.println("Cannot remove: parentContainer or quizBox is null.");
+            }
+
+            mouseEvent.consume();
         });
     }
+
 
     public void shadow(){
         DropShadow dropShadow = new DropShadow();
         dropShadow.setRadius(10);
         dropShadow.setOffsetX(2.5);
         dropShadow.setOffsetY(2.5);
-        dropShadow.setColor(Color.GRAY);
+        dropShadow.setColor(Color.web("#c4c4c4", 0.25));
 
         quizBox.setEffect(dropShadow);
     }
@@ -119,6 +133,8 @@ public class QuizBoxContent implements Initializable {
                     passCourseManagement(quizController);
                     passCourseSpace(quizController);
                     passWrapper(quizController);
+
+                    wrapper.setVvalue(0);
 
                 } catch (IOException e) {
                     e.printStackTrace();

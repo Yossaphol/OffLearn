@@ -1,5 +1,12 @@
 package Student.HomeAndNavigation;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import javax.imageio.ImageIO;
+
+import Database.User;
 import Database.UserDB;
 import Student.HomeAndNavigation.*;
 import a_Session.SessionManager;
@@ -115,7 +122,6 @@ public class HomeController implements Initializable {
     public HBox rootpage;
     private List<AnchorPane> slides;
     private int slideIndex = 0;
-    private UserDB userDB;
     public Label setname;
 
     @FXML
@@ -130,6 +136,7 @@ public class HomeController implements Initializable {
     private NumberAxis yAxis;
 
     String username = SessionManager.getInstance().getUsername();
+    UserDB userDB = new UserDB();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -166,10 +173,6 @@ public class HomeController implements Initializable {
 
 
     }
-
-
-
-
 
     public void callSlider(){
         slides = new ArrayList<>();
@@ -511,7 +514,7 @@ public class HomeController implements Initializable {
         loadAndSetImage(teacherBanner, "/img/Profile/man.png");
 
 //        loadAndSetImage(pfp_statistic, "/img/Profile/doctor.png");
-        setImg();
+        setProfile(userDB.getProfile(username));
 //        setProfile(username);
         loadAndSetImage(teacher_pfp, "/img/Profile/man.png");
 
@@ -532,13 +535,16 @@ public class HomeController implements Initializable {
         loadAndSetImage(course_pic_OOP, "/img/Picture/bg.jpg");
     }
 
-    public void setImg(){
-        String username = SessionManager.getInstance().getUsername();
-        UserDB userDB = new UserDB();
-        HomeController homeController = new HomeController();
+    public void setProfile(String Url){
+        Image img;
+        if (Url.startsWith("http") || Url.startsWith("https")) {
+            img = new Image(Url);
+        } else {
+            img = new Image(getClass().getResource(Url).toExternalForm());
+        }
 
-        String profilePath = (username != null) ? userDB.getProfile(username) : "/img/Profile/user.png";
-        homeController.loadAndSetImage(pfp_statistic, profilePath);
+        this.pfp_statistic.setStroke(Color.TRANSPARENT);
+        this.pfp_statistic.setFill(new ImagePattern(img));
     }
 
     public void loadAndSetImage(Shape shape, String path) {

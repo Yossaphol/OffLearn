@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -18,11 +19,14 @@ import mediaUpload.MediaUpload;
 
 import java.io.File;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ChapterContent implements Initializable {
 
+    public Label date;
     @FXML
     private HBox chapterContent;
 
@@ -66,6 +70,13 @@ public class ChapterContent implements Initializable {
         addMaterials();
 
         shadow();
+        setCurrecntDate();
+    }
+
+    private void setCurrecntDate(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy");
+        String currentDate = dateFormat.format(new Date());
+        date.setText(currentDate);
     }
 
     public void recieveChapList(ArrayList<ChapterItem> chapList){ this.chapList = chapList; }
@@ -186,9 +197,14 @@ public class ChapterContent implements Initializable {
         dropShadow.setRadius(10);
         dropShadow.setOffsetX(2.5);
         dropShadow.setOffsetY(2.5);
-        dropShadow.setColor(Color.GRAY);
+        dropShadow.setColor(Color.web("#c4c4c4", 0.25));
 
         chapterContent.setEffect(dropShadow);
     }
 
+    public void setDisplay(ChapterItem chapterItem){
+        this.chapterName.setText(chapterItem.getChapterName());
+        this.chapDesc.setText(chapterItem.getDesc());
+
+    }
 }

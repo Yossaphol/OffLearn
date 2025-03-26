@@ -92,6 +92,9 @@ public class QuestionContent implements Initializable {
                 radioButton.setText("");
                 radioButton.setToggleGroup(group);
 
+                radioButton.getStylesheets().add(getClass().getResource("/css/setting.css").toExternalForm());
+                choiceMessage.getStylesheets().add(getClass().getResource("/css/teacherTextField.css").toExternalForm());
+
                 choice.getChildren().addAll(radioButton, choiceMessage);
 
                 choiceSpace.getChildren().add(choice);
@@ -261,7 +264,7 @@ public class QuestionContent implements Initializable {
         dropShadow.setRadius(10);
         dropShadow.setOffsetX(2.5);
         dropShadow.setOffsetY(2.5);
-        dropShadow.setColor(Color.GRAY);
+        dropShadow.setColor(Color.web("#c4c4c4", 0.25));
 
         problemContent.setEffect(dropShadow);
     }

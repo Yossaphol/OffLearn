@@ -3,11 +3,16 @@ package Teacher.quiz;
 import Database.ChapterDB;
 import Database.QuestionDB;
 import Database.QuizDB;
+import Student.HomeAndNavigation.Home;
+import Student.HomeAndNavigation.HomeController;
+import Teacher.dashboard.dashboardController;
+import Teacher.navigator.Navigator;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -63,6 +68,9 @@ public class QuizController implements Initializable {
     private QuizBoxContent quizBoxContent;
     private QuizBoxItem quizBoxItem;
 
+    dashboardController d = new dashboardController();
+    HomeController ef = new HomeController();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -71,6 +79,17 @@ public class QuizController implements Initializable {
         questionItemsList = new ArrayList<QuestionItem>();
         saveAllButton();
         setLevelGroup();
+
+        setEffect();
+
+
+
+
+    }
+
+    private void setEffect(){
+        d.hoverEffect(addProblem);
+        ef.hoverEffect(saveAll);
     }
 
     public void setLevelGroup(){
@@ -106,6 +125,7 @@ public class QuizController implements Initializable {
     public void backButton(){
         back.setOnMouseClicked(mouseEvent -> {
             wrapper.setContent(courseManagement);
+            wrapper.setVvalue(0);
         });
     }
 
@@ -139,12 +159,17 @@ public class QuizController implements Initializable {
             if (!saveQuiz()){
                 return;
             }
+            wrapper.setVvalue(0);
         });
     }
 
     public void updateQuizBox(QuizBoxContent q) {
+        chapterDB = new ChapterDB();
+        quizDB = new QuizDB();
         int min = Integer.parseInt(minScore.getText());
         int max = Integer.parseInt(maxScore.getText());
+        int id = quizDB.saveQuiz(chapterDB.getCurrentChapterId(), this.quizName.getText(), min, max, this.getLevel());
+        this.quizItem = new QuizItem(id, this.quizName.getText(), min, max, this.getLevel());
 
         if (q == null) {
             try {
@@ -152,7 +177,7 @@ public class QuizController implements Initializable {
                 HBox quizBox = fxmlLoader.load();
                 QuizBoxContent quizBoxContent = fxmlLoader.getController();
 
-                this.quizBoxItem = new QuizBoxItem(this.quizName.getText(), this.problemSpace.getChildren().size(), max, Integer.parseInt(this.minScore.getText()));
+                this.quizBoxItem = new QuizBoxItem(this.quizName.getText(), this.problemSpace.getChildren().size(), max, min);
 
                 quizBoxContent.setQuizBoxItem(quizBoxItem);
                 quizBoxContent.setDisplay();
@@ -172,6 +197,7 @@ public class QuizController implements Initializable {
                 e.printStackTrace();
             }
         } else {
+            this.quizBoxItem = new QuizBoxItem(this.quizName.getText(), this.problemSpace.getChildren().size(), max, Integer.parseInt(this.minScore.getText()));
             quizBoxItem.setName(this.quizName.getText());
             quizBoxItem.setQuestionCount(problemSpace.getChildren().size());
             quizBoxItem.setMaxScore(max);
@@ -206,6 +232,7 @@ public class QuizController implements Initializable {
 
         if (result.isPresent() && result.get() == ButtonType.YES) {
                 updateQuizBox(quizBoxContent);
+                saveQuiz();
         } else {
             System.out.println("ผู้ใช้กด No หรือปิดหน้าต่าง");
         }
