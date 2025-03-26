@@ -88,7 +88,11 @@ public class learningPageController implements Initializable {
         method_home.hoverEffect(nextCourse);
         method_home.hoverEffect(btnEP1);
     }
-    
+
+    public void recieveMethod(String courseid){
+        this.courseID = courseid;
+    }
+
     private void loadVideoPlayer() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/learningPage/videoPlayer.fxml"));

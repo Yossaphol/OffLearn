@@ -4,10 +4,12 @@ import Database.Category;
 import Database.MyCourse;
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.HomeController;
+import Student.learningPage.learningPageController;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -26,16 +28,25 @@ import java.util.ResourceBundle;
 
 public class myCourseController implements Initializable {
 
-    public VBox leftWrapper;
-    public HBox searchbarcontainer;
-    public VBox bigcalendarContainer;
-    public VBox studyTable;
-    public TabPane tabPane;
-    public Pane courseContainer;
-    public VBox coursecardContainer0;
-    public VBox coursecardContainer1;
-    public VBox coursecardContainer2;
-    public VBox coursecardContainer3;
+    private VBox leftWrapper;
+    private HBox searchbarcontainer;
+    private VBox bigcalendarContainer;
+    @FXML
+    private VBox studyTable;
+    @FXML
+    private TabPane tabPane;
+    @FXML
+    private Pane courseContainer;
+    @FXML
+    private VBox coursecardContainer0;
+    @FXML
+    private VBox coursecardContainer1;
+    @FXML
+    private VBox coursecardContainer2;
+    @FXML
+    private VBox coursecardContainer3;
+    @FXML
+    private HBox bg;
 //    public HBox continueCourse1;
 
     @Override
@@ -62,7 +73,22 @@ public class myCourseController implements Initializable {
                 controller.setCourseCategory(category.getCatName(myCourse.getCat_ID()));
                 controller.setCourseTitle(myCourse.getCourseName());
                 controller.setCourseSubtitle(myCourse.getCourseDescription());
+                controller.setCourseID(myCourse.getCourse_ID());
                 controller.setCourseProgress(50);
+
+                courseItem.setOnMouseClicked(mouseEvent -> {
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Student/learningPage/learningPage.fxml"));
+                        HBox learningPage = fxmlLoader.load();
+                        bg.getChildren().clear();
+                        bg.getChildren().add(learningPage);
+
+                        learningPageController l = fxmlLoader.getController();
+                        l.recieveMethod(myCourse.getCourse_ID());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
 
                 homeController.hoverEffect(courseItem);
                 coursecardContainer0.getChildren().add(courseItem);
@@ -95,6 +121,8 @@ public class myCourseController implements Initializable {
 
     private void setTabSelectionAnimation() {
         tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
+            int tmp = tabPane.getSelectionModel().getSelectedIndex();
+            System.out.println(tabPane.getSelectionModel().getSelectedIndex());
             if (newTab != null) {
                 Node content = newTab.getContent();
                 if (content != null) {
@@ -121,6 +149,67 @@ public class myCourseController implements Initializable {
         });
     }
 
+    public VBox getStudyTable() {
+        return studyTable;
+    }
 
+    public TabPane getTabPane() {
+        return tabPane;
+    }
 
+    public Pane getCourseContainer() {
+        return courseContainer;
+    }
+
+    public VBox getCoursecardContainer0() {
+        return coursecardContainer0;
+    }
+
+    public VBox getCoursecardContainer1() {
+        return coursecardContainer1;
+    }
+
+    public VBox getCoursecardContainer2() {
+        return coursecardContainer2;
+    }
+
+    public VBox getCoursecardContainer3() {
+        return coursecardContainer3;
+    }
+
+    public HBox getBg() {
+        return bg;
+    }
+
+    public void setStudyTable(VBox studyTable) {
+        this.studyTable = studyTable;
+    }
+
+    public void setTabPane(TabPane tabPane) {
+        this.tabPane = tabPane;
+    }
+
+    public void setCourseContainer(Pane courseContainer) {
+        this.courseContainer = courseContainer;
+    }
+
+    public void setCoursecardContainer0(VBox coursecardContainer0) {
+        this.coursecardContainer0 = coursecardContainer0;
+    }
+
+    public void setCoursecardContainer1(VBox coursecardContainer1) {
+        this.coursecardContainer1 = coursecardContainer1;
+    }
+
+    public void setCoursecardContainer2(VBox coursecardContainer2) {
+        this.coursecardContainer2 = coursecardContainer2;
+    }
+
+    public void setCoursecardContainer3(VBox coursecardContainer3) {
+        this.coursecardContainer3 = coursecardContainer3;
+    }
+
+    public void setBg(HBox bg) {
+        this.bg = bg;
+    }
 }
