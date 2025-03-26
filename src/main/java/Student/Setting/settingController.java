@@ -227,7 +227,6 @@ public class settingController implements Initializable {
         closeEditProfile(isEditing);
     }
 
-
     public void uploadImg(ActionEvent e) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select an Image");
@@ -333,42 +332,9 @@ public class settingController implements Initializable {
         fadeOut.play();
     }
     public void cancelChangePass(ActionEvent e){
-
         closePasswordField();
     }
 
-    private void openEditPaymentField() {
-        editPaymentBtn.setVisible(false);
-
-        editPaymentBox.setOpacity(0);
-        editPaymentBox.setVisible(true);
-        name1.setDisable(false);
-        lastName1.setDisable(false);
-        accountNo.setDisable(false);
-        bankName.setDisable(false);
-
-        FadeTransition fadeIn = new FadeTransition(Duration.millis(200), editPaymentBox);
-        fadeIn.setFromValue(0);
-        fadeIn.setToValue(1);
-        fadeIn.play();
-    }
-
-    public void setBankDetail(String name, String lastname, String acctNo, String bank) {
-        acctNo = acctNo.replace("-", "");
-        name1.setText(name);
-        lastName1.setText(lastname);
-
-        if (acctNo.length() >= 6) {
-            String formattedAcctNo = acctNo.substring(0, 3) + "-" +
-                    acctNo.substring(3, 6) + "-" +
-                    acctNo.substring(6);
-            accountNo.setText(formattedAcctNo);
-        } else {
-            accountNo.setText(acctNo);
-        }
-        bankName.setText(bank);
-    }
-    //End edit payment part
 
     private void showAlert(String title, String message, Alert.AlertType type) {
         Alert alert = new Alert(type);
