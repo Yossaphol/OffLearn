@@ -198,16 +198,11 @@ public class VideoPlayerManager implements Initializable {
         });
         sliderTime.valueProperty().addListener((obs, oldVal, newVal) -> {
             updateSliderTimeFill();
-        });
-        sliderTime.valueProperty().addListener((obs, oldVal, newVal) -> {
-            if (sliderTime.isValueChanging()) {
-                updateSliderTimeFill();
-                double newSeconds = newVal.doubleValue();
-                Duration d = Duration.seconds(newSeconds);
-                lblTime.setText(
-                        formatTime(d) + " / " + formatTime(mediaPlayer.getTotalDuration())
-                );
-            }
+            double newSeconds = newVal.doubleValue();
+            Duration d = Duration.seconds(newSeconds);
+            lblTime.setText(
+                    formatTime(d) + " / " + formatTime(mediaPlayer.getTotalDuration())
+            );
         });
 
 
