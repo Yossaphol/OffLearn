@@ -45,14 +45,13 @@ public class searchBarC implements Initializable {
     public Circle userPfp;
     @FXML
     public Label username;
+    public Button cartBtn;
 
     String userName = SessionManager.getInstance().getUsername();
     UserDB userDB = new UserDB();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        closePopupAuto();
-        applyHoverEffectToInside(navPopup);
         hoverEffect();
         hoverEffect1(profileBox);
         setProfile(userDB.getProfile(userName));
@@ -99,28 +98,7 @@ public class searchBarC implements Initializable {
         });
     }
 
-    public void handleLogout(ActionEvent event){
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Warning");
-        alert.setHeaderText(null);
-        alert.setContentText("Are you sure you want to sign out?");
 
-        if (alert.showAndWait().get() == ButtonType.OK){
-            SessionManager.getInstance().clearSession();
-
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/LoginSingup/login.fxml"));
-                Parent root = loader.load();
-
-                Stage stage = (Stage) username.getScene().getWindow();
-                stage.setScene(new Scene(root));
-                stage.setTitle("Login Page");
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     public void hoverEffect(){
         HomeController hm = new HomeController();
@@ -129,9 +107,9 @@ public class searchBarC implements Initializable {
     public void route(){
         Navigator nav = new Navigator();
         allCourse.setOnMouseClicked(nav::courseRoute);
-        cart.setOnMouseClicked(nav::cartRoute);
         username.setOnMouseClicked(nav::dashboardRoute);
         userPfp.setOnMouseClicked(nav::dashboardRoute);
+        cartBtn.setOnMouseClicked(nav::cartRoute);
     }
 
     @FXML
@@ -171,17 +149,7 @@ public class searchBarC implements Initializable {
         fade.play();
     }
 
-    public void closePopupAuto() {
-        navPopup.sceneProperty().addListener((obs, oldScene, newScene) -> {
-            if (newScene != null) {
-                newScene.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
-                    if (navPopup.isVisible() && !navPopup.isHover()) {
-                        closePopup(navPopup);
-                    }
-                });
-            }
-        });
-    }
+
 
 
     private void closePopup(Node popup) {
@@ -198,13 +166,7 @@ public class searchBarC implements Initializable {
         fade.play();
     }
 
-    public void applyHoverEffectToInside(HBox root) {
-        for (Node node : root.lookupAll(".navT1")) {
-            if (node instanceof HBox p) {
-                hoverEffect(p);
-            }
-        }
-    }
+
     public void hoverEffect(HBox hBox) {
         // Scale transition
         ScaleTransition scaleUp = new ScaleTransition(Duration.millis(150), hBox);

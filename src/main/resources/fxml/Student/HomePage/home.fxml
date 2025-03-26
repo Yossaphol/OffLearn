@@ -1520,4 +1520,7 @@
          </children>
       </HBox>
    </children>
+   <padding>
+      <Insets top="20.0" />
+   </padding>
 </HBox>
