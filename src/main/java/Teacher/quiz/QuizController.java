@@ -125,6 +125,7 @@ public class QuizController implements Initializable {
     public void backButton(){
         back.setOnMouseClicked(mouseEvent -> {
             wrapper.setContent(courseManagement);
+            wrapper.setVvalue(0);
         });
     }
 
@@ -158,6 +159,7 @@ public class QuizController implements Initializable {
             if (!saveQuiz()){
                 return;
             }
+            wrapper.setVvalue(0);
         });
     }
 

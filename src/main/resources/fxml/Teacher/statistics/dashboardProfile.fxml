@@ -20,7 +20,7 @@
       </Rectangle>
       <VBox alignment="CENTER_LEFT" prefHeight="329.0" prefWidth="681.0">
          <children>
-            <Label fx:id="name" text="Name  Lastname" textFill="#0675de">
+            <Label fx:id="setfullname" text="Name  Lastname" textFill="#0675de">
                <font>
                   <Font name="System Bold" size="41.0" />
                </font>

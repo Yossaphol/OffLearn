@@ -19,12 +19,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
-import java.security.KeyStore;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class CourseController implements Initializable {
@@ -136,7 +133,7 @@ public class CourseController implements Initializable {
     }
 
     public void passCourseManagement(CourseEditController courseEditController){
-        courseEditController.recieveCourseList(courseManagement);
+        courseEditController.recieveCourseManagement(courseManagement);
     }
 
     public void passWrapperMyCourse(CourseListController courseListController){
@@ -148,6 +145,8 @@ public class CourseController implements Initializable {
     }
 
     public void passMyMethod(CourseEditController courseEditController){courseEditController.recieveMethod(this);}
+
+    public void passMyMethodToCourseList(CourseListController courseListController){courseListController.recieveMethod(this);}
 
     public void newCourseButton(){
         newCourse.setOnAction(actionEvent -> {
@@ -162,6 +161,7 @@ public class CourseController implements Initializable {
                 passWrapper(courseEditController);
                 passCourseManagement(courseEditController);
                 passMyMethod(courseEditController);
+                wrapper.setVvalue(0);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -194,6 +194,7 @@ public class CourseController implements Initializable {
 
                 passCourseManagementMyCourse(controller);
                 passWrapperMyCourse(controller);
+                passMyMethodToCourseList(controller);
 
                 d.hoverEffect(courseListView);
 

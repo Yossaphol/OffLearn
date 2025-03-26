@@ -1,5 +1,4 @@
 package Student.roadmap;
-
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
 import javafx.animation.ScaleTransition;
@@ -8,19 +7,21 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import software.amazon.awssdk.services.s3.endpoints.internal.Value;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 
 public class myRoadmapController implements Initializable {
 
@@ -29,11 +30,12 @@ public class myRoadmapController implements Initializable {
     public HBox optional_course_container;
     public HBox hearted_roadmap_container;
     public Pane optional_course_box;
-    public Button relateCourse2;
-    public Button relateCourse1;
     public HBox pre_test;
     public Pane selected_roadmap_box;
     public Button pretest_button_text;
+    public VBox related_roadmap_content_container;
+    public VBox optional_course_content_container;
+
     HomeController ef = new HomeController();
 
     @Override
@@ -44,7 +46,10 @@ public class myRoadmapController implements Initializable {
 
         setEffect();
         applyHoverEffectToInside(hearted_roadmap_container);
+        handleHeartedRoadmap();
         handleRoadmapNode();
+        handleOptionalRoadmap();
+        handleRelatedRoadmap();
         displaySelectedRoadmapCard();
         route();
     }
@@ -55,6 +60,30 @@ public class myRoadmapController implements Initializable {
         pre_test.setOnMouseClicked(nav::preTestRoute);
         pretest_button_text.setOnMouseClicked(nav::preTestRoute);
 
+    }
+
+    public void handleHeartedRoadmap() {
+        try {
+            List<String> roadmap = new ArrayList<>();
+            roadmap.add("Roadmap 1");
+            roadmap.add("Roadmap 2");
+            roadmap.add("Roadmap 3");
+
+            for (String road : roadmap) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                        "/fxml/Student/courseManage/heartedroadmap.fxml"));
+
+                Node roadmapNode = loader.load();
+
+                HeartedRoadmapController controller = loader.getController();
+
+                controller.setHearted_roadmap(road);
+                hearted_roadmap_container.getChildren().add(roadmapNode);
+            }
+        } catch (IOException e) {
+            System.err.println("FXML loading error: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public void handleRoadmapNode() {
@@ -95,6 +124,78 @@ public class myRoadmapController implements Initializable {
                 }
             }
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handleOptionalRoadmap() {
+        try {
+            List<String> courses = new ArrayList<>();
+            courses.add("Course 1");
+            courses.add("Course 2");
+            courses.add("Course 3");
+
+            List<String> descriptions = new ArrayList<>();
+            descriptions.add("Des 1");
+            descriptions.add("Des 2");
+            descriptions.add("Des 3");
+
+            for (int i = 0; i < courses.size(); i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                        "/fxml/Student/courseManage/optionalcourse.fxml"));
+
+                Node optionalCourse = loader.load();
+
+                OptionalCourseController controller = loader.getController();
+
+                controller.setOptional_Course_Name(courses.get(i));
+                controller.setOptional_Course_Description(descriptions.get(i));
+                optional_course_content_container.getChildren().add(optionalCourse);
+            }
+        } catch (IOException e) {
+            System.err.println("FXML loading error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void handleRelatedRoadmap() {
+        try {
+            List<String> roadmaps = new ArrayList<>();
+            roadmaps.add("Roadmap 1");
+            roadmaps.add("Roadmap 2");
+            roadmaps.add("Roadmap 3");
+
+            List<String> descriptions = new ArrayList<>();
+            descriptions.add("Des 1");
+            descriptions.add("Des 2");
+            descriptions.add("Des 3");
+
+            List<Integer> progressions = new ArrayList<>();
+            progressions.add(10);
+            progressions.add(20);
+            progressions.add(30);
+
+            List<Integer> durations = new ArrayList<>();
+            durations.add(10);
+            durations.add(20);
+            durations.add(30);
+
+            for (int i = 0; i < roadmaps.size(); i++) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                        "/fxml/Student/courseManage/relatedRoadmap.fxml"));
+
+                Node relatedRoadmap = loader.load();
+
+                RelatedRoadmapController controller = loader.getController();
+
+                controller.setRelatedRoadmapName(roadmaps.get(i));
+                controller.setRelatedRoadmapDescription(descriptions.get(i));
+                controller.setContentProgression(progressions.get(i), 100); // Example total: 100
+                controller.setRelatedRoadmapDuration(durations.get(i));
+                related_roadmap_content_container.getChildren().add(relatedRoadmap);
+            }
+        } catch (IOException e) {
+            System.err.println("FXML loading error: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -166,8 +267,6 @@ public class myRoadmapController implements Initializable {
 
     private void setEffect(){
         ef.hoverEffect(optional_course_box);
-        ef.hoverEffect(relateCourse1);
-        ef.hoverEffect(relateCourse2);
         hoverEffect(pre_test);
     }
 

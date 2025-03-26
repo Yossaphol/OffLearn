@@ -43,7 +43,7 @@ public class CourseEditController implements Initializable {
     private Label addQuiz;
 
     @FXML
-    private VBox courseManagement;
+    private VBox courseEdit;
 
     @FXML
     private Button saveAll;
@@ -67,6 +67,9 @@ public class CourseEditController implements Initializable {
     private ImageView img;
 
     @FXML
+    private Label back;
+
+    @FXML
     private ImageView saveChap;
 
     private VBox courseList;
@@ -87,6 +90,7 @@ public class CourseEditController implements Initializable {
     dashboardController d = new dashboardController();
     HomeController ef = new HomeController();
     private CourseItem courseItem;
+    private VBox courseManagement;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -97,6 +101,7 @@ public class CourseEditController implements Initializable {
         addQuizButton();
         saveAllButton();
         addImage();
+        backButton();
 
         setType();
 
@@ -211,8 +216,10 @@ public class CourseEditController implements Initializable {
         quizController.recieveWrapper(wrapper);
     }
 
+    public void passWrapperToQuizBox(QuizBoxContent quizBoxContent){quizBoxContent.setWrapper(wrapper);}
+
     public void passCourseManagement(QuizController quizController){
-        quizController.recieveCourseManagement(courseManagement);
+        quizController.recieveCourseManagement(courseEdit);
     }
 
     public void passCourseSpace(QuizController q){ q.recieveCourseSpace(courseSpace);}
@@ -227,11 +234,14 @@ public class CourseEditController implements Initializable {
         this.wrapper = wrapper;
     }
 
+    public void recieveCourseManagement(VBox courseManagement){this.courseManagement = courseManagement;}
+
     public void recieveCourseList(VBox courseList) {
         this.courseList = courseList;
     }
 
     public void recieveMethod(CourseController courseController){this.courseController = courseController;}
+
 
     public void addQuizButton() {
         addQuiz.setOnMouseClicked(mouseEvent -> {
@@ -250,6 +260,7 @@ public class CourseEditController implements Initializable {
                 passCourseSpace(quizController);
                 passWrapper(quizController);
                 passLQG(quizController);
+                wrapper.setVvalue(0);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -261,8 +272,15 @@ public class CourseEditController implements Initializable {
             if (! saveCourse()){
                 return;
             }
-            wrapper.setContent(courseList);
+            wrapper.setContent(courseManagement);
             courseController.showCourseOnListview();
+        });
+    }
+
+    public void backButton(){
+        back.setOnMouseClicked(mouseEvent -> {
+            wrapper.setContent(courseManagement);
+            System.out.println("back on");
         });
     }
 
@@ -271,7 +289,7 @@ public class CourseEditController implements Initializable {
         type.setItems(FXCollections.observableArrayList(category.getCatList()));
     }
 
-    public void loadMyCourse(int CourseID){
+    public void loadMyCourse(int CourseID, ScrollPane wrapperA){
         courseDB = new CourseDB();
         courseItem = courseDB.getCourseByID(CourseID);
 
@@ -317,12 +335,18 @@ public class CourseEditController implements Initializable {
 
                 QuizBoxItem quizBoxItem = new QuizBoxItem(name, 0, max, min);
 
+                passWrapperToQuizBox(quizBoxContent);
+
+                if (wrapperA == null){
+                    System.out.println("mai me");
+                }
+
+                quizBoxContent.setWrapper(wrapperA);
                 quizBoxContent.setQuizBoxItem(quizBoxItem);
                 quizBoxContent.setDisplay();
 //                quizBoxContent.recieveQuizItemList(questionItemsList);
-                quizBoxContent.setWrapper(wrapper);
                 quizBoxContent.setQuizItem(temp);
-                quizBoxContent.setCourseManagement(courseManagement);
+                quizBoxContent.setCourseManagement(courseEdit);
                 quizBoxContent.setCourseSpace(courseSpace);
                 quizBoxContent.setParentContainer(courseSpace);
 //                passMyController(quizBoxContent);
