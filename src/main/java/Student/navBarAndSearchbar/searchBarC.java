@@ -46,13 +46,16 @@ public class searchBarC implements Initializable {
     @FXML
     public Label username;
 
+    String userName = SessionManager.getInstance().getUsername();
+    UserDB userDB = new UserDB();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         closePopupAuto();
         applyHoverEffectToInside(navPopup);
         hoverEffect();
         hoverEffect1(profileBox);
-        setImg();
+        setProfile(userDB.getProfile(userName));
         route();
 
         String username = SessionManager.getInstance().getUsername();
@@ -62,17 +65,16 @@ public class searchBarC implements Initializable {
             this.username.setText("Guest");
         }
     }
-//    public void setImg(){
-//        HomeController hm  = new HomeController();
-//        hm.loadAndSetImage(userPfp, "/img/Profile/user.png");
-//    }
-    public void setImg(){
-        String username = SessionManager.getInstance().getUsername();
-        UserDB userDB = new UserDB();
-        HomeController homeController = new HomeController();
 
-        String profilePath = (username != null) ? userDB.getProfile(username) : "/img/Profile/user.png";
-        homeController.loadAndSetImage(userPfp, profilePath);
+    public void setProfile(String Url){
+        Image img;
+        if (Url.startsWith("http") || Url.startsWith("https")) {
+            img = new Image(Url);
+        } else {
+            img = new Image(getClass().getResource(Url).toExternalForm());
+        }
+        this.userPfp.setStroke(Color.TRANSPARENT);
+        this.userPfp.setFill(new ImagePattern(img));
     }
 
     private void hoverEffect1(HBox btn) {
