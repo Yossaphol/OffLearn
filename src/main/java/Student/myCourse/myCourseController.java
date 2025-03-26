@@ -73,7 +73,6 @@ public class myCourseController implements Initializable {
                 controller.setCourseCategory(category.getCatName(myCourse.getCat_ID()));
                 controller.setCourseTitle(myCourse.getCourseName());
                 controller.setCourseSubtitle(myCourse.getCourseDescription());
-                controller.setCourseID(myCourse.getCourse_ID());
                 controller.setCourseProgress(50);
 
                 courseItem.setOnMouseClicked(mouseEvent -> {
