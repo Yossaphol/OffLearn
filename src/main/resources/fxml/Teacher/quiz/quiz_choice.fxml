@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="quiz_detail_list" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="291.0" prefWidth="1440.0" style="-fx-background-color: #FBFBFB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.QuizDetail.quiz_choiceController">
+    <padding>
+        <Insets top="10.0" />
+    </padding>
+    <children>
+        <VBox alignment="CENTER" prefHeight="281.0" prefWidth="391.0">
+            <children>
+                <Pane prefHeight="332.0" prefWidth="323.0" />
+                <ImageView fx:id="quiz_image" fitHeight="203.0" fitWidth="214.0" pickOnBounds="true" preserveRatio="true" />
+                <Pane prefHeight="332.0" prefWidth="323.0" />
+            </children>
+        </VBox>
+        <VBox prefHeight="281.0" prefWidth="786.0">
+            <children>
+                <Label fx:id="quiz_name" prefHeight="84.0" prefWidth="293.0" text="ข้อที่ 1 สิ่งที่อยู่ในรูปนี้คืออะไร" textFill="#008cff">
+                    <font>
+                        <Font name="System Bold" size="22.0" />
+                    </font>
+                </Label>
+                <Pane prefHeight="17.0" prefWidth="293.0" />
+                <Label fx:id="quiz_correct_chioce" prefHeight="30.0" prefWidth="293.0" text="คำตอบที่ถูกค้องคือ: แมว">
+                    <font>
+                        <Font name="Kodchasan Regular" size="16.0" />
+                    </font>
+                </Label>
+                <Pane prefHeight="10.0" prefWidth="194.0" />
+                <Label fx:id="quiz_most_choice" prefHeight="42.0" prefWidth="293.0" text="คำตอบที่ตอบเยอะที่สุดคือ: ยีราฟ">
+                    <font>
+                        <Font name="Kodchasan Regular" size="16.0" />
+                    </font>
+                </Label>
+            </children>
+        </VBox>
+        <VBox prefHeight="281.0" prefWidth="467.0">
+            <children>
+                <Pane prefHeight="101.0" prefWidth="170.0" />
+                <HBox prefHeight="192.0" prefWidth="357.0">
+                    <children>
+                        <VBox prefHeight="192.0" prefWidth="173.0">
+                            <children>
+                                <Pane prefHeight="61.0" prefWidth="172.0" />
+                                <Label prefHeight="30.0" prefWidth="293.0" text="ถูก">
+                                    <font>
+                                        <Font size="35.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="quiz_percent_correct" prefHeight="30.0" prefWidth="293.0" text="35%" textFill="#309000">
+                                    <font>
+                                        <Font size="35.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <VBox prefHeight="192.0" prefWidth="186.0">
+                            <children>
+                                <Pane prefHeight="61.0" prefWidth="172.0" />
+                                <Label prefHeight="30.0" prefWidth="293.0" text="ผิด">
+                                    <font>
+                                        <Font size="35.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="quiz_percent_wrong" prefHeight="30.0" prefWidth="293.0" text="65%" textFill="RED">
+                                    <font>
+                                        <Font size="35.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</HBox>

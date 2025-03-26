@@ -81,8 +81,8 @@ module com.example.offlearn {
     exports Teacher.somethingWithVideo to javafx.fxml;
     opens Teacher.somethingWithVideo;
 
-    exports Teacher.QuizDetail to javafx.fxml;
-    opens Teacher.QuizDetail;
+    exports Teacher.quizDetail to javafx.fxml;
+    opens Teacher.quizDetail;
 
     exports Teacher.setting to javafx.fxml;
     opens Teacher.setting;
