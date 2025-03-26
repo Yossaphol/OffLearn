@@ -175,9 +175,9 @@ public class CourseDB extends ConnectDB{
 
                 chapter = new ChapterItem(chapterID, chapterName, chapterDescription);
                 chapter.setQuizItem(quizItem);
+                course.setChapterList(chapter);
             }
 
-            course.setChapterList(chapter);
             return course;
 
         } catch (SQLException e) {

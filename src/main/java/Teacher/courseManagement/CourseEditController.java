@@ -268,8 +268,28 @@ public class CourseEditController implements Initializable {
         this.price.setText(courseItem.getCoursePrice() + "");
         this.img.setImage(new Image(courseItem.getCourseImg()));
 
-//        for (ChapterItem)
-//        this.courseSpace.getChildren().add();
+        for (ChapterItem cItem : courseItem.getChapterList()){
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/courseManagement/chapterContent.fxml"));
+            try {
+                newCourse = fxmlLoader.load();
+
+                ChapterContent cContent = fxmlLoader.getController();
+                passChapList(cContent);
+                passCourseName(cContent);
+                cContent.setParentContainer(courseSpace);
+                cContent.setProblemContent(newCourse);
+                cContent.setDisplay(cItem);
+
+                VBox.setVgrow(newCourse, Priority.ALWAYS);
+                courseSpace.getChildren().add(newCourse);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+
+        }
     }
 }
 ;

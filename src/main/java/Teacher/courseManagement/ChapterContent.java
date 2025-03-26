@@ -191,4 +191,9 @@ public class ChapterContent implements Initializable {
         chapterContent.setEffect(dropShadow);
     }
 
+    public void setDisplay(ChapterItem chapterItem){
+        this.chapterName.setText(chapterItem.getChapterName());
+        this.chapDesc.setText(chapterItem.getDesc());
+
+    }
 }
