@@ -55,7 +55,6 @@ public class QuizBoxContent implements Initializable {
         deleteButton();
         shadow();
         quizEdit();
-
     }
 
     public void setDisplay(){
@@ -82,13 +81,27 @@ public class QuizBoxContent implements Initializable {
     public void deleteButton(){
         quizDB = new QuizDB();
         delete.setOnMouseClicked(mouseEvent -> {
-//            lqg.remove(this.questionItemsList);
-            quizDB.deleteQuiz(quizItem.getQuizID());
-            if (parentContainer != null && quizBox != null) {
-                parentContainer.getChildren().remove(quizBox);
+            System.out.println("Delete button clicked.");
+
+            if (quizItem == null) {
+                System.out.println("quizItem is null, cannot delete.");
+                return;
             }
+
+            quizDB.deleteQuiz(quizItem.getQuizID());
+            System.out.println("Quiz deleted from database.");
+
+            if (parentContainer != null && quizBox != null) {
+                System.out.println("Removing from UI...");
+                parentContainer.getChildren().remove(quizBox);
+            } else {
+                System.out.println("Cannot remove: parentContainer or quizBox is null.");
+            }
+
+            mouseEvent.consume();
         });
     }
+
 
     public void shadow(){
         DropShadow dropShadow = new DropShadow();
