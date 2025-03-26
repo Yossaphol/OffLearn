@@ -1,21 +1,65 @@
 package Student.myCourse;
 
+import Student.HomeAndNavigation.HomeController;
+import Student.HomeAndNavigation.Navigator;
+import Student.mainPage.mainPageController;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
-public class courseCardController {
-    public HBox courseCard;
-    public Rectangle courseImage;
-    public Label courseCategory;
-    public Label courseTitle;
-    public Label courseSubtitle;
-    public ProgressBar courseProgress;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+public class courseCardController implements Initializable {
+    @FXML
+    private Rectangle courseImage;
+    @FXML
+    private Label courseCategory;
+    @FXML
+    private Label courseTitle;
+    @FXML
+    private Label courseSubtitle;
+    @FXML
+    private ProgressBar courseProgress;
+    @FXML
+    private HBox courseCard;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        onClikToLearn();
+
+
+    }
+
+    public void onClikToLearn() {
+        courseCard.setOnMouseClicked(mouseEvent -> {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Student/mainPage.fxml"));
+                HBox mainPageRoot = fxmlLoader.load();
+                mainPageController controller = fxmlLoader.getController();
+
+                // เปลี่ยนเนื้อหาในหน้าเป็น learningPage
+                controller.displayContent("/fxml/Student/learningPage/learningPage.fxml");
+
+                // ใช้ Stage ปัจจุบันในการเปลี่ยนหน้า
+                Stage stage = (Stage) courseCard.getScene().getWindow();
+                stage.getScene().setRoot(mainPageRoot);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
     public void setCourseCard(HBox courseCard) {
         this.courseCard = courseCard;
     }
