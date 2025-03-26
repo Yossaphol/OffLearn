@@ -216,6 +216,8 @@ public class CourseEditController implements Initializable {
         quizController.recieveWrapper(wrapper);
     }
 
+    public void passWrapperToQuizBox(QuizBoxContent quizBoxContent){quizBoxContent.setWrapper(wrapper);}
+
     public void passCourseManagement(QuizController quizController){
         quizController.recieveCourseManagement(courseEdit);
     }
@@ -239,6 +241,7 @@ public class CourseEditController implements Initializable {
     }
 
     public void recieveMethod(CourseController courseController){this.courseController = courseController;}
+
 
     public void addQuizButton() {
         addQuiz.setOnMouseClicked(mouseEvent -> {
@@ -286,7 +289,7 @@ public class CourseEditController implements Initializable {
         type.setItems(FXCollections.observableArrayList(category.getCatList()));
     }
 
-    public void loadMyCourse(int CourseID){
+    public void loadMyCourse(int CourseID, ScrollPane wrapperA){
         courseDB = new CourseDB();
         courseItem = courseDB.getCourseByID(CourseID);
 
@@ -332,10 +335,16 @@ public class CourseEditController implements Initializable {
 
                 QuizBoxItem quizBoxItem = new QuizBoxItem(name, 0, max, min);
 
+                passWrapperToQuizBox(quizBoxContent);
+
+                if (wrapperA == null){
+                    System.out.println("mai me");
+                }
+
+                quizBoxContent.setWrapper(wrapperA);
                 quizBoxContent.setQuizBoxItem(quizBoxItem);
                 quizBoxContent.setDisplay();
 //                quizBoxContent.recieveQuizItemList(questionItemsList);
-                quizBoxContent.setWrapper(wrapper);
                 quizBoxContent.setQuizItem(temp);
                 quizBoxContent.setCourseManagement(courseEdit);
                 quizBoxContent.setCourseSpace(courseSpace);

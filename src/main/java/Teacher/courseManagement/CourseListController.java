@@ -97,7 +97,7 @@ public class CourseListController implements Initializable {
 
                 CourseEditController courseEditController = fxmlLoader.getController();
 
-                courseEditController.loadMyCourse(this.getCourseId());
+                courseEditController.loadMyCourse(this.getCourseId(), wrapper);
 
 
                 passWrapper(courseEditController);

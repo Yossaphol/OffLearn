@@ -132,6 +132,8 @@ public class QuizBoxContent implements Initializable {
                     passCourseSpace(quizController);
                     passWrapper(quizController);
 
+                    wrapper.setVvalue(0);
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
