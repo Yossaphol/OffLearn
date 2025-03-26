@@ -65,6 +65,13 @@ public class QuizBoxContent implements Initializable {
         this.minScore.setText(quizBoxItem.getMinScore() + "");
     }
 
+    public void setDisplay(QuizBoxItem quizBoxItem){
+        this.quizName.setText(quizBoxItem.getName());
+        this.count.setText(quizBoxItem.getQuestionCount() + "");
+        this.maxScore.setText(quizBoxItem.getMaxScore() + "");
+        this.minScore.setText(quizBoxItem.getMinScore() + "");
+    }
+
     public void setQuizBoxItem(QuizBoxItem quizBoxItem){
         this.quizBoxItem = quizBoxItem;
     }
@@ -124,6 +131,7 @@ public class QuizBoxContent implements Initializable {
 
                     QuizController quizController = fxmlLoader.getController();
 
+                    System.out.println(this.quizItem.toString());
                     quizController.loadQuestion(this.quizItem, quizController, this);
                     quizController.setQuizItem(quizBoxItem);
 

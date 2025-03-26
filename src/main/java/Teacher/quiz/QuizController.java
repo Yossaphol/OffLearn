@@ -82,9 +82,6 @@ public class QuizController implements Initializable {
 
         setEffect();
 
-
-
-
     }
 
     private void setEffect(){
@@ -373,6 +370,7 @@ public class QuizController implements Initializable {
         }
 
         for (QuestionItem q : questionList){
+            System.out.println(q.getQuestionID());
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/quiz/questionContent.fxml"));
                 problemContent = fxmlLoader.load();

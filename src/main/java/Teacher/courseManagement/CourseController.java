@@ -182,6 +182,7 @@ public class CourseController implements Initializable {
         }
 
         for (CourseItem c : courseList) {
+            System.out.println(c.getCourseId());
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/courseManagement/courseList.fxml"));
                 Parent courseItemParent = fxmlLoader.load();

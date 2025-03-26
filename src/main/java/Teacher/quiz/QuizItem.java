@@ -1,14 +1,20 @@
 package Teacher.quiz;
 
+import com.beust.ah.A;
+
+import java.util.ArrayList;
+
 public class QuizItem {
     private int quizID;
     private String header;
     private int minScore;
     private int maxScore;
     private String level;
+    private ArrayList<QuestionItem> questionList;
 
     public QuizItem(int quizID){
         this.setQuizID(quizID);
+        questionList = new ArrayList<QuestionItem>();
     }
 
     public QuizItem(int quizID, String header, int minScore, int maxScore, String level){
@@ -17,6 +23,7 @@ public class QuizItem {
         this.setMinScore(minScore);
         this.setMaxScore(maxScore);
         this.setLevel(level);
+        questionList = new ArrayList<QuestionItem>();
     }
 
     public void setQuizID(int quizID){
@@ -57,5 +64,18 @@ public class QuizItem {
 
     public void setMaxScore(int maxScore) {
         this.maxScore = maxScore;
+    }
+
+    public ArrayList<QuestionItem> getQuestionList() {
+        return questionList;
+    }
+
+    public void setQuestionList(QuestionItem questionItem) {
+        this.questionList.add(questionItem);
+    }
+
+    @Override
+    public String toString(){
+        return this.quizID + "";
     }
 }

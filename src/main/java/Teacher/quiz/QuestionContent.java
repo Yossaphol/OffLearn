@@ -157,6 +157,7 @@ public class QuestionContent implements Initializable {
             int point = Integer.parseInt(this.point.getText());
 
             questionID = questionDB.saveQuestion(quiz_id, question, corr, point, imgUrl);
+            System.out.println("save Question TO database");
             saveChoices();
 
             save.setVisible(false);

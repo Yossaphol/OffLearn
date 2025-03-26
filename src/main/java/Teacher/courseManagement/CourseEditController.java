@@ -3,6 +3,7 @@ package Teacher.courseManagement;
 import Database.Category;
 import Database.ChapterDB;
 import Database.CourseDB;
+import Database.QuizDB;
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.HomeController;
 import Teacher.dashboard.dashboardController;
@@ -325,13 +326,16 @@ public class CourseEditController implements Initializable {
                 HBox quizBox = loader.load();
                 QuizBoxContent quizBoxContent = loader.getController();
 
-                QuizItem temp = cItem.getQuizItem();
-                if (temp == null){
+                QuizDB quizDB = new QuizDB();
+                if (cItem.getQuizItem() == null){
                     continue;
                 }
+                QuizItem temp = quizDB.getQuizById(cItem.getQuizItem().getQuizID());
                 String name = temp.getHeader();
                 int max = temp.getMaxScore();
                 int min = temp.getMinScore();
+
+                ArrayList<QuestionItem> questionItemsList = temp.getQuestionList();
 
                 QuizBoxItem quizBoxItem = new QuizBoxItem(name, 0, max, min);
 
@@ -344,12 +348,13 @@ public class CourseEditController implements Initializable {
                 quizBoxContent.setWrapper(wrapperA);
                 quizBoxContent.setQuizBoxItem(quizBoxItem);
                 quizBoxContent.setDisplay();
-//                quizBoxContent.recieveQuizItemList(questionItemsList);
+                quizBoxContent.recieveQuizItemList(questionItemsList);
                 quizBoxContent.setQuizItem(temp);
                 quizBoxContent.setCourseManagement(courseEdit);
                 quizBoxContent.setCourseSpace(courseSpace);
                 quizBoxContent.setParentContainer(courseSpace);
-//                passMyController(quizBoxContent);
+                quizBoxContent.setQuizBoxItem(quizBoxItem);
+                quizBoxContent.setDisplay(quizBoxItem);
 
                 quizBoxContent.setProblemContent(quizBox);
                 courseSpace.getChildren().add(quizBox);

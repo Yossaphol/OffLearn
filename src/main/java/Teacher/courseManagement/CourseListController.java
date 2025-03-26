@@ -90,6 +90,7 @@ public class CourseListController implements Initializable {
 
     public void editcourseMyCourse(){
         mainComp.setOnMouseClicked(mouseEvent -> {
+            System.out.println(this.getCourseId());
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/courseManagement/courseEdit.fxml"));
                 courseEdit = fxmlLoader.load();
