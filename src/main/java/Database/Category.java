@@ -51,6 +51,26 @@ public class Category extends ConnectDB{
         return 0;
     }
 
+    public String getCatName(String id){
+        String sql = "SELECT catname FROM offlearn.category WHERE Cat_ID = ?";
+
+        try {
+            Connection conn = this.connectToDB();
+            PreparedStatement pstm = conn.prepareStatement(sql);
+
+            pstm.setString(1, id);
+            ResultSet rs = pstm.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("catname");
+            }
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return "";
+    }
+
     public ArrayList<String> getCatList(){
         return this.catList;
     }

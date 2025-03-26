@@ -1,28 +1,27 @@
 package Student.myCourse;
 
+import Database.Category;
+import Database.MyCourse;
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.HomeController;
-import Student.HomeAndNavigation.Navigator;
-import Student.courseManage.enrollCourseItem;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import Database.MyCourseDB;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class myCourseController implements Initializable {
@@ -33,23 +32,46 @@ public class myCourseController implements Initializable {
     public VBox studyTable;
     public TabPane tabPane;
     public Pane courseContainer;
-    public HBox continueCourse1;
+    public VBox coursecardContainer0;
+    public VBox coursecardContainer1;
+    public VBox coursecardContainer2;
+    public VBox coursecardContainer3;
+//    public HBox continueCourse1;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         FontLoader fontLoader = new FontLoader();
         fontLoader.loadFonts();
 
+        MyCourseDB myCourseDB = new MyCourseDB();
+        Category category = new Category();
+        ArrayList<MyCourse> myCourses = myCourseDB.getallMyCourse();
+
+        for (MyCourse myCourse : myCourses) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/CourseCard.fxml"));
+
+                Node courseItem = loader.load();
+
+                courseCardController controller = loader.getController();
+
+                controller.setCourseImage(myCourse.getImage());
+
+                controller.setCourseCategory(category.getCatName(myCourse.getCat_ID()));
+                controller.setCourseTitle(myCourse.getCourseName());
+                controller.setCourseSubtitle(myCourse.getCourseDescription());
+                controller.setCourseProgress(50);
+
+                coursecardContainer0.getChildren().add(courseItem);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         displayStudyTable();
         setTabSelectionAnimation();
         setEffect();
-        route();
 
-    }
-
-    private void route(){
-        Navigator nav = new Navigator();
-        continueCourse1.setOnMouseClicked(nav::learningPageRoute);
     }
 
     private void setEffect(){

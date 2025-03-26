@@ -1,17 +1,26 @@
 package Teacher.somethingWithVideo;
 
-import javafx.fxml.FXMLLoader;
+import Database.ChapterDB;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import javafx.stage.FileChooser;
+import mediaUpload.MediaUpload;
+
+import javax.swing.*;
 
 public class uploadVideoController implements Initializable {
     public HBox navBar;
@@ -21,45 +30,100 @@ public class uploadVideoController implements Initializable {
     public TextField clipName;
     public TextField clipDescription;
     public Button clipDoc;
-    public TextField clipCat;
+    public ComboBox clipCat;
     public Button clipFile;
     public Button clipSubmit;
+    public VBox mediacontainer;
+    public StackPane videocontainer;
+    public MediaView mediaView;
+    public AnchorPane controlPane;
+    public Button btnPlay;
+    public Button btnSound;
+    public Slider sliderVolume;
+    public Label lblTime;
+    public Button btnFullscreen;
+    public Slider sliderTime;
+
+    private String imagePath = "";
+    private String videoPath = "";
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        displayNavbar();
+        MediaUpload media = new MediaUpload();
+        FileChooser imgChooser = new FileChooser();
+        FileChooser videoChooser = new FileChooser();
+        videoChooser.setTitle("เลือกไฟล์สำหรับอัปโหลด");
 
-        String videoPath = getClass().getResource("/videos/Test.mp4").toExternalForm();
-        System.out.println("Duration: " + getVideoDuration(videoPath) + " seconds");
+        addClipCover.setOnAction(event -> {
+            imgChooser.getExtensionFilters().add(
+                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp", "*.webp")
+            );
+            File selectedFile = imgChooser.showOpenDialog(clipFile.getScene().getWindow());
 
-    }
+            if (selectedFile != null) {
+                System.out.println("เลือกไฟล์: " + selectedFile.getAbsolutePath());
+                File file = new File(selectedFile.getAbsolutePath());
+                String mediaPath = file.toURI().toString();
+                coverClip.setImage(new Image(mediaPath));
 
-    private void displayNavbar(){
-        try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/navBar/navBar.fxml"));
-            HBox navContent = calendarLoader.load();
-            navBar.getChildren().setAll(navContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+                imagePath = String.valueOf(mediaPath);
 
-    public static double getVideoDuration(String videoPath) {
-        try {
-            ProcessBuilder processBuilder = new ProcessBuilder("C:/ffmpeg/ffmpeg", "-i", videoPath);
-            processBuilder.redirectErrorStream(true);
-            Process process = processBuilder.start();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (line.contains("Duration:")) {
-                    String duration = line.split("Duration: ")[1].split(",")[0].trim();
-                    return convertToSeconds(duration);
-                }
+                System.out.println("selectedFile: " +selectedFile);
+                System.out.println("mediaPath: " + imagePath);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return -1;
+        });
+
+        clipFile.setOnAction(event -> {
+            videoChooser.getExtensionFilters().add(
+                    new FileChooser.ExtensionFilter("Video Files", "*.mp4", "*.avi", "*.mov")
+            );
+            File selectedFile = videoChooser.showOpenDialog(clipFile.getScene().getWindow());
+
+            if (selectedFile != null) {
+                System.out.println("เลือกไฟล์: " + selectedFile.getAbsolutePath());
+
+                File file = new File(selectedFile.getAbsolutePath());
+                String mediaPath = file.toURI().toString();
+
+                Media mediaSource = new Media(mediaPath);
+                MediaPlayer mediaPlayer = new MediaPlayer(mediaSource);
+                mediaView.setMediaPlayer(mediaPlayer);
+                mediaPlayer.setAutoPlay(true);
+
+                videoPath = String.valueOf(mediaPath);
+
+            }
+        });
+
+        clipSubmit.setOnAction(event -> {
+//           int chapterID = chapterList.getChapterID(String.valueOf(clipCat.valueProperty().getValue()));
+           if (videoPath.equals("")) {
+               JOptionPane.showMessageDialog(null,"Please select your video" ,"Video Warning",JOptionPane.WARNING_MESSAGE);
+               return;
+           }
+
+           if (imagePath.equals("")) {
+               JOptionPane.showMessageDialog(null,"Please select your image title" ,"Image Warning",JOptionPane.WARNING_MESSAGE);
+               return;
+           }
+
+           if (clipName.getText().trim().equals("")) {
+               String s = JOptionPane.showInputDialog(null, "Please enter your video name", "Video Warning", JOptionPane.QUESTION_MESSAGE);
+               clipName.setText(s);
+               return;
+           }
+
+           if (clipDescription.getText().trim().equals("")) {
+               String s = JOptionPane.showInputDialog(null, "Please enter your video descliption", "Video Warning", JOptionPane.QUESTION_MESSAGE);
+               clipDescription.setText(s);
+               return;
+           }
+
+//           if (chapterID == 0) {
+//               JOptionPane.showMessageDialog(null,"Please select your category" ,"Category Warning",JOptionPane.WARNING_MESSAGE);
+//               return;
+//           }
+        });
+
     }
 
     private static double convertToSeconds(String duration) {
@@ -69,5 +133,6 @@ public class uploadVideoController implements Initializable {
         double seconds = Double.parseDouble(parts[2]);
         return hours * 3600 + minutes * 60 + seconds;
     }
+
 
 }
