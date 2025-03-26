@@ -8,6 +8,7 @@ import Student.HomeAndNavigation.HomeController;
 import Teacher.dashboard.dashboardController;
 import Teacher.quiz.QuizController;
 import Teacher.quiz.QuestionItem;
+import Teacher.quiz.*;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -85,6 +86,7 @@ public class CourseEditController implements Initializable {
     private CourseController courseController;
     dashboardController d = new dashboardController();
     HomeController ef = new HomeController();
+    private CourseItem courseItem;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -176,7 +178,8 @@ public class CourseEditController implements Initializable {
             showAlert("", "กรุณากรอกราคาคอร์สเรียน", AlertType.ERROR);
             return false;
         }
-        if (imgUrl == null || imgUrl.isEmpty()) {
+        if ((imgUrl == null || imgUrl.isEmpty()) && (this.img.getImage().getUrl().contains("bg.jpg"))) {
+            System.out.println(this.img.getImage().getUrl());
             showAlert("", "กรุณาเพิ่มรูปภาพสำหรับคอร์สเรียน", AlertType.ERROR);
             return false;
         }
@@ -266,6 +269,71 @@ public class CourseEditController implements Initializable {
     public void setType(){
         category = new Category();
         type.setItems(FXCollections.observableArrayList(category.getCatList()));
+    }
+
+    public void loadMyCourse(int CourseID){
+        courseDB = new CourseDB();
+        courseItem = courseDB.getCourseByID(CourseID);
+
+        this.courseName.setText(courseItem.getCourseName());
+        this.desc.setText(courseItem.getCourseDesc());
+        this.type.setValue(courseItem.getCourseCat());
+        this.price.setText(courseItem.getCoursePrice() + "");
+        this.img.setImage(new Image(courseItem.getCourseImg()));
+
+        for (ChapterItem cItem : courseItem.getChapterList()){
+
+//            My chapter
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/courseManagement/chapterContent.fxml"));
+            try {
+                newCourse = fxmlLoader.load();
+
+                ChapterContent cContent = fxmlLoader.getController();
+                passChapList(cContent);
+                passCourseName(cContent);
+                cContent.setParentContainer(courseSpace);
+                cContent.setProblemContent(newCourse);
+                cContent.setDisplay(cItem);
+
+                VBox.setVgrow(newCourse, Priority.ALWAYS);
+                courseSpace.getChildren().add(newCourse);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+//            My quiz
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Teacher/quiz/QuizBox.fxml"));
+                HBox quizBox = loader.load();
+                QuizBoxContent quizBoxContent = loader.getController();
+
+                QuizItem temp = cItem.getQuizItem();
+                if (temp == null){
+                    continue;
+                }
+                String name = temp.getHeader();
+                int max = temp.getMaxScore();
+                int min = temp.getMinScore();
+
+                QuizBoxItem quizBoxItem = new QuizBoxItem(name, 0, max, min);
+
+                quizBoxContent.setQuizBoxItem(quizBoxItem);
+                quizBoxContent.setDisplay();
+//                quizBoxContent.recieveQuizItemList(questionItemsList);
+                quizBoxContent.setWrapper(wrapper);
+                quizBoxContent.setQuizItem(temp);
+                quizBoxContent.setCourseManagement(courseManagement);
+                quizBoxContent.setCourseSpace(courseSpace);
+                quizBoxContent.setParentContainer(courseSpace);
+//                passMyController(quizBoxContent);
+
+                quizBoxContent.setProblemContent(quizBox);
+                courseSpace.getChildren().add(quizBox);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 }
 ;

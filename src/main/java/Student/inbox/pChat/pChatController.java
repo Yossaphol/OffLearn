@@ -152,36 +152,53 @@ public class pChatController implements Initializable, SessionHadler {
     }
 
     public void switchTeacher(String newTeacher) {
-        String oldTeacher = selectedTeacher;
-        selectedTeacher = newTeacher;
+        try {
+            String oldTeacher = selectedTeacher;
+            selectedTeacher = newTeacher;
 
-        if (oldTeacher != null && clientMap.containsKey(oldTeacher)) {
-            clientMap.get(oldTeacher).closeConnection();
+            if (oldTeacher != null && clientMap.containsKey(oldTeacher)) {
+                clientMap.get(oldTeacher).closeConnection();
+            }
+
+            Map<String, String> teacherInfo = teacherDb.getTeacherInfo(selectedTeacher);
+            if (teacherInfo == null) {
+                showAlert("Error", "Teacher information not found for: " + selectedTeacher);
+                return;
+            }
+
+            if (!teacherInfo.containsKey("IP") || !teacherInfo.containsKey("Port")) {
+                showAlert("Error", "Incomplete teacher connection details");
+                return;
+            }
+
+            String teacherIP = teacherInfo.get("IP");
+            int teacherPort = Integer.parseInt(teacherInfo.get("Port"));
+
+            Client client = new Client(teacherIP, teacherPort, studentName);
+            client.setMessageListener(this::receiveMessage);
+
+            clientMap.put(selectedTeacher, client);
+
+            Platform.runLater(() -> {
+                currentTeacherName.setText(selectedTeacher);
+                currentTeacherImg.setImage(TEACHER_IMAGE);
+
+                vboxMessage.getChildren().clear();
+                loadChatHistory(selectedTeacher);
+            });
+        } catch (Exception e) {
+            showAlert("Connection Error", "Failed to connect to teacher: " + e.getMessage());
+            e.printStackTrace();
         }
-
-        Map<String, String> teacherInfo = teacherDb.getTeacherInfo(selectedTeacher);
-        if (teacherInfo == null || !teacherInfo.containsKey("IP") || !teacherInfo.containsKey("Port")) {
-            System.err.println("Error: ไม่พบข้อมูลอาจารย์ " + selectedTeacher);
-            return;
-        }
-
-        String teacherIP = teacherInfo.get("IP");
-        int teacherPort = Integer.parseInt(teacherInfo.get("Port"));
-
-        Client client = new Client(teacherIP, teacherPort, studentName);
-        client.setMessageListener(this::receiveMessage);
-
-        clientMap.put(selectedTeacher, client);
-
-        Platform.runLater(() -> {
-            currentTeacherName.setText(selectedTeacher);
-            currentTeacherImg.setImage(TEACHER_IMAGE);
-
-            vboxMessage.getChildren().clear();
-            loadChatHistory(selectedTeacher);
-        });
     }
 
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 
     public void receiveMessage(String message) {
         if (selectedTeacher == null) {

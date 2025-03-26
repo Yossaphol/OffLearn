@@ -1,17 +1,36 @@
 package Teacher.courseManagement;
 
+import com.beust.ah.A;
+
+import java.util.ArrayList;
+
 public class CourseItem {
+    private int courseId;
     private String courseImg;
     private String courseName;
     private int coursePrice;
     private String courseCat;
+    private String courseDesc;
+    private ArrayList<ChapterItem> chapterList;
 
-    public CourseItem(String courseImg, String courseName, int coursePrice, String courseCat){
+    public CourseItem(int courseId, String courseImg, String courseName, int coursePrice, String courseCat){
+        this.setCourseId(courseId);
         this.setCourseImg(courseImg);
         this.setCourseName(courseName);
         this.setCoursePrice(coursePrice);
         this.setCourseCat(courseCat);
+        this.chapterList = new ArrayList<ChapterItem>();
     }
+
+    public CourseItem(int courseId, String courseImg, String courseName, int coursePrice, String courseCat, String courseDesc){
+        this.setCourseImg(courseImg);
+        this.setCourseName(courseName);
+        this.setCoursePrice(coursePrice);
+        this.setCourseDesc(courseDesc);
+        this.setCourseCat(courseCat);
+        this.chapterList = new ArrayList<ChapterItem>();
+    }
+
 
     public String getCourseImg() {
         return courseImg;
@@ -43,5 +62,29 @@ public class CourseItem {
 
     public void setCourseCat(String courseCat) {
         this.courseCat = courseCat;
+    }
+
+    public String getCourseDesc() {
+        return courseDesc;
+    }
+
+    public void setCourseDesc(String courseDesc) {
+        this.courseDesc = courseDesc;
+    }
+
+    public ArrayList<ChapterItem> getChapterList() {
+        return chapterList;
+    }
+
+    public void setChapterList(ChapterItem chapterItem) {
+        this.chapterList.add(chapterItem);
+    }
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 }
