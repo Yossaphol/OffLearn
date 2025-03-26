@@ -125,7 +125,7 @@
                                           <Font name="Noto Sans Thai Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <PasswordField fx:id="security_password" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;">
+                                    <PasswordField fx:id="security_password" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" text="1234567890">
                                        <font>
                                           <Font name="Noto Sans Thai Regular" size="16.0" />
                                        </font>
