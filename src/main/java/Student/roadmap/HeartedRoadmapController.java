@@ -12,11 +12,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class HeartedRoadmapController implements Initializable {
-    public Button Roadmap_Button;
+    public Label roadmapName;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
-    public void setHearted_roadmap(String txt){Roadmap_Button.setText(txt);}
+    public void setHearted_roadmap(String txt){roadmapName.setText(txt);}
 }

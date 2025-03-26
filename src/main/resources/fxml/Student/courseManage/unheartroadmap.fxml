@@ -11,7 +11,6 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-
 <Button fx:id="sub_category_btn01" mnemonicParsing="false" prefHeight="41.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="forHover" stylesheets="@../../../css/roadmap.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <font>
         <Font name="Noto Sans Thai Bold" size="18.0" />
@@ -29,7 +28,7 @@
     <graphic>
         <HBox alignment="CENTER_LEFT" prefHeight="29.0">
             <children>
-                <Label minHeight="-Infinity" prefHeight="29.0" text="Front-end">
+                <Label fx:id="roadmapName" minHeight="-Infinity" prefHeight="29.0" text="Front-end">
                     <font>
                         <Font name="Noto Sans Thai Bold" size="18.0" />
                     </font>
