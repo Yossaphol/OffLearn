@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="mainComp" alignment="CENTER_LEFT" prefHeight="89.0" prefWidth="973.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.CourseListController">
+<HBox fx:id="mainComp" alignment="CENTER_LEFT" prefHeight="121.0" prefWidth="973.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.CourseListController">
    <children>
       <Pane prefHeight="95.0" prefWidth="29.0" />
       <Rectangle fx:id="courseImg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="76.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />

@@ -1,10 +1,13 @@
 package Teacher.courseManagement;
 
+import Teacher.quiz.QuizItem;
+
 public class ChapterItem {
     private int chapId;
     private String chapterName;
     private String desc;
     private String imrUrl;
+    private QuizItem quizItem;
 
     public ChapterItem(int chapId, String name, String desc){
         this.setChapId(chapId);
@@ -47,5 +50,13 @@ public class ChapterItem {
     @Override
     public String toString(){
        return this.getChapterName() + "\n" + this.getDesc();
+    }
+
+    public QuizItem getQuizItem() {
+        return quizItem;
+    }
+
+    public void setQuizItem(QuizItem quizItem) {
+        this.quizItem = quizItem;
     }
 }

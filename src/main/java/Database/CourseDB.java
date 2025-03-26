@@ -1,6 +1,8 @@
 package Database;
 
+import Teacher.courseManagement.ChapterItem;
 import Teacher.courseManagement.CourseItem;
+import Teacher.quiz.QuizItem;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -92,7 +94,7 @@ public class CourseDB extends ConnectDB{
     public ArrayList<CourseItem> getMyCourse(int user_id) {
         ArrayList<CourseItem> courseList = new ArrayList<>();
 
-        String sql = "SELECT c.courseName, c.image, c.price, cat.catname " +
+        String sql = "SELECT c.Course_ID, c.courseName, c.image, c.price, cat.catname " +
                 "FROM offlearn.course c " +
                 "JOIN offlearn.category cat ON c.Cat_ID = cat.Cat_id " +
                 "WHERE c.user_id = ?";
@@ -105,12 +107,13 @@ public class CourseDB extends ConnectDB{
             pstm.setInt(user_id, 1);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
+                int id = rs.getInt("Course_ID");
                 String name = rs.getString("courseName");
                 String img = rs.getString("image");
                 int price = rs.getInt("price");
                 String catName = rs.getString("catname");
 
-                CourseItem courseItem = new CourseItem(img, name, price, catName);
+                CourseItem courseItem = new CourseItem(id, img, name, price, catName);
                 courseList.add(courseItem);
             }
 
@@ -120,5 +123,70 @@ public class CourseDB extends ConnectDB{
 
         return courseList;
     }
+
+    public CourseItem getCourseByID(int courseID) {
+        String courseSql = "SELECT c.courseName, c.image, c.price, c.courseDescription, cat.catname " +
+                "FROM offlearn.course c " +
+                "JOIN offlearn.category cat ON c.Cat_ID = cat.Cat_id " +
+                "WHERE c.Course_ID = ?";
+
+        String chapterSql = "SELECT Chapter_ID, chapterName, chapter_image, chapterDescription, chapter_material " +
+                "FROM offlearn.chapter WHERE Course_ID = ?";
+
+        String quizSql = "SELECT Quiz_ID, header FROM offlearn.quiz WHERE Chapter_ID = ? LIMIT 1";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement courseStmt = conn.prepareStatement(courseSql);
+             PreparedStatement chapterStmt = conn.prepareStatement(chapterSql)) {
+
+            courseStmt.setInt(1, courseID);
+            ResultSet courseRs = courseStmt.executeQuery();
+
+            if (!courseRs.next()) return null;
+
+            CourseItem course = new CourseItem(
+                    courseID,
+                    courseRs.getString("image"),
+                    courseRs.getString("courseName"),
+                    courseRs.getInt("price"),
+                    courseRs.getString("catname"),
+                    courseRs.getString("courseDescription")
+            );
+
+            chapterStmt.setInt(1, courseID);
+            ResultSet chapterRs = chapterStmt.executeQuery();
+
+            ChapterItem chapter = null;
+            while (chapterRs.next()) {
+                int chapterID = chapterRs.getInt("Chapter_ID");
+                String chapterName = chapterRs.getString("chapterName");
+                String chapterImage = chapterRs.getString("chapter_image");
+                String chapterDescription = chapterRs.getString("chapterDescription");
+                String chapterMaterial = chapterRs.getString("chapter_material");
+
+                QuizItem quizItem = null;
+                try (PreparedStatement quizStmt = conn.prepareStatement(quizSql)) {
+                    quizStmt.setInt(1, chapterID);
+                    ResultSet quizRs = quizStmt.executeQuery();
+                    if (quizRs.next()) {
+                        quizItem = new QuizItem(quizRs.getInt("Quiz_ID"));
+                    }
+                }
+
+                chapter = new ChapterItem(chapterID, chapterName, chapterDescription);
+                chapter.setQuizItem(quizItem);
+            }
+
+            course.setChapterList(chapter);
+            return course;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("not found");
+        return null;
+    }
+
 
 }

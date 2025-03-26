@@ -81,6 +81,7 @@ public class CourseEditController implements Initializable {
     private MediaUpload m;
     private String imgUrl;
     private CourseController courseController;
+    private CourseItem courseItem;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -164,7 +165,8 @@ public class CourseEditController implements Initializable {
             showAlert("", "กรุณากรอกราคาคอร์สเรียน", AlertType.ERROR);
             return false;
         }
-        if (imgUrl == null || imgUrl.isEmpty()) {
+        if ((imgUrl == null || imgUrl.isEmpty()) && (this.img.getImage().getUrl().contains("bg.jpg"))) {
+            System.out.println(this.img.getImage().getUrl());
             showAlert("", "กรุณาเพิ่มรูปภาพสำหรับคอร์สเรียน", AlertType.ERROR);
             return false;
         }
@@ -254,6 +256,20 @@ public class CourseEditController implements Initializable {
     public void setType(){
         category = new Category();
         type.setItems(FXCollections.observableArrayList(category.getCatList()));
+    }
+
+    public void loadMyCourse(int CourseID){
+        courseDB = new CourseDB();
+        courseItem = courseDB.getCourseByID(CourseID);
+
+        this.courseName.setText(courseItem.getCourseName());
+        this.desc.setText(courseItem.getCourseDesc());
+        this.type.setValue(courseItem.getCourseCat());
+        this.price.setText(courseItem.getCoursePrice() + "");
+        this.img.setImage(new Image(courseItem.getCourseImg()));
+
+//        for (ChapterItem)
+//        this.courseSpace.getChildren().add();
     }
 }
 ;

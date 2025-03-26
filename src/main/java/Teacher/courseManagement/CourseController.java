@@ -67,6 +67,14 @@ public class CourseController implements Initializable {
         courseEditController.recieveCourseList(courseManagement);
     }
 
+    public void passWrapperMyCourse(CourseListController courseListController){
+        courseListController.recieveWrapper(wrapper);
+    }
+
+    public void passCourseManagementMyCourse(CourseListController courseListController){
+        courseListController.recieveCourseManagement(courseManagement);
+    }
+
     public void passMyMethod(CourseEditController courseEditController){courseEditController.recieveMethod(this);}
 
     public void newCourseButton(){
@@ -110,6 +118,10 @@ public class CourseController implements Initializable {
 
                 controller.setCourseItem(c);
                 controller.setCourseDisplay();
+                controller.setCourseId(c.getCourseId());
+
+                passCourseManagementMyCourse(controller);
+                passWrapperMyCourse(controller);
 
                 courseListView.getChildren().add(courseItemParent);
 

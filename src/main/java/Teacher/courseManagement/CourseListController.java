@@ -1,15 +1,19 @@
 package Teacher.courseManagement;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -35,9 +39,15 @@ public class CourseListController implements Initializable {
     @FXML
     private Label price;
 
+    private VBox courseEdit;
+    private ScrollPane wrapper;
+    private VBox courseManagement;
+    private int courseId;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         shadow();
+        editcourseMyCourse();
     }
 
     public void setCourseItem(CourseItem courseItem){
@@ -64,6 +74,45 @@ public class CourseListController implements Initializable {
         dropShadow.setColor(Color.GRAY);
 
         mainComp.setEffect(dropShadow);
+    }
+
+    public void setCourseId(int courseId){
+        this.courseId = courseId;
+    }
+
+    public int getCourseId(){
+        return this.courseId;
+    }
+
+    public void editcourseMyCourse(){
+        mainComp.setOnMouseClicked(mouseEvent -> {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/courseManagement/courseEdit.fxml"));
+                courseEdit = fxmlLoader.load();
+                wrapper.setContent(courseEdit);
+
+                CourseEditController courseEditController = fxmlLoader.getController();
+
+                courseEditController.loadMyCourse(this.getCourseId());
+
+                passWrapper(courseEditController);
+                passCourseManagement(courseEditController);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public void recieveWrapper(ScrollPane wrapper){this.wrapper = wrapper;}
+
+    public void recieveCourseManagement(VBox courseManagement){this.courseManagement = courseManagement;}
+
+    public void passWrapper(CourseEditController courseEditController){
+        courseEditController.recieveWrapper(wrapper);
+    }
+
+    public void passCourseManagement(CourseEditController courseEditController){
+        courseEditController.recieveCourseList(courseManagement);
     }
 
 
