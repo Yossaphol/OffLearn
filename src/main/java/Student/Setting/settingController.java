@@ -54,8 +54,6 @@ public class settingController implements Initializable {
     public Button cancelEditProfile;
     public Button savePassword;
     public Button cancelPassword;
-    public Button savePayment;
-    public Button cancelPaymentChange;
     public TextField oldpw;
     public TextField newpwfirst;
     public TextField newpwsecond;
@@ -83,7 +81,6 @@ public class settingController implements Initializable {
         setProfileValue(name, lastNameUser, gmailUser);
         loadAndSetUserImage(picture, imgPath);
         username1.setText(userName);
-        setRadioGroup();
         setEffect();
     }
 
@@ -95,28 +92,6 @@ public class settingController implements Initializable {
         hm.hoverEffect(savePassword);
         hm.hoverEffect(cancelEditProfile);
     }
-
-    private void setRadioGroup(){
-        ToggleGroup quizGroup = new ToggleGroup();
-        quizTrue.setToggleGroup(quizGroup);
-        quizFalse.setToggleGroup(quizGroup);
-
-
-        ToggleGroup messageGroup = new ToggleGroup();
-        mTrue.setToggleGroup(messageGroup);
-        mFalse.setToggleGroup(messageGroup);
-
-        ToggleGroup upComing = new ToggleGroup();
-        cTrue.setToggleGroup(upComing);
-        cFalse.setToggleGroup(upComing);
-
-
-        //Set default
-        quizTrue.setSelected(true);
-        mTrue.setSelected(true);
-        cTrue.setSelected(true);
-    }
-
 
     //Start profile edit part
     public void editProfile(ActionEvent e){
@@ -229,7 +204,6 @@ public class settingController implements Initializable {
         closeEditProfile(isEditing);
     }
 
-
     public void uploadImg(ActionEvent e) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select an Image");
@@ -335,89 +309,9 @@ public class settingController implements Initializable {
         fadeOut.play();
     }
     public void cancelChangePass(ActionEvent e){
-
         closePasswordField();
     }
 
-//    public void editPaymentInfo(ActionEvent e){
-//        if(!isEditingPayment){
-//            openEditPaymentField();
-//
-//            isEditingPayment = true;
-//        }else {
-//            closeEditPaymentField();
-//            isEditingPayment = false;
-//        }
-//    }
-
-
-
-    private void openEditPaymentField() {
-        editPaymentBtn.setVisible(false);
-
-        editPaymentBox.setOpacity(0);
-        editPaymentBox.setVisible(true);
-        name1.setDisable(false);
-        lastName1.setDisable(false);
-        accountNo.setDisable(false);
-        bankName.setDisable(false);
-
-        FadeTransition fadeIn = new FadeTransition(Duration.millis(200), editPaymentBox);
-        fadeIn.setFromValue(0);
-        fadeIn.setToValue(1);
-        fadeIn.play();
-    }
-
-//    private void closeEditPaymentField() {
-//        editPaymentBtn.setVisible(true);
-//
-//        FadeTransition fadeOut = new FadeTransition(Duration.millis(200), editPaymentBox);
-//        fadeOut.setFromValue(1);
-//        fadeOut.setToValue(0);
-//        fadeOut.setOnFinished(event -> {
-//            editPaymentBox.setVisible(false);
-//
-//            name1.setDisable(true);
-//            lastName1.setDisable(true);
-//            accountNo.setDisable(true);
-//            bankName.setDisable(true);
-//        });
-//
-//        fadeOut.play();
-//    }
-
-//    public void savePaymentinfo(ActionEvent e){
-//        this.namep = name1.getText();
-//        this.lastnamep = lastName1.getText();
-//        this.accountN = accountNo.getText();
-//        this.bank = bankName.getText();
-//
-//        setBankDetail(namep, lastnamep, accountN, bank);
-//        closeEditPaymentField();
-//    }
-
-
-//    public void cancelPaymentInfo(ActionEvent e){
-//        setBankDetail(namep, lastnamep, accountN, bank);
-//        closeEditPaymentField();
-//    }
-
-    public void setBankDetail(String name, String lastname, String acctNo, String bank) {
-        acctNo = acctNo.replace("-", "");
-        name1.setText(name);
-        lastName1.setText(lastname);
-
-        if (acctNo.length() >= 6) {
-            String formattedAcctNo = acctNo.substring(0, 3) + "-" +
-                    acctNo.substring(3, 6) + "-" +
-                    acctNo.substring(6);
-            accountNo.setText(formattedAcctNo);
-        } else {
-            accountNo.setText(acctNo);
-        }
-        bankName.setText(bank);
-    }
-    //End edit payment part
 
     private void showAlert(String title, String message, Alert.AlertType type) {
         Alert alert = new Alert(type);

@@ -74,7 +74,6 @@ public class settingController implements Initializable {
 
         security_password.setText("********");
 
-        setRadioGroup();
 
         setEffect();
 
@@ -210,26 +209,6 @@ public class settingController implements Initializable {
         editProfile();
     }
 
-    //Group radio button
-    private void setRadioGroup(){
-        ToggleGroup notification = new ToggleGroup();
-        notification_quiz_y.setToggleGroup(notification);
-        notification_quiz_n.setToggleGroup(notification);
 
-
-        ToggleGroup messageGroup = new ToggleGroup();
-        notification_message_y.setToggleGroup(messageGroup);
-        notification_message_n.setToggleGroup(messageGroup);
-
-        ToggleGroup upComingCourse = new ToggleGroup();
-        notification_startingcourse_y.setToggleGroup(upComingCourse);
-        notification_startingcourse_n.setToggleGroup(upComingCourse);
-
-
-        //Set default
-        notification_quiz_y.setSelected(true);
-        notification_message_y.setSelected(true);
-        notification_startingcourse_y.setSelected(true);
-    }
 
 }

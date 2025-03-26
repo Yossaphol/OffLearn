@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -16,9 +17,9 @@
       <Pane prefHeight="95.0" prefWidth="21.0" />
       <VBox alignment="CENTER_LEFT" prefHeight="95.0" prefWidth="355.0">
          <children>
-            <Label fx:id="courseName" prefHeight="20.0" prefWidth="353.0" text="Each indrustry in economic system ">
+            <Label fx:id="courseName" prefHeight="20.0" prefWidth="353.0" text="Each indrustry in economic system " textFill="#0675de">
                <font>
-                  <Font name="Kodchasan Bold" size="16.0" />
+                  <Font name="Noto Sans Thai Bold" size="16.0" />
                </font>
             </Label>
             <Pane prefHeight="4.0" prefWidth="380.0" />
@@ -26,37 +27,37 @@
                <children>
                   <ImageView fitHeight="21.0" fitWidth="24.0">
                      <image>
-                        <Image url="@../../img/icon/like.png" />
+                        <Image url="@../../../img/icon/like.png" />
                      </image>
                   </ImageView>
                   <Pane prefHeight="35.0" prefWidth="6.0" />
                   <Label text="324">
                      <font>
-                        <Font name="Kodchasan Regular" size="12.0" />
+                        <Font name="Noto Sans Thai Regular" size="12.0" />
                      </font>
                   </Label>
                   <Pane prefHeight="35.0" prefWidth="25.0" />
                   <ImageView fitHeight="21.0" fitWidth="24.0">
                      <image>
-                        <Image url="@../../img/icon/dislike.png" />
+                        <Image url="@../../../img/icon/dislike.png" />
                      </image>
                   </ImageView>
                   <Pane prefHeight="35.0" prefWidth="6.0" />
                   <Label text="5">
                      <font>
-                        <Font name="Kodchasan Regular" size="12.0" />
+                        <Font name="Noto Sans Thai Regular" size="12.0" />
                      </font>
                   </Label>
                   <Pane prefHeight="35.0" prefWidth="18.0" />
                   <Label text="รับชม 13.2K ครั้ง">
                      <font>
-                        <Font name="Kodchasan Regular" size="12.0" />
+                        <Font name="Noto Sans Thai Regular" size="12.0" />
                      </font>
                   </Label>
                   <Pane prefHeight="35.0" prefWidth="16.0" />
                   <Label text="4,304 enrolled">
                      <font>
-                        <Font name="Kodchasan Regular" size="12.0" />
+                        <Font name="Noto Sans Thai Regular" size="12.0" />
                      </font>
                   </Label>
                </children>
@@ -83,4 +84,7 @@
          </children>
       </VBox>
    </children>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
 </HBox>

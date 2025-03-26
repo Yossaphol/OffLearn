@@ -134,7 +134,7 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox fx:id="navPopup" alignment="CENTER_RIGHT" maxHeight="50.0" maxWidth="450.0" minHeight="43.0" prefHeight="43.0" prefWidth="765.0" style="-fx-background-color: white; -fx-background-radius: 20;" visible="false">
+            <HBox fx:id="navPopup" alignment="CENTER_RIGHT" maxHeight="50.0" maxWidth="-Infinity" minHeight="43.0" minWidth="-Infinity" prefHeight="43.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 20;" visible="false">
                <children>
                   <HBox fx:id="cart" alignment="CENTER" prefHeight="19.0" prefWidth="230.0" style="-fx-background-color: transparent;" styleClass="navT1" stylesheets="@../../../css/Home.css">
                      <children>
@@ -147,35 +147,6 @@
                            </cursor>
                         </ImageView>
                         <Label fx:id="cartLabel" stylesheets="@../../../css/Home.css" text="Cart">
-                           <font>
-                              <Font name="Kodchasan Bold" size="20.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Label>
-                     </children>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </HBox>
-                  <HBox fx:id="setting" alignment="CENTER" prefHeight="43.0" prefWidth="230.0" style="-fx-background-color: transparent;" styleClass="navT1" stylesheets="@../../../css/Home.css">
-                     <children>
-                        <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../img/icon/settings.png" />
-                           </image>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </ImageView>
-                        <Label fx:id="settingLabel" stylesheets="@../../../css/Home.css" text="Setting">
                            <font>
                               <Font name="Kodchasan Bold" size="20.0" />
                            </font>

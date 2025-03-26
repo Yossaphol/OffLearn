@@ -23,7 +23,7 @@ public class UserDB extends ConnectDB{
                 String user = rs.getString("Username");
                 String email = rs.getString("Email");
                 String password = rs.getString("Password");
-                byte[] profile = rs.getBytes("Profile");
+                String profile = rs.getString("Profile");
                 return new User(firstname, lastname, user, email, password, profile);
             }
         } catch (SQLException e) {

@@ -6,9 +6,9 @@ public class User {
     private String user;
     private String password;
     private String email;
-    private byte[] profile;
+    private String profile;
 
-    public User(String firstname, String lastname, String username, String email, String password, byte[] profile) {
+    public User(String firstname, String lastname, String username, String email, String password, String profile) {
         this.fname = firstname;
         this.lname = lastname;
         this.user = username;
@@ -37,7 +37,7 @@ public class User {
         return password;
     }
 
-    public byte[] getProfile() {
+    public String getProfile() {
         return profile;
     }
 }
