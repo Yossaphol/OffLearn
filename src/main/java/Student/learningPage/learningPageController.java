@@ -88,27 +88,7 @@ public class learningPageController implements Initializable {
         method_home.hoverEffect(nextCourse);
         method_home.hoverEffect(btnEP1);
     }
-
-    private void displayNavbar() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/navBar.fxml"));
-            VBox navContent = loader.load();
-            leftWrapper.getChildren().setAll(navContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void displaySearchBar() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/searchBar.fxml"));
-            HBox searchbarContent = loader.load();
-            searhbar_container.getChildren().setAll(searchbarContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+    
     private void loadVideoPlayer() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/learningPage/videoPlayer.fxml"));

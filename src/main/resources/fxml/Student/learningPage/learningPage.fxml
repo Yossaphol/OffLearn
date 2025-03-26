@@ -7,7 +7,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -15,10 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
@@ -40,114 +36,10 @@
                      <children>
                         <VBox prefHeight="2017.0" prefWidth="775.0">
                            <children>
-                              <VBox fx:id="mediacontainer" maxWidth="720.0" prefHeight="405.0" prefWidth="720.0">
+                              <VBox fx:id="mediacontainer" maxWidth="720.0" prefHeight="405.0" prefWidth="720.0" style="-fx-border-radius: 25;">
                                  <VBox.margin>
                                     <Insets top="30.0" />
                                  </VBox.margin>
-                                 <children>
-                                    <StackPane fx:id="videocontainer" minHeight="405.0" minWidth="720.0" prefHeight="405.0" prefWidth="720.0">
-                                       <children>
-                                          <MediaView fx:id="mediaView" fitHeight="405.0" fitWidth="720.0" StackPane.alignment="TOP_RIGHT" />
-                                          <AnchorPane fx:id="controlPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="720.0">
-                                             <children>
-                                                <HBox fx:id="controlpanesection" alignment="CENTER_LEFT" minHeight="48.0" minWidth="746.0" prefHeight="48.0" prefWidth="746.0" style="-fx-background-color: linear-gradient(    from 0% 100% to 0% 0%,    #00000080 0%,   /* semi-transparent black at the bottom */    #00000000 100%  /* fully transparent at the top */);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                                                   <children>
-                                                      <Button fx:id="btnPlay" layoutX="10.0" layoutY="19.0" maxHeight="36.0" maxWidth="28.0" minHeight="36.0" minWidth="28.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
-                                                         <graphic>
-                                                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                                               <image>
-                                                                  <Image url="@../../../img/icon/play-button-arrowhead-solid.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                         </graphic>
-                                                         <HBox.margin>
-                                                            <Insets left="20.0" right="15.0" />
-                                                         </HBox.margin>
-                                                         <cursor>
-                                                            <Cursor fx:constant="HAND" />
-                                                         </cursor>
-                                                      </Button>
-                                                      <Button fx:id="btnSound" maxHeight="36.0" maxWidth="28.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
-                                                         <graphic>
-                                                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                                               <image>
-                                                                  <Image url="@../../../img/icon/volume-solid-stage2.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                         </graphic>
-                                                         <HBox.margin>
-                                                            <Insets left="5.0" />
-                                                         </HBox.margin>
-                                                         <cursor>
-                                                            <Cursor fx:constant="HAND" />
-                                                         </cursor>
-                                                      </Button>
-                                                      <Slider fx:id="sliderVolume" minWidth="0.0" prefHeight="30.0" prefWidth="152.0" stylesheets="@../../../css/learningPage.css">
-                                                         <HBox.margin>
-                                                            <Insets />
-                                                         </HBox.margin>
-                                                      </Slider>
-                                                      <HBox fx:id="timebox" minWidth="116.0" prefHeight="43.0" prefWidth="116.0">
-                                                         <children>
-                                                            <Label fx:id="lblTime" prefHeight="43.0" prefWidth="137.0" text="00:00 / 00:00" textFill="WHITE">
-                                                               <font>
-                                                                  <Font name="System Bold" size="16.0" />
-                                                               </font>
-                                                               <effect>
-                                                                  <DropShadow spread="0.01">
-                                                                     <color>
-                                                                        <Color red="0.5" green="0.5" blue="0.5" />
-                                                                     </color>
-                                                                  </DropShadow>
-                                                               </effect>
-                                                               <padding>
-                                                                  <Insets left="7.0" />
-                                                               </padding>
-                                                            </Label>
-                                                         </children>
-                                                      </HBox>
-                                                      <Region fx:id="regionpart" minHeight="43.0" minWidth="191.0" HBox.hgrow="ALWAYS" />
-                                                      <Button fx:id="btnSetting" mnemonicParsing="false" style="-fx-background-color: transparent;">
-                                                         <graphic>
-                                                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                                               <image>
-                                                                  <Image url="@../../../img/icon/settings-solid.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                         </graphic>
-                                                         <HBox.margin>
-                                                            <Insets right="15.0" />
-                                                         </HBox.margin>
-                                                         <cursor>
-                                                            <Cursor fx:constant="HAND" />
-                                                         </cursor>
-                                                      </Button>
-                                                      <Button fx:id="btnFullscreen" mnemonicParsing="false" prefHeight="32.0" prefWidth="35.0" style="-fx-background-color: transparent;">
-                                                         <graphic>
-                                                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
-                                                               <image>
-                                                                  <Image url="@../../../img/icon/expand-solid.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                         </graphic>
-                                                         <HBox.margin>
-                                                            <Insets right="15.0" />
-                                                         </HBox.margin>
-                                                         <cursor>
-                                                            <Cursor fx:constant="HAND" />
-                                                         </cursor>
-                                                      </Button>
-                                                   </children>
-                                                   <padding>
-                                                      <Insets top="5.0" />
-                                                   </padding>
-                                                </HBox>
-                                                <Slider fx:id="sliderTime" maxHeight="1.0" minHeight="1.0" minWidth="-Infinity" prefHeight="1.0" prefWidth="720.0" stylesheets="@../../../css/learningPage.css" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                                             </children>
-                                          </AnchorPane>
-                                       </children>
-                                    </StackPane>
-                                 </children>
                               </VBox>
                               <HBox prefHeight="117.0" prefWidth="746.0">
                                  <children>

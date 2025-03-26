@@ -21,6 +21,7 @@ import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -52,7 +53,7 @@ public class VideoPlayerManager implements Initializable {
     @FXML private StackPane videocontainer;  // root container for the video
     @FXML private AnchorPane controlPane;     // overlay pane with the controls
     private MediaPlayer mediaPlayer;
-
+    private Rectangle clip;
     private ContextMenu settingsMenu;
     private Timeline hideTimeline;         // for delayed fade
     private PauseTransition inactivityTimer;
@@ -148,6 +149,15 @@ public class VideoPlayerManager implements Initializable {
                 mediaView.fitHeightProperty().bind(videocontainer.heightProperty());
             }
         });
+
+        clip = new Rectangle();
+        clip.setArcWidth(30);
+        clip.setArcHeight(30);
+        mediaView.layoutBoundsProperty().addListener((obs, oldBounds, newBounds) -> {
+            clip.setWidth(newBounds.getWidth());
+            clip.setHeight(newBounds.getHeight());
+        });
+        mediaView.setClip(clip);
 
         // toggles play/pause
         videocontainer.setOnMouseClicked(e -> {
@@ -491,6 +501,7 @@ public class VideoPlayerManager implements Initializable {
     }
 
     private void goFullscreen() {
+        mediaView.setClip(null);
         originalParent = (Pane) videocontainer.getParent();
         originalIndex  = originalParent.getChildren().indexOf(videocontainer);
         originalParent.getChildren().remove(videocontainer);
@@ -571,6 +582,7 @@ public class VideoPlayerManager implements Initializable {
         if (fullscreenStage != null && fullscreenStage.isShowing()) {
             fullscreenStage.close();
         }
+        mediaView.setClip(clip);
         mediaView.fitWidthProperty().unbind();
         mediaView.fitHeightProperty().unbind();
 
