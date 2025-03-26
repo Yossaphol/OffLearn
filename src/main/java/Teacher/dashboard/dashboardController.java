@@ -61,7 +61,6 @@ public class dashboardController implements Initializable {
 
         effectMethod.applyHoverEffectToInside(month_selector);
 
-        hoverEffect(dashboard_profile);
         hoverEffect(linechart_container);
         hoverEffect(piechartContainer);
         hoverEffect(lowScore_container);
