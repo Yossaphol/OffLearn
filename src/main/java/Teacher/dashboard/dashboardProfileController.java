@@ -1,5 +1,8 @@
 package Teacher.dashboard;
 
+import Database.User;
+import Database.UserDB;
+import a_Session.SessionManager;
 import Teacher.navigator.Navigator;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,7 +16,7 @@ import javafx.scene.shape.Rectangle;
 public class dashboardProfileController implements Initializable {
 
     public Rectangle user_pfp;
-    public Label name;
+    public Label setfullname;
     public Label bio;
     public Label total_review;
     public Button like_btn;
@@ -23,7 +26,16 @@ public class dashboardProfileController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-    route();
+        route();
+
+        UserDB userDB = new UserDB();
+        String sessionUsername = SessionManager.getInstance().getUsername();
+        User user = userDB.getUserInfo(sessionUsername);
+
+        String name = user.getFirstname();
+        String lastNameUser = user.getLastname();
+        String fullname = name + " " + lastNameUser;
+        setfullname.setText(fullname);
     }
 
     private void route(){
@@ -32,7 +44,7 @@ public class dashboardProfileController implements Initializable {
     }
 
     public void setProfileDetail(String username, String description, String profilePicPath, int likeCount, int disLikeCount, int courseCount){
-        name.setText(username);
+//        setfullname.setText(username);
         bio.setText(description);
 
         HomeController hm = new HomeController();
