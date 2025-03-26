@@ -6,6 +6,7 @@ import Student.FontLoader.FontLoader;
 
 import a_Session.SessionManager;
 import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -110,10 +111,15 @@ public class loginController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Teacher/statistics/dashboard.fxml"));
             root = loader.load();
-
             Stage stage = (Stage) getUsername.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Home Page");
+
+            //แก้เลื่อนไม่ได้ตอนเปลี่ยนหน้า
+            stage.setFullScreen(true);
+            stage.setFullScreenExitHint("");
+            stage.setFullScreen(false);
+
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -62,6 +62,7 @@ public class settingController implements Initializable {
     public Button saveChange1;
     public Button saveChange;
     public Button cancelChange;
+    public HBox confirmPassContainer;
 
     private boolean isProfileEditing = false;
     private boolean isPaymentEditing = false;
@@ -109,21 +110,21 @@ public class settingController implements Initializable {
             privateinfo_lastname.setDisable(isProfileEditing);
             privateinfo_gmail.setDisable(isProfileEditing);
             security_username.setDisable(isProfileEditing);
-            security_password.setDisable(isProfileEditing);
             security_change_button.setVisible(isProfileEditing);
 
             isProfileEditing = true;
             saveCancelBtn.setVisible(isProfileEditing);
+            confirmPassContainer.setVisible(isProfileEditing);
         }else{
             privateinfo_firstname.setDisable(isProfileEditing);
             privateinfo_lastname.setDisable(isProfileEditing);
             privateinfo_gmail.setDisable(isProfileEditing);
             security_username.setDisable(isProfileEditing);
-            security_password.setDisable(isProfileEditing);
             security_change_button.setVisible(isProfileEditing);
 
             isProfileEditing = false;
             saveCancelBtn.setVisible(isProfileEditing);
+            confirmPassContainer.setVisible(isProfileEditing);
         }
     }
     //เปิด-ปิด การแก้ไข TextField Profile
@@ -133,21 +134,21 @@ public class settingController implements Initializable {
             privateinfo_lastname.setDisable(isProfileEditing);
             privateinfo_gmail.setDisable(isProfileEditing);
             security_username.setDisable(isProfileEditing);
-            security_password.setDisable(isProfileEditing);
             security_change_button.setVisible(isProfileEditing);
 
             isProfileEditing = true;
             saveCancelBtn.setVisible(isProfileEditing);
+            confirmPassContainer.setVisible(isProfileEditing);
         }else{
             privateinfo_firstname.setDisable(isProfileEditing);
             privateinfo_lastname.setDisable(isProfileEditing);
             privateinfo_gmail.setDisable(isProfileEditing);
             security_username.setDisable(isProfileEditing);
-            security_password.setDisable(isProfileEditing);
             security_change_button.setVisible(isProfileEditing);
 
             isProfileEditing = false;
             saveCancelBtn.setVisible(isProfileEditing);
+            confirmPassContainer.setVisible(isProfileEditing);
         }
     }
 
@@ -210,5 +211,7 @@ public class settingController implements Initializable {
     }
 
 
-
+    public void uploadImg(ActionEvent event) {
+        //
+    }
 }

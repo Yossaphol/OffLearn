@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <ScrollPane hbarPolicy="NEVER" style="-fx-background-color: #fbfbfb;" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.setting.settingController">
@@ -26,81 +27,98 @@
                         <Font name="Noto Sans Thai Regular" size="16.0" />
                      </font>
                   </Label>
-                  <VBox fx:id="privateinfo_container" fillWidth="false" prefHeight="306.0" prefWidth="1074.0">
+                  <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="privateinfo_header" text="ข้อมูลส่วนตัว" textFill="#0675de">
-                           <font>
-                              <Font name="Kodchasan Bold" size="20.0" />
-                           </font>
-                        </Label>
-                        <HBox prefHeight="85.0" prefWidth="1124.0">
+                        <VBox alignment="CENTER" prefHeight="212.0" prefWidth="179.0" spacing="20.0">
                            <children>
-                              <VBox prefHeight="200.0" prefWidth="310.0">
-                                 <children>
-                                    <Label fx:id="privateinfo_header_firstname" text="ชื่อ">
-                                       <font>
-                                          <Font name="Kodchasan Regular" size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="privateinfo_firstname" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" text="name">
-                                       <font>
-                                          <Font name="Noto Sans Thai Regular" size="16.0" />
-                                       </font></TextField>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets left="20.0" />
-                                 </HBox.margin>
-                              </VBox>
-                              <VBox prefHeight="200.0" prefWidth="310.0">
-                                 <children>
-                                    <Label fx:id="privateinfo_header_lastname" text="นามสกุล">
-                                       <font>
-                                          <Font name="Kodchasan Regular" size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="privateinfo_lastname" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" text="lastname">
-                                       <font>
-                                          <Font name="Noto Sans Thai Regular" size="16.0" />
-                                       </font></TextField>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets left="50.0" />
-                                 </HBox.margin>
-                              </VBox>
-                           </children>
-                           <VBox.margin>
-                              <Insets top="50.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <VBox prefHeight="84.0" prefWidth="310.0">
-                           <children>
-                              <Label fx:id="privateinfo_gmail_header" text="Gmail">
+                              <Label fx:id="privateinfo_header" prefHeight="33.0" prefWidth="175.0" text="ข้อมูลส่วนตัว" textFill="#0675de">
                                  <font>
-                                    <Font name="Kodchasan Regular" size="20.0" />
+                                    <Font name="Noto Sans Thai Bold" size="20.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="privateinfo_gmail" disable="true" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" text="Example@gmail.com">
+                              <Circle fx:id="picture" fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Button fx:id="uploadPic" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#uploadImg" prefHeight="33.0" prefWidth="98.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="เปลี่ยน" textFill="WHITE">
                                  <font>
-                                    <Font name="Noto Sans Thai Regular" size="16.0" />
-                                 </font></TextField>
+                                    <Font name="Noto Sans Thai Bold" size="15.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
                            </children>
-                           <VBox.margin>
-                              <Insets left="20.0" top="50.0" />
-                           </VBox.margin>
+                        </VBox>
+                        <VBox fx:id="privateinfo_container" fillWidth="false" prefHeight="306.0" prefWidth="1074.0">
+                           <children>
+                              <HBox prefHeight="85.0" prefWidth="1124.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="310.0">
+                                       <children>
+                                          <Label fx:id="privateinfo_header_firstname" text="ชื่อ">
+                                             <font>
+                                                <Font name="Noto Sans Thai Regular" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="privateinfo_firstname" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="name">
+                                             <font>
+                                                <Font name="Noto Sans Thai Regular" size="16.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="310.0">
+                                       <children>
+                                          <Label fx:id="privateinfo_header_lastname" text="นามสกุล">
+                                             <font>
+                                                <Font name="Noto Sans Thai Regular" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="privateinfo_lastname" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="lastname">
+                                             <font>
+                                                <Font name="Noto Sans Thai Regular" size="16.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="50.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <VBox prefHeight="84.0" prefWidth="310.0">
+                                 <children>
+                                    <Label fx:id="privateinfo_gmail_header" text="Gmail">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="privateinfo_gmail" disable="true" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="Example@gmail.com">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="16.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="20.0" top="50.0" />
+                                 </VBox.margin>
+                              </VBox>
+                           </children>
                         </VBox>
                      </children>
-                     <VBox.margin>
-                        <Insets left="20.0" top="30.0" />
-                     </VBox.margin>
-                  </VBox>
-                  <VBox fx:id="security_container" fillWidth="false" prefHeight="300.0" prefWidth="1074.0">
+                  </HBox>
+                  <VBox fx:id="security_container" fillWidth="false" prefHeight="367.0" prefWidth="1220.0">
                      <children>
                         <Label fx:id="security_header" text="ความปลอดภัย" textFill="#0675de">
                            <font>
                               <Font name="Noto Sans Thai Bold" size="20.0" />
                            </font>
                         </Label>
-                        <HBox prefHeight="100.0" prefWidth="1124.0">
+                        <HBox prefHeight="100.0" prefWidth="1124.0" spacing="50.0">
                            <children>
                               <VBox fillWidth="false" prefHeight="200.0" prefWidth="310.0">
                                  <children>
@@ -109,13 +127,13 @@
                                           <Font name="Noto Sans Thai Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="security_username" disable="true" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" text="Username">
+                                    <TextField fx:id="security_username" disable="true" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="Username">
                                        <font>
                                           <Font name="Noto Sans Thai Regular" size="16.0" />
                                        </font></TextField>
                                  </children>
                                  <HBox.margin>
-                                    <Insets left="20.0" />
+                                    <Insets />
                                  </HBox.margin>
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="310.0">
@@ -132,13 +150,16 @@
                                     </PasswordField>
                                  </children>
                                  <HBox.margin>
-                                    <Insets left="50.0" />
+                                    <Insets />
                                  </HBox.margin>
                               </VBox>
                            </children>
                            <VBox.margin>
                               <Insets top="50.0" />
                            </VBox.margin>
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
                         </HBox>
                         <Button fx:id="security_change_button" mnemonicParsing="false" onAction="#editProfile" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="เปลี่ยน" textFill="WHITE">
                            <font>
@@ -151,7 +172,59 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <HBox fx:id="saveCancelBtn" alignment="TOP_RIGHT" prefHeight="90.0" prefWidth="696.0" spacing="20.0" visible="false">
+                        <HBox fx:id="confirmPassContainer" prefHeight="60.0" prefWidth="1236.0" spacing="50.0" visible="false">
+                           <children>
+                              <VBox fillWidth="false" prefHeight="200.0" prefWidth="310.0">
+                                 <children>
+                                    <Label text="รหัสผ่านเดิม">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="oldPassword" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="16.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                              <VBox fillWidth="false" prefHeight="200.0" prefWidth="310.0">
+                                 <children>
+                                    <Label text="รหัสผ่านใหม่">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="newPassword" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="16.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                              <VBox fillWidth="false" prefHeight="200.0" prefWidth="310.0">
+                                 <children>
+                                    <Label text="ยืนยันรหัสผ่านใหม่">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="confirmPassword" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
+                                       <font>
+                                          <Font name="Noto Sans Thai Regular" size="16.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox fx:id="saveCancelBtn" alignment="TOP_RIGHT" prefHeight="54.0" prefWidth="1115.0" spacing="20.0" visible="false">
                            <children>
                               <Button fx:id="saveChange" mnemonicParsing="false" onAction="#saveProfileEdit" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="บันทึก" textFill="WHITE">
                                  <font>
@@ -170,6 +243,9 @@
                                  </cursor>
                               </Button>
                            </children>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
                         </HBox>
                      </children>
                      <VBox.margin>
@@ -200,7 +276,7 @@
                                           <Font name="Noto Sans Thai Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="bankaccount_firstname" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" text="Wirayabovorn">
+                                    <TextField fx:id="bankaccount_firstname" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="Wirayabovorn">
                                        <font>
                                           <Font name="Noto Sans Thai Regular" size="16.0" />
                                        </font></TextField>
@@ -213,7 +289,7 @@
                                           <Font name="Noto Sans Thai Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="bankaccount_lastname" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" text="Boonpriam">
+                                    <TextField fx:id="bankaccount_lastname" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="Boonpriam">
                                        <font>
                                           <Font name="Noto Sans Thai Regular" size="16.0" />
                                        </font></TextField>
@@ -236,7 +312,7 @@
                                           <Font name="Noto Sans Thai Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="bankaccount_number" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" text="1313880423">
+                                    <TextField fx:id="bankaccount_number" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="1313880423">
                                        <font>
                                           <Font name="Noto Sans Thai Regular" size="16.0" />
                                        </font></TextField>
@@ -249,7 +325,7 @@
                                           <Font name="Noto Sans Thai Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="bankaccount_bank" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" text="KBANK">
+                                    <TextField fx:id="bankaccount_bank" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="KBANK">
                                        <font>
                                           <Font name="Noto Sans Thai Regular" size="16.0" />
                                        </font></TextField>
