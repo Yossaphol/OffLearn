@@ -51,6 +51,23 @@ public class UserDB extends ConnectDB{
         }
     }
 
+    public boolean updateProfileImage(String username, String profilePath) {
+        String query = "UPDATE offlearn.user SET Profile = ? WHERE Username = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, profilePath);
+            pstmt.setString(2, username);
+
+            int affectedRows = pstmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public String getOldPasswordFromDB(String username) {
         String query = "SELECT Password FROM offlearn.user WHERE Username = ?";
 
