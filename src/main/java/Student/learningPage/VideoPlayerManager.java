@@ -110,7 +110,10 @@ public class VideoPlayerManager implements Initializable {
 
         mediaPlayer.setVolume(0.5);
 
-        btnSound.setOnAction(e -> toggleMute());
+        btnSound.setOnAction(e -> {
+            videocontainer.requestFocus();
+            toggleMute();
+        });
         btnSound.addEventFilter(MouseEvent.MOUSE_ENTERED, e -> showVolumeSlider());
 
         // volume icon
@@ -150,6 +153,7 @@ public class VideoPlayerManager implements Initializable {
         videocontainer.setOnMouseClicked(e -> {
                 togglePlayPause(mediaPlayer);
                 userIsActive();
+                videocontainer.requestFocus();
         });
 
         // Setup settings menu
@@ -164,7 +168,10 @@ public class VideoPlayerManager implements Initializable {
         });
 
         // Fullscreen button
-        btnFullscreen.setOnAction(e -> toggleFullscreen());
+        btnFullscreen.setOnAction(e -> {
+            videocontainer.requestFocus();
+            toggleFullscreen();
+        });
         sliderTime.getStyleClass().add("slider");
         // get duration
         mediaPlayer.setOnReady(() -> {
@@ -179,19 +186,25 @@ public class VideoPlayerManager implements Initializable {
             lblTime.setText(formatTime(newTime) + " / " + formatTime(mediaPlayer.getTotalDuration()));
             updateSliderTimeFill(); // update fill
         });
-        sliderTime.valueChangingProperty().addListener((obs, wasChanging, isChanging) -> {
-            if (isChanging) {
-                updateSliderTimeFill();
-            }
+        sliderTime.valueProperty().addListener((obs, oldVal, newVal) -> {
+            updateSliderTimeFill();
         });
         sliderTime.valueProperty().addListener((obs, oldVal, newVal) -> {
             if (sliderTime.isValueChanging()) {
                 updateSliderTimeFill();
+                double newSeconds = newVal.doubleValue();
+                Duration d = Duration.seconds(newSeconds);
+                lblTime.setText(
+                        formatTime(d) + " / " + formatTime(mediaPlayer.getTotalDuration())
+                );
             }
         });
 
 
-        btnPlay.setOnAction(e -> togglePlayPause(mediaPlayer));
+        btnPlay.setOnAction(e -> {
+            togglePlayPause(mediaPlayer);
+            videocontainer.requestFocus();
+        });
 
         // Seeking logic
         sliderTime.setOnMousePressed(e -> {
@@ -215,6 +228,7 @@ public class VideoPlayerManager implements Initializable {
                     mediaPlayer.play();
                 }
             }
+            videocontainer.requestFocus();
         });
 
         controlPane.setOpacity(1.0);
@@ -229,10 +243,61 @@ public class VideoPlayerManager implements Initializable {
         setupInactivityTimer();
 
         // Volume slider hide logic
+        sliderVolume.setFocusTraversable(false);
         btnSound.addEventFilter(MouseEvent.MOUSE_EXITED, this::checkVolumeMouseExit);
         sliderVolume.addEventFilter(MouseEvent.MOUSE_EXITED, this::checkVolumeMouseExit);
         hideDelayTransition = new PauseTransition(Duration.millis(300));
         hideDelayTransition.setOnFinished(e -> hideVolumeSlider());
+        Platform.runLater(() -> {
+            videocontainer.setFocusTraversable(true);
+            videocontainer.requestFocus();
+            Scene scene = btnPlay.getScene();
+            if (scene != null) {
+                scene.setOnKeyPressed(e -> {
+                    e.consume();
+                    switch (e.getCode()) {
+                        case SPACE:
+                            // Toggle play/pause
+                            togglePlayPause(mediaPlayer);
+                            userIsActive();
+                            break;
+
+                        case LEFT:
+                            // Skip backward 5s
+                            skipBackward(5);
+                            userIsActive();
+                            break;
+
+                        case RIGHT:
+                            // Skip forward 5s
+                            skipForward(5);
+                            userIsActive();
+                            break;
+                        case M:
+                            // Mute/unmute
+                            toggleMute();
+                            userIsActive();
+                            break;
+
+                        case F:
+                            // Toggle fullscreen
+                            toggleFullscreen();
+                            userIsActive();
+                            break;
+
+                        case ESCAPE:
+                            // If in fullscreen, exit
+                            if (isFullscreen) {
+                                exitFullscreen();
+                            }
+                            break;
+
+                        default:
+                            // Do nothing
+                    }
+                });
+            }
+        });
 
         Platform.runLater(() -> {
             Scene scene = btnSound.getScene();
@@ -270,7 +335,10 @@ public class VideoPlayerManager implements Initializable {
         });
         sliderVolume.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> hideDelayTransition.stop());
         sliderVolume.addEventFilter(MouseEvent.MOUSE_DRAGGED, e -> hideDelayTransition.stop());
-        sliderVolume.addEventFilter(MouseEvent.MOUSE_RELEASED, e -> hideDelayTransition.playFromStart());
+        sliderVolume.addEventFilter(MouseEvent.MOUSE_RELEASED, e -> {
+            hideDelayTransition.playFromStart();
+            videocontainer.requestFocus();
+        });
 
         videocontainer.setOnMouseEntered(e -> {
             isMouseInStackPane = true;
@@ -378,6 +446,7 @@ public class VideoPlayerManager implements Initializable {
             } else {
                 settingsMenu.show(btnSetting, Side.TOP, -25, -25);
             }
+            videocontainer.requestFocus();
         });
     }
 
@@ -447,6 +516,33 @@ public class VideoPlayerManager implements Initializable {
                 hideDelayTransition.stop();
             }
         });
+        fsScene.setOnKeyPressed(e -> {
+            e.consume();
+            switch (e.getCode()) {
+                case SPACE:
+                    togglePlayPause(mediaPlayer);
+                    userIsActive();
+                    break;
+                case LEFT:
+                    skipBackward(5);
+                    userIsActive();
+                    break;
+                case RIGHT:
+                    skipForward(5);
+                    userIsActive();
+                    break;
+                case M:
+                    toggleMute();
+                    userIsActive();
+                    break;
+                case ESCAPE:
+                    if (isFullscreen) exitFullscreen();
+                    break;
+            }
+        });
+
+        fsRoot.setFocusTraversable(true);
+        Platform.runLater(() -> fsRoot.requestFocus());
 
         fullscreenStage = new Stage();
         fullscreenStage.setScene(fsScene);
@@ -484,6 +580,7 @@ public class VideoPlayerManager implements Initializable {
         fullscreenStage = null;
         isFullscreen   = false;
         btnSetting.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+        videocontainer.requestFocus();
     }
 
     /* simple utility to block mouse clicks */
@@ -611,7 +708,7 @@ public class VideoPlayerManager implements Initializable {
             hideVolumeSlider();
         }
     }
-
+    /* toggle volume mute */
     public void toggleMute() {
         if (!isMuted) {
             previousVolume = sliderVolume.getValue();
@@ -626,10 +723,12 @@ public class VideoPlayerManager implements Initializable {
         }
     }
 
+    /* cursor hide helper */
     private void hideMouseCursor() {
         videocontainer.setCursor(Cursor.NONE);  // Hide cursor
     }
 
+    /* cursor show helper */
     private void showMouseCursor() {
         videocontainer.setCursor(Cursor.DEFAULT);  // Restore default cursor
     }
@@ -640,6 +739,31 @@ public class VideoPlayerManager implements Initializable {
             mediaPlayer.stop();
             mediaPlayer.dispose();
             mediaPlayer = null;
+        }
+    }
+
+    /* mini skip forward */
+    private void skipForward(double sec) {
+        if (mediaPlayer != null) {
+            Duration current = mediaPlayer.getCurrentTime();
+            Duration total   = mediaPlayer.getTotalDuration();
+            Duration next    = current.add(Duration.seconds(sec));
+            if (next.greaterThan(total)) {
+                next = total;
+            }
+            mediaPlayer.seek(next);
+        }
+    }
+
+    /* mini skip backward */
+    private void skipBackward(double sec) {
+        if (mediaPlayer != null) {
+            Duration current = mediaPlayer.getCurrentTime();
+            Duration prev    = current.subtract(Duration.seconds(sec));
+            if (prev.lessThan(Duration.ZERO)) {
+                prev = Duration.ZERO;
+            }
+            mediaPlayer.seek(prev);
         }
     }
 }
