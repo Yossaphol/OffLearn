@@ -15,8 +15,20 @@
 
 <VBox fx:id="main" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.CourseEditController">
    <ScrollPane fx:id="wrapper" fitToHeight="true" fitToWidth="true" style="-fx-background-color: white;">
-      <VBox fx:id="courseManagement" prefHeight="2093.0" prefWidth="1440.0" style="-fx-background-color: white;">
+      <VBox fx:id="courseEdit" prefHeight="2093.0" prefWidth="1440.0" style="-fx-background-color: white;">
          <children>
+            <HBox alignment="BOTTOM_LEFT" prefHeight="41.0" prefWidth="1440.0">
+               <children>
+                  <Label fx:id="back" text="ย้อนกลับ" textFill="#0675de">
+                     <HBox.margin>
+                        <Insets left="100.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="Kodchasan Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <VBox prefHeight="100.0" prefWidth="1001.0">
@@ -38,7 +50,7 @@
                   </VBox>
                </children>
                <VBox.margin>
-                  <Insets left="200.0" top="100.0" />
+                  <Insets left="200.0" top="20.0" />
                </VBox.margin>
             </HBox>
             <VBox prefHeight="338.0" prefWidth="1440.0">
@@ -170,7 +182,7 @@
                   </HBox>
                   <VBox fx:id="courseSpace" alignment="TOP_CENTER" prefHeight="129.0" prefWidth="1190.0" spacing="15.0">
                      <VBox.margin>
-                        <Insets top="20.0" />
+                        <Insets bottom="20.0" top="20.0" />
                      </VBox.margin></VBox>
                   <HBox alignment="CENTER" fillHeight="false" prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -200,10 +212,13 @@
                   </HBox>
                   <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="saveAll" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: &quot;0675DE&quot;; -fx-background-radius: 10;" text="บันทึก" textFill="WHITE">
+                        <Button fx:id="saveAll" minHeight="50.0" minWidth="200.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: &quot;0675DE&quot;; -fx-background-radius: 10;" text="บันทึก" textFill="WHITE">
                            <font>
                               <Font name="Kodchasan Bold" size="16.0" />
                            </font>
+                           <HBox.margin>
+                              <Insets bottom="50.0" right="25.0" />
+                           </HBox.margin>
                         </Button>
                      </children>
                      <VBox.margin>

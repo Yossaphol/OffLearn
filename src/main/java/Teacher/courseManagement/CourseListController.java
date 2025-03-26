@@ -43,6 +43,7 @@ public class CourseListController implements Initializable {
     private ScrollPane wrapper;
     private VBox courseManagement;
     private int courseId;
+    private CourseController courseController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -95,8 +96,11 @@ public class CourseListController implements Initializable {
 
                 courseEditController.loadMyCourse(this.getCourseId());
 
+
                 passWrapper(courseEditController);
                 passCourseManagement(courseEditController);
+                passMethodCourseController(courseEditController);
+                wrapper.setVvalue(0);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -111,9 +115,13 @@ public class CourseListController implements Initializable {
         courseEditController.recieveWrapper(wrapper);
     }
 
+    public void recieveMethod(CourseController courseController){this.courseController = courseController;}
+
     public void passCourseManagement(CourseEditController courseEditController){
-        courseEditController.recieveCourseList(courseManagement);
+        courseEditController.recieveCourseManagement(courseManagement);
     }
+
+    public void passMethodCourseController(CourseEditController courseEditController){courseEditController.recieveMethod(courseController);}
 
 
 }

@@ -230,7 +230,7 @@
                   </HBox>
                   <VBox fx:id="courseListView" alignment="TOP_CENTER" fillWidth="false" prefHeight="607.0" prefWidth="1444.0" spacing="20.0">
                      <VBox.margin>
-                        <Insets bottom="50.0" />
+                        <Insets bottom="80.0" />
                      </VBox.margin></VBox>
                </children>
                <padding>

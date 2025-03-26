@@ -39,7 +39,7 @@ public class CourseEditController implements Initializable {
     private Label addQuiz;
 
     @FXML
-    private VBox courseManagement;
+    private VBox courseEdit;
 
     @FXML
     private Button saveAll;
@@ -63,6 +63,9 @@ public class CourseEditController implements Initializable {
     private ImageView img;
 
     @FXML
+    private Label back;
+
+    @FXML
     private ImageView saveChap;
 
     private VBox courseList;
@@ -81,6 +84,7 @@ public class CourseEditController implements Initializable {
     private String imgUrl;
     private CourseController courseController;
     private CourseItem courseItem;
+    private VBox courseManagement;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -91,6 +95,7 @@ public class CourseEditController implements Initializable {
         addQuizButton();
         saveAllButton();
         addImage();
+        backButton();
 
         setType();
     }
@@ -198,7 +203,7 @@ public class CourseEditController implements Initializable {
     }
 
     public void passCourseManagement(QuizController quizController){
-        quizController.recieveCourseManagement(courseManagement);
+        quizController.recieveCourseManagement(courseEdit);
     }
 
     public void passCourseSpace(QuizController q){ q.recieveCourseSpace(courseSpace);}
@@ -212,6 +217,8 @@ public class CourseEditController implements Initializable {
     public void recieveWrapper(ScrollPane wrapper){
         this.wrapper = wrapper;
     }
+
+    public void recieveCourseManagement(VBox courseManagement){this.courseManagement = courseManagement;}
 
     public void recieveCourseList(VBox courseList) {
         this.courseList = courseList;
@@ -236,6 +243,7 @@ public class CourseEditController implements Initializable {
                 passCourseSpace(quizController);
                 passWrapper(quizController);
                 passLQG(quizController);
+                wrapper.setVvalue(0);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -247,8 +255,15 @@ public class CourseEditController implements Initializable {
             if (! saveCourse()){
                 return;
             }
-            wrapper.setContent(courseList);
+            wrapper.setContent(courseManagement);
             courseController.showCourseOnListview();
+        });
+    }
+
+    public void backButton(){
+        back.setOnMouseClicked(mouseEvent -> {
+            wrapper.setContent(courseManagement);
+            System.out.println("back on");
         });
     }
 
@@ -308,7 +323,7 @@ public class CourseEditController implements Initializable {
 //                quizBoxContent.recieveQuizItemList(questionItemsList);
                 quizBoxContent.setWrapper(wrapper);
                 quizBoxContent.setQuizItem(temp);
-                quizBoxContent.setCourseManagement(courseManagement);
+                quizBoxContent.setCourseManagement(courseEdit);
                 quizBoxContent.setCourseSpace(courseSpace);
                 quizBoxContent.setParentContainer(courseSpace);
 //                passMyController(quizBoxContent);
