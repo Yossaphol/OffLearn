@@ -4,8 +4,7 @@ import Database.Category;
 import Database.ChapterDB;
 import Database.CourseDB;
 import Student.FontLoader.FontLoader;
-import Teacher.quiz.QuizController;
-import Teacher.quiz.QuestionItem;
+import Teacher.quiz.*;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -270,6 +269,7 @@ public class CourseEditController implements Initializable {
 
         for (ChapterItem cItem : courseItem.getChapterList()){
 
+//            My chapter
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/courseManagement/chapterContent.fxml"));
             try {
                 newCourse = fxmlLoader.load();
@@ -287,7 +287,37 @@ public class CourseEditController implements Initializable {
                 e.printStackTrace();
             }
 
+//            My quiz
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Teacher/quiz/QuizBox.fxml"));
+                HBox quizBox = loader.load();
+                QuizBoxContent quizBoxContent = loader.getController();
 
+                QuizItem temp = cItem.getQuizItem();
+                if (temp == null){
+                    continue;
+                }
+                String name = temp.getHeader();
+                int max = temp.getMaxScore();
+                int min = temp.getMinScore();
+
+                QuizBoxItem quizBoxItem = new QuizBoxItem(name, 0, max, min);
+
+                quizBoxContent.setQuizBoxItem(quizBoxItem);
+                quizBoxContent.setDisplay();
+//                quizBoxContent.recieveQuizItemList(questionItemsList);
+                quizBoxContent.setWrapper(wrapper);
+                quizBoxContent.setQuizItem(temp);
+                quizBoxContent.setCourseManagement(courseManagement);
+                quizBoxContent.setCourseSpace(courseSpace);
+                quizBoxContent.setParentContainer(courseSpace);
+//                passMyController(quizBoxContent);
+
+                quizBoxContent.setProblemContent(quizBox);
+                courseSpace.getChildren().add(quizBox);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         }
     }
