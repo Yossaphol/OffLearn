@@ -11,6 +11,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import Student.HomeAndNavigation.HomeController;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 public class dashboardProfileController implements Initializable {
@@ -36,6 +39,8 @@ public class dashboardProfileController implements Initializable {
         String lastNameUser = user.getLastname();
         String fullname = name + " " + lastNameUser;
         setfullname.setText(fullname);
+
+        setProfile(userDB.getProfile(sessionUsername));
     }
 
     private void route(){
@@ -48,9 +53,21 @@ public class dashboardProfileController implements Initializable {
         bio.setText(description);
 
         HomeController hm = new HomeController();
-        hm.loadAndSetImage(user_pfp, profilePicPath);
+//        hm.loadAndSetImage(user_pfp, profilePicPath);
         dislike_btn.setText(String.valueOf(disLikeCount));
         like_btn.setText(String.valueOf(likeCount));
         courseAmount.setText(courseCount+" คอร์ส");
+    }
+
+    public void setProfile(String Url){
+        Image img;
+        if (Url.startsWith("http") || Url.startsWith("https")) {
+            img = new Image(Url);
+        } else {
+            img = new Image(getClass().getResource(Url).toExternalForm());
+        }
+
+        this.user_pfp.setStroke(Color.TRANSPARENT);
+        this.user_pfp.setFill(new ImagePattern(img));
     }
 }
