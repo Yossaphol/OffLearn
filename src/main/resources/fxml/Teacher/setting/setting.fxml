@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
@@ -14,13 +13,13 @@
 
 <ScrollPane hbarPolicy="NEVER" style="-fx-background-color: #fbfbfb;" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.setting.settingController">
    <content>
-      <VBox prefHeight="2000.0" prefWidth="1440.0" style="-fx-background-color: #fbfbfb;">
+      <VBox prefWidth="1440.0" style="-fx-background-color: #fbfbfb;">
          <children>
             <HBox fx:id="navBar" alignment="TOP_CENTER">
                <VBox.margin>
                   <Insets top="30.0" />
                </VBox.margin></HBox>
-            <VBox fx:id="setting_container" prefHeight="2000.0" prefWidth="1440.0" style="-fx-background-color: #FBFBFB;">
+            <VBox fx:id="setting_container" prefWidth="1440.0" style="-fx-background-color: #FBFBFB;">
                <children>
                   <Label fx:id="setting_header" text="การตั้งค่า" textFill="#a8a8a8">
                      <font>
@@ -175,118 +174,6 @@
                      </children>
                      <VBox.margin>
                         <Insets left="20.0" top="30.0" />
-                     </VBox.margin>
-                  </VBox>
-                  <VBox fx:id="notification_container" prefHeight="311.0" prefWidth="1074.0">
-                     <children>
-                        <Label fx:id="notification_header" text="การแจ้งเตือน" textFill="#0675de">
-                           <font>
-                              <Font name="Noto Sans Thai Bold" size="20.0" />
-                           </font>
-                        </Label>
-                        <HBox prefHeight="122.0" prefWidth="1054.0">
-                           <children>
-                              <VBox prefHeight="174.0" prefWidth="342.0">
-                                 <children>
-                                    <Label fx:id="notification_quiz_header" text="แบบทดสอบ">
-                                       <font>
-                                          <Font name="Noto Sans Thai Regular" size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <HBox prefHeight="77.0" prefWidth="342.0">
-                                       <children>
-                                          <RadioButton fx:id="notification_quiz_y" mnemonicParsing="false" stylesheets="@../../../css/setting.css" text="เปิด">
-                                             <font>
-                                                <Font name="Noto Sans Thai Regular" size="15.0" />
-                                             </font>
-                                          </RadioButton>
-                                          <RadioButton fx:id="notification_quiz_n" mnemonicParsing="false" stylesheets="@../../../css/setting.css" text="ปิด">
-                                             <font>
-                                                <Font name="Noto Sans Thai Regular" size="15.0" />
-                                             </font>
-                                             <HBox.margin>
-                                                <Insets left="10.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets left="20.0" top="20.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="174.0" prefWidth="388.0">
-                                 <children>
-                                    <Label fx:id="notification_message_header" text="กล่องข้อความ">
-                                       <font>
-                                          <Font name="Noto Sans Thai Regular" size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <HBox prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <RadioButton fx:id="notification_message_y" mnemonicParsing="false" stylesheets="@../../../css/setting.css" text="เปิด">
-                                             <font>
-                                                <Font name="Noto Sans Thai Regular" size="15.0" />
-                                             </font>
-                                          </RadioButton>
-                                          <RadioButton fx:id="notification_message_n" mnemonicParsing="false" stylesheets="@../../../css/setting.css" text="ปิด">
-                                             <HBox.margin>
-                                                <Insets left="10.0" />
-                                             </HBox.margin>
-                                             <font>
-                                                <Font name="Noto Sans Thai Regular" size="15.0" />
-                                             </font>
-                                          </RadioButton>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets left="20.0" top="20.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets left="50.0" />
-                                 </HBox.margin>
-                              </VBox>
-                           </children>
-                           <VBox.margin>
-                              <Insets left="20.0" top="50.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <VBox prefHeight="93.0" prefWidth="1054.0">
-                           <children>
-                              <Label fx:id="notification_startingcourse_header" text="คอร์สที่กำลังจะเริ่ม">
-                                 <font>
-                                    <Font name="Noto Sans Thai Regular" size="20.0" />
-                                 </font>
-                              </Label>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <RadioButton fx:id="notification_startingcourse_y" mnemonicParsing="false" stylesheets="@../../../css/setting.css" text="เปิด">
-                                       <font>
-                                          <Font name="Noto Sans Thai Regular" size="15.0" />
-                                       </font>
-                                    </RadioButton>
-                                    <RadioButton fx:id="notification_startingcourse_n" mnemonicParsing="false" stylesheets="@../../../css/setting.css" text="ปิด">
-                                       <font>
-                                          <Font name="Noto Sans Thai Regular" size="15.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets left="10.0" />
-                                       </HBox.margin>
-                                    </RadioButton>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets left="20.0" top="20.0" />
-                                 </VBox.margin>
-                              </HBox>
-                           </children>
-                           <VBox.margin>
-                              <Insets left="20.0" />
-                           </VBox.margin>
-                        </VBox>
-                     </children>
-                     <VBox.margin>
-                        <Insets left="20.0" top="50.0" />
                      </VBox.margin>
                   </VBox>
                   <VBox prefHeight="423.0" prefWidth="1220.0">

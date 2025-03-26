@@ -71,7 +71,7 @@ public class CourseListController implements Initializable {
         dropShadow.setRadius(10);
         dropShadow.setOffsetX(2.5);
         dropShadow.setOffsetY(2.5);
-        dropShadow.setColor(Color.GRAY);
+        dropShadow.setColor(Color.web("#c4c4c4", 0.25));
 
         mainComp.setEffect(dropShadow);
     }

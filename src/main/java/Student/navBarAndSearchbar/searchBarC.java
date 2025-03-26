@@ -127,7 +127,6 @@ public class searchBarC implements Initializable {
     public void route(){
         Navigator nav = new Navigator();
         allCourse.setOnMouseClicked(nav::courseRoute);
-        setting.setOnMouseClicked(nav::settingRoute);
         cart.setOnMouseClicked(nav::cartRoute);
         username.setOnMouseClicked(nav::dashboardRoute);
         userPfp.setOnMouseClicked(nav::dashboardRoute);

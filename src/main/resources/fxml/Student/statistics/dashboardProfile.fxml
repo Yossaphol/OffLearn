@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="user_profile" maxHeight="215.0" maxWidth="764.0" prefHeight="209.0" prefWidth="764.0" style="-fx-background-color: transparent; -fx-background-radius: 20;" styleClass="overflow-img" stylesheets="@../../../css/Home.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.dashboard.dashboardProfileController">
+<Pane fx:id="user_profile" maxHeight="215.0" maxWidth="764.0" prefHeight="209.0" prefWidth="764.0" style="-fx-background-color: transparent; -fx-background-radius: 20;" styleClass="overflow-img" stylesheets="@../../../css/Home.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.dashboard.dashboardProfileEditController">
    <effect>
       <DropShadow>
          <color>
