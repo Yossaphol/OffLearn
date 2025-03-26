@@ -1,5 +1,7 @@
 package Student.Setting;
 
+import javafx.stage.FileChooser;
+import mediaUpload.MediaUpload;
 import Database.User;
 import Database.UserDB;
 import Student.HomeAndNavigation.HomeController;
@@ -45,12 +47,6 @@ public class settingController implements Initializable {
     public RadioButton mFalse;
     public RadioButton cTrue;
     public RadioButton cFalse;
-    public TextField name1;
-    public TextField lastName1;
-    public TextField accountNo;
-    public TextField bankName;
-    public HBox editPaymentBox;
-    public Button editPaymentBtn;
     public Button cancelEditProfile;
     public Button savePassword;
     public Button cancelPassword;
@@ -58,6 +54,7 @@ public class settingController implements Initializable {
     public TextField newpwfirst;
     public TextField newpwsecond;
     private boolean isChangePass = false;
+    private MediaUpload m;
     HomeController hm = new HomeController();
 
     UserDB userDB = new UserDB();
@@ -68,7 +65,7 @@ public class settingController implements Initializable {
     String lastNameUser = user.getLastname();
     String userName = user.getUsername();
     String gmailUser = user.getEmail();
-    String imgPath = (user.getProfile() != null) ? user.getProfile().toString() : "/img/Profile/user.png";
+//    String imgPath = (user.getProfile() != null) ? user.getProfile().toString() : "/img/Profile/user.png";
 //    String imgPath = "/img/Profile/user.png";
     String selectedimg = "";
 
@@ -79,7 +76,8 @@ public class settingController implements Initializable {
 
         uploadPic.setVisible(false);
         setProfileValue(name, lastNameUser, gmailUser);
-        loadAndSetUserImage(picture, imgPath);
+//        loadAndSetUserImage(picture, imgPath);
+        setUserImage(user.getProfile());
         username1.setText(userName);
         setEffect();
     }
@@ -161,29 +159,35 @@ public class settingController implements Initializable {
     }
 
 
-    public void saveProfileEdit(ActionEvent e){
+    public void saveProfileEdit(ActionEvent e) {
         String newFirstname = realName.getText();
         String newLastname = lastName.getText();
         String newEmail = gmail.getText();
 
-        UserDB userDB = new UserDB();
         boolean isUpdated = userDB.updateUserInfo(sessionUsername, newFirstname, newLastname, newEmail);
+
         if (isUpdated) {
+            // อัปโหลดรูปไปที่ Database ถ้ามีการเลือกใหม่
+            if (!selectedimg.isEmpty()) {
+                boolean isImageUpdated = userDB.updateProfileImage(sessionUsername, selectedimg);
+                if (isImageUpdated) {
+                    user = userDB.getUserInfo(sessionUsername); // ดึงข้อมูล user ใหม่จาก Database
+                    setUserImage(user.getProfile());  // อัปเดต UI ให้แสดงรูปใหม่
+                }
+            }
+
             showAlert("Update Successful", "Success", Alert.AlertType.INFORMATION);
-            imgPath = selectedimg;
             setProfileValue(newFirstname, newLastname, newEmail);
             closeProfileEdit();
         } else {
             showAlert("Update Failed", "Fail", Alert.AlertType.ERROR);
         }
-//        imgPath = selectedimg;
-//        setProfileValue(realName.getText(), lastName.getText(), gmail.getText());
-//        closeProfileEdit();
-
     }
 
+
+
     public void cancelProfileEdit(ActionEvent e){
-        loadAndSetUserImage(picture, imgPath);
+//        loadAndSetUserImage(picture, imgPath);
         setProfileValue(name, lastNameUser, gmailUser);
         closeProfileEdit();
     }
@@ -204,7 +208,68 @@ public class settingController implements Initializable {
         closeEditProfile(isEditing);
     }
 
+//    public void uploadImg(ActionEvent e) {
+//        FileChooser fileChooser = new FileChooser();
+//        fileChooser.setTitle("Select an Image");
+//        fileChooser.getExtensionFilters().addAll(
+//                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+//        );
+//
+//        File selectedFile = fileChooser.showOpenDialog(new Stage());
+//
+//        if (selectedFile != null) {
+//            selectedimg = selectedFile.getAbsolutePath(); // เก็บ path ของรูปที่เลือก
+//            loadAndSetUserImage(picture, selectedimg); // แสดงภาพที่เลือกทันที แต่ยังไม่อัปโหลด
+//        }
+//    }
+//
+//    public void loadAndSetUserImage(Shape shape, String path) {
+//        try {
+//            Image img;
+//            if (path == null || path.isEmpty()) {
+//                path = "/img/Profile/user.png"; // ถ้า path ว่าง ให้ใช้รูป default
+//            }
+//
+//            if (path.startsWith("/") || getClass().getResource(path) != null) {
+//                img = new Image(getClass().getResource(path).toExternalForm());
+//            } else {
+//                File file = new File(path);
+//                if (!file.exists()) {
+//                    System.out.println("File not found: " + path);
+//                    return;
+//                }
+//                img = new Image(file.toURI().toString());
+//            }
+//
+//            shape.setStroke(Color.TRANSPARENT);
+//            shape.setFill(new ImagePattern(img));
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//    }
+    private void setUserImage(String imgPath) {
+        try {
+            if (imgPath == null || imgPath.isEmpty()) {
+                imgPath = "/img/Profile/user.png";
+            }
+            Image img;
+
+            if (imgPath.startsWith("http")) { // ตรวจสอบ URL จาก S3
+                img = new Image(imgPath, true); // true = โหลดแบบ async
+            } else if (imgPath.startsWith("/") || getClass().getResource(imgPath) != null) {
+                img = new Image(getClass().getResource(imgPath).toExternalForm());
+            } else {
+                File file = new File(imgPath);
+                if (!file.exists()) return;
+                img = new Image(file.toURI().toString());
+            }
+            picture.setFill(new ImagePattern(img));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
     public void uploadImg(ActionEvent e) {
+        m = new MediaUpload();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select an Image");
         fileChooser.getExtensionFilters().addAll(
@@ -212,41 +277,22 @@ public class settingController implements Initializable {
         );
 
         File selectedFile = fileChooser.showOpenDialog(new Stage());
-//
-//        if (selectedFile != null) {
-//            // ตั้งค่าตำแหน่งของไฟล์ที่เลือก
-//            selectedimg = selectedFile.getAbsolutePath();
-//
-//            // อัปโหลดไฟล์ไปยังฐานข้อมูล
-//            boolean isUploaded = userDB.updateProfileImage(sessionUsername, selectedFile);
-//
-//            if (isUploaded) {
-//                // ถ้าอัปโหลดสำเร็จ ให้แสดงรูปใหม่ใน UI
-//                loadAndSetUserImage(picture, selectedimg);
-//            }
-//        }
-    }
 
-    public void loadAndSetUserImage(Shape shape, String path) {
-        try {
-            Image img;
-            if (path.startsWith("/") || getClass().getResource(path) != null) {
-                img = new Image(getClass().getResource(path).toExternalForm());
+        if (selectedFile != null) {
+            String uploadedUrl = m.uploadImg(selectedFile);
+
+            if (uploadedUrl != null) {
+                selectedimg = uploadedUrl;
+                setUserImage(selectedimg);
             } else {
-                File file = new File(path);
-                if (!file.exists()) {
-                    System.out.println("File not found: " + path);
-                    return;
-                }
-                img = new Image(file.toURI().toString());
+                System.out.println("Upload failed.");
             }
-
-            shape.setStroke(Color.TRANSPARENT);
-            shape.setFill(new ImagePattern(img));
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } else {
+            System.out.println("No file selected.");
         }
     }
+
+
     //End profile edit part
 
 
