@@ -203,5 +203,23 @@ public class CourseDB extends ConnectDB{
         return null;
     }
 
+    public boolean deleteCourseByID(int courseID) {
+        String deleteCourseSql = "DELETE FROM offlearn.course WHERE Course_ID = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement deleteCourseStmt = conn.prepareStatement(deleteCourseSql)) {
+
+            deleteCourseStmt.setInt(1, courseID);
+            int affectedRows = deleteCourseStmt.executeUpdate();
+
+            return affectedRows > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
 
 }

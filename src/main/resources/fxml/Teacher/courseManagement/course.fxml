@@ -214,13 +214,13 @@
                               <Font name="Noto Sans Thai Regular" size="16.0" />
                            </font>
                         </Label>
-                        <Pane prefHeight="32.0" prefWidth="492.0" />
+                        <Pane prefHeight="32.0" prefWidth="466.0" />
                         <Label text="หมวดหมู่">
                            <font>
                               <Font name="Noto Sans Thai Regular" size="16.0" />
                            </font>
                         </Label>
-                        <Pane prefHeight="32.0" prefWidth="192.0" />
+                        <Pane prefHeight="32.0" prefWidth="158.0" />
                         <Label text="จำนวนผู้เรียน">
                            <font>
                               <Font name="Noto Sans Thai Regular" size="16.0" />

@@ -1,5 +1,6 @@
 package Teacher.courseManagement;
 
+import Database.CourseDB;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,6 +13,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -34,11 +36,15 @@ public class CourseListController implements Initializable {
     @FXML
     private Label courseCat;
 
+    @FXML
+    private ImageView delete;
+
     private CourseItem courseItem;
 
     @FXML
     private Label price;
 
+    private VBox courseListView;
     private VBox courseEdit;
     private ScrollPane wrapper;
     private VBox courseManagement;
@@ -49,6 +55,7 @@ public class CourseListController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         shadow();
         editcourseMyCourse();
+        deleteButton();
     }
 
     public void setCourseItem(CourseItem courseItem){
@@ -111,6 +118,18 @@ public class CourseListController implements Initializable {
         });
     }
 
+    public void deleteButton(){
+        delete.setOnMouseClicked(mouseEvent -> {
+            CourseDB courseDB = new CourseDB();
+            if (courseDB.deleteCourseByID(this.getCourseId())){
+                System.out.println("Delete course from database complete");
+            }
+
+            courseListView.getChildren().remove(this);
+            courseController.showCourseOnListview();
+        });
+    }
+
     public void recieveWrapper(ScrollPane wrapper){this.wrapper = wrapper;}
 
     public void recieveCourseManagement(VBox courseManagement){this.courseManagement = courseManagement;}
@@ -120,6 +139,10 @@ public class CourseListController implements Initializable {
     }
 
     public void recieveMethod(CourseController courseController){this.courseController = courseController;}
+
+    public void recieveCourseListView(VBox courseListView){
+        this.courseListView = courseListView;
+    }
 
     public void passCourseManagement(CourseEditController courseEditController){
         courseEditController.recieveCourseManagement(courseManagement);

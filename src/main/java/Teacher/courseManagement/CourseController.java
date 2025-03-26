@@ -148,6 +148,10 @@ public class CourseController implements Initializable {
 
     public void passMyMethodToCourseList(CourseListController courseListController){courseListController.recieveMethod(this);}
 
+    public void passCourseListView(CourseListController courseListController){
+        courseListController.recieveCourseListView(courseListView);
+    }
+
     public void newCourseButton(){
         newCourse.setOnAction(actionEvent -> {
 
@@ -193,6 +197,7 @@ public class CourseController implements Initializable {
                 controller.setCourseDisplay();
                 controller.setCourseId(c.getCourseId());
 
+                passCourseListView(controller);
                 passCourseManagementMyCourse(controller);
                 passWrapperMyCourse(controller);
                 passMyMethodToCourseList(controller);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -10,81 +11,101 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="mainComp" alignment="CENTER_LEFT" prefHeight="121.0" prefWidth="973.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.CourseListController">
+<HBox alignment="CENTER_LEFT" prefHeight="121.0" prefWidth="1088.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.CourseListController">
    <children>
-      <Pane prefHeight="95.0" prefWidth="29.0" />
-      <Rectangle fx:id="courseImg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="76.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />
-      <Pane prefHeight="95.0" prefWidth="21.0" />
-      <VBox alignment="CENTER_LEFT" prefHeight="95.0" prefWidth="355.0">
+      <HBox fx:id="mainComp" alignment="CENTER" prefHeight="122.0" prefWidth="965.0" style="-fx-background-radius: 10; -fx-background-color: white;">
          <children>
-            <Label fx:id="courseName" prefHeight="20.0" prefWidth="353.0" text="Each indrustry in economic system " textFill="#0675de">
-               <font>
-                  <Font name="Noto Sans Thai Bold" size="16.0" />
-               </font>
-            </Label>
-            <Pane prefHeight="4.0" prefWidth="380.0" />
-            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="380.0">
+            <Pane prefHeight="95.0" prefWidth="29.0" />
+            <Rectangle fx:id="courseImg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="76.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />
+            <Pane prefHeight="95.0" prefWidth="21.0" />
+            <VBox alignment="CENTER_LEFT" prefHeight="95.0" prefWidth="355.0">
                <children>
-                  <ImageView fitHeight="21.0" fitWidth="24.0">
-                     <image>
-                        <Image url="@../../../img/icon/like.png" />
-                     </image>
-                  </ImageView>
-                  <Pane prefHeight="35.0" prefWidth="6.0" />
-                  <Label text="324">
+                  <Label fx:id="courseName" prefHeight="20.0" prefWidth="353.0" text="Each indrustry in economic system " textFill="#0675de">
                      <font>
-                        <Font name="Noto Sans Thai Regular" size="12.0" />
+                        <Font name="Noto Sans Thai Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Pane prefHeight="35.0" prefWidth="25.0" />
-                  <ImageView fitHeight="21.0" fitWidth="24.0">
-                     <image>
-                        <Image url="@../../../img/icon/dislike.png" />
-                     </image>
-                  </ImageView>
-                  <Pane prefHeight="35.0" prefWidth="6.0" />
-                  <Label text="5">
+                  <Pane prefHeight="4.0" prefWidth="380.0" />
+                  <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="380.0">
+                     <children>
+                        <ImageView fitHeight="21.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@../../../img/icon/like.png" />
+                           </image>
+                        </ImageView>
+                        <Pane prefHeight="35.0" prefWidth="6.0" />
+                        <Label text="324">
+                           <font>
+                              <Font name="Noto Sans Thai Regular" size="12.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="35.0" prefWidth="25.0" />
+                        <ImageView fitHeight="21.0" fitWidth="24.0">
+                           <image>
+                              <Image url="@../../../img/icon/dislike.png" />
+                           </image>
+                        </ImageView>
+                        <Pane prefHeight="35.0" prefWidth="6.0" />
+                        <Label text="5">
+                           <font>
+                              <Font name="Noto Sans Thai Regular" size="12.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="35.0" prefWidth="18.0" />
+                        <Label text="รับชม 13.2K ครั้ง">
+                           <font>
+                              <Font name="Noto Sans Thai Regular" size="12.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="35.0" prefWidth="16.0" />
+                        <Label text="4,304 enrolled">
+                           <font>
+                              <Font name="Noto Sans Thai Regular" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="122.0" prefWidth="236.0">
+               <children>
+                  <Label fx:id="courseCat" text="Business" textFill="#0675de">
                      <font>
-                        <Font name="Noto Sans Thai Regular" size="12.0" />
-                     </font>
-                  </Label>
-                  <Pane prefHeight="35.0" prefWidth="18.0" />
-                  <Label text="รับชม 13.2K ครั้ง">
-                     <font>
-                        <Font name="Noto Sans Thai Regular" size="12.0" />
-                     </font>
-                  </Label>
-                  <Pane prefHeight="35.0" prefWidth="16.0" />
-                  <Label text="4,304 enrolled">
-                     <font>
-                        <Font name="Noto Sans Thai Regular" size="12.0" />
+                        <Font name="Noto Sans Thai Bold" size="16.0" />
                      </font>
                   </Label>
                </children>
-            </HBox>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="95.0" prefWidth="165.0">
+               <children>
+                  <Label fx:id="coursePrice" text="4,000" textFill="#0675de">
+                     <font>
+                        <Font name="Noto Sans Thai Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </VBox>
          </children>
-      </VBox>
-      <VBox alignment="CENTER" prefHeight="95.0" prefWidth="170.0">
-         <children>
-            <Label fx:id="courseCat" text="Business" textFill="#0675de">
-               <font>
-                  <Font name="Noto Sans Thai Bold" size="16.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
-      <Pane prefHeight="95.0" prefWidth="134.0" />
-      <VBox alignment="CENTER" prefHeight="95.0" prefWidth="165.0">
-         <children>
-            <Label fx:id="coursePrice" text="4,000" textFill="#0675de">
-               <font>
-                  <Font name="Noto Sans Thai Bold" size="16.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </HBox>
+      <ImageView fx:id="delete" fitHeight="38.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../img/icon/trash-solid%20(1).png" />
+         </image>
+         <HBox.margin>
+            <Insets left="30.0" />
+         </HBox.margin>
+      </ImageView>
    </children>
    <cursor>
-      <Cursor fx:constant="HAND" />
+      <Cursor fx:constant="DEFAULT" />
    </cursor>
 </HBox>
