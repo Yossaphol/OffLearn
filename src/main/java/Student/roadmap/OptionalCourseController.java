@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class optionalcoursecontroller implements Initializable {
+public class OptionalCourseController implements Initializable {
     public VBox optional_course_container;
     public HBox optional_course_namebutton_container;
     public Label optional_course_name;
@@ -18,4 +18,6 @@ public class optionalcoursecontroller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
+    public void setOptional_Course_Name(String txt){optional_course_name.setText(txt);}
+    public void setOptional_Course_Description(String txt){optional_course_description.setText(txt);}
 }

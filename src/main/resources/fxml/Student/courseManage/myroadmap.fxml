@@ -54,53 +54,6 @@
                                  <effect>
                                     <Blend />
                                  </effect>
-                                 <children>
-                                    <Button fx:id="sub_category_btn01" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="forHover" stylesheets="@../../../css/roadmap.css" text="Roadmap1">
-                                       <font>
-                                          <Font name="Noto Sans Thai Bold" size="18.0" />
-                                       </font>
-                                       <effect>
-                                          <DropShadow>
-                                             <color>
-                                                <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
-                                             </color>
-                                          </DropShadow>
-                                       </effect>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </Button>
-                                    <Button fx:id="sub_category_btn011" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="forHover" stylesheets="@../../../css/roadmap.css" text="Roadmap2">
-                                       <font>
-                                          <Font name="Noto Sans Thai Bold" size="18.0" />
-                                       </font>
-                                       <effect>
-                                          <DropShadow>
-                                             <color>
-                                                <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
-                                             </color>
-                                          </DropShadow>
-                                       </effect>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </Button>
-                                    <Button fx:id="sub_category_btn012" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="forHover" stylesheets="@../../../css/roadmap.css" text="Roadmap3">
-                                       <font>
-                                          <Font name="Noto Sans Thai Bold" size="18.0" />
-                                       </font>
-                                       <effect>
-                                          <DropShadow>
-                                             <color>
-                                                <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
-                                             </color>
-                                          </DropShadow>
-                                       </effect>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </Button>
-                                 </children>
                               </HBox>
                               <Pane fx:id="selected_roadmap_box" maxHeight="338.0" maxWidth="772.0" prefHeight="271.0" prefWidth="772.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-color: #A8A8A8; -fx-border-radius: 20;" styleClass="overflow-img" stylesheets="@../../../css/Home.css">
                                  <VBox.margin>
@@ -131,29 +84,29 @@
                                     <Insets left="200.0" />
                                  </padding>
                               </HBox>
-                              <VBox fx:id="roadmap_optional_extra_container" alignment="TOP_CENTER" prefHeight="914.0" prefWidth="1136.0">
+                              <VBox fx:id="roadmap_optional_extra_container" alignment="TOP_CENTER" prefHeight="758.0" prefWidth="1136.0">
                                  <children>
                                     <ScrollPane hbarPolicy="NEVER" minHeight="-Infinity" prefHeight="506.0" prefWidth="1136.0" stylesheets="@../../../css/Home.css" vbarPolicy="NEVER">
-                                      <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="578.0" prefWidth="1128.0">
+                                       <content>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="578.0" prefWidth="1128.0">
                                              <children>
                                                 <GridPane fx:id="roadmap_node_container" alignment="TOP_CENTER" minHeight="-Infinity" prefHeight="962.0" prefWidth="1136.0">
-                                                  <columnConstraints>
-                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                  </columnConstraints>
-                                                  <rowConstraints>
-                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                  </rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
                                                 </GridPane>
                                              </children>
                                           </AnchorPane>
-                                      </content>
+                                       </content>
                                     </ScrollPane>
                                     <HBox fx:id="optional_course_container" alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="100.0" prefHeight="229.0" prefWidth="1136.0">
                                        <children>
@@ -166,7 +119,7 @@
                                                 </DropShadow>
                                              </effect>
                                              <children>
-                                                <VBox fx:id="optional_course_content_container" layoutX="-1.0" prefHeight="200.0" prefWidth="280.0" spacing="5.0">
+                                                <VBox fx:id="optional_course_content_container" prefHeight="200.0" prefWidth="280.0" spacing="5.0">
                                                    <children>
                                                       <Label fx:id="optional_course_header" prefHeight="28.0" prefWidth="194.0" text="OPTIONAL COURSE">
                                                          <font>
@@ -176,111 +129,6 @@
                                                             <Insets left="10.0" />
                                                          </padding>
                                                       </Label>
-                                                      <VBox fx:id="optional_course_node" prefHeight="41.0" prefWidth="280.0">
-                                                         <children>
-                                                            <HBox minHeight="20.0" prefHeight="20.0" prefWidth="200.0">
-                                                               <children>
-                                                                  <Label fx:id="optional_course_name_1" prefHeight="22.0" prefWidth="277.0" text="Course" textFill="#8100cc">
-                                                                     <font>
-                                                                        <Font name="Noto Sans Thai Bold" size="15.0" />
-                                                                     </font>
-                                                                     <HBox.margin>
-                                                                        <Insets left="20.0" />
-                                                                     </HBox.margin>
-                                                                  </Label>
-                                                                  <ImageView fx:id="optional_course_button" fitHeight="32.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                                                                     <image>
-                                                                        <Image url="@../../../img/icon/right-purple.png" />
-                                                                     </image>
-                                                                     <cursor>
-                                                                        <Cursor fx:constant="HAND" />
-                                                                     </cursor>
-                                                                     <HBox.margin>
-                                                                        <Insets right="10.0" />
-                                                                     </HBox.margin>
-                                                                  </ImageView>
-                                                               </children>
-                                                            </HBox>
-                                                            <Label fx:id="optional_course_description_1" prefHeight="20.0" prefWidth="412.0" text="For embed AI on APP/WEB">
-                                                               <VBox.margin>
-                                                                  <Insets left="20.0" />
-                                                               </VBox.margin>
-                                                               <font>
-                                                                  <Font name="Noto Sans Thai Regular" size="11.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                      </VBox>
-                                                      <VBox fx:id="optional_course_node1" prefHeight="41.0" prefWidth="280.0">
-                                                         <children>
-                                                            <HBox minHeight="20.0" prefHeight="20.0" prefWidth="200.0">
-                                                               <children>
-                                                                  <Label fx:id="optional_course_name_11" prefHeight="22.0" prefWidth="277.0" text="Course" textFill="#8100cc">
-                                                                     <font>
-                                                                        <Font name="Noto Sans Thai Bold" size="15.0" />
-                                                                     </font>
-                                                                     <HBox.margin>
-                                                                        <Insets left="20.0" />
-                                                                     </HBox.margin>
-                                                                  </Label>
-                                                                  <ImageView fx:id="optional_course_button1" fitHeight="32.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                                                                     <image>
-                                                                        <Image url="@../../../img/icon/right-purple.png" />
-                                                                     </image>
-                                                                     <cursor>
-                                                                        <Cursor fx:constant="HAND" />
-                                                                     </cursor>
-                                                                     <HBox.margin>
-                                                                        <Insets right="10.0" />
-                                                                     </HBox.margin>
-                                                                  </ImageView>
-                                                               </children>
-                                                            </HBox>
-                                                            <Label fx:id="optional_course_description_11" prefHeight="20.0" prefWidth="412.0" text="For embed AI on APP/WEB">
-                                                               <VBox.margin>
-                                                                  <Insets left="20.0" />
-                                                               </VBox.margin>
-                                                               <font>
-                                                                  <Font name="Noto Sans Thai Regular" size="11.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                      </VBox>
-                                                      <VBox fx:id="optional_course_node2" prefHeight="41.0" prefWidth="280.0">
-                                                         <children>
-                                                            <HBox minHeight="20.0" prefHeight="20.0" prefWidth="200.0">
-                                                               <children>
-                                                                  <Label fx:id="optional_course_name_12" prefHeight="22.0" prefWidth="277.0" text="Course" textFill="#8100cc">
-                                                                     <font>
-                                                                        <Font name="Noto Sans Thai Bold" size="15.0" />
-                                                                     </font>
-                                                                     <HBox.margin>
-                                                                        <Insets left="20.0" />
-                                                                     </HBox.margin>
-                                                                  </Label>
-                                                                  <ImageView fx:id="optional_course_button2" fitHeight="32.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                                                                     <image>
-                                                                        <Image url="@../../../img/icon/right-purple.png" />
-                                                                     </image>
-                                                                     <cursor>
-                                                                        <Cursor fx:constant="HAND" />
-                                                                     </cursor>
-                                                                     <HBox.margin>
-                                                                        <Insets right="10.0" />
-                                                                     </HBox.margin>
-                                                                  </ImageView>
-                                                               </children>
-                                                            </HBox>
-                                                            <Label fx:id="optional_course_description_12" prefHeight="20.0" prefWidth="412.0" text="For embed AI on APP/WEB">
-                                                               <VBox.margin>
-                                                                  <Insets left="20.0" />
-                                                               </VBox.margin>
-                                                               <font>
-                                                                  <Font name="Noto Sans Thai Regular" size="11.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                      </VBox>
                                                    </children>
                                                    <padding>
                                                       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -295,43 +143,6 @@
                                        <padding>
                                           <Insets right="80.0" />
                                        </padding>
-                                    </HBox>
-                                    <Label fx:id="extra_roadmap_header" alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="272.0" text="ต่อยอดด้วยแขนง Roadmap ที่เกี่ยวข้อง">
-                                       <font>
-                                          <Font name="Noto Sans Thai Regular" size="14.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="20.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <HBox fx:id="extra_roadmap_button_container" alignment="CENTER" prefHeight="62.0" prefWidth="1136.0" spacing="60.0">
-                                       <children>
-                                          <Button fx:id="relateCourse1" mnemonicParsing="false" prefHeight="33.0" prefWidth="144.0" style="-fx-background-color: #8100cc; -fx-background-radius: 30;" text="Relate Course1" textFill="WHITE">
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin>
-                                             <font>
-                                                <Font name="Noto Sans Thai Bold" size="14.0" />
-                                             </font>
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                          </Button>
-                                          <Button fx:id="relateCourse2" mnemonicParsing="false" prefHeight="33.0" prefWidth="144.0" style="-fx-background-color: #8100cc; -fx-background-radius: 30;" text="Relate course2" textFill="WHITE">
-                                             <font>
-                                                <Font name="Noto Sans Thai Bold" size="14.0" />
-                                             </font>
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                          </Button>
-                                       </children>
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                       <VBox.margin>
-                                          <Insets bottom="20.0" />
-                                       </VBox.margin>
                                     </HBox>
                                  </children>
                               </VBox>
@@ -350,45 +161,13 @@
                                        </children>
                                     </HBox>
                                     <ScrollPane hbarPolicy="NEVER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="258.0" prefWidth="1021.0" styleClass="scroll-panej" stylesheets="@../../../css/Home.css" vbarPolicy="ALWAYS">
-                                      <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="227.0" prefWidth="1025.0" styleClass="scroll-bar">
-                                             <children>
-                                                <VBox alignment="TOP_CENTER" prefHeight="333.0" prefWidth="1009.0">
-                                                   <children>
-                                                      <Pane fx:id="related_roadmap_box_1" maxHeight="350.0" maxWidth="702.0" prefHeight="50.0" prefWidth="702.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #A8A8A8;">
-                                                         <children>
-                                                            <Label fx:id="related_roadmap_description_1" layoutX="114.0" layoutY="4.0" prefHeight="42.0" prefWidth="287.0" text="เรียนรู้การเป็น Python  developer ในปี 2025" textFill="#767676" />
-                                                            <Label fx:id="related_roadmap_time_1" layoutX="413.0" layoutY="4.0" prefHeight="42.0" prefWidth="97.0" text="ระยะเวลา 80 ชม.">
-                                                               <font>
-                                                                  <Font name="Noto Sans Thai Regular" size="13.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label fx:id="related_roadmap_progressfraction_1" layoutX="555.0" layoutY="4.0" prefHeight="42.0" prefWidth="91.0" text="เนื้อหา 11/120">
-                                                               <font>
-                                                                  <Font size="13.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <ImageView fx:id="related_roadmap_button_1" fitHeight="32.0" fitWidth="22.0" layoutX="663.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                                                               <image>
-                                                                  <Image url="@../../../img/icon/right-purple.png" />
-                                                               </image>
-                                                               <cursor>
-                                                                  <Cursor fx:constant="HAND" />
-                                                               </cursor>
-                                                            </ImageView>
-                                                            <Label fx:id="related_roadmap_name_1" layoutX="23.0" layoutY="4.0" prefHeight="42.0" prefWidth="151.0" text="Python">
-                                                               <font>
-                                                                  <Font name="Noto Sans Thai Bold" size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                      </Pane>
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </AnchorPane>
-                                      </content>
-                                    </ScrollPane>
+                                       <content>
+                                          <VBox fx:id="related_roadmap_content_container" prefHeight="242.0" prefWidth="1002.0">
+                                             <padding>
+                                                <Insets left="120.0" />
+                                             </padding>
+                                          </VBox>
+                                       </content></ScrollPane>
                                  </children>
                               </VBox>
                            </children>

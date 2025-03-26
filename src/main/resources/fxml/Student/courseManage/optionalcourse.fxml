@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="optional_course_container" prefHeight="41.0" prefWidth="280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.roadmap.optionalcoursecontroller">
+<VBox fx:id="optional_course_container" prefHeight="41.0" prefWidth="280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.roadmap.OptionalCourseController">
    <children>
       <HBox fx:id="optional_course_namebutton_container" minHeight="20.0" prefHeight="20.0" prefWidth="200.0">
          <children>
