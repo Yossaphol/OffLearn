@@ -159,7 +159,7 @@ public class settingController implements Initializable {
             bankaccount_lastname.setDisable(isPaymentEditing);
             bankaccount_number.setDisable(isPaymentEditing);
             bankaccount_bank.setDisable(isPaymentEditing);
-            bankaccount_change_button.setVisible(isProfileEditing);
+            bankaccount_change_button.setVisible(isPaymentEditing);
 
             isPaymentEditing = true;
             saveCancelBtn1.setVisible(isPaymentEditing);

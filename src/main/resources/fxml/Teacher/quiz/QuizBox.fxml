@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="quizBox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="146.0" prefWidth="850.0" style="-fx-background-radius: 10; -fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.quiz.QuizBoxContent">
+<HBox fx:id="quizBox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="850.0" style="-fx-background-radius: 10; -fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.quiz.QuizBoxContent">
     <children>
         <HBox prefHeight="100.0" prefWidth="800.0" style="-fx-background-radius: 30;">
             <padding>
@@ -19,12 +20,12 @@
                <children>
                   <Label text="Quiz | " textFill="#0675de">
                      <font>
-                        <Font name="Kodchasan Bold" size="20.0" />
+                        <Font name="Noto Sans Thai Bold" size="20.0" />
                      </font>
                   </Label>
                   <Label fx:id="quizName" text="Label" textFill="#0675de">
                      <font>
-                        <Font name="Kodchasan Bold" size="20.0" />
+                        <Font name="Noto Sans Thai Bold" size="20.0" />
                      </font>
                   </Label>
                </children>
@@ -36,12 +37,12 @@
                <children>
                   <Label fx:id="count" text="label">
                      <font>
-                        <Font name="Kodchasan Regular" size="15.0" />
+                        <Font name="Noto Sans Thai Regular" size="15.0" />
                      </font>
                   </Label>
                   <Label text=" ข้อ">
                      <font>
-                        <Font name="Kodchasan Regular" size="15.0" />
+                        <Font name="Noto Sans Thai Regular" size="15.0" />
                      </font>
                   </Label>
                </children>
@@ -50,17 +51,17 @@
                <children>
                   <Label text="ขั้นต่ำ ">
                      <font>
-                        <Font name="Kodchasan Regular" size="15.0" />
+                        <Font name="Noto Sans Thai Regular" size="15.0" />
                      </font>
                   </Label>
                   <Label fx:id="minScore" text=" ข้อ">
                      <font>
-                        <Font name="Kodchasan Regular" size="15.0" />
+                        <Font name="Noto Sans Thai Regular" size="15.0" />
                      </font>
                   </Label>
                   <Label text=" คะแนน">
                      <font>
-                        <Font name="Kodchasan Regular" size="15.0" />
+                        <Font name="Noto Sans Thai Regular" size="15.0" />
                      </font>
                   </Label>
                </children>
@@ -69,12 +70,12 @@
                <children>
                   <Label text=" คะแนนเต็ม ">
                      <font>
-                        <Font name="Kodchasan Regular" size="15.0" />
+                        <Font name="Noto Sans Thai Regular" size="15.0" />
                      </font>
                   </Label>
                   <Label fx:id="maxScore" text=" คะแนน">
                      <font>
-                        <Font name="Kodchasan Regular" size="15.0" />
+                        <Font name="Noto Sans Thai Regular" size="15.0" />
                      </font>
                   </Label>
                </children>
@@ -90,6 +91,9 @@
                     <VBox.margin>
                         <Insets />
                     </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                 </ImageView>
             </children>
         </VBox>

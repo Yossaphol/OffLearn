@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
@@ -54,6 +55,7 @@ public class QuizBoxContent implements Initializable {
         deleteButton();
         shadow();
         quizEdit();
+
     }
 
     public void setDisplay(){
@@ -107,7 +109,7 @@ public class QuizBoxContent implements Initializable {
         dropShadow.setRadius(10);
         dropShadow.setOffsetX(2.5);
         dropShadow.setOffsetY(2.5);
-        dropShadow.setColor(Color.GRAY);
+        dropShadow.setColor(Color.web("#c4c4c4", 0.25));
 
         quizBox.setEffect(dropShadow);
     }

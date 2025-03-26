@@ -3,11 +3,16 @@ package Teacher.quiz;
 import Database.ChapterDB;
 import Database.QuestionDB;
 import Database.QuizDB;
+import Student.HomeAndNavigation.Home;
+import Student.HomeAndNavigation.HomeController;
+import Teacher.dashboard.dashboardController;
+import Teacher.navigator.Navigator;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -63,6 +68,9 @@ public class QuizController implements Initializable {
     private QuizBoxContent quizBoxContent;
     private QuizBoxItem quizBoxItem;
 
+    dashboardController d = new dashboardController();
+    HomeController ef = new HomeController();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -71,6 +79,17 @@ public class QuizController implements Initializable {
         questionItemsList = new ArrayList<QuestionItem>();
         saveAllButton();
         setLevelGroup();
+
+        setEffect();
+
+
+
+
+    }
+
+    private void setEffect(){
+        d.hoverEffect(addProblem);
+        ef.hoverEffect(saveAll);
     }
 
     public void setLevelGroup(){

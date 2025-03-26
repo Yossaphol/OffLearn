@@ -89,6 +89,7 @@ public class dashboardController implements Initializable {
             searhbar_container.getScene().getRoot().applyCss();
         });
 
+
     }
 
     private void displayNavbar(){
