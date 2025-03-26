@@ -28,6 +28,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import Database.Category;
+import Database.RoadmapDB;
 
 public class roadmapController implements Initializable {
     public HBox MainFrame;
@@ -58,7 +59,7 @@ public class roadmapController implements Initializable {
     public HBox levelContainer;
     public Button selectedLevel;
 
-
+private RoadmapDB roadmapDB = new RoadmapDB();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -94,10 +95,27 @@ public class roadmapController implements Initializable {
             categoryLabel.setOnMouseClicked(mouseEvent -> {
                 int catID = category.getCatID(catName);
                 System.out.println(catID + " " + catName);
+
+                // โหลดข้อมูลของ roadmap ตาม category ที่เลือก
+                loadRoadmapsByCategory(String.format("%3d", catID));
             });
         }
+    }
 
+    private void loadRoadmapsByCategory(String catID) {
+        roadmapDB.insertRoadmapList(catID);
+        btn_cotainer.getChildren().clear();
 
+        ArrayList<String[]> roadmaps = roadmapDB.getRoadmapList();
+
+        for (String[] roadmap : roadmaps) {
+            String roadmapName = roadmap[0];
+            String roadmapDesc = roadmap[1];
+
+            Button roadmapButton = new Button(roadmapName);
+
+            btn_cotainer.getChildren().add(roadmapButton);
+        }
     }
 
     public void route(){
