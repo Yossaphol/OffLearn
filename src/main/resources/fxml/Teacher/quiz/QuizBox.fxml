@@ -81,9 +81,9 @@
             </HBox>
          </children>
         </HBox>
-        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+        <VBox fx:id="delete" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
             <children>
-                <ImageView fx:id="delete" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../img/icon/trash-solid%20(1).png" />
                     </image>

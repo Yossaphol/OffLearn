@@ -32,7 +32,7 @@ public class QuizBoxContent implements Initializable {
     private Label quizName;
 
     @FXML
-    private ImageView delete;
+    private VBox delete;
 
     @FXML
     private HBox quizBox;
@@ -82,7 +82,7 @@ public class QuizBoxContent implements Initializable {
     public void deleteButton(){
         quizDB = new QuizDB();
         delete.setOnMouseClicked(mouseEvent -> {
-            lqg.remove(this.questionItemsList);
+//            lqg.remove(this.questionItemsList);
             quizDB.deleteQuiz(quizItem.getQuizID());
             if (parentContainer != null && quizBox != null) {
                 parentContainer.getChildren().remove(quizBox);
