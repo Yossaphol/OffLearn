@@ -90,7 +90,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Circle>
-                                    <Label fx:id="username" minWidth="101.0" prefHeight="27.0" prefWidth="101.0" text="Username">
+                                    <Label fx:id="username" minWidth="101.0" prefHeight="27.0" prefWidth="139.0" text="Username">
                                        <font>
                                           <Font name="Kodchasan Bold" size="20.0" />
                                        </font>

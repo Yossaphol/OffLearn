@@ -209,88 +209,47 @@ public class settingController implements Initializable {
         closeEditProfile(isEditing);
     }
 
-//    public void uploadImg(ActionEvent e) {
-//        FileChooser fileChooser = new FileChooser();
-//        fileChooser.setTitle("Select an Image");
-//        fileChooser.getExtensionFilters().addAll(
-//                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
-//        );
-//
-//        File selectedFile = fileChooser.showOpenDialog(new Stage());
-//
-//        if (selectedFile != null) {
-//            selectedimg = selectedFile.getAbsolutePath(); // เก็บ path ของรูปที่เลือก
-//            loadAndSetUserImage(picture, selectedimg); // แสดงภาพที่เลือกทันที แต่ยังไม่อัปโหลด
-//        }
-//    }
-//
-//    public void loadAndSetUserImage(Shape shape, String path) {
-//        try {
-//            Image img;
-//            if (path == null || path.isEmpty()) {
-//                path = "/img/Profile/user.png"; // ถ้า path ว่าง ให้ใช้รูป default
-//            }
-//
-//            if (path.startsWith("/") || getClass().getResource(path) != null) {
-//                img = new Image(getClass().getResource(path).toExternalForm());
-//            } else {
-//                File file = new File(path);
-//                if (!file.exists()) {
-//                    System.out.println("File not found: " + path);
-//                    return;
-//                }
-//                img = new Image(file.toURI().toString());
-//            }
-//
-//            shape.setStroke(Color.TRANSPARENT);
-//            shape.setFill(new ImagePattern(img));
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//    }
-private void setUserImage(String imgPath) {
-    try {
-        if (imgPath == null || imgPath.isEmpty()) {
-            imgPath = "/img/Profile/user.png";
-        }
-
-        Image img;
-
-        if (imgPath.startsWith("http")) { // Async loading for URLs
-            img = new Image(imgPath, true);
-
-            // Add a listener to set the image when it's loaded
-            img.progressProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue.doubleValue() == 1.0) { // Image is fully loaded
-                    Platform.runLater(() -> {
-                        picture.setFill(new ImagePattern(img));
-                    });
-                }
-            });
-        } else if (imgPath.startsWith("/") || getClass().getResource(imgPath) != null) {
-            img = new Image(getClass().getResource(imgPath).toExternalForm());
-            picture.setFill(new ImagePattern(img));
-        } else {
-            File file = new File(imgPath);
-            if (!file.exists()) {
-                // Fallback to default image if file not found
-                img = new Image(getClass().getResource("/img/Profile/user.png").toExternalForm());
-            } else {
-                img = new Image(file.toURI().toString());
-            }
-            picture.setFill(new ImagePattern(img));
-        }
-    } catch (Exception ex) {
-        ex.printStackTrace();
-        // Fallback to default image in case of any error
+    private void setUserImage(String imgPath) {
         try {
-            Image defaultImg = new Image(getClass().getResource("/img/Profile/user.png").toExternalForm());
-            picture.setFill(new ImagePattern(defaultImg));
-        } catch (Exception e) {
-            e.printStackTrace();
+            if (imgPath == null || imgPath.isEmpty()) {
+                imgPath = "/img/Profile/user.png";
+            }
+
+            Image img;
+
+            if (imgPath.startsWith("http")) {
+                img = new Image(imgPath, true);
+
+                img.progressProperty().addListener((observable, oldValue, newValue) -> {
+                    if (newValue.doubleValue() == 1.0) {
+                        Platform.runLater(() -> {
+                            picture.setFill(new ImagePattern(img));
+                        });
+                    }
+                });
+            } else if (imgPath.startsWith("/") || getClass().getResource(imgPath) != null) {
+                img = new Image(getClass().getResource(imgPath).toExternalForm());
+                picture.setFill(new ImagePattern(img));
+            } else {
+                File file = new File(imgPath);
+                if (!file.exists()) {
+                    img = new Image(getClass().getResource("/img/Profile/user.png").toExternalForm());
+                } else {
+                    img = new Image(file.toURI().toString());
+                }
+                picture.setFill(new ImagePattern(img));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            try {
+                Image defaultImg = new Image(getClass().getResource("/img/Profile/user.png").toExternalForm());
+                picture.setFill(new ImagePattern(defaultImg));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
-}
+
     public void uploadImg(ActionEvent e) {
         m = new MediaUpload();
         FileChooser fileChooser = new FileChooser();
