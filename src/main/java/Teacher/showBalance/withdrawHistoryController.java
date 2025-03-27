@@ -33,29 +33,37 @@ public class withdrawHistoryController implements Initializable {
         displayNavbar();
         route();
         setupTable();
-        refreshTable();
     }
 
     public void setupTable() {
         SwingNode swingNode = new SwingNode();
 
-
         SwingUtilities.invokeLater(() -> {
-            //Data
+            // Sample data
             String[] columns = { "Date/Time", "Account No.", "Account Name", "Amount" };
             Object[][] data = {
                     { "2025-03-27 13:30", "123456", "John Doe", "1000.00" },
                     { "2025-03-26 20:04", "654321", "Jane Smith", "500.50" },
-                    { "2025-03-25 18:27", "789012", "Alice Brown", "250.75" }
+                    { "2025-03-25 18:27", "789012", "Alice Brown", "250.75" },
+                    { "2025-03-26 20:04", "654321", "Jane Smith", "500.50" }
             };
 
+            DefaultTableModel model = new DefaultTableModel(data, columns) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
 
-            JTable table = new JTable(new DefaultTableModel(data, columns));
+            JTable table = new JTable(model);
             JScrollPane scrollPane = new JScrollPane(table);
-            //Style table
+            scrollPane.setPreferredSize(new Dimension(1000, 450));
+
+            // Table styling
             JTableHeader header = table.getTableHeader();
             header.setBackground(new Color(6, 117, 222));
             header.setForeground(Color.WHITE);
+            header.setFont(header.getFont().deriveFont(Font.BOLD, 18));
 
             table.setRowHeight(30);
             table.setGridColor(new Color(6, 117, 222));
@@ -64,32 +72,23 @@ public class withdrawHistoryController implements Initializable {
                 @Override
                 public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                     Component cell = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                    if (row % 2 == 0) {
-                        cell.setBackground(new Color(230, 245, 255));
-                    } else {
-                        cell.setBackground(Color.WHITE);
-                    }
+                    cell.setBackground(row % 2 == 0 ? new Color(230, 245, 255) : Color.WHITE);
+                    cell.setForeground(Color.BLACK);
                     if (isSelected) {
                         cell.setBackground(new Color(100, 180, 255));
-                        cell.setForeground(Color.BLACK);
-                    } else {
-                        cell.setForeground(Color.BLACK);
                     }
                     return cell;
                 }
             });
             swingNode.setContent(scrollPane);
-        });
 
-        javafx.application.Platform.runLater(() -> {
-            tableContainer.getChildren().add(swingNode);
+            Platform.runLater(() -> {
+                tableContainer.getChildren().clear();
+                tableContainer.getChildren().add(swingNode);
+            });
         });
     }
 
-    public void refreshTable() {
-        tableContainer.getChildren().clear();
-        setupTable();
-    }
 
 
     private void route(){
