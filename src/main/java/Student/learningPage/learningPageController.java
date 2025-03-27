@@ -49,6 +49,7 @@ public class learningPageController implements Initializable {
 
     private int countLike = 224;
     private int countDisLike = 17;
+    private String courseID;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

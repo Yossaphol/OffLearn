@@ -53,14 +53,29 @@
                   </children>
                </HBox>
                     <VBox fx:id="choiceSpace" prefHeight="172.0" prefWidth="315.0" spacing="5.0" />
-                    <Label fx:id="addChoice" text="เพิ่มคำตอบ" underline="true">
+               <HBox prefHeight="33.0" prefWidth="302.0">
+                  <children>
+                          <Label fx:id="addChoice" text="เพิ่มคำตอบ" underline="true">
+                              <font>
+                                  <Font name="Noto Sans Thai Regular" size="16.0" />
+                              </font>
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor>
+                          </Label>
+                     <Label fx:id="deleteChoices" text="ลบคำตอบ" textFill="RED" underline="true">
                         <font>
-                            <Font name="Noto Sans Thai Regular" size="16.0" />
+                           <Font name="Noto Sans Thai Regular" size="16.0" />
                         </font>
-                  <cursor>
-                     <Cursor fx:constant="HAND" />
-                  </cursor>
-                    </Label>
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor>
+                        <HBox.margin>
+                           <Insets left="15.0" />
+                        </HBox.margin>
+                     </Label>
+                  </children>
+               </HBox>
                 </VBox>
                 <VBox prefHeight="230.0" prefWidth="303.0">
                     <HBox alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="226.0" />

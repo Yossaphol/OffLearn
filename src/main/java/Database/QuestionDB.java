@@ -84,8 +84,9 @@ public class QuestionDB extends ConnectDB{
                     String name = questionRs.getString("questionText");
                     int point = questionRs.getInt("point");
                     String correct = questionRs.getString("correctAns");
+                    String img = questionRs.getString("question_img");
 
-                    questionItem = new QuestionItem(name, point, correct);
+                    questionItem = new QuestionItem(name, point, correct, img);
                     questionItem.setQuestionID(questionID);
 
                     try (PreparedStatement choicePstm = conn.prepareStatement(choiceSql)) {
@@ -122,6 +123,24 @@ public class QuestionDB extends ConnectDB{
             e.printStackTrace();
         }
         return false;
+    }
+
+    public int countQuestionsByQuizID(int quizID) {
+        String sql = "SELECT COUNT(*) FROM question WHERE Quiz_ID = ?";
+        try (
+                Connection conn = this.connectToDB();
+                PreparedStatement pstm = conn.prepareStatement(sql)
+        ) {
+            pstm.setInt(1, quizID);
+            try (ResultSet rs = pstm.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
 

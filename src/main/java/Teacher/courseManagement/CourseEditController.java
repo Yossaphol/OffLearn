@@ -1,9 +1,6 @@
 package Teacher.courseManagement;
 
-import Database.Category;
-import Database.ChapterDB;
-import Database.CourseDB;
-import Database.QuizDB;
+import Database.*;
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.HomeController;
 import Teacher.dashboard.dashboardController;
@@ -292,6 +289,7 @@ public class CourseEditController implements Initializable {
 
     public void loadMyCourse(int CourseID, ScrollPane wrapperA){
         courseDB = new CourseDB();
+        QuestionDB questionDB = new QuestionDB();
         courseItem = courseDB.getCourseByID(CourseID);
 
         this.courseName.setText(courseItem.getCourseName());
@@ -332,12 +330,13 @@ public class CourseEditController implements Initializable {
                 }
                 QuizItem temp = quizDB.getQuizById(cItem.getQuizItem().getQuizID());
                 String name = temp.getHeader();
+                int count = questionDB.countQuestionsByQuizID(cItem.getQuizItem().getQuizID());
                 int max = temp.getMaxScore();
                 int min = temp.getMinScore();
 
                 ArrayList<QuestionItem> questionItemsList = temp.getQuestionList();
 
-                QuizBoxItem quizBoxItem = new QuizBoxItem(name, 0, max, min);
+                QuizBoxItem quizBoxItem = new QuizBoxItem(name, count, max, min);
 
                 passWrapperToQuizBox(quizBoxContent);
 

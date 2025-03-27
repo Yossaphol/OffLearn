@@ -379,7 +379,7 @@ public class QuizController implements Initializable {
                 questionContent.setQuizController(quizCont);
                 questionContent.setQuestionID(q.getQuestionID());
 
-                questionContent.setDisplay(q.getQuizName(), q.getPoint(), q.getCorrectChoice(), q.getChoices());
+                questionContent.setDisplay(q.getQuizName(), q.getPoint(), q.getCorrectChoice(), q.getChoices(), q.getImg());
 
                 questionContent.setParentContainer(problemSpace);
                 questionContent.setProblemContent(problemContent);

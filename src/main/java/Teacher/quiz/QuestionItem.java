@@ -9,11 +9,13 @@ public class QuestionItem {
     private String correctChoice;
     private ArrayList<String> choices;
     private int questionID;
+    private String img;
 
-    public QuestionItem(String quizName, int point, String correctChoice){
+    public QuestionItem(String quizName, int point, String correctChoice,String img){
         this.setQuizName(quizName);
         this.setPoint(point);
         this.setCorrectChoice(correctChoice);
+        this.setImg(img);
         choices = new ArrayList<String>();
     }
 
@@ -64,5 +66,13 @@ public class QuestionItem {
     @Override
     public String toString(){
         return this.getQuizName() + "\n" + this.getPoint() + "\n" + this.getCorrectChoice() + "\n" + this.getChoices();
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

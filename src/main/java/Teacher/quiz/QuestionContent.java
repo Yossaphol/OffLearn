@@ -53,6 +53,9 @@ public class QuestionContent implements Initializable {
     @FXML
     private HBox problemContent;
 
+    @FXML
+    private Label deleteChoices;
+
     private ToggleGroup group;
     private QuestionItem questionItem;
     private ArrayList<TextField> txtGroup;
@@ -72,6 +75,7 @@ public class QuestionContent implements Initializable {
         addImage();
         saveButton();
         deleteButton();
+        deleteChoicesButton();
 
         shadow();
 
@@ -174,6 +178,25 @@ public class QuestionContent implements Initializable {
         }
     }
 
+    public void deleteChoicesButton() {
+        choicesDB = new ChoicesDB();
+
+        deleteChoices.setOnMouseClicked(mouseEvent -> {
+            if (!choiceSpace.getChildren().isEmpty()) {
+                choiceSpace.getChildren().removeLast();
+            }
+            String curr = choicesDB.getLastChoice(questionID);
+            if (curr != null){
+                if (curr.equals(txtGroup.getLast().getText())){
+                    choicesDB.deleteLastChoice(questionID);
+                }
+            }
+            if (!txtGroup.isEmpty()) {
+                txtGroup.removeLast();
+            }
+        });
+    }
+
     public void setQuizItem(){
         String p = problem.getText();
         int po;
@@ -183,7 +206,7 @@ public class QuestionContent implements Initializable {
             po = Integer.parseInt(point.getText());
         }
         String corr = correctAns.getText();
-        questionItem = new QuestionItem(p, po, corr);
+        questionItem = new QuestionItem(p, po, corr, "");
         for (TextField t: txtGroup){
             questionItem.setChoices(t.getText());
         }
@@ -270,7 +293,7 @@ public class QuestionContent implements Initializable {
         problemContent.setEffect(dropShadow);
     }
 
-    public void setDisplay(String name, int point, String corrAns, ArrayList<String> choices){
+    public void setDisplay(String name, int point, String corrAns, ArrayList<String> choices, String img){
         problem.setText("");
         this.point.setText("");
         correctAns.setText("");
@@ -281,6 +304,10 @@ public class QuestionContent implements Initializable {
         problem.setText(name);
         this.point.setText(point + "");
         correctAns.setText(corrAns);
+
+        if (img != null){
+            this.img.setImage(new Image(img));
+        }
 
         for (String c : choices){
             HBox choice = new HBox(10);

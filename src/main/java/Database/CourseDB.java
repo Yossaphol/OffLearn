@@ -136,7 +136,7 @@ public class CourseDB extends ConnectDB{
 
         String quizSql = "SELECT Quiz_ID, header FROM offlearn.quiz WHERE Chapter_ID = ? LIMIT 1";
 
-        String questionSql = "SELECT Question_ID, questionText, correctAns, point FROM offlearn.question WHERE Quiz_ID = ?";
+        String questionSql = "SELECT Question_ID, questionText, correctAns, point, question_img FROM offlearn.question WHERE Quiz_ID = ?";
 
         try (Connection conn = this.connectToDB();
              PreparedStatement courseStmt = conn.prepareStatement(courseSql);
@@ -182,7 +182,8 @@ public class CourseDB extends ConnectDB{
                                 String questionName = questionRs.getString("questionText");
                                 int point = questionRs.getInt("point");
                                 String corrAns = questionRs.getString("correctAns");
-                                quizItem.setQuestionList(new QuestionItem(questionName, point, corrAns));
+                                String img = questionRs.getString("question_img");
+                                quizItem.setQuestionList(new QuestionItem(questionName, point, corrAns, img));
                             }
                         }
                     }
