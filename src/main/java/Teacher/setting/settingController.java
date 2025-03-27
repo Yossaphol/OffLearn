@@ -5,17 +5,24 @@ import Database.UserDB;
 import Student.HomeAndNavigation.HomeController;
 import a_Session.SessionManager;
 import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+import mediaUpload.MediaUpload;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -76,6 +83,10 @@ public class settingController implements Initializable {
     public Button editBtn;
     public Button cancelProfile;
     public Button saveProfile;
+    private MediaUpload m;
+    public TextField oldpw;
+    public TextField newpwfirst;
+    public TextField newpwsecond;
 
     private boolean isPasswordEditing = false;
     private boolean isPaymentEditing = false;
@@ -93,15 +104,125 @@ public class settingController implements Initializable {
     //    String imgPath = (user.getProfile() != null) ? user.getProfile().toString() : "/img/Profile/user.png";
     String selectedimg = "";
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         displayNavbar();
 
-        security_password.setText("********");
-
+        setProfileValue(firstname, lastNameUser, gmailUser);
+        setUserImage(user.getProfile());
+        security_username.setText(userName);
+        security_username.setEditable(false);
 
         setEffect();
         uploadPic.setVisible(false);
+
+    }
+
+    public void setProfileValue(String Name, String LastName, String Gmail){
+        this.firstname = Name;
+        this.lastNameUser = LastName;
+        this.gmailUser = Gmail;
+
+        _setProfileValue(firstname, lastNameUser, gmailUser);
+    }
+
+    public void _setProfileValue(String Name, String LastName, String Gmail){
+        privateinfo_firstname.setText(Name);
+        privateinfo_lastname.setText(LastName);
+        privateinfo_gmail.setText(Gmail);
+    }
+
+    public void saveProfileEdit(ActionEvent e) {
+        String newFirstname = privateinfo_firstname.getText();
+        String newLastname = privateinfo_lastname.getText();
+        String newEmail = privateinfo_gmail.getText();
+
+        boolean isUpdated = userDB.updateUserInfo(sessionUsername, newFirstname, newLastname, newEmail);
+
+        if (isUpdated) {
+            // Upload image to database if a new image was selected
+            if (!selectedimg.isEmpty()) {
+                boolean isImageUpdated = userDB.updateProfileImage(sessionUsername, selectedimg);
+                if (isImageUpdated) {
+                    user = userDB.getUserInfo(sessionUsername); // Refresh user info
+                    setUserImage(user.getProfile());  // Update UI with the new profile image
+                }
+            }
+
+            showAlert("Update Successful", "Success", Alert.AlertType.INFORMATION);
+            setProfileValue(newFirstname, newLastname, newEmail);
+            editProfile();
+        } else {
+            showAlert("Update Failed", "Fail", Alert.AlertType.ERROR);
+        }
+    }
+
+    private void setUserImage(String imgPath) {
+        try {
+            if (imgPath == null || imgPath.isEmpty()) {
+                imgPath = "/img/Profile/user.png";
+            }
+
+            Image img;
+
+            if (imgPath.startsWith("http")) {
+                img = new Image(imgPath, true);
+
+                img.progressProperty().addListener((observable, oldValue, newValue) -> {
+                    if (newValue.doubleValue() == 1.0) {
+                        Platform.runLater(() -> {
+                            picture.setFill(new ImagePattern(img));
+                        });
+                    }
+                });
+            } else if (imgPath.startsWith("/") || getClass().getResource(imgPath) != null) {
+                img = new Image(getClass().getResource(imgPath).toExternalForm());
+                picture.setFill(new ImagePattern(img));
+            } else {
+                File file = new File(imgPath);
+                if (!file.exists()) {
+                    img = new Image(getClass().getResource("/img/Profile/user.png").toExternalForm());
+                } else {
+                    img = new Image(file.toURI().toString());
+                }
+                picture.setFill(new ImagePattern(img));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            try {
+                Image defaultImg = new Image(getClass().getResource("/img/Profile/user.png").toExternalForm());
+                picture.setFill(new ImagePattern(defaultImg));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void uploadImg(ActionEvent e) {
+        m = new MediaUpload();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select an Image");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+        );
+
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
+
+        if (selectedFile != null) {
+            String uploadedUrl = m.uploadImg(selectedFile);
+
+            if (uploadedUrl != null) {
+                selectedimg = uploadedUrl;
+
+                // Ensure image is loaded on JavaFX Application Thread
+                Platform.runLater(() -> {
+                    setUserImage(selectedimg);
+                });
+            } else {
+                showAlert("Upload Failed", "Unable to upload the image.", Alert.AlertType.ERROR);
+            }
+        }
     }
 
     private void setEffect(){
@@ -287,6 +408,7 @@ public class settingController implements Initializable {
 
     @FXML
     public void cancelChangeProfile(ActionEvent event){
+        setProfileValue(firstname, lastNameUser, gmailUser);
         editProfile();
     }
 
@@ -296,18 +418,35 @@ public class settingController implements Initializable {
         editPayment();
     }
 
-
+    public void updatepw(ActionEvent e){
+        String username = SessionManager.getInstance().getUsername();
+        String oldpwfromdb = userDB.getOldPasswordFromDB(username);
+        String oldPassword = oldpw.getText();
+        String newPasswordFirst = newpwfirst.getText();
+        String confirmNewPassword = newpwsecond.getText();
+        if (oldPassword.isEmpty() || newPasswordFirst.isEmpty() || confirmNewPassword.isEmpty()) {
+            showAlert("Update Password Failed", "Please complete all fields.", Alert.AlertType.WARNING);
+            return;
+        }
+        if (!newPasswordFirst.equals(confirmNewPassword)) {
+            showAlert("Passwords do not match", "Please fill in the information to match.", Alert.AlertType.ERROR);
+            return;
+        }
+        if (!oldpwfromdb.equals(oldPassword)) {
+            showAlert("Error", "Old Password does not match.", Alert.AlertType.ERROR);
+            return;
+        }
+        if (userDB.updatePassword(username, newPasswordFirst)) {
+            showAlert("Success", "Update password successfully!", Alert.AlertType.INFORMATION);
+            editPassword();
+        } else {
+            showAlert("Error", "Sorry, something went wrong!", Alert.AlertType.ERROR);
+        }
+    }
     @FXML
-    private void saveProfileEdit(ActionEvent event){
-
+    private void cancelPassword(ActionEvent event){
         editPassword();
     }
-
-
-    public void uploadImg(ActionEvent event) {
-        //
-    }
-
 
     public void applyTransition(Node node) {
         FadeTransition fade = new FadeTransition(Duration.millis(200), node);
@@ -316,4 +455,11 @@ public class settingController implements Initializable {
         fade.play();
     }
 
+    private void showAlert(String title, String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }

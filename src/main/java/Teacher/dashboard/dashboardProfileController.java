@@ -37,7 +37,7 @@ public class dashboardProfileController implements Initializable {
 
         String name = user.getFirstname();
         String lastNameUser = user.getLastname();
-        String fullname = name + " " + lastNameUser;
+        String fullname = name + "  " + lastNameUser;
         setfullname.setText(fullname);
 
         setProfile(userDB.getProfile(sessionUsername));

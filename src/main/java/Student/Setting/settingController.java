@@ -76,10 +76,11 @@ public class settingController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         uploadPic.setVisible(false);
+
         setProfileValue(name, lastNameUser, gmailUser);
-//        loadAndSetUserImage(picture, imgPath);
         setUserImage(user.getProfile());
         username1.setText(userName);
+        username1.setEditable(false);
         setEffect();
     }
 
@@ -300,10 +301,10 @@ public class settingController implements Initializable {
             return;
         }
         if (userDB.updatePassword(username, newPasswordFirst)) {
-            showAlert("Success", "เปลี่ยนรหัสผ่านสำเร็จ!", Alert.AlertType.INFORMATION);
+            showAlert("Success", "Update password successfully!", Alert.AlertType.INFORMATION);
             closePasswordField();
         } else {
-            showAlert("Error", "เกิดข้อผิดพลาดในการเปลี่ยนรหัสผ่าน!", Alert.AlertType.ERROR);
+            showAlert("Error", "Sorry, something went wrong!", Alert.AlertType.ERROR);
         }
     }
 

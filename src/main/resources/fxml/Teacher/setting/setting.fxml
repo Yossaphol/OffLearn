@@ -113,7 +113,7 @@
                                           <Insets left="50.0" />
                                        </HBox.margin>
                                        <children>
-                                          <Button fx:id="saveProfile" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-radius: 10; -fx-background-color: #0675de;" text="บันทึก" textFill="WHITE">
+                                          <Button fx:id="saveProfile" mnemonicParsing="false" onAction="#saveProfileEdit" prefWidth="100.0" style="-fx-background-radius: 10; -fx-background-color: #0675de;" text="บันทึก" textFill="WHITE">
                                              <font>
                                                 <Font name="Noto Sans Thai Bold" size="16.0" />
                                              </font>
@@ -225,7 +225,7 @@
                                           <Font name="Noto Sans Thai Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="oldPassword" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
+                                    <TextField fx:id="oldpw" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
                                        <font>
                                           <Font name="Noto Sans Thai Regular" size="16.0" />
                                        </font>
@@ -239,7 +239,7 @@
                                           <Font name="Noto Sans Thai Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="newPassword" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
+                                    <TextField fx:id="newpwfirst" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
                                        <font>
                                           <Font name="Noto Sans Thai Regular" size="16.0" />
                                        </font>
@@ -253,7 +253,7 @@
                                           <Font name="Noto Sans Thai Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="confirmPassword" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
+                                    <TextField fx:id="newpwsecond" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
                                        <font>
                                           <Font name="Noto Sans Thai Regular" size="16.0" />
                                        </font>
@@ -270,7 +270,7 @@
                         </HBox>
                         <HBox fx:id="saveCancelBtn" alignment="TOP_RIGHT" prefHeight="54.0" prefWidth="1115.0" spacing="20.0" visible="false">
                            <children>
-                              <Button fx:id="saveChange" mnemonicParsing="false" onAction="#saveProfileEdit" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="บันทึก" textFill="WHITE">
+                              <Button fx:id="saveChange" mnemonicParsing="false" onAction="#updatepw" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="บันทึก" textFill="WHITE">
                                  <font>
                                     <Font name="Noto Sans Thai Bold" size="16.0" />
                                  </font>
@@ -278,7 +278,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="cancelChange" mnemonicParsing="false" onAction="#editPassword" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="ยกเลิก" textFill="WHITE">
+                              <Button fx:id="cancelChange" mnemonicParsing="false" onAction="#cancelPassword" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="ยกเลิก" textFill="WHITE">
                                  <font>
                                     <Font name="Noto Sans Thai Bold" size="16.0" />
                                  </font>
