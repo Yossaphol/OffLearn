@@ -4,13 +4,17 @@ import Database.User;
 import Database.UserDB;
 import Student.HomeAndNavigation.HomeController;
 import a_Session.SessionManager;
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -66,8 +70,12 @@ public class settingController implements Initializable {
     public Button saveChange;
     public Button cancelChange;
     public HBox confirmPassContainer;
+    public HBox saveCancelProfileBtn;
+    public Button uploadPic;
+    public Circle picture;
+    public Button editBtn;
 
-    private boolean isProfileEditing = false;
+    private boolean isPasswordEditing = false;
     private boolean isPaymentEditing = false;
 
     HomeController ef = new HomeController();
@@ -91,7 +99,7 @@ public class settingController implements Initializable {
 
 
         setEffect();
-
+        uploadPic.setVisible(false);
     }
 
     private void setEffect(){
@@ -117,53 +125,108 @@ public class settingController implements Initializable {
 
 
 
-    //เปิด-ปิด การแก้ไข TextField Profile
-    public void editProfile(ActionEvent event){
-        if(!isProfileEditing){
-            privateinfo_firstname.setDisable(isProfileEditing);
-            privateinfo_lastname.setDisable(isProfileEditing);
-            privateinfo_gmail.setDisable(isProfileEditing);
-            security_username.setDisable(isProfileEditing);
-            security_change_button.setVisible(isProfileEditing);
+    //เปิด-ปิด การแก้ไข TextField Pasword
+    public void editPassword(ActionEvent event){
+        if(!isPasswordEditing){
+            security_username.setDisable(isPasswordEditing);
+            security_change_button.setVisible(isPasswordEditing);
 
-            isProfileEditing = true;
-            saveCancelBtn.setVisible(isProfileEditing);
-            confirmPassContainer.setVisible(isProfileEditing);
+            isPasswordEditing = true;
+            saveCancelBtn.setVisible(isPasswordEditing);
+            confirmPassContainer.setVisible(isPasswordEditing);
         }else{
-            privateinfo_firstname.setDisable(isProfileEditing);
-            privateinfo_lastname.setDisable(isProfileEditing);
-            privateinfo_gmail.setDisable(isProfileEditing);
-            security_username.setDisable(isProfileEditing);
-            security_change_button.setVisible(isProfileEditing);
+            security_username.setDisable(isPasswordEditing);
+            security_change_button.setVisible(isPasswordEditing);
 
-            isProfileEditing = false;
-            saveCancelBtn.setVisible(isProfileEditing);
-            confirmPassContainer.setVisible(isProfileEditing);
+            isPasswordEditing = false;
+            saveCancelBtn.setVisible(isPasswordEditing);
+            confirmPassContainer.setVisible(isPasswordEditing);
         }
+        applyTransition(security_username);
+        applyTransition(security_change_button);
+        applyTransition(saveCancelBtn);
+        applyTransition(confirmPassContainer);
     }
+
+    //เปิด-ปิด การแก้ไข TextField Pasword
+    public void editPassword(){
+        if(!isPasswordEditing){
+            security_username.setDisable(isPasswordEditing);
+            security_change_button.setVisible(isPasswordEditing);
+
+            isPasswordEditing = true;
+            saveCancelBtn.setVisible(isPasswordEditing);
+            confirmPassContainer.setVisible(isPasswordEditing);
+        }else{
+            security_username.setDisable(isPasswordEditing);
+            security_change_button.setVisible(isPasswordEditing);
+
+            isPasswordEditing = false;
+            saveCancelBtn.setVisible(isPasswordEditing);
+            confirmPassContainer.setVisible(isPasswordEditing);
+        }
+        applyTransition(security_username);
+        applyTransition(security_change_button);
+        applyTransition(saveCancelBtn);
+        applyTransition(confirmPassContainer);
+    }
+
+    //เปิด-ปิด การแก้ไข TextField Profile
+    public void editProfile(ActionEvent e){
+        if(!saveCancelProfileBtn.isVisible()){
+            //Visible
+            saveCancelProfileBtn.setVisible(true);
+            uploadPic.setVisible(true);
+            editBtn.setVisible(false);
+
+            //set Textfield
+            privateinfo_firstname.setDisable(false);
+            privateinfo_lastname.setDisable(false);
+            privateinfo_gmail.setDisable(false);
+        }else{
+            //Visible
+            saveCancelProfileBtn.setVisible(false);
+            uploadPic.setVisible(false);
+            editBtn.setVisible(true);
+
+            //set Textfield
+            privateinfo_firstname.setDisable(true);
+            privateinfo_lastname.setDisable(true);
+            privateinfo_gmail.setDisable(true);
+
+        }
+        applyTransition(saveCancelProfileBtn);
+        applyTransition(uploadPic);
+        applyTransition(editBtn);
+    }
+
     //เปิด-ปิด การแก้ไข TextField Profile
     public void editProfile(){
-        if(!isProfileEditing){
-            privateinfo_firstname.setDisable(isProfileEditing);
-            privateinfo_lastname.setDisable(isProfileEditing);
-            privateinfo_gmail.setDisable(isProfileEditing);
-            security_username.setDisable(isProfileEditing);
-            security_change_button.setVisible(isProfileEditing);
+        if(!saveCancelProfileBtn.isVisible()){
+            //Visible
+            saveCancelProfileBtn.setVisible(true);
+            uploadPic.setVisible(true);
+            editBtn.setVisible(false);
 
-            isProfileEditing = true;
-            saveCancelBtn.setVisible(isProfileEditing);
-            confirmPassContainer.setVisible(isProfileEditing);
+            //set Textfield
+            privateinfo_firstname.setDisable(false);
+            privateinfo_lastname.setDisable(false);
+            privateinfo_gmail.setDisable(false);
         }else{
-            privateinfo_firstname.setDisable(isProfileEditing);
-            privateinfo_lastname.setDisable(isProfileEditing);
-            privateinfo_gmail.setDisable(isProfileEditing);
-            security_username.setDisable(isProfileEditing);
-            security_change_button.setVisible(isProfileEditing);
+            //Visible
+            saveCancelProfileBtn.setVisible(false);
+            uploadPic.setVisible(false);
+            editBtn.setVisible(true);
 
-            isProfileEditing = false;
-            saveCancelBtn.setVisible(isProfileEditing);
-            confirmPassContainer.setVisible(isProfileEditing);
+            //set Textfield
+            privateinfo_firstname.setDisable(true);
+            privateinfo_lastname.setDisable(true);
+            privateinfo_gmail.setDisable(true);
+
         }
+        applyTransition(saveCancelProfileBtn);
+        applyTransition(uploadPic);
+        applyTransition(editBtn);
     }
 
 
@@ -188,6 +251,8 @@ public class settingController implements Initializable {
             isPaymentEditing = false;
             saveCancelBtn1.setVisible(isPaymentEditing);
         }
+        applyTransition(bankaccount_change_button);
+        applyTransition(saveCancelBtn1);
     }
     //เปิด-ปิด การแก้ไข TextField Payment
     public void editPayment() {
@@ -210,7 +275,15 @@ public class settingController implements Initializable {
             isPaymentEditing = false;
             saveCancelBtn1.setVisible(isPaymentEditing);
         }
+        applyTransition(bankaccount_change_button);
+        applyTransition(saveCancelBtn1);
     }
+
+    @FXML
+    public void cancelChangeProfile(ActionEvent event){
+        editProfile();
+    }
+
 
     @FXML
     private void cancelChangeOnPaymentEdit(ActionEvent event){
@@ -221,11 +294,20 @@ public class settingController implements Initializable {
     @FXML
     private void saveProfileEdit(ActionEvent event){
 
-        editProfile();
+        editPassword();
     }
 
 
     public void uploadImg(ActionEvent event) {
         //
     }
+
+
+    public void applyTransition(Node node) {
+        FadeTransition fade = new FadeTransition(Duration.millis(200), node);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
+    }
+
 }

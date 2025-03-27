@@ -7,6 +7,8 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
@@ -47,7 +49,7 @@
                               </Button>
                            </children>
                         </VBox>
-                        <VBox fx:id="privateinfo_container" fillWidth="false" prefHeight="306.0" prefWidth="1074.0">
+                        <VBox fx:id="privateinfo_container" fillWidth="false" prefHeight="246.0" prefWidth="716.0">
                            <children>
                               <HBox prefHeight="85.0" prefWidth="1124.0">
                                  <children>
@@ -90,25 +92,67 @@
                                     <Insets top="50.0" />
                                  </VBox.margin>
                               </HBox>
-                              <VBox prefHeight="84.0" prefWidth="310.0">
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="737.0">
                                  <children>
-                                    <Label fx:id="privateinfo_gmail_header" text="Gmail">
-                                       <font>
-                                          <Font name="Noto Sans Thai Regular" size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="privateinfo_gmail" disable="true" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="Example@gmail.com">
-                                       <font>
-                                          <Font name="Noto Sans Thai Regular" size="16.0" />
-                                       </font>
-                                    </TextField>
+                                    <VBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="310.0">
+                                       <children>
+                                          <Label fx:id="privateinfo_gmail_header" text="Gmail">
+                                             <font>
+                                                <Font name="Noto Sans Thai Regular" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="privateinfo_gmail" disable="true" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="Example@gmail.com">
+                                             <font>
+                                                <Font name="Noto Sans Thai Regular" size="16.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                    <HBox fx:id="saveCancelProfileBtn" alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="333.0" spacing="30.0" visible="false">
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                       <children>
+                                          <Button fx:id="saveProfile" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-radius: 10; -fx-background-color: #0675de;" text="บันทึก" textFill="WHITE">
+                                             <font>
+                                                <Font name="Noto Sans Thai Bold" size="16.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                          <Button fx:id="cancelProfile" mnemonicParsing="false" onAction="#cancelChangeProfile" prefWidth="100.0" style="-fx-background-radius: 10; -fx-background-color: red;" text="ยกเลิก" textFill="WHITE">
+                                             <font>
+                                                <Font name="Noto Sans Thai Bold" size="16.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                       </children>
+                                    </HBox>
                                  </children>
-                                 <VBox.margin>
-                                    <Insets left="20.0" top="50.0" />
-                                 </VBox.margin>
-                              </VBox>
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                              </HBox>
                            </children>
                         </VBox>
+                        <Button fx:id="editBtn" mnemonicParsing="false" onAction="#editProfile" prefHeight="28.0" prefWidth="28.0" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="23.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../img/icon/edit.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
                      </children>
                   </HBox>
                   <VBox fx:id="security_container" fillWidth="false" prefHeight="367.0" prefWidth="1220.0">
@@ -161,7 +205,7 @@
                               <Insets left="20.0" />
                            </padding>
                         </HBox>
-                        <Button fx:id="security_change_button" mnemonicParsing="false" onAction="#editProfile" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="เปลี่ยน" textFill="WHITE">
+                        <Button fx:id="security_change_button" mnemonicParsing="false" onAction="#editPassword" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="เปลี่ยน" textFill="WHITE">
                            <font>
                               <Font name="Noto Sans Thai Bold" size="16.0" />
                            </font>
@@ -234,7 +278,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="cancelChange" mnemonicParsing="false" onAction="#editProfile" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="ยกเลิก" textFill="WHITE">
+                              <Button fx:id="cancelChange" mnemonicParsing="false" onAction="#editPassword" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="ยกเลิก" textFill="WHITE">
                                  <font>
                                     <Font name="Noto Sans Thai Bold" size="16.0" />
                                  </font>
