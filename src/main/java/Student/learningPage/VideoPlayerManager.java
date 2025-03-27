@@ -5,6 +5,7 @@ import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
 import javafx.animation.*;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
@@ -25,6 +26,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -99,156 +103,63 @@ public class VideoPlayerManager implements Initializable {
         loadIcons();
 
         // test video, idk how to play vid from DB lol ;w;
-        String videoPath = getClass().getResource("/videos/test.mp4").toExternalForm();
-        Media media = new Media(videoPath);
-        mediaPlayer = new MediaPlayer(media);
+        String videoPath = "https://offlearnmedia.s3.ap-southeast-2.amazonaws.com/image/testvideo123.mp4";
+        String outputFilePath = System.getProperty("java.io.tmpdir") + "testvideo123_encoded.mp4";
 
 
-        // volume slider
-        sliderVolume.setMin(0.0);
-        sliderVolume.setMax(1.0);
-        sliderVolume.setValue(0.5);
-        originalVolSliderWidth = sliderVolume.getPrefWidth();
-        sliderVolume.setPrefWidth(0);
-        sliderVolume.setVisible(false);
-        sliderVolume.getStyleClass().add("slider");
-
-        mediaPlayer.setVolume(0.5);
-
-        btnSound.setOnAction(e -> {
-            videocontainer.requestFocus();
-            toggleMute();
-        });
-        btnSound.addEventFilter(MouseEvent.MOUSE_ENTERED, e -> showVolumeSlider());
-
-        // volume icon
-        sliderVolume.valueProperty().addListener((obs, oldVal, newVal) -> {
-            double volume = newVal.doubleValue();
-
-            userIsActive();
-            mediaPlayer.setVolume(volume);
-            updateVolumeIcon(volume);
-
-            Platform.runLater(() -> {
-                Node track = sliderVolume.lookup(".track");
-                if (track != null) {
-                    double percent = volume * 100;
-                    String style = String.format(
-                            "-fx-background-color: linear-gradient(to right, #8100cc %.2f%%, #F6E6FF %.2f%%); " +
-                                    "-fx-background-radius: 5px; -fx-pref-height: 3px;",
-                            percent, percent
-                    );
-                    track.setStyle(style);
+        Task<Void> encodingTask = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                // FFmpeg command:
+                ProcessBuilder pb = new ProcessBuilder(
+                        "ffmpeg", "-y",
+                        "-i", videoPath,
+                        "-c:v", "libx264",
+                        "-preset", "veryfast",
+                        "-crf", "28",
+                        outputFilePath
+                );
+                pb.redirectErrorStream(true);
+                Process process = pb.start();
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        System.out.println(line);
+                    }
                 }
-            });
-        });
-
-
-        // binding
-        mediaView.setMediaPlayer(mediaPlayer);
-        mediaView.setPreserveRatio(true);
-        mediaView.sceneProperty().addListener((obs, oldScene, newScene) -> {
-            if (newScene != null) {
-                mediaView.fitWidthProperty().bind(videocontainer.widthProperty());
-                mediaView.fitHeightProperty().bind(videocontainer.heightProperty());
+                int exitCode = process.waitFor();
+                if (exitCode != 0) {
+                    throw new Exception("FFmpeg encoding failed with exit code " + exitCode);
+                }
+                return null;
             }
-        });
+        };
 
-        clip = new Rectangle();
-        clip.setArcWidth(30);
-        clip.setArcHeight(30);
-        mediaView.layoutBoundsProperty().addListener((obs, oldBounds, newBounds) -> {
-            clip.setWidth(newBounds.getWidth());
-            clip.setHeight(newBounds.getHeight());
-        });
-        mediaView.setClip(clip);
-
-        // toggles play/pause
-        videocontainer.setOnMouseClicked(e -> {
-                togglePlayPause(mediaPlayer);
-                userIsActive();
-                videocontainer.requestFocus();
-        });
-
-        // Setup settings menu
-        setupSettingsMenu(mediaPlayer);
-
-        settingsMenu.setOnShown(e -> {
-            fadeInControlPane();
-            if (hideTimeline != null) hideTimeline.stop();
-        });
-        settingsMenu.setOnHidden(ev -> {
-            DelayFadeOut();
-        });
-
-        // Fullscreen button
-        btnFullscreen.setOnAction(e -> {
-            videocontainer.requestFocus();
-            toggleFullscreen();
-        });
-        sliderTime.getStyleClass().add("slider");
-        // get duration
-        mediaPlayer.setOnReady(() -> {
-            // Keep your existing code:
-            sliderTime.setMax(mediaPlayer.getTotalDuration().toSeconds());
-            lblTime.setText("00:00 / " + formatTime(mediaPlayer.getTotalDuration()));
-            Platform.runLater(this::updateSliderTimeFill);
-
-            // Now add a listener for buffering:
-            mediaPlayer.bufferProgressTimeProperty().addListener((obs, oldVal, newVal) -> {
-                // You can call the same method or a separate method:
-                updateSliderTimeFill();
-            });
-        });
-
-        // Update time
-        mediaPlayer.currentTimeProperty().addListener((obs, oldTime, newTime) -> {
-            sliderTime.setValue(newTime.toSeconds());
-            lblTime.setText(formatTime(newTime) + " / " + formatTime(mediaPlayer.getTotalDuration()));
-            updateSliderTimeFill(); // update fill
-        });
-        mediaPlayer.bufferProgressTimeProperty().addListener((obs, oldVal, newVal) -> {
-            updateSliderTimeFill();
-        });
-        sliderTime.valueProperty().addListener((obs, oldVal, newVal) -> {
-            updateSliderTimeFill();
-            double newSeconds = newVal.doubleValue();
-            Duration d = Duration.seconds(newSeconds);
-            lblTime.setText(
-                    formatTime(d) + " / " + formatTime(mediaPlayer.getTotalDuration())
-            );
-        });
-
-
-        btnPlay.setOnAction(e -> {
-            togglePlayPause(mediaPlayer);
-            videocontainer.requestFocus();
-        });
-
-        // Seeking logic
-        sliderTime.setOnMousePressed(e -> {
-            userIsActive();
-            if (mediaPlayer != null) {
-                wasPlaying[0] = (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING);
-                if (wasPlaying[0]) {
-                    mediaPlayer.pause();
-                }
+        encodingTask.setOnSucceeded(e -> {
+            File encodedFile = new File(outputFilePath);
+            if (!encodedFile.exists()) {
+                System.err.println("Encoded file not found: " + outputFilePath);
+                return;
             }
+            Media media = new Media(encodedFile.toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+            mediaView.setMediaPlayer(mediaPlayer);
+            bindMediaProperties();
         });
-        sliderTime.setOnMouseReleased(e -> {
-            if (mediaPlayer != null) {
-                double newPos = sliderTime.getValue();
-                mediaPlayer.seek(Duration.seconds(newPos));
-                if (videoEnded) {
-                    videoEnded = false;
-                    btnPlay.setGraphic(createIconView(pauseIcon));
-                }
-                if (wasPlaying[0]) {
-                    mediaPlayer.play();
-                }
-            }
-            videocontainer.requestFocus();
+
+        // On failure, log and optionally fall back to playing the original S3 video (TEMP)
+        encodingTask.setOnFailed(e -> {
+            Throwable ex = encodingTask.getException();
+            ex.printStackTrace();
+            Media media = new Media(videoPath);
+            mediaPlayer = new MediaPlayer(media);
+            mediaView.setMediaPlayer(mediaPlayer);
+            bindMediaProperties();
         });
+        new Thread(encodingTask).start();
+
+
+
 
         controlPane.setOpacity(1.0);
 
@@ -261,16 +172,6 @@ public class VideoPlayerManager implements Initializable {
         // Inactivity fade
         setupInactivityTimer();
 
-        btnSkipBack.setOnAction(e -> {
-            skipBackward(5);
-            userIsActive();
-            videocontainer.requestFocus();
-        });
-        btnSkipFront.setOnAction(e -> {
-            skipForward(5);
-            userIsActive();
-            videocontainer.requestFocus();
-        });
         // Volume slider hide logic
         sliderVolume.setFocusTraversable(false);
         btnSound.addEventFilter(MouseEvent.MOUSE_EXITED, this::checkVolumeMouseExit);
@@ -389,10 +290,7 @@ public class VideoPlayerManager implements Initializable {
         });
 
         // If video ends => replay icon
-        mediaPlayer.setOnEndOfMedia(() -> {
-            btnPlay.setGraphic(createIconView(replayIcon));
-            videoEnded = true;
-        });
+
 
         btnPlay.setGraphic(createIconView(playIcon));
 
@@ -402,6 +300,165 @@ public class VideoPlayerManager implements Initializable {
         method_home.hoverEffect(btnSetting);
     }
 
+    private void bindMediaProperties() {
+        // binding
+        mediaView.setMediaPlayer(mediaPlayer);
+        mediaView.setPreserveRatio(true);
+        mediaView.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                mediaView.fitWidthProperty().bind(videocontainer.widthProperty());
+                mediaView.fitHeightProperty().bind(videocontainer.heightProperty());
+            }
+        });
+
+        clip = new Rectangle();
+        clip.setArcWidth(30);
+        clip.setArcHeight(30);
+        mediaView.layoutBoundsProperty().addListener((obs, oldBounds, newBounds) -> {
+            clip.setWidth(newBounds.getWidth());
+            clip.setHeight(newBounds.getHeight());
+        });
+        mediaView.setClip(clip);
+
+        // volume slider
+        sliderVolume.setMin(0.0);
+        sliderVolume.setMax(1.0);
+        sliderVolume.setValue(0.5);
+        originalVolSliderWidth = sliderVolume.getPrefWidth();
+        sliderVolume.setPrefWidth(0);
+        sliderVolume.setVisible(false);
+        sliderVolume.getStyleClass().add("slider");
+
+        mediaPlayer.setVolume(0.5);
+
+        btnSound.setOnAction(e -> {
+            videocontainer.requestFocus();
+            toggleMute();
+        });
+        btnSound.addEventFilter(MouseEvent.MOUSE_ENTERED, e -> showVolumeSlider());
+
+        // volume icon
+        sliderVolume.valueProperty().addListener((obs, oldVal, newVal) -> {
+            double volume = newVal.doubleValue();
+
+            userIsActive();
+            mediaPlayer.setVolume(volume);
+            updateVolumeIcon(volume);
+
+            Platform.runLater(() -> {
+                Node track = sliderVolume.lookup(".track");
+                if (track != null) {
+                    double percent = volume * 100;
+                    String style = String.format(
+                            "-fx-background-color: linear-gradient(to right, #8100cc %.2f%%, #F6E6FF %.2f%%); " +
+                                    "-fx-background-radius: 5px; -fx-pref-height: 3px;",
+                            percent, percent
+                    );
+                    track.setStyle(style);
+                }
+            });
+        });
+        // toggles play/pause
+        videocontainer.setOnMouseClicked(e -> {
+            togglePlayPause(mediaPlayer);
+            userIsActive();
+            videocontainer.requestFocus();
+        });
+
+        // Setup settings menu
+        setupSettingsMenu(mediaPlayer);
+
+        settingsMenu.setOnShown(e -> {
+            fadeInControlPane();
+            if (hideTimeline != null) hideTimeline.stop();
+        });
+        settingsMenu.setOnHidden(ev -> {
+            DelayFadeOut();
+        });
+// Fullscreen button
+        btnFullscreen.setOnAction(e -> {
+            videocontainer.requestFocus();
+            toggleFullscreen();
+        });
+        sliderTime.getStyleClass().add("slider");
+        // get duration
+        mediaPlayer.setOnReady(() -> {
+            // Keep your existing code:
+            sliderTime.setMax(mediaPlayer.getTotalDuration().toSeconds());
+            lblTime.setText("00:00 / " + formatTime(mediaPlayer.getTotalDuration()));
+            Platform.runLater(this::updateSliderTimeFill);
+
+            // Now add a listener for buffering:
+            mediaPlayer.bufferProgressTimeProperty().addListener((obs, oldVal, newVal) -> {
+                // You can call the same method or a separate method:
+                updateSliderTimeFill();
+            });
+        });
+
+        // Update time
+        mediaPlayer.currentTimeProperty().addListener((obs, oldTime, newTime) -> {
+            sliderTime.setValue(newTime.toSeconds());
+            lblTime.setText(formatTime(newTime) + " / " + formatTime(mediaPlayer.getTotalDuration()));
+            updateSliderTimeFill(); // update fill
+        });
+        mediaPlayer.bufferProgressTimeProperty().addListener((obs, oldVal, newVal) -> {
+            updateSliderTimeFill();
+        });
+        sliderTime.valueProperty().addListener((obs, oldVal, newVal) -> {
+            updateSliderTimeFill();
+            double newSeconds = newVal.doubleValue();
+            Duration d = Duration.seconds(newSeconds);
+            lblTime.setText(
+                    formatTime(d) + " / " + formatTime(mediaPlayer.getTotalDuration())
+            );
+        });
+
+
+        btnPlay.setOnAction(e -> {
+            togglePlayPause(mediaPlayer);
+            videocontainer.requestFocus();
+        });
+
+        // Seeking logic
+        sliderTime.setOnMousePressed(e -> {
+            userIsActive();
+            if (mediaPlayer != null) {
+                wasPlaying[0] = (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING);
+                if (wasPlaying[0]) {
+                    mediaPlayer.pause();
+                }
+            }
+        });
+        sliderTime.setOnMouseReleased(e -> {
+            if (mediaPlayer != null) {
+                double newPos = sliderTime.getValue();
+                mediaPlayer.seek(Duration.seconds(newPos));
+                if (videoEnded) {
+                    videoEnded = false;
+                    btnPlay.setGraphic(createIconView(pauseIcon));
+                }
+                if (wasPlaying[0]) {
+                    mediaPlayer.play();
+                }
+            }
+            videocontainer.requestFocus();
+        });
+
+        btnSkipBack.setOnAction(e -> {
+            skipBackward(5);
+            userIsActive();
+            videocontainer.requestFocus();
+        });
+        btnSkipFront.setOnAction(e -> {
+            skipForward(5);
+            userIsActive();
+            videocontainer.requestFocus();
+        });
+        mediaPlayer.setOnEndOfMedia(() -> {
+            btnPlay.setGraphic(createIconView(replayIcon));
+            videoEnded = true;
+        });
+    }
     /* Toggles play/pause or replay if ended.*/
     private void togglePlayPause(MediaPlayer mediaPlayer) {
         if (videoEnded) {
@@ -501,7 +558,7 @@ public class VideoPlayerManager implements Initializable {
                         "-fx-background-radius: 5px; -fx-pref-height: 3px;",
                 playedPercent, playedPercent, bufferPercent
         );
-        
+
         Node track = sliderTime.lookup(".track");
         if (track != null) {
             track.setStyle(style);
