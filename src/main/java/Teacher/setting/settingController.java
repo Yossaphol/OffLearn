@@ -74,6 +74,8 @@ public class settingController implements Initializable {
     public Button uploadPic;
     public Circle picture;
     public Button editBtn;
+    public Button cancelProfile;
+    public Button saveProfile;
 
     private boolean isPasswordEditing = false;
     private boolean isPaymentEditing = false;
@@ -110,6 +112,10 @@ public class settingController implements Initializable {
         ef.hoverEffect(bankaccount_change_button);
         ef.hoverEffect(saveChange1);
         ef.hoverEffect(cancelChange1);
+
+        ef.hoverEffect(uploadPic);
+        ef.hoverEffect(saveProfile);
+        ef.hoverEffect(cancelProfile);
 
     }
 

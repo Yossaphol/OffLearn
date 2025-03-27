@@ -18,6 +18,7 @@ public class withdrawController implements Initializable {
     public HBox navbarContainer;
     public Button withdrawBtn;
     public Button edit;
+    public Button withdrawHistory;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -32,12 +33,14 @@ public class withdrawController implements Initializable {
     private void route(){
         Navigator nav = new Navigator();
         edit.setOnMouseClicked(nav::settingRoute);
-
+        withdrawBtn.setOnMouseClicked(nav::withdrawDetailRoute);
+        withdrawHistory.setOnMouseClicked(nav::withdrawHistoryRoute);
     }
 
     private void setEffect(){
         HomeController hm = new HomeController();
         hm.hoverEffect(withdrawBtn);
+        hm.hoverEffect(withdrawHistory);
     }
 
     public void displayNavbar(){

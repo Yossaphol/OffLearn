@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #FBFBFB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.showBalance.withdrawController">
+<VBox alignment="TOP_CENTER" style="-fx-background-color: #FBFBFB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.showBalance.withdrawController">
    <children>
       <HBox fx:id="navbarContainer" alignment="TOP_CENTER" prefWidth="1440.0">
          <VBox.margin>
@@ -122,14 +122,26 @@
                                        </children>
                                     </HBox>
                                     <Pane prefHeight="49.0" prefWidth="853.0" />
-                                    <Button fx:id="withdrawBtn" mnemonicParsing="false" prefHeight="45.0" prefWidth="162.0" style="-fx-background-color: #0675DE; -fx-background-radius: 8;" text="ถอนเงิน" textFill="WHITE">
-                                       <font>
-                                          <Font name="Noto Sans Thai Bold" size="20.0" />
-                                       </font>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </Button>
+                                    <HBox prefHeight="46.0" prefWidth="830.0" spacing="30.0">
+                                       <children>
+                                          <Button fx:id="withdrawBtn" mnemonicParsing="false" prefHeight="45.0" prefWidth="162.0" style="-fx-background-color: #0675DE; -fx-background-radius: 8;" text="ถอนเงิน" textFill="WHITE">
+                                             <font>
+                                                <Font name="Noto Sans Thai Bold" size="20.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                          <Button fx:id="withdrawHistory" mnemonicParsing="false" prefHeight="45.0" prefWidth="162.0" style="-fx-background-color: transparent; -fx-border-radius: 8; -fx-border-color: #0675de;" text="ประวัติการถอน" textFill="#0675de">
+                                             <font>
+                                                <Font name="Noto Sans Thai Bold" size="20.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                       </children>
+                                    </HBox>
                                     <Label text="*โปรดตรวจสอบความถูกต้องของบันชีรับเงิน" textFill="#868686">
                                        <font>
                                           <Font name="Noto Sans Thai Regular" size="18.0" />
