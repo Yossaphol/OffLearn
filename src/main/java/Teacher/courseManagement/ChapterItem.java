@@ -6,13 +6,16 @@ public class ChapterItem {
     private int chapId;
     private String chapterName;
     private String desc;
-    private String imrUrl;
+    private String imgUrl;
+    private String material;
     private QuizItem quizItem;
 
-    public ChapterItem(int chapId, String name, String desc){
+    public ChapterItem(int chapId, String name, String desc, String imgUrl, String material){
         this.setChapId(chapId);
         this.setChapterName(name);
         this.setDesc(desc);
+        this.setImgUrl(imgUrl);
+        this.setMaterial(material);
     }
 
     public int getChapId(){
@@ -23,12 +26,12 @@ public class ChapterItem {
         this.chapId = chapId;
     }
 
-    public void setImrUrl(String url){
-        this.imrUrl = url;
+    public void setImgUrl(String url){
+        this.imgUrl = url;
     }
 
-    public String getImrUrl(){
-        return this.imrUrl;
+    public String getImgUrl(){
+        return this.imgUrl;
     }
 
     public void setChapterName(String name){
@@ -58,5 +61,13 @@ public class ChapterItem {
 
     public void setQuizItem(QuizItem quizItem) {
         this.quizItem = quizItem;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
     }
 }

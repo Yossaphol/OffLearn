@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:controller="Teacher.courseManagement.CourseEditController" fx:id="courseEdit" alignment="TOP_CENTER" style="-fx-background-color: #FBFBFB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="courseEdit" alignment="TOP_CENTER" style="-fx-background-color: #FBFBFB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.CourseEditController">
    <children>
       <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
          <children>
@@ -76,7 +76,7 @@
                      <children>
                         <ImageView fx:id="img" fitHeight="279.0" fitWidth="259.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../img/Picture/bg.jpg" />
+                              <Image url="@../../../img/Picture/a3ea0f6ea140c07de2d150b8e7e48826.jpg" />
                            </image>
                         </ImageView>
                         <Label fx:id="addCourseImg" text="เปลี่ยนรูป" underline="true">

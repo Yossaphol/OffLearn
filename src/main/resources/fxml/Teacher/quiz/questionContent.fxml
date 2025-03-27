@@ -20,7 +20,7 @@
                     <children>
                         <ImageView fx:id="img" fitHeight="125.0" fitWidth="165.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../../../img/Picture/alvaro-reyes-qWwpHwip31M-unsplash.jpg" />
+                                <Image url="@../../../img/Picture/a3ea0f6ea140c07de2d150b8e7e48826.jpg" />
                             </image>
                             <VBox.margin>
                                 <Insets bottom="20.0" />

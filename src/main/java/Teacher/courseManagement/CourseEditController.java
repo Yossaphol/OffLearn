@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CourseEditController implements Initializable {
@@ -267,11 +268,24 @@ public class CourseEditController implements Initializable {
 
     public void saveAllButton(){
         saveAll.setOnAction(actionEvent -> {
-            if (! saveCourse()){
-                return;
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("ยืนยันการทำรายการ");
+            alert.setHeaderText("คุณแน่ใจหรือไม่?");
+
+            alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.isPresent() && result.get() == ButtonType.YES) {
+                if (! saveCourse()){
+
+                    return;
+                }
+                wrapper.setContent(courseManagement);
+                courseController.showCourseOnListview();
+            } else {
+                System.out.println("ผู้ใช้กด No หรือปิดหน้าต่าง");
             }
-            wrapper.setContent(courseManagement);
-            courseController.showCourseOnListview();
         });
     }
 

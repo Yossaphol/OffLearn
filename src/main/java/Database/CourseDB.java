@@ -189,7 +189,7 @@ public class CourseDB extends ConnectDB{
                     }
                 }
 
-                chapter = new ChapterItem(chapterID, chapterName, chapterDescription);
+                chapter = new ChapterItem(chapterID, chapterName, chapterDescription, chapterImage, chapterMaterial);
                 chapter.setQuizItem(quizItem);
                 course.setChapterList(chapter);
             }

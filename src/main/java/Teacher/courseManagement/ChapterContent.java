@@ -13,6 +13,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import mediaUpload.MediaUpload;
@@ -46,10 +49,13 @@ public class ChapterContent implements Initializable {
     private Button addImg;
 
     @FXML
-    private ImageView video;
+    private MediaView video;
 
     @FXML
     private Button addFile;
+
+    @FXML
+    private Label fileName;
 
     private ChapterItem chapterItem;
     private ArrayList<ChapterItem> chapList;
@@ -61,6 +67,7 @@ public class ChapterContent implements Initializable {
     private String chapImgUrl;
     private String chapMatUrl;
     private MediaUpload m;
+    private int chapterID = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -90,10 +97,23 @@ public class ChapterContent implements Initializable {
         courseDB =  new CourseDB();
         chapterDB = new ChapterDB();
         int courseID = courseDB.getCourseID(courseName.getText());
-        int chapterID = chapterDB.saveChapter(courseID, c, d, chapImgUrl, chapMatUrl);
+
+        if (!chapterDB.isChapterExists(chapterID)){
+            this.chapterID = chapterDB.saveChapter(courseID, c, d, chapImgUrl, chapMatUrl);
+            System.out.println("save chapter complete");
+        } else {
+            if (chapterItem.getMaterial() != null){
+                chapMatUrl = chapterItem.getMaterial();
+            }
+            if (chapterItem.getImgUrl() != null){
+                chapImgUrl = chapterItem.getImgUrl();
+            }
+            chapterDB.updateChapter(this.chapterID, c, d, chapImgUrl, chapMatUrl);
+            System.out.println("update chapter complete");
+        }
 
         if (chapterID != -1) {
-            chapterItem = new ChapterItem(chapterID, c, d);
+            chapterItem = new ChapterItem(chapterID, c, d, chapImgUrl, chapMatUrl);
             chapList.add(chapterItem);
             System.out.println(chapterItem.toString());
         }
@@ -105,16 +125,37 @@ public class ChapterContent implements Initializable {
 
         addImg.setOnMouseClicked(mouseEvent -> {
             File selectedFile = fileChooser.showOpenDialog(null);
-            chapImgUrl = m.uploadVideo(selectedFile);
 
             if (selectedFile != null) {
-                Image image = new Image(selectedFile.toURI().toString());
-                video.setImage(image);
+                if (this.isImageFile(selectedFile)){
+                    showAlert("", "กรุณาเลือกวิดิโอ", Alert.AlertType.ERROR);
+                    return;
+                }
+                chapImgUrl = m.uploadVideo(selectedFile);
+
+                String videoPath = selectedFile.toURI().toString();
+                Media media = new Media(videoPath);
+                MediaPlayer mediaPlayer = new MediaPlayer(media);
+
+                if (this.video.getMediaPlayer() != null) {
+                    this.video.getMediaPlayer().dispose();
+                }
+
+                this.video.setMediaPlayer(mediaPlayer);
             } else {
                 System.out.println("No file selected.");
             }
         });
     }
+
+    public boolean isImageFile(File file) {
+        String fileName = file.getName().toLowerCase();
+
+        return fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") ||
+                fileName.endsWith(".png") || fileName.endsWith(".gif") ||
+                fileName.endsWith(".bmp") || fileName.endsWith(".tiff");
+    }
+
 
     public void showAlert(String title, String message, Alert.AlertType type) {
         Alert alert = new Alert(type);
@@ -130,7 +171,11 @@ public class ChapterContent implements Initializable {
 
         addFile.setOnMouseClicked(mouseEvent -> {
             File selectedFile = fileChooser.showOpenDialog(null);
-            chapMatUrl = m.uploadMaterial(selectedFile);
+            if (selectedFile != null){
+                chapMatUrl = m.uploadMaterial(selectedFile);
+                this.fileName.setText("แนบไฟล์สำเร็จ");
+                this.addFile.setText("แนบไฟล์ใหม่");
+            }
         });
     }
 
@@ -181,12 +226,8 @@ public class ChapterContent implements Initializable {
             showAlert("", "กรุณาใส่คำอธิบายบทเรียน", Alert.AlertType.ERROR);
             return false;
         }
-        if (chapImgUrl == null || chapImgUrl.isEmpty()) {
+        if ((chapImgUrl == null || chapImgUrl.isEmpty()) && (chapterItem.getImgUrl()) == null) {
             showAlert("", "กรุณาเพิ่มวิดีโอก่อนบันทึก", Alert.AlertType.ERROR);
-            return false;
-        }
-        if (chapMatUrl == null || chapMatUrl.isEmpty()) {
-            showAlert("", "กรุณาเพิ่มเอกสารก่อนบันทึก", Alert.AlertType.ERROR);
             return false;
         }
         return true;
@@ -202,9 +243,23 @@ public class ChapterContent implements Initializable {
         chapterContent.setEffect(dropShadow);
     }
 
-    public void setDisplay(ChapterItem chapterItem){
+    public void setDisplay(ChapterItem chapterItem) {
+        this.chapterItem = chapterItem;
         this.chapterName.setText(chapterItem.getChapterName());
         this.chapDesc.setText(chapterItem.getDesc());
 
+        if (chapterItem.getImgUrl() != null) {
+            Media media = new Media(chapterItem.getImgUrl());
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            this.video.setMediaPlayer(mediaPlayer);
+        }
+
+        if (chapterItem.getMaterial() != null){
+            this.fileName.setText("แนบไฟล์สำเร็จ");
+            this.addFile.setText("แนบไฟล์ใหม่");
+        }
+
+        this.chapterID = chapterItem.getChapId();
     }
+
 }

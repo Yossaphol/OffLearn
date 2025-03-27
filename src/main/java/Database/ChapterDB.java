@@ -35,6 +35,36 @@ public class ChapterDB extends ConnectDB{
         return - 1;
     }
 
+    public boolean updateChapter(int chapterId, String chapName, String desc, String chapImg, String chapMaterial) {
+        if (!isChapterExists(chapterId)) {
+            return false;
+        }
+
+        String sql = "UPDATE chapter SET chapterName = ?, chapterDescription = ?, chapter_image = ?, chapter_material = ? WHERE Chapter_ID = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstm = conn.prepareStatement(sql)) {
+
+            pstm.setString(1, chapName);
+            pstm.setString(2, desc);
+            pstm.setString(3, chapImg);
+            pstm.setString(4, chapMaterial);
+            pstm.setInt(5, chapterId);
+
+            int affectedRows = pstm.executeUpdate();
+
+            if (affectedRows > 0) {
+                return true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+
     public void deleteChapter(int chapterId) {
         String sql = "DELETE FROM chapter WHERE chapter_ID = ?";
         try (
@@ -89,5 +119,26 @@ public class ChapterDB extends ConnectDB{
     public ArrayList<String[]> getChapterList(){
         return this.chapterList;
     }
+
+    public boolean isChapterExists(int chapterId) {
+        String sql = "SELECT COUNT(*) FROM chapter WHERE Chapter_ID = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstm = conn.prepareStatement(sql)) {
+
+            pstm.setInt(1, chapterId);
+
+            try (ResultSet rs = pstm.executeQuery()) {
+                if (rs.next() && rs.getInt(1) > 0) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
 
 }
