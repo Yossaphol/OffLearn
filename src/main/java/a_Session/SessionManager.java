@@ -21,6 +21,7 @@ public class SessionManager {
         return username;
     }
 
+
     public void clearSession() {
         username = null;
     }

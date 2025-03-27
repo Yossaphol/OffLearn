@@ -100,30 +100,28 @@ public class CourseDB extends ConnectDB{
                 "JOIN offlearn.category cat ON c.Cat_ID = cat.Cat_id " +
                 "WHERE c.user_id = ?";
 
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstm = conn.prepareStatement(sql)) {
 
-        try {
-            Connection conn = this.connectToDB();
-            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, user_id);
+            try (ResultSet rs = pstm.executeQuery()) {
+                while (rs.next()) {
+                    int id = rs.getInt("Course_ID");
+                    String name = rs.getString("courseName");
+                    String img = rs.getString("image");
+                    int price = rs.getInt("price");
+                    String catName = rs.getString("catname");
 
-            pstm.setInt(user_id, 1);
-            ResultSet rs = pstm.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt("Course_ID");
-                String name = rs.getString("courseName");
-                String img = rs.getString("image");
-                int price = rs.getInt("price");
-                String catName = rs.getString("catname");
-
-                CourseItem courseItem = new CourseItem(id, img, name, price, catName);
-                courseList.add(courseItem);
+                    courseList.add(new CourseItem(id, img, name, price, catName));
+                }
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return courseList;
     }
+
 
     public CourseItem getCourseByID(int courseID) {
         String courseSql = "SELECT c.courseName, c.image, c.price, c.courseDescription, cat.catname " +

@@ -245,5 +245,23 @@ public class UserDB extends ConnectDB{
         return "/img/Profile/user.png";
     }
 
+    public int getUserId(String username) {
+        String query = "SELECT User_ID FROM offlearn.user WHERE username = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("User_ID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
 }
 

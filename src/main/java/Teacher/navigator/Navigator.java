@@ -83,28 +83,26 @@ public class Navigator {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Node source = (Node) event.getSource();
+            if (source == null || source.getScene() == null) {
+                System.err.println("Error: Event source is null or has no scene.");
+                return;
+            }
+
+            Stage stage = (Stage) source.getScene().getWindow();
             Scene scene = new Scene(root);
 
             root.setOpacity(0);
             stage.setScene(scene);
             stage.show();
 
-
-            //Refresh layout when page change
-            Platform.runLater(() -> {
-                stage.setWidth(stage.getWidth() - 1);
-                stage.setHeight(stage.getHeight() - 1);
-                stage.setWidth(stage.getWidth() + 1);
-                stage.setHeight(stage.getHeight() + 1);
-            });
+            Platform.runLater(stage::sizeToScene);
 
             FadeTransition fadeIn = new FadeTransition(Duration.millis(300), root);
             fadeIn.setFromValue(0);
             fadeIn.setToValue(1);
             fadeIn.play();
 
-            stage.setFullScreen(false);
             stage.setMaximized(true);
 
         } catch (IOException e) {
@@ -112,4 +110,5 @@ public class Navigator {
             e.printStackTrace();
         }
     }
+
 }

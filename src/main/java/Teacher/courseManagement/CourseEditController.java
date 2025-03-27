@@ -7,6 +7,8 @@ import Teacher.dashboard.dashboardController;
 import Teacher.quiz.QuizController;
 import Teacher.quiz.QuestionItem;
 import Teacher.quiz.*;
+import a_Session.SessionHadler;
+import a_Session.SessionManager;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class CourseEditController implements Initializable {
+public class CourseEditController implements Initializable, SessionHadler {
 
     @FXML
     private Label addCourse;
@@ -79,7 +81,8 @@ public class CourseEditController implements Initializable {
     private CourseDB courseDB;
     private Category category;
     private ChapterDB chapterDB;
-    private int userID = 00000001;
+    private int userID;
+    private String userName;
     private int courseID;
     private ArrayList<ChapterItem> chapterList = new ArrayList<>();
     private ArrayList<ArrayList<QuestionItem>> lastQuizGroup = new ArrayList<>();
@@ -93,6 +96,7 @@ public class CourseEditController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.handleSession();
         FontLoader fontLoader = new  FontLoader();
         fontLoader.loadFonts();
 
@@ -105,6 +109,14 @@ public class CourseEditController implements Initializable {
         setType();
 
         setEffect();
+    }
+
+    @Override
+    public void handleSession() {
+        this.userName = SessionManager.getInstance().getUsername();
+
+        UserDB userDB = new UserDB();
+        this.userID = userDB.getUserId(userName);
     }
 
     private void setEffect(){
@@ -386,5 +398,7 @@ public class CourseEditController implements Initializable {
 
         }
     }
+
+
 }
 ;

@@ -1,8 +1,11 @@
 package Teacher.courseManagement;
 
 import Database.CourseDB;
+import Database.UserDB;
 import Student.HomeAndNavigation.HomeController;
 import Teacher.dashboard.dashboardController;
+import a_Session.SessionHadler;
+import a_Session.SessionManager;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +27,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class CourseController implements Initializable {
+public class CourseController implements Initializable, SessionHadler {
 
     public LineChart enrollmentStatistics;
     public CategoryAxis xAxis;
@@ -51,7 +54,8 @@ public class CourseController implements Initializable {
 
     private VBox courseEdit;
     private CourseDB courseDB;
-    private int userID = 00000001;
+    private int userID;
+    private String userName;
     private ArrayList<CourseItem> courseList;
 
     private boolean increase = true;
@@ -61,13 +65,25 @@ public class CourseController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.handleSession();
+
+        System.out.println(this.userID);
         displayNavbar();
         newCourseButton();
         showCourseOnListview();
         setUpLineChart();
-        setEffect();
+
 
         setArrow();
+        setEffect();
+    }
+
+    @Override
+    public void handleSession() {
+        this.userName = SessionManager.getInstance().getUsername();
+
+        UserDB userDB = new UserDB();
+        this.userID = userDB.getUserId(userName);
     }
 
     private void setArrow(){
