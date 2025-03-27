@@ -196,7 +196,9 @@ public class pChatServerController extends pChatController implements Initializa
     public void addStudent(String studentName) {
         Platform.runLater(() -> {
             if (!studentList.getItems().contains(studentName)) {
-                studentList.getItems().add(studentName);
+                studentList.getItems().remove(studentName);
+                studentList.getItems().add(0, studentName);
+                studentList.getSelectionModel().select(0);
             }
         });
     }
@@ -209,6 +211,12 @@ public class pChatServerController extends pChatController implements Initializa
 
     public void receiveMessage(String studentName, String message) {
         Platform.runLater(() -> {
+            // First, ensure the student is at the top of the list
+            if (!studentList.getItems().get(0).equals(studentName)) {
+                studentList.getItems().remove(studentName);
+                studentList.getItems().add(0, studentName);
+            }
+
             if (selectedStudent != null && selectedStudent.equals(studentName)) {
                 addMessage(message, Pos.CENTER_LEFT, "#D9D9D9");
             }
