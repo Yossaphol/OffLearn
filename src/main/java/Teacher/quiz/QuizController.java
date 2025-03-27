@@ -176,6 +176,7 @@ public class QuizController implements Initializable {
 
                 this.quizBoxItem = new QuizBoxItem(this.quizName.getText(), this.problemSpace.getChildren().size(), max, min);
 
+                quizBoxContent.setDetailGroup(false);
                 quizBoxContent.setQuizBoxItem(quizBoxItem);
                 quizBoxContent.setDisplay();
                 quizBoxContent.recieveLQG(lqg);
@@ -203,6 +204,7 @@ public class QuizController implements Initializable {
             q.setQuizBoxItem(quizBoxItem);
             q.setDisplay();
 
+            q.setDetailGroup(false);
             q.recieveLQG(lqg);
             q.recieveQuizItemList(questionItemsList);
             q.setWrapper(wrapper);

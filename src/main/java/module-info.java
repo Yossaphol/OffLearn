@@ -108,4 +108,5 @@ module com.example.offlearn {
 
     exports mediaUpload to javafx.fxml;
     opens mediaUpload;
+
 }

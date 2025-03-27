@@ -229,6 +229,10 @@ public class CourseEditController implements Initializable {
 
     public void passCourseName(ChapterContent c){ c.recieveCourseName(courseName);}
 
+    public void passCourseContToQuizBox(QuizBoxContent quizBoxContent){ quizBoxContent.recieveCourseCont(courseController);}
+
+    public void passCourseID(QuizBoxContent quizBoxContent){quizBoxContent.recieveCourseId(courseID);}
+
     public void recieveWrapper(ScrollPane wrapper){
         this.wrapper = wrapper;
     }
@@ -240,6 +244,7 @@ public class CourseEditController implements Initializable {
     }
 
     public void recieveMethod(CourseController courseController){this.courseController = courseController;}
+
 
 
     public void addQuizButton() {
@@ -304,6 +309,7 @@ public class CourseEditController implements Initializable {
     public void loadMyCourse(int CourseID, ScrollPane wrapperA){
         courseDB = new CourseDB();
         QuestionDB questionDB = new QuestionDB();
+        this.courseID = CourseID;
         courseItem = courseDB.getCourseByID(CourseID);
 
         this.courseName.setText(courseItem.getCourseName());
@@ -352,7 +358,10 @@ public class CourseEditController implements Initializable {
 
                 QuizBoxItem quizBoxItem = new QuizBoxItem(name, count, max, min);
 
+                quizBoxContent.setDetailGroup(true);
                 passWrapperToQuizBox(quizBoxContent);
+                passCourseContToQuizBox(quizBoxContent);
+                passCourseID(quizBoxContent);
 
                 if (wrapperA == null){
                     System.out.println("mai me");
