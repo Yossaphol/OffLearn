@@ -13,7 +13,6 @@ import java.util.ResourceBundle;
 //Swing
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-//import javafx.embed.swing.SwingNode;
 
 
 
@@ -31,26 +30,26 @@ public class withdrawHistoryController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         displayNavbar();
         route();
-        setupTable();
+     //   setupTable();
     }
 
-    public void setupTable() {
-        SwingNode swingNode = new SwingNode();
-        javafx.application.Platform.runLater(() -> {
-            String[] columns = { "Date", "Account No.", "Account Name", "Amount" };
-            Object[][] data = {
-                    { "2025-03-27", "123456", "John Doe", "$1000.00" },
-                    { "2025-03-26", "654321", "Jane Smith", "$500.50" },
-                    { "2025-03-25", "789012", "Alice Brown", "$250.75" }
-            };
-
-            JTable table = new JTable(new DefaultTableModel(data, columns));
-            JScrollPane scrollPane = new JScrollPane(table);
-            swingNode.setContent(scrollPane);
-        });
-
-        tableContainer.getChildren().add(swingNode);
-    }
+//    public void setupTable() {
+//        SwingNode swingNode = new SwingNode();
+//        javafx.application.Platform.runLater(() -> {
+//            String[] columns = { "Date", "Account No.", "Account Name", "Amount" };
+//            Object[][] data = {
+//                    { "2025-03-27", "123456", "John Doe", "$1000.00" },
+//                    { "2025-03-26", "654321", "Jane Smith", "$500.50" },
+//                    { "2025-03-25", "789012", "Alice Brown", "$250.75" }
+//            };
+//
+//            JTable table = new JTable(new DefaultTableModel(data, columns));
+//            JScrollPane scrollPane = new JScrollPane(table);
+//            swingNode.setContent(scrollPane);
+//        });
+//
+//        tableContainer.getChildren().add(swingNode);
+//    }
 
 
     private void route(){
