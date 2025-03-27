@@ -1,6 +1,7 @@
 package Teacher.somethingWithVideo;
 
 import Database.ChapterDB;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -9,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -83,14 +85,22 @@ public class uploadVideoController implements Initializable {
 
                 File file = new File(selectedFile.getAbsolutePath());
                 String mediaPath = file.toURI().toString();
-
-                Media mediaSource = new Media(mediaPath);
-                MediaPlayer mediaPlayer = new MediaPlayer(mediaSource);
-                mediaView.setMediaPlayer(mediaPlayer);
-                mediaPlayer.setAutoPlay(true);
-
                 videoPath = String.valueOf(mediaPath);
 
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Teacher/somethingWithVideo/videoclip.fxml"));
+                    StackPane videoClipNode = loader.load();
+
+                    ClipManager clipManager = loader.getController();
+                    clipManager.setVideoUrl(mediaPath);
+
+                    mediacontainer.getChildren().clear();
+                    mediacontainer.getChildren().add(videoClipNode);
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
