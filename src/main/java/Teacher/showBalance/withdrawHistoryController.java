@@ -83,9 +83,14 @@ public class withdrawHistoryController implements Initializable {
             swingNode.setContent(scrollPane);
 
             Platform.runLater(() -> {
+                Stage stage = (Stage) tableContainer.getScene().getWindow();
                 tableContainer.getChildren().clear();
                 tableContainer.getChildren().add(swingNode);
+                stage.setFullScreen(true);
+                stage.setFullScreenExitHint("");
+                stage.setFullScreen(false);
             });
+
         });
     }
 
