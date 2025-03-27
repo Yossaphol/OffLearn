@@ -9,6 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
 <HBox fx:id="chapterContent" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="850.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.ChapterContent">
@@ -17,14 +18,7 @@
             <children>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                     <children>
-                        <ImageView fx:id="video" fitHeight="125.0" fitWidth="165.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../../../img/Picture/alvaro-reyes-qWwpHwip31M-unsplash.jpg" />
-                            </image>
-                            <VBox.margin>
-                                <Insets bottom="20.0" />
-                            </VBox.margin>
-                        </ImageView>
+                  <MediaView fx:id="video" fitHeight="150.0" fitWidth="150.0" />
                         <Button fx:id="addImg" mnemonicParsing="false" prefHeight="30.0" prefWidth="105.0" style="-fx-background-color: #0675de;" text="เพิ่มวิดิโอ" textFill="WHITE">
                      <font>
                         <Font name="Noto Sans Thai Bold" size="12.0" />
@@ -67,13 +61,23 @@
                            <Insets top="20.0" />
                         </VBox.margin>
                      </Label>
-                     <Button fx:id="addFile" mnemonicParsing="false" style="-fx-background-color: #0675de;" text="แนบไฟล์" textFill="WHITE">
-                        <cursor>
-                           <Cursor fx:constant="HAND" />
-                        </cursor>
-                        <font>
-                           <Font name="Noto Sans Thai Bold" size="12.0" />
-                        </font></Button>
+                     <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="332.0">
+                        <children>
+                           <Button fx:id="addFile" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: #0675de;" text="แนบไฟล์" textFill="WHITE">
+                              <cursor>
+                                 <Cursor fx:constant="HAND" />
+                              </cursor>
+                              <font>
+                                 <Font name="Noto Sans Thai Bold" size="12.0" />
+                              </font>
+                           </Button>
+                           <Label fx:id="fileName" prefHeight="18.0" prefWidth="215.0" text="ยังไม่ได้เพิ่มไฟล์..." textFill="#848484">
+                              <HBox.margin>
+                                 <Insets left="20.0" />
+                              </HBox.margin>
+                           </Label>
+                        </children>
+                     </HBox>
                   </children>
                   <VBox.margin>
                      <Insets top="20.0" />

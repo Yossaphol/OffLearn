@@ -28,7 +28,7 @@
     <graphic>
         <HBox alignment="CENTER_LEFT" prefHeight="29.0">
             <children>
-                <Label fx:id="roadmapName" minHeight="-Infinity" prefHeight="29.0" text="Front-end">
+                <Label fx:id="roadmapName" minHeight="-Infinity" prefHeight="29.0" text= "" >
                     <font>
                         <Font name="Noto Sans Thai Bold" size="18.0" />
                     </font>

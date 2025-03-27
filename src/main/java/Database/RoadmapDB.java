@@ -17,7 +17,7 @@ public class RoadmapDB extends ConnectDB {
     public void insertRoadmapList(String catID) {
         roadmapList.clear(); // เคลียร์รายการเก่าก่อนจะโหลดใหม่
 
-        String sql = "SELECT name, RMDescription FROM offlearn.roadmap WHERE Cat_ID = ?";
+        String sql = "SELECT RoadMap_ID, name, RMDescription FROM offlearn.roadmap WHERE Cat_ID = ?";
 
         try {
             Connection conn = this.connectToDB();
@@ -26,9 +26,10 @@ public class RoadmapDB extends ConnectDB {
             ResultSet rs = pstm.executeQuery();
 
             while (rs.next()) {
-                String[] roadmapData = new String[2];
-                roadmapData[0] = rs.getString("name");         // ชื่อ Roadmap
-                roadmapData[1] = rs.getString("RMDescription"); // รายละเอียดของ Roadmap
+                String[] roadmapData = new String[3];
+                roadmapData[0] = rs.getString("RoadMap_ID"); // RoadmapID
+                roadmapData[1] = rs.getString("name");         // ชื่อ Roadmap
+                roadmapData[2] = rs.getString("RMDescription"); // รายละเอียดของ Roadmap
                 roadmapList.add(roadmapData);
             }
 

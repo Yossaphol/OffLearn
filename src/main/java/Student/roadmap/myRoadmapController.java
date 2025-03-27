@@ -1,4 +1,5 @@
 package Student.roadmap;
+import Database.OrderRoadmapDB;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
 import javafx.animation.ScaleTransition;
@@ -25,6 +26,7 @@ import java.util.ResourceBundle;
 
 public class myRoadmapController implements Initializable {
 
+    private String roadmapID;
 
     public GridPane roadmap_node_container;
     public HBox optional_course_container;
@@ -52,6 +54,11 @@ public class myRoadmapController implements Initializable {
         handleRelatedRoadmap();
         displaySelectedRoadmapCard();
         route();
+    }
+
+    public void setRoadmapID(String roadmapID) {
+        this.roadmapID = roadmapID;
+        handleRoadmapNode();
     }
 
     private void route() {
@@ -88,30 +95,33 @@ public class myRoadmapController implements Initializable {
 
     public void handleRoadmapNode() {
         try {
-            List<String> courseList = new ArrayList<>();
-            courseList.add("Linear algebra, Probability and statistics, Calculus1");
-            courseList.add("Discrete Mathematics, Data Structures, Algorithms");
-            courseList.add("Discrete Mathematics, Data Structures, Algorithms");
-            courseList.add("Discrete Mathematics, Data Structures, Algorithms");
-            courseList.add("Discrete Mathematics, Data Structures, Algorithms");
+            OrderRoadmapDB orderRoadmapDB = new OrderRoadmapDB();
+
+
+            ArrayList<String[]> courseList = orderRoadmapDB.getCourseListByRoadmapID(roadmapID);
+            //courseList.add("Linear algebra, Probability and statistics, Calculus1");
+            //courseList.add("Discrete Mathematics, Data Structures, Algorithms");
+            //courseList.add("Discrete Mathematics, Data Structures, Algorithms");
+            //courseList.add("Discrete Mathematics, Data Structures, Algorithms");
+            //courseList.add("Discrete Mathematics, Data Structures, Algorithms");
 
             List<String> description = new ArrayList<>();
-            description.add("Advance Math");
-            description.add("Computer Science");
-            description.add("Computer Science");
-            description.add("Computer Science");
-            description.add("Computer Science");
+            //description.add("Advance Math");
+            //description.add("Computer Science");
+            //description.add("Computer Science");
+            //description.add("Computer Science");
+            //description.add("Computer Science");
 
             int col = 0, row = 0;
-            for (int i = 0; i < courseList.size(); i++) {
+
+            for (String[] courseDetails : courseList) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/roadmapnode.fxml"));
                 Node courseItem = loader.load();
                 roadmapnodecontroller controller = loader.getController();
 
-                // Set details
-                controller.setDescription(courseList.get(i));
-                controller.setSubjectName(description.get(i));
-                controller.setOrderNumber(i+1);
+                controller.setDescription(courseDetails[1]);  // รายละเอียดคอร์ส
+                controller.setSubjectName(courseDetails[0]);  // ชื่อคอร์ส
+                controller.setOrderNumber(Integer.parseInt(courseDetails[2]));  // ลำดับที่
 
                 ef.hoverEffect(courseItem);
                 roadmap_node_container.add(courseItem, col, row);
