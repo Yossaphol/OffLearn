@@ -396,7 +396,7 @@
                         </Button>
                         <HBox fx:id="saveCancelBtn1" prefHeight="78.0" prefWidth="1203.0" spacing="20.0" visible="false">
                            <children>
-                              <Button fx:id="saveChange1" mnemonicParsing="false" onAction="#saveProfileEdit" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="บันทึก" textFill="WHITE">
+                              <Button fx:id="saveChange1" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="บันทึก" textFill="WHITE">
                                  <font>
                                     <Font name="Noto Sans Thai Bold" size="16.0" />
                                  </font>

@@ -63,6 +63,14 @@ public class Navigator {
         navigateTo("/fxml/Teacher/somethingWithVideo/videoDetail.fxml", event);
     }
 
+    public void withdrawDetailRoute(MouseEvent event){
+        navigateTo("/fxml/Teacher/showBalance/withdrawDetail.fxml", event);
+    }
+
+    public void withdrawHistoryRoute(MouseEvent event){
+        navigateTo("/fxml/Teacher/showBalance/withdrawHistory.fxml", event);
+    }
+
     public void settingRoute(MouseEvent event){
         navigateTo("/fxml/Teacher/setting/setting.fxml", event);
         navCtrl.setCurrentPage("settingLabel");
