@@ -3,6 +3,7 @@ package Student.roadmap;
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
+import Student.courseManage.cartCardController;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXMLLoader;
@@ -59,7 +60,9 @@ public class roadmapController implements Initializable {
     public HBox levelContainer;
     public Button selectedLevel;
 
-private RoadmapDB roadmapDB = new RoadmapDB();
+    private RoadmapDB roadmapDB = new RoadmapDB();
+    private Navigator nav = new Navigator();
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -109,12 +112,41 @@ private RoadmapDB roadmapDB = new RoadmapDB();
         ArrayList<String[]> roadmaps = roadmapDB.getRoadmapList();
 
         for (String[] roadmap : roadmaps) {
-            String roadmapName = roadmap[0];
-            String roadmapDesc = roadmap[1];
+            String roadmapID = roadmap[0];
+            String roadmapName = roadmap[1];
+            String roadmapDesc = roadmap[2];
 
-            Button roadmapButton = new Button(roadmapName);
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/unheartroadmap.fxml"));
+                Button roadmapButton = loader.load();
+                roadmapButton.setText(roadmapName);
 
-            btn_cotainer.getChildren().add(roadmapButton);
+                roadmapButton.setOnAction(actionEvent -> {
+                    try {
+                        FXMLLoader roadmapLoader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/myroadmap.fxml"));
+                        Node node = roadmapLoader.load();
+
+                        // ส่งค่า RoadMap_ID ไปที่ myRoadmapController
+                        myRoadmapController controller = roadmapLoader.getController();
+                        controller.setRoadmapID(roadmapID);
+
+                        // เปลี่ยนหน้า
+                        MainFrame.getChildren().clear();
+                        MainFrame.getChildren().add(node);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+
+                btn_cotainer.getChildren().add(roadmapButton);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //Button roadmapButton = new Button(roadmapName);
+
+            //btn_cotainer.getChildren().add(roadmapButton);
         }
     }
 

@@ -91,7 +91,7 @@ public class learningPageController implements Initializable {
     }
 
     public void recieveMethod(String courseid){
-        this.courseID = courseid;
+        // this.courseID = courseid;
     }
 
     private void loadVideoPlayer() {
