@@ -18,6 +18,23 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="137.0" prefWidth="382.0">
                <children>
+                  <VBox fx:id="detailGroup" alignment="CENTER" prefHeight="81.0" prefWidth="75.0">
+                     <children>
+                        <ImageView fitHeight="41.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/icon/analytics.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="รายละเอียด" textFill="#8e8e8e">
+                           <font>
+                              <Font name="Kodchasan Regular" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </VBox>
                   <Label text="Quiz | " textFill="#0675de">
                      <font>
                         <Font name="Noto Sans Thai Bold" size="20.0" />
@@ -30,7 +47,7 @@
                   </Label>
                </children>
                <padding>
-                  <Insets left="100.0" />
+                  <Insets left="30.0" />
                </padding>
             </HBox>
             <HBox alignment="CENTER" prefHeight="137.0" prefWidth="118.0">

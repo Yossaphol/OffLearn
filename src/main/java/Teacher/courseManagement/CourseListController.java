@@ -1,6 +1,8 @@
 package Teacher.courseManagement;
 
 import Database.CourseDB;
+import Teacher.quiz.QuizBoxContent;
+import Teacher.quizDetail.QuizDetailController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

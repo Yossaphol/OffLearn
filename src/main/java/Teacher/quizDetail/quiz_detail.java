@@ -15,7 +15,7 @@ public class quiz_detail extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Teacher.quizDetail.quiz_detail.class.getResource("/fxml/Teacher/quiz/quiz_detail.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/quiz/quiz_detail.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
 
         primaryStage.setTitle("Offlearn");

@@ -3,23 +3,20 @@
 <?import javafx.scene.chart.BubbleChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox prefHeight="1613.0" prefWidth="1450.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.QuizDetail.quiz_detailController">
+<HBox prefHeight="1613.0" prefWidth="1450.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.quizDetail.QuizDetailController">
     <children>
         <VBox prefHeight="1609.0" prefWidth="1450.0">
             <children>
-                <HBox fx:id="searhbar_container" prefHeight="141.0" prefWidth="1450.0" />
                 <VBox prefHeight="1498.0" prefWidth="1450.0">
                     <children>
-                        <HBox fx:id="goback" prefHeight="55.0" prefWidth="1450.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="1450.0">
                             <children>
                                 <HBox prefHeight="27.0" prefWidth="77.0" />
-                                <Label fx:id="goback" prefHeight="27.0" prefWidth="76.0" text="ย้อนกลับ" textFill="#007bff">
+                                <Label fx:id="back" prefHeight="27.0" prefWidth="76.0" text="ย้อนกลับ" textFill="#007bff">
                                     <font>
                                         <Font name="System Bold" size="18.0" />
                                     </font>
@@ -33,43 +30,60 @@
                                     <children>
                                         <HBox prefHeight="158.0" prefWidth="700.0">
                                             <children>
-                                                <Label fx:id="quiz_name" prefHeight="110.0" prefWidth="269.0" text="Quiz 1 Insertion Sort" textFill="#208cff">
+                                                <Label prefHeight="79.0" prefWidth="84.0" text="Quiz |" textFill="#208cff">
                                                     <font>
                                                         <Font name="System Bold" size="26.0" />
                                                     </font>
                                                 </Label>
+                                    <Label fx:id="quizName" prefHeight="110.0" prefWidth="269.0" text="name" textFill="#208cff">
+                                       <font>
+                                          <Font name="System Bold" size="26.0" />
+                                       </font>
+                                    </Label>
                                             </children>
                                         </HBox>
-                                        <HBox prefHeight="147.0" prefWidth="216.0">
+                                        <HBox fx:id="detailBox" alignment="CENTER" prefHeight="147.0" prefWidth="216.0" style="-fx-background-color: white; -fx-background-radius: 10;">
                                             <children>
-                                                <Label fx:id="min_score" prefHeight="68.0" prefWidth="161.0" text="คะแนนขั้นต่ำ 5">
+                                                <Label prefHeight="68.0" prefWidth="90.0" text="คะแนนขั้นต่ำ ">
+                                                    <font>
+                                                        <Font size="16.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label fx:id="min" prefHeight="68.0" prefWidth="88.0" text="min">
                                                     <font>
                                                         <Font name="System Bold" size="16.0" />
                                                     </font>
                                                 </Label>
-                                                <Label fx:id="max_score" prefHeight="68.0" prefWidth="180.0" text="คะแนนเต็ม 10">
+                                    <Label prefHeight="68.0" prefWidth="74.0" text="คะแนนเต็ม">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="max" prefHeight="68.0" prefWidth="82.0" text="max">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                                <Label prefHeight="68.0" prefWidth="54.0" text="จำนวน">
                                                     <font>
-                                                        <Font name="System Bold" size="16.0" />
+                                                        <Font size="16.0" />
                                                     </font>
                                                 </Label>
-                                                <Label fx:id="quiz_count" prefHeight="68.0" prefWidth="156.0" text="จำนวน 2 ข้อ">
-                                                    <font>
-                                                        <Font name="System Bold" size="16.0" />
-                                                    </font>
-                                                </Label>
+                                    <Label fx:id="count" prefHeight="68.0" prefWidth="33.0" text="cnt">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="68.0" prefWidth="86.0" text="ข้อ">
+                                       <font>
+                                          <Font name="Baskerville Old Face" size="16.0" />
+                                       </font>
+                                    </Label>
                                             </children>
                                         </HBox>
                                     </children>
                                 </VBox>
-                                <VBox prefHeight="147.0" prefWidth="307.0">
-                                    <children>
-                                        <ImageView fx:id="quiz_edit_logo" fitHeight="24.0" fitWidth="285.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../../../img/icon/edit.png" />
-                                            </image>
-                                        </ImageView>
-                                    </children>
-                                </VBox>
+                                <VBox prefHeight="147.0" prefWidth="307.0" />
                                 <VBox prefHeight="147.0" prefWidth="299.0" />
                             </children>
                         </HBox>

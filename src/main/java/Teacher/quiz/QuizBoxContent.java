@@ -1,6 +1,8 @@
 package Teacher.quiz;
 
 import Database.QuizDB;
+import Teacher.courseManagement.CourseController;
+import Teacher.quizDetail.QuizDetailController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
@@ -37,6 +38,9 @@ public class QuizBoxContent implements Initializable {
     @FXML
     private HBox quizBox;
 
+    @FXML
+    private VBox detailGroup;
+
     private ScrollPane wrapper;
     private VBox courseManagement;
     private VBox courseSpace;
@@ -48,6 +52,8 @@ public class QuizBoxContent implements Initializable {
     private QuizDB quizDB;
     private QuizController quizController;
     private QuizBoxItem quizBoxItem;
+    private CourseController courseController;
+    private int courseId;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -55,6 +61,8 @@ public class QuizBoxContent implements Initializable {
         deleteButton();
         shadow();
         quizEdit();
+
+        detailGroupButton();
 
     }
 
@@ -110,7 +118,6 @@ public class QuizBoxContent implements Initializable {
         });
     }
 
-
     public void shadow(){
         DropShadow dropShadow = new DropShadow();
         dropShadow.setRadius(10);
@@ -150,15 +157,56 @@ public class QuizBoxContent implements Initializable {
             });
     }
 
+    public void setDetailGroup(boolean isShow){
+        this.detailGroup.setVisible(isShow);
+    }
+
+    public void detailGroupButton(){
+        detailGroup.setOnMouseClicked(mouseEvent -> {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/quiz/quiz_detail.fxml"));
+                HBox quizDetail = fxmlLoader.load();
+
+                QuizDetailController quizDetailController = fxmlLoader.getController();
+                wrapper.setContent(quizDetail);
+
+                quizDetailController.setDetail(quizBoxItem);
+                passQuizBoxItem(quizDetailController);
+                passCourseContToQuizDetail(quizDetailController);
+                passWrapperToQuizDetail(quizDetailController);
+                passCourseManagementToQuizDetail(quizDetailController);
+                passCourseIDToQuizDetail(quizDetailController);
+
+                wrapper.setVvalue(0);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            mouseEvent.consume();
+        });
+    }
+
+    public void recieveCourseCont(CourseController courseController){this.courseController = courseController;}
+
+    public void passCourseContToQuizDetail(QuizDetailController quizDetailController){quizDetailController.recieveCourseController(courseController);}
+
     public void setQuizController(QuizController quizController){this.quizController = quizController;}
 
     public void passCourseManagement(QuizController quizController){
         quizController.recieveCourseManagement(courseManagement);
     }
 
+    public void passQuizBoxItem(QuizDetailController quizDetailController){ quizDetailController.recieveQuizBoxItem(this.quizBoxItem);}
+
     public void passWrapper(QuizController quizController){ quizController.recieveWrapper(wrapper); }
 
+    public void passWrapperToQuizDetail(QuizDetailController quizDetailController){ quizDetailController.recieveWrapper(wrapper);}
+
     public void passCourseSpace(QuizController q){ q.recieveCourseSpace(courseSpace);}
+
+    public void passCourseManagementToQuizDetail(QuizDetailController quizDetailController){quizDetailController.recieveCourseMangement(courseManagement);}
+
+    public void passCourseIDToQuizDetail(QuizDetailController quizDetailController){quizDetailController.recieveCourseId(courseId);}
 
     public void setCourseManagement(VBox courseManagement){ this.courseManagement = courseManagement; }
 
@@ -177,4 +225,6 @@ public class QuizBoxContent implements Initializable {
     public void setWrapper(ScrollPane wrapper){ this.wrapper = wrapper;}
 
     public void recieveQuizItemList(ArrayList<QuestionItem> questionItemsList){ this.questionItemsList = questionItemsList;}
+
+    public void recieveCourseId(int courseId){this.courseId = courseId;}
 }
