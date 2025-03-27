@@ -22,6 +22,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import Teacher.Server;
 import javafx.util.Duration;
+import javafx.scene.layout.Region;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -67,6 +68,8 @@ public class pChatServerController extends pChatController implements Initializa
     private VBox pChatDisplay;
 
     private Map<String, List<HBox>> chatHistory = new HashMap<>();
+    private Map<String, Integer> unreadMessageCounts = new HashMap<>();
+
     private String selectedStudent;
 
     private Server server;
@@ -93,11 +96,18 @@ public class pChatServerController extends pChatController implements Initializa
             private final HBox hBox = new HBox(10);
             private final ImageView profileImage = new ImageView();
             private final Label nameLabel = new Label();
+            private final Label unreadCountLabel = new Label();
 
             {
                 profileImage.setFitHeight(50);
                 profileImage.setFitWidth(50);
-                hBox.getChildren().addAll(profileImage, nameLabel);
+
+                unreadCountLabel.setStyle("-fx-background-color: red; -fx-text-fill: white; " +
+                        "-fx-background-radius: 10; -fx-padding: 2 5; " +
+                        "-fx-font-weight: bold;");
+                Region spacer = new Region();
+                HBox.setHgrow(spacer, javafx.scene.layout.Priority.ALWAYS);
+                hBox.getChildren().addAll(profileImage, nameLabel, spacer, unreadCountLabel);
                 hoverEffect(hBox);
                 hBox.setStyle("-fx-cursor: hand;");
             }
@@ -114,6 +124,14 @@ public class pChatServerController extends pChatController implements Initializa
 
                     nameLabel.setText(studentName);
                     nameLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+
+                    Integer unreadCount = unreadMessageCounts.getOrDefault(studentName, 0);
+                    if (unreadCount > 0) {
+                        unreadCountLabel.setText(String.valueOf(unreadCount));
+                        unreadCountLabel.setVisible(true);
+                    } else {
+                        unreadCountLabel.setVisible(false);
+                    }
 
                     setGraphic(hBox);
                 }
@@ -150,9 +168,6 @@ public class pChatServerController extends pChatController implements Initializa
         });
 
         tfMessage.setOnAction(event -> sendMessage());
-
-
-
 
 
         displayNavbar();
@@ -211,16 +226,23 @@ public class pChatServerController extends pChatController implements Initializa
 
     public void receiveMessage(String studentName, String message) {
         Platform.runLater(() -> {
-            // First, ensure the student is at the top of the list
             if (!studentList.getItems().get(0).equals(studentName)) {
                 studentList.getItems().remove(studentName);
                 studentList.getItems().add(0, studentName);
             }
-
+            if (selectedStudent == null || !selectedStudent.equals(studentName)) {
+                unreadMessageCounts.put(studentName,
+                        unreadMessageCounts.getOrDefault(studentName, 0) + 1);
+                studentList.refresh();
+            }
             if (selectedStudent != null && selectedStudent.equals(studentName)) {
                 addMessage(message, Pos.CENTER_LEFT, "#D9D9D9");
+                unreadMessageCounts.put(studentName, 0);
+                studentList.refresh();
             }
-            chatHistory.computeIfAbsent(studentName, k -> new ArrayList<>()).add(createMessageBox(message, Pos.CENTER_LEFT, "#D9D9D9"));
+
+            chatHistory.computeIfAbsent(studentName, k -> new ArrayList<>())
+                    .add(createMessageBox(message, Pos.CENTER_LEFT, "#D9D9D9"));
         });
     }
 
@@ -243,6 +265,9 @@ public class pChatServerController extends pChatController implements Initializa
     }
 
     private void loadChatHistoryFromDB(int teacherId, int studentId) {
+        String studentName = selectedStudent;
+        unreadMessageCounts.put(studentName, 0);
+        studentList.refresh();
         vboxMessage.getChildren().clear();
 
         List<Map<String, String>> messages = chatHistoryDB.getAllMessages(teacherId, studentId);
