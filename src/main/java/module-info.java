@@ -19,6 +19,7 @@ module com.example.offlearn {
     requires software.amazon.awssdk.auth;
     requires software.amazon.awssdk.regions;
     requires software.amazon.awssdk.services.s3;
+    requires javafx.swing;
 
     opens Student.inbox to javafx.fxml;
     exports Student.inbox;

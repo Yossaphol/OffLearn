@@ -8,10 +8,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #FBFBFB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.showBalance.withdrawDetailController">
+<VBox alignment="TOP_CENTER" minWidth="-Infinity" style="-fx-background-color: #FBFBFB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.showBalance.withdrawDetailController">
     <children>
         <HBox fx:id="navbarContainer" alignment="TOP_CENTER" prefWidth="1440.0">
             <VBox.margin>
@@ -34,20 +33,23 @@
       </HBox>
         <HBox alignment="TOP_CENTER" prefWidth="1440.0">
             <children>
-                <HBox prefHeight="900.0" prefWidth="1057.0" style="-fx-background-color: #FBFBFB;" styleClass="element" stylesheets="@../../../css/withdraw.css">
+                <HBox alignment="TOP_CENTER" prefHeight="900.0" prefWidth="1057.0" style="-fx-background-color: #FBFBFB;">
                     <children>
-                        <VBox prefHeight="900.0" prefWidth="982.0">
+                        <VBox prefWidth="898.0">
                             <HBox.margin>
-                                <Insets bottom="80.0" left="120.0" top="80.0" />
+                                <Insets bottom="80.0" top="80.0" />
                             </HBox.margin>
                             <children>
                                 <Label text="ถอนไปยังบัญชี" textFill="#0675de">
                                     <font>
                                         <Font name="Noto Sans Thai Bold" size="24.0" />
                                     </font>
+                           <VBox.margin>
+                              <Insets bottom="40.0" />
+                           </VBox.margin>
                                 </Label>
                                 <Pane prefHeight="21.0" prefWidth="898.0" />
-                                <HBox prefHeight="643.0" prefWidth="944.0">
+                                <HBox prefHeight="692.0" prefWidth="898.0">
                                     <children>
                                         <Pane prefHeight="643.0" prefWidth="91.0" />
                                         <VBox prefHeight="643.0" prefWidth="853.0">
@@ -109,7 +111,7 @@
                                           <Insets bottom="20.0" />
                                        </padding>
                                                 </HBox>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                    <HBox alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="830.0" spacing="10.0">
                                        <children>
                                                           <Label text="ยอดคงเหลือ">
                                                               <font>
@@ -127,6 +129,25 @@
                                              </font>
                                           </Label>
                                        </children>
+                                       <VBox.margin>
+                                          <Insets top="5.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="BOTTOM_LEFT" prefHeight="76.0" prefWidth="830.0" spacing="50.0">
+                                       <children>
+                                          <VBox prefHeight="76.0" prefWidth="284.0">
+                                             <children>
+                                                <TextField fx:id="name1" prefHeight="38.0" promptText="ระบุจำนวนเงินที่ต้องการถอน" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
+                                                   <font>
+                                                      <Font name="Noto Sans Thai Regular" size="19.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="30.0" />
+                                       </VBox.margin>
                                     </HBox>
                                                 <HBox alignment="BOTTOM_LEFT" prefHeight="110.0" prefWidth="853.0" spacing="50.0">
                                                     <children>
@@ -192,8 +213,7 @@
                                           </VBox>
                                        </children>
                                                 </HBox>
-                                                <Pane prefHeight="49.0" prefWidth="853.0" />
-                                                <HBox alignment="CENTER" prefHeight="69.0" prefWidth="830.0" spacing="30.0">
+                                                <HBox alignment="CENTER" prefHeight="55.0" prefWidth="830.0" spacing="30.0">
                                                     <children>
                                                         <Button fx:id="withdrawBtn" mnemonicParsing="false" prefHeight="46.0" prefWidth="776.0" style="-fx-background-color: #0675DE; -fx-background-radius: 8;" text="ถอนเงิน" textFill="WHITE">
                                                             <font>
@@ -204,6 +224,9 @@
                                                             </cursor>
                                                         </Button>
                                                     </children>
+                                       <VBox.margin>
+                                          <Insets top="30.0" />
+                                       </VBox.margin>
                                                 </HBox>
                                                 <Label text="*โปรดตรวจสอบความถูกต้องของบันชีรับเงิน" textFill="#868686">
                                                     <font>
@@ -221,38 +244,9 @@
                         </VBox>
                     </children>
                     <HBox.margin>
-                        <Insets bottom="30.0" right="20.0" top="30.0" />
+                        <Insets bottom="30.0" top="30.0" />
                     </HBox.margin>
                 </HBox>
-                <VBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="899.5" prefWidth="401.0">
-                    <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="428.0" prefWidth="401.0">
-                            <children>
-                                <Circle fill="#0675de" radius="68.0" stroke="#00000007" strokeType="INSIDE" />
-                                <VBox prefHeight="200.0" prefWidth="100.0">
-                                    <children>
-                                        <Circle fill="#0675de" radius="26.0" stroke="#00000007" strokeType="INSIDE" />
-                                    </children>
-                                </VBox>
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="537.0" prefWidth="401.0">
-                            <children>
-                                <VBox prefHeight="200.0" prefWidth="100.0">
-                                    <children>
-                                        <Circle fill="#0675de" radius="51.0" stroke="#00000007" strokeType="INSIDE" />
-                                        <HBox alignment="CENTER_RIGHT" prefHeight="333.0" prefWidth="100.0">
-                                            <children>
-                                                <Circle fill="#0675de" radius="16.0" stroke="#00000007" strokeType="INSIDE" />
-                                            </children>
-                                        </HBox>
-                                    </children>
-                                </VBox>
-                                <Circle fill="#0776de00" radius="91.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-                            </children>
-                        </HBox>
-                    </children>
-                </VBox>
             </children>
         </HBox>
     </children>

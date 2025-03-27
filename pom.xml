@@ -63,6 +63,18 @@
             <artifactId>javafx-media</artifactId>
             <version>23.0.2</version>
         </dependency>
+        <dependency>
+            <!-- ถ้าขึ้นตัวสีแดง
+            https://mvnrepository.com/artifact/org.openjfx/javafx-swing/23.0.2 โหลดไฟล์ Jar จากนั้น Add เข้า module
+            1. Project structure -> Modules -> Dependencies -> กด + -> เลือกไฟล์ Jar ที่โหลดมา -> เลือก Jar directory (ถ้ามีขึ้นให้เลือก) -> Apply -> Ok
+            2. Reload maven -> Restart Intellij
+            ถ้ายังรันไม่ได้อยู่ ลอง File->Invalidate cache
+            -->
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>23.0.2</version>
+        </dependency>
+
 
         <!-- Unit Testing -->
         <dependency>

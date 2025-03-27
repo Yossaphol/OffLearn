@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #FBFBFB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.showBalance.withdrawHistoryController">
+<VBox alignment="TOP_CENTER" style="-fx-background-color: #FBFBFB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.showBalance.withdrawHistoryController">
     <children>
         <HBox fx:id="navbarContainer" alignment="TOP_CENTER" prefWidth="1440.0">
             <VBox.margin>
@@ -31,7 +31,7 @@
         </HBox>
         <HBox alignment="TOP_CENTER" prefWidth="1440.0">
             <children>
-                  <VBox prefHeight="900.0" prefWidth="982.0">
+                  <VBox>
                       <HBox.margin>
                           <Insets top="80.0" />
                       </HBox.margin>
@@ -42,7 +42,7 @@
                               </font>
                           </Label>
                           <Pane prefHeight="21.0" prefWidth="898.0" />
-                          <HBox fx:id="tableContainer" prefHeight="643.0" prefWidth="944.0" />
+                          <HBox fx:id="tableContainer" />
                       </children>
                   </VBox>
             </children>

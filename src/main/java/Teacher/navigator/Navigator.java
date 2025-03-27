@@ -112,28 +112,4 @@ public class Navigator {
             e.printStackTrace();
         }
     }
-
-
-  /*  public void navigateTo(String fxmlPath, Stage stage) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            Parent root = loader.load();
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setFullScreen(false);
-            stage.setFullScreenExitHint("");
-
-            stage.fullScreenProperty().addListener((obs, wasFullScreen, isNowFullScreen) -> {
-                if (!isNowFullScreen) {
-                    stage.setFullScreen(false);
-                    stage.setMaximized(true);
-                }
-            });
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
-
 }
