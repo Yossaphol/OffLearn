@@ -1,5 +1,6 @@
 package Student.learningPage;
 
+import Database.*;
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
@@ -49,7 +50,10 @@ public class learningPageController implements Initializable {
 
     private int countLike = 224;
     private int countDisLike = 17;
+
     private String courseID;
+    private String chapterID;
+    private String userID;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -88,6 +92,47 @@ public class learningPageController implements Initializable {
         method_home.hoverEffect(btnEP);
         method_home.hoverEffect(nextCourse);
         method_home.hoverEffect(btnEP1);
+
+    }
+
+    public void receiveData(String courseID, String chapterID, String userID) {
+        VideoPathDB videoDB = new VideoPathDB();
+        QuizDB quizDB = new QuizDB();
+        ChapterDB chapterDB = new ChapterDB();
+        CourseDB courseDB = new CourseDB();
+        ProgressDB progressDB = new ProgressDB();
+        UserDB userDB = new UserDB();
+        LearningPageDB learningPagePB = new LearningPageDB();
+
+        this.courseID = courseID;
+        this.chapterID = chapterID;
+        this.userID = userID;
+
+        loadChapterContent();
+        loadTeacherInfo();
+        loadPlaylist();
+        loadProgress();
+        loadRecommendedCourses();
+        loadComments(); // optional
+    }
+
+    private void loadChapterContent() {
+    }
+
+    private void loadTeacherInfo() {
+    }
+
+    private void loadComments() { // optional
+    }
+
+    private void loadRecommendedCourses() {
+    }
+
+    private void loadProgress() {
+    }
+
+    private void loadPlaylist() {
+
     }
 
     public void recieveMethod(String courseid){

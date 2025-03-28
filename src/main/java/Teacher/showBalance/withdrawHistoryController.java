@@ -45,7 +45,7 @@ public class withdrawHistoryController implements Initializable {
                     { "2025-03-27 13:30", "123456", "John Doe", "1000.00" },
                     { "2025-03-26 20:04", "654321", "Jane Smith", "500.50" },
                     { "2025-03-25 18:27", "789012", "Alice Brown", "250.75" },
-                    { "2025-03-26 20:04", "654321", "Jane Smith", "500.50" }
+                    { "2025-03-26 20:04", "654321", "Jane Smith", "500.50" },{ "2025-03-26 20:04", "654321", "Jane Smith", "500.50" },{ "2025-03-26 20:04", "654321", "Jane Smith", "500.50" },{ "2025-03-26 20:04", "654321", "Jane Smith", "500.50" },{ "2025-03-26 20:04", "654321", "Jane Smith", "500.50" },{ "2025-03-26 20:04", "654321", "Jane Smith", "500.50" },{ "2025-03-26 20:04", "654321", "Jane Smith", "500.50" },
             };
 
             DefaultTableModel model = new DefaultTableModel(data, columns) {

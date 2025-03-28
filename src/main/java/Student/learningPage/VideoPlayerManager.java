@@ -58,6 +58,7 @@ public class VideoPlayerManager implements Initializable {
     @FXML private Slider sliderVolume; // volume slider
     @FXML private StackPane videocontainer;  // root container for the video
     @FXML private AnchorPane controlPane;     // overlay pane with the controls
+    @FXML private ImageView loadinggif;
     private MediaPlayer mediaPlayer;
     private Rectangle clip;
     private ContextMenu settingsMenu;
@@ -117,6 +118,7 @@ public class VideoPlayerManager implements Initializable {
                         "-c:v", "libx264",
                         "-preset", "veryfast",
                         "-crf", "28",
+                        "-movflags", "+faststart",
                         outputFilePath
                 );
                 pb.redirectErrorStream(true);
@@ -137,6 +139,7 @@ public class VideoPlayerManager implements Initializable {
 
         encodingTask.setOnSucceeded(e -> {
             File encodedFile = new File(outputFilePath);
+            loadinggif.setImage(playIcon);
             if (!encodedFile.exists()) {
                 System.err.println("Encoded file not found: " + outputFilePath);
                 return;
@@ -149,6 +152,7 @@ public class VideoPlayerManager implements Initializable {
 
         // On failure, log and optionally fall back to playing the original S3 video (TEMP)
         encodingTask.setOnFailed(e -> {
+            loadinggif.setImage(playIcon);
             Throwable ex = encodingTask.getException();
             ex.printStackTrace();
             Media media = new Media(videoPath);
@@ -158,10 +162,6 @@ public class VideoPlayerManager implements Initializable {
         });
         new Thread(encodingTask).start();
 
-
-
-
-        controlPane.setOpacity(1.0);
 
         // Prevent clicks from passing through certain nodes
         consumeClicks(controlpanesection);
@@ -336,6 +336,13 @@ public class VideoPlayerManager implements Initializable {
             toggleMute();
         });
         btnSound.addEventFilter(MouseEvent.MOUSE_ENTERED, e -> showVolumeSlider());
+
+        mediaPlayer.setOnPlaying(() -> {
+            if (loadinggif.isVisible()) {
+                loadinggif.setVisible(false);
+            }
+        });
+
 
         // volume icon
         sliderVolume.valueProperty().addListener((obs, oldVal, newVal) -> {

@@ -29,7 +29,7 @@
                         <Font name="Noto Sans Thai Regular" size="16.0" />
                      </font>
                   </Label>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox prefHeight="354.0" prefWidth="1240.0">
                      <children>
                         <VBox alignment="CENTER" prefHeight="212.0" prefWidth="179.0" spacing="20.0">
                            <children>
@@ -49,7 +49,7 @@
                               </Button>
                            </children>
                         </VBox>
-                        <VBox fx:id="privateinfo_container" fillWidth="false" prefHeight="246.0" prefWidth="716.0">
+                        <VBox fx:id="privateinfo_container" alignment="TOP_RIGHT" fillWidth="false" prefHeight="370.0" prefWidth="716.0">
                            <children>
                               <HBox prefHeight="85.0" prefWidth="1124.0">
                                  <children>
@@ -96,7 +96,21 @@
                                  <children>
                                     <VBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="310.0">
                                        <children>
-                                          <Label fx:id="privateinfo_gmail_header" text="Gmail">
+                                          <Label fx:id="privateinfo_gmail_header" text="คำอธิบายตัวเอง">
+                                             <font>
+                                                <Font name="Noto Sans Thai Regular" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="description" disable="true" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="Describe yourself...">
+                                             <font>
+                                                <Font name="Noto Sans Thai Regular" size="16.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="310.0">
+                                       <children>
+                                          <Label fx:id="privateinfo_gmail_header1" text="Gmail">
                                              <font>
                                                 <Font name="Noto Sans Thai Regular" size="20.0" />
                                              </font>
@@ -107,34 +121,34 @@
                                              </font>
                                           </TextField>
                                        </children>
-                                    </VBox>
-                                    <HBox fx:id="saveCancelProfileBtn" alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="333.0" spacing="30.0" visible="false">
                                        <HBox.margin>
                                           <Insets left="50.0" />
                                        </HBox.margin>
-                                       <children>
-                                          <Button fx:id="saveProfile" mnemonicParsing="false" onAction="#saveProfileEdit" prefWidth="100.0" style="-fx-background-radius: 10; -fx-background-color: #0675de;" text="บันทึก" textFill="WHITE">
-                                             <font>
-                                                <Font name="Noto Sans Thai Bold" size="16.0" />
-                                             </font>
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                          </Button>
-                                          <Button fx:id="cancelProfile" mnemonicParsing="false" onAction="#cancelChangeProfile" prefWidth="100.0" style="-fx-background-radius: 10; -fx-background-color: red;" text="ยกเลิก" textFill="WHITE">
-                                             <font>
-                                                <Font name="Noto Sans Thai Bold" size="16.0" />
-                                             </font>
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                          </Button>
-                                       </children>
-                                    </HBox>
+                                    </VBox>
                                  </children>
                                  <padding>
                                     <Insets left="20.0" />
                                  </padding>
+                              </HBox>
+                              <HBox fx:id="saveCancelProfileBtn" alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="333.0" spacing="30.0" visible="false">
+                                 <children>
+                                    <Button fx:id="saveProfile" mnemonicParsing="false" onAction="#saveProfileEdit" prefWidth="100.0" style="-fx-background-radius: 10; -fx-background-color: #0675de;" text="บันทึก" textFill="WHITE">
+                                       <font>
+                                          <Font name="Noto Sans Thai Bold" size="16.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                    <Button fx:id="cancelProfile" mnemonicParsing="false" onAction="#cancelChangeProfile" prefWidth="100.0" style="-fx-background-radius: 10; -fx-background-color: red;" text="ยกเลิก" textFill="WHITE">
+                                       <font>
+                                          <Font name="Noto Sans Thai Bold" size="16.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                 </children>
                               </HBox>
                            </children>
                         </VBox>
