@@ -9,6 +9,7 @@ import java.util.Map;
 
 public class EnrollDB extends ConnectDB{
 
+//    return int[] index 0 คือ ยอด enroll เดือนนี้ index 1 คือ ยอด enroll เดือนก่อน
     public int[] countEnrollmentsForCurrentAndLastMonth(int userID) {
         String sql = "SELECT " +
                 "SUM(CASE WHEN MONTH(Enroll_Date) = MONTH(CURRENT_DATE()) AND YEAR(Enroll_Date) = YEAR(CURRENT_DATE()) THEN 1 ELSE 0 END) AS this_month, " +
@@ -35,6 +36,7 @@ public class EnrollDB extends ConnectDB{
         return new int[]{0, 0};
     }
 
+//    return top 3 คอร์สที่มียอด enroll สูงสุด
     public Map<String, Integer> getTop3CoursesByEnrollment(int userID) {
         Map<String, Integer> topCourses = new LinkedHashMap<>();
 
@@ -63,6 +65,7 @@ public class EnrollDB extends ConnectDB{
         return topCourses;
     }
 
+//    return ชื่อคอร์ส กับ รายได้คอร์์สนั้น จาก คอร์สทั้งหมดที่เราสร้างไว้
     public Map<String, Integer> getCourseRevenue(int userID) {
         Map<String, Integer> courseRevenue = new LinkedHashMap<>();
 
@@ -89,6 +92,7 @@ public class EnrollDB extends ConnectDB{
         return courseRevenue;
     }
 
+    // return รายได้ทั้งหมดในเดือนนี้
     public int getTotalRevenueForCurrentMonth(int userID) {
         String sql = "SELECT COALESCE(SUM(c.price), 0) AS total_revenue " +
                 "FROM course c " +
@@ -114,6 +118,7 @@ public class EnrollDB extends ConnectDB{
         return 0;
     }
 
+//    return ยอด enroll ทั้งหมด
     public int getTotalEnrollments(int userID) {
         String sql = "SELECT COUNT(e.Enroll_ID) AS total_enrollments " +
                 "FROM enroll e " +
@@ -137,6 +142,7 @@ public class EnrollDB extends ConnectDB{
         return 0;
     }
 
+//    return    index 0 คือ ยอดรวมทั้งหมด index 1 คือ ยอด enroll ทั้งหมด
     public int[] getRevenueAndEnrollCountByCourseId(int courseId) {
         String sql = "SELECT COALESCE(c.price * COUNT(e.Enroll_ID), 0) AS revenue, " +
                 "COUNT(e.Enroll_ID) AS enroll_count " +
