@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.stream.Collectors;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class EnrollDB extends ConnectDB{
 
@@ -35,6 +35,107 @@ public class EnrollDB extends ConnectDB{
         return new int[]{0, 0};
     }
 
+    public Map<String, Integer> getTop3CoursesByEnrollment(int userID) {
+        Map<String, Integer> topCourses = new LinkedHashMap<>();
+
+        String sql = "SELECT c.courseName, COUNT(e.Enroll_ID) AS enroll_count " +
+                "FROM enroll e " +
+                "JOIN course c ON e.Course_ID = c.Course_ID " +
+                "WHERE c.User_ID = ? " +
+                "GROUP BY c.Course_ID " +
+                "ORDER BY enroll_count DESC " +
+                "LIMIT 3";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                topCourses.put(rs.getString("courseName"), rs.getInt("enroll_count"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return topCourses;
+    }
+
+    public Map<String, Integer> getCourseRevenue(int userID) {
+        Map<String, Integer> courseRevenue = new LinkedHashMap<>();
+
+        String sql = "SELECT c.courseName, c.price * COUNT(e.Enroll_ID) AS revenue " +
+                "FROM course c " +
+                "LEFT JOIN enroll e ON c.Course_ID = e.Course_ID " +
+                "WHERE c.User_ID = ? " +
+                "GROUP BY c.Course_ID";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                courseRevenue.put(rs.getString("courseName"), rs.getInt("revenue"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return courseRevenue;
+    }
+
+    public int getTotalRevenueForCurrentMonth(int userID) {
+        String sql = "SELECT COALESCE(SUM(c.price), 0) AS total_revenue " +
+                "FROM course c " +
+                "JOIN enroll e ON c.Course_ID = e.Course_ID " +
+                "WHERE c.User_ID = ? " +
+                "AND MONTH(e.Enroll_Date) = MONTH(CURRENT_DATE()) " +
+                "AND YEAR(e.Enroll_Date) = YEAR(CURRENT_DATE())";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("total_revenue");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    public int getTotalEnrollments(int userID) {
+        String sql = "SELECT COUNT(e.Enroll_ID) AS total_enrollments " +
+                "FROM enroll e " +
+                "JOIN course c ON e.Course_ID = c.Course_ID " +
+                "WHERE c.User_ID = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("total_enrollments");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
 
 
 }

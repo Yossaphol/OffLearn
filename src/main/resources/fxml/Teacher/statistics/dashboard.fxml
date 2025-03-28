@@ -4,7 +4,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
@@ -192,14 +191,14 @@
                                                 </VBox>
                                                 <HBox fx:id="linechart_container" prefHeight="217.0" prefWidth="486.0" style="-fx-background-color: white; -fx-background-radius: 20;">
                                                    <children>
-                                                      <LineChart fx:id="lineChart_enroll" prefHeight="217.0" prefWidth="477.0">
+                                                      <BarChart fx:id="topCourse">
                                                         <xAxis>
                                                           <CategoryAxis side="BOTTOM" />
                                                         </xAxis>
                                                         <yAxis>
                                                           <NumberAxis side="LEFT" />
                                                         </yAxis>
-                                                      </LineChart>
+                                                      </BarChart>
                                                    </children>
                                                    <effect>
                                                       <DropShadow>
@@ -217,7 +216,7 @@
                                                 </HBox>
                                              </children>
                                           </HBox>
-                                          <HBox alignment="TOP_CENTER" prefHeight="261.0" prefWidth="1140.0">
+                                          <HBox alignment="TOP_CENTER" prefHeight="260.0" prefWidth="1202.0">
                                              <VBox.margin>
                                                 <Insets top="70.0" />
                                              </VBox.margin>
@@ -233,7 +232,7 @@
                                                    <children>
                                                       <Label text="เปอร์เซ็นต์ผู้เรียนที่" textFill="#0675de">
                                                          <font>
-                                                            <Font name="Noto Sans Thai Bold" size="16.0" />
+                                                            <Font name="Kodchasan Regular" size="16.0" />
                                                          </font>
                                                       </Label>
                                                       <HBox prefHeight="205.0" prefWidth="386.0">
@@ -243,13 +242,16 @@
                                                                <children>
                                                                   <Label fx:id="pass_rate" text="สอบผ่าน &lt;num&gt;%" textFill="#0675de">
                                                                      <font>
-                                                                        <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                        <Font name="Kodchasan Regular" size="14.0" />
                                                                      </font>
                                                                   </Label>
                                                                   <Label fx:id="fail_rate" text="สอบไม่ผ่าน &lt;num&gt;%" textFill="#de1d07">
                                                                      <font>
-                                                                        <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                                        <Font name="Kodchasan Regular" size="14.0" />
                                                                      </font>
+                                                                     <VBox.margin>
+                                                                        <Insets top="10.0" />
+                                                                     </VBox.margin>
                                                                   </Label>
                                                                </children>
                                                             </VBox>
@@ -275,21 +277,21 @@
                                                       </DropShadow>
                                                    </effect>
                                                    <children>
-                                                      <Label text="คะแนนต่ำกว่าค่าเฉลี่ย และ มีแนวโน้มตก" textFill="#0675de">
+                                                      <Label prefHeight="22.0" prefWidth="294.0" text="คะแนนต่ำกว่าค่าเฉลี่ย และ มีแนวโน้มตก" textFill="#0675de">
                                                          <font>
-                                                            <Font name="Noto Sans Thai Bold" size="16.0" />
+                                                            <Font name="Kodchasan Regular" size="14.0" />
                                                          </font>
                                                       </Label>
                                                       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                                          <children>
                                                             <Label fx:id="std_lowScore" text="&lt;จำนวน&gt;">
                                                                <font>
-                                                                  <Font name="Noto Sans Thai Bold" size="47.0" />
+                                                                  <Font name="Kodchasan Regular" size="40.0" />
                                                                </font>
                                                             </Label>
                                                             <Label text="คน">
                                                                <font>
-                                                                  <Font name="Noto Sans Thai Bold" size="20.0" />
+                                                                  <Font name="Kodchasan Regular" size="20.0" />
                                                                </font>
                                                                <HBox.margin>
                                                                   <Insets left="10.0" />
@@ -316,19 +318,19 @@
                                                    <children>
                                                       <Label text="รายได้รวมเดือนนี้" textFill="#0675de">
                                                          <font>
-                                                            <Font name="Noto Sans Thai Bold" size="16.0" />
+                                                            <Font name="Kodchasan Regular" size="14.0" />
                                                          </font>
                                                       </Label>
                                                       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                                          <children>
                                                             <Label fx:id="total_revenue" text="&lt;จำนวน&gt;">
                                                                <font>
-                                                                  <Font name="Noto Sans Thai Bold" size="47.0" />
+                                                                  <Font name="Kodchasan Regular" size="40.0" />
                                                                </font>
                                                             </Label>
                                                             <Label text="บาท">
                                                                <font>
-                                                                  <Font name="Noto Sans Thai Bold" size="20.0" />
+                                                                  <Font name="Kodchasan Regular" size="20.0" />
                                                                </font>
                                                                <HBox.margin>
                                                                   <Insets left="10.0" />
@@ -352,7 +354,7 @@
                                                    <children>
                                                       <Label prefHeight="37.0" prefWidth="109.0" text="รายได้" textFill="#a8a8a8">
                                                          <font>
-                                                            <Font name="Noto Sans Thai Regular" size="16.0" />
+                                                            <Font name="Kodchasan Regular" size="16.0" />
                                                          </font>
                                                          <padding>
                                                             <Insets left="50.0" />
@@ -599,7 +601,7 @@
                                                       </VBox>
                                                       <Button fx:id="month_select" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#openPopup" style="-fx-background-color: transparent;" text="เดือนนี้" textFill="#0675de" underline="true">
                                                          <font>
-                                                            <Font name="Noto Sans Thai Bold" size="16.0" />
+                                                            <Font name="Kodchasan Regular" size="16.0" />
                                                          </font>
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
@@ -611,7 +613,7 @@
                                                    <children>
                                                       <Label prefHeight="29.0" prefWidth="768.0" text="คอร์ส">
                                                          <font>
-                                                            <Font name="Noto Sans Thai Regular" size="18.0" />
+                                                            <Font name="Kodchasan Regular" size="18.0" />
                                                          </font>
                                                          <HBox.margin>
                                                             <Insets />
@@ -619,7 +621,7 @@
                                                       </Label>
                                                       <Label prefHeight="29.0" prefWidth="215.0" text="หมวดหมู่">
                                                          <font>
-                                                            <Font name="Noto Sans Thai Regular" size="18.0" />
+                                                            <Font name="Kodchasan Regular" size="18.0" />
                                                          </font>
                                                          <HBox.margin>
                                                             <Insets right="10.0" />
@@ -627,7 +629,7 @@
                                                       </Label>
                                                       <Label prefHeight="29.0" prefWidth="203.0" text="รายได้">
                                                          <font>
-                                                            <Font name="Noto Sans Thai Regular" size="18.0" />
+                                                            <Font name="Kodchasan Regular" size="18.0" />
                                                          </font>
                                                       </Label>
                                                    </children>
@@ -647,7 +649,7 @@
                                                    </content></ScrollPane>
                                                 <Button fx:id="course_manageBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="203.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="การจัดการคอร์ส" textFill="WHITE">
                                                    <font>
-                                                      <Font name="Noto Sans Thai Bold" size="17.0" />
+                                                      <Font name="Kodchasan Regular" size="17.0" />
                                                    </font>
                                                    <VBox.margin>
                                                       <Insets right="20.0" top="10.0" />
@@ -674,7 +676,7 @@
                                                    <children>
                                                       <Label prefHeight="26.0" prefWidth="1087.0" text="ข้อมูลเชืงลึก" textFill="#a8a8a8">
                                                          <font>
-                                                            <Font name="Noto Sans Thai Regular" size="16.0" />
+                                                            <Font name="Kodchasan Regular" size="16.0" />
                                                          </font>
                                                       </Label>
                                                    </children>
@@ -688,15 +690,18 @@
                                                          <children>
                                                             <Label text="ภาพรวมรายได้" textFill="#0675de">
                                                                <font>
-                                                                  <Font name="Noto Sans Thai Bold" size="27.0" />
+                                                                  <Font name="Kodchasan Regular" size="27.0" />
                                                                </font>
+                                                               <VBox.margin>
+                                                                  <Insets bottom="10.0" />
+                                                               </VBox.margin>
                                                             </Label>
                                                             <Label text="ภาพรวมรายได้" textFill="#a8a8a8">
                                                                <font>
-                                                                  <Font name="Noto Sans Thai Regular" size="17.0" />
+                                                                  <Font name="Kodchasan Regular" size="17.0" />
                                                                </font>
                                                             </Label>
-                                                            <Line endX="100.0" startX="-100.0" stroke="#0675de" />
+                                                            <Line endX="12.892938613891602" endY="-1.3287171125411987" startX="-100.0" stroke="#0675de" />
                                                          </children>
                                                          <padding>
                                                             <Insets left="70.0" />
@@ -724,21 +729,16 @@
                                                                               <Insets right="10.0" />
                                                                            </HBox.margin>
                                                                         </Line>
-                                                                        <VBox prefHeight="100.0" prefWidth="179.0">
+                                                                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="279.0">
                                                                            <children>
-                                                                              <Label fx:id="course_name1" text="Course name" textFill="#0675de">
+                                                                              <Label fx:id="totalEnroll" text="ยอดเข้าร่วม &lt;count&gt; ครั้ง">
                                                                                  <font>
-                                                                                    <Font name="Noto Sans Thai Bold" size="23.0" />
-                                                                                 </font>
-                                                                              </Label>
-                                                                              <Label fx:id="view_count" text="ยอดเข้าชม &lt;count&gt; ครั้ง">
-                                                                                 <font>
-                                                                                    <Font name="Noto Sans Thai Regular" size="17.0" />
+                                                                                    <Font name="Kodchasan Regular" size="17.0" />
                                                                                  </font>
                                                                               </Label>
                                                                               <Label fx:id="revenue" text="รายได้ &lt;revenue&gt; บาท">
                                                                                  <font>
-                                                                                    <Font name="Noto Sans Thai Regular" size="17.0" />
+                                                                                    <Font name="Kodchasan Regular" size="17.0" />
                                                                                  </font>
                                                                               </Label>
                                                                            </children>
