@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.HBox?>
@@ -10,10 +11,16 @@
       <VBox style="-fx-background-color: transparent;">
          <TabPane fx:id="tabPane" minHeight="-Infinity" prefHeight="700.0" stylesheets="@../../../css/tabPane.css" tabClosingPolicy="UNAVAILABLE">
             <Tab fx:id="btnUpComing" style="-fx-padding: 10px 20px 10px 20px; -fx-font-weight: bold; -fx-font-size: 18;" text="ที่ต้องทำ">
-               <VBox fx:id="containerUpComing" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="1142.0" style="-fx-background-color: white;" />
+               <VBox fx:id="containerUpComing" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="1142.0" spacing="20.0" style="-fx-background-color: white;">
+                  <padding>
+                     <Insets top="20.0" />
+                  </padding></VBox>
             </Tab>
             <Tab fx:id="btnComplete" style="-fx-padding: 10px 20px 10px 20px; -fx-font-weight: bold; -fx-font-size: 18;" text="เสร็จแล้ว">
-               <VBox fx:id="containerComplete" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: white;" />
+               <VBox fx:id="containerComplete" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" style="-fx-background-color: white;">
+                  <padding>
+                     <Insets top="20.0" />
+                  </padding></VBox>
             </Tab>
          </TabPane>
       </VBox>

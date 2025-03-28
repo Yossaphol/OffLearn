@@ -1,6 +1,5 @@
 package Database;
 
-import Teacher.quiz.QuestionItem;
 import Teacher.quiz.QuizItem;
 
 import java.sql.Connection;
@@ -9,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 public class QuizDB extends ConnectDB{
     public int saveQuiz(int chapterID, String quizName, int minScore, int max, String level) {
@@ -122,6 +122,32 @@ public class QuizDB extends ConnectDB{
 
         return quizItem;
     }
+
+    public List<QuizItem> getAllQuizzes() {
+        String sql = "SELECT * FROM quiz";
+        List<QuizItem> quizList = new ArrayList<>();
+
+        try (
+                Connection conn = this.connectToDB();
+                PreparedStatement pstm = conn.prepareStatement(sql);
+                ResultSet rs = pstm.executeQuery()
+        ) {
+            while (rs.next()) {
+                int quizID = rs.getInt("Quiz_ID");
+                String header = rs.getString("header");
+                int minScore = rs.getInt("minScore");
+                String level = rs.getString("level");
+                int maxScore = rs.getInt("maxScore");
+
+                quizList.add(new QuizItem(quizID, header, minScore, maxScore, level));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return quizList;
+    }
+
 
 
 
