@@ -14,34 +14,6 @@ import java.util.ArrayList;
 public class CourseDB extends ConnectDB{
     private CourseItem courseItem;
 
-    public void saveCourse(int cat, String courseName, int userId, String desc, int price) {
-        String checkSql = "SELECT COUNT(*) FROM course WHERE courseName = ? AND User_ID = ?";
-        String insertSql = "INSERT INTO course (Cat_ID, courseName, User_ID, courseDescription, price, image) VALUES (?, ?, ?, ?, ?, ?)";
-
-        try (
-                Connection conn = this.connectToDB();
-                PreparedStatement checkStmt = conn.prepareStatement(checkSql);
-                PreparedStatement insertStmt = conn.prepareStatement(insertSql);
-        ) {
-            checkStmt.setString(1, courseName);
-            checkStmt.setInt(2, userId);
-            ResultSet rs = checkStmt.executeQuery();
-            if (rs.next() && rs.getInt(1) > 0) {
-                return;
-            }
-
-            insertStmt.setInt(1, cat);
-            insertStmt.setString(2, courseName);
-            insertStmt.setInt(3, userId);
-            insertStmt.setString(4, desc);
-            insertStmt.setInt(5, price);
-            insertStmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void saveCourse(int cat, String courseName, int userId, String desc, int price, String imageUrl) {
         String checkSql = "SELECT COUNT(*) FROM course WHERE courseName = ? AND User_ID = ?";
         String insertSql = "INSERT INTO course (Cat_ID, courseName, User_ID, courseDescription, price, image) VALUES (?, ?, ?, ?, ?, ?)";
@@ -217,6 +189,24 @@ public class CourseDB extends ConnectDB{
             e.printStackTrace();
         }
         return false;
+    }
+
+    public int countMyCourses(int user_id) {
+        String sql = "SELECT COUNT(*) FROM offlearn.course WHERE User_ID = ?";
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstm = conn.prepareStatement(sql)) {
+
+            pstm.setInt(1, user_id);
+            ResultSet rs = pstm.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
 

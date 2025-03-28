@@ -1,7 +1,10 @@
 package Teacher.dashboard;
 
-import Database.User;
+import Database.CourseDB;
 import Database.UserDB;
+import Teacher.courseManagement.CourseItem;
+import Teacher.courseManagement.CourseListInDash;
+import a_Session.SessionHadler;
 import a_Session.SessionManager;
 import javafx.animation.*;
 import javafx.application.Platform;
@@ -14,14 +17,14 @@ import javafx.scene.Parent;
 import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import Student.HomeAndNavigation.HomeController;
@@ -31,31 +34,81 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class dashboardController implements Initializable {
-    public HBox searhbar_container;
-    public HBox dashboard_profile;
-    public HBox course_container_table;
-    public BarChart revenueChart;
-    public CategoryAxis xAxis_revenue;
-    public NumberAxis yAxis_revenue;
-    public LineChart lineChart_enroll;
-    public PieChart pie_chart_std;
-    public Button course_manageBtn;
-    public Button withdrawBtn;
-    public Button course_btn;
-    public Button withdraw_btn1;
-    public HBox linechart_container;
-    public VBox piechartContainer;
-    public VBox lowScore_container;
-    public VBox revenue_container;
-    public VBox overview_revenue_container;
-    public VBox month_selector;
-    public Button month_select;
-    public Button save_change;
+public class dashboardController implements Initializable, SessionHadler {
+    @FXML
+    private HBox searhbar_container;
 
+    @FXML
+    private HBox dashboard_profile;
+
+    @FXML
+    private HBox course_container_table;
+
+    @FXML
+    private BarChart revenueChart;
+
+    @FXML
+    private CategoryAxis xAxis_revenue;
+
+    @FXML
+    private NumberAxis yAxis_revenue;
+
+    @FXML
+    private LineChart lineChart_enroll;
+
+    @FXML
+    private PieChart pie_chart_std;
+
+    @FXML
+    private Button course_manageBtn;
+
+    @FXML
+    private Button withdrawBtn;
+
+    @FXML
+    private Button course_btn;
+
+    @FXML
+    private Button withdraw_btn1;
+
+    @FXML
+    private HBox linechart_container;
+
+    @FXML
+    private VBox piechartContainer;
+
+    @FXML
+    private VBox lowScore_container;
+
+    @FXML
+    private VBox revenue_container;
+
+    @FXML
+    private VBox overview_revenue_container;
+
+    @FXML
+    private VBox month_selector;
+
+    @FXML
+    private Button month_select;
+
+    @FXML
+    private ScrollPane courseTableContainer;
+
+    @FXML
+    private VBox myCourseList;
+
+    @FXML
+    private Button save_change;
+
+    private CourseDB courseDB;
+    private int userID;
+    private ArrayList<CourseItem> courseItemList;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        handleSession();
 
         HomeController effectMethod = new HomeController();
         effectMethod.hoverEffect(course_manageBtn);
@@ -69,14 +122,13 @@ public class dashboardController implements Initializable {
         hoverEffect(piechartContainer);
         hoverEffect(lowScore_container);
         hoverEffect(revenue_container);
-        hoverEffect(course_container_table);
         hoverEffect(overview_revenue_container);
 
         closePopupAuto();
 
         displayNavbar();
         displayProfileBox();
-        displayCourseInTable();
+        displayCourseInDash();
         setupRevenueChart();
         setupLinechartEnroll();
         setupStdChart();
@@ -92,10 +144,15 @@ public class dashboardController implements Initializable {
             searhbar_container.getScene().getRoot().applyCss();
         });
 
-
     }
 
-    private void displayNavbar(){
+    @Override
+    public void handleSession() {
+        UserDB userDB = new UserDB();
+        this.userID = userDB.getUserId(SessionManager.getInstance().getUsername());
+    }
+
+    public void displayNavbar(){
         try {
             FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/navBar/navBar.fxml"));
             HBox navContent = calendarLoader.load();
@@ -105,34 +162,38 @@ public class dashboardController implements Initializable {
         }
     }
 
-
-    private void route(){
+    public void route(){
         Navigator nav = new Navigator();
-
 
         //Course
         course_btn.setOnMouseClicked(nav::courseRoute);
         course_manageBtn.setOnMouseClicked(nav::courseRoute);
 
-
         withdrawBtn.setOnMouseClicked(nav::withdrawRoute);
         withdraw_btn1.setOnMouseClicked(nav::withdrawRoute);
 
-
     }
 
+    public void displayCourseInDash(){
+        courseDB = new CourseDB();
+        this.courseItemList = courseDB.getMyCourse(userID);
+        for (CourseItem c : courseItemList){
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/courseManagement/courseListInDash.fxml"));
+                HBox courseList = fxmlLoader.load();
 
-    private void displayCourseInTable(){
-        try {
-            FXMLLoader calendarLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/statistics/courseInTable.fxml"));
-            HBox navContent = calendarLoader.load();
-            course_container_table.getChildren().setAll(navContent);
-        } catch (IOException e) {
-            e.printStackTrace();
+                CourseListInDash courseListInDash = fxmlLoader.getController();
+
+                courseListInDash.setDisplay(c.getCourseImg(), c.getCourseName(), c.getCourseCat(), 0);
+
+                myCourseList.getChildren().add(courseList);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    private void setupRevenueChart() {
+    public void setupRevenueChart() {
         if (xAxis_revenue == null || yAxis_revenue == null || revenueChart == null) {
             System.out.println("FXML components not setup properly!");
             return;
@@ -258,7 +319,7 @@ public class dashboardController implements Initializable {
 
 
     @FXML
-    private void openPopup(ActionEvent event){
+    public void openPopup(ActionEvent event){
         Button clickedbtn = (Button) event.getSource();
         switch (clickedbtn.getId()){
             case "month_select":
@@ -269,7 +330,7 @@ public class dashboardController implements Initializable {
     }
 
     @FXML
-    private void month_selected(ActionEvent event){
+    public void month_selected(ActionEvent event){
         Button clickedbtn = (Button) event.getSource();
         String text = clickedbtn.getText();
         month_select.setText(text);
@@ -277,7 +338,7 @@ public class dashboardController implements Initializable {
 
 
     @FXML
-    private void _openPopup(Node popup) {
+    public void _openPopup(Node popup) {
         popup.setViewOrder(-1);
         FadeTransition fade = new FadeTransition(Duration.millis(300), popup);
 
@@ -310,7 +371,7 @@ public class dashboardController implements Initializable {
     }
 
 
-    private void closePopup(Node popup) {
+    public void closePopup(Node popup) {
         FadeTransition fade = new FadeTransition(Duration.millis(300), popup);
 
         fade.setFromValue(1);
@@ -322,7 +383,7 @@ public class dashboardController implements Initializable {
 
 
 
-    private void displayProfileBox() {
+    public void displayProfileBox() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Teacher/statistics/dashboardProfile.fxml"));
             Parent root = loader.load();
@@ -341,6 +402,7 @@ public class dashboardController implements Initializable {
             e.printStackTrace();
         }
     }
+
 
 
 }

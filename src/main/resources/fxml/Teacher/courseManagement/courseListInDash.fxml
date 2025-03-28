@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="mainComp" alignment="CENTER" prefHeight="122.0" prefWidth="1100.0" style="-fx-background-radius: 10; -fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.courseManagement.CourseListInDash">
+   <children>
+      <Rectangle fx:id="courseImg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="76.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />
+      <Pane prefHeight="95.0" prefWidth="21.0" />
+      <VBox alignment="CENTER_LEFT" prefHeight="122.0" prefWidth="370.0">
+         <children>
+            <Label fx:id="courseName" prefHeight="20.0" prefWidth="353.0" text="Each indrustry in economic system " textFill="#0675de">
+               <font>
+                  <Font name="Noto Sans Thai Bold" size="16.0" />
+               </font>
+            </Label>
+            <Pane prefHeight="4.0" prefWidth="380.0" />
+            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="380.0">
+               <children>
+                  <ImageView fitHeight="21.0" fitWidth="24.0">
+                     <image>
+                        <Image url="@../../../img/icon/like.png" />
+                     </image>
+                  </ImageView>
+                  <Pane prefHeight="35.0" prefWidth="6.0" />
+                  <Label text="324">
+                     <font>
+                        <Font name="Noto Sans Thai Regular" size="12.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="35.0" prefWidth="25.0" />
+                  <ImageView fitHeight="21.0" fitWidth="24.0">
+                     <image>
+                        <Image url="@../../../img/icon/dislike.png" />
+                     </image>
+                  </ImageView>
+                  <Pane prefHeight="35.0" prefWidth="6.0" />
+                  <Label text="5">
+                     <font>
+                        <Font name="Noto Sans Thai Regular" size="12.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="35.0" prefWidth="18.0" />
+                  <Pane prefHeight="35.0" prefWidth="16.0" />
+                  <Label text="4,304 enrolled">
+                     <font>
+                        <Font name="Noto Sans Thai Regular" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" prefHeight="122.0" prefWidth="348.0">
+         <children>
+            <Label fx:id="courseCat" text="Business" textFill="#0675de">
+               <font>
+                  <Font name="Noto Sans Thai Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <padding>
+            <Insets left="140.0" />
+         </padding>
+      </VBox>
+      <VBox alignment="CENTER" prefHeight="95.0" prefWidth="165.0">
+         <children>
+            <Label fx:id="courseIncome" text="4,000" textFill="#0675de">
+               <font>
+                  <Font name="Noto Sans Thai Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
+</HBox>

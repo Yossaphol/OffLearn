@@ -61,24 +61,38 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </HBox>
-            <Button fx:id="courseAmount" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Course amount" textFill="#0675de">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-               <graphic>
-                  <ImageView fitHeight="28.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../img/icon/video-lesson.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <font>
-                  <Font name="Noto Sans Thai Bold" size="15.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
+            <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="682.0">
+               <children>
+                  <Button fx:id="courseAmount" mnemonicParsing="false" style="-fx-background-color: transparent;" textFill="#0675de">
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/icon/video-lesson.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Noto Sans Thai Bold" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Label fx:id="countMyCourse" text="Label">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="Kodchasan Regular" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label text="คอร์ส">
+                     <font>
+                        <Font name="Kodchasan Regular" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
          </children>
          <HBox.margin>
             <Insets left="30.0" />

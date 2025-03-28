@@ -1,9 +1,12 @@
 package Teacher.dashboard;
 
+import Database.CourseDB;
 import Database.User;
 import Database.UserDB;
+import a_Session.SessionHadler;
 import a_Session.SessionManager;
 import Teacher.navigator.Navigator;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
@@ -16,16 +19,38 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
-public class dashboardProfileController implements Initializable {
+public class dashboardProfileController implements Initializable, SessionHadler {
 
-    public Rectangle user_pfp;
-    public Label setfullname;
-    public Label bio;
-    public Label total_review;
-    public Button like_btn;
-    public Button dislike_btn;
-    public Button courseAmount;
-    public Button editProfile;
+    @FXML
+    private Rectangle user_pfp;
+
+    @FXML
+    private Label setfullname;
+
+    @FXML
+    private Label bio;
+
+    @FXML
+    private Label total_review;
+
+    @FXML
+    private Button like_btn;
+
+    @FXML
+    private Button dislike_btn;
+
+    @FXML
+    private Button courseAmount;
+
+    @FXML
+    private Button editProfile;
+
+    @FXML
+    private Label countMyCourse;
+
+    private UserDB userDB;
+    private CourseDB courseDB;
+    private int userId;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -49,6 +74,11 @@ public class dashboardProfileController implements Initializable {
     }
 
     public void setProfileDetail(String username, String description, String profilePicPath, int likeCount, int disLikeCount, int courseCount){
+
+        userDB = new UserDB();
+        courseDB = new CourseDB();
+        userId = userDB.getUserId(SessionManager.getInstance().getUsername());
+        int count = courseDB.countMyCourses(userId);
 //        setfullname.setText(username);
         bio.setText(description);
 
@@ -56,7 +86,7 @@ public class dashboardProfileController implements Initializable {
 //        hm.loadAndSetImage(user_pfp, profilePicPath);
         dislike_btn.setText(String.valueOf(disLikeCount));
         like_btn.setText(String.valueOf(likeCount));
-        courseAmount.setText(courseCount+" คอร์ส");
+        countMyCourse.setText(count + "");
     }
 
     public void setProfile(String Url){
@@ -69,5 +99,10 @@ public class dashboardProfileController implements Initializable {
 
         this.user_pfp.setStroke(Color.TRANSPARENT);
         this.user_pfp.setFill(new ImagePattern(img));
+    }
+
+    @Override
+    public void handleSession() {
+
     }
 }

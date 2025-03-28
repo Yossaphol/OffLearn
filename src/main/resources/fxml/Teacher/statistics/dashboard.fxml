@@ -605,33 +605,13 @@
                                                       <Insets top="10.0" />
                                                    </VBox.margin>
                                                 </HBox>
-                                                <ScrollPane fx:id="courseTableContainer" hbarPolicy="NEVER" prefHeight="323.0" prefWidth="1140.0" stylesheets="@../../../css/Home.css" vbarPolicy="ALWAYS">
-                                                  <content>
-                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="308.0" prefWidth="1102.0">
-                                                         <children>
-                                                            <VBox prefHeight="396.0" prefWidth="1105.0">
-                                                               <children>
-                                                                  <HBox fx:id="course_container_table" alignment="CENTER_LEFT" prefHeight="95.0" prefWidth="1105.0">
-                                                                     <effect>
-                                                                        <DropShadow>
-                                                                           <color>
-                                                                              <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
-                                                                           </color>
-                                                                        </DropShadow>
-                                                                     </effect>
-                                                                     <padding>
-                                                                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-                                                                     </padding>
-                                                                     <cursor>
-                                                                        <Cursor fx:constant="HAND" />
-                                                                     </cursor>
-                                                                  </HBox>
-                                                               </children>
-                                                            </VBox>
-                                                         </children>
-                                                      </AnchorPane>
-                                                  </content>
-                                                </ScrollPane>
+                                                <ScrollPane fx:id="courseTableContainer" fitToWidth="true" hbarPolicy="NEVER" prefHeight="323.0" prefWidth="1140.0" stylesheets="@../../../css/Home.css" vbarPolicy="ALWAYS">
+                                                   <content>
+                                                      <VBox fx:id="myCourseList" spacing="15.0">
+                                                         <padding>
+                                                            <Insets bottom="15.0" />
+                                                         </padding></VBox>
+                                                   </content></ScrollPane>
                                                 <Button fx:id="course_manageBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="203.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="การจัดการคอร์ส" textFill="WHITE">
                                                    <font>
                                                       <Font name="Noto Sans Thai Bold" size="17.0" />
