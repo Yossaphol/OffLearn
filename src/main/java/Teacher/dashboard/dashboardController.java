@@ -1,6 +1,7 @@
 package Teacher.dashboard;
 
 import Database.CourseDB;
+import Database.EnrollDB;
 import Database.UserDB;
 import Teacher.courseManagement.CourseItem;
 import Teacher.courseManagement.CourseListInDash;
@@ -40,9 +41,6 @@ public class dashboardController implements Initializable, SessionHadler {
 
     @FXML
     private HBox dashboard_profile;
-
-    @FXML
-    private HBox course_container_table;
 
     @FXML
     private BarChart revenueChart;
@@ -99,11 +97,22 @@ public class dashboardController implements Initializable, SessionHadler {
     private VBox myCourseList;
 
     @FXML
+    private Label currCount;
+
+    @FXML
+    private Label lastMonthCount;
+
+    @FXML
+    private Label growth_rate;
+
+    @FXML
     private Button save_change;
 
     private CourseDB courseDB;
     private int userID;
     private ArrayList<CourseItem> courseItemList;
+    private EnrollDB enrollDB;
+    private int[] enrollCount;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -217,6 +226,16 @@ public class dashboardController implements Initializable, SessionHadler {
 
     public void setupLinechartEnroll() {
 
+        enrollDB = new EnrollDB();
+
+        enrollCount = enrollDB.countEnrollmentsForCurrentAndLastMonth(userID);
+
+        double percent = calculatePercentageIncrease(enrollCount[0], enrollCount[1]);
+        currCount.setText(enrollCount[0] + "");
+        lastMonthCount.setText(enrollCount[1] + "");
+
+        growth_rate.setText(percent + "%");
+
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Total Enrollment");
 
@@ -236,6 +255,14 @@ public class dashboardController implements Initializable, SessionHadler {
             series.getNode().setStyle("-fx-stroke: #0675de; -fx-stroke-width: 2px;"); // Change line color
         });
     }
+
+    public double calculatePercentageIncrease(int thisMonth, int lastMonth) {
+        if (lastMonth == 0) {
+            return thisMonth > 0 ? 100.0 : 0.0;
+        }
+        return ((double)(thisMonth - lastMonth) / lastMonth) * 100;
+    }
+
 
     public void setupStdChart() {
         PieChart.Data slice1 = new PieChart.Data("Pass", 64);
@@ -326,7 +353,6 @@ public class dashboardController implements Initializable, SessionHadler {
                 _openPopup(month_selector);
                 break;
         }
-
     }
 
     @FXML
@@ -335,7 +361,6 @@ public class dashboardController implements Initializable, SessionHadler {
         String text = clickedbtn.getText();
         month_select.setText(text);
     }
-
 
     @FXML
     public void _openPopup(Node popup) {
@@ -348,13 +373,11 @@ public class dashboardController implements Initializable, SessionHadler {
             fade.setFromValue(0);
             fade.setToValue(1);
 
-
         } else {
             fade.setFromValue(1);
             fade.setToValue(0);
             fade.setOnFinished(e -> popup.setVisible(false));
         }
-
         fade.play();
     }
 
@@ -381,8 +404,6 @@ public class dashboardController implements Initializable, SessionHadler {
         fade.play();
     }
 
-
-
     public void displayProfileBox() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Teacher/statistics/dashboardProfile.fxml"));
@@ -396,13 +417,9 @@ public class dashboardController implements Initializable, SessionHadler {
                     674,
                     210,
                     4);
-
             dashboard_profile.getChildren().add(root);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
-
 }

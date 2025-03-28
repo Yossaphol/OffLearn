@@ -108,53 +108,86 @@
                                                    <children>
                                                       <Label text="ยอดการลงทะเบียน" textFill="#0675de">
                                                          <font>
-                                                            <Font name="Noto Sans Thai Bold" size="18.0" />
+                                                            <Font name="Kodchasan Regular" size="18.0" />
                                                          </font>
                                                       </Label>
-                                                      <VBox prefHeight="200.0" prefWidth="100.0">
+                                                      <HBox alignment="CENTER" prefHeight="27.0" prefWidth="395.0">
                                                          <children>
-                                                            <Label fx:id="all_regis_count" text="ทั้งหมด &lt;ยอดการลงทะเบียน&gt; คนในเดือนนี้">
+                                                            <Label text="ลงทะเบียนทั้งหมด">
                                                                <font>
-                                                                  <Font name="Noto Sans Thai Regular" size="16.0" />
+                                                                  <Font name="Kodchasan Regular" size="12.0" />
+                                                               </font>
+                                                               <HBox.margin>
+                                                                  <Insets right="10.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                            <Label fx:id="currCount" text="Label">
+                                                               <HBox.margin>
+                                                                  <Insets right="10.0" />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                            <Label text="คนในเดือนนี้">
+                                                               <font>
+                                                                  <Font name="Kodchasan Regular" size="12.0" />
                                                                </font>
                                                             </Label>
-                                                            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                                         </children>
+                                                         <VBox.margin>
+                                                            <Insets top="10.0" />
+                                                         </VBox.margin>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                                         <children>
+                                                            <ImageView fx:id="up_down_pic" fitHeight="87.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../../../img/icon/arrowup.png" />
+                                                               </image>
+                                                               <HBox.margin>
+                                                                  <Insets right="20.0" />
+                                                               </HBox.margin>
+                                                            </ImageView>
+                                                            <VBox prefHeight="114.0" prefWidth="190.0">
                                                                <children>
-                                                                  <ImageView fx:id="up_down_pic" fitHeight="98.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
-                                                                     <image>
-                                                                        <Image url="@../../../img/icon/arrowup.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                                  <VBox prefHeight="106.0" prefWidth="189.0">
+                                                                  <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
                                                                      <children>
-                                                                        <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
-                                                                           <children>
-                                                                              <Label fx:id="growth_rate" prefHeight="86.0" prefWidth="135.0" text="20%" textFill="#0675de">
-                                                                                 <font>
-                                                                                    <Font name="Noto Sans Thai Bold" size="53.0" />
-                                                                                 </font>
-                                                                              </Label>
-                                                                              <Label fx:id="state" prefHeight="69.0" prefWidth="44.0" text="เพื่มขึ้น">
-                                                                                 <font>
-                                                                                    <Font name="Noto Sans Thai Regular" size="16.0" />
-                                                                                 </font>
-                                                                              </Label>
-                                                                           </children>
-                                                                        </HBox>
-                                                                        <Label fx:id="compare_num" text="จาก &lt;จำนวนคน&gt; คน เดือนที่แล้ว">
+                                                                        <Label fx:id="growth_rate" prefHeight="86.0" prefWidth="135.0" text="20%" textFill="#0675de">
                                                                            <font>
-                                                                              <Font name="Noto Sans Thai Regular" size="14.0" />
+                                                                              <Font name="Noto Sans Thai Bold" size="53.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="state" prefHeight="70.0" prefWidth="60.0" text="เพื่มขึ้น">
+                                                                           <font>
+                                                                              <Font name="Kodchasan Regular" size="16.0" />
                                                                            </font>
                                                                         </Label>
                                                                      </children>
-                                                                  </VBox>
+                                                                  </HBox>
+                                                                  <HBox alignment="CENTER" prefHeight="27.0" prefWidth="395.0">
+                                                                     <children>
+                                                                        <Label text="จาก">
+                                                                           <font>
+                                                                              <Font name="Kodchasan Regular" size="12.0" />
+                                                                           </font>
+                                                                           <HBox.margin>
+                                                                              <Insets right="10.0" />
+                                                                           </HBox.margin>
+                                                                        </Label>
+                                                                        <Label fx:id="lastMonthCount" text="Label">
+                                                                           <HBox.margin>
+                                                                              <Insets right="10.0" />
+                                                                           </HBox.margin>
+                                                                        </Label>
+                                                                        <Label text="คนในเดือนที่แล้ว">
+                                                                           <font>
+                                                                              <Font name="Kodchasan Regular" size="12.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
                                                                </children>
-                                                            </HBox>
+                                                            </VBox>
                                                          </children>
-                                                         <padding>
-                                                            <Insets left="40.0" />
-                                                         </padding>
-                                                      </VBox>
+                                                      </HBox>
                                                    </children>
                                                 </VBox>
                                                 <HBox fx:id="linechart_container" prefHeight="217.0" prefWidth="486.0" style="-fx-background-color: white; -fx-background-radius: 20;">

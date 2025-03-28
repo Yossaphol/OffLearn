@@ -209,6 +209,27 @@ public class CourseDB extends ConnectDB{
         return 0;
     }
 
+    public ArrayList<Integer> getAllMyCourseIDs(int user_id) {
+        ArrayList<Integer> courseIDs = new ArrayList<>();
+        String sql = "SELECT Course_ID FROM offlearn.course WHERE User_ID = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstm = conn.prepareStatement(sql)) {
+
+            pstm.setInt(1, user_id);
+            try (ResultSet rs = pstm.executeQuery()) {
+                while (rs.next()) {
+                    courseIDs.add(rs.getInt("Course_ID"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return courseIDs;
+    }
+
+
 
 
 }
