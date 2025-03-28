@@ -74,6 +74,7 @@ public class VideoPlayerManager implements Initializable {
     private boolean isFadeInActive     = false;
     private boolean volumeSliderVisible= false;
     private boolean isMuted = false;
+    private Process ffmpegProcess = null;
     private double previousVolume = 0.5;
 
     private double originalVolSliderWidth;
@@ -104,32 +105,34 @@ public class VideoPlayerManager implements Initializable {
         loadIcons();
 
         // test video, idk how to play vid from DB lol ;w;
-        String videoPath = "https://offlearnmedia.s3.ap-southeast-2.amazonaws.com/image/testvideo123.mp4";
+        String videoPath = "https://offlearnmedia.s3.ap-southeast-2.amazonaws.com/image/testagainnnn.mp4";
         String outputFilePath = System.getProperty("java.io.tmpdir") + "testvideo123_encoded.mp4";
 
 
-        Task<Void> encodingTask = new Task<Void>() {
+        /*Task<Void> encodingTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
                 // FFmpeg command:
                 ProcessBuilder pb = new ProcessBuilder(
-                        "ffmpeg", "-y",
+                        "ffmpeg", "-loglevel", "verbose", // add this
+                        "-y",
                         "-i", videoPath,
                         "-c:v", "libx264",
-                        "-preset", "veryfast",
-                        "-crf", "28",
+                        "-preset", "ultrafast",
+                        "-crf", "35",
+                        "-an",
                         "-movflags", "+faststart",
                         outputFilePath
                 );
                 pb.redirectErrorStream(true);
-                Process process = pb.start();
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                ffmpegProcess = pb.start();
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(ffmpegProcess.getInputStream()))) {
                     String line;
                     while ((line = reader.readLine()) != null) {
                         System.out.println(line);
                     }
                 }
-                int exitCode = process.waitFor();
+                int exitCode = ffmpegProcess.waitFor();
                 if (exitCode != 0) {
                     throw new Exception("FFmpeg encoding failed with exit code " + exitCode);
                 }
@@ -161,8 +164,11 @@ public class VideoPlayerManager implements Initializable {
             bindMediaProperties();
         });
         new Thread(encodingTask).start();
-
-
+*/
+        Media media = new Media(videoPath);
+        mediaPlayer = new MediaPlayer(media);
+        mediaView.setMediaPlayer(mediaPlayer);
+        bindMediaProperties();
         // Prevent clicks from passing through certain nodes
         consumeClicks(controlpanesection);
         consumeClicks(timebox);
@@ -851,6 +857,12 @@ public class VideoPlayerManager implements Initializable {
             mediaPlayer.dispose();
             mediaPlayer = null;
         }
+
+        if (ffmpegProcess != null && ffmpegProcess.isAlive()) {
+            ffmpegProcess.destroyForcibly(); // kill FFmpeg
+            ffmpegProcess = null;
+            System.out.println("FFmpeg process terminated.");
+        }
     }
 
     /* mini skip forward */
@@ -877,4 +889,5 @@ public class VideoPlayerManager implements Initializable {
             mediaPlayer.seek(prev);
         }
     }
+
 }

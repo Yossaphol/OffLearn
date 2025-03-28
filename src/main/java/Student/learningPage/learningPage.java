@@ -7,6 +7,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class learningPage extends Application {
+
+    private learningPageController controller;
     public static void main(String[] args) {
         launch(args);
     }
@@ -21,5 +23,15 @@ public class learningPage extends Application {
         primaryStage.setFullScreenExitHint("");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        controller = fxmlLoader.getController();
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("App is closing. Cleanup here.");
+        if (controller != null && controller.getVideoManager() != null) {
+            controller.getVideoManager().disposePlayer();
+        }
     }
 }

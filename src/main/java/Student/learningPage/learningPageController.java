@@ -14,13 +14,14 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class learningPageController implements Initializable {
 
     public VBox leftWrapper;
     public HBox searhbar_container;
     public VBox mediacontainer;
+    public VBox playlistcontainer;
 
     public Label subject_name;
     public Label ep;
@@ -47,11 +48,11 @@ public class learningPageController implements Initializable {
     public Button btnEP1;
     public Label playlistcount;
     public Label commentcount;
-
+    private VideoPlayerManager videoManager;
     private int countLike = 224;
     private int countDisLike = 17;
 
-    private String courseID;
+    private String courseID = "99"; /// TEST
     private String chapterID;
     private String userID;
 
@@ -62,6 +63,7 @@ public class learningPageController implements Initializable {
         loadVideoPlayer();
         HomeController method_home = new HomeController();
         Navigator method_navigator = new Navigator();
+        loadPlaylist();
 
         subject_name.setText("Test Subject");
         ep.setText("Test Episode : 0");
@@ -70,10 +72,6 @@ public class learningPageController implements Initializable {
         clipDescription.setText("ความรักกันไม่ได้หรอก ฉันชอบแอบมานานแล้ว พี่พรรลบ เขาเทอไม่รักฉัน เขาไม่แย่งเธอหรอก. 7 yrs. 2. ยะศิษย์ แดน เพ็งเซ้ง. คนอื่นไม่รู้ แต่กรูดูจนจบฮ่าๆๆ แหวงเเป๊ก เย๊กกะไฟฟ้า");
         method_home.loadAndSetImage(teacherImg, "/img/Profile/user.png");
 
-        btnEP.setText("Episode : 69");
-        btnEP1.setText("Episode : 70");
-
-        playlistcount.setText("("+2+")");
         labelPercent.setText("69%");
 
         nextCourseName.setText("DSA");
@@ -89,9 +87,7 @@ public class learningPageController implements Initializable {
         method_home.hoverEffect(btnLike);
         method_home.hoverEffect(btnDislike);
         method_home.hoverEffect(btnOffLoad);
-        method_home.hoverEffect(btnEP);
         method_home.hoverEffect(nextCourse);
-        method_home.hoverEffect(btnEP1);
 
     }
 
@@ -132,8 +128,38 @@ public class learningPageController implements Initializable {
     }
 
     private void loadPlaylist() {
+        playlistcontainer.getChildren().clear();
 
+        PlaylistDB playlistDB = new PlaylistDB();
+        ArrayList<String[]> chapters = playlistDB.getChaptersByCourseID(courseID); // use real courseID
+
+        for (int i = 0; i < chapters.size(); i++) {
+            String chapterId = chapters.get(i)[0];
+            String chapterTitle = chapters.get(i)[1];
+            int epNumber = i + 1;
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/learningPage/EPbutton.fxml"));
+                Button EPbtn = loader.load();
+                EPButtonController controller = loader.getController();
+
+                controller.setText("EP" + epNumber + " : " + chapterTitle);
+                controller.setActive(chapterId.equals(chapterID)); // compare with current
+
+                EPbtn.setOnAction(e -> {
+                    System.out.println("Clicked EP: " + epNumber + " (Chapter ID: " + chapterId + ")");
+                    receiveData(courseID, chapterId, userID); // switch content
+                });
+
+                playlistcontainer.getChildren().add(EPbtn);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        playlistcount.setText("(" + chapters.size() + ")");
     }
+
 
     public void recieveMethod(String courseid){
         this.courseID = courseid;
@@ -142,11 +168,16 @@ public class learningPageController implements Initializable {
     private void loadVideoPlayer() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/learningPage/videoPlayer.fxml"));
-            StackPane videoRoot = loader.load(); // The root is <StackPane> from videoPlayerManager.fxml
+            StackPane videoRoot = loader.load();
+            videoManager = loader.getController(); // <== save controller
             mediacontainer.getChildren().setAll(videoRoot);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    public VideoPlayerManager getVideoManager() {
+        return videoManager;
+    }
+
 }

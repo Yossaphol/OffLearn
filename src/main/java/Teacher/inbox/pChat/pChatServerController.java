@@ -23,6 +23,11 @@ import javafx.scene.text.TextFlow;
 import Teacher.Server;
 import javafx.util.Duration;
 import javafx.scene.layout.Region;
+import java.io.ByteArrayInputStream;
+import javafx.scene.layout.Region;
+import javafx.scene.shape.Circle;
+import javafx.scene.image.WritableImage;
+import javafx.scene.image.PixelReader;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -79,7 +84,6 @@ public class pChatServerController extends pChatController implements Initializa
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         switchToGlobal();
 
         spMain.vvalueProperty().bind(vboxMessage.heightProperty());
@@ -115,13 +119,26 @@ public class pChatServerController extends pChatController implements Initializa
             @Override
             protected void updateItem(String studentName, boolean empty) {
                 super.updateItem(studentName, empty);
-
                 if (empty || studentName == null) {
                     setGraphic(null);
                 } else {
-                    Image profilePic = new Image(getClass().getResourceAsStream("/img/Profile/user.png"));
-                    profileImage.setImage(profilePic);
+                    byte[] profileImageBytes = stdDb.getStudentProfilePicture(studentName);
+                    Image profilePic;
+                    if (profileImageBytes != null && profileImageBytes.length > 0) {
+                        profilePic = new Image(new ByteArrayInputStream(profileImageBytes));
+                    } else {
+                        profilePic = new Image(getClass().getResourceAsStream("/img/Profile/user.png"));
+                    }
 
+                    Image squaredProfilePic = cropToSquare(profilePic);
+                    profileImage.setImage(squaredProfilePic);
+                    profileImage.setFitWidth(50);
+                    profileImage.setFitHeight(50);
+                    profileImage.setPreserveRatio(false);
+                    profileImage.setSmooth(true);
+                    profileImage.setCache(true);
+                    Circle clip = new Circle(25, 25, 25);
+                    profileImage.setClip(clip);
                     nameLabel.setText(studentName);
                     nameLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
 
@@ -132,7 +149,6 @@ public class pChatServerController extends pChatController implements Initializa
                     } else {
                         unreadCountLabel.setVisible(false);
                     }
-
                     setGraphic(hBox);
                 }
             }
@@ -149,7 +165,22 @@ public class pChatServerController extends pChatController implements Initializa
             if (newValue != null) {
                 selectedStudent = newValue;
                 currStudentName.setText(selectedStudent);
-                currStudentImg.setImage(new Image(getClass().getResource("/img/Profile/user.png").toExternalForm()));
+                byte[] profileImageBytes = stdDb.getStudentProfilePicture(selectedStudent);
+                Image profilePic;
+                if (profileImageBytes != null && profileImageBytes.length > 0) {
+                    profilePic = new Image(new ByteArrayInputStream(profileImageBytes));
+                } else {
+                    profilePic = new Image(getClass().getResource("/img/Profile/user.png").toExternalForm());
+                }
+                Image squaredProfilePic = cropToSquare(profilePic);
+                currStudentImg.setImage(squaredProfilePic);
+                Circle clip = new Circle(25, 25, 25);
+                currStudentImg.setClip(clip);
+                currStudentImg.setFitWidth(50);
+                currStudentImg.setFitHeight(50);
+                currStudentImg.setPreserveRatio(false);
+                currStudentImg.setSmooth(true);
+                currStudentImg.setCache(true);
 
                 int teacherId = teacherDBConnect.getTeacherId(server.getTeacherName());
                 int studentId = stdDb.getStudentID(selectedStudent);
@@ -157,7 +188,6 @@ public class pChatServerController extends pChatController implements Initializa
                 loadChatHistoryFromDB(teacherId, studentId);
             }
         });
-
 
         sendButton.setOnAction(event -> {
             sendMessage();
@@ -169,10 +199,8 @@ public class pChatServerController extends pChatController implements Initializa
 
         tfMessage.setOnAction(event -> sendMessage());
 
-
         displayNavbar();
         hoverEffect(globalButton);
-
     }
 
     private void sendMessage() {
@@ -315,4 +343,21 @@ public class pChatServerController extends pChatController implements Initializa
         });
     }
 
+    private Image cropToSquare(Image originalImage) {
+        double width = originalImage.getWidth();
+        double height = originalImage.getHeight();
+        double cropSize = Math.min(width, height);
+        double x = (width - cropSize) / 2;
+        double y = (height - cropSize) / 2;
+
+        PixelReader pixelReader = originalImage.getPixelReader();
+        WritableImage croppedImage = new WritableImage(
+                pixelReader,
+                (int)x,
+                (int)y,
+                (int)cropSize,
+                (int)cropSize
+        );
+        return croppedImage;
+    }
 }
