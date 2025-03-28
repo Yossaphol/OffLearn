@@ -196,14 +196,17 @@ public class dashboardController implements Initializable, SessionHadler {
     public void displayCourseInDash(){
         courseDB = new CourseDB();
         this.courseItemList = courseDB.getMyCourse(userID);
+        enrollDB = new EnrollDB();
+
         for (CourseItem c : courseItemList){
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Teacher/courseManagement/courseListInDash.fxml"));
                 HBox courseList = fxmlLoader.load();
 
                 CourseListInDash courseListInDash = fxmlLoader.getController();
+                int[] income = enrollDB.getRevenueAndEnrollCountByCourseId(c.getCourseId());
 
-                courseListInDash.setDisplay(c.getCourseImg(), c.getCourseName(), c.getCourseCat(), 0);
+                courseListInDash.setDisplay(c.getCourseImg(), c.getCourseName(), c.getCourseCat(), income[0]);
 
                 myCourseList.getChildren().add(courseList);
             } catch (IOException e) {

@@ -1,6 +1,7 @@
 package Teacher.courseManagement;
 
 import Database.CourseDB;
+import Database.EnrollDB;
 import Database.UserDB;
 import Student.HomeAndNavigation.HomeController;
 import Teacher.dashboard.dashboardController;
@@ -11,10 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -25,6 +23,7 @@ import javafx.scene.shape.Rectangle;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class CourseController implements Initializable, SessionHadler {
@@ -52,11 +51,25 @@ public class CourseController implements Initializable, SessionHadler {
     @FXML
     private Label count;
 
+    @FXML
+    private Label percent;
+
+    @FXML
+    private BarChart barChart;
+
+    @FXML
+    private Label currCount;
+
+    @FXML
+    private Label lastMonthCount;
+
     private VBox courseEdit;
     private CourseDB courseDB;
     private int userID;
     private String userName;
     private ArrayList<CourseItem> courseList;
+    private EnrollDB enrollDB;
+    private int[] enrollCount;
 
     private boolean increase = true;
 
@@ -71,8 +84,7 @@ public class CourseController implements Initializable, SessionHadler {
         displayNavbar();
         newCourseButton();
         showCourseOnListview();
-        setUpLineChart();
-
+        setupBarChartEnroll();
 
         setArrow();
         setEffect();
@@ -101,35 +113,37 @@ public class CourseController implements Initializable, SessionHadler {
 
 
     //Chart with exmaple data
-    public void setUpLineChart() {
-        enrollmentStatistics.setLegendVisible(false);
+    public void setupBarChartEnroll() {
+        enrollDB = new EnrollDB();
+        Map<String, Integer> topCourses = enrollDB.getTop3CoursesByEnrollment(this.userID);
 
-        enrollmentStatistics.getData().clear();
+        enrollCount = enrollDB.countEnrollmentsForCurrentAndLastMonth(userID);
 
-        enrollmentStatistics.setStyle("-fx-background-color: transparent;");
-        enrollmentStatistics.lookup(".chart-plot-background").setStyle("-fx-background-color: transparent;");
-        enrollmentStatistics.lookup(".chart").setStyle("-fx-background-color: transparent;");
+        double percent = calculatePercentageIncrease(enrollCount[0], enrollCount[1]);
+        currCount.setText(enrollCount[0] + "");
+        lastMonthCount.setText(enrollCount[1] + "");
+
+        this.percent.setText(percent + "%");
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
-        series.getData().add(new XYChart.Data<>("Jan", 150));
-        series.getData().add(new XYChart.Data<>("Feb", 180));
-        series.getData().add(new XYChart.Data<>("Mar", 220));
-        series.getData().add(new XYChart.Data<>("Apr", 170));
-        series.getData().add(new XYChart.Data<>("May", 250));
+        series.setName("Top Enrollment Courses");
 
-        enrollmentStatistics.getData().add(series);
 
-        Platform.runLater(() -> {
-            if (series.getNode() != null) {
-                series.getNode().lookup(".chart-series-line").setStyle("-fx-stroke: #0675DE; -fx-stroke-width: 2px;");
-            }
+        for (Map.Entry<String, Integer> entry : topCourses.entrySet()) {
+            series.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
+        }
 
-            for (XYChart.Data<String, Number> data : series.getData()) {
-                if (data.getNode() != null) {
-                    data.getNode().setStyle("-fx-background-color: transparent;");
-                }
-            }
-        });
+        barChart.setLegendVisible(false);
+        barChart.getData().clear();
+        barChart.getData().add(series);
+
+    }
+
+    public double calculatePercentageIncrease(int thisMonth, int lastMonth) {
+        if (lastMonth == 0) {
+            return thisMonth > 0 ? 100.0 : 0.0;
+        }
+        return ((double)(thisMonth - lastMonth) / lastMonth) * 100;
     }
 
 
@@ -192,6 +206,7 @@ public class CourseController implements Initializable, SessionHadler {
         courseListView.getChildren().clear();
         this.courseDB = new CourseDB();
         courseList = courseDB.getMyCourse(userID);
+        enrollDB = new EnrollDB();
 
         count.setText(courseList.size() + "");
 
@@ -208,9 +223,10 @@ public class CourseController implements Initializable, SessionHadler {
                 Parent courseItemParent = fxmlLoader.load();
 
                 CourseListController controller = fxmlLoader.getController();
+                int[] enrollCount = enrollDB.getRevenueAndEnrollCountByCourseId(c.getCourseId());
 
                 controller.setCourseItem(c);
-                controller.setCourseDisplay();
+                controller.setCourseDisplay(enrollCount[1]);
                 controller.setCourseId(c.getCourseId());
 
                 passCourseListView(controller);

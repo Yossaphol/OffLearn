@@ -64,10 +64,10 @@ public class CourseListController implements Initializable {
         this.courseItem = courseItem;
     }
 
-    public void setCourseDisplay(){
+    public void setCourseDisplay(int enrollCount){
         courseName.setText(courseItem.getCourseName());
         courseCat.setText(courseItem.getCourseCat());
-        coursePrice.setText(courseItem.getCoursePrice() + "");
+        coursePrice.setText(enrollCount + "");
         this.setImageToRectangle(courseItem.getCourseImg());
     }
 

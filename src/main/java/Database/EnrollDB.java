@@ -137,5 +137,29 @@ public class EnrollDB extends ConnectDB{
         return 0;
     }
 
+    public int[] getRevenueAndEnrollCountByCourseId(int courseId) {
+        String sql = "SELECT COALESCE(c.price * COUNT(e.Enroll_ID), 0) AS revenue, " +
+                "COUNT(e.Enroll_ID) AS enroll_count " +
+                "FROM course c " +
+                "LEFT JOIN enroll e ON c.Course_ID = e.Course_ID " +
+                "WHERE c.Course_ID = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, courseId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return new int[]{rs.getInt("revenue"), rs.getInt("enroll_count")};
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return new int[]{0, 0};
+    }
+
 
 }
