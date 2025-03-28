@@ -56,6 +56,12 @@ public class withdrawHistoryController implements Initializable {
             };
 
             JTable table = new JTable(model);
+            table.setRowSelectionAllowed(false);
+            table.setColumnSelectionAllowed(false);
+            table.setCellSelectionEnabled(false);
+            table.setFocusable(false);
+
+
             JScrollPane scrollPane = new JScrollPane(table);
             scrollPane.setPreferredSize(new Dimension(1000, 450));
 

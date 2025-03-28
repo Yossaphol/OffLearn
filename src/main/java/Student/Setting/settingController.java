@@ -54,6 +54,7 @@ public class settingController implements Initializable {
     public TextField oldpw;
     public TextField newpwfirst;
     public TextField newpwsecond;
+    public TextField description;
     private boolean isChangePass = false;
     private MediaUpload m;
     HomeController hm = new HomeController();
