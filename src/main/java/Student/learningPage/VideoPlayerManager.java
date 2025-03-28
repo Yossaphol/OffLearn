@@ -106,7 +106,7 @@ public class VideoPlayerManager implements Initializable {
         loadIcons();
 
         // test video, idk how to play vid from DB lol ;w;
-        String videoPath = "https://offlearnmedia.s3.ap-southeast-2.amazonaws.com/image/testagainnnn.mp4";
+        String videoPath = "https://offlearnmedia.s3.ap-southeast-2.amazonaws.com/image/longvideotest.mp4";
         String outputFilePath = System.getProperty("java.io.tmpdir") + "testvideo123_encoded.mp4";
 
         // ignore this (old ffpmeg stuff)
@@ -166,7 +166,6 @@ public class VideoPlayerManager implements Initializable {
         });
         new Thread(encodingTask).start();
 */
-        loadinggif.setImage(playIcon);
         Media media = new Media(videoPath);
         mediaPlayer = new MediaPlayer(media);
         mediaView.setMediaPlayer(mediaPlayer);
@@ -497,6 +496,16 @@ public class VideoPlayerManager implements Initializable {
             skipForward(5);
             userIsActive();
             videocontainer.requestFocus();
+        });
+        mediaPlayer.setOnStalled(() -> {
+            System.out.println("Playback is stalled");
+            loadinggif.setVisible(true);
+        });
+        mediaPlayer.statusProperty().addListener((obs, oldStatus, newStatus) -> {
+            if (newStatus == MediaPlayer.Status.STALLED) {
+                System.out.println("MediaPlayer status is STALLED");
+                loadinggif.setVisible(true);
+            }
         });
         mediaPlayer.setOnEndOfMedia(() -> {
             btnPlay.setGraphic(createIconView(replayIcon));
