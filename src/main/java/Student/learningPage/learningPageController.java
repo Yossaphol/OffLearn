@@ -72,7 +72,6 @@ public class learningPageController implements Initializable {
         clipDescription.setText("ความรักกันไม่ได้หรอก ฉันชอบแอบมานานแล้ว พี่พรรลบ เขาเทอไม่รักฉัน เขาไม่แย่งเธอหรอก. 7 yrs. 2. ยะศิษย์ แดน เพ็งเซ้ง. คนอื่นไม่รู้ แต่กรูดูจนจบฮ่าๆๆ แหวงเเป๊ก เย๊กกะไฟฟ้า");
         method_home.loadAndSetImage(teacherImg, "/img/Profile/user.png");
 
-        playlistcount.setText("("+2+")");
         labelPercent.setText("69%");
 
         nextCourseName.setText("DSA");
