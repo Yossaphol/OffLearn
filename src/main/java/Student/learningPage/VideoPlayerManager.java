@@ -105,20 +105,22 @@ public class VideoPlayerManager implements Initializable {
         loadIcons();
 
         // test video, idk how to play vid from DB lol ;w;
-        String videoPath = "https://offlearnmedia.s3.ap-southeast-2.amazonaws.com/image/testvideo123.mp4";
+        String videoPath = "https://offlearnmedia.s3.ap-southeast-2.amazonaws.com/image/testagainnnn.mp4";
         String outputFilePath = System.getProperty("java.io.tmpdir") + "testvideo123_encoded.mp4";
 
 
-        Task<Void> encodingTask = new Task<Void>() {
+        /*Task<Void> encodingTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
                 // FFmpeg command:
                 ProcessBuilder pb = new ProcessBuilder(
-                        "ffmpeg", "-y",
+                        "ffmpeg", "-loglevel", "verbose", // add this
+                        "-y",
                         "-i", videoPath,
                         "-c:v", "libx264",
-                        "-preset", "veryfast",
-                        "-crf", "28",
+                        "-preset", "ultrafast",
+                        "-crf", "35",
+                        "-an",
                         "-movflags", "+faststart",
                         outputFilePath
                 );
@@ -162,8 +164,11 @@ public class VideoPlayerManager implements Initializable {
             bindMediaProperties();
         });
         new Thread(encodingTask).start();
-
-
+*/
+        Media media = new Media(videoPath);
+        mediaPlayer = new MediaPlayer(media);
+        mediaView.setMediaPlayer(mediaPlayer);
+        bindMediaProperties();
         // Prevent clicks from passing through certain nodes
         consumeClicks(controlpanesection);
         consumeClicks(timebox);
