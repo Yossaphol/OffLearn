@@ -128,12 +128,12 @@
                                           </TextField>
                                        </children>
                                        <HBox.margin>
-                                          <Insets left="20.0" />
+                                          <Insets />
                                        </HBox.margin>
                                     </VBox>
                                  </children>
                                  <VBox.margin>
-                                    <Insets top="20.0" />
+                                    <Insets left="20.0" top="20.0" />
                                  </VBox.margin>
                               </HBox>
                            </children>

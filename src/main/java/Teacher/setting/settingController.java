@@ -83,6 +83,7 @@ public class settingController implements Initializable {
     public Button editBtn;
     public Button cancelProfile;
     public Button saveProfile;
+    public TextField description;
     private MediaUpload m;
     public TextField oldpw;
     public TextField newpwfirst;
@@ -310,6 +311,8 @@ public class settingController implements Initializable {
             privateinfo_firstname.setDisable(false);
             privateinfo_lastname.setDisable(false);
             privateinfo_gmail.setDisable(false);
+            description.setDisable(false);
+
         }else{
             //Visible
             saveCancelProfileBtn.setVisible(false);
@@ -320,6 +323,7 @@ public class settingController implements Initializable {
             privateinfo_firstname.setDisable(true);
             privateinfo_lastname.setDisable(true);
             privateinfo_gmail.setDisable(true);
+            description.setDisable(true);
 
         }
         applyTransition(saveCancelProfileBtn);
@@ -339,6 +343,7 @@ public class settingController implements Initializable {
             privateinfo_firstname.setDisable(false);
             privateinfo_lastname.setDisable(false);
             privateinfo_gmail.setDisable(false);
+            description.setDisable(false);
         }else{
             //Visible
             saveCancelProfileBtn.setVisible(false);
@@ -349,6 +354,7 @@ public class settingController implements Initializable {
             privateinfo_firstname.setDisable(true);
             privateinfo_lastname.setDisable(true);
             privateinfo_gmail.setDisable(true);
+            description.setDisable(true);
 
         }
         applyTransition(saveCancelProfileBtn);
