@@ -26,6 +26,7 @@ import javafx.scene.layout.HBox;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import Student.HomeAndNavigation.HomeController;
@@ -52,7 +53,7 @@ public class dashboardController implements Initializable, SessionHadler {
     private NumberAxis yAxis_revenue;
 
     @FXML
-    private LineChart lineChart_enroll;
+    private BarChart topCourse;
 
     @FXML
     private PieChart pie_chart_std;
@@ -104,6 +105,15 @@ public class dashboardController implements Initializable, SessionHadler {
 
     @FXML
     private Label growth_rate;
+
+    @FXML
+    private Label revenue;
+
+    @FXML
+    private Label total_revenue;
+
+    @FXML
+    private Label totalEnroll;
 
     @FXML
     private Button save_change;
@@ -203,6 +213,11 @@ public class dashboardController implements Initializable, SessionHadler {
     }
 
     public void setupRevenueChart() {
+        enrollDB = new EnrollDB();
+        Map<String, Integer> revenue = enrollDB.getTop3CoursesByEnrollment(this.userID);
+        int total = 0;
+
+
         if (xAxis_revenue == null || yAxis_revenue == null || revenueChart == null) {
             System.out.println("FXML components not setup properly!");
             return;
@@ -210,23 +225,23 @@ public class dashboardController implements Initializable, SessionHadler {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Monthly Sales");
 
-        series.getData().add(new XYChart.Data<>("Course A", 50));
-        series.getData().add(new XYChart.Data<>("Course B", 70));
-        series.getData().add(new XYChart.Data<>("Course C", 30));
+        for (Map.Entry<String, Integer> entry : revenue.entrySet()) {
+            total += entry.getValue();
+            series.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
+        }
 
+        this.revenue.setText("รายได้ " + total + " บาท");
         revenueChart.setLegendVisible(false);
         revenueChart.getData().add(series);
 
-        Platform.runLater(() -> {
-            series.getData().get(0).getNode().setStyle("-fx-bar-fill: #3498db;");
-            series.getData().get(1).getNode().setStyle("-fx-bar-fill: #e74c3c;");
-            series.getData().get(2).getNode().setStyle("-fx-bar-fill: #2ecc71;");
-        });
+        this.total_revenue.setText(enrollDB.getTotalRevenueForCurrentMonth(this.userID) + "");
+        this.totalEnroll.setText("ยอดการเข้าร่วม " + enrollDB.getTotalEnrollments(this.userID) + " คน");
+
     }
 
     public void setupLinechartEnroll() {
-
         enrollDB = new EnrollDB();
+        Map<String, Integer> topCourses = enrollDB.getTop3CoursesByEnrollment(this.userID);
 
         enrollCount = enrollDB.countEnrollmentsForCurrentAndLastMonth(userID);
 
@@ -237,23 +252,17 @@ public class dashboardController implements Initializable, SessionHadler {
         growth_rate.setText(percent + "%");
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
-        series.setName("Total Enrollment");
+        series.setName("Top Enrollment Courses");
 
 
-        series.getData().add(new XYChart.Data<>("Course1", 30));
-        series.getData().add(new XYChart.Data<>("Course2", 50));
-        series.getData().add(new XYChart.Data<>("Course3", 10));
-        series.getData().add(new XYChart.Data<>("Course4", 30));
-        series.getData().add(new XYChart.Data<>("Course5", 60));
+        for (Map.Entry<String, Integer> entry : topCourses.entrySet()) {
+            series.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
+        }
 
-        lineChart_enroll.setLegendVisible(false);
-        lineChart_enroll.setCreateSymbols(false);
-        lineChart_enroll.getData().clear();
-        lineChart_enroll.getData().add(series);
+        topCourse.setLegendVisible(false);
+        topCourse.getData().clear();
+        topCourse.getData().add(series);
 
-        Platform.runLater(() -> {
-            series.getNode().setStyle("-fx-stroke: #0675de; -fx-stroke-width: 2px;"); // Change line color
-        });
     }
 
     public double calculatePercentageIncrease(int thisMonth, int lastMonth) {
