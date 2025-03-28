@@ -36,7 +36,7 @@
                      <children>
                         <VBox prefHeight="2017.0" prefWidth="775.0">
                            <children>
-                              <VBox fx:id="mediacontainer" maxWidth="720.0" prefHeight="405.0" prefWidth="720.0" style="-fx-border-radius: 25;">
+                              <VBox fx:id="mediacontainer" maxWidth="720.0" prefHeight="405.0" prefWidth="720.0" style="-fx-border-radius: 25; -fx-background-radius: 25;">
                                  <VBox.margin>
                                     <Insets top="30.0" />
                                  </VBox.margin>
@@ -372,7 +372,7 @@
                                           </Label>
                                        </children>
                                     </HBox>
-                                    <ScrollPane fx:id="playlistcontainer" prefHeight="480.0" prefWidth="306.0" style="-fx-background-color: transparent;" styleClass="scroll-panej" stylesheets="@../../../css/Home.css" vbarPolicy="ALWAYS">
+                                    <ScrollPane fx:id="playlistscroll" prefHeight="480.0" prefWidth="306.0" style="-fx-background-color: transparent;" styleClass="scroll-panej" stylesheets="@../../../css/Home.css" vbarPolicy="ALWAYS">
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
@@ -382,7 +382,7 @@
                                        <content>
                                           <AnchorPane prefWidth="200.0">
                                              <children>
-                                                <VBox alignment="TOP_CENTER" minWidth="-Infinity" prefWidth="271.0" spacing="10.0">
+                                                <VBox fx:id="playlistcontainer" alignment="TOP_CENTER" minWidth="-Infinity" prefWidth="271.0" spacing="10.0">
                                                    <children>
                                                       <Button fx:id="btnEP" mnemonicParsing="false" prefHeight="50.0" prefWidth="233.0" style="-fx-background-color: #8100cc; -fx-background-radius: 10;" text="EP&lt;count&gt;: Watching ep" textFill="WHITE">
                                                          <font>
