@@ -74,6 +74,7 @@ public class VideoPlayerManager implements Initializable {
     private boolean isFadeInActive     = false;
     private boolean volumeSliderVisible= false;
     private boolean isMuted = false;
+    private Process ffmpegProcess = null;
     private double previousVolume = 0.5;
 
     private double originalVolSliderWidth;
@@ -122,14 +123,14 @@ public class VideoPlayerManager implements Initializable {
                         outputFilePath
                 );
                 pb.redirectErrorStream(true);
-                Process process = pb.start();
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                ffmpegProcess = pb.start();
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(ffmpegProcess.getInputStream()))) {
                     String line;
                     while ((line = reader.readLine()) != null) {
                         System.out.println(line);
                     }
                 }
-                int exitCode = process.waitFor();
+                int exitCode = ffmpegProcess.waitFor();
                 if (exitCode != 0) {
                     throw new Exception("FFmpeg encoding failed with exit code " + exitCode);
                 }
@@ -851,6 +852,12 @@ public class VideoPlayerManager implements Initializable {
             mediaPlayer.dispose();
             mediaPlayer = null;
         }
+
+        if (ffmpegProcess != null && ffmpegProcess.isAlive()) {
+            ffmpegProcess.destroyForcibly(); // kill FFmpeg
+            ffmpegProcess = null;
+            System.out.println("FFmpeg process terminated.");
+        }
     }
 
     /* mini skip forward */
@@ -877,4 +884,5 @@ public class VideoPlayerManager implements Initializable {
             mediaPlayer.seek(prev);
         }
     }
+
 }

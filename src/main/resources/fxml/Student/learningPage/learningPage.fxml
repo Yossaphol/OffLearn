@@ -382,40 +382,7 @@
                                        <content>
                                           <AnchorPane prefWidth="200.0">
                                              <children>
-                                                <VBox fx:id="playlistcontainer" alignment="TOP_CENTER" minWidth="-Infinity" prefWidth="271.0" spacing="10.0">
-                                                   <children>
-                                                      <Button fx:id="btnEP" mnemonicParsing="false" prefHeight="50.0" prefWidth="233.0" style="-fx-background-color: #8100cc; -fx-background-radius: 10;" text="EP&lt;count&gt;: Watching ep" textFill="WHITE">
-                                                         <font>
-                                                            <Font name="Noto Sans Thai Bold" size="15.0" />
-                                                         </font>
-                                                         <effect>
-                                                            <DropShadow>
-                                                               <color>
-                                                                  <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
-                                                               </color>
-                                                            </DropShadow>
-                                                         </effect>
-                                                         <cursor>
-                                                            <Cursor fx:constant="HAND" />
-                                                         </cursor>
-                                                      </Button>
-                                                      <Button fx:id="btnEP1" mnemonicParsing="false" prefHeight="50.0" prefWidth="233.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="EP&lt;count&gt;: Watching ep">
-                                                         <font>
-                                                            <Font name="Noto Sans Thai Bold" size="15.0" />
-                                                         </font>
-                                                         <effect>
-                                                            <DropShadow>
-                                                               <color>
-                                                                  <Color red="0.7599999904632568" green="0.7599999904632568" blue="0.7599999904632568" opacity="0.25" />
-                                                               </color>
-                                                            </DropShadow>
-                                                         </effect>
-                                                         <cursor>
-                                                            <Cursor fx:constant="HAND" />
-                                                         </cursor>
-                                                      </Button>
-                                                   </children>
-                                                </VBox>
+                                                <VBox fx:id="playlistcontainer" alignment="TOP_CENTER" minWidth="-Infinity" prefWidth="271.0" spacing="10.0" />
                                              </children>
                                           </AnchorPane>
                                        </content>
