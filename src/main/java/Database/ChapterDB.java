@@ -166,4 +166,43 @@ public class ChapterDB extends ConnectDB{
         return chapters;
     }
 
+    public String getVideoURLByChapterID(String chapterID) {
+        System.out.println("Inside DB: looking up chapterID = " + chapterID);
+        String url = "";
+        String query = "SELECT chapter_video FROM chapter WHERE Chapter_ID = ?";
+        try (Connection conn = this.connectToDB();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, Integer.parseInt(chapterID));
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                url = rs.getString("chapter_video");
+                System.out.println("Video URL fetched from DB: " + url);
+            }
+        } catch (SQLException | NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return url;
+    }
+    public String[] getChapterDetailsByID(String chapterID) {
+        String sql = "SELECT chapterName, chapterDescription FROM chapter WHERE Chapter_ID = ?";
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstm = conn.prepareStatement(sql)) {
+
+            pstm.setString(1, chapterID);
+            ResultSet rs = pstm.executeQuery();
+
+            if (rs.next()) {
+                String[] result = new String[2];
+                result[0] = rs.getString("chapterName");
+                result[1] = rs.getString("chapterDescription");
+                return result;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
