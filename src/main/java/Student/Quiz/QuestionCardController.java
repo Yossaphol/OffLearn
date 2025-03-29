@@ -1,4 +1,4 @@
-package Student.test;
+package Student.Quiz;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -9,7 +9,7 @@ import javafx.scene.control.ToggleGroup;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class answerCardController implements Initializable {
+public class QuestionCardController implements Initializable {
     public Label questionAndNumber2;
     public ToggleButton ans2_1;
     public ToggleButton ans2_2;
