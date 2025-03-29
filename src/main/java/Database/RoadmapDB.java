@@ -11,11 +11,11 @@ public class RoadmapDB extends ConnectDB {
     ArrayList<String[]> roadmapList = new ArrayList<>();
 
     public RoadmapDB() {
-        // Constructor เปล่าไว้ก่อน
+        // Constructor
     }
 
     public void insertRoadmapList(String catID) {
-        roadmapList.clear(); // เคลียร์รายการเก่าก่อนจะโหลดใหม่
+        roadmapList.clear();
 
         String sql = "SELECT RoadMap_ID, name, RMDescription FROM offlearn.roadmap WHERE Cat_ID = ?";
 
@@ -27,9 +27,9 @@ public class RoadmapDB extends ConnectDB {
 
             while (rs.next()) {
                 String[] roadmapData = new String[3];
-                roadmapData[0] = rs.getString("RoadMap_ID"); // RoadmapID
-                roadmapData[1] = rs.getString("name");         // ชื่อ Roadmap
-                roadmapData[2] = rs.getString("RMDescription"); // รายละเอียดของ Roadmap
+                roadmapData[0] = rs.getString("RoadMap_ID");
+                roadmapData[1] = rs.getString("name");
+                roadmapData[2] = rs.getString("RMDescription");
                 roadmapList.add(roadmapData);
             }
 
