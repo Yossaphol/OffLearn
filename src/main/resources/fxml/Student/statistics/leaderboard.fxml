@@ -193,12 +193,12 @@
                                                 <Font name="Noto Sans Thai Bold" size="19.0" />
                                              </font>
                                           </Label>
-                                          <Label prefHeight="39.0" prefWidth="332.0" text="ผู้เรียน" textFill="#8100cc">
+                                          <Label prefHeight="39.0" prefWidth="452.0" text="ผู้เรียน" textFill="#8100cc">
                                              <font>
                                                 <Font name="Noto Sans Thai Bold" size="19.0" />
                                              </font>
                                           </Label>
-                                          <Label prefHeight="39.0" prefWidth="261.0" text="คะแนนรวม" textFill="#8100cc">
+                                          <Label prefHeight="39.0" prefWidth="189.0" text="คะแนนรวม" textFill="#8100cc">
                                              <font>
                                                 <Font name="Noto Sans Thai Bold" size="19.0" />
                                              </font>
@@ -210,7 +210,7 @@
                                           </ComboBox>
                                        </children>
                                     </HBox>
-                                    <Line endX="937.5" startX="-100.0" stroke="#d4a6ee" />
+                                    <Line endX="939.0" startX="-100.0" stroke="#d4a6ee" />
                                     <VBox fx:id="studentList" maxHeight="70.0" prefWidth="1048.0" />
                                  </children>
                               </VBox>
