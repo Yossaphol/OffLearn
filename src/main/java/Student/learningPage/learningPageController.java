@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class learningPageController implements Initializable {
+public class learningPageController implements Initializable, DisposableController  {
 
     public VBox leftWrapper;
     public HBox searhbar_container;
@@ -52,7 +52,7 @@ public class learningPageController implements Initializable {
     private int countLike = 224;
     private int countDisLike = 17;
 
-    private String courseID = "99"; /// TEST
+    private String courseID = "126"; /// TEST
     private String chapterID;
     private String userID;
 
@@ -160,9 +160,36 @@ public class learningPageController implements Initializable {
         playlistcount.setText("(" + chapters.size() + ")");
     }
 
+    @Override
+    public void disposePlayer() {
+        System.out.println("Disposing video from learningPageController...");
+        if (videoManager != null) {
+            videoManager.disposePlayer();  // or mediaPlayer.stop(), etc.
+        }
+    }
 
-    public void recieveMethod(String courseid){
+
+    public void recieveMethod(String courseid) {
+        // Set the course ID from MyCourse
         this.courseID = courseid;
+
+        // Query chapters for this course
+        ChapterDB chapterDB = new ChapterDB();
+        ArrayList<String[]> chapters = chapterDB.getChaptersByCourseID(courseid);
+
+        if (!chapters.isEmpty()) {
+            // For example, choose the first chapter as default
+            this.chapterID = chapters.get(0)[0]; // Chapter_ID is at index 0
+            System.out.println("Default chapter set: " + chapterID);
+
+            // Optionally update playlist UI here
+            loadPlaylist();
+
+            // Load content (video or quiz) for the selected chapter
+            loadChapterContent();
+        } else {
+            System.err.println("No chapters found for course ID: " + courseid);
+        }
     }
 
     private void loadVideoPlayer() {

@@ -99,6 +99,9 @@ public class mainPageController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
             HBox contentComponent = loader.load();
+            Object newController = loader.getController();
+            Navigator.setCurrentContentController(newController);
+
             FontLoader font = new FontLoader();
             font.loadFonts();
             FadeTransition fadeOut = new FadeTransition(Duration.millis(200), content);

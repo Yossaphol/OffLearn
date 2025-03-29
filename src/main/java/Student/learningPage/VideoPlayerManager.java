@@ -66,6 +66,7 @@ public class VideoPlayerManager implements Initializable {
     private PauseTransition inactivityTimer;
     private PauseTransition hideDelayTransition;
     private Node trackNode;
+    public static VideoPlayerManager currentVideo;
 
     private Stage fullscreenStage = null;
     private boolean isFullscreen = false;
@@ -101,7 +102,7 @@ public class VideoPlayerManager implements Initializable {
         fontLoader.loadFonts();
         settingsMenu = new ContextMenu();
         HomeController method_home = new HomeController();
-
+        currentVideo = this;
         // Load icons
         loadIcons();
 
@@ -416,6 +417,7 @@ public class VideoPlayerManager implements Initializable {
 
         // Update time
         mediaPlayer.currentTimeProperty().addListener((obs, oldTime, newTime) -> {
+            if (mediaPlayer == null) return;
             Duration total = mediaPlayer.getTotalDuration();
             if (videoEnded) {
                 sliderTime.setValue(total.toSeconds());
