@@ -1117,7 +1117,7 @@
                         <Insets top="60.0" />
                      </VBox.margin>
                   </HBox>
-                  <GridPane fx:id="allCourseContainer" minHeight="-Infinity" minWidth="-Infinity" prefHeight="994.0" prefWidth="1140.0" stylesheets="@../../../css/course.css">
+                  <GridPane fx:id="allCourseContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="994.0" prefWidth="1140.0" stylesheets="@../../../css/course.css">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
