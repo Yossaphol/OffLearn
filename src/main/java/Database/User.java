@@ -8,7 +8,7 @@ public class User {
     private String email;
     private String profile;
 
-    public User(String firstname, String lastname, String username, String email, String password, String profile) {
+    public User( String firstname, String lastname, String username, String email, String password, String profile) {
         this.fname = firstname;
         this.lname = lastname;
         this.user = username;
