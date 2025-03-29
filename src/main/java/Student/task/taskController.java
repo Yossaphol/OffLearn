@@ -2,6 +2,7 @@ package Student.task;
 
 import Database.QuestionDB;
 import Database.QuizDB;
+import Database.UserDB;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
 import Teacher.quiz.QuizItem;
@@ -58,13 +59,12 @@ public class taskController implements Initializable {
     //พวกที่มีเลขตามหลังเช่น task1 point2 1 คือแท็บหน้าเลยกำหนด 2 คือแท็บหน้าเสร็จ ส่วนที่ไม่มีเลขคือแท็บกำลังจะมาถึง
 
     QuizDB dataDB = new QuizDB();
-    ArrayList<QuizItem> quiz = (ArrayList<QuizItem>) dataDB.getAllQuizzes();
-    QuestionDB questionDB = new QuestionDB();
+    ArrayList<QuizItem> quiz = (ArrayList<QuizItem>) dataDB.getAllThisUserQuiz();
+    UserDB userDB = new UserDB();
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
 
         setUpComing();
         setComplete();

@@ -149,6 +149,33 @@ public class QuizDB extends ConnectDB{
     }
 
 
+    public List<QuizItem> getAllThisUserQuiz() {
+        String sql = "SELECT * FROM quiz";
+        List<QuizItem> quizList = new ArrayList<>();
+
+        try (
+                Connection conn = this.connectToDB();
+                PreparedStatement pstm = conn.prepareStatement(sql);
+                ResultSet rs = pstm.executeQuery()
+        ) {
+            while (rs.next()) {
+                int quizID = rs.getInt("Quiz_ID");
+                String header = rs.getString("header");
+                int minScore = rs.getInt("minScore");
+                String level = rs.getString("level");
+                int maxScore = rs.getInt("maxScore");
+
+                quizList.add(new QuizItem(quizID, header, minScore, maxScore, level));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return quizList;
+    }
+
+
+
 
 
 }
