@@ -4,6 +4,7 @@ import Database.Category;
 import Database.MyCourse;
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.HomeController;
+import Student.HomeAndNavigation.Navigator;
 import Student.learningPage.learningPageController;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -84,6 +85,7 @@ public class myCourseController implements Initializable {
 
                         learningPageController l = fxmlLoader.getController();
                         l.recieveMethod(myCourse.getCourse_ID());
+                        Navigator.setCurrentContentController(l);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }

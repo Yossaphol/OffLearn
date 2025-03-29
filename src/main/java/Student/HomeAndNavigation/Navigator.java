@@ -1,5 +1,6 @@
 package Student.HomeAndNavigation;
 
+import Student.learningPage.DisposableController;
 import javafx.scene.input.MouseEvent;
 import Student.mainPage.mainPageController;
 import Student.navBarAndSearchbar.navBarController;
@@ -8,6 +9,7 @@ public class Navigator {
 
     private static mainPageController controller;
     private static navBarController navCtrl;
+    private static Object currentContentController;
 
     public static void setController(mainPageController ctrl) {
         controller = ctrl;
@@ -59,7 +61,7 @@ public class Navigator {
     }
 
 
-    public void testResult() {
+    public void QuizResult() {
         navigateTo("/fxml/Student/Quiz/resultPage.fxml");
         controller.stopHideNavbar();
         controller.stopHideSearchBar();
@@ -112,13 +114,20 @@ public class Navigator {
     }
 
     public void navigateTo(String fxmlPath) {
+        System.out.println("navigateTo called: " + fxmlPath);
+        if (currentContentController instanceof DisposableController) {
+            System.out.println("Calling dispose on current content controller...");
+            ((DisposableController) currentContentController).disposePlayer();
+        }
         if (controller != null) {
             controller.displayNavbar();
             controller.displayContent(fxmlPath);
         } else {
             System.out.println("Navigator Error");
         }
-
+    }
+    public static void setCurrentContentController(Object controller) {
+        currentContentController = controller;
     }
 }
 

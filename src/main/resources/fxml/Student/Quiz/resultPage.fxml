@@ -24,7 +24,7 @@
                      <children>
                         <Label prefHeight="22.0" prefWidth="939.0" text="ผลลัพธ์" textFill="#bcbcbc">
                            <font>
-                              <Font name="Noto Sans Thai Regular" size="13.0" />
+                              <Font name="Kodchasan Regular" size="13.0" />
                            </font>
                            <VBox.margin>
                               <Insets bottom="20.0" />
@@ -41,14 +41,14 @@
                            <children>
                               <HBox prefHeight="93.0" prefWidth="750.0">
                                  <children>
-                                    <Label prefHeight="93.0" prefWidth="491.0" text="ยินดีด้วยคุณได้คะแนน" textFill="#8100cc">
+                                    <Label prefHeight="94.0" prefWidth="587.0" text="ยินดีด้วยคุณได้คะแนน" textFill="#8100cc">
                                        <font>
-                                          <Font name="Noto Sans Thai Bold" size="51.0" />
+                                          <Font name="Kodchasan Regular" size="51.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="score_getandmax" prefHeight="111.0" prefWidth="246.0" text="64/100" underline="true">
+                                    <Label fx:id="yourScore" prefHeight="111.0" prefWidth="246.0" text="64/100" underline="true">
                                        <font>
-                                          <Font name="Noto Sans Thai Bold" size="41.0" />
+                                          <Font name="Kodchasan Regular" size="41.0" />
                                        </font>
                                     </Label>
                                  </children>
@@ -59,19 +59,19 @@
                                        <children>
                                           <VBox prefHeight="282.0" prefWidth="221.0">
                                              <children>
-                                                <Label fx:id="score_average_percen" alignment="TOP_LEFT" prefHeight="72.0" prefWidth="228.0" text="คิดเป็น 64%">
+                                                <Label fx:id="scorePercent" alignment="TOP_LEFT" prefHeight="72.0" prefWidth="228.0" text="คิดเป็น 64%">
                                                    <font>
-                                                      <Font name="Noto Sans Thai Regular" size="38.0" />
+                                                      <Font name="Kodchasan Regular" size="38.0" />
                                                    </font>
                                                 </Label>
-                                                <Label fx:id="score_average_testerpercen" alignment="TOP_LEFT" prefHeight="72.0" prefWidth="203.0" text="มากกว่า 70% ของผู้สอบ">
+                                                <Label fx:id="score_average_testerpercent" alignment="TOP_LEFT" prefHeight="43.0" prefWidth="203.0" text="มากกว่า 70% ของผู้สอบ">
                                                    <font>
-                                                      <Font name="Noto Sans Thai Regular" size="17.0" />
+                                                      <Font name="Kodchasan Regular" size="17.0" />
                                                    </font>
                                                 </Label>
                                              </children>
                                           </VBox>
-                                          <BarChart fx:id="score_average_chart" prefHeight="282.0" prefWidth="370.0">
+                                          <BarChart fx:id="barChart" prefHeight="282.0" prefWidth="370.0">
                                             <xAxis>
                                               <CategoryAxis side="BOTTOM" fx:id="xAxis" />
                                             </xAxis>
@@ -83,24 +83,28 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="282.0" prefWidth="263.0">
                                        <children>
-                                          <Circle fx:id="teacher_pic" fill="DODGERBLUE" radius="30.0" stroke="BLACK" strokeType="INSIDE">
-                                             <HBox.margin>
-                                                <Insets right="10.0" />
-                                             </HBox.margin>
-                                          </Circle>
+                                          <HBox fx:id="teacherProfileContainer" alignment="CENTER" prefHeight="282.0" prefWidth="78.0">
+                                             <children>
+                                                <Circle fx:id="teacherProfile" fill="DODGERBLUE" radius="30.0" stroke="BLACK" strokeType="INSIDE">
+                                                   <HBox.margin>
+                                                      <Insets right="10.0" />
+                                                   </HBox.margin>
+                                                </Circle>
+                                             </children>
+                                          </HBox>
                                           <VBox alignment="CENTER_LEFT" prefHeight="78.0">
                                              <children>
                                                 <Label text="สร้างโดย" textFill="#a8a8a8">
                                                    <font>
-                                                      <Font name="Noto Sans Thai Regular" size="12.0" />
+                                                      <Font name="Kodchasan Regular" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <Label fx:id="teacher_name" prefHeight="0.0" text="Bobby Lovecat" textFill="#8100cc">
+                                                <Label fx:id="teacherName" prefHeight="0.0" text="Bobby Lovecat" textFill="#8100cc">
                                                    <font>
-                                                      <Font name="Noto Sans Thai Bold" size="14.0" />
+                                                      <Font name="Kodchasan Regular" size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <Label fx:id="teacher_description" prefHeight="0.0" text="นายกสมาคม Programmer" textFill="#a8a8a8">
+                                                <Label fx:id="teacherDesc" prefHeight="0.0" text="นายกสมาคม Programmer" textFill="#a8a8a8">
                                                    <font>
                                                       <Font name="Noto Sans Thai Regular" size="12.0" />
                                                    </font>
@@ -110,7 +114,7 @@
                                                       <Insets top="10.0" />
                                                    </VBox.margin>
                                                    <font>
-                                                      <Font name="Noto Sans Thai Bold" size="12.0" />
+                                                      <Font name="Kodchasan Regular" size="12.0" />
                                                    </font>
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
@@ -129,11 +133,6 @@
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0">
                            <children>
-                              <Label fx:id="text" text="text">
-                                 <font>
-                                    <Font name="Noto Sans Thai Regular" size="16.0" />
-                                 </font>
-                              </Label>
                               <Button fx:id="startLearning" mnemonicParsing="false" prefHeight="41.0" prefWidth="139.0" style="-fx-background-color: #8100cc; -fx-background-radius: 10;" text="เริ่มเรียนเลย!" textFill="WHITE">
                                  <font>
                                     <Font name="Noto Sans Thai Bold" size="18.0" />
