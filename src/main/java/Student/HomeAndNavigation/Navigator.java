@@ -59,7 +59,7 @@ public class Navigator {
     }
 
 
-    public void testResult() {
+    public void QuizResult() {
         navigateTo("/fxml/Student/Quiz/resultPage.fxml");
         controller.stopHideNavbar();
         controller.stopHideSearchBar();

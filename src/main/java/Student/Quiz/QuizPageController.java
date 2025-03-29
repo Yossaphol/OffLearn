@@ -1,74 +1,69 @@
 package Student.Quiz;
 
+import Database.QuestionDB;
+import Database.QuizDB;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
+import Teacher.quiz.QuestionItem;
+import Teacher.quiz.QuizController;
+import Teacher.quiz.QuizItem;
+import com.beust.ah.A;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class QuizPageController implements Initializable {
-    public VBox leftWrapper;
-    public Label score;
-    public Button finishBtn;
-    public VBox problemContainer;
 
-    HomeController ef = new HomeController();
-    testPageController tp = new testPageController();
+    @FXML
+    private VBox questionSpace;
 
-    List<Question> problemList;
+    @FXML
+    private Button sendButton;
+
+    private int quizId = 104;
+    private ArrayList<QuestionItem> questionItemsList;
+    private QuestionDB questionDB;
+    private ArrayList<QuestionCardController> questionCardControllersList;
+    private int point;
+    private Navigator navigator;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        problemList = tp.getQuestions(); //โจทย์ที่ดึงมาก
-        if (problemList == null) {
-            problemList = new ArrayList<>();
-        }
-
-        setScore(67, 100);
-        route();
-        setEffect();
-
-        //ตัวอย่างโจทย์
-        problemList.add(new Question(1, "What is Love?", "Chemical reaction", "Feeling", "Money", "Understanding each other", "ผิด", "Money", "Feeling"));
-        problemList.add(new Question(2, "What is 2 + 2?", "1", "2", "3", "4", "ผิด", "2", "4"));
-        problemList.add(new Question(1, "What is Java?", "Programming language", "Coffee", "Planet", "Game", "ถูก", "Programming language", "Programming language"));
-
-        setProblems(problemList);
+        questionCardControllersList = new ArrayList<QuestionCardController>();
+        loadQuiz();
+        setSendButton();
     }
 
-    public void setProblems(List<Question> questions) {
-        problemContainer.getChildren().clear();
+    public void loadQuiz(){
+        questionDB = new QuestionDB();
+        questionItemsList = questionDB.getQuestionsByQuizID(quizId);
 
-        for (int i = 0; i < questions.size(); i++) {
+        for (QuestionItem q : questionItemsList){
             try {
-                Question question = questions.get(i);
-                FXMLLoader loader;
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Student/Quiz/questionCard.fxml"));
+                VBox questionCard = fxmlLoader.load();
 
-                if (question.getType() == 1) {
-                    loader = new FXMLLoader(getClass().getResource("/fxml/Student/Quiz/questionCard.fxml"));
-                } else {
-                    loader = new FXMLLoader(getClass().getResource("/fxml/Student/Quiz/answerPageCard2.fxml"));
-                }
+                QuestionCardController questionCardController = fxmlLoader.getController();
 
-                VBox problemCard = loader.load();
-                QuestionCardController q = loader.getController();
-                if(question.getType() == 1){
-                    q.setProblemCard1(i + 1, question.getQuestionText(), question.getOptionA(), question.getOptionB(), question.getOptionC(), question.getOptionD(), question.getCorrectness(), question.getSelectedChoice(), question.getCorrectAns());
-                }
-                else{
-                    q.setProblemCard2(i + 1, question.getQuestionText(), question.getOptionA(), question.getOptionB(), question.getOptionC(), question.getOptionD(), question.getCorrectness(), question.getSelectedChoice(), question.getCorrectAns());
-                }
+                questionCardController.setQuestionItem(q);
+                questionCardController.setSendButton(sendButton);
+                questionCardController.setDisplay();
 
+                questionCardControllersList.add(questionCardController);
+                questionSpace.getChildren().add(questionCard);
 
-                problemContainer.getChildren().add(problemCard);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -76,17 +71,51 @@ public class QuizPageController implements Initializable {
         }
     }
 
+    public void setSendButton(){
+        navigator = new Navigator();
+        sendButton.setOnAction(actionEvent -> {
+            this.point = 0;
+            boolean allAnswered = true;
 
-    private void setEffect() {
-        ef.hoverEffect(finishBtn);
+            for (QuestionCardController q : questionCardControllersList){
+                q.checkAnswer();
+                if (q.getPoint() == -1) {
+                    allAnswered = false;
+                } else {
+                    this.point += q.getPoint();
+                }
+            }
+            if (!allAnswered) {
+                showAlert("คำตอบไม่ครบ", "กรุณาตอบคำถามให้ครบทุกข้อก่อนส่ง", Alert.AlertType.ERROR);
+                return;
+            }
+
+            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmAlert.setTitle("ยืนยันการส่งคำตอบ");
+            confirmAlert.setHeaderText(null);
+            confirmAlert.setContentText("ท่านต้องการส่งคำตอบใช่หรือไม่?");
+
+            if (confirmAlert.showAndWait().get() == ButtonType.OK) {
+                navigator.QuizResult();
+                System.out.println("" + point);
+            } else {
+                System.out.println("ยกเลิกการส่งคำตอบ");
+            }
+        });
     }
 
-    private void route() {
-        Navigator nav = new Navigator();
-        finishBtn.setOnMouseClicked(nav::testResult);
+
+    public void showAlert(String title, String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
-    public void setScore(int got, int total) {
-        score.setText(got + "/" + total + " คะแนน");
+
+    public void setQuizId(int quizId){
+        this.quizId = quizId;
     }
+
 }
