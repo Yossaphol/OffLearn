@@ -68,13 +68,12 @@ public class taskController implements Initializable {
     }
 
     private void setUpComing(){
-
         for (QuizItem task : quiz){
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/taskCard.fxml"));
                 Node quizItem = loader.load();
                 taskCardController controller = loader.getController();
-                controller.setTaskInformation(task.getHeader(), task.getHeader(), task.getMaxScore());
+                controller.setTaskInformation(task.getHeader(), task.getLevel(), task.getMaxScore());
 
                 Button content = (Button) quizItem;
                 hoverEffect(content);
@@ -83,8 +82,6 @@ public class taskController implements Initializable {
                 e.printStackTrace();
             }
         }
-
-
     }
 
 
