@@ -42,8 +42,8 @@ public class StudentScoreDB extends ConnectDB {
             if (rs.next()) {
                 int courseId = rs.getInt("Course_ID");
 
-                if (!hasChapters(courseId, conn)) {
-                    return -2; //ถ้าคอร์สนั้นไม่มีควิซ
+                if (!hasQuizChapters(courseId, conn)) {
+                    return -2; //ถ้าคอร์สนั้นไม่มี quiz
                 }
 
                 return courseId;
@@ -56,19 +56,20 @@ public class StudentScoreDB extends ConnectDB {
     }
 
     //เช็คว่าคอร์สนั้นๆ มีควิซหรือไม่มี
-    private boolean hasChapters(int courseId, Connection conn) {
-        String sql = "SELECT 1 FROM chapter WHERE Course_ID = ? LIMIT 1";
+    private boolean hasQuizChapters(int courseId, Connection conn) {
+        String sql = "SELECT 1 FROM quiz WHERE Chapter_ID IN (SELECT Chapter_ID FROM chapter WHERE Course_ID = ?) LIMIT 1";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, courseId);
             ResultSet rs = stmt.executeQuery();
-            return rs.next(); //Returns true ถ้าคอร์สนั้นมี Chapter(มี quiz)
+            return rs.next(); //Returns true ถ้าคอร์สมีควิซ
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return false;
     }
+
 
 
 }

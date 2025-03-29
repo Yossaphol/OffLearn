@@ -211,7 +211,7 @@
                                        </children>
                                     </HBox>
                                     <Line endX="937.5" startX="-100.0" stroke="#d4a6ee" />
-                                    <VBox fx:id="studentList" alignment="TOP_CENTER" maxHeight="70.0" prefWidth="1048.0" />
+                                    <VBox fx:id="studentList" maxHeight="70.0" prefWidth="1048.0" />
                                  </children>
                               </VBox>
                            </children>
