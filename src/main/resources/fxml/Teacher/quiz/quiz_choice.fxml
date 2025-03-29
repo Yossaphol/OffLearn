@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="quiz_detail_list" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="291.0" prefWidth="1440.0" style="-fx-background-color: #FBFBFB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.QuizDetail.quiz_choiceController">
+<HBox fx:id="quiz_detail_list" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="291.0" prefWidth="1440.0" style="-fx-background-color: #FBFBFB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Teacher.quizDetail.quiz_choiceController">
     <padding>
         <Insets top="10.0" />
     </padding>
