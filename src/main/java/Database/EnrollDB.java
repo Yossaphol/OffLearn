@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class EnrollDB extends ConnectDB{
@@ -165,6 +167,77 @@ public class EnrollDB extends ConnectDB{
         }
 
         return new int[]{0, 0};
+    }
+
+
+    public List<String> getEnrolledCourseNames(int userID) {
+        List<String> courseNames = new ArrayList<>();
+
+        String sql = "SELECT c.courseName " +
+                "FROM enroll e " +
+                "JOIN course c ON e.Course_ID = c.Course_ID " +
+                "WHERE e.User_ID = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                courseNames.add(rs.getString("courseName"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return courseNames;
+    }
+
+    public List<String> getStudentsByCourseName(String courseName) {
+        List<String> studentNames = new ArrayList<>();
+
+        String sql = "SELECT u.userName " +
+                "FROM enroll e " +
+                "JOIN user u ON e.User_ID = u.User_ID " +
+                "JOIN course c ON e.Course_ID = c.Course_ID " +
+                "WHERE c.courseName = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, courseName);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                studentNames.add(rs.getString("userName"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return studentNames;
+    }
+
+    public int getCourseIdByCourseName(String courseName) {
+        String sql = "SELECT Course_ID FROM course WHERE courseName = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, courseName);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("Course_ID");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return -1;
     }
 
 

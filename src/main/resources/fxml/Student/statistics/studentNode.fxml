@@ -8,14 +8,14 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="73.0" spacing="40.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.leaderboard.studentNodeController">
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="73.0" spacing="40.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.leaderboard.studentNodeController">
     <children>
-          <Label fx:id="sequence" alignment="CENTER" prefHeight="73.0" text="1" textFill="#8100cc">
+          <Label fx:id="sequence" alignment="CENTER" prefHeight="73.0" prefWidth="111.0" text="1" textFill="#8100cc">
               <font>
                   <Font name="Noto Sans Thai Bold" size="18.0" />
               </font>
           </Label>
-      <HBox alignment="CENTER_LEFT" prefHeight="100.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="332.0">
          <children>
               <Circle fx:id="profilePic" fill="DODGERBLUE" radius="24.0" stroke="BLACK" strokeType="INSIDE">
                   <HBox.margin>
@@ -29,7 +29,7 @@
               </Label>
          </children>
       </HBox>
-        <Label fx:id="score" alignment="CENTER" prefHeight="33.0" text="score" textFill="#8100cc">
+        <Label fx:id="score" prefHeight="33.0" prefWidth="261.0" text="score" textFill="#8100cc">
             <font>
                 <Font name="Noto Sans Thai Regular" size="18.0" />
             </font>

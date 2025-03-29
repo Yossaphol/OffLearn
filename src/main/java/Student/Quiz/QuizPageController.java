@@ -21,13 +21,13 @@ public class QuizPageController implements Initializable {
     public VBox problemContainer;
 
     HomeController ef = new HomeController();
-    testPageController tp = new testPageController();
+//    testPageController tp = new testPageController();
 
     List<Question> problemList;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        problemList = tp.getQuestions(); //โจทย์ที่ดึงมาก
+    //    problemList = tp.getQuestions(); //โจทย์ที่ดึงมาก
         if (problemList == null) {
             problemList = new ArrayList<>();
         }
