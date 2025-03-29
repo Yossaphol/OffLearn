@@ -29,6 +29,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import Database.CourseDB;
+import Teacher.courseManagement.CourseItem;
+
 public class courseController implements Initializable {
     @FXML
     public VBox leftWrapper;
@@ -209,41 +212,39 @@ public class courseController implements Initializable {
 
     }
 
-    public void handleCourseItem(){
-        try {
-            List<String> courseList = new ArrayList<>();
-            courseList.add("Math");
+    public void handleCourseItem() {
 
-            List<String> description = new ArrayList<>();
-            description.add("Math for IT");
+        CourseDB courseDB = new CourseDB();
+        ArrayList<CourseItem> courseList = courseDB.getAllCourses();
 
-            int col = 0, row = 0;
-            for (String courseName : courseList) {
+        int col = 0, row = 0;
+        for (CourseItem course : courseList) {
+            try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/enrollCourseItem.fxml"));
-                Node courseItem = loader.load();
+                Node courseItemNode = loader.load();
+
                 enrollCourseItem controller = loader.getController();
 
-                //Set detail
-                controller.setCourseName(courseName);
-                controller.setShortDescription(description.get(col));
+                // ตั้งค่ารายละเอียดคอร์สให้กับ Controller ของ FXML
+                controller.setCourseName(course.getCourseName());
+                //controller.setShortDescription(course.getDescription());
                 controller.setTeacherName("ผศ.ดร. วิรยบวร บุญเปรี่ยม");
                 controller.setTeacherImg("/img/Profile/man.png");
-                controller.setCourseImg("/img/Picture/bg.jpg");
+                //controller.setCourseImg(course.getImage() != null ? course.getImage() : "/img/Picture/bg.jpg");
 
 
-                ef.hoverEffect(courseItem);
-                allCourseContainer.add(courseItem, col, row);
-                GridPane.setMargin(courseItem, new Insets(10, 30, 10, 30));
-
+                ef.hoverEffect(courseItemNode);
+                allCourseContainer.add(courseItemNode, col, row);
+                GridPane.setMargin(courseItemNode, new Insets(10, 30, 10, 30));
 
                 col++;
                 if (col == 3) {
                     col = 0;
                     row++;
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
