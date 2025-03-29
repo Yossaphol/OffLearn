@@ -74,9 +74,21 @@
                                           </VBox>
                                        </children>
                                     </HBox>
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                    <HBox fx:id="Quiz" alignment="CENTER" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="118.0" prefWidth="136.0">
                                        <children>
-                                          <Button fx:id="btnOffLoad" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-radius: 10; -fx-cursor: hand;" textFill="TRANSPARENT">
+                                          <Button fx:id="btnOffLoad" mnemonicParsing="false" prefHeight="38.0" prefWidth="127.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-radius: 10; -fx-cursor: hand;" text="ทำแบบทดสอบ" textFill="#7e00cc">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" layoutX="650.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Button fx:id="btnOffLoad1" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-radius: 10; -fx-cursor: hand;" textFill="TRANSPARENT">
                                              <graphic>
                                                 <ImageView fitHeight="31.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
