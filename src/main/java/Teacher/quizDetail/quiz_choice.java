@@ -20,7 +20,6 @@ public class quiz_choice extends Application {
 
         // ดึง Controller และอัปเดตข้อมูล
         quiz_choiceController controller = fxmlLoader.getController();
-        controller.updateStatistics("ข้อที่ 1 สิ่งที่อยู่ในรูปนี้คืออะไร", "แมว", "ยีราฟ", 35.0, 65.0);
 
         // สร้าง Scene
         Scene scene = new Scene(root, 1280, 720);

@@ -43,6 +43,26 @@ public class CourseDB extends ConnectDB{
         }
     }
 
+    public int getCourseIDByChapterID(int chapterID) {
+        String sql = "SELECT Course_ID FROM offlearn.chapter WHERE Chapter_ID = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstm = conn.prepareStatement(sql)) {
+
+            pstm.setInt(1, chapterID);
+            ResultSet rs = pstm.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("Course_ID");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
 
     public int getCourseID(String name){
         String sql = "SELECT Course_ID FROM offlearn.course WHERE courseName = ? ";

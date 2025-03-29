@@ -1,7 +1,6 @@
 package Student.Quiz;
 
-import Database.QuestionDB;
-import Database.QuizDB;
+import Database.*;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
 import Teacher.quiz.QuestionItem;
@@ -38,6 +37,13 @@ public class QuizPageController implements Initializable {
     private ArrayList<QuestionCardController> questionCardControllersList;
     private int point;
     private Navigator navigator;
+    private ScoreDB scoreDB;
+    private int chapterID = 131;
+    private int userID = 17;
+    private ChapterDB chapterDB;
+    private CourseDB courseDB;
+    private QuizDB quizDB;
+    private QuizItem quizItem;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -73,6 +79,12 @@ public class QuizPageController implements Initializable {
 
     public void setSendButton(){
         navigator = new Navigator();
+        scoreDB = new ScoreDB();
+        courseDB = new CourseDB();
+        quizDB = new QuizDB();
+
+        quizItem = quizDB.getQuizById(quizId);
+
         sendButton.setOnAction(actionEvent -> {
             this.point = 0;
             boolean allAnswered = true;
@@ -96,7 +108,8 @@ public class QuizPageController implements Initializable {
             confirmAlert.setContentText("ท่านต้องการส่งคำตอบใช่หรือไม่?");
 
             if (confirmAlert.showAndWait().get() == ButtonType.OK) {
-                navigator.QuizResult();
+//                navigator.QuizResult();
+                scoreDB.saveScore(courseDB, userID, chapterID, point);
                 System.out.println("" + point);
             } else {
                 System.out.println("ยกเลิกการส่งคำตอบ");

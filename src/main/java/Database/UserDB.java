@@ -263,5 +263,40 @@ public class UserDB extends ConnectDB{
         return -1;
     }
 
+    public String[] getUserNameProfileAndSpecByCourseID(int courseID) {
+        String sql = "SELECT u.username, u.profile, u.specification FROM offlearn.course c " +
+                "JOIN offlearn.user u ON c.User_ID = u.User_ID " +
+                "WHERE c.Course_ID = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, courseID);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                String username = rs.getString("Username");
+                String profile = rs.getString("Profile");
+                String specification = rs.getString("Specification");
+
+                if (profile == null || profile.isEmpty()) {
+                    profile = "/img/Profile/user.png";
+                }
+
+                if (specification == null) {
+                    specification = "-";
+                }
+
+                return new String[]{username, profile, specification};
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+
+
 }
 
