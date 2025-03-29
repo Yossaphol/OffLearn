@@ -225,9 +225,8 @@ public class courseController implements Initializable {
 
                 enrollCourseItem controller = loader.getController();
 
-                // ตั้งค่ารายละเอียดคอร์สให้กับ Controller ของ FXML
                 controller.setCourseName(course.getCourseName());
-                //controller.setShortDescription(course.getDescription());
+                controller.setShortDescription(course.getCourseDesc());
                 controller.setTeacherName("ผศ.ดร. วิรยบวร บุญเปรี่ยม");
                 controller.setTeacherImg("/img/Profile/man.png");
                 //controller.setCourseImg(course.getImage() != null ? course.getImage() : "/img/Picture/bg.jpg");
