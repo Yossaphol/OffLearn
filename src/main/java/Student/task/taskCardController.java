@@ -19,7 +19,7 @@ public class taskCardController implements Initializable {
     public void setTaskInformation(String information, String detail, double score){
         taskInformation.setText(information);
         taskDetail.setText(detail);
-        point.setText(String.valueOf(score));
+        point.setText(score+" คะแนน");
     }
 
 

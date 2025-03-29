@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="73.0" spacing="40.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.leaderboard.studentNodeController">
+    <children>
+          <Label fx:id="sequence" alignment="CENTER" prefHeight="73.0" text="1" textFill="#8100cc">
+              <font>
+                  <Font name="Noto Sans Thai Bold" size="18.0" />
+              </font>
+          </Label>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0">
+         <children>
+              <Circle fx:id="profilePic" fill="DODGERBLUE" radius="24.0" stroke="BLACK" strokeType="INSIDE">
+                  <HBox.margin>
+                      <Insets right="10.0" />
+                  </HBox.margin>
+              </Circle>
+              <Label fx:id="name" prefHeight="33.0" text="Sirname lastname" textFill="#8100cc">
+                  <font>
+                      <Font name="Noto Sans Thai Bold" size="20.0" />
+                  </font>
+              </Label>
+         </children>
+      </HBox>
+        <Label fx:id="score" alignment="CENTER" prefHeight="33.0" text="score" textFill="#8100cc">
+            <font>
+                <Font name="Noto Sans Thai Regular" size="18.0" />
+            </font>
+        </Label>
+        <Button mnemonicParsing="false" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #410066, #8100CC); -fx-background-radius: 7;" text="Inbox" textFill="WHITE">
+            <font>
+                <Font name="Noto Sans Thai Bold" size="14.0" />
+            </font>
+            <padding>
+                <Insets bottom="2.0" left="15.0" right="15.0" top="2.0" />
+            </padding>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+    </children>
+   <padding>
+      <Insets left="40.0" right="40.0" />
+   </padding>
+</HBox>
