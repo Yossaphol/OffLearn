@@ -112,7 +112,7 @@ public class Navigator {
         controller.displayNavbar();
     }
 
-    private void navigateTo(String fxmlPath) {
+    public void navigateTo(String fxmlPath) {
         if (controller != null) {
             controller.displayNavbar();
             controller.displayContent(fxmlPath);

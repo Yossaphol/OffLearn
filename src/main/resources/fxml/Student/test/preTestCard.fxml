@@ -9,11 +9,6 @@
 
 <VBox alignment="CENTER_LEFT" prefHeight="272.0" prefWidth="774.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: a8a8a8;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.test.preTestCardController">
    <children>
-      <Label alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="701.0" text="Pre-Test" textFill="#8100cc">
-         <font>
-            <Font name="Noto Sans Thai Bold" size="14.0" />
-         </font>
-      </Label>
       <Label fx:id="name" prefHeight="62.0" prefWidth="672.0" text="Name">
          <font>
             <Font name="Noto Sans Thai Bold" size="48.0" />

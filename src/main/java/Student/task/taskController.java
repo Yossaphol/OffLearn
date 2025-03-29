@@ -1,12 +1,16 @@
 package Student.task;
 
+import Database.QuestionDB;
 import Database.QuizDB;
 import Student.HomeAndNavigation.HomeController;
+import Student.HomeAndNavigation.Navigator;
+import Student.test.pre_testController;
 import Teacher.quiz.QuizItem;
 import javafx.animation.*;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -56,6 +60,7 @@ public class taskController implements Initializable {
 
     QuizDB dataDB = new QuizDB();
     ArrayList<QuizItem> quiz = (ArrayList<QuizItem>) dataDB.getAllQuizzes();
+    QuestionDB questionDB = new QuestionDB();
 
 
     @Override
@@ -67,22 +72,45 @@ public class taskController implements Initializable {
         setTabAnimation();
     }
 
-    private void setUpComing(){
-        for (QuizItem task : quiz){
+    private void setUpComing() {
+        for (QuizItem task : quiz) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/taskCard.fxml"));
                 Node quizItem = loader.load();
+
                 taskCardController controller = loader.getController();
                 controller.setTaskInformation(task.getHeader(), task.getLevel(), task.getMaxScore());
 
                 Button content = (Button) quizItem;
                 hoverEffect(content);
+//                content.setOnMouseClicked(e ->
+//                        handleQuizTestLink("TeacherD", task.getLevel(), task.getHeader(), 120, questionDB.countQuestionsByQuizID(task.getQuizID()))
+//                );
                 containerUpComing.getChildren().add(content);
-            } catch (IOException e){
+
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
+
+//    private void handleQuizTestLink(String teacherName, String hardness, String testName, int duration, int amountOfQuestion) {
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/test/preTest.fxml"));
+//            Parent root = loader.load();
+//
+//            pre_testController ctrl = loader.getController();
+//            ctrl.displayCard(teacherName, hardness, testName, duration, amountOfQuestion);
+//
+//            Navigator nav = new Navigator();
+//            nav.navigateTo("/fxml/Student/test/preTest.fxml");
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
 
 
     private void setComplete(){
