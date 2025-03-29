@@ -63,7 +63,7 @@
                                        <children>
                                           <VBox alignment="BOTTOM_LEFT" prefHeight="73.0" prefWidth="282.0">
                                              <children>
-                                                <Label text="บัญชี">
+                                                <Label text="เลขบัญชี">
                                                    <font>
                                                       <Font name="Noto Sans Thai Bold" size="24.0" />
                                                    </font>
@@ -82,7 +82,7 @@
                                                       <Font name="Noto Sans Thai Bold" size="24.0" />
                                                    </font>
                                                 </Label>
-                                                <Label fx:id="AccountName" text="Wirayabovorn Boonpriam" textFill="#0675de">
+                                                <Label fx:id="accountName" text="Wirayabovorn Boonpriam" textFill="#0675de">
                                                    <font>
                                                       <Font name="Kodchasan Bold" size="24.0" />
                                                    </font>
@@ -112,7 +112,7 @@
                                                       <Font name="Noto Sans Thai Bold" size="24.0" />
                                                    </font>
                                                 </Label>
-                                                <Label text="กสิกรไทย" textFill="#0675de">
+                                                <Label fx:id="bankname" text="กสิกรไทย" textFill="#0675de">
                                                    <font>
                                                       <Font name="Kodchasan Bold" size="24.0" />
                                                    </font>
