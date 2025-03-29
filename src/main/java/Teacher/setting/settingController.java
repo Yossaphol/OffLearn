@@ -87,8 +87,10 @@ public class settingController implements Initializable {
     HomeController ef = new HomeController();
 
     UserDB userDB = new UserDB();
+    withdrawDB withdrawDB = new withdrawDB();
     String sessionUsername = SessionManager.getInstance().getUsername();
     User user = userDB.getUserInfo(sessionUsername);
+    int userID = userDB.getUserId(SessionManager.getInstance().getUsername());
 
     String firstname = user.getFirstname();
     String lastNameUser = user.getLastname();
@@ -410,18 +412,20 @@ public class settingController implements Initializable {
     }
 
     public void setWithdrawInfo() {
-//        String userId = SessionManager.getInstance().getUserId();
-//        withdraw userWithdraw = withdrawDB.getWithdrawInfo(userId);
-//        System.out.println(userId);
-//        System.out.println(userWithdraw);
-//        if (userWithdraw != null) {
-//            bankaccount_number.setText(userWithdraw.getAccountNumber());
-//            bankaccount_firstname.setText(userWithdraw.getAccountFName());
-//            bankaccount_lastname.setText(userWithdraw.getAccountLName());
-//            bankaccount_bank.setText(userWithdraw.getBankName());
-//        } else {
-//            System.out.println("Not found data");
-//        }
+        String sessionUsername = SessionManager.getInstance().getUsername();
+        UserDB userDB = new UserDB();
+        int userId = userDB.getUserId(sessionUsername);
+        withdraw userWithdraw = withdrawDB.getWithdrawInfo(String.valueOf(userId));
+        System.out.println(userId);
+        System.out.println(userWithdraw);
+        if (userWithdraw != null) {
+            bankaccount_number.setText(userWithdraw.getAccountNumber());
+            bankaccount_firstname.setText(userWithdraw.getAccountFName());
+            bankaccount_lastname.setText(userWithdraw.getAccountLName());
+            bankaccount_bank.setText(userWithdraw.getBankName());
+        } else {
+            System.out.println("Not found data");
+        }
     }
 
     @FXML
@@ -437,11 +441,8 @@ public class settingController implements Initializable {
             showAlert("Update Failed", "Please complete all fields.", Alert.AlertType.WARNING);
             return;
         }
-
-        boolean ss = new withdrawDB().updateWithdrawInfo(username, acctNumber, bankFName, bankLName, bankname);
-
-        if (ss) {
-            showAlert("Success", "Update payment information successfully!", Alert.AlertType.INFORMATION);
+        if (withdrawDB.updateWithdrawInfo(acctNumber, bankFName, bankLName, bankname, userID)) {
+            showAlert("Success", "Update password successfully!", Alert.AlertType.INFORMATION);
             editPayment();
         } else {
             showAlert("Error", "Sorry, something went wrong!", Alert.AlertType.ERROR);
@@ -449,8 +450,8 @@ public class settingController implements Initializable {
     }
     @FXML
     private void cancelChangeOnPaymentEdit(ActionEvent event){
-
         editPayment();
+        setWithdrawInfo();
     }
 
     public void updatepw(ActionEvent e){

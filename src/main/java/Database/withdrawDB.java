@@ -1,20 +1,20 @@
 package Database;
 
+import a_Session.SessionManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class withdrawDB extends ConnectDB {
-
-    // ดึงข้อมูลบัญชีธนาคารจากฐานข้อมูล
     public static withdraw getWithdrawInfo(String userId) {
         String query = "SELECT accountNumber, accountFName, accountLName, bankName FROM offlearn.bookbank WHERE user_id = ?";
 
-        try (Connection conn = new withdrawDB().connectToDB(); // ✅ เรียกผ่าน instance
+        try (Connection conn = new withdrawDB().connectToDB();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-            pstmt.setString(1, userId);  // ใช้ user_id แทน username
+            pstmt.setString(1, userId);
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
@@ -31,9 +31,8 @@ public class withdrawDB extends ConnectDB {
         return null;
     }
 
-    // อัปเดตข้อมูลบัญชีธนาคาร
-    public boolean updateWithdrawInfo(String username, String accountNumber, String accountFName, String accountLName, String bankName) {
-        String query = "UPDATE offlearn.bookbank SET accountNumber = ?, accountFName = ?, accountLName = ?, bankName = ? WHERE Username = ?";
+    public boolean updateWithdrawInfo(String accountNumber, String accountFName, String accountLName, String bankName, int User_ID) {
+        String query = "UPDATE offlearn.bookbank SET accountNumber = ?, accountFName = ?, accountLName = ?, bankName = ? WHERE User_ID = ?";
 
         try (Connection conn = this.connectToDB();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -42,10 +41,10 @@ public class withdrawDB extends ConnectDB {
             pstmt.setString(2, accountFName);
             pstmt.setString(3, accountLName);
             pstmt.setString(4, bankName);
-            pstmt.setString(5, username);
+            pstmt.setInt(5, User_ID);
 
             int affectedRows = pstmt.executeUpdate();
-            return affectedRows > 0; // true ถ้าอัปเดตสำเร็จ
+            return affectedRows > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
