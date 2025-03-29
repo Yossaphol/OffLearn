@@ -155,7 +155,11 @@ public class leaderboardController implements Initializable {
                     studentScore = 0;
                 }
 
-                controller.setDetail(i + 1, studentInCourse.get(i), studentScore, user.getProfile(studentInCourse.get(i)));
+                String studentName = studentInCourse.get(i);
+                if(studentName.equals(username)){
+                    studentName = studentInCourse.get(i)+ " (คุณ)";
+                }
+                controller.setDetail(i + 1, studentName, studentScore, user.getProfile(studentInCourse.get(i)));
                 studentList.getChildren().add(stdBox);
 
             } catch (IOException e) {

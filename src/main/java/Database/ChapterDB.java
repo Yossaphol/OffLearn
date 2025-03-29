@@ -10,8 +10,8 @@ public class ChapterDB extends ConnectDB{
         getAllChapter();
     }
 
-    public int saveChapter(int course_id, String chapName, String desc, String chapImg, String chapMaterial){
-        String sql = "INSERT INTO chapter (Course_ID, chapterName, chapterDescription, chapter_image, chapter_material) VALUES (?, ?, ?, ?, ?)";
+    public int saveChapter(int course_id, String chapName, String desc, String chapVideo, String chapMaterial, double playtime){
+        String sql = "INSERT INTO chapter (Course_ID, chapterName, chapterDescription, chapter_video, chapter_material, chapter_playtime) VALUES (?, ?, ?, ?, ?, ?)";
         try (
                 Connection conn = this.connectToDB();
                 PreparedStatement pstm = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -19,8 +19,9 @@ public class ChapterDB extends ConnectDB{
             pstm.setInt(1, course_id);
             pstm.setString(2, chapName);
             pstm.setString(3, desc);
-            pstm.setString(4, chapImg);
+            pstm.setString(4, chapVideo);
             pstm.setString(5, chapMaterial);
+            pstm.setDouble(6, playtime);
             pstm.executeUpdate();
 
             try (ResultSet rs = pstm.getGeneratedKeys()) {
@@ -35,21 +36,22 @@ public class ChapterDB extends ConnectDB{
         return - 1;
     }
 
-    public boolean updateChapter(int chapterId, String chapName, String desc, String chapImg, String chapMaterial) {
+    public boolean updateChapter(int chapterId, String chapName, String desc, String chapVideo, String chapMaterial, double playtime) {
         if (!isChapterExists(chapterId)) {
             return false;
         }
 
-        String sql = "UPDATE chapter SET chapterName = ?, chapterDescription = ?, chapter_image = ?, chapter_material = ? WHERE Chapter_ID = ?";
+        String sql = "UPDATE chapter SET chapterName = ?, chapterDescription = ?, chapter_video = ?, chapter_material = ?, chapter_playtime WHERE Chapter_ID = ?";
 
         try (Connection conn = this.connectToDB();
              PreparedStatement pstm = conn.prepareStatement(sql)) {
 
             pstm.setString(1, chapName);
             pstm.setString(2, desc);
-            pstm.setString(3, chapImg);
+            pstm.setString(3, chapVideo);
             pstm.setString(4, chapMaterial);
             pstm.setInt(5, chapterId);
+            pstm.setDouble(6, playtime);
 
             int affectedRows = pstm.executeUpdate();
 

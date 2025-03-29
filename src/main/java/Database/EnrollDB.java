@@ -202,7 +202,8 @@ public class EnrollDB extends ConnectDB{
                 "FROM enroll e " +
                 "JOIN user u ON e.User_ID = u.User_ID " +
                 "JOIN course c ON e.Course_ID = c.Course_ID " +
-                "WHERE c.courseName = ?";
+                "WHERE c.courseName = ? " +
+                "AND u.type = 'student'";
 
         try (Connection conn = this.connectToDB();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -220,25 +221,7 @@ public class EnrollDB extends ConnectDB{
         return studentNames;
     }
 
-    public int getCourseIdByCourseName(String courseName) {
-        String sql = "SELECT Course_ID FROM course WHERE courseName = ?";
 
-        try (Connection conn = this.connectToDB();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, courseName);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                return rs.getInt("Course_ID");
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return -1;
-    }
 
 
 }
