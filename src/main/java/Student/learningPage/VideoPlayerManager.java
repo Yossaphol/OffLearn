@@ -461,24 +461,23 @@ public class VideoPlayerManager implements Initializable {
             if (mediaPlayer != null) {
                 double newPos = sliderTime.getValue();
                 double total = mediaPlayer.getTotalDuration().toSeconds();
-                // Check if near the end
                 if (newPos >= total - 0.1) {
                     mediaPlayer.seek(Duration.seconds(total));
                     sliderTime.setValue(total);
-                    lblTime.setText(formatTime(mediaPlayer.getTotalDuration()) + " / " + formatTime(mediaPlayer.getTotalDuration()));
+                    lblTime.setText(formatTime(mediaPlayer.getTotalDuration())
+                            + " / " + formatTime(mediaPlayer.getTotalDuration()));
                     updateSliderTimeFill();
                     btnPlay.setGraphic(createIconView(replayIcon));
                     videoEnded = true;
+                    return;
                 } else {
-                    // If coming from an ended state, unlock and force play
                     if (videoEnded) {
                         videoEnded = false;
                         btnPlay.setGraphic(createIconView(pauseIcon));
                         mediaPlayer.seek(Duration.seconds(newPos));
-                        mediaPlayer.play();  // Force the video to play
+                        mediaPlayer.play();
                     } else {
                         mediaPlayer.seek(Duration.seconds(newPos));
-                        // Resume play if the video was playing before the drag
                         if (wasPlaying[0]) {
                             mediaPlayer.play();
                         }
@@ -893,12 +892,6 @@ public class VideoPlayerManager implements Initializable {
             mediaPlayer.stop();
             mediaPlayer.dispose();
             mediaPlayer = null;
-        }
-
-        if (ffmpegProcess != null && ffmpegProcess.isAlive()) {
-            ffmpegProcess.destroyForcibly(); // kill FFmpeg
-            ffmpegProcess = null;
-            System.out.println("FFmpeg process terminated.");
         }
     }
 
