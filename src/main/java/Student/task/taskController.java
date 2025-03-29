@@ -4,7 +4,6 @@ import Database.QuestionDB;
 import Database.QuizDB;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
-import Student.test.pre_testController;
 import Teacher.quiz.QuizItem;
 import javafx.animation.*;
 import javafx.fxml.FXMLLoader;
