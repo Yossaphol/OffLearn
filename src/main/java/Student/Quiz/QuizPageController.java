@@ -1,4 +1,4 @@
-package Student.test;
+package Student.Quiz;
 
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class answerPageController implements Initializable {
+public class QuizPageController implements Initializable {
     public VBox leftWrapper;
     public Label score;
     public Button finishBtn;
@@ -53,13 +53,13 @@ public class answerPageController implements Initializable {
                 FXMLLoader loader;
 
                 if (question.getType() == 1) {
-                    loader = new FXMLLoader(getClass().getResource("/fxml/Student/test/answerPageCard.fxml"));
+                    loader = new FXMLLoader(getClass().getResource("/fxml/Student/Quiz/questionCard.fxml"));
                 } else {
-                    loader = new FXMLLoader(getClass().getResource("/fxml/Student/test/answerPageCard2.fxml"));
+                    loader = new FXMLLoader(getClass().getResource("/fxml/Student/Quiz/answerPageCard2.fxml"));
                 }
 
                 VBox problemCard = loader.load();
-                answerCardController q = loader.getController();
+                QuestionCardController q = loader.getController();
                 if(question.getType() == 1){
                     q.setProblemCard1(i + 1, question.getQuestionText(), question.getOptionA(), question.getOptionB(), question.getOptionC(), question.getOptionD(), question.getCorrectness(), question.getSelectedChoice(), question.getCorrectAns());
                 }

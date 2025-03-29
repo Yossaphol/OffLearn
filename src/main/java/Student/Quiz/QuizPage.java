@@ -1,4 +1,4 @@
-package Student.test;
+package Student.Quiz;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class answerPage extends Application {
+public class QuizPage extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -15,7 +15,7 @@ public class answerPage extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(answerPage.class.getResource("/fxml/Student/test/answerPage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(QuizPage.class.getResource("/fxml/Student/Quiz/quizPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         primaryStage.setTitle("Offlearn");
         primaryStage.setMaximized(true);

@@ -1,6 +1,4 @@
-package Student.test;
-
-import software.amazon.awssdk.services.s3.endpoints.internal.Value;
+package Student.Quiz;
 
 public class Question {
     private String questionText;

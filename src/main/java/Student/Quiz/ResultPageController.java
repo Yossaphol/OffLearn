@@ -1,9 +1,7 @@
-package Student.test;
+package Student.Quiz;
 
-import Student.HomeAndNavigation.Home;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
 import javafx.scene.control.Button;
@@ -11,13 +9,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.TextFlow;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class test_resultController implements Initializable {
+public class ResultPageController implements Initializable {
     public VBox leftWrapper;
     public HBox searchbar_container;
     public Label pretestDescription;

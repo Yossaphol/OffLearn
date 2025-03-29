@@ -1,6 +1,5 @@
 package Student.HomeAndNavigation;
 
-import javafx.application.Platform;
 import javafx.scene.input.MouseEvent;
 import Student.mainPage.mainPageController;
 import Student.navBarAndSearchbar.navBarController;
@@ -61,17 +60,17 @@ public class Navigator {
 
 
     public void testResult() {
-        navigateTo("/fxml/Student/test/test_result.fxml");
+        navigateTo("/fxml/Student/Quiz/resultPage.fxml");
         controller.stopHideNavbar();
         controller.stopHideSearchBar();
     }
 
     public void testResult(MouseEvent event) {
-        navigateTo("/fxml/Student/test/test_result.fxml");
+        navigateTo("/fxml/Student/Quiz/resultPage.fxml");
     }
 
     public void preTestRoute(MouseEvent event) {
-        navigateTo("/fxml/Student/test/preTest.fxml");
+        navigateTo("/fxml/Student/Quiz/preTest.fxml");
     }
 
     public void courseEnrollRoute(MouseEvent event) {
@@ -79,13 +78,13 @@ public class Navigator {
     }
 
     public void testRoute(MouseEvent event) {
-        navigateTo("/fxml/Student/test/testPage.fxml");
+        navigateTo("/fxml/Student/Quiz/testPage.fxml");
         controller.hideNavbar();
         controller.hideSearchBar();
     }
 
     public void seeAnswer(MouseEvent event) {
-        navigateTo("/fxml/Student/test/answerPage.fxml");
+        navigateTo("/fxml/Student/Quiz/quizPage.fxml");
     }
 
     public void myCourseRoute(MouseEvent event) {
