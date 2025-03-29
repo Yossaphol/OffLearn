@@ -34,6 +34,7 @@ public class learningPageController implements Initializable, DisposableControll
     public Button btnContectTeacher;
     public Button btnGloblalChat;
     public Button btnOffLoad;
+    public Button btnQuiz;
     public Label countPlaylist;
     public Label labelPercent;
     public ProgressBar progressBar;
@@ -44,15 +45,13 @@ public class learningPageController implements Initializable, DisposableControll
     public Label nextTeacherName;
     public ProgressBar nextCourseProgressBar;
     public Rectangle nextImgCourse;
-    public Button btnEP;
-    public Button btnEP1;
     public Label playlistcount;
     public Label commentcount;
     private VideoPlayerManager videoManager;
     private int countLike = 224;
     private int countDisLike = 17;
 
-    private String courseID = "126"; /// TEST
+    private String courseID;
     private String chapterID;
     private String userID;
 
@@ -60,16 +59,13 @@ public class learningPageController implements Initializable, DisposableControll
     public void initialize(URL url, ResourceBundle rb) {
         FontLoader fontLoader = new FontLoader();
         fontLoader.loadFonts();
-        loadVideoPlayer();
         HomeController method_home = new HomeController();
         Navigator method_navigator = new Navigator();
         loadPlaylist();
 
-        subject_name.setText("Test Subject");
         ep.setText("Test Episode : 0");
         teacherName.setText("Wirayabovorn Boonpriaw");
         role.setText("ศาสตราจารย์");
-        clipDescription.setText("ความรักกันไม่ได้หรอก ฉันชอบแอบมานานแล้ว พี่พรรลบ เขาเทอไม่รักฉัน เขาไม่แย่งเธอหรอก. 7 yrs. 2. ยะศิษย์ แดน เพ็งเซ้ง. คนอื่นไม่รู้ แต่กรูดูจนจบฮ่าๆๆ แหวงเเป๊ก เย๊กกะไฟฟ้า");
         method_home.loadAndSetImage(teacherImg, "/img/Profile/user.png");
 
         labelPercent.setText("69%");
@@ -81,18 +77,17 @@ public class learningPageController implements Initializable, DisposableControll
         btnLike.setText(String.valueOf(countLike));
         btnDislike.setText(String.valueOf(countDisLike));
 
-        commentcount.setText("2");
         method_home.hoverEffect(btnContectTeacher);
         method_home.hoverEffect(btnGloblalChat);
         method_home.hoverEffect(btnLike);
         method_home.hoverEffect(btnDislike);
         method_home.hoverEffect(btnOffLoad);
         method_home.hoverEffect(nextCourse);
+        method_home.hoverEffect(btnQuiz);
 
     }
 
     public void receiveData(String courseID, String chapterID, String userID) {
-        VideoPathDB videoDB = new VideoPathDB();
         QuizDB quizDB = new QuizDB();
         ChapterDB chapterDB = new ChapterDB();
         CourseDB courseDB = new CourseDB();
@@ -104,21 +99,29 @@ public class learningPageController implements Initializable, DisposableControll
         this.chapterID = chapterID;
         this.userID = userID;
 
+        disposePlayer();        // Stop previous video if switching chapters
+        loadVideoPlayer();
         loadChapterContent();
         loadTeacherInfo();
         loadPlaylist();
         loadProgress();
         loadRecommendedCourses();
-        loadComments(); // optional
     }
 
     private void loadChapterContent() {
+        ChapterDB chapterDB = new ChapterDB();
+        String[] details = chapterDB.getChapterDetailsByID(chapterID); // You’ll write this new method
+
+        if (details != null) {
+            String chapterName = details[0];
+            String chapterDesc = details[1];
+
+            subject_name.setText(chapterName != null ? chapterName : ""); // title
+            clipDescription.setText(chapterDesc != null ? chapterDesc : ""); // description
+        }
     }
 
     private void loadTeacherInfo() {
-    }
-
-    private void loadComments() { // optional
     }
 
     private void loadRecommendedCourses() {
@@ -130,8 +133,9 @@ public class learningPageController implements Initializable, DisposableControll
     private void loadPlaylist() {
         playlistcontainer.getChildren().clear();
 
+        String forcedCourseID = "136";
         PlaylistDB playlistDB = new PlaylistDB();
-        ArrayList<String[]> chapters = playlistDB.getChaptersByCourseID(courseID); // use real courseID
+        ArrayList<String[]> chapters = playlistDB.getChaptersByCourseID(forcedCourseID);
 
         for (int i = 0; i < chapters.size(); i++) {
             String chapterId = chapters.get(i)[0];
@@ -169,26 +173,21 @@ public class learningPageController implements Initializable, DisposableControll
     }
 
 
-    public void recieveMethod(String courseid) {
-        // Set the course ID from MyCourse
-        this.courseID = courseid;
+    public void recieveMethod(String ignoredCourseId) {
+        this.courseID = "136"; // hardcoded override for test (too lazy to enroll course into mycourse)
 
-        // Query chapters for this course
         ChapterDB chapterDB = new ChapterDB();
-        ArrayList<String[]> chapters = chapterDB.getChaptersByCourseID(courseid);
+        ArrayList<String[]> chapters = chapterDB.getChaptersByCourseID(this.courseID);
 
         if (!chapters.isEmpty()) {
-            // For example, choose the first chapter as default
-            this.chapterID = chapters.get(0)[0]; // Chapter_ID is at index 0
+            this.chapterID = chapters.get(0)[0];
             System.out.println("Default chapter set: " + chapterID);
 
-            // Optionally update playlist UI here
+            loadVideoPlayer();
             loadPlaylist();
-
-            // Load content (video or quiz) for the selected chapter
             loadChapterContent();
         } else {
-            System.err.println("No chapters found for course ID: " + courseid);
+            System.err.println("No chapters found for forced course ID: " + this.courseID);
         }
     }
 
@@ -196,8 +195,17 @@ public class learningPageController implements Initializable, DisposableControll
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/learningPage/videoPlayer.fxml"));
             StackPane videoRoot = loader.load();
-            videoManager = loader.getController(); // <== save controller
+            videoManager = loader.getController(); // Save reference
             mediacontainer.getChildren().setAll(videoRoot);
+
+            // 👇 Set the video path here, using your ChapterDB or chapterID
+            String videoURL = new ChapterDB().getVideoURLByChapterID(chapterID);
+            System.out.println("Video URL: " + videoURL);
+            System.out.println("chapterID passed: " + chapterID);
+            if (videoURL != null && !videoURL.isEmpty()) {
+                videoManager.setVideoPath(videoURL);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
