@@ -103,7 +103,7 @@
                                                 <Insets top="90.0" />
                                              </VBox.margin>
                                              <children>
-                                                <VBox prefHeight="217.0" prefWidth="395.0">
+                                                <VBox prefHeight="216.0" prefWidth="494.0">
                                                    <children>
                                                       <Label text="ยอดการลงทะเบียน" textFill="#0675de">
                                                          <font>
@@ -145,13 +145,13 @@
                                                                   <Insets right="20.0" />
                                                                </HBox.margin>
                                                             </ImageView>
-                                                            <VBox prefHeight="114.0" prefWidth="190.0">
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="270.0">
                                                                <children>
-                                                                  <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                                                      <children>
-                                                                        <Label fx:id="growth_rate" prefHeight="86.0" prefWidth="135.0" text="20%" textFill="#0675de">
+                                                                        <Label fx:id="growth_rate" prefHeight="82.0" prefWidth="206.0" text="20%" textFill="#0675de">
                                                                            <font>
-                                                                              <Font name="Noto Sans Thai Bold" size="53.0" />
+                                                                              <Font size="44.0" />
                                                                            </font>
                                                                         </Label>
                                                                         <Label fx:id="state" prefHeight="70.0" prefWidth="60.0" text="เพื่มขึ้น">
@@ -284,7 +284,7 @@
                                                       </Label>
                                                       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                                          <children>
-                                                            <Label fx:id="std_lowScore" text="&lt;จำนวน&gt;">
+                                                            <Label fx:id="lowScore" text="&lt;จำนวน&gt;">
                                                                <font>
                                                                   <Font name="Kodchasan Regular" size="40.0" />
                                                                </font>

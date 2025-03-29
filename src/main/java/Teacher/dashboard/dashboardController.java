@@ -2,6 +2,7 @@ package Teacher.dashboard;
 
 import Database.CourseDB;
 import Database.EnrollDB;
+import Database.ScoreDB;
 import Database.UserDB;
 import Teacher.courseManagement.CourseItem;
 import Teacher.courseManagement.CourseListInDash;
@@ -116,6 +117,15 @@ public class dashboardController implements Initializable, SessionHadler {
     private Label totalEnroll;
 
     @FXML
+    private Label pass_rate;
+
+    @FXML
+    private Label fail_rate;
+
+    @FXML
+    private Label lowScore;
+
+    @FXML
     private Button save_change;
 
     private CourseDB courseDB;
@@ -123,6 +133,7 @@ public class dashboardController implements Initializable, SessionHadler {
     private ArrayList<CourseItem> courseItemList;
     private EnrollDB enrollDB;
     private int[] enrollCount;
+    private ScoreDB scoreDB;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -150,7 +161,7 @@ public class dashboardController implements Initializable, SessionHadler {
         displayCourseInDash();
         setupRevenueChart();
         setupLinechartEnroll();
-        setupStdChart();
+        setupPieChart();
         route();
 
         Platform.runLater(() -> {
@@ -252,7 +263,7 @@ public class dashboardController implements Initializable, SessionHadler {
         currCount.setText(enrollCount[0] + "");
         lastMonthCount.setText(enrollCount[1] + "");
 
-        growth_rate.setText(percent + "%");
+        growth_rate.setText(String.format("%.2f%%", percent));
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Top Enrollment Courses");
@@ -276,14 +287,25 @@ public class dashboardController implements Initializable, SessionHadler {
     }
 
 
-    public void setupStdChart() {
-        PieChart.Data slice1 = new PieChart.Data("Pass", 64);
-        PieChart.Data slice2 = new PieChart.Data("Fail", 36);
+    public void setupPieChart() {
+        scoreDB = new ScoreDB();
+        double pass = scoreDB.calculatePercentageAboveMinScore(userID);
+        double fail = scoreDB.calculatePercentageBelowMinScore(userID);
+        double belowAvg = scoreDB.calculatePercentageBelowAverage(userID);
+
+        PieChart.Data slice1 = new PieChart.Data("Pass", pass);
+        PieChart.Data slice2 = new PieChart.Data("Fail", fail);
 
         pie_chart_std.getData().addAll(slice1, slice2);
         pie_chart_std.setLegendVisible(false);
         slice1.getNode().setStyle("-fx-pie-color: #3498db;");
         slice2.getNode().setStyle("-fx-pie-color: #e74c3c;");
+
+        this.pass_rate.setText("สอบผ่าน " + pass + "%");
+        this.fail_rate.setText("สอบไม่ผ่าน " + fail + "%");
+
+        this.lowScore.setText((int) Math.ceil(belowAvg) + " คน");
+
 
     }
 

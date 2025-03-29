@@ -79,4 +79,106 @@ public class ScoreDB extends ConnectDB{
     }
 
 
+    public double calculatePercentageAboveMinScore(int teacherID) {
+        String query = """
+            SELECT COUNT(s.studentscore) AS totalStudents,
+                   SUM(CASE WHEN s.studentscore > q.minscore THEN 1 ELSE 0 END) AS aboveMin
+            FROM studentscore s
+            JOIN quiz q ON s.Chapter_ID = q.Chapter_ID
+            JOIN chapter ch ON q.Chapter_ID = ch.Chapter_ID
+            JOIN course c ON ch.Course_ID = c.Course_ID
+            WHERE c.User_ID = ?
+        """;
+
+        int totalStudents = 0;
+        int aboveMinCount = 0;
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, teacherID);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                totalStudents = rs.getInt("totalStudents");
+                aboveMinCount = rs.getInt("aboveMin");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return (totalStudents > 0) ? ((double) aboveMinCount / totalStudents) * 100 : 0.0;
+    }
+
+    public double calculatePercentageBelowMinScore(int teacherID) {
+        String query = """
+            SELECT COUNT(s.studentscore) AS totalStudents,
+                   SUM(CASE WHEN s.studentscore <= q.minscore THEN 1 ELSE 0 END) AS belowMin
+            FROM studentscore s
+            JOIN quiz q ON s.Chapter_ID = q.Chapter_ID
+            JOIN chapter ch ON q.Chapter_ID = ch.Chapter_ID
+            JOIN course c ON ch.Course_ID = c.Course_ID
+            WHERE c.User_ID = ?
+        """;
+
+        int totalStudents = 0;
+        int belowMinCount = 0;
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, teacherID);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                totalStudents = rs.getInt("totalStudents");
+                belowMinCount = rs.getInt("belowMin");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return (totalStudents > 0) ? ((double) belowMinCount / totalStudents) * 100 : 0.0;
+    }
+
+    public double calculatePercentageBelowAverage(int teacherID) {
+        String query = """
+            WITH avg_score AS (
+                SELECT AVG(s.studentscore) AS avgScore
+                FROM studentscore s
+                JOIN chapter ch ON s.Chapter_ID = ch.Chapter_ID
+                JOIN course c ON ch.Course_ID = c.Course_ID
+                WHERE c.User_ID = ?
+            )
+            SELECT COUNT(s.studentscore) AS totalStudents,
+                   SUM(CASE WHEN s.studentscore < (SELECT avgScore FROM avg_score) THEN 1 ELSE 0 END) AS belowAvg
+            FROM studentscore s
+            JOIN chapter ch ON s.Chapter_ID = ch.Chapter_ID
+            JOIN course c ON ch.Course_ID = c.Course_ID
+            WHERE c.User_ID = ?;
+        """;
+
+        int totalStudents = 0;
+        int belowAvgCount = 0;
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, teacherID);
+            pstmt.setInt(2, teacherID);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                totalStudents = rs.getInt("totalStudents");
+                belowAvgCount = rs.getInt("belowAvg");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return (totalStudents > 0) ? ((double) belowAvgCount / totalStudents) * 100 : 0.0;
+    }
 }
