@@ -61,7 +61,6 @@ public class learningPageController implements Initializable, DisposableControll
         fontLoader.loadFonts();
         HomeController method_home = new HomeController();
         Navigator method_navigator = new Navigator();
-        loadPlaylist();
 
         ep.setText("Test Episode : 0");
         teacherName.setText("Wirayabovorn Boonpriaw");
