@@ -2,6 +2,8 @@ package Teacher.setting;
 
 import Database.User;
 import Database.UserDB;
+import Database.withdraw;
+import Database.withdrawDB;
 import Student.HomeAndNavigation.HomeController;
 import a_Session.SessionManager;
 import javafx.animation.FadeTransition;
@@ -25,6 +27,7 @@ import mediaUpload.MediaUpload;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class settingController implements Initializable {
@@ -45,17 +48,6 @@ public class settingController implements Initializable {
     public TextField security_username;
     public Label security_password_header;
     public Button security_change_button;
-    public VBox notification_container;
-    public Label notification_header;
-    public Label notification_quiz_header;
-    public RadioButton notification_quiz_y;
-    public RadioButton notification_quiz_n;
-    public Label notification_message_header;
-    public RadioButton notification_message_y;
-    public RadioButton notification_message_n;
-    public Label notification_startingcourse_header;
-    public RadioButton notification_startingcourse_y;
-    public RadioButton notification_startingcourse_n;
     public Label payment_header;
     public Label bankaccount_header;
     public Label bankaccount_firstname_header;
@@ -67,8 +59,8 @@ public class settingController implements Initializable {
     public Label bankaccount_bank_header;
     public TextField bankaccount_bank;
     public Button bankaccount_change_button;
-    public Button cancel_button;
-    public Button save_button;
+    public Button cancelChangeOnPaymentEdit;
+    public Button saveChangeOnPaymentEdit;
     public PasswordField security_password;
     public HBox saveCancelBtn;
     public HBox saveCancelBtn1;
@@ -102,14 +94,13 @@ public class settingController implements Initializable {
     String lastNameUser = user.getLastname();
     String userName = user.getUsername();
     String gmailUser = user.getEmail();
-    //    String imgPath = (user.getProfile() != null) ? user.getProfile().toString() : "/img/Profile/user.png";
     String selectedimg = "";
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         displayNavbar();
-
+        setWithdrawInfo();
         setProfileValue(firstname, lastNameUser, gmailUser);
         setUserImage(user.getProfile());
         security_username.setText(userName);
@@ -418,9 +409,47 @@ public class settingController implements Initializable {
         editProfile();
     }
 
+    public void setWithdrawInfo() {
+//        String userId = SessionManager.getInstance().getUserId();
+//        withdraw userWithdraw = withdrawDB.getWithdrawInfo(userId);
+//        System.out.println(userId);
+//        System.out.println(userWithdraw);
+//        if (userWithdraw != null) {
+//            bankaccount_number.setText(userWithdraw.getAccountNumber());
+//            bankaccount_firstname.setText(userWithdraw.getAccountFName());
+//            bankaccount_lastname.setText(userWithdraw.getAccountLName());
+//            bankaccount_bank.setText(userWithdraw.getBankName());
+//        } else {
+//            System.out.println("Not found data");
+//        }
+    }
 
     @FXML
+    public void saveChangeOnPaymentEdit(ActionEvent event) {
+        String username = SessionManager.getInstance().getUsername();
+
+        String bankFName = bankaccount_firstname.getText();
+        String bankLName = bankaccount_lastname.getText();
+        String acctNumber = bankaccount_number.getText();
+        String bankname = bankaccount_bank.getText();
+
+        if (bankFName.isEmpty() || bankLName.isEmpty() || acctNumber.isEmpty() || bankname.isEmpty()) {
+            showAlert("Update Failed", "Please complete all fields.", Alert.AlertType.WARNING);
+            return;
+        }
+
+        boolean ss = new withdrawDB().updateWithdrawInfo(username, acctNumber, bankFName, bankLName, bankname);
+
+        if (ss) {
+            showAlert("Success", "Update payment information successfully!", Alert.AlertType.INFORMATION);
+            editPayment();
+        } else {
+            showAlert("Error", "Sorry, something went wrong!", Alert.AlertType.ERROR);
+        }
+    }
+    @FXML
     private void cancelChangeOnPaymentEdit(ActionEvent event){
+
         editPayment();
     }
 
