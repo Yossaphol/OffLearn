@@ -3,6 +3,7 @@ package Student.task;
 import Database.QuizDB;
 import Database.StudentScoreDB;
 import Database.UserDB;
+import Student.Quiz.QuizPageController;
 import Teacher.quiz.QuizItem;
 import a_Session.SessionManager;
 import javafx.animation.*;
@@ -68,9 +69,7 @@ public class taskController implements Initializable {
 
                 Button content = (Button) quizItem;
                 hoverEffect(content);
-//                content.setOnMouseClicked(e ->
-//                        handleQuizTestLink("TeacherD", task.getLevel(), task.getHeader(), 120, questionDB.countQuestionsByQuizID(task.getQuizID()))
-//                );
+                controller.quizLink(task.getQuizID(), dtaDB.getChapterIdByQuizID(task.getQuizID()),content);
                 containerUpComing.getChildren().add(content);
 
             } catch (IOException e) {
@@ -80,21 +79,6 @@ public class taskController implements Initializable {
     }
 
 
-//    private void handleQuizTestLink(String teacherName, String hardness, String testName, int duration, int amountOfQuestion) {
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/test/preTest.fxml"));
-//            Parent root = loader.load();
-//
-//            pre_testController ctrl = loader.getController();
-//            ctrl.displayCard(teacherName, hardness, testName, duration, amountOfQuestion);
-//
-//            Navigator nav = new Navigator();
-//            nav.navigateTo("/fxml/Student/test/preTest.fxml");
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     private void setComplete(){
         if(doneQuiz.isEmpty()){

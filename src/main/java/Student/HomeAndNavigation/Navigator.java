@@ -111,7 +111,7 @@ public class Navigator {
     }
 
     public void testRoute(MouseEvent event) {
-        navigateTo("/fxml/Student/Quiz/testPage.fxml");
+        navigateTo("/fxml/Student/Quiz/quizPage.fxml");
         controller.hideNavbar();
         controller.hideSearchBar();
     }

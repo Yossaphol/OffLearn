@@ -206,6 +206,23 @@ public class QuizDB extends ConnectDB{
         return -1;
     }
 
+    public int getChapterIdByQuizID(int quizID) {
+        String sql = "SELECT Chapter_ID FROM quiz WHERE Quiz_ID = ?";
+        try (
+                Connection conn = this.connectToDB();
+                PreparedStatement pstm = conn.prepareStatement(sql)
+        ) {
+            pstm.setInt(1, quizID);
+            try (ResultSet rs = pstm.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("Chapter_ID");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
 
 
 

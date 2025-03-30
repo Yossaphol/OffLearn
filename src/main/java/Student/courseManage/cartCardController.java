@@ -1,6 +1,5 @@
 package Student.courseManage;
 
-import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
@@ -8,12 +7,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import javafx.event.ActionEvent;
 
@@ -35,7 +32,6 @@ public class cartCardController implements Initializable {
     public Button enrollBtn;
     @FXML
     public Button deleteBtn;
-    HomeController ef = new HomeController();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -44,7 +40,6 @@ public class cartCardController implements Initializable {
         three.setVisible(false);
         four.setVisible(false);
 
-        ef.hoverEffect(enrollBtn);
         deleteBtn.setVisible(false);
         route();
     }
@@ -57,46 +52,49 @@ public class cartCardController implements Initializable {
     public void setName(String n){
         name.setText(n);
     }
+
     public void setDescription(String n){
         description.setText(n);
     }
-    public void setCategory(String picturePath, String catagoryName){
-        category.setText(catagoryName);
-        ef.loadAndSetImage(categoryPic, picturePath);
 
-    }
-    public void setPrice(double n){
-        price.setText(n +" บาท");
-    }
-    public void setRating(double rating , int totalReview){
-        review.setText(String.valueOf(rating)+" ("+String.valueOf(totalReview)+")");
-
-        switch ((int) rating){
-            case 1:
-                one.setVisible(true);
-                break;
-            case 2:
-                one.setVisible(true);
-                two.setVisible(true);
-                break;
-            case 3:
-                one.setVisible(true);
-                two.setVisible(true);
-                three.setVisible(true);
-                break;
-            case 4:
-                one.setVisible(true);
-                two.setVisible(true);
-                three.setVisible(true);
-                four.setVisible(true);
-                break;
+    public void setCategory(String picturePath, String categoryName){
+        category.setText(categoryName);
+        try {
+            URL url = getClass().getResource(picturePath);
+            if (url != null) {
+                categoryPic.setFill(new javafx.scene.paint.ImagePattern(new Image(url.toExternalForm())));
+            } else {
+                System.out.println("❌ ไม่พบรูป category: " + picturePath);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    public void setPicture(String path){
-        ef.loadAndSetImage(picture, path);
+    public void setPrice(double n){
+        price.setText(n + " บาท");
     }
 
+    public void setRating(double rating, int totalReview){
+        review.setText(rating + " (" + totalReview + ")");
+        one.setVisible(rating >= 1);
+        two.setVisible(rating >= 2);
+        three.setVisible(rating >= 3);
+        four.setVisible(rating >= 4);
+    }
+
+    public void setPicture(String path){
+        try {
+            URL url = getClass().getResource(path);
+            if (url != null) {
+                picture.setFill(new javafx.scene.paint.ImagePattern(new Image(url.toExternalForm())));
+            } else {
+                System.out.println("❌ ไม่พบรูปภาพ course: " + path);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void displayDeleteBtn(boolean isVisible) {
         FadeTransition fade = new FadeTransition(Duration.millis(300), deleteBtn);
@@ -115,11 +113,8 @@ public class cartCardController implements Initializable {
         fade.play();
     }
 
-
-
-    public void deleteCourse(ActionEvent e){  //ยังไม่ได้ทำให้ลบได้
+    public void deleteCourse(ActionEvent e){
         System.out.println("Delete success!");
+        // TODO: เพิ่มการลบออกจาก CartManager ด้วย ถ้าต้องการ
     }
-
-
 }
