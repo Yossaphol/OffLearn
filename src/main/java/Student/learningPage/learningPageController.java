@@ -63,9 +63,10 @@ public class learningPageController implements Initializable, DisposableControll
     private int countLike = 224;
     private int countDisLike = 17;
 
-    private String courseID;
-    private String chapterID;
-    private String userID;
+    private int courseID;
+    private int chapterID;
+    private int userID;
+    private int quizID;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -87,7 +88,7 @@ public class learningPageController implements Initializable, DisposableControll
         btnDislike.setText(String.valueOf(countDisLike));
 
         toQuizButton();
-        
+
         method_home.hoverEffect(btnContectTeacher);
         method_home.hoverEffect(btnGloblalChat);
         method_home.hoverEffect(btnLike);
@@ -105,7 +106,7 @@ public class learningPageController implements Initializable, DisposableControll
         });
     }
 
-    public void receiveData(String courseID, String chapterID, String userID) {
+    public void receiveData(int courseID, int chapterID, int userID) {
         QuizDB quizDB = new QuizDB();
         ChapterDB chapterDB = new ChapterDB();
         CourseDB courseDB = new CourseDB();
@@ -117,7 +118,7 @@ public class learningPageController implements Initializable, DisposableControll
         this.chapterID = chapterID;
         this.userID = userID;
 
-        boolean quizAvailable = quizDB.isQuizAvailableForChapter(Integer.parseInt(chapterID));
+        boolean quizAvailable = quizDB.isQuizAvailableForChapter(chapterID);
 
         btnQuiz.setVisible(quizAvailable);
         btnQuiz.setDisable(!quizAvailable);
@@ -149,11 +150,10 @@ public class learningPageController implements Initializable, DisposableControll
 
     private void loadTeacherInfo() {
         try {
-            int courseId = Integer.parseInt(courseID);
             UserDB userDB = new UserDB();
-            String[] teacherInfo = userDB.getUserNameProfileAndSpecByCourseID(courseId);
+            String[] teacherInfo = userDB.getUserNameProfileAndSpecByCourseID(courseID);
 
-            System.out.println("Fetching teacher info for course ID: " + courseId);
+            System.out.println("Fetching teacher info for course ID: " + courseID);
 
             if (teacherInfo != null) {
                 String teacherUsername = teacherInfo[0];
@@ -169,7 +169,7 @@ public class learningPageController implements Initializable, DisposableControll
 
                 loadTeacherImage(teacherImg, profilePath);
             } else {
-                System.err.println("No teacher info found for course ID: " + courseId);
+                System.err.println("No teacher info found for course ID: " + courseID);
             }
         } catch (Exception e) {
             System.err.println("⚠️ Exception in loadTeacherInfo:");
@@ -186,12 +186,12 @@ public class learningPageController implements Initializable, DisposableControll
     private void loadPlaylist() {
         playlistcontainer.getChildren().clear();
 
-        String forcedCourseID = "138";
+        int forcedCourseID = 138; // now using int
         PlaylistDB playlistDB = new PlaylistDB();
         ArrayList<String[]> chapters = playlistDB.getChaptersByCourseID(forcedCourseID);
 
         for (int i = 0; i < chapters.size(); i++) {
-            String chapterId = chapters.get(i)[0];
+            int chapterId = Integer.parseInt(chapters.get(i)[0]); // convert from string to int
             String chapterTitle = chapters.get(i)[1];
             int epNumber = i + 1;
 
@@ -201,7 +201,7 @@ public class learningPageController implements Initializable, DisposableControll
                 EPButtonController controller = loader.getController();
 
                 controller.setText("EP" + epNumber + " : " + chapterTitle);
-                controller.setActive(chapterId.equals(chapterID)); // compare with current
+                controller.setActive(chapterId == chapterID); // compare as int
 
                 EPbtn.setOnAction(e -> {
                     System.out.println("Clicked EP: " + epNumber + " (Chapter ID: " + chapterId + ")");
@@ -217,6 +217,7 @@ public class learningPageController implements Initializable, DisposableControll
         playlistcount.setText("(" + chapters.size() + ")");
     }
 
+
     @Override
     public void disposePlayer() {
         System.out.println("Disposing video from learningPageController...");
@@ -227,22 +228,22 @@ public class learningPageController implements Initializable, DisposableControll
 
 
     public void recieveMethod(String ignoredCourseId) {
-        this.courseID = "138"; // hardcoded override for test (too lazy to enroll course into mycourse)
+        this.courseID = 138; // hardcoded override for test (too lazy to enroll course into mycourse)
 
         ChapterDB chapterDB = new ChapterDB();
         Category categoryDB = new Category();
         ArrayList<String[]> chapters = chapterDB.getChaptersByCourseID(this.courseID);
-        String category = categoryDB.getCategoryByCourseID(Integer.parseInt(courseID));
+        String category = categoryDB.getCategoryByCourseID(courseID);
 
         System.out.println("Fetched category name: " + catName);
 
 
 
         if (!chapters.isEmpty()) {
-            this.chapterID = chapters.get(0)[0];
+            this.chapterID = Integer.parseInt(chapters.get(0)[0]);
             System.out.println("Default chapter set: " + chapterID);
             QuizDB quizDB = new QuizDB();
-            boolean quizAvailable = quizDB.isQuizAvailableForChapter(Integer.parseInt(chapterID));
+            boolean quizAvailable = quizDB.isQuizAvailableForChapter(chapterID);
 
             btnQuiz.setVisible(quizAvailable);
             btnQuiz.setDisable(!quizAvailable);
