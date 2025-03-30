@@ -35,16 +35,25 @@ public class QuizPageController implements Initializable, SessionHadler {
     private Button sendButton;
 
     @FXML
-    private HBox quizDesc;
+    private Label name;
 
-    private int quizId = 104;
+    @FXML
+    private Label min;
+
+    @FXML
+    private Label max;
+
+    @FXML
+    private Label level;
+
+    private int quizId;
     private ArrayList<QuestionItem> questionItemsList;
     private QuestionDB questionDB;
     private ArrayList<QuestionCardController> questionCardControllersList;
     private int point;
     private Navigator navigator;
     private ScoreDB scoreDB;
-    private int chapterID = 131;
+    private int chapterID;
     private int userID;
     private ChapterDB chapterDB;
     private CourseDB courseDB;
@@ -69,7 +78,10 @@ public class QuizPageController implements Initializable, SessionHadler {
     }
 
     public void setQuizDesc(){
-
+        this.name.setText(quizItem.getHeader());
+        this.min.setText(quizItem.getMinScore() + " คะแนน");
+        this.max.setText(quizItem.getMaxScore() + " คะแนน");
+        this.level.setText(quizItem.getLevel());
     }
 
     public void loadQuiz(){
@@ -128,7 +140,7 @@ public class QuizPageController implements Initializable, SessionHadler {
             confirmAlert.setContentText("ท่านต้องการส่งคำตอบใช่หรือไม่?");
 
             if (confirmAlert.showAndWait().get() == ButtonType.OK) {
-                navigator.QuizResult(point, courseDB.getCourseIDByChapterID(chapterID), quizItem);
+                navigator.QuizResult(point, courseDB.getCourseIDByChapterID(chapterID), quizItem, chapterID);
                 scoreDB.saveScore(courseDB, userID, chapterID, point);
                 System.out.println("" + point);
             } else {
@@ -149,6 +161,10 @@ public class QuizPageController implements Initializable, SessionHadler {
 
     public void setQuizId(int quizId){
         this.quizId = quizId;
+    }
+
+    public void setChapterID(int chapterID){
+        this.chapterID = chapterID;
     }
 
 

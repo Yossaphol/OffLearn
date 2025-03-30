@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -121,11 +122,36 @@ public class mainPageController implements Initializable {
         }
     }
 
+    public void displayContent(Parent contentComponent) {
+        if (content == null) {
+            System.out.println("Error: 'content' container is null. Cannot display content.");
+            return;
+        }
+
+        FontLoader font = new FontLoader();
+        font.loadFonts();
+
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(200), content);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+        fadeOut.setOnFinished(event -> {
+            content.getChildren().setAll(contentComponent);
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(200), content);
+            fadeIn.setFromValue(0.0);
+            fadeIn.setToValue(1.0);
+            fadeIn.play();
+        });
+
+        fadeOut.play();
+    }
+
+
+
     public <T> T displayContent(String path, Class<T> controllerClass) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
             HBox contentComponent = loader.load();
-            T newController = loader.getController(); // ใช้ Generic Type
+            T newController = loader.getController();
 
             Navigator.setCurrentContentController(newController);
 

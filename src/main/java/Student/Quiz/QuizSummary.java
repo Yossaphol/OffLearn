@@ -33,7 +33,7 @@ public class QuizSummary implements Initializable {
     private Label quizName;
 
     private ArrayList<QuestionItem> questionItemsList;
-    private int quizId = 104;
+    private int quizId;
     private Navigator navigator;
 
     @Override
@@ -41,8 +41,9 @@ public class QuizSummary implements Initializable {
         setComplete();
     }
 
-    public void loadAnwer(int point , QuizItem quizItem){
+    public void loadAnwer(int point , QuizItem quizItem, int quizId){
         QuestionDB questionDB = new QuestionDB();
+        this.quizId = quizId;
         questionItemsList = questionDB.getQuestionsByQuizID(quizId);
 
         for (QuestionItem q : questionItemsList){
@@ -69,7 +70,7 @@ public class QuizSummary implements Initializable {
 
     public void setComplete(){
         navigator = new Navigator();
-        complete.setOnAction(actionEvent -> navigator.learningPageRoute(actionEvent));
+        complete.setOnAction(actionEvent -> navigator.myCourseRoute(actionEvent));
     }
 
 

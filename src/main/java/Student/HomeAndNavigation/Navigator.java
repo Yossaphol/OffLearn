@@ -1,5 +1,6 @@
 package Student.HomeAndNavigation;
 
+import Student.Quiz.QuizPageController;
 import Student.Quiz.QuizSummary;
 import Student.Quiz.ResultPageController;
 import Student.learningPage.DisposableController;
@@ -76,22 +77,21 @@ public class Navigator {
     }
 
 
-    public void QuizPage(){
-        navigateTo("/fxml/Student/Quiz/quizPage.fxml");
-        controller.stopHideNavbar();
-        controller.stopHideSearchBar();
+    public void QuizPage(int chapterID, int quizID) {
+        navigateTo("/fxml/Student/Quiz/quizPage.fxml", chapterID, quizID);
     }
 
-    public void QuizResult(int point, int courseID, QuizItem quizItem) {
-        navigateTo("/fxml/Student/Quiz/resultPage.fxml", point, courseID, quizItem);
+
+    public void QuizResult(int point, int courseID, QuizItem quizItem, int chapterID) {
+        navigateTo("/fxml/Student/Quiz/resultPage.fxml", point, courseID, quizItem, chapterID);
 
         controller.stopHideNavbar();
         controller.stopHideSearchBar();
 
     }
 
-    public void QuizSummary(int point, int courseID, QuizItem quizItem) {
-        navigateTo("/fxml/Student/Quiz/quizSummary.fxml", point, courseID, quizItem);
+    public void QuizSummary(int point, int courseID, QuizItem quizItem, int chapterID) {
+        navigateTo("/fxml/Student/Quiz/quizSummary.fxml", point, courseID, quizItem, chapterID);
 
         controller.stopHideNavbar();
         controller.stopHideSearchBar();
@@ -120,7 +120,9 @@ public class Navigator {
         navigateTo("/fxml/Student/courseManage/myCourse.fxml");
     }
 
-
+    public void myCourseRoute(ActionEvent event) {
+        navigateTo("/fxml/Student/courseManage/myCourse.fxml");
+    }
 
     public void myRoadmapRoute(MouseEvent event) {
         navigateTo("/fxml/Student/courseManage/myroadmap.fxml");
@@ -154,12 +156,45 @@ public class Navigator {
         }
     }
 
+    public void navigateTo(String fxmlPath, int chapterID, int quizID) {
+        System.out.println("navigateTo called: " + fxmlPath);
+
+        if (currentContentController instanceof DisposableController) {
+            System.out.println("Calling dispose on current content controller...");
+            ((DisposableController) currentContentController).disposePlayer();
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+
+            if (fxmlPath.equals("/fxml/Student/Quiz/quizPage.fxml")) {
+                QuizPageController quizController = loader.getController();
+                quizController.setQuizId(quizID);
+                quizController.setChapterID(chapterID);
+                quizController.loadQuiz();
+                quizController.setSendButton();
+                quizController.setQuizDesc();
+            }
+
+            if (controller != null) {
+                controller.displayNavbar();
+                controller.displayContent(root);
+            } else {
+                System.out.println("Navigator Error: controller is null");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public enum ControllerType {
         QUIZ_SUMMARY,
         QUIZ_RESULT
     }
 
-    public void navigateTo(String fxmlPath, int point, int courseID, QuizItem quizItem) {
+    public void navigateTo(String fxmlPath, int point, int courseID, QuizItem quizItem, int chapterID) {
         System.out.println("navigateTo called: " + fxmlPath);
 
         if (currentContentController instanceof DisposableController) {
@@ -177,11 +212,11 @@ public class Navigator {
             }
 
             if (newController instanceof ResultPageController) {
-                ((ResultPageController) newController).loadData(point, courseID, quizItem);
+                ((ResultPageController) newController).loadData(point, courseID, quizItem, chapterID);
                 currentContentController = newController;
                 System.out.println("Loaded ResultPageController successfully.");
             } else if (newController instanceof QuizSummary){
-                ((QuizSummary) newController).loadAnwer(point, quizItem);
+                ((QuizSummary) newController).loadAnwer(point, quizItem, quizItem.getQuizID());
                 currentContentController = newController;
                 System.out.println("Loaded ResultPageController successfully.");
             } else {

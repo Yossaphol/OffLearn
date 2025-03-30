@@ -63,6 +63,7 @@ public class learningPageController implements Initializable, DisposableControll
     private int chapterID;
     private int userID;
     private int quizID;
+    private QuizDB quizDB;
 
     // Helper: run tasks on a background daemon thread
     private <T> void runBackgroundTask(Task<T> task) {
@@ -85,9 +86,10 @@ public class learningPageController implements Initializable, DisposableControll
         nextTeacherName.setText("อาจารย์ขิม ใจดี");
         method_home.loadAndSetImage(nextImgCourse, "/img/Profile/user.png");
 
+        toQuizButton();
+
         btnLike.setText(String.valueOf(countLike));
         btnDislike.setText(String.valueOf(countDisLike));
-        toQuizButton();
         method_home.hoverEffect(btnContectTeacher);
         method_home.hoverEffect(btnGloblalChat);
         method_home.hoverEffect(btnLike);
@@ -100,14 +102,16 @@ public class learningPageController implements Initializable, DisposableControll
     public void toQuizButton(){
         btnQuiz.setOnAction(actionEvent -> {
             navigator = new Navigator();
-            navigator.QuizPage();
+            navigator.QuizPage(chapterID, quizID);
         });
     }
 
     public void receiveData(int courseID, int chapterID, int userID) {
+        quizDB = new QuizDB();
         this.courseID = courseID;
         this.chapterID = chapterID;
         this.userID = userID;
+        this.quizID = quizDB.getQuizIdByChapterId(this.chapterID);
 
         // Create a latch to wait for both tasks (set count = 2)
         CountDownLatch latch = new CountDownLatch(2);
