@@ -6,13 +6,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="335.0" prefWidth="933.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-width: 1; -fx-border-color: #A8A8A8; -fx-border-radius: 20;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.Quiz.QuestionCardController">
+<VBox alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="224.0" prefWidth="933.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-width: 1; -fx-border-color: #A8A8A8; -fx-border-radius: 20;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.Quiz.QuestionCardController">
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="932.0">
          <children>
             <Label fx:id="QuestionName" text="Label">
                <font>
-                  <Font name="Kodchasan Regular" size="32.0" />
+                  <Font name="Kodchasan Regular" size="24.0" />
                </font>
             </Label>
          </children>
@@ -20,7 +20,7 @@
             <Insets left="50.0" />
          </padding>
       </HBox>
-      <VBox fx:id="choicesSpace" alignment="CENTER_LEFT" prefHeight="224.0" prefWidth="932.0" spacing="10.0">
+      <VBox fx:id="choicesSpace" prefHeight="146.0" prefWidth="932.0" spacing="10.0">
          <padding>
             <Insets left="100.0" />
          </padding>

@@ -35,6 +35,25 @@ public class QuestionCardController implements Initializable {
         for (String choice : questionItem.getChoices()){
             RadioButton radioButton = new RadioButton(choice);
             radioButton.setToggleGroup(group);
+            radioButton.setStyle("-fx-font-size: 18px;");
+
+            this.choicesSpace.getChildren().add(radioButton);
+        }
+    }
+
+    public void setDisplay(String corrAns){
+        group = new ToggleGroup();
+
+        this.QuestionName.setText(questionItem.getQuizName());
+
+        for (String choice : questionItem.getChoices()){
+            RadioButton radioButton = new RadioButton(choice);
+            radioButton.setToggleGroup(group);
+            if (choice.equals(corrAns)){
+                radioButton.setStyle("-fx-text-fill: #39F077; -fx-font-size: 18px;");
+            } else {
+                radioButton.setStyle("-fx-font-size: 16px; -fx-text-fill: #e0e0e0;");
+            }
 
             this.choicesSpace.getChildren().add(radioButton);
         }

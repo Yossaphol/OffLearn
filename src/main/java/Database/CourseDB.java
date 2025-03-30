@@ -254,7 +254,9 @@ public class CourseDB extends ConnectDB{
 
         String sql = "SELECT c.Course_ID, c.courseName, c.image, c.price, c.courseDescription, cat.catname " +
                 "FROM offlearn.course c " +
-                "JOIN offlearn.category cat ON c.Cat_ID = cat.Cat_id";
+                "JOIN offlearn.category cat ON c.Cat_ID = cat.Cat_id " +
+                "WHERE c.verify = 1";
+
 
         try (Connection conn = this.connectToDB();
              PreparedStatement pstm = conn.prepareStatement(sql);

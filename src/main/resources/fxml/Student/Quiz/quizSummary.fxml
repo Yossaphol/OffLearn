@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -16,15 +17,41 @@
                     <children>
                         <VBox>
                             <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="900.0">
+                                 <children>
+                                    <Label text="ชื่อเรื่อง" textFill="#8100cc">
+                                       <font>
+                                          <Font name="Kodchasan Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="quizName" text="Label">
+                                       <font>
+                                          <Font name="Kodchasan Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <Label fx:id="score" text="Label">
+                                 <font>
+                                    <Font name="Kodchasan Regular" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
                                 <Pane prefHeight="60.0" prefWidth="1139.0" />
                                 <VBox fx:id="questionSpace" alignment="CENTER" prefWidth="1139.0" spacing="20.0">
                                     <padding>
-                                        <Insets bottom="50.0" left="90.0" right="100.0" top="50.0" />
+                                        <Insets bottom="20.0" left="90.0" right="100.0" top="50.0" />
                                     </padding>
                                 </VBox>
                                 <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                     <children>
-                                        <Button fx:id="sendButton" mnemonicParsing="false" prefHeight="47.0" prefWidth="103.0" style="-fx-background-color: #8100CC; -fx-background-radius: 10;" text="เสร็จสิ้น" textFill="WHITE">
+                                        <Button fx:id="complete" mnemonicParsing="false" prefHeight="47.0" prefWidth="103.0" style="-fx-background-color: #8100CC; -fx-background-radius: 10;" text="เสร็จสิ้น" textFill="WHITE">
                                             <font>
                                                 <Font name="Noto Sans Thai Bold" size="18.0" />
                                             </font>

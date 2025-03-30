@@ -291,7 +291,7 @@ public class dashboardController implements Initializable, SessionHadler {
         scoreDB = new ScoreDB();
         double pass = scoreDB.calculatePercentageAboveMinScore(userID);
         double fail = scoreDB.calculatePercentageBelowMinScore(userID);
-        double belowAvg = scoreDB.calculatePercentageBelowAverage(userID);
+        int belowAvg = scoreDB.countStudentsBelowAverage(userID);
 
         PieChart.Data slice1 = new PieChart.Data("Pass", pass);
         PieChart.Data slice2 = new PieChart.Data("Fail", fail);
@@ -304,7 +304,7 @@ public class dashboardController implements Initializable, SessionHadler {
         this.pass_rate.setText("สอบผ่าน " + pass + "%");
         this.fail_rate.setText("สอบไม่ผ่าน " + fail + "%");
 
-        this.lowScore.setText((int) Math.ceil(belowAvg) + " คน");
+        this.lowScore.setText(belowAvg + "");
 
 
     }

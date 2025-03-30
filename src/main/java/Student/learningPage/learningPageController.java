@@ -1,16 +1,22 @@
 package Student.learningPage;
 
+ // TEST IN MYCOURSE
+
 import Database.*;
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -19,38 +25,41 @@ import java.util.*;
 
 public class learningPageController implements Initializable, DisposableController  {
 
-    public VBox leftWrapper;
-    public HBox searhbar_container;
     public VBox mediacontainer;
     public VBox playlistcontainer;
-    @FXML
-    private Button btnQuiz;
+    public HBox rootpage;
 
     public Label subject_name;
     public Label ep;
-    public Circle teacherImg;
     public Label teacherName;
-    public Text clipDescription;
     public Label role;
+    public Label labelPercent;
+    public Label btnRoadmap;
+    public Label catName;
+    public Label nextCourseName;
+    public Label nextTeacherName;
+    public Label playlistcount;
+
+    public Circle teacherImg;
+    public Rectangle nextImgCourse;
+
+    public Text clipDescription;
+
+    @FXML
+    private Button btnQuiz;
     public Button btnLike;
     public Button btnDislike;
     public Button btnContectTeacher;
     public Button btnGloblalChat;
     public Button btnOffLoad;
-    public Label countPlaylist;
-    public Label labelPercent;
-    public ProgressBar progressBar;
-    public Label btnRoadmap;
     public Button nextCourse;
-    public Label category;
-    public Label nextCourseName;
-    public Label nextTeacherName;
+
+    public ProgressBar progressBar;
     public ProgressBar nextCourseProgressBar;
-    public Rectangle nextImgCourse;
-    public Label playlistcount;
-    public Label commentcount;
+
     private VideoPlayerManager videoManager;
     private Navigator navigator;
+
     private int countLike = 224;
     private int countDisLike = 17;
 
@@ -60,15 +69,14 @@ public class learningPageController implements Initializable, DisposableControll
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        rootpage.getStylesheets().add(
+                getClass().getResource("/css/learningPage.css").toExternalForm()
+        );
         FontLoader fontLoader = new FontLoader();
         fontLoader.loadFonts();
         HomeController method_home = new HomeController();
-        Navigator method_navigator = new Navigator();
 
-        teacherName.setText("Wirayabovorn Boonpriaw");
-        role.setText("ศาสตราจารย์");
         method_home.loadAndSetImage(teacherImg, "/img/Profile/user.png");
-
         labelPercent.setText("69%");
 
         nextCourseName.setText("DSA");
@@ -77,6 +85,8 @@ public class learningPageController implements Initializable, DisposableControll
 
         btnLike.setText(String.valueOf(countLike));
         btnDislike.setText(String.valueOf(countDisLike));
+
+        toQuizButton();
 
         method_home.hoverEffect(btnContectTeacher);
         method_home.hoverEffect(btnGloblalChat);
@@ -134,6 +144,33 @@ public class learningPageController implements Initializable, DisposableControll
     }
 
     private void loadTeacherInfo() {
+        try {
+            int courseId = Integer.parseInt(courseID);
+            UserDB userDB = new UserDB();
+            String[] teacherInfo = userDB.getUserNameProfileAndSpecByCourseID(courseId);
+
+            System.out.println("Fetching teacher info for course ID: " + courseId);
+
+            if (teacherInfo != null) {
+                String teacherUsername = teacherInfo[0];
+                String profilePath = teacherInfo[1];
+                String description = teacherInfo[2];
+
+                System.out.println("Teacher Username: " + teacherUsername);
+                System.out.println("Profile Path: " + profilePath);
+                System.out.println("Description: " + description);
+
+                teacherName.setText(teacherUsername);
+                role.setText(description);
+
+                loadTeacherImage(teacherImg, profilePath);
+            } else {
+                System.err.println("No teacher info found for course ID: " + courseId);
+            }
+        } catch (Exception e) {
+            System.err.println("⚠️ Exception in loadTeacherInfo:");
+            e.printStackTrace();
+        }
     }
 
     private void loadRecommendedCourses() {
@@ -145,7 +182,7 @@ public class learningPageController implements Initializable, DisposableControll
     private void loadPlaylist() {
         playlistcontainer.getChildren().clear();
 
-        String forcedCourseID = "136";
+        String forcedCourseID = "138";
         PlaylistDB playlistDB = new PlaylistDB();
         ArrayList<String[]> chapters = playlistDB.getChaptersByCourseID(forcedCourseID);
 
@@ -186,10 +223,13 @@ public class learningPageController implements Initializable, DisposableControll
 
 
     public void recieveMethod(String ignoredCourseId) {
-        this.courseID = "136"; // hardcoded override for test (too lazy to enroll course into mycourse)
+        this.courseID = "138"; // hardcoded override for test (too lazy to enroll course into mycourse)
 
         ChapterDB chapterDB = new ChapterDB();
+        Category categoryDB = new Category();
         ArrayList<String[]> chapters = chapterDB.getChaptersByCourseID(this.courseID);
+        String category = categoryDB.getCategoryByCourseID(Integer.parseInt(courseID));
+        System.out.println("Fetched category name: " + catName);
 
         if (!chapters.isEmpty()) {
             this.chapterID = chapters.get(0)[0];
@@ -198,6 +238,12 @@ public class learningPageController implements Initializable, DisposableControll
             loadVideoPlayer();
             loadPlaylist();
             loadChapterContent();
+            loadTeacherInfo();
+            if (category != null) {
+                catName.setText(category);
+            } else {
+                catName.setText("unknown");
+            }
         } else {
             System.err.println("No chapters found for forced course ID: " + this.courseID);
         }
@@ -227,4 +273,35 @@ public class learningPageController implements Initializable, DisposableControll
         return videoManager;
     }
 
+
+
+    // for testing
+    private void loadTeacherImage(Shape shape, String imagePath) {
+        try {
+            Image image;
+            if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
+                image = new Image(imagePath, true); // async loading
+            } else {
+                URL url = getClass().getResource(imagePath);
+                if (url == null) {
+                    throw new IllegalArgumentException("Local image not found: " + imagePath);
+                }
+                image = new Image(url.toExternalForm(), true);
+            }
+
+            // Wait for it to finish loading
+            image.progressProperty().addListener((obs, oldVal, newVal) -> {
+                if (newVal.doubleValue() >= 1.0) {
+                    Platform.runLater(() -> {
+                        shape.setFill(new ImagePattern(image));
+                        System.out.println("Image loaded" + imagePath);
+                    });
+                }
+            });
+
+        } catch (Exception e) {
+            System.err.println("❌ Failed to load image into shape: " + imagePath);
+            e.printStackTrace();
+        }
+    }
 }

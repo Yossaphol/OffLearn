@@ -60,8 +60,6 @@ public class settingController implements Initializable {
     public Label bankaccount_bank_header;
     public TextField bankaccount_bank;
     public Button bankaccount_change_button;
-    public Button cancelChangeOnPaymentEdit;
-    public Button saveChangeOnPaymentEdit;
     public PasswordField security_password;
     public HBox saveCancelBtn;
     public HBox saveCancelBtn1;
@@ -148,12 +146,11 @@ public class settingController implements Initializable {
         boolean isUpdated = userDB.updateUserInfoes(sessionUsername, newFirstname, newLastname, newEmail, adddescription);
 
         if (isUpdated) {
-            // Upload image to database if a new image was selected
             if (!selectedimg.isEmpty()) {
                 boolean isImageUpdated = userDB.updateProfileImage(sessionUsername, selectedimg);
                 if (isImageUpdated) {
-                    user = userDB.getUserInfo(sessionUsername); // Refresh user info
-                    setUserImage(user.getProfile());  // Update UI with the new profile image
+                    user = userDB.getUserInfo(sessionUsername);
+                    setUserImage(user.getProfile());
                 }
             }
 
@@ -450,16 +447,16 @@ public class settingController implements Initializable {
             return;
         }
         if (!(wd == null) && (db.updateWithdrawInfo(acctNumber, bankFName, bankLName, bankname, userID,wd))) {
-            System.out.println("Successfully updated");
+//            System.out.println("Successfully updated");
             showAlert("Success", "Update payment successfully!", Alert.AlertType.INFORMATION);
             editPayment();
         } else if ((wd == null) &&(db.insertWithdrawInfo(acctNumber, bankFName, bankLName, bankname, userID, wd))) {
-            System.out.println("Successfully Insert");
+//            System.out.println("Successfully Insert");
             showAlert("Success", "Insert payment successfully!", Alert.AlertType.INFORMATION);
             reloadPage(event);
             editPayment();
         } else {
-            System.out.println("Sorry");
+//            System.out.println("Sorry");
             showAlert("Error", "Sorry, something went wrong!", Alert.AlertType.ERROR);
         }
     }

@@ -112,7 +112,6 @@ public class CourseController implements Initializable, SessionHadler {
     }
 
 
-    //Chart with exmaple data
     public void setupBarChartEnroll() {
         enrollDB = new EnrollDB();
         Map<String, Integer> topCourses = enrollDB.getTop3CoursesByEnrollment(this.userID);

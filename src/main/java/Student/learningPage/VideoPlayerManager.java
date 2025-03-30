@@ -343,10 +343,19 @@ public class VideoPlayerManager implements Initializable {
         sliderVolume.setMin(0.0);
         sliderVolume.setMax(1.0);
         sliderVolume.setValue(0.5);
-        originalVolSliderWidth = sliderVolume.getPrefWidth();
+        originalVolSliderWidth = 120;
         sliderVolume.setPrefWidth(0);
         sliderVolume.setVisible(false);
         sliderVolume.getStyleClass().add("slider");
+        sliderVolume.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
+            updateVolumeSliderValue(e);
+            e.consume();
+        });
+
+        sliderVolume.addEventFilter(MouseEvent.MOUSE_DRAGGED, e -> {
+            updateVolumeSliderValue(e);
+            e.consume();
+        });
 
         mediaPlayer.setVolume(0.5);
 
@@ -514,6 +523,7 @@ public class VideoPlayerManager implements Initializable {
             btnPlay.setGraphic(createIconView(replayIcon));
             videoEnded = true;
         });
+
     }
     /* Toggles play/pause or replay if ended.*/
     private void togglePlayPause(MediaPlayer mediaPlayer) {
@@ -831,6 +841,9 @@ public class VideoPlayerManager implements Initializable {
                     new KeyFrame(Duration.millis(250), new KeyValue(sliderVolume.prefWidthProperty(), originalVolSliderWidth))
             );
             showTimeline.play();
+            System.out.println("🎚️ Showing volume slider...");
+            System.out.println("Initial width: " + sliderVolume.getPrefWidth());
+            System.out.println("Animating to width: " + originalVolSliderWidth);
         }
     }
 
@@ -845,6 +858,7 @@ public class VideoPlayerManager implements Initializable {
                 volumeSliderVisible = false;
             });
             hideTimeline.play();
+            System.out.println("🎚️ Hiding volume slider...");
         }
     }
 
@@ -953,8 +967,6 @@ public class VideoPlayerManager implements Initializable {
         double newValue = sliderTime.getMin() + percentage * (sliderTime.getMax() - sliderTime.getMin());
         double totalSec = sliderTime.getMax();
 
-        // If the video was ended but the new value is less than the max,
-        // unlock the ended state.
         if (videoEnded && newValue < totalSec) {
             videoEnded = false;
             btnPlay.setGraphic(createIconView(pauseIcon));
@@ -962,6 +974,16 @@ public class VideoPlayerManager implements Initializable {
 
         sliderTime.setValue(newValue);
         updateSliderTimeFill();
+    }
+
+    private void updateVolumeSliderValue(MouseEvent e) {
+        double mouseX = e.getX();
+        double width = sliderVolume.getWidth();
+        if (width == 0) return;
+
+        double percent = mouseX / width;
+        percent = Math.max(0.0, Math.min(1.0, percent)); // clamp
+        sliderVolume.setValue(percent);
     }
 
     public void setVideoPath(String path) {
