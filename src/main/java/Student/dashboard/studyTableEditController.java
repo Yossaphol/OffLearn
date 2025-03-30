@@ -2,6 +2,7 @@ package Student.dashboard;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -73,7 +74,7 @@ public class studyTableEditController implements Initializable{
 
         day.setItems(daysOfWeek);
     }
-
+    @FXML
     private void handleAdd() {
         // Validate inputs
         if (!validateInputs()) {
@@ -148,7 +149,7 @@ public class studyTableEditController implements Initializable{
         //update the ID after adding schedule
         updateTableIds();
     }
-
+    @FXML
     private void handleDelete() {
         // Check if the id ComboBox is empty or the table is empty
         if (id.getSelectionModel().isEmpty() || tableData.isEmpty()) {
@@ -187,7 +188,7 @@ public class studyTableEditController implements Initializable{
             alert.showAndWait();
         }
     }
-
+    @FXML
     private void handleClear() {
         if (tableData.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -213,7 +214,7 @@ public class studyTableEditController implements Initializable{
             }
         });
     }
-
+    @FXML
     private void handleDone() {
         // Get from and to times
         String fromStr = from.getSelectionModel().getSelectedItem();
