@@ -7,14 +7,16 @@ public class User {
     private String password;
     private String email;
     private String profile;
+    private String description;
 
-    public User(String firstname, String lastname, String username, String email, String password, String profile) {
+    public User( String firstname, String lastname, String username, String email, String password, String profile, String description) {
         this.fname = firstname;
         this.lname = lastname;
         this.user = username;
         this.email = email;
         this.password = password;
         this.profile = profile;
+        this.description = description;
     }
 
     public String getUsername() {
@@ -40,4 +42,6 @@ public class User {
     public String getProfile() {
         return profile;
     }
+
+    public String getDescription() {return description;}
 }

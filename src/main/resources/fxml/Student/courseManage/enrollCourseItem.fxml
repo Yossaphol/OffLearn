@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="container" alignment="TOP_CENTER" prefHeight="331.0" prefWidth="320.0" style="-fx-background-color: white; -fx-background-radius: 20;" styleClass="forHover" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.courseManage.enrollCourseItem">
+<VBox fx:id="container" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="331.0" prefWidth="320.0" style="-fx-background-color: white; -fx-background-radius: 20;" styleClass="forHover" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.courseManage.enrollCourseItem">
    <children>
       <Rectangle fx:id="course_image" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="124.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 40; -fx-arc-width: 40;" width="331.0">
          <VBox.margin>

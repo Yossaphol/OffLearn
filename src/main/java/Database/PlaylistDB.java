@@ -5,24 +5,26 @@ import java.util.ArrayList;
 
 public class PlaylistDB extends ConnectDB{
     ArrayList<String[]> playlist = new ArrayList<>();
-    public ArrayList<String[]> getChaptersByCourseID(String courseID) {
-        ArrayList<String[]> chapters = new ArrayList<>();
+    public ArrayList<String[]> getChaptersByCourseID(int courseID) {
         String sql = "SELECT Chapter_ID, chapterName FROM chapter WHERE Course_ID = ?";
 
-        try (Connection conn = this.connectToDB();
-             PreparedStatement pstm = conn.prepareStatement(sql)) {
+        ArrayList<String[]> chapters = new ArrayList<>();
 
-            pstm.setString(1, courseID);
-            ResultSet rs = pstm.executeQuery();
+        try (
+                Connection conn = this.connectToDB();
+                PreparedStatement pstmt = conn.prepareStatement(sql)
+        ) {
+            pstmt.setInt(1, courseID);
+            ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                String[] chapter = new String[2];
-                chapter[0] = rs.getString("Chapter_ID");   // ID
-                chapter[1] = rs.getString("chapterName");  // Title
-                chapters.add(chapter);
+                String[] row = new String[2];
+                row[0] = String.valueOf(rs.getInt("Chapter_ID"));
+                row[1] = rs.getString("chapterName");
+                chapters.add(row);
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

@@ -4,12 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.io.*;
+
 public class UserDB extends ConnectDB{
 
     //setting page
     public User getUserInfo(String username) {
-        String query = "SELECT Firstname, Lastname, Username, Email, Password, Profile FROM offlearn.user WHERE Username = ?";
+        String query = "SELECT Firstname, Lastname, Username, Email, Password, Profile, description FROM offlearn.user WHERE Username = ?";
 
         try (Connection conn = this.connectToDB();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -24,7 +24,8 @@ public class UserDB extends ConnectDB{
                 String email = rs.getString("Email");
                 String password = rs.getString("Password");
                 String profile = rs.getString("Profile");
-                return new User(firstname, lastname, user, email, password, profile);
+                String description = rs.getString("description");
+                return new User(firstname, lastname, user, email, password, profile, description);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -42,6 +43,26 @@ public class UserDB extends ConnectDB{
             pstmt.setString(2, lastname);
             pstmt.setString(3, email);
             pstmt.setString(4, username);
+
+            int affectedRows = pstmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateUserInfoes(String username, String firstname, String lastname, String email, String description) {
+        String query = "UPDATE offlearn.user SET firstname = ?, lastname = ?, email = ? , description = ? WHERE username = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, firstname);
+            pstmt.setString(2, lastname);
+            pstmt.setString(3, email);
+            pstmt.setString(5, username);
+            pstmt.setString(4, description);
 
             int affectedRows = pstmt.executeUpdate();
             return affectedRows > 0;
@@ -262,6 +283,41 @@ public class UserDB extends ConnectDB{
         }
         return -1;
     }
+
+    public String[] getUserNameProfileAndSpecByCourseID(int courseID) {
+        String sql = "SELECT u.username, u.profile, u.description FROM offlearn.course c " +
+                "JOIN offlearn.user u ON c.User_ID = u.User_ID " +
+                "WHERE c.Course_ID = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, courseID);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                String username = rs.getString("Username");
+                String profile = rs.getString("Profile");
+                String specification = rs.getString("description");
+
+                if (profile == null || profile.isEmpty()) {
+                    profile = "/img/Profile/user.png";
+                }
+
+                if (specification == null) {
+                    specification = "-";
+                }
+
+                return new String[]{username, profile, specification};
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+
 
 }
 

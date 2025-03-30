@@ -1,7 +1,10 @@
 package Teacher.showBalance;
 
+import Database.UserDB;
+import Database.historyPaymentDB;
 import Teacher.navigator.Navigator;
 
+import a_Session.SessionManager;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingNode;
 
@@ -15,6 +18,11 @@ import javafx.stage.Stage;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 //Swing
@@ -30,43 +38,65 @@ public class withdrawHistoryController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        String sessionUsername = SessionManager.getInstance().getUsername();
+
+        UserDB userDB = new UserDB();
+        int userId = userDB.getUserId(sessionUsername);
+
         displayNavbar();
         route();
-        setupTable();
+        setupTable(userId);
     }
 
-    public void setupTable() {
-        SwingNode swingNode = new SwingNode();
+public void setupTable(int userId) {
+    SwingNode swingNode = new SwingNode();
 
-        SwingUtilities.invokeLater(() -> {
-            // Sample data
-            String[] columns = { "Date/Time", "Account No.", "Account Name", "Amount" };
-            Object[][] data = {
-                    { "2025-03-27 13:30", "123456", "John Doe", "1000.00" },
-                    { "2025-03-26 20:04", "654321", "Jane Smith", "500.50" },
-                    { "2025-03-25 18:27", "789012", "Alice Brown", "250.75" },
-                    { "2025-03-26 20:04", "654321", "Jane Smith", "500.50" },{ "2025-03-26 20:04", "654321", "Jane Smith", "500.50" },{ "2025-03-26 20:04", "654321", "Jane Smith", "500.50" },{ "2025-03-26 20:04", "654321", "Jane Smith", "500.50" },{ "2025-03-26 20:04", "654321", "Jane Smith", "500.50" },{ "2025-03-26 20:04", "654321", "Jane Smith", "500.50" },{ "2025-03-26 20:04", "654321", "Jane Smith", "500.50" },
-            };
+    SwingUtilities.invokeLater(() -> {
+        String[] columns = { "Date/Time", "Account No.", "Account Name", "Bank", "Amount" };
+        ArrayList<Object[]> dataList = new ArrayList<>();
 
-            DefaultTableModel model = new DefaultTableModel(data, columns) {
-                @Override
-                public boolean isCellEditable(int row, int column) {
-                    return false;
-                }
-            };
+        String query = "SELECT time_stamp, acctNo, acctName, bankName, amount FROM offlearn.historypayment WHERE User_ID = ?";
 
-            JTable table = new JTable(model);
-            table.setRowSelectionAllowed(false);
-            table.setColumnSelectionAllowed(false);
-            table.setCellSelectionEnabled(false);
-            table.setFocusable(false);
-            table.getTableHeader().setReorderingAllowed(false);
+        try (Connection conn = new historyPaymentDB().connectToDB();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
 
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
 
-            JScrollPane scrollPane = new JScrollPane(table);
-            scrollPane.setPreferredSize(new Dimension(1000, 450));
+            while (rs.next()) {
+                Object[] row = {
+                        rs.getString("time_stamp"),
+                        rs.getString("acctNo"),
+                        rs.getString("acctName"),
+                        rs.getString("bankName"),
+                        rs.getDouble("amount")
+                };
+                dataList.add(row);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-            // Table styling
+        Object[][] data = dataList.toArray(new Object[0][]);
+        DefaultTableModel model = new DefaultTableModel(data, columns) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        JTable table = new JTable(model);
+        table.setRowSelectionAllowed(false);
+        table.setColumnSelectionAllowed(false);
+        table.setCellSelectionEnabled(false);
+        table.setFocusable(false);
+        table.getTableHeader().setReorderingAllowed(false);
+        table.setFillsViewportHeight(true);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setPreferredSize(new Dimension(1000, 450));
+
+//         Table styling
             JTableHeader header = table.getTableHeader();
             header.setBackground(new Color(6, 117, 222));
             header.setForeground(Color.WHITE);
@@ -97,9 +127,8 @@ public class withdrawHistoryController implements Initializable {
                 stage.setFullScreenExitHint("");
                 stage.setFullScreen(false);
             });
-
-        });
-    }
+    });
+}
 
 
 

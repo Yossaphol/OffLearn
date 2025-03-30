@@ -16,10 +16,16 @@ public class taskCardController implements Initializable {
 
     }
 
-    public void setTaskInformation(String information, String detail, double score){
+    public void setTaskInformation(String information, String subject, double score){
         taskInformation.setText(information);
-        taskDetail.setText(detail);
-        point.setText(score+" คะแนน");
+        taskDetail.setText(subject);
+        point.setText(score+" คะแนนเต็ม");
+    }
+
+    public void setTaskInformation(String information, String subject, String score){
+        taskInformation.setText(information);
+        taskDetail.setText(subject);
+        point.setText(score);
     }
 
 

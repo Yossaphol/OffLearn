@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
 
+import Database.EnrollDB;
+import Database.StudentScoreDB;
 import Database.User;
 import Database.UserDB;
 import Student.HomeAndNavigation.*;
@@ -37,9 +39,7 @@ import javafx.scene.shape.Rectangle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class HomeController implements Initializable {
 
@@ -120,9 +120,28 @@ public class HomeController implements Initializable {
     public Button pfp_btn;
     public ScrollPane mainScrollPane;
     public HBox rootpage;
+    public VBox top4Container;
     private List<AnchorPane> slides;
     private int slideIndex = 0;
     public Label setname;
+
+//line 538-542
+//    loadAndSetImage(leaderboard_pfp, studentPfpPath);
+//    loadAndSetImage(leaderboard_pfp1, studentPfpPath);
+//    loadAndSetImage(leaderboard_pfp2, studentPfpPath);
+//    loadAndSetImage(leaderboard_pfp3, studentPfpPath);
+    public Circle imgTopOne;
+    public Circle imgTopTwo;
+    public Circle imgTopThree;
+    public Circle imgTopFour;
+    public Label nameTopOne;
+    public Label nameTopTwo;
+    public Label nameTopThree;
+    public Label nameTopFour;
+    public Label scoreTopOne;
+    public Label scoreTopTwo;
+    public Label scoreTopThree;
+    public Label scoreTopFour;
 
     @FXML
     private VBox calendarContainer;
@@ -144,7 +163,7 @@ public class HomeController implements Initializable {
         setupBarChart();
         setImgContainer();
         route();
-
+        loadStd();
 //        String username = SessionManager.getInstance().getUsername();
         if (username != null) {
             setname.setText(username);
@@ -169,9 +188,6 @@ public class HomeController implements Initializable {
         applyHoverEffectToInside(slide2);
         closePopupAuto();
         callSlider();
-
-
-
     }
 
     public void callSlider(){
@@ -519,10 +535,10 @@ public class HomeController implements Initializable {
         loadAndSetImage(teacher_pfp, "/img/Profile/man.png");
 
         String studentPfpPath = "/img/Profile/student.png";
-        loadAndSetImage(leaderboard_pfp, studentPfpPath);
-        loadAndSetImage(leaderboard_pfp1, studentPfpPath);
-        loadAndSetImage(leaderboard_pfp2, studentPfpPath);
-        loadAndSetImage(leaderboard_pfp3, studentPfpPath);
+//        loadAndSetImage(leaderboard_pfp, studentPfpPath);
+//        loadAndSetImage(leaderboard_pfp1, studentPfpPath);
+//        loadAndSetImage(leaderboard_pfp2, studentPfpPath);
+//        loadAndSetImage(leaderboard_pfp3, studentPfpPath);
 
         loadAndSetImage(course_pic, "/img/Picture/Python.png");
         loadAndSetImage(category_pic, "/img/icon/code.png");
@@ -556,7 +572,7 @@ public class HomeController implements Initializable {
 
     private void progressValue() {
         progress1.setProgress(Double.parseDouble(progressValue1.getText().replace("%", "").trim()) / 100);
-        progress2.setProgress(Double.parseDouble(progressValue2.getText().replace("%", "").trim()) / 100);
+//        progress2.setProgress(Double.parseDouble(progressValue2.getText().replace("%", "").trim()) / 100);
         continueProgress.setProgress(Double.parseDouble(progressOfConValue.getText().replace("%", "").trim()) / 100);
 
         categorybar.setProgress(Double.parseDouble(progressCategory.getText().replace("% completed", "").trim()) / 100);
@@ -565,7 +581,7 @@ public class HomeController implements Initializable {
 
         codingProgress.setProgress(Double.parseDouble(progressCategory.getText().replace("% completed", "").trim()) / 100);
         businessProgress.setProgress(Double.parseDouble(progressValue1.getText().replace("%", "").trim()) / 100);
-        mathProgress.setProgress(Double.parseDouble(progressValue2.getText().replace("%", "").trim()) / 100);
+//        mathProgress.setProgress(Double.parseDouble(progressValue2.getText().replace("%", "").trim()) / 100);
         aiProgress.setProgress(Double.parseDouble(progressValue1.getText().replace("%", "").trim()) / 100);
         continueProgressData.setProgress(Double.parseDouble(progressOfConValueData.getText().replace("%", "").trim()) / 100);
         continueProgressOOP.setProgress(Double.parseDouble(progressOfConValueOOP.getText().replace("%", "").trim()) / 100);
@@ -690,5 +706,106 @@ public class HomeController implements Initializable {
         });
     }
 
+    EnrollDB enrollDta = new EnrollDB();
+    UserDB user = new UserDB();
+//    String username = SessionManager.getInstance().getUsername();
+    StudentScoreDB scoreDB = new StudentScoreDB();
+    int std_id = user.getUserId(username);
+    List<String> studentInCourse;
+    private int courseID;
+    List<String> EnrolledCourses = enrollDta.getEnrolledCourseNames(std_id);
 
+    private void loadStd(){ //หาคอร์สที่มีการจัดอันดับ แล้วเอาชื่อคอร์สไปใช้ดึงต่อ
+        if(!EnrolledCourses.isEmpty()){
+            for(String courseName: EnrolledCourses){
+                courseID = scoreDB.getCourseIdByCourseName(courseName);
+                if(courseID != -2){ //-2 ถ้า Course ไม่มีควิซ แปลว่าไม่มีจัดอันดับ
+                    loadStd(courseName);
+                    return;
+                }
+            }
+            setTopStudentToDefault();
+        }
+    }
+
+    private void loadStd(String courseName) {
+        studentInCourse = enrollDta.getStudentsByCourseName(courseName);
+
+        Map<String, Integer> studentScores = new HashMap<>(); //Get score
+        for (String student : studentInCourse) {
+            int studentId = user.getUserId(student);
+            studentScores.put(student, scoreDB.getStudentScore(studentId, courseID));
+        }
+
+        studentInCourse.sort((s1, s2) -> Integer.compare(studentScores.get(s2), studentScores.get(s1))); //Sort
+
+        if (!studentInCourse.isEmpty()) { //ตั้งค่าเป็นค่าเริ่มต้น ถ้าไม่มีนักเรียนในบอร์ด (อันดับจัดตามคะแนนควิซ บางคอร์สไม่มีควิซ)
+            if (studentInCourse.size() >= 4) {
+                setFirst(studentInCourse.get(0), scoreDB.getStudentScore(user.getUserId(studentInCourse.get(0)), courseID), user.getProfile(studentInCourse.get(0)));
+                setSecond(studentInCourse.get(1), scoreDB.getStudentScore(user.getUserId(studentInCourse.get(1)), courseID), user.getProfile(studentInCourse.get(1)));
+                setThird(studentInCourse.get(2), scoreDB.getStudentScore(user.getUserId(studentInCourse.get(2)), courseID), user.getProfile(studentInCourse.get(2)));
+                setFourth(studentInCourse.get(3), scoreDB.getStudentScore(user.getUserId(studentInCourse.get(3)), courseID), user.getProfile(studentInCourse.get(3)));
+            } else if (studentInCourse.size() == 3) {
+                setFirst(studentInCourse.get(0), scoreDB.getStudentScore(user.getUserId(studentInCourse.get(0)), courseID), user.getProfile(studentInCourse.get(0)));
+                setSecond(studentInCourse.get(1), scoreDB.getStudentScore(user.getUserId(studentInCourse.get(1)), courseID), user.getProfile(studentInCourse.get(1)));
+                setThird(studentInCourse.get(2), scoreDB.getStudentScore(user.getUserId(studentInCourse.get(2)), courseID), user.getProfile(studentInCourse.get(2)));
+                setFourth("Fourth", 0, "/img/Profile/user.png");
+            } else if (studentInCourse.size() == 2) {
+                setFirst(studentInCourse.get(0), scoreDB.getStudentScore(user.getUserId(studentInCourse.get(0)), courseID), user.getProfile(studentInCourse.get(0)));
+                setSecond(studentInCourse.get(1), scoreDB.getStudentScore(user.getUserId(studentInCourse.get(1)), courseID), user.getProfile(studentInCourse.get(1)));
+                setThird("Third", 0, "/img/Profile/user.png");
+                setFourth("Fourth", 0, "/img/Profile/user.png");
+            } else if (studentInCourse.size() == 1) {
+                setFirst(studentInCourse.get(0), scoreDB.getStudentScore(user.getUserId(studentInCourse.get(0)), courseID), user.getProfile(studentInCourse.get(0)));
+                setSecond("Second", 0, "/img/Profile/user.png");
+                setThird("Third", 0, "/img/Profile/user.png");
+                setFourth("Fourth", 0, "/img/Profile/user.png");
+            }
+        }else{
+            setTopStudentToDefault();
+        }
+    }
+
+    private void setTopStudentToDefault(){
+        setFirst("First", 0, "/img/Profile/user.png");
+        setSecond("Second", 0, "/img/Profile/user.png");
+        setThird("Third", 0, "/img/Profile/user.png");
+        setFourth("Fourth", 0, "/img/Profile/user.png");
+    }
+
+    private void setFirst(String name, int point, String imgPath){
+        nameTopOne.setText(name);
+        scoreTopOne.setText(String.valueOf(point));
+        setPic(imgPath, imgTopOne);
+    }
+
+    private void setSecond(String name, int point, String imgPath){
+        nameTopTwo.setText(name);
+        scoreTopTwo.setText(String.valueOf(point));
+        setPic(imgPath, imgTopTwo);
+    }
+
+    private void setThird(String name, int point, String imgPath){
+        nameTopThree.setText(name);
+        scoreTopThree.setText(String.valueOf(point));
+        setPic(imgPath, imgTopThree);
+    }
+
+    private void setFourth(String name, int point, String imgPath){
+        nameTopFour.setText(name);
+        scoreTopFour.setText(String.valueOf(point));
+        setPic(imgPath, imgTopFour);
+    }
+
+    public void setPic(String Url, Circle profilePic){
+        Image img;
+        if (Url.startsWith("http") || Url.startsWith("https")) {
+            img = new Image(Url);
+        } else {
+            img = new Image(getClass().getResource(Url).toExternalForm());
+        }
+
+        profilePic.setStroke(Color.TRANSPARENT);
+        profilePic.setFill(new ImagePattern(img));
+    }
 }

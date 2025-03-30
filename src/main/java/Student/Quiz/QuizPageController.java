@@ -1,12 +1,13 @@
 package Student.Quiz;
 
-import Database.QuestionDB;
-import Database.QuizDB;
+import Database.*;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
 import Teacher.quiz.QuestionItem;
 import Teacher.quiz.QuizController;
 import Teacher.quiz.QuizItem;
+import a_Session.SessionHadler;
+import a_Session.SessionManager;
 import com.beust.ah.A;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -24,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class QuizPageController implements Initializable {
+public class QuizPageController implements Initializable, SessionHadler {
 
     @FXML
     private VBox questionSpace;
@@ -32,18 +34,42 @@ public class QuizPageController implements Initializable {
     @FXML
     private Button sendButton;
 
+    @FXML
+    private HBox quizDesc;
+
     private int quizId = 104;
     private ArrayList<QuestionItem> questionItemsList;
     private QuestionDB questionDB;
     private ArrayList<QuestionCardController> questionCardControllersList;
     private int point;
     private Navigator navigator;
+    private ScoreDB scoreDB;
+    private int chapterID = 131;
+    private int userID;
+    private ChapterDB chapterDB;
+    private CourseDB courseDB;
+    private QuizDB quizDB;
+    private QuizItem quizItem;
+    private String userName;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         questionCardControllersList = new ArrayList<QuestionCardController>();
         loadQuiz();
         setSendButton();
+        handleSession();
+    }
+
+    @Override
+    public void handleSession() {
+        this.userName = SessionManager.getInstance().getUsername();
+
+        UserDB userDB = new UserDB();
+        this.userID = userDB.getUserId(userName);
+    }
+
+    public void setQuizDesc(){
+
     }
 
     public void loadQuiz(){
@@ -73,6 +99,12 @@ public class QuizPageController implements Initializable {
 
     public void setSendButton(){
         navigator = new Navigator();
+        scoreDB = new ScoreDB();
+        courseDB = new CourseDB();
+        quizDB = new QuizDB();
+
+        quizItem = quizDB.getQuizById(quizId);
+
         sendButton.setOnAction(actionEvent -> {
             this.point = 0;
             boolean allAnswered = true;
@@ -96,7 +128,8 @@ public class QuizPageController implements Initializable {
             confirmAlert.setContentText("ท่านต้องการส่งคำตอบใช่หรือไม่?");
 
             if (confirmAlert.showAndWait().get() == ButtonType.OK) {
-                navigator.QuizResult();
+                navigator.QuizResult(point, courseDB.getCourseIDByChapterID(chapterID), quizItem);
+                scoreDB.saveScore(courseDB, userID, chapterID, point);
                 System.out.println("" + point);
             } else {
                 System.out.println("ยกเลิกการส่งคำตอบ");
@@ -117,5 +150,6 @@ public class QuizPageController implements Initializable {
     public void setQuizId(int quizId){
         this.quizId = quizId;
     }
+
 
 }

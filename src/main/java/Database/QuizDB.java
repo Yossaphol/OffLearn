@@ -148,6 +148,45 @@ public class QuizDB extends ConnectDB{
         return quizList;
     }
 
+    public String getCourseNameByQuizID(int quizID) {
+        String sql = "SELECT c.courseName " +
+                "FROM course c " +
+                "JOIN chapter ch ON c.Course_ID = ch.Course_ID " +
+                "JOIN quiz q ON ch.Chapter_ID = q.Chapter_ID " +
+                "WHERE q.Quiz_ID = ?";
+
+        try (
+                Connection conn = this.connectToDB();
+                PreparedStatement pstm = conn.prepareStatement(sql)
+        ) {
+            pstm.setInt(1, quizID);
+            try (ResultSet rs = pstm.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString("courseName");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public boolean isQuizAvailableForChapter(int chapterId) {
+        String sql = "SELECT Quiz_ID FROM quiz WHERE Chapter_ID = ?";
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, chapterId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                return rs.next(); // true if a quiz exists
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
 
 
 

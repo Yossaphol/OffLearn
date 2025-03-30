@@ -1,26 +1,58 @@
 package Student.learningPage;
 
+import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 
 public class EPButtonController {
-    @FXML public Button EPbtn;
 
-    public void setText(String epNumber) {
-        EPbtn.setText(epNumber);
+    @FXML
+    private Button EPbtn;
+
+    private boolean isActive = false;
+
+    @FXML
+    private void initialize() {
+        setupHoverEffect();
     }
 
-    public void setActive(boolean isActive) {
-        if (isActive) {
-            EPbtn.setStyle("-fx-background-color: #8100cc; -fx-background-radius: 10;");
-            EPbtn.setTextFill(javafx.scene.paint.Color.WHITE);
+    public void setText(String text) {
+        EPbtn.setText(text);
+    }
+
+    public void setActive(boolean active) {
+        this.isActive = active;
+        if (active) {
+            EPbtn.setStyle("-fx-background-color: #8100cc; -fx-text-fill: white; -fx-background-radius: 10;");
         } else {
-            EPbtn.setStyle("-fx-background-color: white; -fx-background-radius: 10;");
-            EPbtn.setTextFill(javafx.scene.paint.Color.BLACK);
+            EPbtn.setStyle("-fx-background-color: white; -fx-text-fill: #8100CC; -fx-background-radius: 10;");
         }
     }
 
-    public Button getButton() {
-        return EPbtn;
+    private void setupHoverEffect() {
+        EPbtn.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
+            if (!isActive) {
+                EPbtn.setStyle("-fx-background-color: #f3e6ff; -fx-text-fill: #8100CC; -fx-background-radius: 10;");
+            }
+            animateScale(EPbtn, 1.0, 1.05); // scale up slightly
+        });
+
+        EPbtn.addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
+            if (!isActive) {
+                EPbtn.setStyle("-fx-background-color: white; -fx-text-fill: #8100CC; -fx-background-radius: 10;");
+            }
+            animateScale(EPbtn, 1.05, 1.0); // scale back to normal
+        });
+    }
+
+    private void animateScale(Button button, double from, double to) {
+        ScaleTransition scale = new ScaleTransition(Duration.millis(150), button);
+        scale.setFromX(from);
+        scale.setFromY(from);
+        scale.setToX(to);
+        scale.setToY(to);
+        scale.play();
     }
 }

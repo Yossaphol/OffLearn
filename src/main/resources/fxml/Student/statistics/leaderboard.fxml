@@ -26,7 +26,7 @@
                         <Insets bottom="50.0" left="50.0" top="70.0" />
                      </VBox.margin>
                      <font>
-                        <Font name="Noto Sans Thai Regular" size="18.0" />
+                        <Font name="Noto Sans Thai Bold" size="25.0" />
                      </font>
                   </Label>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="498.0" prefWidth="1139.0">
@@ -51,7 +51,7 @@
                                           <Font name="System Bold" size="32.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="pts_nd" text="10030.4">
+                                    <Label fx:id="pts_nd" text="0">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font>
@@ -105,7 +105,7 @@
                                                 <Font name="System Bold" size="32.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="pts_nd1" text="10030.4">
+                                          <Label fx:id="pts_nd1" text="0">
                                              <font>
                                                 <Font name="System Bold" size="20.0" />
                                              </font>
@@ -148,7 +148,7 @@
                                           <Font name="System Bold" size="32.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="pts_nd2" text="10030.4">
+                                    <Label fx:id="pts_nd2" text="0">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font>
@@ -193,17 +193,12 @@
                                                 <Font name="Noto Sans Thai Bold" size="19.0" />
                                              </font>
                                           </Label>
-                                          <Label prefHeight="39.0" prefWidth="332.0" text="ผู้เรียน" textFill="#8100cc">
+                                          <Label prefHeight="39.0" prefWidth="452.0" text="ผู้เรียน" textFill="#8100cc">
                                              <font>
                                                 <Font name="Noto Sans Thai Bold" size="19.0" />
                                              </font>
                                           </Label>
-                                          <Label prefHeight="39.0" prefWidth="149.0" text="คะแนนรวม" textFill="#8100cc">
-                                             <font>
-                                                <Font name="Noto Sans Thai Bold" size="19.0" />
-                                             </font>
-                                          </Label>
-                                          <Label prefHeight="39.0" prefWidth="228.0" text="Avg. Quiz/Exercise" textFill="#8100cc">
+                                          <Label prefHeight="39.0" prefWidth="189.0" text="คะแนนรวม" textFill="#8100cc">
                                              <font>
                                                 <Font name="Noto Sans Thai Bold" size="19.0" />
                                              </font>
@@ -215,8 +210,8 @@
                                           </ComboBox>
                                        </children>
                                     </HBox>
-                                    <Line endX="937.5" startX="-100.0" stroke="#d4a6ee" />
-                                    <VBox fx:id="studentList" alignment="TOP_CENTER" maxHeight="70.0" prefWidth="1048.0" />
+                                    <Line endX="939.0" startX="-100.0" stroke="#d4a6ee" />
+                                    <VBox fx:id="studentList" maxHeight="70.0" prefWidth="1048.0" />
                                  </children>
                               </VBox>
                            </children>

@@ -1,5 +1,6 @@
 package Student.mainPage;
 
+import Student.Quiz.ResultPageController;
 import Student.navBarAndSearchbar.navBarController;
 import a_Session.SessionManager;
 import javafx.animation.FadeTransition;
@@ -99,6 +100,9 @@ public class mainPageController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
             HBox contentComponent = loader.load();
+            Object newController = loader.getController();
+            Navigator.setCurrentContentController(newController);
+
             FontLoader font = new FontLoader();
             font.loadFonts();
             FadeTransition fadeOut = new FadeTransition(Duration.millis(200), content);
@@ -116,6 +120,37 @@ public class mainPageController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public <T> T displayContent(String path, Class<T> controllerClass) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+            HBox contentComponent = loader.load();
+            T newController = loader.getController(); // ใช้ Generic Type
+
+            Navigator.setCurrentContentController(newController);
+
+            FontLoader font = new FontLoader();
+            font.loadFonts();
+            FadeTransition fadeOut = new FadeTransition(Duration.millis(200), content);
+            fadeOut.setFromValue(1.0);
+            fadeOut.setToValue(0.0);
+            fadeOut.setOnFinished(event -> {
+                content.getChildren().setAll(contentComponent);
+                FadeTransition fadeIn = new FadeTransition(Duration.millis(200), content);
+                fadeIn.setFromValue(0.0);
+                fadeIn.setToValue(1.0);
+                fadeIn.play();
+            });
+            fadeOut.play();
+
+            return newController;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 
     public Navigator getNavigator() {
         return navigator;

@@ -94,12 +94,10 @@ public class roadmapController implements Initializable {
 
             categoryContainer.getChildren().add(categoryLabel);
 
-            // ตรวจสอบว่าเมื่อคลิก จะแสดง catID
             categoryLabel.setOnMouseClicked(mouseEvent -> {
                 int catID = category.getCatID(catName);
                 System.out.println(catID + " " + catName);
 
-                // โหลดข้อมูลของ roadmap ตาม category ที่เลือก
                 loadRoadmapsByCategory(String.format("%3d", catID));
             });
         }

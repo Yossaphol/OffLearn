@@ -43,6 +43,26 @@ public class CourseDB extends ConnectDB{
         }
     }
 
+    public int getCourseIDByChapterID(int chapterID) {
+        String sql = "SELECT Course_ID FROM offlearn.chapter WHERE Chapter_ID = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstm = conn.prepareStatement(sql)) {
+
+            pstm.setInt(1, chapterID);
+            ResultSet rs = pstm.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("Course_ID");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
 
     public int getCourseID(String name){
         String sql = "SELECT Course_ID FROM offlearn.course WHERE courseName = ? ";
@@ -229,6 +249,36 @@ public class CourseDB extends ConnectDB{
         return courseIDs;
     }
 
+    public ArrayList<CourseItem> getAllCourses() {
+        ArrayList<CourseItem> courseList = new ArrayList<>();
+
+        String sql = "SELECT c.Course_ID, c.courseName, c.image, c.price, c.courseDescription, cat.catname " +
+                "FROM offlearn.course c " +
+                "JOIN offlearn.category cat ON c.Cat_ID = cat.Cat_id " +
+                "WHERE c.verify = 1";
+
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstm = conn.prepareStatement(sql);
+             ResultSet rs = pstm.executeQuery()) {
+
+            while (rs.next()) {
+                int id = rs.getInt("Course_ID");
+                String name = rs.getString("courseName");
+                String img = rs.getString("image");
+                int price = rs.getInt("price");
+                String description = rs.getString("courseDescription");
+                String catName = rs.getString("catname");
+
+                courseList.add(new CourseItem(id, img, name, price, catName, description));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return courseList;
+    }
 
 
 

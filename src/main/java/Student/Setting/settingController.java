@@ -42,12 +42,6 @@ public class settingController implements Initializable {
     public Button changePasswordBtn;
     public HBox changePasswordField;
     public TextField username1;
-    public RadioButton quizTrue;
-    public RadioButton quizFalse;
-    public RadioButton mTrue;
-    public RadioButton mFalse;
-    public RadioButton cTrue;
-    public RadioButton cFalse;
     public Button cancelEditProfile;
     public Button savePassword;
     public Button cancelPassword;
@@ -67,8 +61,6 @@ public class settingController implements Initializable {
     String lastNameUser = user.getLastname();
     String userName = user.getUsername();
     String gmailUser = user.getEmail();
-//    String imgPath = (user.getProfile() != null) ? user.getProfile().toString() : "/img/Profile/user.png";
-//    String imgPath = "/img/Profile/user.png";
     String selectedimg = "";
 
     private boolean isEditing = false;
@@ -170,12 +162,11 @@ public class settingController implements Initializable {
         boolean isUpdated = userDB.updateUserInfo(sessionUsername, newFirstname, newLastname, newEmail);
 
         if (isUpdated) {
-            // Upload image to database if a new image was selected
             if (!selectedimg.isEmpty()) {
                 boolean isImageUpdated = userDB.updateProfileImage(sessionUsername, selectedimg);
                 if (isImageUpdated) {
-                    user = userDB.getUserInfo(sessionUsername); // Refresh user info
-                    setUserImage(user.getProfile());  // Update UI with the new profile image
+                    user = userDB.getUserInfo(sessionUsername);
+                    setUserImage(user.getProfile());
                 }
             }
 
@@ -190,7 +181,6 @@ public class settingController implements Initializable {
 
 
     public void cancelProfileEdit(ActionEvent e){
-//        loadAndSetUserImage(picture, imgPath);
         setProfileValue(name, lastNameUser, gmailUser);
         closeProfileEdit();
     }
@@ -268,7 +258,6 @@ public class settingController implements Initializable {
             if (uploadedUrl != null) {
                 selectedimg = uploadedUrl;
 
-                // Ensure image is loaded on JavaFX Application Thread
                 Platform.runLater(() -> {
                     setUserImage(selectedimg);
                 });
@@ -277,8 +266,6 @@ public class settingController implements Initializable {
             }
         }
     }
-
-
     //End profile edit part
 
 

@@ -6,7 +6,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Button fx:id="EPbtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="233.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="EP&lt;count&gt;: Watching ep" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.learningPage.EPButtonController">
+<Button fx:id="EPbtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="233.0" style="-fx-background-color: white; -fx-background-radius: 10;" styleClass="ep-button" text="EP&lt;count&gt;: Watching ep" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.learningPage.EPButtonController">
     <font>
         <Font name="Noto Sans Thai Bold" size="15.0" />
     </font>

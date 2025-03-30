@@ -1,6 +1,7 @@
 package Student.loginAndSignUp;
 
 import Database.ConnectDB;
+import Database.User;
 import Database.UserDB;
 import Student.FontLoader.FontLoader;
 
@@ -25,7 +26,6 @@ import java.sql.*;
 import java.util.ResourceBundle;
 
 public class loginController implements Initializable {
-
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -66,7 +66,6 @@ public class loginController implements Initializable {
 
         if (userType != null) {
             SessionManager.getInstance().setUsername(username);
-//            System.out.println(userType);
             if (userType.equals("student")) {
                 showAlert("Login Successful", "Welcome, " + username, Alert.AlertType.INFORMATION);
                 openHomePage();

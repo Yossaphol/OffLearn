@@ -68,6 +68,7 @@ public class ChapterContent implements Initializable {
     private String chapMatUrl;
     private MediaUpload m;
     private int chapterID = 0;
+    private double playtime;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -99,7 +100,7 @@ public class ChapterContent implements Initializable {
         int courseID = courseDB.getCourseID(courseName.getText());
 
         if (!chapterDB.isChapterExists(chapterID)){
-            this.chapterID = chapterDB.saveChapter(courseID, c, d, chapImgUrl, chapMatUrl);
+            this.chapterID = chapterDB.saveChapter(courseID, c, d, chapImgUrl, chapMatUrl, playtime);
             System.out.println("save chapter complete");
         } else {
             if (chapterItem.getMaterial() != null){
@@ -108,7 +109,7 @@ public class ChapterContent implements Initializable {
             if (chapterItem.getImgUrl() != null){
                 chapImgUrl = chapterItem.getImgUrl();
             }
-            chapterDB.updateChapter(this.chapterID, c, d, chapImgUrl, chapMatUrl);
+            chapterDB.updateChapter(this.chapterID, c, d, chapImgUrl, chapMatUrl, playtime);
             System.out.println("update chapter complete");
         }
 
@@ -131,6 +132,7 @@ public class ChapterContent implements Initializable {
                     showAlert("", "กรุณาเลือกวิดิโอ", Alert.AlertType.ERROR);
                     return;
                 }
+
                 chapImgUrl = m.uploadVideo(selectedFile);
 
                 String videoPath = selectedFile.toURI().toString();
@@ -142,6 +144,11 @@ public class ChapterContent implements Initializable {
                 }
 
                 this.video.setMediaPlayer(mediaPlayer);
+
+                mediaPlayer.setOnReady(() -> {
+                    this.playtime = mediaPlayer.getTotalDuration().toSeconds();
+
+                });
             } else {
                 System.out.println("No file selected.");
             }

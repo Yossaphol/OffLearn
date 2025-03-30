@@ -2,9 +2,12 @@ package Student.task;
 
 import Database.QuestionDB;
 import Database.QuizDB;
+import Database.QuizScoreDB;
+import Database.UserDB;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
 import Teacher.quiz.QuizItem;
+import a_Session.SessionManager;
 import javafx.animation.*;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,65 +23,55 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class taskController implements Initializable {
     public VBox navBar;
-    public HBox searhbar_container;
     public HBox MainFrame;
     public TabPane tabPane;
     public Tab btnUpComing;
     public VBox containerUpComing;
-    public VBox boxUpComing;
-    public Tab btnLate;
-    public VBox containerLate;
     public Tab btnComplete;
     public VBox containerComplete;
     public Label point;
-    public Label taskDetail;
-    public Label taskInformation;
     public Button task;
-    public Label labelUpComingDate;
-    public VBox boxUpComing1;
-    public Label labelUpComingDate1;
-    public Button task1;
-    public Label taskInformation1;
-    public Label taskDetail1;
-    public Label point1;
-    public VBox boxUpComing2;
-    public Button task2;
-    public Label taskInformation2;
-    public Label taskDetail2;
-    public Label point2;
-    public Label labelLateDate;
-    public Label labelDone;
-    public Label labelUpComingDay;
-    //พวกที่มีเลขตามหลังเช่น task1 point2 1 คือแท็บหน้าเลยกำหนด 2 คือแท็บหน้าเสร็จ ส่วนที่ไม่มีเลขคือแท็บกำลังจะมาถึง
 
-    QuizDB dataDB = new QuizDB();
-    ArrayList<QuizItem> quiz = (ArrayList<QuizItem>) dataDB.getAllQuizzes();
-    QuestionDB questionDB = new QuestionDB();
+    QuizScoreDB dataDB = new QuizScoreDB();
+    QuizDB dtaDB = new QuizDB();
+    String username = SessionManager.getInstance().getUsername();
+    UserDB userDB = new UserDB();
+    int userID = userDB.getUserId(username);
+    ArrayList<QuizItem> undoneQuiz = (ArrayList<QuizItem>) dataDB.getUserUndoneQuizzes(userID);
+    ArrayList<QuizItem> doneQuiz = (ArrayList<QuizItem>) dataDB.getUserDoneQuizzes(userID);
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
         setUpComing();
         setComplete();
         setTabAnimation();
     }
 
     private void setUpComing() {
-        for (QuizItem task : quiz) {
+        if(undoneQuiz.isEmpty()){
+            Label txt = new Label("คุณไม่มีควิซที่ต้องทำในขณะนี้");
+            txt.setStyle("-fx-font-size: 20px;");
+            containerUpComing.getChildren().clear();
+            containerUpComing.getChildren().add(txt);
+            return;
+        }
+        containerUpComing.getChildren().clear();
+        for (QuizItem task : undoneQuiz) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/taskCard.fxml"));
                 Node quizItem = loader.load();
 
                 taskCardController controller = loader.getController();
-                controller.setTaskInformation(task.getHeader(), task.getLevel(), task.getMaxScore());
+                controller.setTaskInformation(task.getHeader(), dtaDB.getCourseNameByQuizID(task.getQuizID()), task.getMaxScore());
 
                 Button content = (Button) quizItem;
                 hoverEffect(content);
@@ -110,11 +103,39 @@ public class taskController implements Initializable {
 //        }
 //    }
 
-
-
     private void setComplete(){
-        //containerComplete
+        if(doneQuiz.isEmpty()){
+            Label txt = new Label("เริ่มทำแบบทดสอบเลย!");
+            txt.setStyle("-fx-font-size: 20px;");
+            containerComplete.getChildren().clear();
+            containerComplete.getChildren().add(txt);
+            return;
+        }
+        containerComplete.getChildren().clear();
+        for (QuizItem task : doneQuiz) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/taskCard.fxml"));
+                Node quizItem = loader.load();
+
+                taskCardController controller = loader.getController();
+                Integer sc = dataDB.getUserQuizScore(userID, task.getQuizID());
+                String score = sc+"/"+task.getMaxScore()+" คะแนน";
+                controller.setTaskInformation(task.getHeader(), dtaDB.getCourseNameByQuizID(task.getQuizID()), score);
+
+                Button content = (Button) quizItem;
+                hoverEffect(content);
+//                content.setOnMouseClicked(e ->
+//                        handleQuizTestLink("TeacherD", task.getLevel(), task.getHeader(), 120, questionDB.countQuestionsByQuizID(task.getQuizID()))
+//                );
+                containerComplete.getChildren().add(content);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
+
+
 
 
     public void hoverEffect(Button btn) {

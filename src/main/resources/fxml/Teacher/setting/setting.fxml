@@ -60,7 +60,7 @@
                                                 <Font name="Noto Sans Thai Regular" size="20.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="privateinfo_firstname" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="name">
+                                          <TextField fx:id="privateinfo_firstname" disable="true" prefHeight="40.0" promptText="firstname" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
                                              <font>
                                                 <Font name="Noto Sans Thai Regular" size="16.0" />
                                              </font>
@@ -77,7 +77,7 @@
                                                 <Font name="Noto Sans Thai Regular" size="20.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="privateinfo_lastname" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="lastname">
+                                          <TextField fx:id="privateinfo_lastname" disable="true" prefHeight="40.0" promptText="lastname" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
                                              <font>
                                                 <Font name="Noto Sans Thai Regular" size="16.0" />
                                              </font>
@@ -101,7 +101,7 @@
                                                 <Font name="Noto Sans Thai Regular" size="20.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="description" disable="true" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="Describe yourself...">
+                                          <TextField fx:id="description" disable="true" prefHeight="40.0" prefWidth="310.0" promptText="Describe yourself..." style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
                                              <font>
                                                 <Font name="Noto Sans Thai Regular" size="16.0" />
                                              </font>
@@ -115,7 +115,7 @@
                                                 <Font name="Noto Sans Thai Regular" size="20.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="privateinfo_gmail" disable="true" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="Example@gmail.com">
+                                          <TextField fx:id="privateinfo_gmail" disable="true" prefHeight="40.0" prefWidth="310.0" promptText="Example@gmail.com" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
                                              <font>
                                                 <Font name="Noto Sans Thai Regular" size="16.0" />
                                              </font>
@@ -334,7 +334,7 @@
                                           <Font name="Noto Sans Thai Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="bankaccount_firstname" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="Wirayabovorn">
+                                    <TextField fx:id="bankaccount_firstname" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
                                        <font>
                                           <Font name="Noto Sans Thai Regular" size="16.0" />
                                        </font></TextField>
@@ -347,7 +347,7 @@
                                           <Font name="Noto Sans Thai Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="bankaccount_lastname" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="Boonpriam">
+                                    <TextField fx:id="bankaccount_lastname" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
                                        <font>
                                           <Font name="Noto Sans Thai Regular" size="16.0" />
                                        </font></TextField>
@@ -370,7 +370,7 @@
                                           <Font name="Noto Sans Thai Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="bankaccount_number" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="1313880423">
+                                    <TextField fx:id="bankaccount_number" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
                                        <font>
                                           <Font name="Noto Sans Thai Regular" size="16.0" />
                                        </font></TextField>
@@ -383,7 +383,7 @@
                                           <Font name="Noto Sans Thai Regular" size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="bankaccount_bank" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="KBANK">
+                                    <TextField fx:id="bankaccount_bank" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
                                        <font>
                                           <Font name="Noto Sans Thai Regular" size="16.0" />
                                        </font></TextField>
@@ -410,7 +410,7 @@
                         </Button>
                         <HBox fx:id="saveCancelBtn1" prefHeight="78.0" prefWidth="1203.0" spacing="20.0" visible="false">
                            <children>
-                              <Button fx:id="saveChange1" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="บันทึก" textFill="WHITE">
+                              <Button fx:id="saveChange1" mnemonicParsing="false" onAction="#saveChangeOnPaymentEdit" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #0675de; -fx-background-radius: 10;" text="บันทึก" textFill="WHITE">
                                  <font>
                                     <Font name="Noto Sans Thai Bold" size="16.0" />
                                  </font>
