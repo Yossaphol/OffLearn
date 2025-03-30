@@ -179,6 +179,8 @@ public class VideoPlayerManager implements Initializable {
         consumeClicks(regionpart);
         consumeClicks(lblTime);
 
+        controlPane.setVisible(false);
+        controlPane.setOpacity(0);
         // Inactivity fade
         setupInactivityTimer();
 
@@ -418,14 +420,21 @@ public class VideoPlayerManager implements Initializable {
         mediaPlayer.setOnReady(() -> {
             sliderTime.setMax(mediaPlayer.getTotalDuration().toSeconds());
             lblTime.setText("00:00 / " + formatTime(mediaPlayer.getTotalDuration()));
-            Platform.runLater(this::updateSliderTimeFill);
 
             Platform.runLater(() -> {
-                FadeTransition fadeOut = new FadeTransition(Duration.millis(300), loadinggif);
-                fadeOut.setFromValue(1.0);
-                fadeOut.setToValue(0.0);
-                fadeOut.setOnFinished(e -> loadinggif.setVisible(false));
-                fadeOut.play();
+                updateSliderTimeFill();
+
+                // Hide the loading gif once ready
+                loadinggif.setVisible(false);
+                // Fade in the control pane with animation
+                controlPane.setVisible(true);
+                FadeTransition fadeIn = new FadeTransition(Duration.millis(500), controlPane);
+                fadeIn.setFromValue(0);
+                fadeIn.setToValue(1);
+                fadeIn.play();
+
+                // Optionally start your inactivity timer here if needed:
+                setupInactivityTimer();
             });
 
             mediaPlayer.bufferProgressTimeProperty().addListener((obs, oldVal, newVal) -> {
@@ -804,6 +813,9 @@ public class VideoPlayerManager implements Initializable {
 
     /* Fade in the control pane if not already */
     private void fadeInControlPane() {
+        if (mediaPlayer == null || mediaPlayer.getStatus() != MediaPlayer.Status.READY) {
+            return;
+        }
         if (!isFadeInActive && (controlPane.getOpacity() < 1.0 || !controlPane.isVisible())) {
             isFadeInActive = true;
             controlPane.setVisible(true);
