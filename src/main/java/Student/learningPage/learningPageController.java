@@ -1,11 +1,12 @@
 package Student.learningPage;
 
-// Test by clicking on course in Mycourse (id is hardcoded for now)
+ // TEST IN MYCOURSE
 
 import Database.*;
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
+import a_Session.SessionManager;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
@@ -25,9 +26,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class learningPageController implements Initializable, DisposableController {
+public class learningPageController extends ChapterProgress implements Initializable, DisposableController {
 
     public VBox mediacontainer;
     public VBox playlistcontainer;
@@ -52,8 +56,8 @@ public class learningPageController implements Initializable, DisposableControll
     public Button btnContactTeacher;
     public Button btnGloblalChat;
     public Button btnOffLoad;
-    public Button nextCourse;
     public ProgressBar progressBar;
+    public Button nextCourse;
     public ProgressBar nextCourseProgressBar;
 
     private VideoPlayerManager videoManager;
@@ -65,6 +69,7 @@ public class learningPageController implements Initializable, DisposableControll
     private int userID;
     private int quizID;
     private QuizDB quizDB;
+    String sessionUserID = SessionManager.getInstance().getUserID();
 
     // Helper: run tasks on a background daemon thread
     private <T> void runBackgroundTask(Task<T> task) {
@@ -98,6 +103,29 @@ public class learningPageController implements Initializable, DisposableControll
         method_home.hoverEffect(btnOffLoad);
         method_home.hoverEffect(nextCourse);
         method_home.hoverEffect(btnQuiz);
+
+        if (loadChapterProgress(String.valueOf(chapterID), sessionUserID) == -1) {
+            progressBar.setProgress(0);
+            labelPercent.setText("0%");
+        } else {
+            double tmp = loadChapterProgress(String.valueOf(chapterID), sessionUserID);
+            progressBar.setProgress(tmp);
+            labelPercent.setText(tmp+"%");
+        }
+
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+        scheduler.scheduleAtFixedRate(() -> {
+            try {
+                System.out.println(111);
+                updateProgress(videoManager.getVideoMediaPlayer(), chapterID);
+//                double tmp = loadChapterProgress(String.valueOf(chapterID), sessionUserID);
+//                progressBar.setProgress(tmp);
+//                labelPercent.setText(tmp+"%");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }, 0, 1, TimeUnit.MINUTES);
     }
 
     public void toQuizButton(){

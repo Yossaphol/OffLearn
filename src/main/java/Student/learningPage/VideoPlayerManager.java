@@ -1019,5 +1019,8 @@ public class VideoPlayerManager implements Initializable {
         bindMediaProperties();
     }
 
+    public MediaPlayer getVideoMediaPlayer() {
+        return mediaPlayer;
+    }
 
 }
