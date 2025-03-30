@@ -4,8 +4,8 @@ import Database.*;
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -19,66 +19,54 @@ import java.util.*;
 
 public class learningPageController implements Initializable, DisposableController  {
 
-    public VBox leftWrapper;
-    public HBox searhbar_container;
     public VBox mediacontainer;
     public VBox playlistcontainer;
 
     public Label subject_name;
     public Label ep;
-    public Circle teacherImg;
     public Label teacherName;
-    public Text clipDescription;
     public Label role;
+    public Label labelPercent;
+    public Label btnRoadmap;
+    public Label category;
+    public Label nextCourseName;
+    public Label nextTeacherName;
+    public Label playlistcount;
+
+    public Circle teacherImg;
+    public Rectangle nextImgCourse;
+
+    public Text clipDescription;
+
+    @FXML
+    private Button btnQuiz;
     public Button btnLike;
     public Button btnDislike;
     public Button btnContectTeacher;
     public Button btnGloblalChat;
     public Button btnOffLoad;
-    public Label countPlaylist;
-    public Label labelPercent;
-    public ProgressBar progressBar;
-    public Label btnRoadmap;
     public Button nextCourse;
-    public Label category;
-    public Label nextCourseName;
-    public Label nextTeacherName;
+
+    public ProgressBar progressBar;
     public ProgressBar nextCourseProgressBar;
-    public Rectangle nextImgCourse;
 
-    @FXML
-    public Button btnQuiz;
-
-    public Button btnEP;
-    public Button btnEP1;
-    public Label playlistcount;
-    //    public Label commentcount;
     private VideoPlayerManager videoManager;
+    private Navigator navigator;
+
     private int countLike = 224;
     private int countDisLike = 17;
 
-    private String courseID = "126"; /// TEST
+    private String courseID;
     private String chapterID;
     private String userID;
-    private Navigator navigator;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         FontLoader fontLoader = new FontLoader();
         fontLoader.loadFonts();
-        loadVideoPlayer();
         HomeController method_home = new HomeController();
-        Navigator method_navigator = new Navigator();
-        loadPlaylist();
-        toQuizButton();
 
-        subject_name.setText("Test Subject");
-        ep.setText("Test Episode : 0");
-        teacherName.setText("Wirayabovorn Boonpriaw");
-        role.setText("ศาสตราจารย์");
-        clipDescription.setText("ความรักกันไม่ได้หรอก ฉันชอบแอบมานานแล้ว พี่พรรลบ เขาเทอไม่รักฉัน เขาไม่แย่งเธอหรอก. 7 yrs. 2. ยะศิษย์ แดน เพ็งเซ้ง. คนอื่นไม่รู้ แต่กรูดูจนจบฮ่าๆๆ แหวงเเป๊ก เย๊กกะไฟฟ้า");
         method_home.loadAndSetImage(teacherImg, "/img/Profile/user.png");
-
         labelPercent.setText("69%");
 
         nextCourseName.setText("DSA");
@@ -88,18 +76,17 @@ public class learningPageController implements Initializable, DisposableControll
         btnLike.setText(String.valueOf(countLike));
         btnDislike.setText(String.valueOf(countDisLike));
 
-//        commentcount.setText("2");
         method_home.hoverEffect(btnContectTeacher);
         method_home.hoverEffect(btnGloblalChat);
         method_home.hoverEffect(btnLike);
         method_home.hoverEffect(btnDislike);
         method_home.hoverEffect(btnOffLoad);
         method_home.hoverEffect(nextCourse);
+        method_home.hoverEffect(btnQuiz);
 
     }
 
     public void toQuizButton(){
-        navigator = new Navigator();
         btnQuiz.setOnAction(actionEvent -> {
             navigator = new Navigator();
             navigator.QuizPage();
@@ -107,7 +94,6 @@ public class learningPageController implements Initializable, DisposableControll
     }
 
     public void receiveData(String courseID, String chapterID, String userID) {
-        VideoPathDB videoDB = new VideoPathDB();
         QuizDB quizDB = new QuizDB();
         ChapterDB chapterDB = new ChapterDB();
         CourseDB courseDB = new CourseDB();
@@ -119,21 +105,61 @@ public class learningPageController implements Initializable, DisposableControll
         this.chapterID = chapterID;
         this.userID = userID;
 
+        disposePlayer();        // Stop previous video if switching chapters
+        loadVideoPlayer();
         loadChapterContent();
         loadTeacherInfo();
         loadPlaylist();
         loadProgress();
         loadRecommendedCourses();
-        loadComments(); // optional
     }
 
     private void loadChapterContent() {
+        ChapterDB chapterDB = new ChapterDB();
+        String[] details = chapterDB.getChapterDetailsByID(chapterID);
+
+        if (details != null) {
+            subject_name.setText(details[0] != null ? details[0] : "");
+            clipDescription.setText(details[1] != null ? details[1] : "");
+        }
+
+        int episodeNumber = chapterDB.getEpisodeNumber(courseID, chapterID);
+        if (episodeNumber != -1) {
+            ep.setText("Episode : " + episodeNumber);
+        } else {
+            ep.setText(""); // fallback
+        }
     }
 
     private void loadTeacherInfo() {
-    }
+        try {
+            UserDB userDB = new UserDB();
+            int cid = Integer.parseInt(courseID);  // Ensure it's an int
+            System.out.println("🔍 Fetching teacher info for courseID = " + cid);
 
-    private void loadComments() { // optional
+            String[] info = userDB.getUserNameProfileAndSpecByCourseID(cid);
+            if (info != null) {
+                String username = info[0];
+                String profilePath = info[1];
+                String desc = info[2];
+
+                System.out.println("✅ Username: " + username);
+                System.out.println("🖼️ Profile Path: " + profilePath);
+                System.out.println("📜 Description: " + desc);
+
+                teacherName.setText(username);
+                role.setText(desc);
+
+                HomeController method_home = new HomeController();
+                method_home.loadAndSetImage(teacherImg, profilePath);
+            } else {
+                System.out.println("⚠️ No teacher info found for courseID: " + cid);
+            }
+
+        } catch (Exception e) {
+            System.out.println("❌ Error while loading teacher info:");
+            e.printStackTrace();
+        }
     }
 
     private void loadRecommendedCourses() {
@@ -145,8 +171,9 @@ public class learningPageController implements Initializable, DisposableControll
     private void loadPlaylist() {
         playlistcontainer.getChildren().clear();
 
+        String forcedCourseID = "138";
         PlaylistDB playlistDB = new PlaylistDB();
-        ArrayList<String[]> chapters = playlistDB.getChaptersByCourseID(courseID); // use real courseID
+        ArrayList<String[]> chapters = playlistDB.getChaptersByCourseID(forcedCourseID);
 
         for (int i = 0; i < chapters.size(); i++) {
             String chapterId = chapters.get(i)[0];
@@ -184,26 +211,22 @@ public class learningPageController implements Initializable, DisposableControll
     }
 
 
-    public void recieveMethod(String courseid) {
-        // Set the course ID from MyCourse
-        this.courseID = courseid;
+    public void recieveMethod(String ignoredCourseId) {
+        this.courseID = "138"; // hardcoded override for test (too lazy to enroll course into mycourse)
 
-        // Query chapters for this course
         ChapterDB chapterDB = new ChapterDB();
-        ArrayList<String[]> chapters = chapterDB.getChaptersByCourseID(courseid);
+        ArrayList<String[]> chapters = chapterDB.getChaptersByCourseID(this.courseID);
 
         if (!chapters.isEmpty()) {
-            // For example, choose the first chapter as default
-            this.chapterID = chapters.get(0)[0]; // Chapter_ID is at index 0
+            this.chapterID = chapters.get(0)[0];
             System.out.println("Default chapter set: " + chapterID);
 
-            // Optionally update playlist UI here
+            loadVideoPlayer();
             loadPlaylist();
-
-            // Load content (video or quiz) for the selected chapter
             loadChapterContent();
+            loadTeacherInfo();
         } else {
-            System.err.println("No chapters found for course ID: " + courseid);
+            System.err.println("No chapters found for forced course ID: " + this.courseID);
         }
     }
 
@@ -211,8 +234,17 @@ public class learningPageController implements Initializable, DisposableControll
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/learningPage/videoPlayer.fxml"));
             StackPane videoRoot = loader.load();
-            videoManager = loader.getController(); // <== save controller
+            videoManager = loader.getController(); // Save reference
             mediacontainer.getChildren().setAll(videoRoot);
+
+            // 👇 Set the video path here, using your ChapterDB or chapterID
+            String videoURL = new ChapterDB().getVideoURLByChapterID(chapterID);
+            System.out.println("Video URL: " + videoURL);
+            System.out.println("chapterID passed: " + chapterID);
+            if (videoURL != null && !videoURL.isEmpty()) {
+                videoManager.setVideoPath(videoURL);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

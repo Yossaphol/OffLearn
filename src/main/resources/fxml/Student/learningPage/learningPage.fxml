@@ -43,7 +43,7 @@
                                  <children>
                                     <HBox prefHeight="117.0" prefWidth="734.0">
                                        <children>
-                                          <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="183.0">
+                                          <VBox alignment="CENTER_LEFT" prefHeight="118.0" prefWidth="530.0">
                                              <children>
                                                 <Label fx:id="subject_name" text="Subject name" textFill="#8100cc">
                                                    <font>
