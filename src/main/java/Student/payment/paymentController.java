@@ -17,6 +17,9 @@ import static Student.payment.Paypal.capturePayment;
 
 public class paymentController implements Initializable {
 
+    private double amount;
+
+
     @FXML
     private ImageView qrCode;
 
@@ -26,11 +29,25 @@ public class paymentController implements Initializable {
     @FXML
     private Label status;
 
+    @FXML
+    private Label courseTitle;
+
+    @FXML
+    private Label courseBy;
+
+    @FXML
+    private Label priceDisplay;
+
+    @FXML
+    private Label teacherName;
+
+    private String courseName;
+    private double coursePrice;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             qrCodeDisplay();
-
         } catch (WriterException e) {
             System.out.println(e);
         }
@@ -40,7 +57,7 @@ public class paymentController implements Initializable {
         new Thread(() -> {
             try {
                 String accessToken = Paypal.getAccessToken();
-                String[] orderData = Paypal.createOrder(accessToken, 10.0, "THB");
+                String[] orderData = Paypal.createOrder(accessToken, amount, "THB");
                 String orderId = orderData[0];
                 String approvalUrl = orderData[1];
 
@@ -68,5 +85,20 @@ public class paymentController implements Initializable {
             }
         }).start();
     }
+
+    public void setCourseInfo(String name, double price, String teacher) {
+        this.courseName = name;
+        this.coursePrice = price;
+        this.amount = price;
+
+        if (courseTitle != null) courseTitle.setText(name);
+        if (priceDisplay != null) priceDisplay.setText(String.format("%.0f", price) + " THB");
+        if (teacherName != null) teacherName.setText(teacher);
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
 
 }

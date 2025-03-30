@@ -35,14 +35,14 @@
                                     <Font name="Kodchasan Regular" size="12.0" />
                                  </font>
                               </Label>
-                              <Label text="Sam Wilson">
+                              <Label fx:id="teacherName" text="Sam Wilson">
                                  <font>
                                     <Font name="Kodchasan Regular" size="12.0" />
                                  </font>
                               </Label>
                            </children>
                         </HBox>
-                        <Label text="Object Oriented Programming" textFill="#8100cc">
+                        <Label fx:id="courseTitle" textFill="#8100cc">
                            <font>
                               <Font name="Kodchasan Bold" size="18.0" />
                            </font>
@@ -67,7 +67,7 @@
                   <Font name="Kodchasan Bold" size="36.0" />
                </font>
             </Label>
-            <Label text="8,000" textFill="#8100cc">
+            <Label fx:id="priceDisplay" text="8,000" textFill="#8100cc">
                <font>
                   <Font name="Kodchasan Bold" size="40.0" />
                </font>
