@@ -268,7 +268,11 @@ public class learningPageController implements Initializable, DisposableControll
                     controller.setText("EP" + epNumber + " : " + chapterTitle);
                     controller.setActive(chapterId == chapterID);
                     EPbtn.setOnAction(e2 -> {
-                        System.out.println("Clicked EP: " + epNumber + " (Chapter ID: " + chapterId + ")");
+                        if (chapterId == chapterID) {
+                            System.out.println("You clicked on the currently active chapter. Ignoring.");
+                            return;
+                        }
+                        System.out.println("Switching to EP: " + epNumber + " (Chapter ID: " + chapterId + ")");
                         if (videoManager != null) {
                             videoManager.disposePlayer();
                         }
