@@ -61,6 +61,12 @@ public class Navigator {
     }
 
 
+    public void QuizPage(){
+        navigateTo("/fxml/Student/Quiz/quizPage.fxml");
+        controller.stopHideNavbar();
+        controller.stopHideSearchBar();
+    }
+
     public void QuizResult() {
         navigateTo("/fxml/Student/Quiz/resultPage.fxml");
         controller.stopHideNavbar();
@@ -83,10 +89,6 @@ public class Navigator {
         navigateTo("/fxml/Student/Quiz/testPage.fxml");
         controller.hideNavbar();
         controller.hideSearchBar();
-    }
-
-    public void seeAnswer(MouseEvent event) {
-        navigateTo("/fxml/Student/Quiz/quizPage.fxml");
     }
 
     public void myCourseRoute(MouseEvent event) {
