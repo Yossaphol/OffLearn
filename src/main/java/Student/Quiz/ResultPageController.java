@@ -7,6 +7,8 @@ import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
 import Teacher.courseManagement.Course;
 import Teacher.quiz.QuizItem;
+import a_Session.SessionHadler;
+import a_Session.SessionManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
@@ -21,7 +23,7 @@ import javafx.scene.shape.Circle;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ResultPageController implements Initializable {
+public class ResultPageController implements Initializable, SessionHadler {
 
     @FXML
     private Label yourScore;
@@ -55,8 +57,8 @@ public class ResultPageController implements Initializable {
 
     private ScoreDB scoreDB;
     private UserDB userDB;
-    private int userID = 17;
-    private int chapterID = 131;
+    private int userID;
+    private int chapterID;
     private Navigator navigator;
     private int point;
     private QuizItem quizItem;
@@ -68,9 +70,10 @@ public class ResultPageController implements Initializable {
         setComplete();
     }
 
-    public void loadData(int point, int courseID, QuizItem quizItem){
+    public void loadData(int point, int courseID, QuizItem quizItem, int chapterID){
         this.point = point;
         this.quizItem = quizItem;
+        this.chapterID = chapterID;
         scoreDB = new ScoreDB();
         userDB = new UserDB();
 
@@ -88,6 +91,12 @@ public class ResultPageController implements Initializable {
                 "มากกว่า " + String.format("%.2f", scorePercentage) + "% ของผู้สอบ"
         );
         ;
+    }
+
+    @Override
+    public void handleSession() {
+        userDB = new UserDB();
+        this.userID = userDB.getUserId(SessionManager.getInstance().getUsername());
     }
 
     public void setCircularImage(Circle circle, String imagePath) {
@@ -109,7 +118,7 @@ public class ResultPageController implements Initializable {
         courseDB = new CourseDB();
         navigator = new Navigator();
         seeAnswer.setOnAction(actionEvent -> {
-            navigator.QuizSummary(point, courseDB.getCourseIDByChapterID(chapterID), quizItem);
+            navigator.QuizSummary(point, courseDB.getCourseIDByChapterID(chapterID), quizItem, chapterID);
         });
     }
 
@@ -117,5 +126,6 @@ public class ResultPageController implements Initializable {
         navigator = new Navigator();
         startLearning.setOnAction(actionEvent -> navigator.learningPageRoute(actionEvent));
     }
+
 
 }

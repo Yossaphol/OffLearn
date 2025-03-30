@@ -28,7 +28,7 @@
                                           <Font name="Kodchasan Bold" size="20.0" />
                                        </font>
                                     </Label>
-                                    <Label text="Label">
+                                    <Label fx:id="name" text="Label">
                                        <font>
                                           <Font name="Kodchasan ExtraLight" size="16.0" />
                                        </font>
@@ -42,7 +42,7 @@
                                           <Font name="Kodchasan Bold" size="20.0" />
                                        </font>
                                     </Label>
-                                    <Label text="Label">
+                                    <Label fx:id="min" text="Label">
                                        <font>
                                           <Font name="Kodchasan ExtraLight" size="16.0" />
                                        </font>
@@ -56,7 +56,7 @@
                                           <Font name="Kodchasan Bold" size="20.0" />
                                        </font>
                                     </Label>
-                                    <Label text="Label">
+                                    <Label fx:id="max" text="Label">
                                        <font>
                                           <Font name="Kodchasan ExtraLight" size="16.0" />
                                        </font>
@@ -70,7 +70,7 @@
                                           <Font name="Kodchasan Bold" size="20.0" />
                                        </font>
                                     </Label>
-                                    <Label text="Label">
+                                    <Label fx:id="level" text="Label">
                                        <font>
                                           <Font name="Kodchasan ExtraLight" size="16.0" />
                                        </font>
@@ -98,12 +98,18 @@
                            <padding>
                               <Insets right="80.0" />
                            </padding>
+                           <VBox.margin>
+                              <Insets bottom="50.0" />
+                           </VBox.margin>
                         </HBox>
                      </children>
                   </VBox>
                </children>
             </VBox>
          </children>
+         <HBox.margin>
+            <Insets bottom="50.0" />
+         </HBox.margin>
       </HBox>
    </children>
    <padding>

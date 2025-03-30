@@ -32,6 +32,7 @@ public class learningPageController implements Initializable, DisposableControll
     public VBox mediacontainer;
     public VBox playlistcontainer;
     public HBox rootpage;
+    public VBox attachmentcontainer;
     public Label subject_name;
     public Label ep;
     public Label teacherName;
@@ -63,6 +64,7 @@ public class learningPageController implements Initializable, DisposableControll
     private int chapterID;
     private int userID;
     private int quizID;
+    private QuizDB quizDB;
 
     // Helper: run tasks on a background daemon thread
     private <T> void runBackgroundTask(Task<T> task) {
@@ -85,9 +87,10 @@ public class learningPageController implements Initializable, DisposableControll
         nextTeacherName.setText("อาจารย์ขิม ใจดี");
         method_home.loadAndSetImage(nextImgCourse, "/img/Profile/user.png");
 
+        toQuizButton();
+
         btnLike.setText(String.valueOf(countLike));
         btnDislike.setText(String.valueOf(countDisLike));
-        toQuizButton();
         method_home.hoverEffect(btnContectTeacher);
         method_home.hoverEffect(btnGloblalChat);
         method_home.hoverEffect(btnLike);
@@ -100,14 +103,16 @@ public class learningPageController implements Initializable, DisposableControll
     public void toQuizButton(){
         btnQuiz.setOnAction(actionEvent -> {
             navigator = new Navigator();
-            navigator.QuizPage();
+            navigator.QuizPage(chapterID, quizID);
         });
     }
 
     public void receiveData(int courseID, int chapterID, int userID) {
+        quizDB = new QuizDB();
         this.courseID = courseID;
         this.chapterID = chapterID;
         this.userID = userID;
+        this.quizID = quizDB.getQuizIdByChapterId(this.chapterID);
 
         // Create a latch to wait for both tasks (set count = 2)
         CountDownLatch latch = new CountDownLatch(2);
@@ -173,6 +178,7 @@ public class learningPageController implements Initializable, DisposableControll
             loadPlaylist();
             loadProgress();
             loadRecommendedCourses();
+            loadAttachment();
         });
         combinedTask.setOnFailed(e -> {
             System.err.println("Error in combined task:");
@@ -384,5 +390,44 @@ public class learningPageController implements Initializable, DisposableControll
 
     public VideoPlayerManager getVideoManager() {
         return videoManager;
+    }
+
+    private void loadAttachment() {
+        Task<String> task = new Task<>() {
+            @Override
+            protected String call() {
+                ChapterDB chapterDB = new ChapterDB();
+                return chapterDB.getChapterMaterialByID(chapterID);
+            }
+        };
+
+        task.setOnSucceeded(e -> {
+            String materialURL = task.getValue();
+            attachmentcontainer.getChildren().clear();
+
+            if (materialURL != null && !materialURL.trim().isEmpty()) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/learningPage/attachment.fxml"));
+                    HBox attachmentNode = loader.load();
+                    AttachmentController controller = loader.getController();
+
+                    // Extract filename from URL (or use fallback)
+                    String fileName = materialURL.substring(materialURL.lastIndexOf('/') + 1);
+                    controller.setFilename(fileName);
+                    controller.setDownloadURL(materialURL);
+
+                    attachmentcontainer.getChildren().add(attachmentNode);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+        task.setOnFailed(e -> {
+            System.err.println("Failed to load attachment:");
+            task.getException().printStackTrace();
+        });
+
+        runBackgroundTask(task);
     }
 }
