@@ -32,6 +32,7 @@ public class learningPageController implements Initializable, DisposableControll
     public VBox mediacontainer;
     public VBox playlistcontainer;
     public HBox rootpage;
+    public VBox attachmentcontainer;
     public Label subject_name;
     public Label ep;
     public Label teacherName;
@@ -177,6 +178,7 @@ public class learningPageController implements Initializable, DisposableControll
             loadPlaylist();
             loadProgress();
             loadRecommendedCourses();
+            loadAttachment();
         });
         combinedTask.setOnFailed(e -> {
             System.err.println("Error in combined task:");
@@ -388,5 +390,44 @@ public class learningPageController implements Initializable, DisposableControll
 
     public VideoPlayerManager getVideoManager() {
         return videoManager;
+    }
+
+    private void loadAttachment() {
+        Task<String> task = new Task<>() {
+            @Override
+            protected String call() {
+                ChapterDB chapterDB = new ChapterDB();
+                return chapterDB.getChapterMaterialByID(chapterID);
+            }
+        };
+
+        task.setOnSucceeded(e -> {
+            String materialURL = task.getValue();
+            attachmentcontainer.getChildren().clear();
+
+            if (materialURL != null && !materialURL.trim().isEmpty()) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/learningPage/attachment.fxml"));
+                    HBox attachmentNode = loader.load();
+                    AttachmentController controller = loader.getController();
+
+                    // Extract filename from URL (or use fallback)
+                    String fileName = materialURL.substring(materialURL.lastIndexOf('/') + 1);
+                    controller.setFilename(fileName);
+                    controller.setDownloadURL(materialURL);
+
+                    attachmentcontainer.getChildren().add(attachmentNode);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+        task.setOnFailed(e -> {
+            System.err.println("Failed to load attachment:");
+            task.getException().printStackTrace();
+        });
+
+        runBackgroundTask(task);
     }
 }

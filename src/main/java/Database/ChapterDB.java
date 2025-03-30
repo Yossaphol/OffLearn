@@ -205,4 +205,19 @@ public class ChapterDB extends ConnectDB{
         }
         return null;
     }
+
+    public String getChapterMaterialByID(int chapterID) {
+        String sql = "SELECT chapter_material FROM chapter WHERE Chapter_ID = ?";
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstm = conn.prepareStatement(sql)) {
+            pstm.setInt(1, chapterID);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                return rs.getString("chapter_material");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
 }
