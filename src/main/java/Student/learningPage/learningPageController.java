@@ -4,7 +4,6 @@ import Database.*;
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -45,14 +44,10 @@ public class learningPageController implements Initializable, DisposableControll
     public Label nextTeacherName;
     public ProgressBar nextCourseProgressBar;
     public Rectangle nextImgCourse;
-
-    @FXML
-    public Button btnQuiz;
-
     public Button btnEP;
     public Button btnEP1;
     public Label playlistcount;
-//    public Label commentcount;
+    public Label commentcount;
     private VideoPlayerManager videoManager;
     private int countLike = 224;
     private int countDisLike = 17;
@@ -60,7 +55,6 @@ public class learningPageController implements Initializable, DisposableControll
     private String courseID = "126"; /// TEST
     private String chapterID;
     private String userID;
-    private Navigator navigator;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -70,7 +64,6 @@ public class learningPageController implements Initializable, DisposableControll
         HomeController method_home = new HomeController();
         Navigator method_navigator = new Navigator();
         loadPlaylist();
-        toQuizButton();
 
         subject_name.setText("Test Subject");
         ep.setText("Test Episode : 0");
@@ -88,7 +81,7 @@ public class learningPageController implements Initializable, DisposableControll
         btnLike.setText(String.valueOf(countLike));
         btnDislike.setText(String.valueOf(countDisLike));
 
-//        commentcount.setText("2");
+        commentcount.setText("2");
         method_home.hoverEffect(btnContectTeacher);
         method_home.hoverEffect(btnGloblalChat);
         method_home.hoverEffect(btnLike);
@@ -96,14 +89,6 @@ public class learningPageController implements Initializable, DisposableControll
         method_home.hoverEffect(btnOffLoad);
         method_home.hoverEffect(nextCourse);
 
-    }
-
-    public void toQuizButton(){
-        navigator = new Navigator();
-        btnQuiz.setOnAction(actionEvent -> {
-            navigator = new Navigator();
-            navigator.QuizPage();
-        });
     }
 
     public void receiveData(String courseID, String chapterID, String userID) {
