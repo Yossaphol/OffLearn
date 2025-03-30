@@ -6,13 +6,17 @@ import Database.*;
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -135,31 +139,30 @@ public class learningPageController implements Initializable, DisposableControll
 
     private void loadTeacherInfo() {
         try {
+            int courseId = Integer.parseInt(courseID);
             UserDB userDB = new UserDB();
-            int cid = Integer.parseInt(courseID);  // Ensure it's an int
-            System.out.println("🔍 Fetching teacher info for courseID = " + cid);
+            String[] teacherInfo = userDB.getUserNameProfileAndSpecByCourseID(courseId);
 
-            String[] info = userDB.getUserNameProfileAndSpecByCourseID(cid);
-            if (info != null) {
-                String username = info[0];
-                String profilePath = info[1];
-                String desc = info[2];
+            System.out.println("Fetching teacher info for course ID: " + courseId);
 
-                System.out.println("✅ Username: " + username);
-                System.out.println("🖼️ Profile Path: " + profilePath);
-                System.out.println("📜 Description: " + desc);
+            if (teacherInfo != null) {
+                String teacherUsername = teacherInfo[0];
+                String profilePath = teacherInfo[1];
+                String description = teacherInfo[2];
 
-                teacherName.setText(username);
-                role.setText(desc);
+                System.out.println("Teacher Username: " + teacherUsername);
+                System.out.println("Profile Path: " + profilePath);
+                System.out.println("Description: " + description);
 
-                HomeController method_home = new HomeController();
-                method_home.loadAndSetImage(teacherImg, profilePath);
+                teacherName.setText(teacherUsername);
+                role.setText(description);
+
+                loadTeacherImage(teacherImg, profilePath);
             } else {
-                System.out.println("⚠️ No teacher info found for courseID: " + cid);
+                System.err.println("No teacher info found for course ID: " + courseId);
             }
-
         } catch (Exception e) {
-            System.out.println("❌ Error while loading teacher info:");
+            System.err.println("⚠️ Exception in loadTeacherInfo:");
             e.printStackTrace();
         }
     }
@@ -264,4 +267,35 @@ public class learningPageController implements Initializable, DisposableControll
         return videoManager;
     }
 
+
+
+    // for testing
+    private void loadTeacherImage(Shape shape, String imagePath) {
+        try {
+            Image image;
+            if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
+                image = new Image(imagePath, true); // async loading
+            } else {
+                URL url = getClass().getResource(imagePath);
+                if (url == null) {
+                    throw new IllegalArgumentException("Local image not found: " + imagePath);
+                }
+                image = new Image(url.toExternalForm(), true);
+            }
+
+            // Wait for it to finish loading
+            image.progressProperty().addListener((obs, oldVal, newVal) -> {
+                if (newVal.doubleValue() >= 1.0) {
+                    Platform.runLater(() -> {
+                        shape.setFill(new ImagePattern(image));
+                        System.out.println("Image loaded" + imagePath);
+                    });
+                }
+            });
+
+        } catch (Exception e) {
+            System.err.println("❌ Failed to load image into shape: " + imagePath);
+            e.printStackTrace();
+        }
+    }
 }
