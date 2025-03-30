@@ -30,6 +30,28 @@ public class StudentScoreDB extends ConnectDB {
         return null;
     }
 
+    public int getTotalStudentScore(int userID, int courseID) {
+        String query = "SELECT SUM(studentscore) AS totalScore FROM studentscore WHERE User_ID = ? AND Course_ID = ?";
+
+        try (Connection connection = this.connectToDB();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, userID);
+            preparedStatement.setInt(2, courseID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt("totalScore");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+
+    }
+
+
     public int getCourseIdByCourseName(String courseName) {
         String sql = "SELECT Course_ID FROM course WHERE courseName = ?";
 

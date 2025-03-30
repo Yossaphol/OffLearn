@@ -163,7 +163,7 @@ public class HomeController implements Initializable {
         setupBarChart();
         setImgContainer();
         route();
-        loadStd();
+     //   loadStd();
 //        String username = SessionManager.getInstance().getUsername();
         if (username != null) {
             setname.setText(username);
@@ -724,8 +724,8 @@ public class HomeController implements Initializable {
                     return;
                 }
             }
-            setTopStudentToDefault();
         }
+        setTopStudentToDefault();
     }
 
     private void loadStd(String courseName) {
