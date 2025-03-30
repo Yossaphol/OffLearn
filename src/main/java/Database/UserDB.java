@@ -317,6 +317,23 @@ public class UserDB extends ConnectDB{
         return null;
     }
 
+    public String getDescByUserID(int userId) {
+        String query = "SELECT description FROM offlearn.user WHERE User_ID = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("description");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
 }

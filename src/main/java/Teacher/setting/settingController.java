@@ -3,7 +3,7 @@ package Teacher.setting;
 import Database.User;
 import Database.UserDB;
 import Database.withdraw;
-import Database.withdrawDB;
+import Database.WithdrawDB;
 import Student.HomeAndNavigation.HomeController;
 import a_Session.SessionManager;
 import javafx.animation.FadeTransition;
@@ -28,7 +28,6 @@ import mediaUpload.MediaUpload;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class settingController implements Initializable {
@@ -87,7 +86,7 @@ public class settingController implements Initializable {
 
     UserDB userDB = new UserDB();
     String sessionUsername = SessionManager.getInstance().getUsername();
-    withdrawDB db;
+    WithdrawDB db;
     withdraw wd;
     User user = userDB.getUserInfo(sessionUsername);
     int userID = userDB.getUserId(SessionManager.getInstance().getUsername());
@@ -111,7 +110,7 @@ public class settingController implements Initializable {
         setEffect();
         uploadPic.setVisible(false);
 
-        db = new withdrawDB();
+        db = new WithdrawDB();
         wd = db.getWithdrawInfo(userID);
 
         if (wd == null) {
@@ -422,7 +421,7 @@ public class settingController implements Initializable {
         String sessionUsername = SessionManager.getInstance().getUsername();
         UserDB userDB = new UserDB();
         int userId = userDB.getUserId(sessionUsername);
-        withdraw userWithdraw = withdrawDB.getWithdrawInfo(userId);
+        withdraw userWithdraw = WithdrawDB.getWithdrawInfo(userId);
         System.out.println(userId);
         System.out.println(userWithdraw);
         if (userWithdraw != null) {
