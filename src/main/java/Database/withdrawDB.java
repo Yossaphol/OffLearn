@@ -1,7 +1,5 @@
 package Database;
 
-import a_Session.SessionManager;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +16,6 @@ public class withdrawDB extends ConnectDB {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                System.out.println(rs.getString("accountNumber"));
                 withdraw withdrawInfo = new withdraw();
                 withdrawInfo.setAccountNumber(rs.getString("accountNumber"));
                 withdrawInfo.setAccountFName(rs.getString("accountFName"));

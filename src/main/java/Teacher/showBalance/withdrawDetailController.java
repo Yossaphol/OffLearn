@@ -1,5 +1,6 @@
 package Teacher.showBalance;
 
+import Database.historyPaymentDB;
 import Database.EnrollDB;
 import Database.UserDB;
 import Database.withdraw;
@@ -79,23 +80,38 @@ public class withdrawDetailController implements Initializable {
     }
 
     public void withdrawBtn(ActionEvent event) {
+        String sessionUsername = SessionManager.getInstance().getUsername();
+
+        UserDB userDB = new UserDB();
+        int userId = userDB.getUserId(sessionUsername);
+
+        withdraw userWithdraw = withdrawDB.getWithdrawInfo(userId);
+
+        String acctno = userWithdraw.getAccountNumber();
+        String acctname = userWithdraw.getAccountFName() + " " + userWithdraw.getAccountLName();
+        String bankname = userWithdraw.getBankName();
         try {
             double requestAmount = Double.parseDouble(requestMoneyWithdraw.getText());
             double totalCost = Double.parseDouble(totalMoney.getText());
 
             if (requestAmount > totalCost) {
                 showAlert("Fail", "The withdrawal amount exceeds the available balance.", Alert.AlertType.ERROR);
-                System.out.println("Fail");
+//                System.out.println("Fail");
             } else {
-//                double newBalance = totalCost - requestAmount;
-//                enrollDB.updateUserBalance(SessionManager.getInstance().getUsername(), newBalance);
-//                totalMoney.setText(String.format("%.2f", newBalance));
-                showAlert("Successfully", "Withdraw successfully!",  Alert.AlertType.INFORMATION);
-                System.out.println("Withdraw successfully!");
+                historyPaymentDB historyDB = new historyPaymentDB();
+                boolean success = historyDB.insertHistoryPayment(acctno, acctname, bankname, requestAmount, userId);
+                if (success) {
+                    showAlert("Successfully", "Withdraw successfully!", Alert.AlertType.INFORMATION);
+                    requestMoneyWithdraw.setText("");
+//                    System.out.println("successfully!");
+                } else {
+                    showAlert("Fail", "Could not record withdraw!", Alert.AlertType.ERROR);
+//                    System.out.println("Fail");
+                }
             }
         } catch (NumberFormatException e) {
             showAlert("Fail", "Sorry, something went wrong!", Alert.AlertType.ERROR);
-            System.out.println("Something went wrong");
+//            System.out.println("Something went wrong");
         }
     }
 
