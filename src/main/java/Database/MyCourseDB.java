@@ -1,5 +1,7 @@
 package Database;
 
+import a_Session.SessionManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +21,7 @@ public class MyCourseDB extends ConnectDB {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             PreparedStatement pstmt2 = conn.prepareStatement(sqlCourse)) {
 
-            pstmt.setInt(1, 00000001);
+            pstmt.setInt(1, Integer.parseInt(SessionManager.getInstance().getUserID()));
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()){
                 pstmt2.setInt(1, rs.getInt("Course_ID"));

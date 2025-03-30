@@ -1,5 +1,7 @@
 package Database;
 
+import a_Session.SessionManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -125,7 +127,7 @@ public class UserDB extends ConnectDB{
 
     //login page
     public String loginConnect(String username, String password) {
-        String query = "SELECT type FROM offlearn.user WHERE Username = ? AND Password = ?";
+        String query = "SELECT type,User_ID FROM offlearn.user WHERE Username = ? AND Password = ?";
 
         try (Connection conn = this.connectToDB();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -135,6 +137,7 @@ public class UserDB extends ConnectDB{
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
+                SessionManager.getInstance().setUserID(rs.getString("User_ID"));
                 return rs.getString("type");
             }
         } catch (SQLException e) {
