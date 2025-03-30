@@ -66,21 +66,30 @@ public class leaderboardController implements Initializable {
 
         loadStdFromSubject();
         setupSubjectSelectionListener();
-        setupPaginationButtons();
+        if(!EnrolledCourses.isEmpty()){
+            setupPaginationButtons();
+        }else{
+            setDefault();
+        }
+
     }
 
+    private void setDefault(){
+        welcomeText.setText("หลักสูตรนี้ยังไม่มีแบบทดสอบ :)");
+        setFirst("First", 0, "/img/Profile/user.png");
+        setSecond("Second", 0, "/img/Profile/user.png");
+        setThird("Third", 0, "/img/Profile/user.png");
+        studentList.getChildren().clear();
+        studentList.getChildren().add(welcomeText);
+        return;
+    }
 
     private void loadStd(String courseName) {
         studentInCourse = enrollDta.getStudentsByCourseName(courseName);
         courseID = scoreDB.getCourseIdByCourseName(courseName);
 
         if (courseID == -2) {
-            welcomeText.setText("หลักสูตรนี้ยังไม่มีแบบทดสอบ :)");
-            setFirst("First", 0, "/img/Profile/user.png");
-            setSecond("Second", 0, "/img/Profile/user.png");
-            setThird("Third", 0, "/img/Profile/user.png");
-            studentList.getChildren().clear();
-            studentList.getChildren().add(welcomeText);
+            setDefault();
             return;
         }
 
@@ -88,7 +97,7 @@ public class leaderboardController implements Initializable {
         Map<String, Integer> studentScores = new HashMap<>();
         for (String student : studentInCourse) {
             int studentId = user.getUserId(student);
-            studentScores.put(student, scoreDB.getStudentScore(studentId, courseID));
+            studentScores.put(student, scoreDB.getTotalStudentScore(studentId, courseID));
         }
 
         studentInCourse.sort((s1, s2) -> Integer.compare(studentScores.get(s2), studentScores.get(s1)));
@@ -100,15 +109,15 @@ public class leaderboardController implements Initializable {
 
         if (!studentInCourse.isEmpty()) {
             if (studentInCourse.size() >= 3) {
-                setFirst(studentInCourse.get(0), scoreDB.getStudentScore(user.getUserId(studentInCourse.get(0)), courseID), user.getProfile(studentInCourse.get(0)));
-                setSecond(studentInCourse.get(1), scoreDB.getStudentScore(user.getUserId(studentInCourse.get(1)), courseID), user.getProfile(studentInCourse.get(1)));
-                setThird(studentInCourse.get(2), scoreDB.getStudentScore(user.getUserId(studentInCourse.get(2)), courseID), user.getProfile(studentInCourse.get(2)));
+                setFirst(studentInCourse.get(0), scoreDB.getTotalStudentScore(user.getUserId(studentInCourse.get(0)), courseID), user.getProfile(studentInCourse.get(0)));
+                setSecond(studentInCourse.get(1), scoreDB.getTotalStudentScore(user.getUserId(studentInCourse.get(1)), courseID), user.getProfile(studentInCourse.get(1)));
+                setThird(studentInCourse.get(2), scoreDB.getTotalStudentScore(user.getUserId(studentInCourse.get(2)), courseID), user.getProfile(studentInCourse.get(2)));
             } else if (studentInCourse.size() == 2) {
-                setFirst(studentInCourse.get(0), scoreDB.getStudentScore(user.getUserId(studentInCourse.get(0)), courseID), user.getProfile(studentInCourse.get(0)));
-                setSecond(studentInCourse.get(1), scoreDB.getStudentScore(user.getUserId(studentInCourse.get(1)), courseID), user.getProfile(studentInCourse.get(1)));
+                setFirst(studentInCourse.get(0), scoreDB.getTotalStudentScore(user.getUserId(studentInCourse.get(0)), courseID), user.getProfile(studentInCourse.get(0)));
+                setSecond(studentInCourse.get(1), scoreDB.getTotalStudentScore(user.getUserId(studentInCourse.get(1)), courseID), user.getProfile(studentInCourse.get(1)));
                 setThird("Third", 0, "/img/Profile/user.png");
             } else if (studentInCourse.size() == 1) {
-                setFirst(studentInCourse.get(0), scoreDB.getStudentScore(user.getUserId(studentInCourse.get(0)), courseID), user.getProfile(studentInCourse.get(0)));
+                setFirst(studentInCourse.get(0), scoreDB.getTotalStudentScore(user.getUserId(studentInCourse.get(0)), courseID), user.getProfile(studentInCourse.get(0)));
                 setSecond("Second", 0, "/img/Profile/user.png");
                 setThird("Third", 0, "/img/Profile/user.png");
             }
@@ -124,6 +133,7 @@ public class leaderboardController implements Initializable {
             select_subject.setValue(EnrolledCourses.get(0));
             loadStd(String.valueOf(select_subject.getValue()));
         }else{
+            setDefault();
             select_subject.setValue("คุณยังไม่ได้ลงทะเบียนหลักสูตรใดๆ");
         }
     }
@@ -150,7 +160,7 @@ public class leaderboardController implements Initializable {
                 Node stdBox = loader.load();
                 studentNodeController controller = loader.getController();
 
-                Integer studentScore = scoreDB.getStudentScore(user.getUserId(studentInCourse.get(i)), courseID);
+                Integer studentScore = scoreDB.getTotalStudentScore(user.getUserId(studentInCourse.get(i)), courseID);
                 if (studentScore == null) {
                     studentScore = 0;
                 }

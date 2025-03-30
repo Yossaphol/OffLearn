@@ -21,6 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class ResultPageController implements Initializable, SessionHadler {
@@ -54,6 +55,7 @@ public class ResultPageController implements Initializable, SessionHadler {
 
     @FXML
     private Button startLearning;
+
 
     private ScoreDB scoreDB;
     private UserDB userDB;
@@ -90,7 +92,8 @@ public class ResultPageController implements Initializable, SessionHadler {
         this.score_average_testerpercent.setText(
                 "มากกว่า " + String.format("%.2f", scorePercentage) + "% ของผู้สอบ"
         );
-        ;
+
+        setBarChart(quizItem.getQuizID(), quizItem);
     }
 
     @Override
@@ -126,6 +129,51 @@ public class ResultPageController implements Initializable, SessionHadler {
         navigator = new Navigator();
         startLearning.setOnAction(actionEvent -> navigator.learningPageRoute(actionEvent));
     }
+
+    public void setBarChart(int quizId, QuizItem quizItem) {
+        scoreDB = new ScoreDB();
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Number of Students");
+        yAxis.setLowerBound(0);
+        yAxis.setUpperBound(quizItem.getMaxScore());
+        int range = quizItem.getMaxScore() / 10;
+        yAxis.setTickUnit(range);
+        xAxis.setLabel("Score");
+
+        barChart.setTitle("Score Distribution");
+        barChart.getData().clear();
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Scores");
+
+        Map<Integer, Integer> scoreData = scoreDB.getScoreDistribution(quizId);
+
+        for (int score = 0; score <= quizItem.getMaxScore(); score++) {
+            int count = scoreData.getOrDefault(score, 0);
+            XYChart.Data<String, Number> data = new XYChart.Data<>(String.valueOf(score), count);
+
+            if (score == point) {
+                data.nodeProperty().addListener((obs, oldNode, newNode) -> {
+                    if (newNode != null) {
+                        newNode.setStyle("-fx-bar-fill: #8100CC;");
+                    }
+                });
+            } else {
+                data.nodeProperty().addListener((obs, oldNode, newNode) -> {
+                    if (newNode != null) {
+                        newNode.setStyle("-fx-bar-fill: #8100CC;");
+                        newNode.setOpacity(0.32);
+                    }
+                });
+            }
+
+            series.getData().add(data);
+        }
+
+        barChart.getData().add(series);
+    }
+
 
 
 }

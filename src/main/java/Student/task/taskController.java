@@ -1,18 +1,14 @@
 package Student.task;
 
-import Database.QuestionDB;
 import Database.QuizDB;
-import Database.QuizScoreDB;
+import Database.StudentScoreDB;
 import Database.UserDB;
-import Student.HomeAndNavigation.HomeController;
-import Student.HomeAndNavigation.Navigator;
 import Teacher.quiz.QuizItem;
 import a_Session.SessionManager;
 import javafx.animation.*;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -23,10 +19,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class taskController implements Initializable {
@@ -40,13 +33,13 @@ public class taskController implements Initializable {
     public Label point;
     public Button task;
 
-    QuizScoreDB dataDB = new QuizScoreDB();
+    StudentScoreDB dataDB = new StudentScoreDB();
     QuizDB dtaDB = new QuizDB();
     String username = SessionManager.getInstance().getUsername();
     UserDB userDB = new UserDB();
     int userID = userDB.getUserId(username);
-    ArrayList<QuizItem> undoneQuiz = (ArrayList<QuizItem>) dataDB.getUserUndoneQuizzes(userID);
-    ArrayList<QuizItem> doneQuiz = (ArrayList<QuizItem>) dataDB.getUserDoneQuizzes(userID);
+    ArrayList<QuizItem> undoneQuiz = (ArrayList<QuizItem>) dataDB.getUndoneQuizzes(userID);
+    ArrayList<QuizItem> doneQuiz = (ArrayList<QuizItem>) dataDB.getFinishedQuizzes(userID);
 
 
     @Override
@@ -118,15 +111,12 @@ public class taskController implements Initializable {
                 Node quizItem = loader.load();
 
                 taskCardController controller = loader.getController();
-                Integer sc = dataDB.getUserQuizScore(userID, task.getQuizID());
-                String score = sc+"/"+task.getMaxScore()+" คะแนน";
-                controller.setTaskInformation(task.getHeader(), dtaDB.getCourseNameByQuizID(task.getQuizID()), score);
+                Integer sc = dataDB.getStudentScore(userID, task.getQuizID());
+                String score_ = sc+"/"+task.getMaxScore()+" คะแนน";
+                controller.setTaskInformation(task.getHeader(), dtaDB.getCourseNameByQuizID(task.getQuizID()), score_);
 
                 Button content = (Button) quizItem;
                 hoverEffect(content);
-//                content.setOnMouseClicked(e ->
-//                        handleQuizTestLink("TeacherD", task.getLevel(), task.getHeader(), 120, questionDB.countQuestionsByQuizID(task.getQuizID()))
-//                );
                 containerComplete.getChildren().add(content);
 
             } catch (IOException e) {

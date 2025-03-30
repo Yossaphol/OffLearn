@@ -28,7 +28,7 @@ public class dashboardProfileController implements Initializable, SessionHadler 
     private Label setfullname;
 
     @FXML
-    private Label bio;
+    private Label description;
 
     @FXML
     private Label total_review;
@@ -50,7 +50,7 @@ public class dashboardProfileController implements Initializable, SessionHadler 
 
     private UserDB userDB;
     private CourseDB courseDB;
-    private int userId;
+    private int userID;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -73,19 +73,17 @@ public class dashboardProfileController implements Initializable, SessionHadler 
         editProfile.setOnMouseClicked(nav::settingRoute);
     }
 
-    public void setProfileDetail(String username, String description, String profilePicPath, int likeCount, int disLikeCount, int courseCount){
+    public void setProfileDetail(){
 
         userDB = new UserDB();
         courseDB = new CourseDB();
-        userId = userDB.getUserId(SessionManager.getInstance().getUsername());
-        int count = courseDB.countMyCourses(userId);
-//        setfullname.setText(username);
-        bio.setText(description);
+        userID = userDB.getUserId(SessionManager.getInstance().getUsername());
+        int count = courseDB.countMyCourses(userID);
+        String description = userDB.getDescByUserID(userID);
+        this.description.setText(description);
 
-        HomeController hm = new HomeController();
-//        hm.loadAndSetImage(user_pfp, profilePicPath);
-        dislike_btn.setText(String.valueOf(disLikeCount));
-        like_btn.setText(String.valueOf(likeCount));
+        dislike_btn.setText(String.valueOf(1));
+        like_btn.setText(String.valueOf(1));
         countMyCourse.setText(count + "");
     }
 
@@ -103,6 +101,7 @@ public class dashboardProfileController implements Initializable, SessionHadler 
 
     @Override
     public void handleSession() {
-
+        UserDB userDB = new UserDB();
+        this.userID = userDB.getUserId(SessionManager.getInstance().getUsername());
     }
 }

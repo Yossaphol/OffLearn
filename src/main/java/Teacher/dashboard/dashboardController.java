@@ -444,13 +444,7 @@ public class dashboardController implements Initializable, SessionHadler {
             Parent root = loader.load();
             dashboardProfileController controller = loader.getController();
 
-            controller.setProfileDetail(
-                    "Wirayabovorn Boonpriam",
-                    "Junior software developer",
-                    "/img/Picture/computer.jpg",
-                    674,
-                    210,
-                    4);
+            controller.setProfileDetail();
             dashboard_profile.getChildren().add(root);
         } catch (IOException e) {
             e.printStackTrace();

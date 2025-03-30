@@ -141,7 +141,7 @@ public class QuizPageController implements Initializable, SessionHadler {
 
             if (confirmAlert.showAndWait().get() == ButtonType.OK) {
                 navigator.QuizResult(point, courseDB.getCourseIDByChapterID(chapterID), quizItem, chapterID);
-                scoreDB.saveScore(courseDB, userID, chapterID, point);
+                scoreDB.saveScore(courseDB, userID, chapterID, point, quizId);
                 System.out.println("" + point);
             } else {
                 System.out.println("ยกเลิกการส่งคำตอบ");
