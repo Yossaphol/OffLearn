@@ -172,7 +172,19 @@ public class QuizDB extends ConnectDB{
         return null;
     }
 
-
+    public boolean isQuizAvailableForChapter(int chapterId) {
+        String sql = "SELECT Quiz_ID FROM quiz WHERE Chapter_ID = ?";
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, chapterId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                return rs.next(); // true if a quiz exists
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 
 

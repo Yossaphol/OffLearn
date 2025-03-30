@@ -87,7 +87,7 @@ public class learningPageController implements Initializable, DisposableControll
         btnDislike.setText(String.valueOf(countDisLike));
 
         toQuizButton();
-
+        
         method_home.hoverEffect(btnContectTeacher);
         method_home.hoverEffect(btnGloblalChat);
         method_home.hoverEffect(btnLike);
@@ -117,6 +117,10 @@ public class learningPageController implements Initializable, DisposableControll
         this.chapterID = chapterID;
         this.userID = userID;
 
+        boolean quizAvailable = quizDB.isQuizAvailableForChapter(Integer.parseInt(chapterID));
+
+        btnQuiz.setVisible(quizAvailable);
+        btnQuiz.setDisable(!quizAvailable);
         disposePlayer();        // Stop previous video if switching chapters
         loadVideoPlayer();
         loadChapterContent();
@@ -229,12 +233,19 @@ public class learningPageController implements Initializable, DisposableControll
         Category categoryDB = new Category();
         ArrayList<String[]> chapters = chapterDB.getChaptersByCourseID(this.courseID);
         String category = categoryDB.getCategoryByCourseID(Integer.parseInt(courseID));
+
         System.out.println("Fetched category name: " + catName);
+
+
 
         if (!chapters.isEmpty()) {
             this.chapterID = chapters.get(0)[0];
             System.out.println("Default chapter set: " + chapterID);
+            QuizDB quizDB = new QuizDB();
+            boolean quizAvailable = quizDB.isQuizAvailableForChapter(Integer.parseInt(chapterID));
 
+            btnQuiz.setVisible(quizAvailable);
+            btnQuiz.setDisable(!quizAvailable);
             loadVideoPlayer();
             loadPlaylist();
             loadChapterContent();
@@ -304,4 +315,6 @@ public class learningPageController implements Initializable, DisposableControll
             e.printStackTrace();
         }
     }
+
+
 }
