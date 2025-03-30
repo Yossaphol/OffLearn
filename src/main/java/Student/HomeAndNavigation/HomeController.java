@@ -712,8 +712,8 @@ public class HomeController implements Initializable {
                     return;
                 }
             }
-            setTopStudentToDefault();
         }
+        setTopStudentToDefault();
     }
 
     private void loadStd(String courseName) {
