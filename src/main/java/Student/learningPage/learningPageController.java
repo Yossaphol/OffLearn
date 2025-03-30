@@ -30,7 +30,7 @@ public class learningPageController implements Initializable, DisposableControll
     public Label role;
     public Label labelPercent;
     public Label btnRoadmap;
-    public Label category;
+    public Label catName;
     public Label nextCourseName;
     public Label nextTeacherName;
     public Label playlistcount;
@@ -217,7 +217,10 @@ public class learningPageController implements Initializable, DisposableControll
         this.courseID = "138"; // hardcoded override for test (too lazy to enroll course into mycourse)
 
         ChapterDB chapterDB = new ChapterDB();
+        Category categoryDB = new Category();
         ArrayList<String[]> chapters = chapterDB.getChaptersByCourseID(this.courseID);
+        String category = categoryDB.getCategoryByCourseID(Integer.parseInt(courseID));
+        System.out.println("Fetched category name: " + catName);
 
         if (!chapters.isEmpty()) {
             this.chapterID = chapters.get(0)[0];
@@ -227,6 +230,11 @@ public class learningPageController implements Initializable, DisposableControll
             loadPlaylist();
             loadChapterContent();
             loadTeacherInfo();
+            if (category != null) {
+                catName.setText(category);
+            } else {
+                catName.setText("unknown");
+            }
         } else {
             System.err.println("No chapters found for forced course ID: " + this.courseID);
         }

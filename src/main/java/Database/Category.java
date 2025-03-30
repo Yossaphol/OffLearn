@@ -75,4 +75,24 @@ public class Category extends ConnectDB{
         return this.catList;
     }
 
+    public String getCategoryByCourseID(int courseID) {
+        String sql = "SELECT cat.CatName FROM offlearn.course c " +
+                "JOIN offlearn.category cat ON c.Cat_ID = cat.Cat_ID " +
+                "WHERE c.Course_ID = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, courseID);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("CatName");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

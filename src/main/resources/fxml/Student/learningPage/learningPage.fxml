@@ -43,32 +43,49 @@
                                  <children>
                                     <HBox prefHeight="117.0" prefWidth="734.0">
                                        <children>
-                                          <VBox alignment="CENTER_LEFT" prefHeight="118.0" prefWidth="530.0">
+                                          <VBox alignment="CENTER_LEFT" prefHeight="101.0" prefWidth="530.0">
                                              <children>
                                                 <Label fx:id="subject_name" text="Subject name" textFill="#8100cc">
                                                    <font>
-                                                      <Font name="System Bold" size="24.0" />
+                                                      <Font name="System Bold" size="28.0" />
                                                    </font>
+                                                   <VBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </VBox.margin>
                                                 </Label>
                                                 <Label fx:id="ep" text="Episode" textFill="#a4a4a4">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
+                                                   <VBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </VBox.margin>
                                                 </Label>
-                                                <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="183.0">
-                                                   <children>
-                                                      <Circle fx:id="catPic" fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
-                                                         <HBox.margin>
-                                                            <Insets right="3.0" />
-                                                         </HBox.margin>
-                                                      </Circle>
-                                                      <Label fx:id="catName" text="catName" />
-                                                   </children>
+                                                <HBox prefHeight="26.0" prefWidth="475.0">
                                                    <VBox.margin>
                                                       <Insets top="4.0" />
                                                    </VBox.margin>
+                                                   <children>
+                                                      <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="83.0" style="-fx-background-color: rgba(129, 0, 204, 0.2); -fx-background-radius: 25;">
+                                                         <children>
+                                                            <Circle fx:id="catPic" fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE">
+                                                               <HBox.margin>
+                                                                  <Insets left="5.0" right="3.0" />
+                                                               </HBox.margin>
+                                                            </Circle>
+                                                            <Label fx:id="catName" style="-fx-text-fill: rgba(129, 0, 204, 1);" text="catName">
+                                                               <font>
+                                                                  <Font size="10.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
                                                 </HBox>
                                              </children>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
                                           </VBox>
                                        </children>
                                     </HBox>
@@ -108,7 +125,7 @@
                                        <children>
                                           <HBox prefHeight="67.0" prefWidth="415.0">
                                              <VBox.margin>
-                                                <Insets top="25.0" />
+                                                <Insets top="15.0" />
                                              </VBox.margin>
                                              <children>
                                                 <Circle fx:id="teacherImg" fill="DODGERBLUE" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
