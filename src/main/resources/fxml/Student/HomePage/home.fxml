@@ -1264,6 +1264,9 @@
                                        <children>
                                           <Circle fx:id="pfp_statistic" fill="DODGERBLUE" layoutX="119.0" layoutY="45.0" radius="41.0" stroke="BLACK" strokeType="INSIDE" />
                                        </children>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" top="10.0" />
+                                       </VBox.margin>
                                     </Pane>
                                     <Label prefHeight="32.0" prefWidth="226.0" text="นกที่บินไม่ขึ้นไม่ใช่นกที่ไม่พยายาม แต่เป็นนกอ้วน" textFill="#a8a8a8">
                                        <font>
@@ -1287,6 +1290,9 @@
                                                    </tickLabelFont>
                                                 </NumberAxis>
                                              </yAxis>
+                                             <HBox.margin>
+                                                <Insets top="20.0" />
+                                             </HBox.margin>
                                           </BarChart>
                                        </children>
                                     </HBox>
@@ -1301,6 +1307,9 @@
                                              <font>
                                                 <Font name="Noto Sans Thai Bold" size="12.0" />
                                              </font>
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
                                           </Label>
                                           <HBox prefHeight="21.0" prefWidth="237.0">
                                              <children>
@@ -1317,21 +1326,7 @@
                                              </children>
                                           </HBox>
                                           <ProgressBar fx:id="progress1" prefHeight="14.0" prefWidth="237.0" progress="0.0" stylesheets="@../../../css/Home.css" />
-                                          <HBox prefHeight="21.0" prefWidth="237.0">
-                                             <children>
-                                                <Label prefHeight="18.0" prefWidth="127.0" text="Cyber security">
-                                                   <font>
-                                                      <Font name="Noto Sans Thai Regular" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label fx:id="progressValue2" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="127.0" text="40%" textFill="#8100cc">
-                                                   <font>
-                                                      <Font name="Noto Sans Thai Regular" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </HBox>
-                                          <ProgressBar fx:id="progress2" prefHeight="14.0" prefWidth="237.0" progress="0.0" stylesheets="@../../../css/Home.css" />
+                                          <HBox prefHeight="21.0" prefWidth="237.0" />
                                           <Pane prefHeight="8.0" prefWidth="237.0" />
                                           <Button fx:id="btn_dashboard_atStatistics" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #8100CC; -fx-background-radius: 10;" text="Dashboard" textFill="WHITE">
                                              <font>
@@ -1351,7 +1346,7 @@
                            </children>
                         </Pane>
                         <Pane prefHeight="57.0" prefWidth="294.0" style="-fx-background-color: transparent;" />
-                        <Pane fx:id="topLeaderboard" prefHeight="345.0" prefWidth="294.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                        <Pane fx:id="topLeaderboard" prefHeight="319.0" prefWidth="294.0" style="-fx-background-color: white; -fx-background-radius: 10;">
                            <effect>
                               <DropShadow>
                                  <color>
@@ -1362,7 +1357,7 @@
                            <children>
                               <VBox layoutY="14.0" prefHeight="310.0" prefWidth="295.0">
                                  <children>
-                                    <Pane prefHeight="25.0" prefWidth="294.0" />
+                                    <Pane prefHeight="15.0" prefWidth="235.0" />
                                     <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="294.0">
                                        <children>
                                           <Label text="Leaderboard " textFill="#8100cc">
@@ -1382,24 +1377,24 @@
                                           <Insets top="3.0" />
                                        </VBox.margin>
                                     </Line>
-                                    <VBox prefHeight="331.0" prefWidth="234.0">
+                                    <VBox prefHeight="232.0" prefWidth="235.0">
                                        <VBox.margin>
                                           <Insets top="15.0" />
                                        </VBox.margin>
                                        <children>
-                                          <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="234.0">
+                                          <HBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="234.0">
                                              <children>
                                                 <Label prefHeight="29.0" prefWidth="28.0" text="1" textFill="#8100cc">
                                                    <font>
                                                       <Font name="Noto Sans Thai Bold" size="16.0" />
                                                    </font>
                                                 </Label>
-                                                <Circle fx:id="leaderboard_pfp" fill="DODGERBLUE" radius="17.0" stroke="BLACK" strokeType="INSIDE">
+                                                <Circle fx:id="imgTopOne" fill="DODGERBLUE" radius="17.0" stroke="BLACK" strokeType="INSIDE">
                                                    <HBox.margin>
                                                       <Insets left="4.0" />
                                                    </HBox.margin>
                                                 </Circle>
-                                                <Label prefHeight="26.0" prefWidth="101.0" text="John" textFill="#8100cc">
+                                                <Label fx:id="nameTopOne" prefHeight="26.0" prefWidth="230.0" text="Username" textFill="#8100cc">
                                                    <font>
                                                       <Font name="Noto Sans Thai Bold" size="16.0" />
                                                    </font>
@@ -1407,7 +1402,7 @@
                                                       <Insets left="10.0" />
                                                    </HBox.margin>
                                                 </Label>
-                                                <Label alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="151.0" text="13,000" textFill="#c2c2c2">
+                                                <Label fx:id="scoreTopOne" alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="151.0" text="13,000" textFill="#c2c2c2">
                                                    <font>
                                                       <Font name="Noto Sans Thai Bold" size="13.0" />
                                                    </font>
@@ -1421,12 +1416,12 @@
                                                       <Font name="Noto Sans Thai Bold" size="16.0" />
                                                    </font>
                                                 </Label>
-                                                <Circle fx:id="leaderboard_pfp1" fill="DODGERBLUE" radius="17.0" stroke="BLACK" strokeType="INSIDE">
+                                                <Circle fx:id="imgTopTwo" fill="DODGERBLUE" radius="17.0" stroke="BLACK" strokeType="INSIDE">
                                                    <HBox.margin>
                                                       <Insets left="4.0" />
                                                    </HBox.margin>
                                                 </Circle>
-                                                <Label prefHeight="26.0" prefWidth="101.0" text="POP" textFill="#8100cc">
+                                                <Label fx:id="nameTopTwo" prefHeight="26.0" prefWidth="230.0" text="Username" textFill="#8100cc">
                                                    <font>
                                                       <Font name="Noto Sans Thai Bold" size="16.0" />
                                                    </font>
@@ -1434,7 +1429,7 @@
                                                       <Insets left="10.0" />
                                                    </HBox.margin>
                                                 </Label>
-                                                <Label alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="151.0" text="12,000" textFill="#c2c2c2">
+                                                <Label fx:id="scoreTopTwo" alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="151.0" text="12,000" textFill="#c2c2c2">
                                                    <font>
                                                       <Font name="Noto Sans Thai Bold" size="13.0" />
                                                    </font>
@@ -1448,12 +1443,12 @@
                                                       <Font name="Noto Sans Thai Bold" size="16.0" />
                                                    </font>
                                                 </Label>
-                                                <Circle fx:id="leaderboard_pfp2" fill="DODGERBLUE" radius="17.0" stroke="BLACK" strokeType="INSIDE">
+                                                <Circle fx:id="imgTopThree" fill="DODGERBLUE" radius="17.0" stroke="BLACK" strokeType="INSIDE">
                                                    <HBox.margin>
                                                       <Insets left="4.0" />
                                                    </HBox.margin>
                                                 </Circle>
-                                                <Label prefHeight="26.0" prefWidth="101.0" text="STD" textFill="#8100cc">
+                                                <Label fx:id="nameTopThree" prefHeight="26.0" prefWidth="230.0" text="username" textFill="#8100cc">
                                                    <font>
                                                       <Font name="Noto Sans Thai Bold" size="16.0" />
                                                    </font>
@@ -1461,7 +1456,7 @@
                                                       <Insets left="10.0" />
                                                    </HBox.margin>
                                                 </Label>
-                                                <Label alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="151.0" text="10000" textFill="#c2c2c2">
+                                                <Label fx:id="scoreTopThree" alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="151.0" text="10000" textFill="#c2c2c2">
                                                    <font>
                                                       <Font name="Noto Sans Thai Bold" size="13.0" />
                                                    </font>
@@ -1475,12 +1470,12 @@
                                                       <Font name="Noto Sans Thai Bold" size="16.0" />
                                                    </font>
                                                 </Label>
-                                                <Circle fx:id="leaderboard_pfp3" fill="DODGERBLUE" radius="17.0" stroke="BLACK" strokeType="INSIDE">
+                                                <Circle fx:id="imgTopFour" fill="DODGERBLUE" radius="17.0" stroke="BLACK" strokeType="INSIDE">
                                                    <HBox.margin>
                                                       <Insets left="4.0" />
                                                    </HBox.margin>
                                                 </Circle>
-                                                <Label prefHeight="26.0" prefWidth="101.0" text="o" textFill="#8100cc">
+                                                <Label fx:id="nameTopFour" prefHeight="26.0" prefWidth="230.0" text="Username" textFill="#8100cc">
                                                    <font>
                                                       <Font name="Noto Sans Thai Bold" size="16.0" />
                                                    </font>
@@ -1488,7 +1483,7 @@
                                                       <Insets left="10.0" />
                                                    </HBox.margin>
                                                 </Label>
-                                                <Label alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="151.0" text="7600" textFill="#c2c2c2">
+                                                <Label fx:id="scoreTopFour" alignment="CENTER_RIGHT" prefHeight="22.0" prefWidth="151.0" text="7600" textFill="#c2c2c2">
                                                    <font>
                                                       <Font name="Noto Sans Thai Bold" size="13.0" />
                                                    </font>

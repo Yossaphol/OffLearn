@@ -43,7 +43,7 @@ public class StudentScoreDB extends ConnectDB {
                 int courseId = rs.getInt("Course_ID");
 
                 if (!hasQuizChapters(courseId, conn)) {
-                    return -2; //ถ้าคอร์สนั้นไม่มี quiz
+                    return -2;
                 }
 
                 return courseId;
@@ -62,14 +62,11 @@ public class StudentScoreDB extends ConnectDB {
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, courseId);
             ResultSet rs = stmt.executeQuery();
-            return rs.next(); //Returns true ถ้าคอร์สมีควิซ
+            return rs.next();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return false;
     }
-
-
-
 }

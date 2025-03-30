@@ -219,8 +219,4 @@ public class leaderboardController implements Initializable {
         profilePic.setStroke(Color.TRANSPARENT);
         profilePic.setFill(new ImagePattern(img));
     }
-
-
-
-    
 }
