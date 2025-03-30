@@ -1059,7 +1059,7 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Label fx:id="currentPage" text="0" textFill="#8100cc">
+                                    <Label fx:id="pageLabel" text="0" textFill="#8100cc">
                                        <font>
                                           <Font name="Noto Sans Thai Regular" size="15.0" />
                                        </font>
@@ -1076,7 +1076,7 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <Button fx:id="previous" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                              <Button fx:id="previousButton" mnemonicParsing="false" style="-fx-background-color: transparent;">
                                  <graphic>
                                     <ImageView fitHeight="43.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -1092,7 +1092,7 @@
                                  </cursor>
                               </Button>
                               <Pane prefHeight="51.0" prefWidth="0.0" />
-                              <Button fx:id="next" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                              <Button fx:id="nextButton" mnemonicParsing="false" style="-fx-background-color: transparent;">
                                  <graphic>
                                     <ImageView fitHeight="43.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                                        <image>

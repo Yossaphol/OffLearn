@@ -67,6 +67,10 @@ public class courseController implements Initializable {
     public Label progressCategory2;
     public ProgressBar categorybar2;
     HomeController ef = new HomeController();
+    private int currentPage = 0;
+    private final int coursesPerPage = 9;
+    private ArrayList<CourseItem> courseList;
+
 
     public void initialize(URL location, ResourceBundle resources) {
         closePopupAuto();
@@ -75,6 +79,10 @@ public class courseController implements Initializable {
         route();
         setProgressBar();
         handleCourseItem();
+        updatePageLabel();
+
+        previousButton.setOnAction(event -> handlePreviousButton());
+        nextButton.setOnAction(event -> handleNextButton());
     }
 
 
@@ -215,26 +223,30 @@ public class courseController implements Initializable {
     public void handleCourseItem() {
 
         CourseDB courseDB = new CourseDB();
-        ArrayList<CourseItem> courseList = courseDB.getAllCourses();
+        courseList = courseDB.getAllCourses();
+
+        allCourseContainer.getChildren().clear();
+
+        int start = currentPage * coursesPerPage;
+        int end = Math.min(start + coursesPerPage, courseList.size());
 
         int col = 0, row = 0;
-        for (CourseItem course : courseList) {
+        for (int i = start; i < end; i++) {
+            CourseItem course = courseList.get(i);
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/enrollCourseItem.fxml"));
                 Node courseItemNode = loader.load();
 
                 enrollCourseItem controller = loader.getController();
-
                 controller.setCourseName(course.getCourseName());
-                //controller.setShortDescription(course.getCourseDesc());
+                controller.setShortDescription("");
                 controller.setTeacherName("ผศ.ดร. วิรยบวร บุญเปรี่ยม");
                 controller.setTeacherImg("/img/Profile/man.png");
                 //controller.setCourseImg(course.getImage() != null ? course.getImage() : "/img/Picture/bg.jpg");
 
-
                 ef.hoverEffect(courseItemNode);
                 allCourseContainer.add(courseItemNode, col, row);
-                GridPane.setMargin(courseItemNode, new Insets(10, 30, 10, 30));
+                GridPane.setMargin(courseItemNode, new Insets(30, 30, 30, 30));
 
                 col++;
                 if (col == 3) {
@@ -246,6 +258,99 @@ public class courseController implements Initializable {
             }
         }
     }
+
+    @FXML
+    private Button previousButton;
+    @FXML
+    private Button nextButton;
+    @FXML
+    private Label pageLabel;
+
+    @FXML
+    private void handlePreviousButton() {
+        if (currentPage > 0) {
+            currentPage--;
+            allCourseContainer.getChildren().clear();
+
+            int start = currentPage * coursesPerPage;
+            int end = Math.min(start + coursesPerPage, courseList.size());
+
+            int col = 0, row = 0;
+            for (int i = start; i < end; i++) {
+                CourseItem course = courseList.get(i);
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/enrollCourseItem.fxml"));
+                    Node courseItemNode = loader.load();
+
+                    enrollCourseItem controller = loader.getController();
+                    controller.setCourseName(course.getCourseName());
+                    controller.setShortDescription("");
+                    controller.setTeacherName("ผศ.ดร. วิรยบวร บุญเปรี่ยม");
+                    controller.setTeacherImg("/img/Profile/man.png");
+                    //controller.setCourseImg(course.getImage() != null ? course.getImage() : "/img/Picture/bg.jpg");
+
+                    ef.hoverEffect(courseItemNode);
+                    allCourseContainer.add(courseItemNode, col, row);
+                    GridPane.setMargin(courseItemNode, new Insets(30, 30, 30, 30));
+
+                    col++;
+                    if (col == 3) {
+                        col = 0;
+                        row++;
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            updatePageLabel();
+        }
+    }
+
+    @FXML
+    private void handleNextButton() {
+        if ((currentPage + 1) * coursesPerPage < courseList.size()) {
+            currentPage++;
+            allCourseContainer.getChildren().clear();
+
+            int start = currentPage * coursesPerPage;
+            int end = Math.min(start + coursesPerPage, courseList.size());
+
+            int col = 0, row = 0;
+            for (int i = start; i < end; i++) {
+                CourseItem course = courseList.get(i);
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/enrollCourseItem.fxml"));
+                    Node courseItemNode = loader.load();
+
+                    enrollCourseItem controller = loader.getController();
+                    controller.setCourseName(course.getCourseName());
+                    controller.setShortDescription("");
+                    controller.setTeacherName("ผศ.ดร. วิรยบวร บุญเปรี่ยม");
+                    controller.setTeacherImg("/img/Profile/man.png");
+                    //controller.setCourseImg(course.getImage() != null ? course.getImage() : "/img/Picture/bg.jpg");
+
+                    ef.hoverEffect(courseItemNode);
+                    allCourseContainer.add(courseItemNode, col, row);
+                    GridPane.setMargin(courseItemNode, new Insets(30, 30, 30, 30));
+
+                    col++;
+                    if (col == 3) {
+                        col = 0;
+                        row++;
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            updatePageLabel();
+        }
+    }
+
+    private void updatePageLabel() {
+        int totalPages = (int) Math.ceil((double) courseList.size() / coursesPerPage);
+        pageLabel.setText((currentPage + 1) + "/" + totalPages);
+    }
+
 
 
 
