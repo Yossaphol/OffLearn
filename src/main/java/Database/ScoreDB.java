@@ -4,14 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ScoreDB extends ConnectDB{
 
-    public void saveScore(CourseDB courseDB, int userID, int chapterID, int score) {
-
-        int courseID =  courseDB.getCourseIDByChapterID(chapterID);
+    public void saveScore(CourseDB courseDB, int userID, int chapterID, int score, int quizID) {
+        int courseID = courseDB.getCourseIDByChapterID(chapterID);
         String checkQuery = "SELECT COUNT(*) FROM studentscore WHERE User_ID = ? AND Chapter_ID = ?";
-        String insertQuery = "INSERT INTO studentscore (User_ID, Course_ID, Chapter_ID, studentscore) VALUES (?, ?, ?, ?)";
+        String insertQuery = "INSERT INTO studentscore (User_ID, Course_ID, Chapter_ID, studentscore, Quiz_ID) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = this.connectToDB();
              PreparedStatement checkStmt = conn.prepareStatement(checkQuery)) {
@@ -26,7 +27,9 @@ public class ScoreDB extends ConnectDB{
                     insertStmt.setInt(2, courseID);
                     insertStmt.setInt(3, chapterID);
                     insertStmt.setInt(4, score);
+                    insertStmt.setInt(5, quizID);
                     insertStmt.executeUpdate();
+                    System.out.println("บันทึกคะแนน " + score + " สำหรับ User " + userID + " ใน Chapter " + chapterID);
                 }
             } else {
                 System.out.println("คะแนนของ User " + userID + " ใน Chapter " + chapterID + " ถูกบันทึกไปแล้ว");
@@ -177,6 +180,27 @@ public class ScoreDB extends ConnectDB{
         }
 
         return belowAvgCount;
+    }
+
+    public Map<Integer, Integer> getScoreDistribution(int quizId) {
+        Map<Integer, Integer> scoreMap = new HashMap<>();
+        String query = "SELECT studentscore, COUNT(*) AS count FROM studentscore WHERE Quiz_ID = ? GROUP BY studentscore ORDER BY studentscore";
+
+        try (Connection conn = new ConnectDB().connectToDB();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, quizId);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                int score = rs.getInt("studentscore");
+                int count = rs.getInt("count");
+                scoreMap.put(score, count);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return scoreMap;
     }
 
 }
