@@ -56,7 +56,7 @@ public class StudentScoreDB extends ConnectDB {
     }
 
     //เช็คว่าคอร์สนั้นๆ มีควิซหรือไม่มี
-    private boolean hasQuizChapters(int courseId, Connection conn) {
+    public boolean hasQuizChapters(int courseId, Connection conn) {
         String sql = "SELECT 1 FROM quiz WHERE Chapter_ID IN (SELECT Chapter_ID FROM chapter WHERE Course_ID = ?) LIMIT 1";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {

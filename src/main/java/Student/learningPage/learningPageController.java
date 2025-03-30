@@ -125,12 +125,12 @@ public class learningPageController implements Initializable, DisposableControll
             clipDescription.setText(details[1] != null ? details[1] : "");
         }
 
-        int episodeNumber = chapterDB.getEpisodeNumber(courseID, chapterID);
-        if (episodeNumber != -1) {
-            ep.setText("Episode : " + episodeNumber);
-        } else {
-            ep.setText(""); // fallback
-        }
+//        int episodeNumber = chapterDB.getEpisodeNumber(courseID, chapterID);
+//        if (episodeNumber != -1) {
+//            ep.setText("Episode : " + episodeNumber);
+//        } else {
+//            ep.setText(""); // fallback
+//        }
     }
 
     private void loadTeacherInfo() {

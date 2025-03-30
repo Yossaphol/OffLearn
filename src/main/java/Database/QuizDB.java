@@ -148,70 +148,31 @@ public class QuizDB extends ConnectDB{
         return quizList;
     }
 
-
-    public List<QuizItem> getAllThisUserQuiz(int userId) {
-        String sql = "SELECT q.Quiz_ID, q.header, q.minScore, q.maxScore, q.level " +
-                "FROM studentscore s " +
-                "JOIN quiz q ON s.Chapter_ID = q.Chapter_ID " +
-                "WHERE s.User_ID = ?";
-
-        List<QuizItem> quizList = new ArrayList<>();
+    public String getCourseNameByQuizID(int quizID) {
+        String sql = "SELECT c.courseName " +
+                "FROM course c " +
+                "JOIN chapter ch ON c.Course_ID = ch.Course_ID " +
+                "JOIN quiz q ON ch.Chapter_ID = q.Chapter_ID " +
+                "WHERE q.Quiz_ID = ?";
 
         try (
                 Connection conn = this.connectToDB();
                 PreparedStatement pstm = conn.prepareStatement(sql)
         ) {
-            pstm.setInt(1, userId);
+            pstm.setInt(1, quizID);
             try (ResultSet rs = pstm.executeQuery()) {
-                while (rs.next()) {
-                    int quizID = rs.getInt("Quiz_ID");
-                    String header = rs.getString("header");
-                    int minScore = rs.getInt("minScore");
-                    int maxScore = rs.getInt("maxScore");
-                    String level = rs.getString("level");
-
-                    quizList.add(new QuizItem(quizID, header, minScore, maxScore, level));
+                if (rs.next()) {
+                    return rs.getString("courseName");
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return quizList;
+        return null;
     }
 
 
-//    public List<QuizItem> getAllUndoQuiz(int userId) {
-//        String sql = "SELECT q.Quiz_ID, q.header, q.minScore, q.maxScore, q.level " +
-//                "FROM quiz q " +
-//                "WHERE q.Chapter_ID NOT IN ( " +
-//                "    SELECT s.Chapter_ID FROM studentscore s WHERE s.User_ID = ? AND s.studentscore IS NOT NULL" +
-//                ")";
-//
-//        List<QuizItem> quizList = new ArrayList<>();
-//
-//        try (
-//                Connection conn = this.connectToDB();
-//                PreparedStatement pstm = conn.prepareStatement(sql)
-//        ) {
-//            pstm.setInt(1, userId);
-//            try (ResultSet rs = pstm.executeQuery()) {
-//                while (rs.next()) {
-//                    int quizID = rs.getInt("Quiz_ID");
-//                    String header = rs.getString("header");
-//                    int minScore = rs.getInt("minScore");
-//                    int maxScore = rs.getInt("maxScore");
-//                    String level = rs.getString("level");
-//
-//                    quizList.add(new QuizItem(quizID, header, minScore, maxScore, level));
-//                }
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return quizList;
-//    }
 
 
 
