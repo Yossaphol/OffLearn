@@ -1,6 +1,9 @@
 package Student.task;
 
+import Student.HomeAndNavigation.Navigator;
+import Student.Quiz.QuizPageController;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.net.URL;
@@ -10,6 +13,7 @@ public class taskCardController implements Initializable {
     public Label taskInformation;
     public Label taskDetail;
     public Label point;
+    Navigator nav = new Navigator();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -28,5 +32,8 @@ public class taskCardController implements Initializable {
         point.setText(score);
     }
 
+    public void quizLink(int quizID,int chapterID, Button taskBtn){
+        taskBtn.setOnMouseClicked(e->nav.navigateTo("/fxml/Student/Quiz/quizPage.fxml", chapterID,quizID));
+    }
 
 }
