@@ -124,9 +124,6 @@ public class taskController implements Initializable {
 
                 Button content = (Button) quizItem;
                 hoverEffect(content);
-//                content.setOnMouseClicked(e ->
-//                        handleQuizTestLink("TeacherD", task.getLevel(), task.getHeader(), 120, questionDB.countQuestionsByQuizID(task.getQuizID()))
-//                );
                 containerComplete.getChildren().add(content);
 
             } catch (IOException e) {

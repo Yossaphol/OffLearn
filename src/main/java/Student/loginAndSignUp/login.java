@@ -18,7 +18,7 @@ public class login extends Application {
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(login.class.getResource("/fxml/Student/LoginSingup/login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
-        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/icon/_.png")));
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/icon/Offlearn_Icon.png")));
         primaryStage.setTitle("Offlearn");
         primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
