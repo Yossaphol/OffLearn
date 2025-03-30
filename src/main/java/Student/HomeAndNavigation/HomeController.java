@@ -125,11 +125,6 @@ public class HomeController implements Initializable {
     private int slideIndex = 0;
     public Label setname;
 
-//line 538-542
-//    loadAndSetImage(leaderboard_pfp, studentPfpPath);
-//    loadAndSetImage(leaderboard_pfp1, studentPfpPath);
-//    loadAndSetImage(leaderboard_pfp2, studentPfpPath);
-//    loadAndSetImage(leaderboard_pfp3, studentPfpPath);
     public Circle imgTopOne;
     public Circle imgTopTwo;
     public Circle imgTopThree;
@@ -163,8 +158,7 @@ public class HomeController implements Initializable {
         setupBarChart();
         setImgContainer();
         route();
-     //   loadStd();
-//        String username = SessionManager.getInstance().getUsername();
+        loadStd();
         if (username != null) {
             setname.setText(username);
         } else {
@@ -529,16 +523,11 @@ public class HomeController implements Initializable {
         loadAndSetImage(imgContainer, "/img/Picture/bg.jpg");
         loadAndSetImage(teacherBanner, "/img/Profile/man.png");
 
-//        loadAndSetImage(pfp_statistic, "/img/Profile/doctor.png");
         setProfile(userDB.getProfile(username));
-//        setProfile(username);
+
         loadAndSetImage(teacher_pfp, "/img/Profile/man.png");
 
         String studentPfpPath = "/img/Profile/student.png";
-//        loadAndSetImage(leaderboard_pfp, studentPfpPath);
-//        loadAndSetImage(leaderboard_pfp1, studentPfpPath);
-//        loadAndSetImage(leaderboard_pfp2, studentPfpPath);
-//        loadAndSetImage(leaderboard_pfp3, studentPfpPath);
 
         loadAndSetImage(course_pic, "/img/Picture/Python.png");
         loadAndSetImage(category_pic, "/img/icon/code.png");
@@ -708,18 +697,17 @@ public class HomeController implements Initializable {
 
     EnrollDB enrollDta = new EnrollDB();
     UserDB user = new UserDB();
-//    String username = SessionManager.getInstance().getUsername();
     StudentScoreDB scoreDB = new StudentScoreDB();
     int std_id = user.getUserId(username);
     List<String> studentInCourse;
     private int courseID;
     List<String> EnrolledCourses = enrollDta.getEnrolledCourseNames(std_id);
 
-    private void loadStd(){ //หาคอร์สที่มีการจัดอันดับ แล้วเอาชื่อคอร์สไปใช้ดึงต่อ
+    private void loadStd(){
         if(!EnrolledCourses.isEmpty()){
             for(String courseName: EnrolledCourses){
                 courseID = scoreDB.getCourseIdByCourseName(courseName);
-                if(courseID != -2){ //-2 ถ้า Course ไม่มีควิซ แปลว่าไม่มีจัดอันดับ
+                if(courseID != -2){
                     loadStd(courseName);
                     return;
                 }
@@ -739,7 +727,7 @@ public class HomeController implements Initializable {
 
         studentInCourse.sort((s1, s2) -> Integer.compare(studentScores.get(s2), studentScores.get(s1))); //Sort
 
-        if (!studentInCourse.isEmpty()) { //ตั้งค่าเป็นค่าเริ่มต้น ถ้าไม่มีนักเรียนในบอร์ด (อันดับจัดตามคะแนนควิซ บางคอร์สไม่มีควิซ)
+        if (!studentInCourse.isEmpty()) {
             if (studentInCourse.size() >= 4) {
                 setFirst(studentInCourse.get(0), scoreDB.getStudentScore(user.getUserId(studentInCourse.get(0)), courseID), user.getProfile(studentInCourse.get(0)));
                 setSecond(studentInCourse.get(1), scoreDB.getStudentScore(user.getUserId(studentInCourse.get(1)), courseID), user.getProfile(studentInCourse.get(1)));

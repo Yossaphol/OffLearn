@@ -35,7 +35,7 @@ public class postTopic implements ActionListener, SessionHadler {
 
             jFrame = new JFrame("Swing Window");
             jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            jFrame.setUndecorated(true); // ปิดขอบของระบบเพื่อให้เราสร้างขอบเอง
+            jFrame.setUndecorated(true);
             jFrame.setSize(400, 400);
             jFrame.setLocation(800, 300);
 

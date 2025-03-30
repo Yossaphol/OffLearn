@@ -49,7 +49,7 @@ public class learningPageController implements Initializable, DisposableControll
     @FXML private Button btnQuiz;
     public Button btnLike;
     public Button btnDislike;
-    public Button btnContectTeacher;
+    public Button btnContactTeacher;
     public Button btnGloblalChat;
     public Button btnOffLoad;
     public Button nextCourse;

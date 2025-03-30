@@ -40,14 +40,6 @@ public class mainPageController implements Initializable {
         displayNavbar();
         displaySearchBar();
         displayContent("/fxml/Student/HomePage/home.fxml");
-
-        //ได้แล้ววุ้ววววว เดี๋ยวหา label มาใส่ username แล้วถ้ามีรูปโปรไฟล์ก็ไปดึงมาจากdbโดยหาจากusername เน้อออ
-//        String username = SessionManager.getInstance().getUsername();
-//        if (username != null) {
-//            user.setText(username + "!");
-//        } else {
-//            user.setText("Guest!");
-//        }
     }
 
 

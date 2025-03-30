@@ -152,7 +152,7 @@
                                                 <Insets top="15.0" />
                                              </VBox.margin>
                                              <children>
-                                                <Button fx:id="btnContectTeacher" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" prefWidth="184.0" style="-fx-background-color: #8800cc; -fx-background-radius: 10; -fx-cursor: hand;" text="ติดต่อผู้สอน" textAlignment="CENTER" textFill="WHITE">
+                                                <Button fx:id="btnContactTeacher" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" prefWidth="184.0" style="-fx-background-color: #8800cc; -fx-background-radius: 10; -fx-cursor: hand;" text="ติดต่อผู้สอน" textAlignment="CENTER" textFill="WHITE">
                                                    <HBox.margin>
                                                       <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                                                    </HBox.margin>
