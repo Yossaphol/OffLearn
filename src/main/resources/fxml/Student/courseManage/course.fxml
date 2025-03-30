@@ -1064,16 +1064,6 @@
                                           <Font name="Noto Sans Thai Regular" size="15.0" />
                                        </font>
                                     </Label>
-                                    <Label text="/" textFill="#8100cc">
-                                       <font>
-                                          <Font name="Noto Sans Thai Regular" size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lastPage" text="5" textFill="#8100cc">
-                                       <font>
-                                          <Font name="Noto Sans Thai Regular" size="15.0" />
-                                       </font>
-                                    </Label>
                                  </children>
                               </HBox>
                               <Button fx:id="previousButton" mnemonicParsing="false" style="-fx-background-color: transparent;">
