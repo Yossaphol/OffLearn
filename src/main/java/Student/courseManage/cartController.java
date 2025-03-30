@@ -53,11 +53,8 @@ public class cartController implements Initializable {
     }
 
     private void displayCourseList() {
-        List<courseObject> courses = List.of(
-                new courseObject("Learn algorithm to solve real problem", "Data Structure and Algorithm", 1900, 3.5, 437, "/img/icon/_.png", "Coding", "/img/Picture/bg.jpg"),
-                new courseObject("Master web development with JavaScript", "Full-Stack Web Development", 2500, 4.2, 520, "/img/icon/_.png", "Web Development", "/img/Picture/bg.jpg"),
-                new courseObject("Understand AI concepts and applications", "Artificial Intelligence Basics", 3000, 4.8, 600, "/img/icon/_.png", "AI & ML", "/img/Picture/bg.jpg")
-        );
+        List<courseObject> courses = CartManager.getInstance().getCartList();
+
 
         courseContainer.getChildren().clear();
 
@@ -82,6 +79,7 @@ public class cartController implements Initializable {
             }
         }
     }
+
 
 
     public void changeColor(ActionEvent event) {

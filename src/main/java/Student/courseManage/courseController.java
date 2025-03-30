@@ -232,13 +232,18 @@ public class courseController implements Initializable {
 
         int col = 0, row = 0;
         for (int i = start; i < end; i++) {
-            CourseItem course = courseList.get(i);
+            CourseItem courseItem = courseList.get(i);
+            courseObject course = courseItem.toCourseObject();
+
+
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/enrollCourseItem.fxml"));
                 Node courseItemNode = loader.load();
 
-                enrollCourseItem controller = loader.getController();
-                controller.setCourseName(course.getCourseName());
+                EnrollCourseItemController controller = loader.getController();
+                controller.setData(course);
+
+                controller.setCourseName(course.getName());
                 controller.setShortDescription("");
                 controller.setTeacherName("ผศ.ดร. วิรยบวร บุญเปรี่ยม");
                 controller.setTeacherImg("/img/Profile/man.png");
@@ -277,13 +282,18 @@ public class courseController implements Initializable {
 
             int col = 0, row = 0;
             for (int i = start; i < end; i++) {
-                CourseItem course = courseList.get(i);
+                CourseItem courseItem = courseList.get(i);
+                courseObject course = courseItem.toCourseObject();
+
+
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/enrollCourseItem.fxml"));
                     Node courseItemNode = loader.load();
 
-                    enrollCourseItem controller = loader.getController();
-                    controller.setCourseName(course.getCourseName());
+                    EnrollCourseItemController controller = loader.getController();
+                    controller.setData(course);
+
+                    controller.setCourseName(course.getName());
                     controller.setShortDescription("");
                     controller.setTeacherName("ผศ.ดร. วิรยบวร บุญเปรี่ยม");
                     controller.setTeacherImg("/img/Profile/man.png");
@@ -317,13 +327,18 @@ public class courseController implements Initializable {
 
             int col = 0, row = 0;
             for (int i = start; i < end; i++) {
-                CourseItem course = courseList.get(i);
+                CourseItem courseItem = courseList.get(i);
+                courseObject course = courseItem.toCourseObject();
+
+
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/enrollCourseItem.fxml"));
                     Node courseItemNode = loader.load();
 
-                    enrollCourseItem controller = loader.getController();
-                    controller.setCourseName(course.getCourseName());
+                    EnrollCourseItemController controller = loader.getController();
+                    controller.setData(course);
+
+                    controller.setCourseName(course.getName());
                     controller.setShortDescription("");
                     controller.setTeacherName("ผศ.ดร. วิรยบวร บุญเปรี่ยม");
                     controller.setTeacherImg("/img/Profile/man.png");
@@ -352,6 +367,22 @@ public class courseController implements Initializable {
     }
 
 
+    @FXML
+    private Button addtocart;
+
+    private courseObject course; // เก็บคอร์สปัจจุบันที่จะแสดงผล
+
+    public void setCourse(courseObject course) {
+        this.course = course;
+    }
+
+    @FXML
+    private void initialize() {
+        addtocart.setOnAction(event -> {
+            CartManager.getInstance().addCourse(course);
+            System.out.println("Added to cart: " + course.getName());
+        });
+    }
 
 
 

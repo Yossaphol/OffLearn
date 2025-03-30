@@ -1,5 +1,6 @@
 package Teacher.courseManagement;
 
+import Student.courseManage.courseObject;
 import com.beust.ah.A;
 
 import java.util.ArrayList;
@@ -87,4 +88,18 @@ public class CourseItem {
     public void setCourseId(int courseId) {
         this.courseId = courseId;
     }
+
+    public courseObject toCourseObject() {
+        return new courseObject(
+                courseDesc,
+                courseName,
+                coursePrice,
+                4.9,              // สมมติให้ rating คงที่หรือสุ่ม
+                120,              // จำนวนรีวิว mock
+                "/img/icon/code.png",  // ไอคอนหมวดหมู่
+                courseCat,
+                courseImg
+        );
+    }
+
 }
