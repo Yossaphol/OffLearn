@@ -61,11 +61,12 @@ public class withdrawHistoryController implements Initializable {
             table.setCellSelectionEnabled(false);
             table.setFocusable(false);
             table.getTableHeader().setReorderingAllowed(false);
+            table.setFillsViewportHeight(true); //Fit container width
 
 
             JScrollPane scrollPane = new JScrollPane(table);
             scrollPane.setPreferredSize(new Dimension(1000, 450));
-
+//
             // Table styling
             JTableHeader header = table.getTableHeader();
             header.setBackground(new Color(6, 117, 222));

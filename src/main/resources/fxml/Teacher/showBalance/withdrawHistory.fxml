@@ -31,7 +31,7 @@
         </HBox>
         <HBox alignment="TOP_CENTER" prefWidth="1440.0">
             <children>
-                  <VBox>
+                  <VBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="1000.0">
                       <HBox.margin>
                           <Insets top="80.0" />
                       </HBox.margin>
@@ -42,7 +42,7 @@
                               </font>
                           </Label>
                           <Pane prefHeight="21.0" prefWidth="898.0" />
-                          <HBox fx:id="tableContainer" />
+                          <HBox fx:id="tableContainer" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="1000.0" />
                       </children>
                   </VBox>
             </children>
