@@ -813,9 +813,7 @@ public class VideoPlayerManager implements Initializable {
 
     /* Fade in the control pane if not already */
     private void fadeInControlPane() {
-        if (mediaPlayer == null || mediaPlayer.getStatus() != MediaPlayer.Status.READY) {
-            return;
-        }
+        if (mediaPlayer == null || mediaPlayer.getStatus() == MediaPlayer.Status.UNKNOWN) return;
         if (!isFadeInActive && (controlPane.getOpacity() < 1.0 || !controlPane.isVisible())) {
             isFadeInActive = true;
             controlPane.setVisible(true);

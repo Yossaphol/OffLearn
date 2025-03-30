@@ -142,14 +142,14 @@ public class ChapterDB extends ConnectDB{
         return false;
     }
 
-    public ArrayList<String[]> getChaptersByCourseID(String courseID) { // some test
+    public ArrayList<String[]> getChaptersByCourseID(int courseID) { // some test
         ArrayList<String[]> chapters = new ArrayList<>();
         String sql = "SELECT Chapter_ID, chapterName FROM chapter WHERE Course_ID = ?";
 
         try (Connection conn = this.connectToDB();
              PreparedStatement pstm = conn.prepareStatement(sql)) {
 
-            pstm.setString(1, courseID);
+            pstm.setInt(1, courseID);
             ResultSet rs = pstm.executeQuery();
 
             while (rs.next()) {
@@ -166,14 +166,14 @@ public class ChapterDB extends ConnectDB{
         return chapters;
     }
 
-    public String getVideoURLByChapterID(String chapterID) {
+    public String getVideoURLByChapterID(int chapterID) {
         System.out.println("Inside DB: looking up chapterID = " + chapterID);
         String url = "";
         String query = "SELECT chapter_video FROM chapter WHERE Chapter_ID = ?";
         try (Connection conn = this.connectToDB();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            stmt.setInt(1, Integer.parseInt(chapterID));
+            stmt.setInt(1, chapterID);
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
@@ -185,12 +185,12 @@ public class ChapterDB extends ConnectDB{
         }
         return url;
     }
-    public String[] getChapterDetailsByID(String chapterID) {
+    public String[] getChapterDetailsByID(int chapterID) {
         String sql = "SELECT chapterName, chapterDescription FROM chapter WHERE Chapter_ID = ?";
         try (Connection conn = this.connectToDB();
              PreparedStatement pstm = conn.prepareStatement(sql)) {
 
-            pstm.setString(1, chapterID);
+            pstm.setInt(1, chapterID);
             ResultSet rs = pstm.executeQuery();
 
             if (rs.next()) {
