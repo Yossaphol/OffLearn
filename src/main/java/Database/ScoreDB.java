@@ -143,24 +143,22 @@ public class ScoreDB extends ConnectDB{
         return (totalStudents > 0) ? ((double) belowMinCount / totalStudents) * 100 : 0.0;
     }
 
-    public double calculatePercentageBelowAverage(int teacherID) {
+    public int countStudentsBelowAverage(int teacherID) {
         String query = """
-            WITH avg_score AS (
-                SELECT AVG(s.studentscore) AS avgScore
-                FROM studentscore s
-                JOIN chapter ch ON s.Chapter_ID = ch.Chapter_ID
-                JOIN course c ON ch.Course_ID = c.Course_ID
-                WHERE c.User_ID = ?
-            )
-            SELECT COUNT(s.studentscore) AS totalStudents,
-                   SUM(CASE WHEN s.studentscore < (SELECT avgScore FROM avg_score) THEN 1 ELSE 0 END) AS belowAvg
+        WITH avg_score AS (
+            SELECT AVG(s.studentscore) AS avgScore
             FROM studentscore s
             JOIN chapter ch ON s.Chapter_ID = ch.Chapter_ID
             JOIN course c ON ch.Course_ID = c.Course_ID
-            WHERE c.User_ID = ?;
-        """;
+            WHERE c.User_ID = ?
+        )
+        SELECT SUM(CASE WHEN s.studentscore < (SELECT avgScore FROM avg_score) THEN 1 ELSE 0 END) AS belowAvg
+        FROM studentscore s
+        JOIN chapter ch ON s.Chapter_ID = ch.Chapter_ID
+        JOIN course c ON ch.Course_ID = c.Course_ID
+        WHERE c.User_ID = ?;
+    """;
 
-        int totalStudents = 0;
         int belowAvgCount = 0;
 
         try (Connection conn = this.connectToDB();
@@ -171,7 +169,6 @@ public class ScoreDB extends ConnectDB{
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                totalStudents = rs.getInt("totalStudents");
                 belowAvgCount = rs.getInt("belowAvg");
             }
 
@@ -179,6 +176,7 @@ public class ScoreDB extends ConnectDB{
             e.printStackTrace();
         }
 
-        return (totalStudents > 0) ? ((double) belowAvgCount / totalStudents) * 100 : 0.0;
+        return belowAvgCount;
     }
+
 }

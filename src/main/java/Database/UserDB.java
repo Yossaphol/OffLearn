@@ -285,7 +285,7 @@ public class UserDB extends ConnectDB{
     }
 
     public String[] getUserNameProfileAndSpecByCourseID(int courseID) {
-        String sql = "SELECT u.username, u.profile, u.specification FROM offlearn.course c " +
+        String sql = "SELECT u.username, u.profile, u.description FROM offlearn.course c " +
                 "JOIN offlearn.user u ON c.User_ID = u.User_ID " +
                 "WHERE c.Course_ID = ?";
 
@@ -298,7 +298,7 @@ public class UserDB extends ConnectDB{
             if (rs.next()) {
                 String username = rs.getString("Username");
                 String profile = rs.getString("Profile");
-                String specification = rs.getString("Specification");
+                String specification = rs.getString("description");
 
                 if (profile == null || profile.isEmpty()) {
                     profile = "/img/Profile/user.png";
