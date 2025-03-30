@@ -91,7 +91,7 @@ public class learningPageController implements Initializable, DisposableControll
 
         btnLike.setText(String.valueOf(countLike));
         btnDislike.setText(String.valueOf(countDisLike));
-        method_home.hoverEffect(btnContectTeacher);
+        //method_home.hoverEffect(btnContectTeacher);
         method_home.hoverEffect(btnGloblalChat);
         method_home.hoverEffect(btnLike);
         method_home.hoverEffect(btnDislike);

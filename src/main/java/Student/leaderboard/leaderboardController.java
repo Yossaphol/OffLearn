@@ -66,21 +66,30 @@ public class leaderboardController implements Initializable {
 
         loadStdFromSubject();
         setupSubjectSelectionListener();
-        setupPaginationButtons();
+        if(!EnrolledCourses.isEmpty()){
+            setupPaginationButtons();
+        }else{
+            setDefault();
+        }
+
     }
 
+    private void setDefault(){
+        welcomeText.setText("หลักสูตรนี้ยังไม่มีแบบทดสอบ :)");
+        setFirst("First", 0, "/img/Profile/user.png");
+        setSecond("Second", 0, "/img/Profile/user.png");
+        setThird("Third", 0, "/img/Profile/user.png");
+        studentList.getChildren().clear();
+        studentList.getChildren().add(welcomeText);
+        return;
+    }
 
     private void loadStd(String courseName) {
         studentInCourse = enrollDta.getStudentsByCourseName(courseName);
         courseID = scoreDB.getCourseIdByCourseName(courseName);
 
         if (courseID == -2) {
-            welcomeText.setText("หลักสูตรนี้ยังไม่มีแบบทดสอบ :)");
-            setFirst("First", 0, "/img/Profile/user.png");
-            setSecond("Second", 0, "/img/Profile/user.png");
-            setThird("Third", 0, "/img/Profile/user.png");
-            studentList.getChildren().clear();
-            studentList.getChildren().add(welcomeText);
+            setDefault();
             return;
         }
 
@@ -124,6 +133,7 @@ public class leaderboardController implements Initializable {
             select_subject.setValue(EnrolledCourses.get(0));
             loadStd(String.valueOf(select_subject.getValue()));
         }else{
+            setDefault();
             select_subject.setValue("คุณยังไม่ได้ลงทะเบียนหลักสูตรใดๆ");
         }
     }
