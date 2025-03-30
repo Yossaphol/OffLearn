@@ -2,9 +2,11 @@ package Student.task;
 
 import Database.QuestionDB;
 import Database.QuizDB;
+import Database.UserDB;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
 import Teacher.quiz.QuizItem;
+import a_Session.SessionManager;
 import javafx.animation.*;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -58,14 +60,14 @@ public class taskController implements Initializable {
     //พวกที่มีเลขตามหลังเช่น task1 point2 1 คือแท็บหน้าเลยกำหนด 2 คือแท็บหน้าเสร็จ ส่วนที่ไม่มีเลขคือแท็บกำลังจะมาถึง
 
     QuizDB dataDB = new QuizDB();
-    ArrayList<QuizItem> quiz = (ArrayList<QuizItem>) dataDB.getAllQuizzes();
-    QuestionDB questionDB = new QuestionDB();
+    String username = SessionManager.getInstance().getUsername();
+    UserDB userDB = new UserDB();
+    int userID = userDB.getUserId(username);
+    ArrayList<QuizItem> quiz = (ArrayList<QuizItem>) dataDB.getAllThisUserQuiz(userID);
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
         setUpComing();
         setComplete();
         setTabAnimation();

@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -75,11 +76,11 @@ public class settingController implements Initializable {
     public Button editBtn;
     public Button cancelProfile;
     public Button saveProfile;
-    public TextField description;
     private MediaUpload m;
     public TextField oldpw;
     public TextField newpwfirst;
     public TextField newpwsecond;
+    public TextField description;
 
     private boolean isPasswordEditing = false;
     private boolean isPaymentEditing = false;
@@ -87,8 +88,9 @@ public class settingController implements Initializable {
     HomeController ef = new HomeController();
 
     UserDB userDB = new UserDB();
-    withdrawDB withdrawDB = new withdrawDB();
     String sessionUsername = SessionManager.getInstance().getUsername();
+    withdrawDB db;
+    withdraw wd;
     User user = userDB.getUserInfo(sessionUsername);
     int userID = userDB.getUserId(SessionManager.getInstance().getUsername());
 
@@ -96,14 +98,14 @@ public class settingController implements Initializable {
     String lastNameUser = user.getLastname();
     String userName = user.getUsername();
     String gmailUser = user.getEmail();
+    String descriptionUser = user.getDescription();
     String selectedimg = "";
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         displayNavbar();
         setWithdrawInfo();
-        setProfileValue(firstname, lastNameUser, gmailUser);
+        setProfileValue(firstname, lastNameUser, gmailUser, descriptionUser);
         setUserImage(user.getProfile());
         security_username.setText(userName);
         security_username.setEditable(false);
@@ -111,28 +113,39 @@ public class settingController implements Initializable {
         setEffect();
         uploadPic.setVisible(false);
 
+        db = new withdrawDB();
+        wd = db.getWithdrawInfo(userID);
+
+        if (wd == null) {
+            bankaccount_change_button.setText("เพิ่มบัญชี");
+        }
+
     }
 
-    public void setProfileValue(String Name, String LastName, String Gmail){
+
+    public void setProfileValue(String Name, String LastName, String Gmail, String descriptionn){
         this.firstname = Name;
         this.lastNameUser = LastName;
         this.gmailUser = Gmail;
+        this.descriptionUser = descriptionn;
 
-        _setProfileValue(firstname, lastNameUser, gmailUser);
+        _setProfileValue(firstname, lastNameUser, gmailUser, descriptionUser);
     }
 
-    public void _setProfileValue(String Name, String LastName, String Gmail){
+    public void _setProfileValue(String Name, String LastName, String Gmail, String descriptionn){
         privateinfo_firstname.setText(Name);
         privateinfo_lastname.setText(LastName);
         privateinfo_gmail.setText(Gmail);
+        description.setText(descriptionn);
     }
 
     public void saveProfileEdit(ActionEvent e) {
         String newFirstname = privateinfo_firstname.getText();
         String newLastname = privateinfo_lastname.getText();
         String newEmail = privateinfo_gmail.getText();
+        String adddescription = description.getText();
 
-        boolean isUpdated = userDB.updateUserInfo(sessionUsername, newFirstname, newLastname, newEmail);
+        boolean isUpdated = userDB.updateUserInfoes(sessionUsername, newFirstname, newLastname, newEmail, adddescription);
 
         if (isUpdated) {
             // Upload image to database if a new image was selected
@@ -145,7 +158,7 @@ public class settingController implements Initializable {
             }
 
             showAlert("Update Successful", "Success", Alert.AlertType.INFORMATION);
-            setProfileValue(newFirstname, newLastname, newEmail);
+            setProfileValue(newFirstname, newLastname, newEmail, adddescription);
             editProfile();
         } else {
             showAlert("Update Failed", "Fail", Alert.AlertType.ERROR);
@@ -231,7 +244,6 @@ public class settingController implements Initializable {
         ef.hoverEffect(uploadPic);
         ef.hoverEffect(saveProfile);
         ef.hoverEffect(cancelProfile);
-
     }
 
     private void displayNavbar(){
@@ -243,8 +255,6 @@ public class settingController implements Initializable {
             e.printStackTrace();
         }
     }
-
-
 
     //เปิด-ปิด การแก้ไข TextField Pasword
     public void editPassword(ActionEvent event){
@@ -407,7 +417,7 @@ public class settingController implements Initializable {
 
     @FXML
     public void cancelChangeProfile(ActionEvent event){
-        setProfileValue(firstname, lastNameUser, gmailUser);
+        setProfileValue(firstname, lastNameUser, gmailUser, descriptionUser);
         editProfile();
     }
 
@@ -415,7 +425,7 @@ public class settingController implements Initializable {
         String sessionUsername = SessionManager.getInstance().getUsername();
         UserDB userDB = new UserDB();
         int userId = userDB.getUserId(sessionUsername);
-        withdraw userWithdraw = withdrawDB.getWithdrawInfo(String.valueOf(userId));
+        withdraw userWithdraw = withdrawDB.getWithdrawInfo(userId);
         System.out.println(userId);
         System.out.println(userWithdraw);
         if (userWithdraw != null) {
@@ -430,8 +440,6 @@ public class settingController implements Initializable {
 
     @FXML
     public void saveChangeOnPaymentEdit(ActionEvent event) {
-        String username = SessionManager.getInstance().getUsername();
-
         String bankFName = bankaccount_firstname.getText();
         String bankLName = bankaccount_lastname.getText();
         String acctNumber = bankaccount_number.getText();
@@ -441,10 +449,17 @@ public class settingController implements Initializable {
             showAlert("Update Failed", "Please complete all fields.", Alert.AlertType.WARNING);
             return;
         }
-        if (withdrawDB.updateWithdrawInfo(acctNumber, bankFName, bankLName, bankname, userID)) {
-            showAlert("Success", "Update password successfully!", Alert.AlertType.INFORMATION);
+        if (!(wd == null) && (db.updateWithdrawInfo(acctNumber, bankFName, bankLName, bankname, userID,wd))) {
+            System.out.println("Successfully updated");
+            showAlert("Success", "Update payment successfully!", Alert.AlertType.INFORMATION);
+            editPayment();
+        } else if ((wd == null) &&(db.insertWithdrawInfo(acctNumber, bankFName, bankLName, bankname, userID, wd))) {
+            System.out.println("Successfully Insert");
+            showAlert("Success", "Insert payment successfully!", Alert.AlertType.INFORMATION);
+            reloadPage(event);
             editPayment();
         } else {
+            System.out.println("Sorry");
             showAlert("Error", "Sorry, something went wrong!", Alert.AlertType.ERROR);
         }
     }
@@ -497,5 +512,18 @@ public class settingController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public void reloadPage(ActionEvent event) {
+        try {
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Teacher/setting/setting.fxml"));
+            Parent root = loader.load();
+
+            stage.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

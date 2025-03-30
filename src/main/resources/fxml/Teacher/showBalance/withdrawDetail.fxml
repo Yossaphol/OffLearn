@@ -56,7 +56,7 @@
                                             <children>
                                                 <HBox prefHeight="102.0" prefWidth="853.0" spacing="20.0" style="-fx-border-color: rgba(196, 196, 196, 0.25); -fx-border-width: 0 0 1 0;">
                                        <children>
-                                          <VBox fx:id="currentAccount" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="102.0" style="-fx-background-color: transparent; -fx-border-color: #0675de; -fx-border-radius: 20;">
+                                          <VBox fx:id="currentAccount" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="102.0" prefWidth="315.0" style="-fx-background-color: transparent; -fx-border-color: #0675de; -fx-border-radius: 20;">
                                              <children>
                                                 <Label fx:id="bank" text="BANK">
                                                    <font>
@@ -137,7 +137,7 @@
                                        <children>
                                           <VBox prefHeight="76.0" prefWidth="284.0">
                                              <children>
-                                                <TextField fx:id="name1" prefHeight="38.0" promptText="ระบุจำนวนเงินที่ต้องการถอน" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
+                                                <TextField fx:id="requestMoneyWithdraw" prefHeight="38.0" promptText="ระบุจำนวนเงินที่ต้องการถอน" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
                                                    <font>
                                                       <Font name="Noto Sans Thai Regular" size="19.0" />
                                                    </font>
@@ -153,32 +153,19 @@
                                                     <children>
                                                         <VBox prefHeight="73.0">
                                                             <children>
-                                                <Label text="ชื่อ">
+                                                <Label text="ชื่อบัญชี">
                                                    <font>
                                                       <Font name="Noto Sans Thai Regular" size="20.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="name" disable="true" prefHeight="38.0" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="Wirayabovorn">
+                                                <TextField fx:id="nameacct" disable="true" prefHeight="38.0" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
                                                    <font>
                                                       <Font name="Noto Sans Thai Regular" size="19.0" />
                                                    </font>
                                                 </TextField>
                                                             </children>
                                                         </VBox>
-                                          <VBox prefHeight="73.0">
-                                             <children>
-                                                <Label text="นามสกุล">
-                                                   <font>
-                                                      <Font name="Noto Sans Thai Regular" size="20.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField fx:id="lastname" disable="true" prefHeight="38.0" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="Boonpriam">
-                                                   <font>
-                                                      <Font name="Noto Sans Thai Regular" size="19.0" />
-                                                   </font>
-                                                </TextField>
-                                             </children>
-                                          </VBox>
+                                          <VBox prefHeight="73.0" />
                                           <VBox prefHeight="73.0">
                                              <children>
                                                 <Label text="เลขบัญชี">
@@ -186,7 +173,7 @@
                                                       <Font name="Noto Sans Thai Regular" size="20.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="lastname1" disable="true" prefHeight="38.0" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="131-388-0423">
+                                                <TextField fx:id="numacct" disable="true" prefHeight="38.0" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
                                                    <font>
                                                       <Font name="Noto Sans Thai Regular" size="19.0" />
                                                    </font>
@@ -204,7 +191,7 @@
                                                       <Font name="Noto Sans Thai Regular" size="20.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="lastname11" disable="true" prefHeight="38.0" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="131-388-0423">
+                                                <TextField fx:id="bankacct" disable="true" prefHeight="38.0" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
                                                    <font>
                                                       <Font name="Noto Sans Thai Regular" size="19.0" />
                                                    </font>
@@ -215,7 +202,7 @@
                                                 </HBox>
                                                 <HBox alignment="CENTER" prefHeight="55.0" prefWidth="830.0" spacing="30.0">
                                                     <children>
-                                                        <Button fx:id="withdrawBtn" mnemonicParsing="false" prefHeight="46.0" prefWidth="776.0" style="-fx-background-color: #0675DE; -fx-background-radius: 8;" text="ถอนเงิน" textFill="WHITE">
+                                                        <Button fx:id="withdrawBtn" mnemonicParsing="false" onAction="#withdrawBtn" prefHeight="46.0" prefWidth="776.0" style="-fx-background-color: #0675DE; -fx-background-radius: 8;" text="ถอนเงิน" textFill="WHITE">
                                                             <font>
                                                                 <Font name="Noto Sans Thai Bold" size="20.0" />
                                                             </font>

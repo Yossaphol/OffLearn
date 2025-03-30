@@ -78,7 +78,7 @@ public class VideoPlayerManager implements Initializable {
     private boolean isMuted = false;
     private Process ffmpegProcess = null;
     private double previousVolume = 0.5;
-
+    private String videoPath;
     private double originalVolSliderWidth;
     private double originalPrefWidth;
     private double originalPrefHeight;
@@ -107,7 +107,13 @@ public class VideoPlayerManager implements Initializable {
         loadIcons();
 
         // test video, idk how to play vid from DB lol ;w;
-        String videoPath = "https://offlearnmedia.s3.ap-southeast-2.amazonaws.com/image/longvideotest.mp4";
+        if (videoPath == null || videoPath.isEmpty()) {
+            videoPath = "https://offlearnmedia.s3.ap-southeast-2.amazonaws.com/image/longvideotest.mp4";
+            Media media = new Media(videoPath);
+            mediaPlayer = new MediaPlayer(media);
+            mediaView.setMediaPlayer(mediaPlayer);
+            bindMediaProperties();
+        }
         String outputFilePath = System.getProperty("java.io.tmpdir") + "testvideo123_encoded.mp4";
 
         // ignore this (old ffpmeg stuff)
@@ -167,10 +173,6 @@ public class VideoPlayerManager implements Initializable {
         });
         new Thread(encodingTask).start();
 */
-        Media media = new Media(videoPath);
-        mediaPlayer = new MediaPlayer(media);
-        mediaView.setMediaPlayer(mediaPlayer);
-        bindMediaProperties();
         // Prevent clicks from passing through certain nodes
         consumeClicks(controlpanesection);
         consumeClicks(timebox);
@@ -960,5 +962,21 @@ public class VideoPlayerManager implements Initializable {
 
         sliderTime.setValue(newValue);
         updateSliderTimeFill();
+    }
+
+    public void setVideoPath(String path) {
+        if (path == null || path.isEmpty()) return;
+
+        this.videoPath = path;
+
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.dispose();
+        }
+
+        Media media = new Media(videoPath);
+        mediaPlayer = new MediaPlayer(media);
+        mediaView.setMediaPlayer(mediaPlayer);
+        bindMediaProperties();
     }
 }

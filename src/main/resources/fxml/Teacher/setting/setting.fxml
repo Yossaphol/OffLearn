@@ -60,7 +60,7 @@
                                                 <Font name="Noto Sans Thai Regular" size="20.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="privateinfo_firstname" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="name">
+                                          <TextField fx:id="privateinfo_firstname" disable="true" prefHeight="40.0" promptText="firstname" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
                                              <font>
                                                 <Font name="Noto Sans Thai Regular" size="16.0" />
                                              </font>
@@ -77,7 +77,7 @@
                                                 <Font name="Noto Sans Thai Regular" size="20.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="privateinfo_lastname" disable="true" prefHeight="40.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="lastname">
+                                          <TextField fx:id="privateinfo_lastname" disable="true" prefHeight="40.0" promptText="lastname" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
                                              <font>
                                                 <Font name="Noto Sans Thai Regular" size="16.0" />
                                              </font>
@@ -101,7 +101,7 @@
                                                 <Font name="Noto Sans Thai Regular" size="20.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="description" disable="true" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="Describe yourself...">
+                                          <TextField fx:id="description" disable="true" prefHeight="40.0" prefWidth="310.0" promptText="Describe yourself..." style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
                                              <font>
                                                 <Font name="Noto Sans Thai Regular" size="16.0" />
                                              </font>
@@ -115,7 +115,7 @@
                                                 <Font name="Noto Sans Thai Regular" size="20.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="privateinfo_gmail" disable="true" prefHeight="40.0" prefWidth="310.0" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css" text="Example@gmail.com">
+                                          <TextField fx:id="privateinfo_gmail" disable="true" prefHeight="40.0" prefWidth="310.0" promptText="Example@gmail.com" style="-fx-background-radius: 10;" styleClass="text-fieldT" stylesheets="@../../../css/Home.css">
                                              <font>
                                                 <Font name="Noto Sans Thai Regular" size="16.0" />
                                              </font>

@@ -4,7 +4,6 @@ import Database.*;
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -53,13 +52,9 @@ public class learningPageController implements Initializable, DisposableControll
     private int countLike = 224;
     private int countDisLike = 17;
 
-    @FXML
-    private Button btnQuiz;
-
     private String courseID = "126"; /// TEST
     private String chapterID;
     private String userID;
-    private Navigator navigator;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -96,12 +91,6 @@ public class learningPageController implements Initializable, DisposableControll
 
     }
 
-    public void toQuizButton(){
-        btnQuiz.setOnAction(actionEvent -> {
-            navigator = new Navigator();
-            navigator.QuizPage();
-        });
-    }
     public void receiveData(String courseID, String chapterID, String userID) {
         VideoPathDB videoDB = new VideoPathDB();
         QuizDB quizDB = new QuizDB();

@@ -38,7 +38,7 @@
                     <children>
                         <Label fx:id="point" alignment="CENTER" prefHeight="20.0" text="point" textAlignment="RIGHT">
                             <font>
-                                <Font name="System Bold" size="14.0" />
+                                <Font name="Noto Sans Thai Bold" size="14.0" />
                             </font>
                         </Label>
                     </children>
