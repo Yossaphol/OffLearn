@@ -24,10 +24,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class learningPageController implements Initializable, DisposableController {
 
-    // FXML injected UI elements
     public VBox mediacontainer;
     public VBox playlistcontainer;
     public HBox rootpage;
@@ -54,7 +55,6 @@ public class learningPageController implements Initializable, DisposableControll
     public ProgressBar progressBar;
     public ProgressBar nextCourseProgressBar;
 
-    // Internal fields
     private VideoPlayerManager videoManager;
     private Navigator navigator;
     private int countLike = 224;
@@ -79,18 +79,15 @@ public class learningPageController implements Initializable, DisposableControll
         fontLoader.loadFonts();
         HomeController method_home = new HomeController();
 
-        // Set default teacher and next course images
         method_home.loadAndSetImage(teacherImg, "/img/Profile/user.png");
         labelPercent.setText("69%");
         nextCourseName.setText("DSA");
         nextTeacherName.setText("อาจารย์ขิม ใจดี");
         method_home.loadAndSetImage(nextImgCourse, "/img/Profile/user.png");
 
-        // Set like/dislike counts
         btnLike.setText(String.valueOf(countLike));
         btnDislike.setText(String.valueOf(countDisLike));
         toQuizButton();
-        // Add hover effects (using your HomeController methods)
         method_home.hoverEffect(btnContectTeacher);
         method_home.hoverEffect(btnGloblalChat);
         method_home.hoverEffect(btnLike);
@@ -107,13 +104,33 @@ public class learningPageController implements Initializable, DisposableControll
         });
     }
 
-    // When data is received (or when switching chapters), run DB calls in the background
     public void receiveData(int courseID, int chapterID, int userID) {
         this.courseID = courseID;
         this.chapterID = chapterID;
         this.userID = userID;
 
-        // Check quiz availability on background thread
+        // Create a latch to wait for both tasks (set count = 2)
+        CountDownLatch latch = new CountDownLatch(2);
+        AtomicReference<String[]> chapterDetailsRef = new AtomicReference<>();
+        AtomicReference<Boolean> quizAvailableRef = new AtomicReference<>();
+
+        Task<String[]> chapterTask = new Task<>() {
+            @Override
+            protected String[] call() {
+                ChapterDB chapterDB = new ChapterDB();
+                return chapterDB.getChapterDetailsByID(chapterID);
+            }
+        };
+        chapterTask.setOnSucceeded(e -> {
+            chapterDetailsRef.set(chapterTask.getValue());
+            latch.countDown();
+        });
+        chapterTask.setOnFailed(e -> {
+            System.err.println("Error loading chapter content:");
+            chapterTask.getException().printStackTrace();
+            latch.countDown();
+        });
+
         Task<Boolean> quizTask = new Task<>() {
             @Override
             protected Boolean call() {
@@ -122,24 +139,48 @@ public class learningPageController implements Initializable, DisposableControll
             }
         };
         quizTask.setOnSucceeded(e -> {
-            boolean quizAvailable = quizTask.getValue();
+            quizAvailableRef.set(quizTask.getValue());
+            latch.countDown();
+        });
+        quizTask.setOnFailed(e -> {
+            System.err.println("Error checking quiz availability:");
+            quizTask.getException().printStackTrace();
+            latch.countDown();
+        });
+
+        runBackgroundTask(chapterTask);
+        runBackgroundTask(quizTask);
+
+        Task<Void> combinedTask = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                latch.await();
+                return null;
+            }
+        };
+        combinedTask.setOnSucceeded(e -> {
+            String[] details = chapterDetailsRef.get();
+            if (details != null) {
+                subject_name.setText(details[0] != null ? details[0] : "");
+                clipDescription.setText(details[1] != null ? details[1] : "");
+            }
+            boolean quizAvailable = quizAvailableRef.get() != null && quizAvailableRef.get();
             btnQuiz.setVisible(quizAvailable);
             btnQuiz.setDisable(!quizAvailable);
-            // Now that quiz availability is determined, load all the other components.
             disposePlayer();
             loadVideoPlayer();
-            loadChapterContent();
             loadTeacherInfo();
             loadPlaylist();
             loadProgress();
             loadRecommendedCourses();
         });
-        quizTask.setOnFailed(e -> {
-            System.err.println("Error checking quiz availability:");
-            quizTask.getException().printStackTrace();
+        combinedTask.setOnFailed(e -> {
+            System.err.println("Error in combined task:");
+            combinedTask.getException().printStackTrace();
         });
-        runBackgroundTask(quizTask);
+        runBackgroundTask(combinedTask);
     }
+
 
     // Load chapter content asynchronously
     private void loadChapterContent() {
@@ -222,6 +263,9 @@ public class learningPageController implements Initializable, DisposableControll
                     controller.setActive(chapterId == chapterID);
                     EPbtn.setOnAction(e2 -> {
                         System.out.println("Clicked EP: " + epNumber + " (Chapter ID: " + chapterId + ")");
+                        if (videoManager != null) {
+                            videoManager.disposePlayer();
+                        }
                         receiveData(courseID, chapterId, userID);
                     });
                     playlistcontainer.getChildren().add(EPbtn);

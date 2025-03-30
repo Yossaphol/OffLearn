@@ -329,7 +329,6 @@ public class VideoPlayerManager implements Initializable {
                 mediaView.fitHeightProperty().bind(videocontainer.heightProperty());
             }
         });
-
         clip = new Rectangle();
         clip.setArcWidth(30);
         clip.setArcHeight(30);
@@ -420,6 +419,14 @@ public class VideoPlayerManager implements Initializable {
             sliderTime.setMax(mediaPlayer.getTotalDuration().toSeconds());
             lblTime.setText("00:00 / " + formatTime(mediaPlayer.getTotalDuration()));
             Platform.runLater(this::updateSliderTimeFill);
+
+            Platform.runLater(() -> {
+                FadeTransition fadeOut = new FadeTransition(Duration.millis(300), loadinggif);
+                fadeOut.setFromValue(1.0);
+                fadeOut.setToValue(0.0);
+                fadeOut.setOnFinished(e -> loadinggif.setVisible(false));
+                fadeOut.play();
+            });
 
             mediaPlayer.bufferProgressTimeProperty().addListener((obs, oldVal, newVal) -> {
                 updateSliderTimeFill();
@@ -995,10 +1002,12 @@ public class VideoPlayerManager implements Initializable {
             mediaPlayer.stop();
             mediaPlayer.dispose();
         }
-
+        loadinggif.setVisible(true);
         Media media = new Media(videoPath);
         mediaPlayer = new MediaPlayer(media);
         mediaView.setMediaPlayer(mediaPlayer);
         bindMediaProperties();
     }
+
+
 }
