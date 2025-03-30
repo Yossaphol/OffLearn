@@ -120,6 +120,7 @@ public class HomeController implements Initializable {
     public Button pfp_btn;
     public ScrollPane mainScrollPane;
     public HBox rootpage;
+    public VBox top4Container;
     private List<AnchorPane> slides;
     private int slideIndex = 0;
     public Label setname;
@@ -162,7 +163,7 @@ public class HomeController implements Initializable {
         setupBarChart();
         setImgContainer();
         route();
-
+        loadStd();
 //        String username = SessionManager.getInstance().getUsername();
         if (username != null) {
             setname.setText(username);
@@ -712,29 +713,33 @@ public class HomeController implements Initializable {
     int std_id = user.getUserId(username);
     List<String> studentInCourse;
     private int courseID;
+    List<String> EnrolledCourses = enrollDta.getEnrolledCourseNames(std_id);
+
+    private void loadStd(){ //หาคอร์สที่มีการจัดอันดับ แล้วเอาชื่อคอร์สไปใช้ดึงต่อ
+        if(!EnrolledCourses.isEmpty()){
+            for(String courseName: EnrolledCourses){
+                courseID = scoreDB.getCourseIdByCourseName(courseName);
+                if(courseID != -2){ //-2 ถ้า Course ไม่มีควิซ แปลว่าไม่มีจัดอันดับ
+                    loadStd(courseName);
+                    return;
+                }
+            }
+            setTopStudentToDefault();
+        }
+    }
 
     private void loadStd(String courseName) {
         studentInCourse = enrollDta.getStudentsByCourseName(courseName);
-        courseID = scoreDB.getCourseIdByCourseName(courseName);
 
-        if (courseID == -2) {
-            setFirst("First", 0, "/img/Profile/user.png");
-            setSecond("Second", 0, "/img/Profile/user.png");
-            setThird("Third", 0, "/img/Profile/user.png");
-            setFourth("Fourth", 0, "/img/Profile/user.png");
-            return;
-        }
-
-
-        Map<String, Integer> studentScores = new HashMap<>();
+        Map<String, Integer> studentScores = new HashMap<>(); //Get score
         for (String student : studentInCourse) {
             int studentId = user.getUserId(student);
             studentScores.put(student, scoreDB.getStudentScore(studentId, courseID));
         }
 
-        studentInCourse.sort((s1, s2) -> Integer.compare(studentScores.get(s2), studentScores.get(s1)));
+        studentInCourse.sort((s1, s2) -> Integer.compare(studentScores.get(s2), studentScores.get(s1))); //Sort
 
-        if (!studentInCourse.isEmpty()) {
+        if (!studentInCourse.isEmpty()) { //ตั้งค่าเป็นค่าเริ่มต้น ถ้าไม่มีนักเรียนในบอร์ด (อันดับจัดตามคะแนนควิซ บางคอร์สไม่มีควิซ)
             if (studentInCourse.size() >= 4) {
                 setFirst(studentInCourse.get(0), scoreDB.getStudentScore(user.getUserId(studentInCourse.get(0)), courseID), user.getProfile(studentInCourse.get(0)));
                 setSecond(studentInCourse.get(1), scoreDB.getStudentScore(user.getUserId(studentInCourse.get(1)), courseID), user.getProfile(studentInCourse.get(1)));
@@ -756,7 +761,16 @@ public class HomeController implements Initializable {
                 setThird("Third", 0, "/img/Profile/user.png");
                 setFourth("Fourth", 0, "/img/Profile/user.png");
             }
+        }else{
+            setTopStudentToDefault();
         }
+    }
+
+    private void setTopStudentToDefault(){
+        setFirst("First", 0, "/img/Profile/user.png");
+        setSecond("Second", 0, "/img/Profile/user.png");
+        setThird("Third", 0, "/img/Profile/user.png");
+        setFourth("Fourth", 0, "/img/Profile/user.png");
     }
 
     private void setFirst(String name, int point, String imgPath){
