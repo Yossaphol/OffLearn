@@ -27,6 +27,7 @@ public class learningPageController implements Initializable, DisposableControll
 
     public VBox mediacontainer;
     public VBox playlistcontainer;
+    public HBox rootpage;
 
     public Label subject_name;
     public Label ep;
@@ -68,6 +69,9 @@ public class learningPageController implements Initializable, DisposableControll
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        rootpage.getStylesheets().add(
+                getClass().getResource("/css/learningPage.css").toExternalForm()
+        );
         FontLoader fontLoader = new FontLoader();
         fontLoader.loadFonts();
         HomeController method_home = new HomeController();
