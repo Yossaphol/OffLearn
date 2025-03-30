@@ -5,7 +5,6 @@
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -13,8 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="691.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.myCourse.studyTableEditController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="752.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.dashboard.studyTableEditController">
    <children>
       <Label alignment="CENTER" prefHeight="42.0" prefWidth="710.0" style="-fx-background-color: #8100CC;" text="Table Editor" textFill="WHITE">
          <font>
@@ -32,22 +30,22 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="85.0" prefWidth="617.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="27.0" prefWidth="710.0" text="First">
+                        <Label alignment="CENTER" prefHeight="27.0" prefWidth="710.0" text="From">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ComboBox prefWidth="150.0" style="-fx-background-radius: 10;" />
+                        <ComboBox fx:id="from" prefWidth="150.0" style="-fx-background-radius: 10;" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="85.0" prefWidth="610.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="27.0" prefWidth="710.0" text="Last">
+                        <Label alignment="CENTER" prefHeight="27.0" prefWidth="710.0" text="To">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ComboBox prefWidth="150.0" style="-fx-background-radius: 10;" />
+                        <ComboBox fx:id="to" prefWidth="150.0" style="-fx-background-radius: 10;" />
                      </children>
                   </VBox>
                </children>
@@ -63,20 +61,17 @@
             </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ScrollPane prefHeight="100.0" prefWidth="581.0">
-                     <content>
-                        <TableView prefHeight="200.0" prefWidth="564.0">
-                          <columns>
-                            <TableColumn prefWidth="44.0000701546669" text="Id" />
-                            <TableColumn minWidth="7.20001220703125" prefWidth="249.60000228881836" text="Name" />
-                              <TableColumn minWidth="0.0" prefWidth="92.79998779296875" text="Day" />
-                              <TableColumn minWidth="0.0" prefWidth="37.5999755859375" text="Start" />
-                              <TableColumn minWidth="0.0" prefWidth="36.800048828125" text="Stop" />
-                              <TableColumn minWidth="0.0" prefWidth="108.0" text="Color" />
-                          </columns>
-                        </TableView>
-                     </content>
-                  </ScrollPane>
+                  <TableView fx:id="list_table" prefHeight="100.0" prefWidth="655.0">
+                    <columns>
+                      <TableColumn fx:id="list_id" prefWidth="50.0" text="Id" />
+                      <TableColumn fx:id="list_name" minWidth="7.20001220703125" prefWidth="260.0" text="Name" />
+                        <TableColumn fx:id="list_day" minWidth="0.0" prefWidth="90.0" text="Day" />
+                        <TableColumn fx:id="list_start" minWidth="0.0" prefWidth="35.0" text="Start" />
+                        <TableColumn fx:id="list_stop" minWidth="0.0" prefWidth="35.0" text="Stop" />
+                        <TableColumn fx:id="list_bgcolor" minWidth="0.0" text="Background" />
+                        <TableColumn fx:id="list_tcolor" minWidth="0.0" text="Text" />
+                    </columns>
+                  </TableView>
                </children>
             </HBox>
          </children>
@@ -95,12 +90,24 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <ComboBox prefWidth="150.0" style="-fx-background-radius: 10;" />
+                  <ComboBox fx:id="id" prefWidth="150.0" style="-fx-background-radius: 10;" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="85.0" prefWidth="610.0">
                <children>
-                  <Button fx:id="enrollBtn1" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="167.0" style="-fx-background-color: #8100CC; -fx-background-radius: 10;" text="Delete" textFill="WHITE">
+                  <Button fx:id="delete" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleDelete" prefWidth="167.0" style="-fx-background-color: #8100CC; -fx-background-radius: 10;" text="Delete" textFill="WHITE">
+                     <font>
+                        <Font name="Noto Sans Thai Bold" size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="85.0" prefWidth="610.0">
+               <children>
+                  <Button fx:id="clear" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleClear" prefWidth="167.0" style="-fx-background-color: #8100CC; -fx-background-radius: 10;" text="Clear" textFill="WHITE">
                      <font>
                         <Font name="Noto Sans Thai Bold" size="20.0" />
                      </font>
@@ -126,7 +133,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField maxWidth="150.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10;" />
+                  <TextField fx:id="name" maxWidth="150.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10;" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="85.0" prefWidth="610.0">
@@ -136,17 +143,23 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <ComboBox prefWidth="150.0" style="-fx-background-radius: 10;" />
+                  <ComboBox fx:id="start" prefWidth="150.0" style="-fx-background-radius: 10;" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="85.0" prefWidth="610.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="710.0" text="Last">
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="710.0" text="Background Color">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="14.0" />
                      </font>
                   </Label>
-                  <ColorPicker prefWidth="150.0" style="-fx-background-radius: 10;" />
+                  <ColorPicker fx:id="bgcolor" prefWidth="150.0" style="-fx-background-radius: 10;" />
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="710.0" text="Text Color">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <ColorPicker fx:id="tcolor" prefWidth="150.0" style="-fx-background-radius: 10;" />
                </children>
             </VBox>
          </children>
@@ -160,7 +173,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <ComboBox prefWidth="150.0" style="-fx-background-radius: 10;" />
+                  <ComboBox fx:id="day" prefWidth="150.0" style="-fx-background-radius: 10;" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="85.0" prefWidth="610.0">
@@ -170,12 +183,28 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <ComboBox prefWidth="150.0" style="-fx-background-radius: 10;" />
+                  <ComboBox fx:id="stop" prefWidth="150.0" style="-fx-background-radius: 10;" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="85.0" prefWidth="610.0">
                <children>
-                  <Button fx:id="enrollBtn" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="167.0" style="-fx-background-color: #8100CC; -fx-background-radius: 10;" text="Add" textFill="WHITE">
+                  <Button fx:id="add" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleAdd" prefWidth="167.0" style="-fx-background-color: #8100CC; -fx-background-radius: 10;" text="Add" textFill="WHITE">
+                     <font>
+                        <Font name="Noto Sans Thai Bold" size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="98.0" prefWidth="710.0">
+               <children>
+                  <Button fx:id="done" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleDone" prefHeight="43.0" prefWidth="328.0" style="-fx-background-color: #8100CC; -fx-background-radius: 10;" text="Done" textFill="WHITE">
                      <font>
                         <Font name="Noto Sans Thai Bold" size="20.0" />
                      </font>

@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import Student.HomeAndNavigation.Navigator;
@@ -22,6 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import Student.HomeAndNavigation.HomeController;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -163,7 +165,8 @@ public class dashboardController implements Initializable {
 
         setDate();
 
-
+        //handle studyTable
+       studyTable.setOnMouseClicked(event -> handleStudyTableClick());
     }
 
 
@@ -449,7 +452,27 @@ public class dashboardController implements Initializable {
         }
     }
 
+    @FXML
+    private void handleStudyTableClick() {
+        try {
+            // Load the .fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/statistics/studyTableEdit.fxml"));
+            Pane mdiContent = loader.load();
 
+            // Create a new Stage (window) for the MDI form
+            Stage mdiStage = new Stage();
+            mdiStage.setTitle("Study Table");
+
+            // Set the content in a Scene
+            Scene scene = new Scene(mdiContent);
+            mdiStage.setScene(scene);
+
+            // Show the MDI form
+            mdiStage.show();
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle any loading errors
+        }
+    }
 
 
 
