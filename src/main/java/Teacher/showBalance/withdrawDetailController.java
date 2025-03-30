@@ -4,7 +4,7 @@ import Database.historyPaymentDB;
 import Database.EnrollDB;
 import Database.UserDB;
 import Database.withdraw;
-import Database.withdrawDB;
+import Database.WithdrawDB;
 import Student.HomeAndNavigation.HomeController;
 import Teacher.dashboard.dashboardController;
 import Teacher.navigator.Navigator;
@@ -16,7 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Alert;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,6 +34,7 @@ public class withdrawDetailController implements Initializable {
     public Button withdrawBtn;
 
     EnrollDB enrollDB = new EnrollDB();
+    WithdrawDB withdrawDB = new WithdrawDB();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -62,9 +62,9 @@ public class withdrawDetailController implements Initializable {
         String sessionUsername = SessionManager.getInstance().getUsername();
         UserDB userDB = new UserDB();
         int userId = userDB.getUserId(sessionUsername);
-        withdraw userWithdraw = withdrawDB.getWithdrawInfo(userId);
+        withdraw userWithdraw = WithdrawDB.getWithdrawInfo(userId);
 
-        double totalCost = enrollDB.getTotalEnrollments(userId);
+        double totalCost = withdrawDB.getAvailableBalance(userId);
 
         if (userWithdraw != null) {
             accountNo.setText(userWithdraw.getAccountNumber());
@@ -85,7 +85,7 @@ public class withdrawDetailController implements Initializable {
         UserDB userDB = new UserDB();
         int userId = userDB.getUserId(sessionUsername);
 
-        withdraw userWithdraw = withdrawDB.getWithdrawInfo(userId);
+        withdraw userWithdraw = WithdrawDB.getWithdrawInfo(userId);
 
         String acctno = userWithdraw.getAccountNumber();
         String acctname = userWithdraw.getAccountFName() + " " + userWithdraw.getAccountLName();
@@ -96,22 +96,19 @@ public class withdrawDetailController implements Initializable {
 
             if (requestAmount > totalCost) {
                 showAlert("Fail", "The withdrawal amount exceeds the available balance.", Alert.AlertType.ERROR);
-//                System.out.println("Fail");
             } else {
-                historyPaymentDB historyDB = new historyPaymentDB();
-                boolean success = historyDB.insertHistoryPayment(acctno, acctname, bankname, requestAmount, userId);
+                withdrawDB = new WithdrawDB();
+                boolean success = withdrawDB.withdrawAmount(userId, acctno, acctname, bankname, requestAmount);
                 if (success) {
                     showAlert("Successfully", "Withdraw successfully!", Alert.AlertType.INFORMATION);
                     requestMoneyWithdraw.setText("");
-//                    System.out.println("successfully!");
+                    setWithdrawInfo();
                 } else {
                     showAlert("Fail", "Could not record withdraw!", Alert.AlertType.ERROR);
-//                    System.out.println("Fail");
                 }
             }
         } catch (NumberFormatException e) {
             showAlert("Fail", "Sorry, something went wrong!", Alert.AlertType.ERROR);
-//            System.out.println("Something went wrong");
         }
     }
 

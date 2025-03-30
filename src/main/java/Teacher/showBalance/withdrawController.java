@@ -3,7 +3,7 @@ package Teacher.showBalance;
 import Database.EnrollDB;
 import Database.UserDB;
 import Database.withdraw;
-import Database.withdrawDB;
+import Database.WithdrawDB;
 import Student.HomeAndNavigation.HomeController;
 import Teacher.navigator.Navigator;
 import a_Session.SessionManager;
@@ -31,6 +31,7 @@ public class withdrawController implements Initializable {
     public Label totalMoney;
 
     EnrollDB enrollDB = new EnrollDB();
+    WithdrawDB withdrawDB = new WithdrawDB();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -45,16 +46,17 @@ public class withdrawController implements Initializable {
     }
 
     private void showacct() {
+        withdrawDB = new WithdrawDB();
         String sessionUsername = SessionManager.getInstance().getUsername();
         UserDB userDB = new UserDB();
         int userId = userDB.getUserId(sessionUsername);
-        withdraw userWithdraw = withdrawDB.getWithdrawInfo((userId));
+        withdraw userWithdraw = WithdrawDB.getWithdrawInfo((userId));
         String acctname = userWithdraw.getAccountFName() + " " + userWithdraw.getAccountLName();
         accountNo.setText(userWithdraw.getAccountNumber());
         accountName.setText(acctname);
         bankname.setText(userWithdraw.getBankName());
 
-        double totalCost = enrollDB.getTotalEnrollments(userId);
+        double totalCost = withdrawDB.getAvailableBalance(userId);
         totalMoney.setText(String.format("%.2f", totalCost));
     }
 
