@@ -5,7 +5,12 @@ import java.util.List;
 public class OfflineCourseData {
     private int courseID;
     private int chapterID;
-    private String subjectName;
+    private String courseName;
+    private String courseDescription;
+    private String courseCategory;
+    private String chapterName;
+    private String chapterDescription;
+    private String videoPath;
     private String teacherName;
     private List<String[]> playlist; // e.g., each entry: {chapterID, chapterName}
 
@@ -22,11 +27,23 @@ public class OfflineCourseData {
     public void setChapterID(int chapterID) {
         this.chapterID = chapterID;
     }
-    public String getSubjectName() {
-        return subjectName;
+    public String getChapterName() {
+        return chapterName;
     }
-    public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
+    public void setChapterName(String chapterName) {
+        this.chapterName = chapterName;
+    }
+    public String getChapterDescription() {
+        return chapterDescription;
+    }
+    public void setChapterDescription(String chapterDescription) {
+        this.chapterDescription = chapterDescription;
+    }
+    public String getVideoPath() {
+        return videoPath;
+    }
+    public void setVideoPath(String videoPath) {
+        this.videoPath = videoPath;
     }
     public String getTeacherName() {
         return teacherName;
@@ -39,5 +56,29 @@ public class OfflineCourseData {
     }
     public void setPlaylist(List<String[]> playlist) {
         this.playlist = playlist;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public String getCourseDescription() {
+        return courseDescription;
+    }
+
+    public void setCourseDescription(String courseDescription) {
+        this.courseDescription = courseDescription;
+    }
+
+    public String getCourseCategory() {
+        return courseCategory;
+    }
+
+    public void setCourseCategory(String courseCategory) {
+        this.courseCategory = courseCategory;
     }
 }
