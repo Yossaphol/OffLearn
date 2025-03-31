@@ -27,27 +27,12 @@
             <Font name="Noto Sans Thai Regular" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="points" layoutX="233.0" layoutY="154.0" prefWidth="82.0" text="43,900.4" textAlignment="RIGHT" textFill="#8100cc">
+      <Label fx:id="points" layoutX="308.0" layoutY="156.0" prefHeight="29.0" prefWidth="128.0" text="points" textAlignment="RIGHT" textFill="#8100cc">
          <font>
             <Font name="Noto Sans Thai Bold" size="18.0" />
          </font>
       </Label>
-      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="392.0" layoutY="155.0" prefHeight="29.0" prefWidth="15.0" text="#" textFill="#8100cc">
-         <font>
-            <Font name="Noto Sans Thai Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="311.0" layoutY="154.0" text="pts" textFill="#8100cc">
-         <font>
-            <Font name="Noto Sans Thai Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="numRanks" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="408.0" layoutY="154.0" prefHeight="29.0" prefWidth="42.0" text="num" textFill="#8100cc">
-         <font>
-            <Font name="Noto Sans Thai Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="445.0" layoutY="154.0" prefHeight="29.0" prefWidth="52.0" text="Rank" textFill="#8100cc">
+      <Label layoutX="239.0" layoutY="156.0" prefHeight="29.0" prefWidth="78.0" text="คะแนน :" textFill="#8100cc">
          <font>
             <Font name="Noto Sans Thai Bold" size="18.0" />
          </font>

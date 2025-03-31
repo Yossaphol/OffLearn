@@ -32,15 +32,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-/**
- * handles:
- * - Play/Pause/Replay
- * - Volume slider (with a hide/show animation)
- * - Seek bar
- * - Inactivity fade for the control pane
- * - Fullscreen toggling (ESC to exit)
- * - Setting Menus
- */
 public class VideoPlayerManager implements Initializable {
 
     @FXML private HBox controlpanesection; // contain controls

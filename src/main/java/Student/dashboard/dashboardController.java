@@ -1,10 +1,15 @@
 package Student.dashboard;
 
+import Database.QuizDB;
+import Database.StudentScoreDB;
 import Database.User;
 import Database.UserDB;
+import Student.task.taskCardController;
+import Teacher.quiz.QuizItem;
 import a_Session.SessionManager;
 import Student.FontLoader.FontLoader;
 import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -77,7 +82,7 @@ public class dashboardController implements Initializable {
     public VBox roadmapProgression;
     public VBox courseProgression;
     public VBox scoreTendency;
-    public VBox risk;
+//    public VBox risk;
     public VBox studyTable;
     public Button btn_continue;
     public Button btn_otherCourse;
@@ -121,6 +126,14 @@ public class dashboardController implements Initializable {
 
     @FXML
     private NumberAxis yAxis;
+
+    StudentScoreDB dataDB = new StudentScoreDB();
+    QuizDB dtaDB = new QuizDB();
+    String username = SessionManager.getInstance().getUsername();
+    UserDB userDB = new UserDB();
+    int userID = userDB.getUserId(username);
+    ArrayList<QuizItem> undoneQuiz = (ArrayList<QuizItem>) dataDB.getUndoneQuizzes(userID);
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -128,7 +141,8 @@ public class dashboardController implements Initializable {
         fontLoader.loadFonts();
 
         route();
-        displayTask();
+//        displayTask();
+        setUpComing();
 
         HomeController method_home = new HomeController();
 
@@ -143,7 +157,7 @@ public class dashboardController implements Initializable {
         method_home.hoverEffect(roadmapProgression);
         method_home.hoverEffect(courseProgression);
         method_home.hoverEffect(scoreTendency);
-        method_home.hoverEffect(risk);
+//        method_home.hoverEffect(risk);
         method_home.hoverEffect(studyTable);
         method_home.hoverEffect(btn_continue);
         method_home.hoverEffect(btn_otherCourse);
@@ -163,15 +177,8 @@ public class dashboardController implements Initializable {
         courseProgressionChart();
         scoreChart();
 
-        setDate();
-
         //handle studyTable
        studyTable.setOnMouseClicked(event -> handleStudyTableClick());
-    }
-
-
-    public void setDate(){
-        date.setValue(LocalDate.now());
     }
 
     public void route(){
@@ -183,13 +190,9 @@ public class dashboardController implements Initializable {
         btn_otherCourse.setOnMouseClicked(nav::courseRoute);
     }
 
-
-
     private void displayProfileBox() {
         loadWithTransition("/fxml/Student/statistics/dashboardProfile.fxml");
     }
-
-
 
     private void loadWithTransition(String fxmlPath) {
         try {
@@ -230,16 +233,63 @@ public class dashboardController implements Initializable {
                 break;
         }
     }
+    public void setUpComing() {
+        if(undoneQuiz.isEmpty()){
+            Label txt = new Label("คุณไม่มีควิซที่ต้องทำในขณะนี้");
+            txt.setStyle("-fx-font-size: 20px;");
+            taskContainer.getChildren().clear();
+            taskContainer.getChildren().add(txt);
+            return;
+        }
+        taskContainer.getChildren().clear();
+        for (QuizItem task : undoneQuiz) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/statistics/dashboardTaskElement.fxml"));
+                Node quizItem = loader.load();
 
-    private void displayTask() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/statistics/dashboardTaskElement.fxml"));
-            HBox searchbarContent = loader.load();
-            taskContainer.getChildren().setAll(searchbarContent);
-        } catch (IOException e) {
-            e.printStackTrace();
+                dashboardTaskController controller = loader.getController();
+                controller.setTaskInformation(task.getHeader(), dtaDB.getCourseNameByQuizID(task.getQuizID()));
+
+                Button content = (Button) quizItem;
+                hoverEffect(content);
+                controller.quizLink(task.getQuizID(), dtaDB.getChapterIdByQuizID(task.getQuizID()),content);
+                taskContainer.getChildren().add(content);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
+
+    public void hoverEffect(Button btn) {
+        ScaleTransition scaleUp = new ScaleTransition(Duration.millis(200), btn);
+        scaleUp.setFromX(1);
+        scaleUp.setFromY(1);
+        scaleUp.setToX(1.02);
+        scaleUp.setToY(1.02);
+        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(200), btn);
+        scaleDown.setFromX(1.02);
+        scaleDown.setFromY(1.02);
+        scaleDown.setToX(1);
+        scaleDown.setToY(1);
+
+        btn.setOnMouseEntered(mouseEvent -> {
+            scaleUp.play();
+        });
+        btn.setOnMouseExited(mouseEvent -> {
+            scaleDown.play();
+        });
+    }
+
+//    private void displayTask() {
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/statistics/dashboardTaskElement.fxml"));
+//            HBox searchbarContent = loader.load();
+//            taskContainer.getChildren().setAll(searchbarContent);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
     @FXML

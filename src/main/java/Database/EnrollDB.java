@@ -231,6 +231,48 @@ public class EnrollDB extends ConnectDB{
         return studentNames;
     }
 
+    public List<String> getAllStudents() {
+        List<String> studentNames = new ArrayList<>();
+        String sql = "SELECT userName FROM user WHERE type = 'student'";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                studentNames.add(rs.getString("userName"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return studentNames;
+    }
+
+    public List<String> getCoursesByStudent(String userName) {
+        List<String> courses = new ArrayList<>();
+        String sql = "SELECT c.courseName FROM enroll e " +
+                "JOIN user u ON e.User_ID = u.User_ID " +
+                "JOIN course c ON e.Course_ID = c.Course_ID " +
+                "WHERE u.userName = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, userName);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                courses.add(rs.getString("courseName"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return courses;
+    }
 
 
 }

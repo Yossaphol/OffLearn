@@ -22,11 +22,11 @@ public class MyCourse {
     }
 
     public void setCourse_ID(String course_ID) {
-        Course_ID = course_ID;
+        this.Course_ID = course_ID;
     }
 
     public void setCat_ID(String cat_ID) {
-        Cat_ID = cat_ID;
+        this.Cat_ID = cat_ID;
     }
 
     public void setCourseName(String courseName) {

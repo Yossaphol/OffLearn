@@ -1,7 +1,6 @@
 package Student.dashboard;
 
-import Database.User;
-import Database.UserDB;
+import Database.*;
 import a_Session.SessionManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,36 +11,48 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class dashboardProfileEditController implements Initializable {
     @FXML
     public Label setfullname;
     public Rectangle userpfp;
+//    public Label numRanks;
+    public Label points;
+
+    private final UserDB userDB = new UserDB();
+    private final ScoreDB scoreDB = new ScoreDB();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String userName = SessionManager.getInstance().getUsername();
-        UserDB userDB = new UserDB();
-
         User user = userDB.getUserInfo(userName);
+        int userId = userDB.getUserId(userName);
 
-        setProfile(userDB.getProfile(userName));
+        if (user != null) {
+            setProfile(userDB.getProfile(userName));
+            setfullname.setText(user.getFirstname() + " " + user.getLastname());
+        }
 
-        String name = user.getFirstname();
-        String lastNameUser = user.getLastname();
-        String fullname = name + " " + lastNameUser;
-        setfullname.setText(fullname);
+        updatePoints(userId);
     }
 
-    public void setProfile(String Url){
+    public void setProfile(String Url) {
         Image img;
         if (Url.startsWith("http") || Url.startsWith("https")) {
             img = new Image(Url);
         } else {
             img = new Image(getClass().getResource(Url).toExternalForm());
         }
-
         this.userpfp.setStroke(Color.TRANSPARENT);
         this.userpfp.setFill(new ImagePattern(img));
     }
+
+    private void updatePoints(int userID) {
+        int totalPoints = scoreDB.getTotalScore(userID);
+        points.setText(String.valueOf(totalPoints));
+    }
+
+
 }

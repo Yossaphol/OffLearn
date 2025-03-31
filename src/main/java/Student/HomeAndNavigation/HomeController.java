@@ -6,11 +6,10 @@ import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
 
-import Database.EnrollDB;
-import Database.StudentScoreDB;
-import Database.User;
-import Database.UserDB;
+import Database.*;
 import Student.HomeAndNavigation.*;
+import Student.courseManage.courseInfoController;
+import Teacher.courseManagement.CourseItem;
 import a_Session.SessionManager;
 import javafx.animation.*;
 import javafx.event.ActionEvent;
@@ -137,7 +136,9 @@ public class HomeController implements Initializable {
     public Label scoreTopTwo;
     public Label scoreTopThree;
     public Label scoreTopFour;
-
+    public Button previousButton;
+    public Button nextButton;
+    public HBox container;
     @FXML
     private VBox calendarContainer;
     @FXML
@@ -148,6 +149,13 @@ public class HomeController implements Initializable {
 
     @FXML
     private NumberAxis yAxis;
+
+    MyCourseDB myCourseDB = new MyCourseDB();
+
+    private int currentPage = 0;
+    private final int coursesPerPage = 2;
+    private ArrayList<CourseItem> courseList;
+    ArrayList<MyCourse> myCourses = myCourseDB.getallMyCourse();
 
     String username = SessionManager.getInstance().getUsername();
     UserDB userDB = new UserDB();
@@ -165,6 +173,8 @@ public class HomeController implements Initializable {
             setname.setText("Guest");
         }
 
+        previousButton.setOnAction(event -> handlePreviousButton());
+        nextButton.setOnAction(event -> handleNextButton());
 
         hoverEffect(topLeaderboard);
         hoverEffect(smallStatistic);
@@ -178,10 +188,62 @@ public class HomeController implements Initializable {
         applyHoverEffectToInside(popup);
         applyHoverEffectToInside(popup1);
         applyHoverEffectToInside(popup2);
-        applyHoverEffectToInside(slide1);
-        applyHoverEffectToInside(slide2);
+//        applyHoverEffectToInside(slide1);
+//        applyHoverEffectToInside(slide2);
         closePopupAuto();
-        callSlider();
+//        callSlider();
+        showCourse();
+    }
+
+    public void showCourse() {
+        CourseDB courseDB = new CourseDB();
+        courseList = courseDB.getAllCourses();
+        loadCourses();
+    }
+    private void loadCourses() {
+        container.getChildren().clear();
+
+        int start = currentPage * coursesPerPage;
+        int end = Math.min(start + coursesPerPage, courseList.size());
+
+        if (courseList.isEmpty()) {
+            Label txt = new Label("ไม่มีคอร์สที่แสดง");
+            txt.setStyle("-fx-font-size: 20px;");
+            container.getChildren().add(txt);
+            return;
+        }
+
+        for (int i = start; i < end; i++) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/courseInfo.fxml"));
+                Node courseItem = loader.load();
+
+                courseInfoController controller = loader.getController();
+                controller.setCourseInformation(courseList.get(i));
+
+                Button content = (Button) courseItem;
+                hoverEffect(content);
+                container.getChildren().add(content);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    private void handlePreviousButton() {
+        if (currentPage > 0) {
+            currentPage--;
+            loadCourses();
+        }
+    }
+
+    @FXML
+    private void handleNextButton() {
+        if ((currentPage + 1) * coursesPerPage < courseList.size()) {
+            currentPage++;
+            loadCourses();
+        }
     }
 
     public void callSlider(){
@@ -525,19 +587,19 @@ public class HomeController implements Initializable {
 
         setProfile(userDB.getProfile(username));
 
-        loadAndSetImage(teacher_pfp, "/img/Profile/man.png");
+//        loadAndSetImage(teacher_pfp, "/img/Profile/man.png");
 
         String studentPfpPath = "/img/Profile/student.png";
 
-        loadAndSetImage(course_pic, "/img/Picture/Python.png");
-        loadAndSetImage(category_pic, "/img/icon/code.png");
-        loadAndSetImage(category_pic1, "/img/icon/partners.png");
-        loadAndSetImage(category_pic2, "/img/icon/artificial-intelligence.png");
+//        loadAndSetImage(course_pic, "/img/Picture/Python.png");
+//        loadAndSetImage(category_pic, "/img/icon/code.png");
+//        loadAndSetImage(category_pic1, "/img/icon/partners.png");
+//        loadAndSetImage(category_pic2, "/img/icon/artificial-intelligence.png");
 
-        loadAndSetImage(teacher_pfp_OOP, "/img/Profile/man.png");
-        loadAndSetImage(teacher_pfp_Data, "/img/Profile/teacher.png");
-        loadAndSetImage(course_pic_Data, "/img/Picture/DSA.jpg");
-        loadAndSetImage(course_pic_OOP, "/img/Picture/bg.jpg");
+//        loadAndSetImage(teacher_pfp_OOP, "/img/Profile/man.png");
+//        loadAndSetImage(teacher_pfp_Data, "/img/Profile/teacher.png");
+//        loadAndSetImage(course_pic_Data, "/img/Picture/DSA.jpg");
+//        loadAndSetImage(course_pic_OOP, "/img/Picture/bg.jpg");
     }
 
     public void setProfile(String Url){
@@ -562,7 +624,7 @@ public class HomeController implements Initializable {
     private void progressValue() {
         progress1.setProgress(Double.parseDouble(progressValue1.getText().replace("%", "").trim()) / 100);
 //        progress2.setProgress(Double.parseDouble(progressValue2.getText().replace("%", "").trim()) / 100);
-        continueProgress.setProgress(Double.parseDouble(progressOfConValue.getText().replace("%", "").trim()) / 100);
+//        continueProgress.setProgress(Double.parseDouble(progressOfConValue.getText().replace("%", "").trim()) / 100);
 
         categorybar.setProgress(Double.parseDouble(progressCategory.getText().replace("% completed", "").trim()) / 100);
         categorybar1.setProgress(Double.parseDouble(progressCategory1.getText().replace("% completed", "").trim()) / 100);
@@ -572,8 +634,8 @@ public class HomeController implements Initializable {
         businessProgress.setProgress(Double.parseDouble(progressValue1.getText().replace("%", "").trim()) / 100);
 //        mathProgress.setProgress(Double.parseDouble(progressValue2.getText().replace("%", "").trim()) / 100);
         aiProgress.setProgress(Double.parseDouble(progressValue1.getText().replace("%", "").trim()) / 100);
-        continueProgressData.setProgress(Double.parseDouble(progressOfConValueData.getText().replace("%", "").trim()) / 100);
-        continueProgressOOP.setProgress(Double.parseDouble(progressOfConValueOOP.getText().replace("%", "").trim()) / 100);
+//        contxinueProgressData.setProgress(Double.parseDouble(progressOfConValueData.getText().replace("%", "").trim()) / 100);
+//        continueProgressOOP.setProgress(Double.parseDouble(progressOfConValueOOP.getText().replace("%", "").trim()) / 100);
     }
 
 
@@ -610,13 +672,13 @@ public class HomeController implements Initializable {
         barChart.getData().add(series);
     }
 
-    public void applyHoverEffectToInside(AnchorPane root) {
-        for (Node node : root.lookupAll(".continueCourse")) {
-            if (node instanceof Pane p) {
-                hoverEffect(p);
-            }
-        }
-    }
+//    public void applyHoverEffectToInside(AnchorPane root) {
+//        for (Node node : root.lookupAll(".continueCourse")) {
+//            if (node instanceof Pane p) {
+//                hoverEffect(p);
+//            }
+//        }
+//    }
 
     public void applyHoverEffectToInside(GridPane root) {
         for (Node node : root.lookupAll(".forHover")) {

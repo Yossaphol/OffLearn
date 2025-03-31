@@ -50,7 +50,7 @@ public class taskController implements Initializable {
         setTabAnimation();
     }
 
-    private void setUpComing() {
+    public void setUpComing() {
         if(undoneQuiz.isEmpty()){
             Label txt = new Label("คุณไม่มีควิซที่ต้องทำในขณะนี้");
             txt.setStyle("-fx-font-size: 20px;");

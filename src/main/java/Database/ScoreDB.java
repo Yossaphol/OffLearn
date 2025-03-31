@@ -213,5 +213,26 @@ public class ScoreDB extends ConnectDB{
         return scoreMap;
     }
 
+    public int getTotalScore(int userID) {
+        String query = "SELECT SUM(studentscore) AS totalScore FROM offlearn.studentscore WHERE User_ID = ?";
+        int totalScore = 0;
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, userID);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                totalScore = rs.getInt("totalScore"); // ดึงค่าผลรวมของคะแนนทั้งหมด
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return totalScore;
+    }
+
 
 }
