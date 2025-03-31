@@ -103,12 +103,12 @@ public class CourseItem {
                 courseDesc,
                 courseName,
                 coursePrice,
-                4.9,              // สมมติให้ rating คงที่หรือสุ่ม
-                120,              // จำนวนรีวิว mock
+                4.9,              // rating
+                120,              // จำนวนรีวิว
                 "/img/icon/code.png",  // ไอคอนหมวดหมู่
                 courseCat,
                 courseImg,
-                teacherName
+                this.teacherName
         );
     }
 
