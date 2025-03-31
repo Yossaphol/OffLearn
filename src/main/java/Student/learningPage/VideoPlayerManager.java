@@ -1017,6 +1017,8 @@ public class VideoPlayerManager implements Initializable {
         mediaPlayer = new MediaPlayer(media);
         mediaView.setMediaPlayer(mediaPlayer);
         bindMediaProperties();
+        mediaPlayer.play();
+        btnPlay.setGraphic(createIconView(pauseIcon));
     }
 
     public MediaPlayer getVideoMediaPlayer() {
