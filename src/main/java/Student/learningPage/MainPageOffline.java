@@ -3,6 +3,7 @@ package Student.learningPage;
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.Navigator;
 import Student.navBarAndSearchbar.navBarController;
+import Student.navBarAndSearchbar.navBarOffline;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,13 +24,13 @@ public class MainPageOffline implements Initializable {
     public ScrollPane mainScrollPane;
     public HBox searchbar_container;
     public HBox content;
-    private navBarController navCtrl;
+    private navBarOffline navCtrl;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //        Navigator.setController(this);
         displayNavbar();
         displaySearchBar();
-//        displayContent("/fxml/Student/HomePage/home.fxml");
+        displayContent("/fxml/Student/Offline/learningPageoffline.fxml");
     }
 
 
@@ -104,32 +105,6 @@ public class MainPageOffline implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void displayContent() throws IOException {
-        if (content == null) {
-            System.out.println("Error: 'content' container is null. Cannot display content.");
-            return;
-        }
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/offline/OfflineMyCourse.fxml"));
-        Parent newContent = loader.load();
-
-        FontLoader font = new FontLoader();
-        font.loadFonts();
-
-        FadeTransition fadeOut = new FadeTransition(Duration.millis(200), content);
-        fadeOut.setFromValue(1.0);
-        fadeOut.setToValue(0.0);
-        fadeOut.setOnFinished(event -> {
-            content.getChildren().setAll(content);
-            FadeTransition fadeIn = new FadeTransition(Duration.millis(200), newContent);
-            fadeIn.setFromValue(0.0);
-            fadeIn.setToValue(1.0);
-            fadeIn.play();
-        });
-
-        fadeOut.play();
     }
 
 
