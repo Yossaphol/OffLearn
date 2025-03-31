@@ -5,8 +5,9 @@ package Student.learningPage;
 import Database.*;
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.HomeController;
+
 import Student.HomeAndNavigation.Navigator;
-import Student.inbox.pChat.pChatController;
+import Utili.FileStorageHelper;
 import a_Session.SessionManager;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -14,7 +15,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -26,7 +26,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -101,6 +104,7 @@ public class learningPageController extends ChapterProgress implements Initializ
         nextTeacherName.setText("อาจารย์ขิม ใจดี");
         method_home.loadAndSetImage(nextImgCourse, "/img/Profile/user.png");
 
+        initializeVidDownloadHandler();
         toQuizButton();
         method_home.hoverEffect(btnContactTeacher);
         method_home.hoverEffect(btnGloblalChat);
@@ -398,15 +402,29 @@ public class learningPageController extends ChapterProgress implements Initializ
         };
         task.setOnSucceeded(e -> {
             String videoURL = task.getValue();
-            System.out.println("Video URL: " + videoURL);
-            System.out.println("chapterID passed: " + chapterID);
+            File localVideo = FileStorageHelper.getChapterVideoFile(chapterID);
+            String mediaSource;
+            boolean isOffline = false;
+            if (localVideo.exists()) {
+                mediaSource = localVideo.toURI().toString();
+                isOffline = true;
+                System.out.println("Playing offline video: " + mediaSource);
+            } else {
+                mediaSource = videoURL;
+                System.out.println("Playing online video: " + mediaSource);
+            }
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/learningPage/videoPlayer.fxml"));
                 StackPane videoRoot = loader.load();
                 videoManager = loader.getController();
                 mediacontainer.getChildren().setAll(videoRoot);
-                if (videoURL != null && !videoURL.isEmpty()) {
-                    videoManager.setVideoPath(videoURL);
+                if (mediaSource != null && !mediaSource.isEmpty()) {
+                    videoManager.setVideoPath(mediaSource);
+                }
+                if (isOffline) {
+                    System.out.println("This is an offline video.");
+                } else {
+                    System.out.println("This is an online video.");
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -608,5 +626,69 @@ public class learningPageController extends ChapterProgress implements Initializ
             scene.setCursor(isLoading ? Cursor.WAIT : Cursor.DEFAULT);
         }
         rootpage.setDisable(isLoading);
+    }
+
+    public void initializeVidDownloadHandler() {
+        btnOffLoad.setOnAction(e -> {
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to download the video for offline use?", ButtonType.YES, ButtonType.NO);
+            confirm.setTitle("Download Video");
+            confirm.setHeaderText(null);
+            if (confirm.showAndWait().orElse(ButtonType.NO) == ButtonType.YES) {
+                btnOffLoad.setDisable(true);
+                rootpage.getScene().setCursor(Cursor.WAIT);
+                downloadChapterVideo();
+            }
+        });
+    }
+
+    private void downloadChapterVideo() {
+        String videoURL = new ChapterDB().getVideoURLByChapterID(chapterID);
+        if (videoURL == null || videoURL.isEmpty()) {
+            showAlert("Error", "Video URL not available.", Alert.AlertType.ERROR);
+            btnOffLoad.setDisable(false);
+            rootpage.getScene().setCursor(Cursor.DEFAULT);
+            return;
+        }
+        File destination = FileStorageHelper.getChapterVideoFile(chapterID);
+
+        Task<Void> downloadTask = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                try (InputStream in = new URL(videoURL).openStream();
+                     FileOutputStream out = new FileOutputStream(destination)) {
+
+                    byte[] buffer = new byte[8192];
+                    int bytesRead;
+                    while ((bytesRead = in.read(buffer)) != -1) {
+                        if (isCancelled()) break;
+                        out.write(buffer, 0, bytesRead);
+                    }
+                }
+                return null;
+            }
+        };
+        downloadTask.setOnSucceeded(e -> {
+            Platform.runLater(() -> {
+                showAlert("Download Completed", "Video downloaded to: " + destination.getAbsolutePath(), Alert.AlertType.INFORMATION);
+                btnOffLoad.setDisable(false);
+                rootpage.getScene().setCursor(Cursor.DEFAULT);
+            });
+        });
+        downloadTask.setOnFailed(e -> {
+            Platform.runLater(() -> {
+                showAlert("Download Failed", "Failed to download video.", Alert.AlertType.ERROR);
+                btnOffLoad.setDisable(false);
+                rootpage.getScene().setCursor(Cursor.DEFAULT);
+            });
+        });
+        runBackgroundTask(downloadTask);
+    }
+
+    private void showAlert(String title, String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
