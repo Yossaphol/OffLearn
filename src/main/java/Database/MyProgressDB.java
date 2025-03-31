@@ -62,16 +62,16 @@ public class MyProgressDB extends ConnectDB {
                 pstmS.setString(1, userID);
                 pstmS.setString(2, r.getString("Chapter_ID"));
                 ResultSet r1 = pstmS.executeQuery();
-                System.out.println(r.getString("Chapter_ID"));
+//                System.out.println(r.getString("Chapter_ID"));
                 if (r1.next()) {
-                    System.out.println(r1.getDouble("myprogress"));
+//                    System.out.println(r1.getDouble("myprogress"));
                     tmpS += r1.getDouble("myprogress");
                 }
             }
             if (rc.next()) {
                 tmpC = rc.getInt(1);
             }
-            System.out.println("S "+tmpS + " C" + tmpC);
+//            System.out.println("S "+tmpS + " C" + tmpC);
             if ( tmpS == 0 || tmpC == 0) {
                 return 0;
             }
@@ -80,7 +80,7 @@ public class MyProgressDB extends ConnectDB {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println(totalProgress);
+        System.out.println(CourseID+" "+totalProgress);
         return totalProgress;
     }
 

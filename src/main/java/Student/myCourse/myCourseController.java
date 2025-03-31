@@ -68,17 +68,21 @@ public class myCourseController implements Initializable {
         for (MyCourse myCourse : myCourses) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/CourseCard.fxml"));
+                FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/CourseCard.fxml"));
 
                 Node courseItem = loader.load();
+                Node courseItem1 = loader1.load();
 
                 courseCardController controller = loader.getController();
+                courseCardController controller1 = loader1.getController();
+
+                double progress = myProgressDB.sumChapterProgress(myCourse.getCourse_ID(),myCourse.getCat_ID(), SessionManager.getInstance().getUserID());
 
                 controller.setCourseImage(myCourse.getImage());
-
                 controller.setCourseCategory(category.getCatName(myCourse.getCat_ID()));
                 controller.setCourseTitle(myCourse.getCourseName());
                 controller.setCourseSubtitle(myCourse.getCourseDescription());
-                controller.setCourseProgress(myProgressDB.sumChapterProgress(myCourse.getCourse_ID(),myCourse.getCat_ID(), SessionManager.getInstance().getUserID()));
+                controller.setCourseProgress(progress);
 
                 courseItem.setOnMouseClicked(mouseEvent -> {
                     try {
@@ -95,7 +99,35 @@ public class myCourseController implements Initializable {
                     }
                 });
 
+                controller1.setCourseImage(myCourse.getImage());
+                controller1.setCourseCategory(category.getCatName(myCourse.getCat_ID()));
+                controller1.setCourseTitle(myCourse.getCourseName());
+                controller1.setCourseSubtitle(myCourse.getCourseDescription());
+                controller1.setCourseProgress(progress);
+
+                courseItem1.setOnMouseClicked(mouseEvent -> {
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Student/learningPage/learningPage.fxml"));
+                        HBox learningPage = fxmlLoader.load();
+                        bg.getChildren().clear();
+                        bg.getChildren().add(learningPage);
+
+                        learningPageController l = fxmlLoader.getController();
+                        l.recieveMethod(myCourse.getCourse_ID());
+                        Navigator.setCurrentContentController(l);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+
                 homeController.hoverEffect(courseItem);
+                homeController.hoverEffect(courseItem1);
+                System.out.println(progress);
+                if ( progress >= 10 && progress < 80 ) {
+                    coursecardContainer1.getChildren().add(courseItem1);
+                } else if ( progress >= 80 && progress <= 101 ) {
+                    coursecardContainer2.getChildren().add(courseItem1);
+                }
                 coursecardContainer0.getChildren().add(courseItem);
             } catch (IOException e) {
                 throw new RuntimeException(e);
