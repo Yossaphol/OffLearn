@@ -1,7 +1,8 @@
 package Student.swing;
 
 import Database.*;
-import a_Session.SessionHadler;
+import a_Session.SessionHandler;
+import a_Session.SessionHandler;
 import a_Session.SessionManager;
 
 import javax.swing.*;
@@ -9,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class postTopic implements ActionListener, SessionHadler {
+public class postTopic implements ActionListener, SessionHandler {
 
     private JFrame jFrame;
     private JPanel contentPanel;

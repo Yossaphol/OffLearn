@@ -6,7 +6,8 @@ import Student.HomeAndNavigation.Navigator;
 import Teacher.quiz.QuestionItem;
 import Teacher.quiz.QuizController;
 import Teacher.quiz.QuizItem;
-import a_Session.SessionHadler;
+import a_Session.SessionHandler;
+import a_Session.SessionHandler;
 import a_Session.SessionManager;
 import com.beust.ah.A;
 import javafx.fxml.FXML;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class QuizPageController implements Initializable, SessionHadler {
+public class QuizPageController implements Initializable, SessionHandler {
 
     @FXML
     private VBox questionSpace;

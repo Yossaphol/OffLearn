@@ -1,7 +1,8 @@
 package Student.inbox.gChat;
 
 import Database.*;
-import a_Session.SessionHadler;
+import a_Session.SessionHandler;
+import a_Session.SessionHandler;
 import a_Session.SessionManager;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
@@ -24,7 +25,7 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class gChatController implements Initializable, SessionHadler {
+public class gChatController implements Initializable, SessionHandler {
 
     @FXML
     private Button createTopic;

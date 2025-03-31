@@ -54,7 +54,7 @@ public class UserDB extends ConnectDB{
         }
     }
 
-    public boolean updateUserInfoes(String username, String firstname, String lastname, String email, String description) {
+    public boolean updateUserInfo(String username, String firstname, String lastname, String email, String description) {
         String query = "UPDATE offlearn.user SET firstname = ?, lastname = ?, email = ? , description = ? WHERE username = ?";
 
         try (Connection conn = this.connectToDB();

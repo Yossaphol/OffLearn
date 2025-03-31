@@ -4,7 +4,8 @@ import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
 import Student.inbox.Client;
 import Database.*;
-import a_Session.SessionHadler;
+import a_Session.SessionHandler;
+import a_Session.SessionHandler;
 import a_Session.SessionManager;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
@@ -29,7 +30,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class pChatController implements Initializable, SessionHadler {
+public class pChatController implements Initializable, SessionHandler {
 
     @FXML
     private Button sendButton;

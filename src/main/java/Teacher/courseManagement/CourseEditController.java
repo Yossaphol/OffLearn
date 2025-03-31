@@ -7,7 +7,8 @@ import Teacher.dashboard.dashboardController;
 import Teacher.quiz.QuizController;
 import Teacher.quiz.QuestionItem;
 import Teacher.quiz.*;
-import a_Session.SessionHadler;
+import a_Session.SessionHandler;
+import a_Session.SessionHandler;
 import a_Session.SessionManager;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -32,7 +33,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class CourseEditController implements Initializable, SessionHadler {
+public class CourseEditController implements Initializable, SessionHandler {
 
     @FXML
     private Label addCourse;

@@ -142,7 +142,7 @@ public class settingController implements Initializable {
         String newEmail = privateinfo_gmail.getText();
         String adddescription = description.getText();
 
-        boolean isUpdated = userDB.updateUserInfoes(sessionUsername, newFirstname, newLastname, newEmail, adddescription);
+        boolean isUpdated = userDB.updateUserInfo(sessionUsername, newFirstname, newLastname, newEmail, adddescription);
 
         if (isUpdated) {
             if (!selectedimg.isEmpty()) {

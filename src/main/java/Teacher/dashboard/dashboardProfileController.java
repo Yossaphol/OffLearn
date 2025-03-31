@@ -3,7 +3,8 @@ package Teacher.dashboard;
 import Database.CourseDB;
 import Database.User;
 import Database.UserDB;
-import a_Session.SessionHadler;
+import a_Session.SessionHandler;
+import a_Session.SessionHandler;
 import a_Session.SessionManager;
 import Teacher.navigator.Navigator;
 import javafx.fxml.FXML;
@@ -19,7 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
-public class dashboardProfileController implements Initializable, SessionHadler {
+public class dashboardProfileController implements Initializable, SessionHandler {
 
     @FXML
     private Rectangle user_pfp;
