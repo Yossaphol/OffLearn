@@ -132,23 +132,17 @@ public class learningPageController extends ChapterProgress implements Initializ
             }
         });
 
-        if (loadChapterProgress(String.valueOf(chapterID), sessionUserID) == -1) {
-            progressBar.setProgress(0);
-            labelPercent.setText("0%");
-        } else {
-            double tmp = loadChapterProgress(String.valueOf(chapterID), sessionUserID);
-            progressBar.setProgress(tmp);
-            labelPercent.setText(tmp+"%");
-        }
-
         scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(() -> {
             try {
                 System.out.println(111);
                 updateProgress(videoManager.getVideoMediaPlayer(), chapterID);
-//                double tmp = loadChapterProgress(String.valueOf(chapterID), sessionUserID);
-//                progressBar.setProgress(tmp);
-//                labelPercent.setText(tmp+"%");
+                double tmp = loadChapterProgress(String.valueOf(chapterID), sessionUserID);
+                double normalized = tmp / 100.0;
+                Platform.runLater(() -> {
+                    progressBar.setProgress(normalized);
+                    labelPercent.setText(String.format("%.2f%%", tmp));
+                });
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -333,7 +327,7 @@ public class learningPageController extends ChapterProgress implements Initializ
         Task<ArrayList<String[]>> task = new Task<>() {
             @Override
             protected ArrayList<String[]> call() {
-                int forcedCourseID = 138; // for testing; you might want to use courseID instead
+                int forcedCourseID = courseID;
                 PlaylistDB playlistDB = new PlaylistDB();
                 return playlistDB.getChaptersByCourseID(forcedCourseID);
             }
@@ -466,7 +460,35 @@ public class learningPageController extends ChapterProgress implements Initializ
 
     // Stub methods for future implementations
     private void loadRecommendedCourses() { }
-    private void loadProgress() { }
+
+    private void loadProgress() {
+        Task<Double> progressTask = new Task<>() {
+            @Override
+            protected Double call() {
+                MyProgressDB progressDB = new MyProgressDB();
+                return progressDB.loadChapterProgress(String.valueOf(chapterID), sessionUserID);
+            }
+        };
+
+        progressTask.setOnSucceeded(e -> {
+            double progress = progressTask.getValue();
+            if (progress < 0) {
+                progressBar.setProgress(0);
+                labelPercent.setText("0%");
+            } else {
+                double normalized = progress / 100.0;
+                progressBar.setProgress(normalized);
+                labelPercent.setText(String.format("%.2f%%", progress));
+            }
+        });
+
+        progressTask.setOnFailed(e -> {
+            System.err.println("Error loading chapter progress:");
+            progressTask.getException().printStackTrace();
+        });
+
+        runBackgroundTask(progressTask);
+    }
 
     @Override
     public void disposePlayer() {

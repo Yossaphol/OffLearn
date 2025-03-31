@@ -20,7 +20,10 @@ import javafx.stage.FileChooser;
 import mediaUpload.MediaUpload;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -132,7 +135,8 @@ public class ChapterContent implements Initializable {
                     return;
                 }
 
-                chapImgUrl = m.uploadVideo(selectedFile);
+                File formattedfile = Formatname(selectedFile);
+                chapImgUrl = m.uploadVideo(formattedfile);
 
                 String videoPath = selectedFile.toURI().toString();
                 Media media = new Media(videoPath);
@@ -266,6 +270,20 @@ public class ChapterContent implements Initializable {
         }
 
         this.chapterID = chapterItem.getChapId();
+    }
+
+    private File Formatname(File original) {
+        String originalName = original.getName();
+        String sanitized = originalName.replaceAll("\\s+", "_").replaceAll("[^a-zA-Z0-9_.-]", "");
+        if (originalName.equals(sanitized)) return original;
+
+        File renamed = new File(original.getParent(), sanitized);
+        try {
+            Files.copy(original.toPath(), renamed.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return renamed;
     }
 
 }
