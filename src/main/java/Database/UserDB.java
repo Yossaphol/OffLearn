@@ -2,10 +2,14 @@ package Database;
 
 import a_Session.SessionManager;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class UserDB extends ConnectDB{
 
@@ -155,6 +159,19 @@ public class UserDB extends ConnectDB{
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void saveUserData(String userID, String username, String password) {
+        Properties prop = new Properties();
+        try (FileOutputStream output = new FileOutputStream("user_config.properties")) {
+            prop.setProperty("User_ID", userID);
+            prop.setProperty("username", username);
+            prop.setProperty("password", password);
+            prop.store(output, null);
+            System.out.println("บันทึกข้อมูลผู้ใช้สำเร็จ!");
+        } catch (IOException e) {
+            System.err.println("เกิดข้อผิดพลาดในการบันทึกข้อมูล: " + e.getMessage());
+        }
     }
 
     //signup page

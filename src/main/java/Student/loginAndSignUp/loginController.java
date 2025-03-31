@@ -5,6 +5,7 @@ import Database.User;
 import Database.UserDB;
 import Student.FontLoader.FontLoader;
 
+import Student.learningPage.MainPageOffline;
 import a_Session.SessionManager;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
@@ -20,10 +21,15 @@ import javafx.event.ActionEvent;
 import javafx.util.Duration;
 
 import java.awt.event.KeyEvent;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.Properties;
 import java.util.ResourceBundle;
+
+import static Student.loginAndSignUp.Internet.isInternetAvailable;
 
 public class loginController implements Initializable {
     private Stage stage;
@@ -62,6 +68,28 @@ public class loginController implements Initializable {
             return;
         }
 
+        if (!isInternetAvailable()) {
+            if (loadUserData(username, password)){
+                showAlert("Login Successful", "Welcome, " + username, Alert.AlertType.INFORMATION);
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/Offline/MainPageOffline.fxml"));
+                    root = loader.load();
+                    MainPageOffline mainPageOffline = loader.getController();
+
+                    Stage stage = (Stage) getUsername.getScene().getWindow();
+                    stage.setScene(new Scene(root));
+                    stage.setTitle("Home Page");
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    showAlert("Error", "Cannot load home page.", Alert.AlertType.ERROR);
+                }
+            } else {
+                showAlert("Login Failed", "Please try again.", Alert.AlertType.WARNING);
+            }
+            return;
+        }
+
         String userType = userDB.loginConnect(username, password);
 
         if (userType != null) {
@@ -79,6 +107,24 @@ public class loginController implements Initializable {
         } else {
             showAlert("Login Failed", "Invalid username or password.", Alert.AlertType.ERROR);
         }
+    }
+
+    public boolean loadUserData(String name, String pass) {
+        Properties prop = new Properties();
+        try (FileInputStream input = new FileInputStream("user_config.properties")) {
+            prop.load(input);
+            String userID = prop.getProperty("User_ID");
+            String username = prop.getProperty("username");
+            String password = prop.getProperty("password");
+            if (name.equals(username) & pass.equals(password)) {
+                SessionManager.getInstance().setUserID(userID);
+                SessionManager.getInstance().setUsername(username);
+                return true;
+            }
+        } catch (IOException e) {
+            System.err.println("ไม่พบไฟล์ user_config.properties");
+        }
+        return false;
     }
 
 
