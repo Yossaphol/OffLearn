@@ -64,13 +64,14 @@ public class learningPageController extends ChapterProgress implements Initializ
 
     private VideoPlayerManager videoManager;
     private Navigator navigator;
-    private int countLike = 224;
-    private int countDisLike = 17;
+    private int countLike;
+    private int countDisLike;
     private int courseID;
     private int chapterID;
     private int userID;
     private int quizID;
     private QuizDB quizDB;
+    private ChapterFavDB favDB;
     String sessionUserID = SessionManager.getInstance().getUserID();
 
     // Helper: run tasks on a background daemon thread
@@ -95,9 +96,6 @@ public class learningPageController extends ChapterProgress implements Initializ
         method_home.loadAndSetImage(nextImgCourse, "/img/Profile/user.png");
 
         toQuizButton();
-
-        btnLike.setText(String.valueOf(countLike));
-        btnDislike.setText(String.valueOf(countDisLike));
         method_home.hoverEffect(btnContactTeacher);
         method_home.hoverEffect(btnGloblalChat);
         method_home.hoverEffect(btnLike);
@@ -218,6 +216,8 @@ public class learningPageController extends ChapterProgress implements Initializ
             loadProgress();
             loadRecommendedCourses();
             loadAttachment();
+            initializeReactionHandlers();
+            updateReactionCounts();
         });
         combinedTask.setOnFailed(e -> {
             System.err.println("Error in combined task:");
@@ -421,6 +421,8 @@ public class learningPageController extends ChapterProgress implements Initializ
             loadPlaylist();
             loadChapterContent();
             loadTeacherInfo();
+            initializeReactionHandlers();
+            updateReactionCounts();
             if (category != null) {
                 catName.setText(category);
             } else {
@@ -472,5 +474,83 @@ public class learningPageController extends ChapterProgress implements Initializ
         });
 
         runBackgroundTask(task);
+    }
+    private void updateReactionCounts() {
+        favDB = new ChapterFavDB();
+        int[] totals = favDB.getChapterReactionTotals(chapterID); // totals[0]: likes, totals[1]: dislikes
+        btnLike.setText(String.valueOf(totals[0]));
+        btnDislike.setText(String.valueOf(totals[1]));
+        System.out.println("Updated Reaction Totals -> Likes: " + totals[0] + ", Dislikes: " + totals[1]);
+    }
+
+    private void initializeReactionHandlers() {
+        ChapterFavDB favDB = new ChapterFavDB();
+        int userId = Integer.parseInt(sessionUserID);
+
+        // Load current totals and user reaction
+        Task<Void> task = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                int[] totals = favDB.getChapterReactionTotals(chapterID);
+                boolean[] userReaction = favDB.getUserReaction(userId, chapterID);
+
+                Platform.runLater(() -> {
+                    btnLike.setText(String.valueOf(totals[0]));
+                    btnDislike.setText(String.valueOf(totals[1]));
+
+                    updateButtonStyle(btnLike, userReaction[0]);
+                    updateButtonStyle(btnDislike, userReaction[1]);
+                });
+
+                return null;
+            }
+        };
+
+        runBackgroundTask(task);
+
+        //Like Button
+        btnLike.setOnAction(e -> {
+            runBackgroundTask(new Task<>() {
+                @Override
+                protected Void call() {
+                    favDB.toggleReaction(userId, chapterID, true); // true = like
+                    refreshReactions(favDB, userId);
+                    return null;
+                }
+            });
+        });
+
+        //Dislike Button
+        btnDislike.setOnAction(e -> {
+            runBackgroundTask(new Task<>() {
+                @Override
+                protected Void call() {
+                    favDB.toggleReaction(userId, chapterID, false); // false = dislike
+                    refreshReactions(favDB, userId);
+                    return null;
+                }
+            });
+        });
+    }
+
+    private void refreshReactions(ChapterFavDB favDB, int userId) {
+        int[] totals = favDB.getChapterReactionTotals(chapterID);
+        boolean[] userReaction = favDB.getUserReaction(userId, chapterID);
+
+        Platform.runLater(() -> {
+            btnLike.setText(String.valueOf(totals[0]));
+            btnDislike.setText(String.valueOf(totals[1]));
+            updateButtonStyle(btnLike, userReaction[0]);
+            updateButtonStyle(btnDislike, userReaction[1]);
+        });
+    }
+
+    // highlight button when active ( WILL CHANGE ) mostly for testing
+    private void updateButtonStyle(Button button, boolean isActive) {
+        if (isActive) {
+            button.setStyle("-fx-background-color: transparent; -fx-border-color: #8100cc; -fx-border-radius: 10;");
+        } else {
+            button.setStyle("-fx-background-color: transparent;");
+        }
     }
 }
