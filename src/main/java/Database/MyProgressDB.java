@@ -7,6 +7,16 @@ import java.sql.SQLException;
 
 public class MyProgressDB extends ConnectDB {
 
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
     public double loadChapterProgress(String chapID, String userID) {
         String sql = "SELECT myprogress FROM offlearn.myprogress WHERE Chapter_ID = ? AND User_ID = ?";
 
@@ -49,7 +59,7 @@ public class MyProgressDB extends ConnectDB {
         return -1;
     }
 
-    public double insertChapterProgress(String chapID, String userID, double progress, double lasttime) {
+    public double saveToDB(String chapID, String userID, double progress, double lasttime) {
         String sql = "INSERT INTO offlearn.myprogress (User_ID, Chapter_ID, myprogress,lasttime) VALUES (?,?,?,?)";
         String sqlu = "UPDATE offlearn.myprogress SET Lasttime = ?, myprogress = ? WHERE User_ID = ? AND Chapter_ID = ?";
 
@@ -83,4 +93,6 @@ public class MyProgressDB extends ConnectDB {
         }
         return 0;
     }
+
+
 }

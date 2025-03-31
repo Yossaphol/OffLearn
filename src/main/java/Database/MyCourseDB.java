@@ -13,6 +13,16 @@ public class MyCourseDB extends ConnectDB {
 
     public MyCourseDB() { getAllMyCourse(); }
 
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
     private void getAllMyCourse() {
         String sql = "SELECT Course_ID FROM enroll WHERE User_ID = ?";
         String sqlCourse = "SELECT * FROM course WHERE Course_ID = ?";
@@ -45,4 +55,6 @@ public class MyCourseDB extends ConnectDB {
     }
 
     public ArrayList<MyCourse> getallMyCourse() { return allMyCourse; }
+
+
 }

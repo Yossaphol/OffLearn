@@ -6,7 +6,8 @@ import Database.ScoreDB;
 import Database.UserDB;
 import Teacher.courseManagement.CourseItem;
 import Teacher.courseManagement.CourseListInDash;
-import a_Session.SessionHadler;
+import a_Session.SessionHandler;
+import a_Session.SessionHandler;
 import a_Session.SessionManager;
 import javafx.animation.*;
 import javafx.application.Platform;
@@ -37,7 +38,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class dashboardController implements Initializable, SessionHadler {
+public class dashboardController implements Initializable, SessionHandler {
     @FXML
     private HBox searhbar_container;
 

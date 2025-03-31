@@ -13,6 +13,8 @@ public class CourseItem {
     private String courseCat;
     private String courseDesc;
     private ArrayList<ChapterItem> chapterList;
+    private String teacherName;
+    private String categoryName;
 
     public CourseItem(int courseId, String courseImg, String courseName, int coursePrice, String courseCat){
         this.setCourseId(courseId);
@@ -24,6 +26,7 @@ public class CourseItem {
     }
 
     public CourseItem(int courseId, String courseImg, String courseName, int coursePrice, String courseCat, String courseDesc){
+        this.setCourseId(courseId);
         this.setCourseImg(courseImg);
         this.setCourseName(courseName);
         this.setCoursePrice(coursePrice);
@@ -89,16 +92,25 @@ public class CourseItem {
         this.courseId = courseId;
     }
 
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
     public courseObject toCourseObject() {
         return new courseObject(
                 courseDesc,
                 courseName,
                 coursePrice,
-                4.9,              // สมมติให้ rating คงที่หรือสุ่ม
-                120,              // จำนวนรีวิว mock
+                4.9,              // rating
+                120,              // จำนวนรีวิว
                 "/img/icon/code.png",  // ไอคอนหมวดหมู่
                 courseCat,
-                courseImg
+                courseImg,
+                this.teacherName
         );
     }
 

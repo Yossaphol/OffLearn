@@ -6,6 +6,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class WithdrawDB extends ConnectDB {
+
+
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
     public static withdraw getWithdrawInfo(int userId) {
         String query = "SELECT accountNumber, accountFName, accountLName, bankName FROM offlearn.bookbank WHERE User_ID = ?";
 
@@ -53,7 +65,7 @@ public class WithdrawDB extends ConnectDB {
         return false;
     }
 
-    public boolean insertWithdrawInfo(String accountNumber, String accountFName, String accountLName, String bankName, int User_ID,withdraw withdrawInfo) {
+    public boolean saveToDB(String accountNumber, String accountFName, String accountLName, String bankName, int User_ID,withdraw withdrawInfo) {
         String query = "INSERT INTO offlearn.bookbank (accountNumber, accountFName, accountLName, bankName, User_ID) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = this.connectToDB();

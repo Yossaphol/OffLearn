@@ -65,6 +65,7 @@ public class cartController implements Initializable {
                 cartCardController controller = loader.getController();
                 controller.setDescription(course.getDescription());
                 controller.setName(course.getName());
+                controller.setTeacherName(course.getTeacherName());
                 controller.setPrice(course.getPrice());
                 controller.setRating(course.getRating(), course.getReviewCount());
                 controller.setCategory(course.getCategoryIcon(), course.getCategoryName());

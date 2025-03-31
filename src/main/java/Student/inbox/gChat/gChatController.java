@@ -1,7 +1,8 @@
 package Student.inbox.gChat;
 
 import Database.*;
-import a_Session.SessionHadler;
+import Student.swing.PostTopicMDI;
+import a_Session.SessionHandler;
 import a_Session.SessionManager;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
@@ -12,19 +13,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import Student.swing.postTopic;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
+import com.formdev.flatlaf.FlatLightLaf;
+import javax.swing.*;
+import java.awt.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class gChatController implements Initializable, SessionHadler {
+public class gChatController implements Initializable, SessionHandler {
 
     @FXML
     private Button createTopic;
@@ -49,6 +51,7 @@ public class gChatController implements Initializable, SessionHadler {
 
     private String name;
     private UserDB userDB;
+    private topicContent t;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -57,11 +60,8 @@ public class gChatController implements Initializable, SessionHadler {
 
         setProfile(userDB.getProfile(name));
 
-        postTopic postGui = new postTopic();
         refreshContent();
-
-        createTopic.setOnAction(actionEvent -> postGui.openSwingWindow());
-
+        createTopic.setOnAction(actionEvent -> openPostTopic());
         refresh.setOnMouseClicked(mouseEvent -> refreshContent());
 
         setEffect();
@@ -82,15 +82,15 @@ public class gChatController implements Initializable, SessionHadler {
         }).start();
     }
 
-    public Pane getPane(){
+    public Pane getPane() {
         return this.pane;
     }
 
-    public VBox getMain(){
+    public VBox getMain() {
         return this.main;
     }
 
-    public void setProfile(String Url){
+    public void setProfile(String Url) {
         Image img;
         if (Url.startsWith("http") || Url.startsWith("https")) {
             img = new Image(Url);
@@ -102,8 +102,7 @@ public class gChatController implements Initializable, SessionHadler {
         this.profile.setFill(new ImagePattern(img));
     }
 
-
-    public void setEffect(){
+    public void setEffect() {
         hoverEffect(createTopic);
     }
 
@@ -119,12 +118,59 @@ public class gChatController implements Initializable, SessionHadler {
         scaleDown.setToX(1);
         scaleDown.setToY(1);
 
-        btn.setOnMouseEntered(mouseEvent -> {
-            scaleUp.play();
-        });
-        btn.setOnMouseExited(mouseEvent -> {
-            scaleDown.play();
+        btn.setOnMouseEntered(mouseEvent -> scaleUp.play());
+        btn.setOnMouseExited(mouseEvent -> scaleDown.play());
+    }
+
+
+    public void openPostTopic() {
+        SwingUtilities.invokeLater(() -> {
+            try {
+                UIManager.setLookAndFeel(new com.formdev.flatlaf.FlatLightLaf()); // FlatLaf Light Theme
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            JFrame frame = new JFrame("Post Topic");
+            frame.setSize(650, 450);
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            frame.setLocationRelativeTo(null);
+
+            JDesktopPane desktopPane = new JDesktopPane();
+            frame.setContentPane(desktopPane);
+
+            JInternalFrame internalFrame = new JInternalFrame("", false, false, false, false);
+            internalFrame.setBounds(0, 0, frame.getWidth() - 10, frame.getHeight() - 35);
+            internalFrame.setBorder(null);
+            internalFrame.putClientProperty("JInternalFrame.isPalette", Boolean.TRUE);
+            internalFrame.setVisible(true);
+
+            JPanel contentPanel = new JPanel();
+            contentPanel.setLayout(new BorderLayout());
+            contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+            contentPanel.add(new JLabel("Post Your Topic"), BorderLayout.NORTH);
+
+            JTextArea textArea = new JTextArea();
+            contentPanel.add(new JScrollPane(textArea), BorderLayout.CENTER);
+
+            JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+            JButton postButton = new JButton("Post");
+            postButton.addActionListener(e -> {
+                new topicDB().saveToDB(textArea.getText(), name);
+                refreshContent();
+                frame.dispose();
+            });
+
+            buttonPanel.add(postButton);
+            contentPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+            internalFrame.setContentPane(contentPanel);
+
+            desktopPane.add(internalFrame);
+            frame.setVisible(true);
         });
     }
 
+
 }
+

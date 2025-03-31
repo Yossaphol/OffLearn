@@ -4,7 +4,19 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class PlaylistDB extends ConnectDB{
+    
     ArrayList<String[]> playlist = new ArrayList<>();
+
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
     public ArrayList<String[]> getChaptersByCourseID(int courseID) {
         String sql = "SELECT Chapter_ID, chapterName FROM chapter WHERE Course_ID = ?";
 
@@ -30,5 +42,6 @@ public class PlaylistDB extends ConnectDB{
 
         return chapters;
     }
+
 
 }

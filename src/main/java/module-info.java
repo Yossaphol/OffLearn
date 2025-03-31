@@ -2,7 +2,6 @@ module com.example.offlearn {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
-    requires java.desktop;
     requires jdk.xml.dom;
     requires jdk.compiler;
     requires jdk.dynalink;
@@ -20,6 +19,7 @@ module com.example.offlearn {
     requires software.amazon.awssdk.regions;
     requires software.amazon.awssdk.services.s3;
     requires javafx.swing;
+    requires com.formdev.flatlaf;
 
     opens Student.inbox to javafx.fxml;
     exports Student.inbox;

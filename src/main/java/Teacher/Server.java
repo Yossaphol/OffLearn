@@ -2,6 +2,7 @@ package Teacher;
 
 import Teacher.inbox.pChat.pChatServerController;
 import Database.*;
+import a_Session.SessionManager;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -23,7 +24,7 @@ public class Server {
         this.serverSocket = serverSocket;
         this.controller = controller;
         this.teacherDb = new TeacherDBConnect();
-        this.teacherName = "teacher 1";
+        this.teacherName = SessionManager.getInstance().getUsername();
         this.teacherIP = getLocalIPAddress();
         this.teacherPort = serverSocket.getLocalPort();
         saveTeacherInfoToDB(teacherName);

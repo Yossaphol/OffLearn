@@ -9,6 +9,17 @@ import java.sql.SQLException;
 
 public class UserDB extends ConnectDB{
 
+
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
     //setting page
     public User getUserInfo(String username) {
         String query = "SELECT Firstname, Lastname, Username, Email, Password, Profile, description FROM offlearn.user WHERE Username = ?";
@@ -54,7 +65,7 @@ public class UserDB extends ConnectDB{
         }
     }
 
-    public boolean updateUserInfoes(String username, String firstname, String lastname, String email, String description) {
+    public boolean updateUserInfo(String username, String firstname, String lastname, String email, String description) {
         String query = "UPDATE offlearn.user SET firstname = ?, lastname = ?, email = ? , description = ? WHERE username = ?";
 
         try (Connection conn = this.connectToDB();

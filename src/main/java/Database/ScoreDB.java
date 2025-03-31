@@ -9,7 +9,17 @@ import java.util.Map;
 
 public class ScoreDB extends ConnectDB{
 
-    public void saveScore(CourseDB courseDB, int userID, int chapterID, int score, int quizID) {
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
+    public void saveToDB(CourseDB courseDB, int userID, int chapterID, int score, int quizID) {
         int courseID = courseDB.getCourseIDByChapterID(chapterID);
         String checkQuery = "SELECT COUNT(*) FROM studentscore WHERE User_ID = ? AND Chapter_ID = ?";
         String insertQuery = "INSERT INTO studentscore (User_ID, Course_ID, Chapter_ID, studentscore, Quiz_ID) VALUES (?, ?, ?, ?, ?)";
@@ -186,7 +196,7 @@ public class ScoreDB extends ConnectDB{
         Map<Integer, Integer> scoreMap = new HashMap<>();
         String query = "SELECT studentscore, COUNT(*) AS count FROM studentscore WHERE Quiz_ID = ? GROUP BY studentscore ORDER BY studentscore";
 
-        try (Connection conn = new ConnectDB().connectToDB();
+        try (Connection conn = this.connectToDB();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setInt(1, quizId);
@@ -202,5 +212,6 @@ public class ScoreDB extends ConnectDB{
         }
         return scoreMap;
     }
+
 
 }

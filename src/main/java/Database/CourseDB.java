@@ -14,7 +14,17 @@ import java.util.ArrayList;
 public class CourseDB extends ConnectDB{
     private CourseItem courseItem;
 
-    public void saveCourse(int cat, String courseName, int userId, String desc, int price, String imageUrl) {
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
+    public void saveToDB(int cat, String courseName, int userId, String desc, int price, String imageUrl) {
         String checkSql = "SELECT COUNT(*) FROM course WHERE courseName = ? AND User_ID = ?";
         String insertSql = "INSERT INTO course (Cat_ID, courseName, User_ID, courseDescription, price, image) VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -194,7 +204,7 @@ public class CourseDB extends ConnectDB{
         return null;
     }
 
-    public boolean deleteCourseByID(int courseID) {
+    public boolean deleteFromDB(int courseID) {
         String deleteCourseSql = "DELETE FROM offlearn.course WHERE Course_ID = ?";
 
         try (Connection conn = this.connectToDB();
@@ -252,10 +262,13 @@ public class CourseDB extends ConnectDB{
     public ArrayList<CourseItem> getAllCourses() {
         ArrayList<CourseItem> courseList = new ArrayList<>();
 
-        String sql = "SELECT c.Course_ID, c.courseName, c.image, c.price, c.courseDescription, cat.catname " +
+        String sql = "SELECT c.Course_ID, c.courseName, c.image, c.price, c.courseDescription, cat.catname, " +
+                "CONCAT(u.firstname, ' ', u.lastname) AS teacherName " +
                 "FROM offlearn.course c " +
                 "JOIN offlearn.category cat ON c.Cat_ID = cat.Cat_id " +
+                "JOIN offlearn.user u ON c.User_ID = u.User_ID " +
                 "WHERE c.verify = 1";
+
 
 
         try (Connection conn = this.connectToDB();
@@ -269,8 +282,12 @@ public class CourseDB extends ConnectDB{
                 int price = rs.getInt("price");
                 String description = rs.getString("courseDescription");
                 String catName = rs.getString("catname");
+                String teacherName = rs.getString("teacherName");
 
-                courseList.add(new CourseItem(id, img, name, price, catName, description));
+                CourseItem course = new CourseItem(id, img, name, price, catName, description);
+                course.setTeacherName(teacherName);
+
+                courseList.add(course);
             }
 
         } catch (SQLException e) {

@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import Student.mainPage.mainPageController;
 import Student.navBarAndSearchbar.navBarController;
+import Student.inbox.pChat.pChatController;
 
 import java.io.IOException;
 
@@ -53,12 +54,27 @@ public class Navigator {
         controller.displayNavbar();
     }
 
+    public void inboxRouteWithTeacher(String teacherName) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/inbox/pChat.fxml"));
+            Parent root = loader.load();
+            pChatController chatController = loader.getController();
+            chatController.setTeacherToSelect(teacherName);
+            
+            if (controller != null) {
+                controller.displayNavbar();
+                controller.displayContent(root);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void taskRoute(MouseEvent event) {
         navigateTo("/fxml/Student/courseManage/task.fxml");
         navCtrl.setCurrentPage("task_btn");
         controller.displayNavbar();
     }
-
 
     public void roadmapRoute(MouseEvent event) {
         navigateTo("/fxml/Student/courseManage/roadmap.fxml");

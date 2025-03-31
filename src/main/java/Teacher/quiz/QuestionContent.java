@@ -160,7 +160,7 @@ public class QuestionContent implements Initializable {
             String corr = correctAns.getText();
             int point = Integer.parseInt(this.point.getText());
 
-            questionID = questionDB.saveQuestion(quiz_id, question, corr, point, imgUrl);
+            questionID = questionDB.saveToDB(quiz_id, question, corr, point, imgUrl);
             System.out.println("save Question TO database");
             saveChoices();
 
@@ -174,7 +174,7 @@ public class QuestionContent implements Initializable {
     public void saveChoices(){
         choicesDB = new ChoicesDB();
         for (TextField t : txtGroup){
-            choicesDB.saveChoices( this.questionID, t.getText());
+            choicesDB.saveToDB( this.questionID, t.getText());
         }
     }
 
@@ -188,7 +188,7 @@ public class QuestionContent implements Initializable {
             String curr = choicesDB.getLastChoice(questionID);
             if (curr != null){
                 if (curr.equals(txtGroup.getLast().getText())){
-                    choicesDB.deleteLastChoice(questionID);
+                    choicesDB.deleteFromDB(questionID);
                 }
             }
             if (!txtGroup.isEmpty()) {
@@ -217,7 +217,7 @@ public class QuestionContent implements Initializable {
 
         delete.setOnMouseClicked(mouseEvent -> {
             itm.remove(this.questionItem);
-            questionDB.deleteQuestion(questionID);
+            questionDB.deleteFromDB(questionID);
             quizController.removeQuestion(this);
 
             System.out.println(questionID);

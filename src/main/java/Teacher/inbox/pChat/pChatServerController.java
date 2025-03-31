@@ -1,7 +1,6 @@
 package Teacher.inbox.pChat;
 
 import Database.*;
-import Student.HomeAndNavigation.HomeController;
 import Student.inbox.pChat.pChatController;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
@@ -24,7 +23,7 @@ import Teacher.Server;
 import javafx.util.Duration;
 import javafx.scene.layout.Region;
 import java.io.ByteArrayInputStream;
-import javafx.scene.layout.Region;
+
 import javafx.scene.shape.Circle;
 import javafx.scene.image.WritableImage;
 import javafx.scene.image.PixelReader;
@@ -191,10 +190,6 @@ public class pChatServerController extends pChatController implements Initializa
 
         sendButton.setOnAction(event -> {
             sendMessage();
-
-            int teacherId = teacherDBConnect.getTeacherId(server.getTeacherName());
-            int studentId = stdDb.getStudentID(selectedStudent);
-            loadChatHistoryFromDB(teacherId, studentId);
         });
 
         tfMessage.setOnAction(event -> sendMessage());
@@ -206,13 +201,12 @@ public class pChatServerController extends pChatController implements Initializa
     private void sendMessage() {
         if (selectedStudent != null && !tfMessage.getText().isEmpty()) {
             String messageToSend = tfMessage.getText();
-            addMessage(messageToSend, Pos.CENTER_RIGHT, "#81C2FF");
             server.sendMessageToStudent(selectedStudent, messageToSend);
 
             int sender_id = teacherDBConnect.getTeacherId(server.getTeacherName());
             int receive_id = stdDb.getStudentID(selectedStudent);
-            chatHistoryDB.saveChatMessage(sender_id, "teacher", receive_id, "student", messageToSend);
-
+            chatHistoryDB.saveToDB(sender_id, "teacher", receive_id, "student", messageToSend);
+            loadChatHistoryFromDB(sender_id, receive_id);
             tfMessage.clear();
         } else {
             System.out.println("Please select student");

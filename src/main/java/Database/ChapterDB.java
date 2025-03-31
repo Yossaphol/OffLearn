@@ -10,7 +10,17 @@ public class ChapterDB extends ConnectDB{
         getAllChapter();
     }
 
-    public int saveChapter(int course_id, String chapName, String desc, String chapVideo, String chapMaterial, double playtime){
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
+    public int saveToDB(int course_id, String chapName, String desc, String chapVideo, String chapMaterial, double playtime){
         String sql = "INSERT INTO chapter (Course_ID, chapterName, chapterDescription, chapter_video, chapter_material, chapter_playtime) VALUES (?, ?, ?, ?, ?, ?)";
         try (
                 Connection conn = this.connectToDB();
@@ -67,7 +77,7 @@ public class ChapterDB extends ConnectDB{
     }
 
 
-    public void deleteChapter(int chapterId) {
+    public void deleteFromDB(int chapterId) {
         String sql = "DELETE FROM chapter WHERE chapter_ID = ?";
         try (
                 Connection conn = this.connectToDB();
@@ -220,4 +230,6 @@ public class ChapterDB extends ConnectDB{
         }
         return "";
     }
+
+
 }

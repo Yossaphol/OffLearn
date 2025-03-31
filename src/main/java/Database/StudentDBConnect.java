@@ -15,6 +15,16 @@ import java.io.ByteArrayOutputStream;
 
 public class StudentDBConnect extends ConnectDB {
 
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
     public ArrayList<String> getStudentNames() {
         ArrayList<String> studentNames = new ArrayList<>();
         String query = "SELECT name FROM offlearn.studentlist";
@@ -85,4 +95,6 @@ public class StudentDBConnect extends ConnectDB {
         }
         return profilePicture;
     }
+
+
 }

@@ -72,6 +72,8 @@ public class courseController implements Initializable {
     private ArrayList<CourseItem> courseList;
 
 
+
+
     public void initialize(URL location, ResourceBundle resources) {
         closePopupAuto();
         setImg();
@@ -245,8 +247,9 @@ public class courseController implements Initializable {
 
                 controller.setCourseName(course.getName());
                 controller.setShortDescription("");
-                controller.setTeacherName("ผศ.ดร. วิรยบวร บุญเปรี่ยม");
+                controller.setTeacherName(course.getTeacherName());
                 controller.setTeacherImg("/img/Profile/man.png");
+                controller.setCategoryName(course.getCategoryName());
                 //controller.setCourseImg(course.getImage() != null ? course.getImage() : "/img/Picture/bg.jpg");
 
                 ef.hoverEffect(courseItemNode);
@@ -295,8 +298,9 @@ public class courseController implements Initializable {
 
                     controller.setCourseName(course.getName());
                     controller.setShortDescription("");
-                    controller.setTeacherName("ผศ.ดร. วิรยบวร บุญเปรี่ยม");
+                    controller.setTeacherName(course.getTeacherName());
                     controller.setTeacherImg("/img/Profile/man.png");
+                    controller.setCategoryName(course.getCategoryName());
                     //controller.setCourseImg(course.getImage() != null ? course.getImage() : "/img/Picture/bg.jpg");
 
                     ef.hoverEffect(courseItemNode);
@@ -340,8 +344,9 @@ public class courseController implements Initializable {
 
                     controller.setCourseName(course.getName());
                     controller.setShortDescription("");
-                    controller.setTeacherName("ผศ.ดร. วิรยบวร บุญเปรี่ยม");
+                    controller.setTeacherName(course.getTeacherName());
                     controller.setTeacherImg("/img/Profile/man.png");
+                    controller.setCategoryName(course.getCategoryName());
                     //controller.setCourseImg(course.getImage() != null ? course.getImage() : "/img/Picture/bg.jpg");
 
                     ef.hoverEffect(courseItemNode);

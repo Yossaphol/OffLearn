@@ -48,7 +48,7 @@ public class withdrawHistoryController implements Initializable {
         setupTable(userId);
     }
 
-public void setupTable(int userId) {
+    public void setupTable(int userId) {
     SwingNode swingNode = new SwingNode();
 
     SwingUtilities.invokeLater(() -> {

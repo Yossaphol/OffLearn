@@ -1,8 +1,6 @@
 package Teacher.courseManagement;
 
 import Database.CourseDB;
-import Teacher.quiz.QuizBoxContent;
-import Teacher.quizDetail.QuizDetailController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -123,7 +121,7 @@ public class CourseListController implements Initializable {
     public void deleteButton(){
         delete.setOnMouseClicked(mouseEvent -> {
             CourseDB courseDB = new CourseDB();
-            if (courseDB.deleteCourseByID(this.getCourseId())){
+            if (courseDB.deleteFromDB(this.getCourseId())){
                 System.out.println("Delete course from database complete");
             }
 

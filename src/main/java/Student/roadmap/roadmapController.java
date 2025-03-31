@@ -1,10 +1,7 @@
 package Student.roadmap;
 
 import Student.FontLoader.FontLoader;
-import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
-import Student.courseManage.cartCardController;
-import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,13 +18,8 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.scene.control.Label;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
+
 import Database.Category;
 import Database.RoadmapDB;
 
@@ -104,7 +96,7 @@ public class roadmapController implements Initializable {
     }
 
     private void loadRoadmapsByCategory(String catID) {
-        roadmapDB.insertRoadmapList(catID);
+        roadmapDB.saveToDB(catID);
         btn_cotainer.getChildren().clear();
 
         ArrayList<String[]> roadmaps = roadmapDB.getRoadmapList();

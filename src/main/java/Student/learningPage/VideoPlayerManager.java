@@ -726,7 +726,6 @@ public class VideoPlayerManager implements Initializable {
 
         fullscreenStage = new Stage();
         fullscreenStage.setScene(fsScene);
-        fullscreenStage.setFullScreenExitHint("Press ESC to exit fullscreen");
         fullscreenStage.setFullScreen(true);
         fullscreenStage.show();
 
@@ -1017,6 +1016,8 @@ public class VideoPlayerManager implements Initializable {
         mediaPlayer = new MediaPlayer(media);
         mediaView.setMediaPlayer(mediaPlayer);
         bindMediaProperties();
+        mediaPlayer.play();
+        btnPlay.setGraphic(createIconView(pauseIcon));
     }
 
     public MediaPlayer getVideoMediaPlayer() {

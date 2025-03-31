@@ -104,7 +104,7 @@ public class QuizBoxContent implements Initializable {
                 return;
             }
 
-            quizDB.deleteQuiz(quizItem.getQuizID());
+            quizDB.deleteFromDB(quizItem.getQuizID());
             System.out.println("Quiz deleted from database.");
 
             if (parentContainer != null && quizBox != null) {

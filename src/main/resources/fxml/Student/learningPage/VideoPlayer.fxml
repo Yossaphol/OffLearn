@@ -46,7 +46,7 @@
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../img/icon/play-button-arrowhead-solid.png" />
+                              <Image url="@../../../img/icon/pause-solid.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -77,7 +77,7 @@
                   </Button>
                   <Slider fx:id="sliderVolume" minWidth="0.0" prefHeight="30.0" prefWidth="152.0" style="-fx-cursor: hand;" stylesheets="@../../../css/learningPage.css">
                      <HBox.margin>
-                        <Insets />
+                        <Insets top="2.0" />
                      </HBox.margin>
                   </Slider>
                   <HBox fx:id="timebox" minWidth="116.0" prefHeight="43.0" prefWidth="116.0">
@@ -96,6 +96,9 @@
                            <padding>
                               <Insets left="7.0" />
                            </padding>
+                           <HBox.margin>
+                              <Insets top="2.0" />
+                           </HBox.margin>
                         </Label>
                      </children>
                   </HBox>

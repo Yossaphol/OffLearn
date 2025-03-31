@@ -11,6 +11,16 @@ import java.util.Map;
 
 public class EnrollDB extends ConnectDB{
 
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
 //    return int[] index 0 คือ ยอด enroll เดือนนี้ index 1 คือ ยอด enroll เดือนก่อน
     public int[] countEnrollmentsForCurrentAndLastMonth(int userID) {
         String sql = "SELECT " +
@@ -220,7 +230,6 @@ public class EnrollDB extends ConnectDB{
         }
         return studentNames;
     }
-
 
 
 

@@ -5,6 +5,16 @@ import java.util.ArrayList;
 
 public class OrderRoadmapDB extends ConnectDB {
 
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
     public ArrayList<String[]> getCourseListByRoadmapID(String roadmapID) {
         ArrayList<String[]> courseList = new ArrayList<>();
 
@@ -35,4 +45,6 @@ public class OrderRoadmapDB extends ConnectDB {
 
         return courseList;
     }
+
+
 }

@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConnectDB {
+public abstract class ConnectDB {
 
     private static final Dotenv nev = Dotenv.load();
     private static final String url = nev.get("DB_URL");
@@ -25,4 +25,8 @@ public class ConnectDB {
             return null;
         }
     }
+
+    public abstract  void saveToDB();
+
+    public abstract void deleteFromDB();
 }

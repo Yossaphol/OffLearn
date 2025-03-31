@@ -7,7 +7,8 @@ import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
 import Teacher.courseManagement.Course;
 import Teacher.quiz.QuizItem;
-import a_Session.SessionHadler;
+import a_Session.SessionHandler;
+import a_Session.SessionHandler;
 import a_Session.SessionManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,7 +25,7 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class ResultPageController implements Initializable, SessionHadler {
+public class ResultPageController implements Initializable, SessionHandler {
 
     @FXML
     private Label yourScore;

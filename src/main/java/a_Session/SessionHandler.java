@@ -1,6 +1,6 @@
 package a_Session;
 
-public interface SessionHadler {
+public interface SessionHandler {
 
     public abstract void handleSession();
     

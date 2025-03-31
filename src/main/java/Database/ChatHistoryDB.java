@@ -8,7 +8,17 @@ import java.util.Map;
 
 public class ChatHistoryDB extends ConnectDB {
 
-    public void saveChatMessage(int senderId, String senderType, int receiverId, String receiverType, String message) {
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
+    public void saveToDB(int senderId, String senderType, int receiverId, String receiverType, String message) {
         String query = "INSERT INTO messages (sender_id, sender_type, receiver_id, receiver_type, message_text) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = this.connectToDB();
@@ -56,4 +66,6 @@ public class ChatHistoryDB extends ConnectDB {
         }
         return messages;
     }
+
+
 }

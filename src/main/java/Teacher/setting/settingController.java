@@ -142,7 +142,7 @@ public class settingController implements Initializable {
         String newEmail = privateinfo_gmail.getText();
         String adddescription = description.getText();
 
-        boolean isUpdated = userDB.updateUserInfoes(sessionUsername, newFirstname, newLastname, newEmail, adddescription);
+        boolean isUpdated = userDB.updateUserInfo(sessionUsername, newFirstname, newLastname, newEmail, adddescription);
 
         if (isUpdated) {
             if (!selectedimg.isEmpty()) {
@@ -449,7 +449,7 @@ public class settingController implements Initializable {
 //            System.out.println("Successfully updated");
             showAlert("Success", "Update payment successfully!", Alert.AlertType.INFORMATION);
             editPayment();
-        } else if ((wd == null) &&(db.insertWithdrawInfo(acctNumber, bankFName, bankLName, bankname, userID, wd))) {
+        } else if ((wd == null) &&(db.saveToDB(acctNumber, bankFName, bankLName, bankname, userID, wd))) {
 //            System.out.println("Successfully Insert");
             showAlert("Success", "Insert payment successfully!", Alert.AlertType.INFORMATION);
             reloadPage(event);

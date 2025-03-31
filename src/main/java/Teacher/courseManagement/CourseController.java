@@ -5,7 +5,8 @@ import Database.EnrollDB;
 import Database.UserDB;
 import Student.HomeAndNavigation.HomeController;
 import Teacher.dashboard.dashboardController;
-import a_Session.SessionHadler;
+import a_Session.SessionHandler;
+import a_Session.SessionHandler;
 import a_Session.SessionManager;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class CourseController implements Initializable, SessionHadler {
+public class CourseController implements Initializable, SessionHandler {
 
     public LineChart enrollmentStatistics;
     public CategoryAxis xAxis;

@@ -1,10 +1,8 @@
 package Student.inbox.pChat;
 
-import Student.HomeAndNavigation.HomeController;
-import Student.HomeAndNavigation.Navigator;
 import Student.inbox.Client;
 import Database.*;
-import a_Session.SessionHadler;
+import a_Session.SessionHandler;
 import a_Session.SessionManager;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
@@ -29,7 +27,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class pChatController implements Initializable, SessionHadler {
+public class pChatController implements Initializable, SessionHandler {
 
     @FXML
     private Button sendButton;
@@ -69,12 +67,12 @@ public class pChatController implements Initializable, SessionHadler {
     private ChatHistoryDB chatHistoryDB;
     private StudentDBConnect studentDBConnect;
     private String studentName;
+    private String teacherToSelect;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         handleSession();
-        switchToGlobal();
-
+        
         spMain.vvalueProperty().bind(vboxMessage.heightProperty());
         teacherDb = new TeacherDBConnect();
         chatHistoryDB = new ChatHistoryDB();
@@ -92,8 +90,15 @@ public class pChatController implements Initializable, SessionHadler {
         sendButton.setOnAction(event -> sendMessage());
         tfMessage.setOnAction(event -> sendMessage());
 
-
         setEffect();
+
+        if (teacherToSelect != null) {
+            Platform.runLater(() -> {
+                teacherList.getSelectionModel().select(teacherToSelect);
+            });
+        } else {
+            switchToGlobal();
+        }
     }
 
     public void setEffect(){
@@ -225,7 +230,7 @@ public class pChatController implements Initializable, SessionHadler {
 
                 int receiverId = teacherDb.getTeacherId(selectedTeacher);
                 int senderId = studentDBConnect.getStudentID(studentName);
-                chatHistoryDB.saveChatMessage(senderId, "student", receiverId, "teacher", messageToSend);
+                chatHistoryDB.saveToDB(senderId, "student", receiverId, "teacher", messageToSend);
 
                 Platform.runLater(() -> tfMessage.clear());
             }
@@ -320,5 +325,8 @@ public class pChatController implements Initializable, SessionHadler {
         });
     }
 
+    public void setTeacherToSelect(String teacherName) {
+        this.teacherToSelect = teacherName;
+    }
 
 }
