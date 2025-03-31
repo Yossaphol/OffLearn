@@ -13,7 +13,9 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -163,9 +165,28 @@ public class learningPageController extends ChapterProgress implements Initializ
         this.quizID = quizDB.getQuizIdByChapterId(this.chapterID);
 
         // Create a latch to wait for both tasks (set count = 2)
-        CountDownLatch latch = new CountDownLatch(2);
+        CountDownLatch latch = new CountDownLatch(3);
         AtomicReference<String[]> chapterDetailsRef = new AtomicReference<>();
         AtomicReference<Boolean> quizAvailableRef = new AtomicReference<>();
+        AtomicReference<boolean[]> userReactionRef = new AtomicReference<>();
+        AtomicReference<int[]> totalsRef = new AtomicReference<>();
+
+        btnLike.setDisable(true);
+        btnDislike.setDisable(true);
+
+        Task<Void> reactionTask = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                ChapterFavDB favDB = new ChapterFavDB();
+                int[] totals = favDB.getChapterReactionTotals(chapterID);
+                boolean[] userReaction = favDB.getUserReaction(Integer.parseInt(sessionUserID), chapterID);
+                totalsRef.set(totals);
+                userReactionRef.set(userReaction);
+                latch.countDown();
+                return null;
+            }
+        };
+        runBackgroundTask(reactionTask);
 
         Task<String[]> chapterTask = new Task<>() {
             @Override
@@ -216,19 +237,27 @@ public class learningPageController extends ChapterProgress implements Initializ
             if (details != null) {
                 subject_name.setText(details[0] != null ? details[0] : "");
                 clipDescription.setText(details[1] != null ? details[1] : "");
+                int[] totals = totalsRef.get();
+                boolean[] reaction = userReactionRef.get();
+
+                btnLike.setText(String.valueOf(totals[0]));
+                btnDislike.setText(String.valueOf(totals[1]));
+                setButtonIcon(btnLike, reaction[0] ? "/img/icon/likeactive.png" : "/img/icon/like.png");
+                setButtonIcon(btnDislike, reaction[1] ? "/img/icon/dislikeactive.png" : "/img/icon/dislike.png");
+                initializeReactionHandlers(userReactionRef.get(), totalsRef.get());
+                btnLike.setDisable(false);
+                btnDislike.setDisable(false);
             }
             boolean quizAvailable = quizAvailableRef.get() != null && quizAvailableRef.get();
             btnQuiz.setVisible(quizAvailable);
             btnQuiz.setDisable(!quizAvailable);
             disposePlayer();
             loadVideoPlayer();
-            loadTeacherInfo();
             loadPlaylist();
             loadProgress();
             loadRecommendedCourses();
             loadAttachment();
-            initializeReactionHandlers();
-            updateReactionCounts();
+            setSceneCursor(Cursor.DEFAULT);
         });
         combinedTask.setOnFailed(e -> {
             System.err.println("Error in combined task:");
@@ -322,6 +351,7 @@ public class learningPageController extends ChapterProgress implements Initializ
                             System.out.println("You clicked on the currently active chapter. Ignoring.");
                             return;
                         }
+                        setSceneCursor(Cursor.WAIT);
                         System.out.println("Switching to EP: " + epNumber + " (Chapter ID: " + chapterId + ")");
                         if (videoManager != null) {
                             videoManager.disposePlayer();
@@ -415,30 +445,19 @@ public class learningPageController extends ChapterProgress implements Initializ
 
     // For forced test—overriding courseID and chapterID
     public void recieveMethod(String ignoredCourseId) {
-        this.courseID = 138; // Hardcoded for testing
+        this.courseID = 138; // test
         chapterDB = new ChapterDB();
         categoryDB = new Category();
+
         ArrayList<String[]> chapters = chapterDB.getChaptersByCourseID(this.courseID);
         String category = categoryDB.getCategoryByCourseID(courseID);
-        System.out.println("Fetched category name: " + category);
+
         if (!chapters.isEmpty()) {
             this.chapterID = Integer.parseInt(chapters.get(0)[0]);
-            System.out.println("Default chapter set: " + chapterID);
-            quizDB = new QuizDB();
-            boolean quizAvailable = quizDB.isQuizAvailableForChapter(chapterID);
-            btnQuiz.setVisible(quizAvailable);
-            btnQuiz.setDisable(!quizAvailable);
-            loadVideoPlayer();
-            loadPlaylist();
-            loadChapterContent();
+
             loadTeacherInfo();
-            initializeReactionHandlers();
-            updateReactionCounts();
-            if (category != null) {
-                catName.setText(category);
-            } else {
-                catName.setText("unknown");
-            }
+            receiveData(courseID, chapterID, Integer.parseInt(sessionUserID));
+            catName.setText(category != null ? category : "unknown");
         } else {
             System.err.println("No chapters found for forced course ID: " + this.courseID);
         }
@@ -494,53 +513,53 @@ public class learningPageController extends ChapterProgress implements Initializ
         System.out.println("Updated Reaction Totals -> Likes: " + totals[0] + ", Dislikes: " + totals[1]);
     }
 
-    private void initializeReactionHandlers() {
-        ChapterFavDB favDB = new ChapterFavDB();
+    private void initializeReactionHandlers(boolean[] userReaction, int[] totals) {
         int userId = Integer.parseInt(sessionUserID);
 
-        // Load current totals and user reaction
-        Task<Void> task = new Task<>() {
-            @Override
-            protected Void call() throws Exception {
-                int[] totals = favDB.getChapterReactionTotals(chapterID);
-                boolean[] userReaction = favDB.getUserReaction(userId, chapterID);
+        Platform.runLater(() -> {
+            btnLike.setText(String.valueOf(totals[0]));
+            btnDislike.setText(String.valueOf(totals[1]));
+            setButtonIcon(btnLike, userReaction[0] ? "/img/icon/likeactive.png" : "/img/icon/like.png");
+            setButtonIcon(btnDislike, userReaction[1] ? "/img/icon/dislikeactive.png" : "/img/icon/dislike.png");
+        });
 
-                Platform.runLater(() -> {
-                    btnLike.setText(String.valueOf(totals[0]));
-                    btnDislike.setText(String.valueOf(totals[1]));
-
-
-                    setButtonIcon(btnLike, userReaction[0] ? "/img/icon/likeactive.png" : "/img/icon/like.png");
-                    setButtonIcon(btnDislike, userReaction[1] ? "/img/icon/dislikeactive.png" : "/img/icon/dislike.png");
-                });
-
-                return null;
-            }
-        };
-
-        runBackgroundTask(task);
-
-        //Like Button
+        // Like Button
         btnLike.setOnAction(e -> {
+            btnLike.setDisable(true);
+            btnDislike.setDisable(true);
+            btnLike.getScene().setCursor(Cursor.WAIT);
             runBackgroundTask(new Task<>() {
                 @Override
                 protected Void call() {
                     ChapterFavDB favDB = new ChapterFavDB();
                     favDB.toggleReaction(userId, chapterID, true);
                     refreshReactions(userId);
+                    Platform.runLater(() -> {
+                        btnLike.setDisable(false);
+                        btnDislike.setDisable(false);
+                        btnLike.getScene().setCursor(Cursor.DEFAULT);
+                    });
                     return null;
                 }
             });
         });
 
-        //Dislike Button
+        // Dislike Button
         btnDislike.setOnAction(e -> {
+            btnLike.setDisable(true);
+            btnDislike.setDisable(true);
+            btnDislike.getScene().setCursor(Cursor.WAIT);
             runBackgroundTask(new Task<>() {
                 @Override
                 protected Void call() {
                     ChapterFavDB favDB = new ChapterFavDB();
-                    favDB.toggleReaction(userId, chapterID, true);
+                    favDB.toggleReaction(userId, chapterID, false); // fixed this!
                     refreshReactions(userId);
+                    Platform.runLater(() -> {
+                        btnLike.setDisable(false);
+                        btnDislike.setDisable(false);
+                        btnLike.getScene().setCursor(Cursor.DEFAULT);
+                    });
                     return null;
                 }
             });
@@ -566,5 +585,14 @@ public class learningPageController extends ChapterProgress implements Initializ
         icon.setFitWidth(22);
         icon.setFitHeight(22);
         button.setGraphic(icon);
+    }
+
+    private void setSceneCursor(Cursor cursor) {
+        Platform.runLater(() -> {
+            Scene scene = rootpage.getScene();
+            if (scene != null) {
+                scene.setCursor(cursor);
+            }
+        });
     }
 }
