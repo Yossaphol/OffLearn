@@ -191,10 +191,6 @@ public class pChatServerController extends pChatController implements Initializa
 
         sendButton.setOnAction(event -> {
             sendMessage();
-
-            int teacherId = teacherDBConnect.getTeacherId(server.getTeacherName());
-            int studentId = stdDb.getStudentID(selectedStudent);
-            loadChatHistoryFromDB(teacherId, studentId);
         });
 
         tfMessage.setOnAction(event -> sendMessage());
@@ -206,13 +202,12 @@ public class pChatServerController extends pChatController implements Initializa
     private void sendMessage() {
         if (selectedStudent != null && !tfMessage.getText().isEmpty()) {
             String messageToSend = tfMessage.getText();
-            addMessage(messageToSend, Pos.CENTER_RIGHT, "#81C2FF");
             server.sendMessageToStudent(selectedStudent, messageToSend);
 
             int sender_id = teacherDBConnect.getTeacherId(server.getTeacherName());
             int receive_id = stdDb.getStudentID(selectedStudent);
             chatHistoryDB.saveChatMessage(sender_id, "teacher", receive_id, "student", messageToSend);
-
+            loadChatHistoryFromDB(sender_id, receive_id);
             tfMessage.clear();
         } else {
             System.out.println("Please select student");
