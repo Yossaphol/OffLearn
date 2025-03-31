@@ -70,6 +70,7 @@ public class learningPageController extends ChapterProgress implements Initializ
     private int quizID;
     private QuizDB quizDB;
     String sessionUserID = SessionManager.getInstance().getUserID();
+    private ScheduledExecutorService scheduler ;
 
     // Helper: run tasks on a background daemon thread
     private <T> void runBackgroundTask(Task<T> task) {
@@ -113,8 +114,7 @@ public class learningPageController extends ChapterProgress implements Initializ
             labelPercent.setText(tmp+"%");
         }
 
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
+        scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(() -> {
             try {
                 System.out.println(111);
@@ -125,7 +125,7 @@ public class learningPageController extends ChapterProgress implements Initializ
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }, 0, 1, TimeUnit.MINUTES);
+        }, 0, 5, TimeUnit.SECONDS);
     }
 
     public void toQuizButton(){
