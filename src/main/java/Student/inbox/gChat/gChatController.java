@@ -51,6 +51,7 @@ public class gChatController implements Initializable, SessionHandler {
 
     private String name;
     private UserDB userDB;
+    private topicContent t;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -155,7 +156,8 @@ public class gChatController implements Initializable, SessionHandler {
             JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
             JButton postButton = new JButton("Post");
             postButton.addActionListener(e -> {
-                System.out.println("Posted: " + textArea.getText());
+                new topicDB().saveToDB(textArea.getText(), name);
+                refreshContent();
                 frame.dispose();
             });
 
