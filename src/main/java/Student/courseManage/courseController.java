@@ -249,6 +249,7 @@ public class courseController implements Initializable {
                 controller.setShortDescription("");
                 controller.setTeacherName(course.getTeacherName());
                 controller.setTeacherImg("/img/Profile/man.png");
+                controller.setCategoryName(course.getCategoryName());
                 //controller.setCourseImg(course.getImage() != null ? course.getImage() : "/img/Picture/bg.jpg");
 
                 ef.hoverEffect(courseItemNode);
@@ -299,6 +300,7 @@ public class courseController implements Initializable {
                     controller.setShortDescription("");
                     controller.setTeacherName(course.getTeacherName());
                     controller.setTeacherImg("/img/Profile/man.png");
+                    controller.setCategoryName(course.getCategoryName());
                     //controller.setCourseImg(course.getImage() != null ? course.getImage() : "/img/Picture/bg.jpg");
 
                     ef.hoverEffect(courseItemNode);
@@ -344,6 +346,7 @@ public class courseController implements Initializable {
                     controller.setShortDescription("");
                     controller.setTeacherName(course.getTeacherName());
                     controller.setTeacherImg("/img/Profile/man.png");
+                    controller.setCategoryName(course.getCategoryName());
                     //controller.setCourseImg(course.getImage() != null ? course.getImage() : "/img/Picture/bg.jpg");
 
                     ef.hoverEffect(courseItemNode);

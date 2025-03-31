@@ -1,6 +1,7 @@
 package Student.courseManage;
 
 import Student.HomeAndNavigation.HomeController;
+import Teacher.courseManagement.CourseItem;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -17,6 +18,13 @@ public class EnrollCourseItemController implements Initializable {
     private Button addtocart;
 
     private courseObject course;
+
+    @FXML
+    private Label tag1;
+
+    public void setData(CourseItem course) {
+        tag1.setText(course.getCourseCat()); // แสดงหมวดหมู่
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -57,5 +65,13 @@ public class EnrollCourseItemController implements Initializable {
         // สมมติว่าคุณมี Circle ชื่อ teacher_pic อยู่ใน FXML
         new HomeController().loadAndSetImage(teacher_pic, path);
     }
+
+    @FXML
+    private Label categoryLabel;
+
+    public void setCategoryName(String category) {
+        categoryLabel.setText(category);
+    }
+
 
 }

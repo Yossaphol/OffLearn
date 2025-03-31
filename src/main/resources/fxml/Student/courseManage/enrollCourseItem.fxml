@@ -13,15 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="container"
-      fx:controller="Student.courseManage.EnrollCourseItemController"
-      alignment="TOP_CENTER"
-      prefHeight="331.0"
-      prefWidth="320.0"
-      style="-fx-background-color: white; -fx-background-radius: 20;"
-      styleClass="forHover"
-      xmlns="http://javafx.com/javafx/23.0.1"
-      xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="container" alignment="TOP_CENTER" prefHeight="331.0" prefWidth="320.0" style="-fx-background-color: white; -fx-background-radius: 20;" styleClass="forHover" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.courseManage.EnrollCourseItemController">
    <children>
       <Rectangle fx:id="course_image" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="124.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 40; -fx-arc-width: 40;" width="331.0">
          <VBox.margin>
@@ -31,9 +23,7 @@
 
       <HBox alignment="CENTER_LEFT" prefHeight="29.0" prefWidth="147.0">
          <children>
-            <Label fx:id="tag1" alignment="CENTER" prefHeight="21.0" prefWidth="69.0"
-                   style="-fx-background-color: #F0D6FF; -fx-background-radius: 10;"
-                   text="&lt;/&gt;Coding" textFill="#8100cc">
+            <Label fx:id="categoryLabel" prefHeight="21.0" prefWidth="161.0" style="-fx-background-color: #F0D6FF; -fx-background-radius: 10;" text="&lt;/&gt;Coding" textFill="#8100cc">
                <font>
                   <Font name="Noto Sans Thai Bold" size="10.0" />
                </font>
@@ -99,11 +89,9 @@
          </VBox.margin>
       </HBox>
 
-      <HBox alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="280.0">
+            <HBox alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="280.0" spacing="10.0">
          <children>
-            <Button fx:id="addtocart" mnemonicParsing="false" prefHeight="29.0" prefWidth="96.0"
-                    style="-fx-background-color: #8100cc; -fx-background-radius: 10;"
-                    text="Add to cart" textFill="WHITE">
+            <Button fx:id="addtocart" mnemonicParsing="false" prefHeight="29.0" prefWidth="96.0" style="-fx-background-color: #8100cc; -fx-background-radius: 10;" text="Add to cart" textFill="WHITE">
                <font>
                   <Font name="Kodchasan Bold" size="12.0" />
                </font>
@@ -111,9 +99,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="96.0"
-                    style="-fx-background-color: #8100cc; -fx-background-radius: 10;"
-                    text="รายละเอียด" textFill="WHITE">
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="96.0" style="-fx-background-color: #8100cc; -fx-background-radius: 10;" text="รายละเอียด" textFill="WHITE">
                <font>
                   <Font name="Noto Sans Thai Bold" size="12.0" />
                </font>

@@ -14,6 +14,7 @@ public class CourseItem {
     private String courseDesc;
     private ArrayList<ChapterItem> chapterList;
     private String teacherName;
+    private String categoryName;
 
     public CourseItem(int courseId, String courseImg, String courseName, int coursePrice, String courseCat){
         this.setCourseId(courseId);
@@ -25,6 +26,7 @@ public class CourseItem {
     }
 
     public CourseItem(int courseId, String courseImg, String courseName, int coursePrice, String courseCat, String courseDesc){
+        this.setCourseId(courseId);
         this.setCourseImg(courseImg);
         this.setCourseName(courseName);
         this.setCoursePrice(coursePrice);
