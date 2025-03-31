@@ -297,6 +297,24 @@ public class CourseDB extends ConnectDB{
         return courseList;
     }
 
+    public int countMyChapter(int course_id) {
+        String sql = "SELECT COUNT(*) FROM offlearn.chapter WHERE Course_ID = ?";
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstm = conn.prepareStatement(sql)) {
+
+            pstm.setInt(1, course_id);
+            ResultSet rs = pstm.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
 
 
 }

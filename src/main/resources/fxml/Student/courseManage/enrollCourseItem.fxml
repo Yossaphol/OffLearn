@@ -31,6 +31,11 @@
                   <Insets bottom="1.0" left="4.0" right="4.0" top="1.0" />
                </padding>
             </Label>
+            <Label fx:id="shortDescription" text="short description">
+               <font>
+                  <Font name="Noto Sans Thai Regular" size="13.0" />
+               </font>
+            </Label>
          </children>
          <VBox.margin>
             <Insets bottom="5.0" top="10.0" />
@@ -42,20 +47,12 @@
 
       <VBox prefHeight="65.0" prefWidth="300.0">
          <children>
-            <Label fx:id="courseNameLabel" text="Course name">
+            <Label fx:id="courseNameLabel" prefHeight="106.0" prefWidth="311.0" text="Course name" textOverrun="CLIP" wrapText="true">
             <font>
-                  <Font name="Kodchasan Bold" size="23.0" />
+                  <Font name="Kodchasan Bold" size="18.0" />
                </font>
             </Label>
-            <BorderPane prefHeight="22.0" prefWidth="280.0">
-               <left>
-                  <Label fx:id="shortDescription" text="short description" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font name="Noto Sans Thai Regular" size="13.0" />
-                     </font>
-                  </Label>
-               </left>
-            </BorderPane>
+            <BorderPane prefHeight="22.0" prefWidth="280.0" />
          </children>
          <VBox.margin>
             <Insets left="20.0" />

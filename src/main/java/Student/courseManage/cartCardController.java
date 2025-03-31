@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -133,12 +134,9 @@ public class cartCardController implements Initializable {
 
     public void setPicture(String path) {
         try {
-            URL url = getClass().getResource(path);
-            if (url != null) {
-                picture.setFill(new ImagePattern(new Image(url.toExternalForm())));
-            } else {
-                System.out.println("❌ ไม่พบรูปภาพ course: " + path);
-            }
+            Image img = new Image(path);
+            this.picture.setStroke(Color.TRANSPARENT);
+            this.picture.setFill(new ImagePattern(img));
         } catch (Exception e) {
             e.printStackTrace();
         }
