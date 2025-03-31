@@ -221,9 +221,8 @@ public class HomeController implements Initializable {
                 courseInfoController controller = loader.getController();
                 controller.setCourseInformation(courseList.get(i));
 
-                Button content = (Button) courseItem;
-                hoverEffect(content);
-                container.getChildren().add(content);
+                hoverEffect(courseItem);
+                container.getChildren().add(courseItem);
             } catch (IOException e) {
                 e.printStackTrace();
             }

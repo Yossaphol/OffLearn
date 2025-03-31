@@ -43,7 +43,7 @@
                 </Circle>
                 <VBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="232.0">
                     <children>
-                        <Label fx:id="teacherName" text="รศ.ดร. โชติพัชร์ ภรณวลัย">
+                        <Label fx:id="teacherName" text="Teacher name">
                             <font>
                                 <Font name="Noto Sans Thai Bold" size="16.0" />
                             </font>

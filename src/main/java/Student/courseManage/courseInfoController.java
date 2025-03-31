@@ -3,6 +3,7 @@ package Student.courseManage;
 import Student.HomeAndNavigation.Navigator;
 import Teacher.courseManagement.CourseItem;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -14,10 +15,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class courseInfoController implements Initializable {
-    public Rectangle course_image;
     public Label courseName;
-    public Label teacherName;
+    public Rectangle course_image;
     public Circle teacher_pic;
+    public Label teacherName;
     Navigator nav = new Navigator();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
