@@ -23,7 +23,7 @@
 
       <HBox alignment="CENTER_LEFT" prefHeight="29.0" prefWidth="147.0">
          <children>
-            <Label fx:id="categoryLabel" prefHeight="21.0" prefWidth="161.0" style="-fx-background-color: #F0D6FF; -fx-background-radius: 10;" text="&lt;/&gt;Coding" textFill="#8100cc">
+            <Label fx:id="categoryLabel" prefHeight="21.0" style="-fx-background-color: #F0D6FF; -fx-background-radius: 10;" text="&lt;/&gt;Coding" textFill="#8100cc">
                <font>
                   <Font name="Noto Sans Thai Bold" size="10.0" />
                </font>
