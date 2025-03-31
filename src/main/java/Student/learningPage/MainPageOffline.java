@@ -30,7 +30,7 @@ public class MainPageOffline implements Initializable {
 //        Navigator.setController(this);
         displayNavbar();
         displaySearchBar();
-        displayContent("/fxml/Student/Offline/learningPageoffline.fxml");
+        displayContent("/fxml/Student/Offline/OfflineMyCourse.fxml");
     }
 
 
