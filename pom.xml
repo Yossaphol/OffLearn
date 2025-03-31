@@ -37,8 +37,24 @@
             <artifactId>logback-classic</artifactId>
             <version>1.2.6</version>
         </dependency>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.2</version>  <!-- อัปเดตเป็นเวอร์ชันล่าสุดได้ -->
+        </dependency>
 
+        <!-- ✅ JavaFX (ถ้าคุณรัน JavaFX บน Maven) -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>21</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>21</version>
+        </dependency>
 
         <!-- Environment Variables -->
         <dependency>
