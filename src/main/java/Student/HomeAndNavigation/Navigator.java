@@ -4,6 +4,7 @@ import Student.Quiz.QuizPageController;
 import Student.Quiz.QuizSummary;
 import Student.Quiz.ResultPageController;
 import Student.learningPage.DisposableController;
+import Student.learningPage.MainPageOffline;
 import Student.navBarAndSearchbar.navBarOffline;
 import Teacher.quiz.QuizController;
 import Teacher.quiz.QuizItem;
@@ -20,7 +21,9 @@ import java.io.IOException;
 public class Navigator {
 
     private static mainPageController controller;
+    private static MainPageOffline controller1;
     private static navBarController navCtrl;
+    private static navBarOffline navCtrl1;
     private static Object currentContentController;
 
     public static void setController(mainPageController ctrl) {
@@ -31,31 +34,39 @@ public class Navigator {
         navCtrl = navController;
     }
     public static void setNavBarController(navBarOffline navController) {
-        navCtrl = navController;
+        navCtrl1 = navController;
     }
 
     public void homeRoute(MouseEvent event) {
         navigateTo("/fxml/Student/HomePage/home.fxml");
         navCtrl.setCurrentPage("home_btn");
+        navCtrl1.setCurrentPage("home_btn");
         controller.displayNavbar();
+        controller1.displayNavbar();
     }
 
     public void dashboardRoute(MouseEvent event) {
         navigateTo("/fxml/Student/statistics/dashboard.fxml");
         navCtrl.setCurrentPage("dashboard_btn");
+        navCtrl1.setCurrentPage("dashboard_btn");
         controller.displayNavbar();
+        controller1.displayNavbar();
     }
 
     public void courseRoute(MouseEvent event) {
         navigateTo("/fxml/Student/courseManage/course.fxml");
         navCtrl.setCurrentPage("course_btn");
+        navCtrl1.setCurrentPage("course_btn");
         controller.displayNavbar();
+        controller1.displayNavbar();
     }
 
     public void inboxRoute(MouseEvent event) {
         navigateTo("/fxml/Student/inbox/pChat.fxml");
         navCtrl.setCurrentPage("inbox_btn");
+        navCtrl1.setCurrentPage("inbox_btn");
         controller.displayNavbar();
+        controller1.displayNavbar();
     }
 
     public void inboxRouteWithTeacher(String teacherName) {
@@ -78,22 +89,26 @@ public class Navigator {
         navigateTo("/fxml/Student/courseManage/task.fxml");
         navCtrl.setCurrentPage("task_btn");
         controller.displayNavbar();
+        controller1.displayNavbar();
     }
 
     public void roadmapRoute(MouseEvent event) {
         navigateTo("/fxml/Student/courseManage/roadmap.fxml");
         navCtrl.setCurrentPage("roadmap_btn");
         controller.displayNavbar();
+        controller1.displayNavbar();
     }
 
     public void learningPageRoute(MouseEvent event) {
         navigateTo("/fxml/Student/learningPage/learningPage.fxml");
         controller.displayNavbar();
+        controller1.displayNavbar();
     }
 
     public void learningPageRoute(ActionEvent event) {
         navigateTo("/fxml/Student/learningPage/learningPage.fxml");
         controller.displayNavbar();
+        controller1.displayNavbar();
     }
 
 
@@ -159,7 +174,9 @@ public class Navigator {
     public void settingRoute(MouseEvent event) {
         navigateTo("/fxml/Student/setting/setting.fxml");
         navCtrl.setCurrentPage("settingBtn1");
+        navCtrl1.setCurrentPage("settingBtn1");
         controller.displayNavbar();
+        controller1.displayNavbar();
     }
 
     public void navigateTo(String fxmlPath) {
