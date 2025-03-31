@@ -64,6 +64,7 @@ public class learningPageController extends ChapterProgress implements Initializ
     public ProgressBar progressBar;
     public Button nextCourse;
     public ProgressBar nextCourseProgressBar;
+    private EPButtonController currentlyActiveEPController = null;
 
     private VideoPlayerManager videoManager;
     private Navigator navigator;
@@ -344,6 +345,10 @@ public class learningPageController extends ChapterProgress implements Initializ
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/learningPage/EPbutton.fxml"));
                     Button EPbtn = loader.load();
                     EPButtonController controller = loader.getController();
+                    controller.setActive(chapterId == chapterID);
+                    if (chapterId == chapterID) {
+                        currentlyActiveEPController = controller;
+                    }
                     controller.setText("EP" + epNumber + " : " + chapterTitle);
                     controller.setActive(chapterId == chapterID);
                     EPbtn.setOnAction(e2 -> {
@@ -351,12 +356,22 @@ public class learningPageController extends ChapterProgress implements Initializ
                             System.out.println("You clicked on the currently active chapter. Ignoring.");
                             return;
                         }
-                        setLoadingState(true);
-                        System.out.println("Switching to EP: " + epNumber + " (Chapter ID: " + chapterId + ")");
+
+                        // Update active button UI *immediately*
+                        if (currentlyActiveEPController != null) {
+                            currentlyActiveEPController.setActive(false); // deactivate old one
+                        }
+                        controller.setActive(true); // activate new one
+                        currentlyActiveEPController = controller;
+
+                        rootpage.setDisable(true);
+                        EPbtn.getScene().setCursor(Cursor.WAIT);
+
                         if (videoManager != null) {
                             videoManager.disposePlayer();
                         }
-                        receiveData(courseID, chapterId, userID);
+
+                        receiveData(courseID, chapterId, userID); // start loading chapter
                     });
                     playlistcontainer.getChildren().add(EPbtn);
                 } catch (IOException ex) {
