@@ -6,12 +6,14 @@ import Database.*;
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
+import Student.inbox.pChat.pChatController;
 import a_Session.SessionManager;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -103,6 +105,15 @@ public class learningPageController extends ChapterProgress implements Initializ
         method_home.hoverEffect(btnOffLoad);
         method_home.hoverEffect(nextCourse);
         method_home.hoverEffect(btnQuiz);
+
+        btnContactTeacher.setOnAction(event -> {
+            try {
+                Navigator navigator = new Navigator();
+                navigator.inboxRouteWithTeacher(teacherName.getText());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 
         if (loadChapterProgress(String.valueOf(chapterID), sessionUserID) == -1) {
             progressBar.setProgress(0);

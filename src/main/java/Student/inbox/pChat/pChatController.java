@@ -69,12 +69,12 @@ public class pChatController implements Initializable, SessionHadler {
     private ChatHistoryDB chatHistoryDB;
     private StudentDBConnect studentDBConnect;
     private String studentName;
+    private String teacherToSelect;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         handleSession();
-        switchToGlobal();
-
+        
         spMain.vvalueProperty().bind(vboxMessage.heightProperty());
         teacherDb = new TeacherDBConnect();
         chatHistoryDB = new ChatHistoryDB();
@@ -92,8 +92,15 @@ public class pChatController implements Initializable, SessionHadler {
         sendButton.setOnAction(event -> sendMessage());
         tfMessage.setOnAction(event -> sendMessage());
 
-
         setEffect();
+
+        if (teacherToSelect != null) {
+            Platform.runLater(() -> {
+                teacherList.getSelectionModel().select(teacherToSelect);
+            });
+        } else {
+            switchToGlobal();
+        }
     }
 
     public void setEffect(){
@@ -320,5 +327,8 @@ public class pChatController implements Initializable, SessionHadler {
         });
     }
 
+    public void setTeacherToSelect(String teacherName) {
+        this.teacherToSelect = teacherName;
+    }
 
 }
