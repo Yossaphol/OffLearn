@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
@@ -32,10 +33,12 @@ public class MainPageOffline implements Initializable {
     }
 
 
+
+
     public void displayNavbar() {
         try {
             if (navCtrl == null) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/navBar.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/NavBarOffline.fxml"));
                 VBox navContent = loader.load();
 
                 navCtrl = loader.getController();
@@ -103,11 +106,14 @@ public class MainPageOffline implements Initializable {
         }
     }
 
-    public void displayContent(Parent contentComponent) {
+    public void displayContent() throws IOException {
         if (content == null) {
             System.out.println("Error: 'content' container is null. Cannot display content.");
             return;
         }
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/offline/OfflineMyCourse.fxml"));
+        Parent newContent = loader.load();
 
         FontLoader font = new FontLoader();
         font.loadFonts();
@@ -116,8 +122,8 @@ public class MainPageOffline implements Initializable {
         fadeOut.setFromValue(1.0);
         fadeOut.setToValue(0.0);
         fadeOut.setOnFinished(event -> {
-            content.getChildren().setAll(contentComponent);
-            FadeTransition fadeIn = new FadeTransition(Duration.millis(200), content);
+            content.getChildren().setAll(content);
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(200), newContent);
             fadeIn.setFromValue(0.0);
             fadeIn.setToValue(1.0);
             fadeIn.play();

@@ -4,6 +4,7 @@ import Student.Quiz.QuizPageController;
 import Student.Quiz.QuizSummary;
 import Student.Quiz.ResultPageController;
 import Student.learningPage.DisposableController;
+import Student.navBarAndSearchbar.navBarOffline;
 import Teacher.quiz.QuizController;
 import Teacher.quiz.QuizItem;
 import javafx.event.ActionEvent;
@@ -27,6 +28,9 @@ public class Navigator {
     }
 
     public static void setNavBarController(navBarController navController) {
+        navCtrl = navController;
+    }
+    public static void setNavBarController(navBarOffline navController) {
         navCtrl = navController;
     }
 

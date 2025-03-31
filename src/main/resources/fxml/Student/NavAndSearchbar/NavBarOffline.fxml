@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="300.0" prefWidth="293.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.navBarAndSearchbar.navBarOffline">
+    <children>
+        <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" prefWidth="200.0">
+            <children>
+                <HBox fx:id="logo" alignment="CENTER" prefHeight="87.0" prefWidth="166.0">
+                    <children>
+                        <ImageView fitHeight="72.0" fitWidth="79.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../img/icon/Group%2022.png" />
+                            </image>
+                        </ImageView>
+                        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                            <children>
+                                <Label text="Off">
+                                    <font>
+                                        <Font name="Kodchasan Bold" size="24.0" />
+                                    </font>
+                                </Label>
+                                <Label text="Learn" textFill="#8100cc">
+                                    <font>
+                                        <Font name="Kodchasan Bold" size="24.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                    </children>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </HBox>
+            </children>
+            <VBox.margin>
+                <Insets bottom="40.0" top="40.0" />
+            </VBox.margin>
+        </HBox>
+        <VBox maxHeight="1.7976931348623157E308" prefHeight="373.0" prefWidth="300.0" spacing="5.0">
+            <children>
+                <Label text="ภาพรวม" textFill="#c2c2c2">
+                    <font>
+                        <Font name="Noto Sans Thai Regular" size="16.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
+                    <padding>
+                        <Insets left="60.0" />
+                    </padding>
+                </Label>
+                <HBox fx:id="dashboard" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
+                    <children>
+                        <Button fx:id="dashboard_btn" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="40.0" prefWidth="351.0" style="-fx-background-color: transparent;" text="Dashboard">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../img/icon/dashboard.png" />
+                                    </image>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="Kodchasan Bold" size="20.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="10.0" left="60.0" top="10.0" />
+                            </padding>
+                        </Button>
+                    </children>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </HBox>
+                <HBox fx:id="home" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
+                    <children>
+                        <Button fx:id="home_btn" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="40.0" prefWidth="341.0" style="-fx-background-color: transparent;" text="Home" textFill="#8100cc">
+                            <font>
+                                <Font name="Kodchasan Bold" size="20.0" />
+                            </font>
+                            <graphic>
+                                <ImageView fitHeight="29.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../img/icon/home.png" />
+                                    </image>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </ImageView>
+                            </graphic>
+                            <padding>
+                                <Insets bottom="10.0" left="60.0" top="10.0" />
+                            </padding>
+                        </Button>
+                    </children>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </HBox>
+                <HBox fx:id="course" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
+                    <children>
+                        <Button fx:id="course_btn" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="40.0" prefWidth="348.0" style="-fx-background-color: transparent;" text="Course">
+                            <font>
+                                <Font name="Kodchasan Bold" size="20.0" />
+                            </font>
+                            <graphic>
+                                <ImageView fitHeight="29.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../img/icon/audio-book.png" />
+                                    </image>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </ImageView>
+                            </graphic>
+                            <padding>
+                                <Insets bottom="10.0" left="60.0" top="10.0" />
+                            </padding>
+                        </Button>
+                    </children>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </HBox>
+                <HBox fx:id="inbox" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
+                    <children>
+                        <Button fx:id="inbox_btn" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="40.0" prefWidth="382.0" style="-fx-background-color: transparent;" text="Inbox">
+                            <font>
+                                <Font name="Kodchasan Bold" size="20.0" />
+                            </font>
+                            <graphic>
+                                <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../img/icon/inbox.png" />
+                                    </image>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </ImageView>
+                            </graphic>
+                            <padding>
+                                <Insets bottom="10.0" left="60.0" top="10.0" />
+                            </padding>
+                        </Button>
+                    </children>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </HBox>
+                <HBox fx:id="task" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
+                    <children>
+                        <Button fx:id="task_btn" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="40.0" prefWidth="352.0" style="-fx-background-color: transparent;" text="Task">
+                            <font>
+                                <Font name="Kodchasan Bold" size="20.0" />
+                            </font>
+                            <graphic>
+                                <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../img/icon/task.png" />
+                                    </image>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </ImageView>
+                            </graphic>
+                            <padding>
+                                <Insets bottom="10.0" left="60.0" top="10.0" />
+                            </padding>
+                        </Button>
+                    </children>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </HBox>
+                <HBox fx:id="roadmap" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
+                    <children>
+                        <Button fx:id="roadmap_btn" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="40.0" prefWidth="338.0" style="-fx-background-color: transparent;" text="Roadmap">
+                            <font>
+                                <Font name="Kodchasan Bold" size="20.0" />
+                            </font>
+                            <graphic>
+                                <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../img/icon/business-plan.png" />
+                                    </image>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </ImageView>
+                            </graphic>
+                            <padding>
+                                <Insets bottom="10.0" left="60.0" top="10.0" />
+                            </padding>
+                        </Button>
+                    </children>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </HBox>
+            </children>
+            <VBox.margin>
+                <Insets bottom="10.0" />
+            </VBox.margin>
+        </VBox>
+        <Button fx:id="yourCoursebtn" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="167.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #410066, #8100CC); -fx-background-radius: 10;" text="คอร์สของคุณ" textFill="WHITE">
+            <font>
+                <Font name="Noto Sans Thai Bold" size="20.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <VBox.margin>
+                <Insets bottom="10.0" />
+            </VBox.margin>
+        </Button>
+        <Pane maxHeight="1.7976931348623157E308" prefHeight="64.0" prefWidth="300.0">
+            <children>
+                <Label layoutY="37.0" text="การตั้งค่า" textFill="#c2c2c2">
+                    <font>
+                        <Font name="Noto Sans Thai Regular" size="16.0" />
+                    </font>
+                    <padding>
+                        <Insets left="60.0" />
+                    </padding>
+                </Label>
+            </children></Pane>
+        <HBox fx:id="settingBtn" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
+            <children>
+                <Button fx:id="settingBtn1" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="40.0" prefWidth="352.0" style="-fx-background-color: transparent;" text="Setting">
+                    <font>
+                        <Font name="Kodchasan Bold" size="20.0" />
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../img/icon/settings.png" />
+                            </image>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </ImageView>
+                    </graphic>
+                    <padding>
+                        <Insets bottom="10.0" left="60.0" top="10.0" />
+                    </padding>
+                </Button>
+            </children>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <VBox.margin>
+                <Insets bottom="5.0" />
+            </VBox.margin>
+        </HBox>
+        <HBox fx:id="logoutBtn" alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="280.0">
+            <children>
+                <Button fx:id="logoutBtn1" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleLogout" prefHeight="40.0" prefWidth="338.0" style="-fx-background-color: transparent;" text="Logout" textFill="RED">
+                    <font>
+                        <Font name="Kodchasan Bold" size="20.0" />
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../img/icon/logout.png" />
+                            </image>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </ImageView>
+                    </graphic>
+                    <padding>
+                        <Insets bottom="10.0" left="60.0" top="10.0" />
+                    </padding>
+                </Button>
+            </children>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </HBox>
+    </children>
+    <padding>
+        <Insets bottom="60.0" />
+    </padding>
+</VBox>
