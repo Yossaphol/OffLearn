@@ -333,7 +333,7 @@ public class learningPageController extends ChapterProgress implements Initializ
         Task<ArrayList<String[]>> task = new Task<>() {
             @Override
             protected ArrayList<String[]> call() {
-                int forcedCourseID = 138; // for testing; you might want to use courseID instead
+                int forcedCourseID = courseID;
                 PlaylistDB playlistDB = new PlaylistDB();
                 return playlistDB.getChaptersByCourseID(forcedCourseID);
             }
