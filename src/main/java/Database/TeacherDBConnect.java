@@ -7,6 +7,16 @@ import java.util.Map;
 
 public class TeacherDBConnect extends ConnectDB {
 
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
     public ArrayList<String> getTeacherNames() {
         ArrayList<String> teacherNames = new ArrayList<>();
         String query = "SELECT u.Username FROM offlearn.user u JOIN offlearn.teacherlist t ON u.Username = t.name WHERE u.type = 'teacher'";
@@ -93,4 +103,6 @@ public class TeacherDBConnect extends ConnectDB {
             e.printStackTrace();
         }
     }
+
+
 }

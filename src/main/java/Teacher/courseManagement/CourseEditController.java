@@ -8,7 +8,6 @@ import Teacher.quiz.QuizController;
 import Teacher.quiz.QuestionItem;
 import Teacher.quiz.*;
 import a_Session.SessionHandler;
-import a_Session.SessionHandler;
 import a_Session.SessionManager;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -212,7 +211,7 @@ public class CourseEditController implements Initializable, SessionHandler {
             return false;
         }
 
-        courseDB.saveCourse(catID, name, userID, des, priceValue, imgUrl);
+        courseDB.saveToDB(catID, name, userID, des, priceValue, imgUrl);
         return true;
     }
 

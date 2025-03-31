@@ -1,10 +1,7 @@
 package Student.inbox.pChat;
 
-import Student.HomeAndNavigation.HomeController;
-import Student.HomeAndNavigation.Navigator;
 import Student.inbox.Client;
 import Database.*;
-import a_Session.SessionHandler;
 import a_Session.SessionHandler;
 import a_Session.SessionManager;
 import javafx.animation.ScaleTransition;
@@ -233,7 +230,7 @@ public class pChatController implements Initializable, SessionHandler {
 
                 int receiverId = teacherDb.getTeacherId(selectedTeacher);
                 int senderId = studentDBConnect.getStudentID(studentName);
-                chatHistoryDB.saveChatMessage(senderId, "student", receiverId, "teacher", messageToSend);
+                chatHistoryDB.saveToDB(senderId, "student", receiverId, "teacher", messageToSend);
 
                 Platform.runLater(() -> tfMessage.clear());
             }

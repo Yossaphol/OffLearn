@@ -6,7 +6,18 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class QuestionDB extends ConnectDB{
-    public int saveQuestion(int quiz_id, String question, String corr, int point, String imgUrl) {
+
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
+    public int saveToDB(int quiz_id, String question, String corr, int point, String imgUrl) {
         String checkSql = "SELECT Question_ID FROM question WHERE Quiz_ID = ? AND questionText = ?";
         String updateSql = "UPDATE question SET correctAns = ?, point = ?, question_img = ? WHERE Question_ID = ?";
         String insertSql = "INSERT INTO question (Quiz_ID, questionText, correctAns, point, question_img) VALUES (?, ?, ?, ?, ?)";
@@ -52,9 +63,8 @@ public class QuestionDB extends ConnectDB{
         return -1;
     }
 
-
-
-    public void deleteQuestion(int questionID) {
+    
+    public void deleteFromDB(int questionID) {
         String sql = "DELETE FROM question WHERE Question_ID = ?";
         try (
                 Connection conn = this.connectToDB();
@@ -142,6 +152,7 @@ public class QuestionDB extends ConnectDB{
         }
         return 0;
     }
+
 
 
 }

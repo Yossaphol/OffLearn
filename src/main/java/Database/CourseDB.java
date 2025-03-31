@@ -14,7 +14,17 @@ import java.util.ArrayList;
 public class CourseDB extends ConnectDB{
     private CourseItem courseItem;
 
-    public void saveCourse(int cat, String courseName, int userId, String desc, int price, String imageUrl) {
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
+    public void saveToDB(int cat, String courseName, int userId, String desc, int price, String imageUrl) {
         String checkSql = "SELECT COUNT(*) FROM course WHERE courseName = ? AND User_ID = ?";
         String insertSql = "INSERT INTO course (Cat_ID, courseName, User_ID, courseDescription, price, image) VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -194,7 +204,7 @@ public class CourseDB extends ConnectDB{
         return null;
     }
 
-    public boolean deleteCourseByID(int courseID) {
+    public boolean deleteFromDB(int courseID) {
         String deleteCourseSql = "DELETE FROM offlearn.course WHERE Course_ID = ?";
 
         try (Connection conn = this.connectToDB();

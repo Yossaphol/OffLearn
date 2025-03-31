@@ -9,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -100,7 +99,7 @@ public class ChapterContent implements Initializable {
         int courseID = courseDB.getCourseID(courseName.getText());
 
         if (!chapterDB.isChapterExists(chapterID)){
-            this.chapterID = chapterDB.saveChapter(courseID, c, d, chapImgUrl, chapMatUrl, playtime);
+            this.chapterID = chapterDB.saveToDB(courseID, c, d, chapImgUrl, chapMatUrl, playtime);
             System.out.println("save chapter complete");
         } else {
             if (chapterItem.getMaterial() != null){
@@ -202,7 +201,7 @@ public class ChapterContent implements Initializable {
         chapterDB = new ChapterDB();
         delete.setOnMouseClicked(mouseEvent -> {
             if (chapterItem != null) {
-                chapterDB.deleteChapter(chapterItem.getChapId());
+                chapterDB.deleteFromDB(chapterItem.getChapId());
                 chapList.remove(chapterItem);
 
                 if (parentContainer != null && chapContainer != null) {

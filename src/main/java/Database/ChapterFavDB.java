@@ -4,6 +4,16 @@ import java.sql.*;
 
 public class ChapterFavDB extends ConnectDB {
 
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
     // Create or Update reaction
     public void setReaction(int userId, int chapterId, boolean isLike, boolean isDislike) {
         String sqlCheck = "SELECT Chapterfav_ID FROM chapterfav WHERE Chapter_ID = ? AND User_ID = ?";
@@ -43,7 +53,7 @@ public class ChapterFavDB extends ConnectDB {
     }
 
     // Delete reaction
-    public void removeReaction(int userId, int chapterId) {
+    public void deleteFromDB(int userId, int chapterId) {
         String sql = "DELETE FROM chapterfav WHERE Chapter_ID = ? AND User_ID = ?";
         try (Connection conn = this.connectToDB();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -102,7 +112,7 @@ public class ChapterFavDB extends ConnectDB {
         if (isLike) {
             if (liked) {
                 // User already liked → unset like
-                removeReaction(userId, chapterId);
+                deleteFromDB(userId, chapterId);
             } else {
                 // Set like, unset dislike
                 setReaction(userId, chapterId, true, false);
@@ -110,11 +120,13 @@ public class ChapterFavDB extends ConnectDB {
         } else {
             if (disliked) {
                 // User already disliked → unset dislike
-                removeReaction(userId, chapterId);
+                deleteFromDB(userId, chapterId);
             } else {
                 // Set dislike, unset like
                 setReaction(userId, chapterId, false, true);
             }
         }
     }
+
+
 }

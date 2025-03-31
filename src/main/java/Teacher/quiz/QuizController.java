@@ -3,16 +3,13 @@ package Teacher.quiz;
 import Database.ChapterDB;
 import Database.QuestionDB;
 import Database.QuizDB;
-import Student.HomeAndNavigation.Home;
 import Student.HomeAndNavigation.HomeController;
 import Teacher.dashboard.dashboardController;
-import Teacher.navigator.Navigator;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -165,7 +162,7 @@ public class QuizController implements Initializable {
         quizDB = new QuizDB();
         int min = Integer.parseInt(minScore.getText());
         int max = Integer.parseInt(maxScore.getText());
-        int id = quizDB.saveQuiz(chapterDB.getCurrentChapterId(), this.quizName.getText(), min, max, this.getLevel());
+        int id = quizDB.saveToDB(chapterDB.getCurrentChapterId(), this.quizName.getText(), min, max, this.getLevel());
         this.quizItem = new QuizItem(id, this.quizName.getText(), min, max, this.getLevel());
 
         if (q == null) {
@@ -277,7 +274,7 @@ public class QuizController implements Initializable {
             return false;
         }
 
-        int id = quizDB.saveQuiz(chapterDB.getCurrentChapterId(), name, mini, max, lev);
+        int id = quizDB.saveToDB(chapterDB.getCurrentChapterId(), name, mini, max, lev);
         if (id == -1) {
             showAlert("", "เกิดข้อผิดพลาดในการบันทึกแบบทดสอบ", Alert.AlertType.ERROR);
         } else {
@@ -326,7 +323,7 @@ public class QuizController implements Initializable {
             return false;
         }
 
-        int id = quizDB.saveQuiz(chapterDB.getCurrentChapterId(), name, mini, max, lev);
+        int id = quizDB.saveToDB(chapterDB.getCurrentChapterId(), name, mini, max, lev);
         if (id == -1) {
             showAlert("", "เกิดข้อผิดพลาดในการบันทึกแบบทดสอบ", Alert.AlertType.ERROR);
         } else {

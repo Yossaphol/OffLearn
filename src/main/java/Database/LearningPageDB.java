@@ -9,4 +9,13 @@ import java.util.ArrayList;
 
 public class LearningPageDB extends ConnectDB {
 
+    @Override
+    public void saveToDB() {
+        
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
 }

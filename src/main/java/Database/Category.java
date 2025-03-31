@@ -14,6 +14,16 @@ public class Category extends ConnectDB{
         insertCatList();
     }
 
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
     public void insertCatList(){
         String sql = "SELECT catName FROM offlearn.category";
 
@@ -95,4 +105,6 @@ public class Category extends ConnectDB{
 
         return null;
     }
+
+
 }

@@ -38,4 +38,14 @@ public class VideoPathDB extends ConnectDB {
 
         return null; // No video means quiz chapter
     }
+
+    @Override
+    public void saveToDB() {
+        
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
 }

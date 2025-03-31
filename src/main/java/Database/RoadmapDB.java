@@ -14,7 +14,17 @@ public class RoadmapDB extends ConnectDB {
         // Constructor
     }
 
-    public void insertRoadmapList(String catID) {
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
+    public void saveToDB(String catID) {
         roadmapList.clear();
 
         String sql = "SELECT RoadMap_ID, name, RMDescription FROM offlearn.roadmap WHERE Cat_ID = ?";
@@ -41,4 +51,6 @@ public class RoadmapDB extends ConnectDB {
     public ArrayList<String[]> getRoadmapList() {
         return roadmapList;
     }
+
+
 }

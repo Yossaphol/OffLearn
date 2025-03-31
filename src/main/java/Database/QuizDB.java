@@ -11,7 +11,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuizDB extends ConnectDB{
-    public int saveQuiz(int chapterID, String quizName, int minScore, int max, String level) {
+
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
+    public int saveToDB(int chapterID, String quizName, int minScore, int max, String level) {
         String checkSql = "SELECT Quiz_ID FROM quiz WHERE Chapter_ID = ? AND header = ?";
         String insertSql = "INSERT INTO quiz (Chapter_ID, header, minScore, level, maxScore) VALUES (?, ?, ?, ?, ?)";
 
@@ -68,7 +79,7 @@ public class QuizDB extends ConnectDB{
     }
 
 
-    public void deleteQuiz(int quizID) {
+    public void deleteFromDB(int quizID) {
         String sql = "DELETE FROM quiz WHERE Quiz_ID = ?";
         try (
                 Connection conn = this.connectToDB();
@@ -223,8 +234,6 @@ public class QuizDB extends ConnectDB{
         }
         return -1;
     }
-
-
 
 
 

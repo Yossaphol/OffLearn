@@ -9,6 +9,17 @@ import java.sql.SQLException;
 
 public class UserDB extends ConnectDB{
 
+
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
     //setting page
     public User getUserInfo(String username) {
         String query = "SELECT Firstname, Lastname, Username, Email, Password, Profile, description FROM offlearn.user WHERE Username = ?";

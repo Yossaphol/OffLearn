@@ -5,7 +5,19 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class historyPaymentDB extends ConnectDB {
-    public boolean insertHistoryPayment(String accountNumber, String accountName, String bankName, double amount, int userId) {
+
+
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
+    public boolean saveToDB(String accountNumber, String accountName, String bankName, double amount, int userId) {
         String query = "INSERT INTO offlearn.historypayment (acctNo, acctName, bankName, amount, User_ID,time_stamp) " +
                 "VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
 
@@ -26,4 +38,5 @@ public class historyPaymentDB extends ConnectDB {
             return false;
         }
     }
+
 }

@@ -9,6 +9,16 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class StudentScoreDB extends ConnectDB {
+    
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
 
     public Integer getStudentScore(int userID, int quizID) {
         String query = """
@@ -163,7 +173,6 @@ public class StudentScoreDB extends ConnectDB {
 
         return undoneQuizzes;
     }
-
 
 
 

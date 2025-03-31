@@ -14,6 +14,16 @@ public class topicDB extends ConnectDB {
     private static Map<Integer, Boolean> userFavorites = new HashMap<>();
     private static Map<Integer, Integer> favoriteCounts = new HashMap<>();
 
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
     public boolean isTopicFavorited(int topicId) {
         String currentUser = SessionManager.getInstance().getUsername();
         String sql = "SELECT COUNT(*) FROM user_favorites WHERE topicID = ? AND username = ?";
@@ -112,7 +122,7 @@ public class topicDB extends ConnectDB {
         }
     }
 
-    public void saveTopic(String messages, String posterName){
+    public void saveToDB(String messages, String posterName){
         String sql = "INSERT INTO topicdb (topic_messages, posterName, time_stamp, favourite_count) VALUES (?, ?, NOW(), 0)";
         try (Connection conn = this.connectToDB();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -165,4 +175,6 @@ public class topicDB extends ConnectDB {
 
         return vbox;
     }
+
+
 }

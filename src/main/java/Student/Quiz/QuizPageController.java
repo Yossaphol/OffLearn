@@ -1,15 +1,11 @@
 package Student.Quiz;
 
 import Database.*;
-import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
 import Teacher.quiz.QuestionItem;
-import Teacher.quiz.QuizController;
 import Teacher.quiz.QuizItem;
 import a_Session.SessionHandler;
-import a_Session.SessionHandler;
 import a_Session.SessionManager;
-import com.beust.ah.A;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,14 +13,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class QuizPageController implements Initializable, SessionHandler {
@@ -142,7 +135,7 @@ public class QuizPageController implements Initializable, SessionHandler {
 
             if (confirmAlert.showAndWait().get() == ButtonType.OK) {
                 navigator.QuizResult(point, courseDB.getCourseIDByChapterID(chapterID), quizItem, chapterID);
-                scoreDB.saveScore(courseDB, userID, chapterID, point, quizId);
+                scoreDB.saveToDB(courseDB, userID, chapterID, point, quizId);
                 System.out.println("" + point);
             } else {
                 System.out.println("ยกเลิกการส่งคำตอบ");

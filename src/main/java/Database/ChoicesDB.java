@@ -6,7 +6,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ChoicesDB extends ConnectDB{
-    public void saveChoices(int questionID, String text) {
+
+    @Override
+    public void saveToDB() {
+
+    }
+
+    @Override
+    public void deleteFromDB() {
+
+    }
+
+    public void saveToDB(int questionID, String text) {
         String checkQuery = "SELECT 1 FROM choices WHERE Question_id = ? AND text = ? LIMIT 1";
         String insertQuery = "INSERT INTO choices (Question_id, text) VALUES (?, ?)";
 
@@ -53,7 +64,7 @@ public class ChoicesDB extends ConnectDB{
         return null;
     }
 
-    public void deleteLastChoice(int questionID) {
+    public void deleteFromDB(int questionID) {
         String getLastChoiceQuery = "SELECT Choice_ID FROM choices WHERE Question_ID = ? ORDER BY Choice_ID DESC LIMIT 1";
         String deleteLastChoiceQuery = "DELETE FROM choices WHERE Choice_ID = ?";
 

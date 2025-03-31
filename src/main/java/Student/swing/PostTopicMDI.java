@@ -75,7 +75,7 @@ public class PostTopicMDI extends JInternalFrame implements ActionListener, Sess
         } else if (e.getSource() == post) {
             String messages = jTextArea.getText();
             topicDB topic = new topicDB();
-            topic.saveTopic(messages, name);
+            topic.saveToDB(messages, name);
             dispose();
         }
     }
