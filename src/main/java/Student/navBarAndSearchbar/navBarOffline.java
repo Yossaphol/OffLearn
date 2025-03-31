@@ -4,6 +4,7 @@ import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
 import Student.mainPage.mainPageController;
 import a_Session.SessionManager;
+import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,10 +15,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -56,16 +59,16 @@ public class navBarOffline implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         instance = this;
-        HomeController method_home = new HomeController();
-        method_home.hoverEffect(dashboard);
-        method_home.hoverEffect(course);
-        method_home.hoverEffect(inbox);
-        method_home.hoverEffect(task);
-        method_home.hoverEffect(roadmap);
-        method_home.hoverEffect(home);
-        method_home.hoverEffect(yourCoursebtn);
-        method_home.hoverEffect(settingBtn);
-        method_home.hoverEffect(logoutBtn);
+      //  HomeController method_home = new HomeController();
+        hoverEffect(dashboard);
+        hoverEffect(course);
+        hoverEffect(inbox);
+        hoverEffect(task);
+        hoverEffect(roadmap);
+        hoverEffect(home);
+        hoverEffect(yourCoursebtn);
+        hoverEffect(settingBtn);
+        hoverEffect(logoutBtn);
 
       //  route();
         Navigator.setNavBarController(this);
@@ -86,6 +89,90 @@ public class navBarOffline implements Initializable {
     public static navBarOffline getInstance() {
         return instance;
     }
+
+    public void hoverEffect(Button btn) {
+        ScaleTransition scaleUp = new ScaleTransition(Duration.millis(200), btn);
+        scaleUp.setFromX(1);
+        scaleUp.setFromY(1);
+        scaleUp.setToX(1.05);
+        scaleUp.setToY(1.05);
+        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(200), btn);
+        scaleDown.setFromX(1.05);
+        scaleDown.setFromY(1.05);
+        scaleDown.setToX(1);
+        scaleDown.setToY(1);
+
+        btn.setOnMouseEntered(mouseEvent -> {
+            scaleUp.play();
+        });
+        btn.setOnMouseExited(mouseEvent -> {
+            scaleDown.play();
+        });
+    }
+
+    public void hoverEffect(HBox hBox) {
+        // Scale transition
+        ScaleTransition scaleUp = new ScaleTransition(Duration.millis(150), hBox);
+        scaleUp.setFromX(1);
+        scaleUp.setFromY(1);
+        scaleUp.setToX(1.07);
+        scaleUp.setToY(1.07);
+
+        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(150), hBox);
+        scaleDown.setFromX(1.07);
+        scaleDown.setFromY(1.07);
+        scaleDown.setToX(1);
+        scaleDown.setToY(1);
+
+        DropShadow glow = new DropShadow();
+        glow.setRadius(20);
+        glow.setSpread(0.5);
+        glow.setColor(Color.web("#8100CC", 0.6));
+
+        hBox.setOnMouseEntered(mouseEvent -> {
+            scaleUp.play();
+            switch (hBox.getId()) {
+                case "logoutBtn":
+                    hBox.setStyle("-fx-background-color: #FFEBEB;");
+                    break;
+                case "learn_now":
+                    hBox.setEffect(glow);
+                    hBox.setStyle(
+                            "-fx-background-radius: 30; " +
+                                    "-fx-background-color: linear-gradient(to right, #8100CC, #A000FF);"
+                    );
+                    break;
+                case "pre_test":
+                    hBox.setEffect(glow);
+                    hBox.setStyle(
+                            "-fx-background-radius: 30; " +
+                                    "-fx-background-color:  linear-gradient(from 0% 0% to 100% 100%, #8100cc, #410066);"
+                    );
+                    break;
+                default:
+                    hBox.setStyle("-fx-background-color: #F7E9FF;");
+                    break;
+            }
+        });
+
+        hBox.setOnMouseExited(mouseEvent -> {
+            scaleDown.play();
+            switch (hBox.getId()){
+                case "learn_now":
+                    hBox.setEffect(null);
+                    hBox.setStyle("-fx-background-radius: 30;" + "-fx-background-color: #8100CC;");
+                    break;
+                case "pre_test":
+                    hBox.setEffect(null);
+                    hBox.setStyle("-fx-background-radius: 30;" + "-fx-background-color:  linear-gradient(from 0% 0% to 100% 100%, #8100cc, #410066);");
+                    break;
+                default :
+                    hBox.setStyle("-fx-background-color: transparent;");
+            }
+
+        });
+    }
+
 
 //    private void route() {
 //        Navigator nav = new Navigator();

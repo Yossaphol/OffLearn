@@ -98,13 +98,14 @@ public class searchBarOffline implements Initializable {
         HomeController hm = new HomeController();
         hm.hoverEffect(allCourse);
     }
-    public void route(){
-        Navigator nav = new Navigator();
-        allCourse.setOnMouseClicked(nav::courseRoute);
-        username.setOnMouseClicked(nav::dashboardRoute);
-        userPfp.setOnMouseClicked(nav::dashboardRoute);
-        cartBtn.setOnMouseClicked(nav::cartRoute);
-    }
+//    public void route(){
+//        Navigator nav = new Navigator();
+//        allCourse.setOnMouseClicked(nav::courseRoute);
+//        username.setOnMouseClicked(nav::dashboardRoute);
+//        userPfp.setOnMouseClicked(nav::dashboardRoute);
+//        cartBtn.setOnMouseClicked(nav::cartRoute);
+//    }
+
 
     @FXML
     private void openPopup(ActionEvent event){
