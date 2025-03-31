@@ -72,7 +72,6 @@ public class learningPageController extends ChapterProgress implements Initializ
     private int userID;
     private int quizID;
     private QuizDB quizDB;
-    private ChapterFavDB favDB;
     private Category categoryDB;
     private ChapterDB chapterDB;
     String sessionUserID = SessionManager.getInstance().getUserID();
@@ -488,7 +487,7 @@ public class learningPageController extends ChapterProgress implements Initializ
         runBackgroundTask(task);
     }
     private void updateReactionCounts() {
-        favDB = new ChapterFavDB();
+        ChapterFavDB favDB = new ChapterFavDB();
         int[] totals = favDB.getChapterReactionTotals(chapterID); // totals[0]: likes, totals[1]: dislikes
         btnLike.setText(String.valueOf(totals[0]));
         btnDislike.setText(String.valueOf(totals[1]));
@@ -496,7 +495,7 @@ public class learningPageController extends ChapterProgress implements Initializ
     }
 
     private void initializeReactionHandlers() {
-        favDB = new ChapterFavDB();
+        ChapterFavDB favDB = new ChapterFavDB();
         int userId = Integer.parseInt(sessionUserID);
 
         // Load current totals and user reaction
@@ -526,8 +525,9 @@ public class learningPageController extends ChapterProgress implements Initializ
             runBackgroundTask(new Task<>() {
                 @Override
                 protected Void call() {
-                    favDB.toggleReaction(userId, chapterID, true); // true = like
-                    refreshReactions(favDB, userId);
+                    ChapterFavDB favDB = new ChapterFavDB();
+                    favDB.toggleReaction(userId, chapterID, true);
+                    refreshReactions(userId);
                     return null;
                 }
             });
@@ -538,15 +538,17 @@ public class learningPageController extends ChapterProgress implements Initializ
             runBackgroundTask(new Task<>() {
                 @Override
                 protected Void call() {
-                    favDB.toggleReaction(userId, chapterID, false); // false = dislike
-                    refreshReactions(favDB, userId);
+                    ChapterFavDB favDB = new ChapterFavDB();
+                    favDB.toggleReaction(userId, chapterID, true);
+                    refreshReactions(userId);
                     return null;
                 }
             });
         });
     }
 
-    private void refreshReactions(ChapterFavDB favDB, int userId) {
+    private void refreshReactions(int userId) {
+        ChapterFavDB favDB = new ChapterFavDB();
         int[] totals = favDB.getChapterReactionTotals(chapterID);
         boolean[] userReaction = favDB.getUserReaction(userId, chapterID);
 
