@@ -78,7 +78,7 @@ public class cartCardController implements Initializable {
             Parent popupRoot = loader.load();
 
             paymentController controller = loader.getController();
-            controller.setCourseInfo(courseName, amount, teacher);
+            controller.setCourseInfo(courseName, amount);
 
             Stage popupStage = new Stage();
             popupStage.initModality(Modality.APPLICATION_MODAL);

@@ -13,6 +13,7 @@ public class CourseItem {
     private String courseCat;
     private String courseDesc;
     private ArrayList<ChapterItem> chapterList;
+    private String teacherName;
 
     public CourseItem(int courseId, String courseImg, String courseName, int coursePrice, String courseCat){
         this.setCourseId(courseId);
@@ -89,6 +90,14 @@ public class CourseItem {
         this.courseId = courseId;
     }
 
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
     public courseObject toCourseObject() {
         return new courseObject(
                 courseDesc,
@@ -98,7 +107,8 @@ public class CourseItem {
                 120,              // จำนวนรีวิว mock
                 "/img/icon/code.png",  // ไอคอนหมวดหมู่
                 courseCat,
-                courseImg
+                courseImg,
+                teacherName
         );
     }
 

@@ -27,7 +27,7 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="23.0" prefWidth="519.0">
                            <children>
-                              <Label text="Course by  :">
+                              <Label>
                                  <padding>
                                     <Insets right="10.0" />
                                  </padding>
@@ -35,7 +35,7 @@
                                     <Font name="Kodchasan Regular" size="12.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="teacherName" text="Sam Wilson">
+                              <Label fx:id="teacherName">
                                  <font>
                                     <Font name="Kodchasan Regular" size="12.0" />
                                  </font>
@@ -70,11 +70,6 @@
             <Label fx:id="priceDisplay" text="8,000" textFill="#8100cc">
                <font>
                   <Font name="Kodchasan Bold" size="40.0" />
-               </font>
-            </Label>
-            <Label text="THB">
-               <font>
-                  <Font name="Kodchasan Regular" size="20.0" />
                </font>
             </Label>
          </children>

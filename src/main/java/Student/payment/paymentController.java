@@ -19,7 +19,6 @@ public class paymentController implements Initializable {
 
     private double amount;
 
-
     @FXML
     private ImageView qrCode;
 
@@ -33,13 +32,7 @@ public class paymentController implements Initializable {
     private Label courseTitle;
 
     @FXML
-    private Label courseBy;
-
-    @FXML
     private Label priceDisplay;
-
-    @FXML
-    private Label teacherName;
 
     private String courseName;
     private double coursePrice;
@@ -65,7 +58,6 @@ public class paymentController implements Initializable {
 
                 Platform.runLater(() -> qrCode.setImage(qrCodeImage));
 
-
                 boolean isApproved = Paypal.waitForApproval(accessToken, orderId);
                 if (!isApproved) {
                     Platform.runLater(() -> status.setText("Payment not approved"));
@@ -78,7 +70,6 @@ public class paymentController implements Initializable {
 
                 Platform.runLater(() -> status.setText(paymentMessage));
                 status.setStyle(isCaptured ? "-fx-text-fill: green;" : "-fx-text-fill: red;");
-
             } catch (IOException | WriterException e) {
                 e.printStackTrace();
                 Platform.runLater(() -> status.setText("Error generating QR code"));
@@ -86,19 +77,16 @@ public class paymentController implements Initializable {
         }).start();
     }
 
-    public void setCourseInfo(String name, double price, String teacher) {
+    public void setCourseInfo(String name, double price) {
         this.courseName = name;
         this.coursePrice = price;
         this.amount = price;
 
         if (courseTitle != null) courseTitle.setText(name);
-        if (priceDisplay != null) priceDisplay.setText(String.format("%.0f", price) + " THB");
-        if (teacherName != null) teacherName.setText(teacher);
+        if (priceDisplay != null) priceDisplay.setText(String.format("%.0f THB", price));
     }
 
     public void setAmount(double amount) {
         this.amount = amount;
     }
-
-
 }

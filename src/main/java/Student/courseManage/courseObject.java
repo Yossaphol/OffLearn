@@ -9,8 +9,10 @@ public class courseObject {
         private String categoryIcon;
         private String categoryName;
         private String picture;
+        private String teacherName;
 
-        public courseObject(String description, String name, double price, double rating, int reviewCount, String categoryIcon, String categoryName, String picture) {
+
+    public courseObject(String description, String name, double price, double rating, int reviewCount, String categoryIcon, String categoryName, String picture, String teacherName) {
             this.description = description;
             this.name = name;
             this.price = price;
@@ -19,6 +21,7 @@ public class courseObject {
             this.categoryIcon = categoryIcon;
             this.categoryName = categoryName;
             this.picture = picture;
+            this.teacherName = teacherName;
         }
 
         public String getDescription() {
@@ -46,6 +49,8 @@ public class courseObject {
         public String getPicture() {
             return picture;
         }
+        public String getTeacherName() { return teacherName; }
+
 
 
 }
