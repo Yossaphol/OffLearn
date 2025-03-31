@@ -257,7 +257,7 @@ public class learningPageController extends ChapterProgress implements Initializ
             loadProgress();
             loadRecommendedCourses();
             loadAttachment();
-            setSceneCursor(Cursor.DEFAULT);
+            setLoadingState(false);
         });
         combinedTask.setOnFailed(e -> {
             System.err.println("Error in combined task:");
@@ -351,7 +351,7 @@ public class learningPageController extends ChapterProgress implements Initializ
                             System.out.println("You clicked on the currently active chapter. Ignoring.");
                             return;
                         }
-                        setSceneCursor(Cursor.WAIT);
+                        setLoadingState(true);
                         System.out.println("Switching to EP: " + epNumber + " (Chapter ID: " + chapterId + ")");
                         if (videoManager != null) {
                             videoManager.disposePlayer();
@@ -454,7 +454,7 @@ public class learningPageController extends ChapterProgress implements Initializ
 
         if (!chapters.isEmpty()) {
             this.chapterID = Integer.parseInt(chapters.get(0)[0]);
-
+            setLoadingState(true);
             loadTeacherInfo();
             receiveData(courseID, chapterID, Integer.parseInt(sessionUserID));
             catName.setText(category != null ? category : "unknown");
@@ -587,12 +587,11 @@ public class learningPageController extends ChapterProgress implements Initializ
         button.setGraphic(icon);
     }
 
-    private void setSceneCursor(Cursor cursor) {
-        Platform.runLater(() -> {
-            Scene scene = rootpage.getScene();
-            if (scene != null) {
-                scene.setCursor(cursor);
-            }
-        });
+    private void setLoadingState(boolean isLoading) {
+        Scene scene = rootpage.getScene();
+        if (scene != null) {
+            scene.setCursor(isLoading ? Cursor.WAIT : Cursor.DEFAULT);
+        }
+        rootpage.setDisable(isLoading);
     }
 }
