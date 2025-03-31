@@ -53,7 +53,7 @@ public class MainPageOffline implements Initializable {
 
     public void displaySearchBar() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/searchBar.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/NavAndSearchbar/searchBarOffline.fxml"));
             HBox searchbarContent = loader.load();
             searchbar_container.getChildren().setAll(searchbarContent);
         } catch (IOException e) {
