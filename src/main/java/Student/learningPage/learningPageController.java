@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -72,6 +73,8 @@ public class learningPageController extends ChapterProgress implements Initializ
     private int quizID;
     private QuizDB quizDB;
     private ChapterFavDB favDB;
+    private Category categoryDB;
+    private ChapterDB chapterDB;
     String sessionUserID = SessionManager.getInstance().getUserID();
 
     // Helper: run tasks on a background daemon thread
@@ -159,7 +162,7 @@ public class learningPageController extends ChapterProgress implements Initializ
         Task<String[]> chapterTask = new Task<>() {
             @Override
             protected String[] call() {
-                ChapterDB chapterDB = new ChapterDB();
+                chapterDB = new ChapterDB();
                 return chapterDB.getChapterDetailsByID(chapterID);
             }
         };
@@ -232,7 +235,7 @@ public class learningPageController extends ChapterProgress implements Initializ
         Task<String[]> task = new Task<>() {
             @Override
             protected String[] call() {
-                ChapterDB chapterDB = new ChapterDB();
+                chapterDB = new ChapterDB();
                 return chapterDB.getChapterDetailsByID(chapterID);
             }
         };
@@ -336,7 +339,7 @@ public class learningPageController extends ChapterProgress implements Initializ
         Task<String> task = new Task<>() {
             @Override
             protected String call() {
-                ChapterDB chapterDB = new ChapterDB();
+                chapterDB = new ChapterDB();
                 return chapterDB.getVideoURLByChapterID(chapterID);
             }
         };
@@ -405,15 +408,15 @@ public class learningPageController extends ChapterProgress implements Initializ
     // For forced test—overriding courseID and chapterID
     public void recieveMethod(String ignoredCourseId) {
         this.courseID = 138; // Hardcoded for testing
-        ChapterDB chapterDB = new ChapterDB();
-        Category categoryDB = new Category();
+        chapterDB = new ChapterDB();
+        categoryDB = new Category();
         ArrayList<String[]> chapters = chapterDB.getChaptersByCourseID(this.courseID);
         String category = categoryDB.getCategoryByCourseID(courseID);
         System.out.println("Fetched category name: " + category);
         if (!chapters.isEmpty()) {
             this.chapterID = Integer.parseInt(chapters.get(0)[0]);
             System.out.println("Default chapter set: " + chapterID);
-            QuizDB quizDB = new QuizDB();
+            quizDB = new QuizDB();
             boolean quizAvailable = quizDB.isQuizAvailableForChapter(chapterID);
             btnQuiz.setVisible(quizAvailable);
             btnQuiz.setDisable(!quizAvailable);
@@ -441,7 +444,7 @@ public class learningPageController extends ChapterProgress implements Initializ
         Task<String> task = new Task<>() {
             @Override
             protected String call() {
-                ChapterDB chapterDB = new ChapterDB();
+                chapterDB = new ChapterDB();
                 return chapterDB.getChapterMaterialByID(chapterID);
             }
         };
@@ -484,7 +487,7 @@ public class learningPageController extends ChapterProgress implements Initializ
     }
 
     private void initializeReactionHandlers() {
-        ChapterFavDB favDB = new ChapterFavDB();
+        favDB = new ChapterFavDB();
         int userId = Integer.parseInt(sessionUserID);
 
         // Load current totals and user reaction
@@ -498,8 +501,9 @@ public class learningPageController extends ChapterProgress implements Initializ
                     btnLike.setText(String.valueOf(totals[0]));
                     btnDislike.setText(String.valueOf(totals[1]));
 
-                    updateButtonStyle(btnLike, userReaction[0]);
-                    updateButtonStyle(btnDislike, userReaction[1]);
+
+                    setButtonIcon(btnLike, userReaction[0] ? "/img/icon/likeactive.png" : "/img/icon/like.png");
+                    setButtonIcon(btnDislike, userReaction[1] ? "/img/icon/dislikeactive.png" : "/img/icon/dislike.png");
                 });
 
                 return null;
@@ -537,20 +541,19 @@ public class learningPageController extends ChapterProgress implements Initializ
         int[] totals = favDB.getChapterReactionTotals(chapterID);
         boolean[] userReaction = favDB.getUserReaction(userId, chapterID);
 
+        setButtonIcon(btnLike, userReaction[0] ? "/img/icon/likeactive.png" : "/img/icon/like.png");
+        setButtonIcon(btnDislike, userReaction[1] ? "/img/icon/dislikeactive.png" : "/img/icon/dislike.png");
         Platform.runLater(() -> {
             btnLike.setText(String.valueOf(totals[0]));
             btnDislike.setText(String.valueOf(totals[1]));
-            updateButtonStyle(btnLike, userReaction[0]);
-            updateButtonStyle(btnDislike, userReaction[1]);
         });
     }
 
-    // highlight button when active ( WILL CHANGE ) mostly for testing
-    private void updateButtonStyle(Button button, boolean isActive) {
-        if (isActive) {
-            button.setStyle("-fx-background-color: transparent; -fx-border-color: #8100cc; -fx-border-radius: 10;");
-        } else {
-            button.setStyle("-fx-background-color: transparent;");
-        }
+    private void setButtonIcon(Button button, String iconPath) {
+        Image img = new Image(getClass().getResource(iconPath).toExternalForm());
+        ImageView icon = new ImageView(img);
+        icon.setFitWidth(22);
+        icon.setFitHeight(22);
+        button.setGraphic(icon);
     }
 }
