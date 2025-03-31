@@ -116,6 +116,15 @@ public class learningPageController extends ChapterProgress implements Initializ
             }
         });
 
+        btnGloblalChat.setOnAction(event -> {
+            try {
+                Navigator navigator = new Navigator();
+                // route to global chat here
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
         if (loadChapterProgress(String.valueOf(chapterID), sessionUserID) == -1) {
             progressBar.setProgress(0);
             labelPercent.setText("0%");
