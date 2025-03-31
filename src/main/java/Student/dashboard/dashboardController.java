@@ -109,7 +109,7 @@ public class dashboardController implements Initializable {
     public Button edit;
     public Button saved_roadmap;
     public Label allMyCourse;
-    public HBox taskContainer;
+    public VBox taskContainer;
     public Button selected_subject;
     public HBox scoreDetail;
     public Pane subjectSelector;
@@ -245,15 +245,13 @@ public class dashboardController implements Initializable {
         for (QuizItem task : undoneQuiz) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/statistics/dashboardTaskElement.fxml"));
-                Node quizItem = loader.load();
+                HBox quizItem = loader.load();
 
                 dashboardTaskController controller = loader.getController();
                 controller.setTaskInformation(task.getHeader(), dtaDB.getCourseNameByQuizID(task.getQuizID()));
 
-                Button content = (Button) quizItem;
-                hoverEffect(content);
-                controller.quizLink(task.getQuizID(), dtaDB.getChapterIdByQuizID(task.getQuizID()),content);
-                taskContainer.getChildren().add(content);
+                controller.quizLink(task.getQuizID(), dtaDB.getChapterIdByQuizID(task.getQuizID()),quizItem);
+                taskContainer.getChildren().add(quizItem);
 
             } catch (IOException e) {
                 e.printStackTrace();

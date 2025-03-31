@@ -4,6 +4,8 @@ import Student.HomeAndNavigation.Navigator;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,7 +31,7 @@ public class dashboardTaskController implements Initializable {
         Quiz.setText(quiz);
     }
 
-    public void quizLink(int quizID,int chapterID, Button taskBtn){
+    public void quizLink(int quizID,int chapterID, HBox taskBtn){
         taskBtn.setOnMouseClicked(e->nav.navigateTo("/fxml/Student/Quiz/quizPage.fxml", chapterID,quizID));
     }
 }
