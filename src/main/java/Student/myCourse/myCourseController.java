@@ -2,10 +2,12 @@ package Student.myCourse;
 
 import Database.Category;
 import Database.MyCourse;
+import Database.MyProgressDB;
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
 import Student.learningPage.learningPageController;
+import a_Session.SessionManager;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -48,7 +50,7 @@ public class myCourseController implements Initializable {
     private VBox coursecardContainer3;
     @FXML
     private HBox bg;
-//    public HBox continueCourse1;
+    private MyProgressDB myProgressDB;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -56,6 +58,8 @@ public class myCourseController implements Initializable {
         fontLoader.loadFonts();
 
         HomeController homeController = new HomeController();
+
+        myProgressDB = new MyProgressDB();
 
         MyCourseDB myCourseDB = new MyCourseDB();
         Category category = new Category();
@@ -74,7 +78,7 @@ public class myCourseController implements Initializable {
                 controller.setCourseCategory(category.getCatName(myCourse.getCat_ID()));
                 controller.setCourseTitle(myCourse.getCourseName());
                 controller.setCourseSubtitle(myCourse.getCourseDescription());
-                controller.setCourseProgress(50);
+                controller.setCourseProgress(myProgressDB.sumChapterProgress(myCourse.getCourse_ID(),myCourse.getCat_ID(), SessionManager.getInstance().getUserID()));
 
                 courseItem.setOnMouseClicked(mouseEvent -> {
                     try {

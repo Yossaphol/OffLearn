@@ -460,7 +460,7 @@ public class learningPageController extends ChapterProgress implements Initializ
 
     // For forced test—overriding courseID and chapterID
     public void recieveMethod(String ignoredCourseId) {
-        this.courseID = 138; // test
+        this.courseID = Integer.parseInt(ignoredCourseId); // test
         chapterDB = new ChapterDB();
         categoryDB = new Category();
 
