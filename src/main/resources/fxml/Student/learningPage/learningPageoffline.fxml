@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<HBox fx:id="bg" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1148.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.learningPage.learningPageOfflineController">
+   <children>
+      <HBox fx:id="rootpage" maxWidth="1.7976931348623157E308" prefHeight="1083.0" prefWidth="1136.0">
+         <children>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1102.0" prefWidth="1136.0" style="-fx-background-color: #FBFBFB;">
+               <children>
+                  <Pane prefHeight="62.0" prefWidth="1139.0" />
+                  <HBox fx:id="content" prefHeight="1018.0" prefWidth="1086.0">
+                     <VBox.margin>
+                        <Insets left="25.0" right="25.0" />
+                     </VBox.margin>
+                     <children>
+                        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="914.0" prefWidth="726.0">
+                           <children>
+                              <VBox fx:id="mediacontainer" maxWidth="720.0" prefHeight="405.0" prefWidth="720.0" style="-fx-border-radius: 25; -fx-background-radius: 25;">
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </VBox>
+                              <HBox prefWidth="634.0">
+                                 <children>
+                                    <HBox prefHeight="117.0" prefWidth="734.0">
+                                       <children>
+                                          <VBox alignment="CENTER_LEFT" maxHeight="90.0" minWidth="90.0" prefHeight="90.0" prefWidth="530.0" spacing="5.0">
+                                             <children>
+                                                <Label fx:id="subject_name" text="Subject name" textFill="#8100cc">
+                                                   <font>
+                                                      <Font name="System Bold" size="36.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="475.0">
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                   <children>
+                                                      <HBox alignment="CENTER" prefHeight="26.0" prefWidth="83.0" style="-fx-background-color: rgba(129, 0, 204, 0.2); -fx-background-radius: 25;">
+                                                         <children>
+                                                            <Label fx:id="catName" alignment="CENTER" style="-fx-text-fill: rgba(129, 0, 204, 1);" text="catName">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets top="15.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="354.0" prefWidth="848.0">
+                                 <children>
+                                    <VBox prefHeight="354.0" prefWidth="400.0">
+                                       <children>
+                                          <HBox prefHeight="45.0" prefWidth="415.0">
+                                             <VBox.margin>
+                                                <Insets top="15.0" />
+                                             </VBox.margin>
+                                             <children>
+                                                <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="51.0" prefWidth="368.0">
+                                                   <HBox.margin>
+                                                      <Insets left="15.0" />
+                                                   </HBox.margin>
+                                                   <children>
+                                                      <Label fx:id="teacherName" text="Teacher Name">
+                                                         <font>
+                                                            <Font name="System Bold" size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <VBox minHeight="77.0" minWidth="-Infinity" prefWidth="415.0" style="-fx-background-color: EFEFEF; -fx-background-radius: 15;">
+                                             <children>
+                                                <TextFlow maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="132.0" prefWidth="395.0">
+                                                   <children>
+                                                      <Text fx:id="clipDescription" fill="#979191" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="528.13671875">
+                                                         <font>
+                                                            <Font name="Noto Sans Thai Regular" size="12.0" />
+                                                         </font>
+                                                      </Text>
+                                                   </children>
+                                                </TextFlow>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </VBox>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                             <VBox.margin>
+                                                <Insets top="15.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="354.0" prefWidth="380.0">
+                                       <children>
+                                          <VBox prefHeight="260.0" prefWidth="317.0">
+                                             <children>
+                                                <ScrollPane hbarPolicy="NEVER" prefHeight="240.0" prefWidth="331.0" styleClass="scroll-panej" stylesheets="@../../../css/Home.css" vbarPolicy="NEVER">
+                                                   <content>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0">
+                                                         <children>
+                                                            <VBox fx:id="attachmentcontainer" minHeight="-Infinity" minWidth="-Infinity" prefHeight="234.0" prefWidth="313.0">
+                                                               <padding>
+                                                                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                                               </padding>
+                                                            </VBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </content>
+                                                </ScrollPane>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" prefHeight="1000.0" prefWidth="361.0">
+                           <children>
+                              <VBox maxWidth="-Infinity" prefHeight="942.0" prefWidth="306.0">
+                                 <children>
+                                    <HBox prefHeight="23.0" prefWidth="494.0">
+                                       <children>
+                                          <Label prefHeight="25.0" prefWidth="65.0" text="เพลย์ลิสต์" textFill="#8800cc">
+                                             <font>
+                                                <Font name="Noto Sans Thai Bold" size="15.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="15.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label fx:id="playlistcount" contentDisplay="CENTER" prefHeight="35.0" text="(playlistcount)" textFill="#8800cc">
+                                             <font>
+                                                <Font name="Noto Sans Thai Bold" size="15.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <ScrollPane fx:id="playlistscroll" prefHeight="480.0" prefWidth="306.0" style="-fx-background-color: transparent;" styleClass="scroll-panej" stylesheets="@../../../css/Home.css" vbarPolicy="ALWAYS">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                                       </padding>
+                                       <content>
+                                          <AnchorPane prefWidth="200.0">
+                                             <children>
+                                                <VBox fx:id="playlistcontainer" alignment="TOP_CENTER" minWidth="-Infinity" prefWidth="271.0" spacing="10.0" />
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </ScrollPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</HBox>

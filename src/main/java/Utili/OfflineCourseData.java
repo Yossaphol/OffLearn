@@ -6,6 +6,7 @@ public class OfflineCourseData {
     private int chapterID;
     private String courseName;
     private String courseDescription;
+    private String courseCategory;
     private String chapterName;
     private String chapterDescription;
     private String videoPath;
@@ -63,5 +64,13 @@ public class OfflineCourseData {
 
     public void setCourseDescription(String courseDescription) {
         this.courseDescription = courseDescription;
+    }
+
+    public String getCourseCategory() {
+        return courseCategory;
+    }
+
+    public void setCourseCategory(String courseCategory) {
+        this.courseCategory = courseCategory;
     }
 }
