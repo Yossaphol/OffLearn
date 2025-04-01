@@ -101,7 +101,10 @@ public class courseController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setImgContainer();
+        closePopupAuto();
+        setEffect();
         route();
+        setProgressBar();
         handleCourseItem();
         updatePageLabel();
         setupRoadmapButtons();
@@ -110,7 +113,123 @@ public class courseController implements Initializable {
         nextButton.setOnAction(event -> handleNextButton());
     }
 
+    public void setEffect() {
+        if (popup != null) ef.applyHoverEffectToInside(popup);
+        if (popup1 != null) ef.applyHoverEffectToInside(popup1);
+        if (popup2 != null) ef.applyHoverEffectToInside(popup2);
+        if (categoryPopup != null) ef.applyHoverEffectToInside(categoryPopup);
 
+        if (learn_now != null) ef.hoverEffect(learn_now);
+        if (cat1 != null) ef.hoverEffect(cat1);
+        if (cat2 != null) ef.hoverEffect(cat2);
+        if (cat3 != null) ef.hoverEffect(cat3);
+        if (roadmapRecommendContainer != null) ef.hoverEffect(roadmapRecommendContainer);
+        if (explore != null) ef.hoverEffect(explore);
+
+        if (categoryPopup != null) categoryPopup.setViewOrder(-1);
+        if (popup != null) popup.setViewOrder(-1);
+        if (popup1 != null) popup1.setViewOrder(-1);
+        if (popup2 != null) popup2.setViewOrder(-1);
+        if (category_recommend != null) category_recommend.setViewOrder(0);
+    }
+
+
+
+    @FXML
+    private void openPopup(ActionEvent event) {
+        Button clickedbtn = (Button) event.getSource();
+        switch (clickedbtn.getId()) {
+            case "btnpopup":
+                _openPopup(popup);
+                break;
+            case "btnpopup1":
+                _openPopup(popup1);
+                break;
+            case "btnpopup2":
+                _openPopup(popup2);
+                break;
+            case "seeAll":
+                seeAll.setText("ปิด");
+                _openPopup(categoryPopup);
+        }
+    }
+
+    @FXML
+    private void _openPopup(Node popup) {
+        popup.toFront();
+        FadeTransition fade = new FadeTransition(Duration.millis(300), popup);
+        FadeTransition fade2 = new FadeTransition(Duration.millis(300), category_recommend);
+
+        if (!popup.isVisible()) {
+            if (popup.getId().equals("categoryPopup")) {
+                seeAll.setText("ปิด");
+                category_recommend.setVisible(false);
+                category_recommend.setOpacity(0);
+                fade2.setFromValue(1);
+                fade2.setToValue(0);
+                fade2.setOnFinished(e -> category_recommend.setVisible(false));
+            }
+            popup.setVisible(true);
+            popup.setOpacity(0);
+            fade.setFromValue(0);
+            fade.setToValue(1);
+        } else {
+            if (popup.getId().equals("categoryPopup")) {
+                seeAll.setText("ดูทั้งหมด");
+                category_recommend.setVisible(true);
+                category_recommend.setOpacity(0);
+                fade2.setFromValue(0);
+                fade2.setToValue(1);
+            }
+            fade.setFromValue(1);
+            fade.setToValue(0);
+            fade.setOnFinished(e -> popup.setVisible(false));
+        }
+        fade.play();
+        fade2.play();
+    }
+
+    public void closePopupAuto() {
+        MainFrame.setOnMouseClicked(event -> {
+            if (popup.isVisible()) closePopup(popup);
+            if (popup1.isVisible()) closePopup(popup1);
+            if (popup2.isVisible()) closePopup(popup2);
+            if (categoryPopup.isVisible()) {
+                seeAll.setText("ดูทั้งหมด");
+                closePopup(categoryPopup);
+            }
+        });
+    }
+
+    private void closePopup(Node popup) {
+        FadeTransition fade2 = new FadeTransition(Duration.millis(300), category_recommend);
+        if (popup.getId().equals("categoryPopup")) {
+            category_recommend.setVisible(true);
+            category_recommend.setOpacity(0);
+            fade2.setFromValue(0);
+            fade2.setToValue(1);
+        }
+
+        FadeTransition fade = new FadeTransition(Duration.millis(300), popup);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.setOnFinished(e -> popup.setVisible(false));
+
+        fade.play();
+        fade2.play();
+    }
+
+    private void setProgressBar() {
+        if (progressCategory != null) {
+            categorybar.setProgress(Double.parseDouble(progressCategory.getText().replace("% completed", "").trim()) / 100);
+        }
+        if (progressCategory1 != null) {
+            categorybar1.setProgress(Double.parseDouble(progressCategory1.getText().replace("% completed", "").trim()) / 100);
+        }
+        if (progressCategory2 != null) {
+            categorybar2.setProgress(Double.parseDouble(progressCategory2.getText().replace("% completed", "").trim()) / 100);
+        }
+    }
 
 
     public void handleCourseItem() {
@@ -168,7 +287,7 @@ public class courseController implements Initializable {
     private void setupRoadmapButtons() {
         rm1.setOnMouseClicked(event -> handleRoadmapClick("Frontend Development"));
         rm2.setOnMouseClicked(event -> handleRoadmapClick("Backend Development"));
-        rm3.setOnMouseClicked(event -> handleRoadmapClick("Game Designer"));
+        rm3.setOnMouseClicked(event -> handleRoadmapClick("Web Security"));
     }
 
     private void handleRoadmapClick(String roadmapName) {
