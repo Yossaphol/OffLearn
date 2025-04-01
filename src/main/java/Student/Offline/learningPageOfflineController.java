@@ -23,14 +23,13 @@ import java.util.ResourceBundle;
 
 public class learningPageOfflineController implements Initializable, DisposableController {
 
-    // UI elements for offline display
     @FXML private VBox mediacontainer;
-    @FXML private VBox playlistcontainer;      // Listing chapters
-    @FXML private HBox rootpage;               // The root container
-    @FXML private Label subject_name;          // Course/chapter name
-    @FXML private Label catName;               // Course category
-    @FXML private Label teacherName;           // Teacher name
-    @FXML private Text clipDescription;        // Chapter description
+    @FXML private VBox playlistcontainer;
+    @FXML private HBox rootpage;
+    @FXML private Label subject_name;
+    @FXML private Label catName;
+    @FXML private Label teacherName;
+    @FXML private Text clipDescription;
     @FXML private Label playlistcount;
 
     private EPButtonController currentlyActiveEPController = null;
@@ -42,7 +41,7 @@ public class learningPageOfflineController implements Initializable, DisposableC
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // No pre-loading here – wait until receiveOfflineData is called.
+        rootpage.getStylesheets().add(getClass().getResource("/css/learningPage.css").toExternalForm());
     }
 
     public void receiveOfflineData(OfflineCourseData data, int userID) {
@@ -56,11 +55,9 @@ public class learningPageOfflineController implements Initializable, DisposableC
         catName.setText(data.getCourseCategory());
         teacherName.setText(data.getTeacherName());
 
-        // Load chapter content, including video.
         disposePlayer();
         loadOfflineChapter(data);
 
-        // Build playlist
         List<OfflineCourseData> allChapters = OfflineCourseManager.getAllChaptersForCourse(userID, data.getCourseID());
         loadOfflinePlaylist(allChapters);
     }

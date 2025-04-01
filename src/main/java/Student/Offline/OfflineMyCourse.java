@@ -39,13 +39,10 @@ public class OfflineMyCourse implements Initializable {
                 ctrl.setOnClickHandler(e -> {
                     MainPageOffline offlineMain = Navigator.getCurrentOfflineController();
                     if (offlineMain != null) {
-                        // Switch to learning page
                         offlineMain.displayContent("/fxml/Student/Offline/learningPageOffline.fxml");
 
-                        // Load actual chapters
                         List<OfflineCourseData> chapters = OfflineCourseManager.getAllChaptersForCourse(userID, course.getCourseID());
                         if (!chapters.isEmpty()) {
-                            // Now pass the *real* chapter data
                             Object contentCtrl = Navigator.getCurrentContentController();
                             if (contentCtrl instanceof learningPageOfflineController learningCtrl) {
                                 learningCtrl.receiveOfflineData(chapters.get(0), userID);
@@ -54,7 +51,7 @@ public class OfflineMyCourse implements Initializable {
                             System.err.println("No chapters found for course " + course.getCourseID());
                         }
                     } else {
-                        System.err.println("❌ Main controller is not MainPageOffline");
+                        System.err.println("Main controller is not MainPageOffline");
                     }
                 });
 
