@@ -290,7 +290,7 @@ public class learningPageController extends ChapterProgress implements Initializ
         runBackgroundTask(task);
     }
 
-    // Load teacher info asynchronously
+//     Load teacher info asynchronously
     private void loadTeacherInfo() {
         Task<String[]> task = new Task<>() {
             @Override

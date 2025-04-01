@@ -23,6 +23,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import javafx.scene.layout.HBox;
 import javafx.fxml.FXMLLoader;
@@ -51,7 +52,13 @@ public class HomeController implements Initializable {
     public ProgressBar continueProgress;
     public Label progressOfConValue;
     public Rectangle imgContainer;
+
     public Circle teacherBanner;
+
+    public Text subjectName;
+
+    public Label teacherName;
+
     public Circle pfp;
     public Circle pfp_statistic;
     public Circle teacher_pfp;
@@ -159,6 +166,7 @@ public class HomeController implements Initializable {
 
     String username = SessionManager.getInstance().getUsername();
     UserDB userDB = new UserDB();
+    CourseDB courseDB = new CourseDB();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -581,26 +589,7 @@ public class HomeController implements Initializable {
         fade2.play();
     }
 
-    private void setImgContainer() {
-        loadAndSetImage(imgContainer, "/img/Picture/bg.jpg");
-        loadAndSetImage(teacherBanner, "/img/Profile/man.png");
 
-        setProfile(userDB.getProfile(username));
-
-//        loadAndSetImage(teacher_pfp, "/img/Profile/man.png");
-
-        String studentPfpPath = "/img/Profile/student.png";
-
-//        loadAndSetImage(course_pic, "/img/Picture/Python.png");
-//        loadAndSetImage(category_pic, "/img/icon/code.png");
-//        loadAndSetImage(category_pic1, "/img/icon/partners.png");
-//        loadAndSetImage(category_pic2, "/img/icon/artificial-intelligence.png");
-
-//        loadAndSetImage(teacher_pfp_OOP, "/img/Profile/man.png");
-//        loadAndSetImage(teacher_pfp_Data, "/img/Profile/teacher.png");
-//        loadAndSetImage(course_pic_Data, "/img/Picture/DSA.jpg");
-//        loadAndSetImage(course_pic_OOP, "/img/Picture/bg.jpg");
-    }
 
     public void setProfile(String Url){
         Image img;
@@ -857,5 +846,14 @@ public class HomeController implements Initializable {
 
         profilePic.setStroke(Color.TRANSPARENT);
         profilePic.setFill(new ImagePattern(img));
+    }
+
+    public void setImgContainer() {
+        CourseItem courseItem = courseDB.getLatestCourse();
+        loadAndSetImage(teacherBanner, userDB.getUserNameProfileAndSpecByCourseID(courseItem.getCourseId())[1]);
+        loadAndSetImage(imgContainer, courseItem.getCourseImg());
+
+        this.subjectName.setText(courseItem.getCourseName());
+        setProfile(courseItem.getTeacherName());
     }
 }
