@@ -938,7 +938,10 @@
                               <Insets top="60.0" />
                            </VBox.margin>
                         </HBox>
-                        <HBox fx:id="container" prefHeight="303.0" prefWidth="761.0" />
+                        <HBox fx:id="container" prefHeight="303.0" prefWidth="797.0" spacing="24.0">
+                           <padding>
+                              <Insets left="40.0" right="60.0" />
+                           </padding></HBox>
                      </children>
                   </VBox>
                   <VBox>
