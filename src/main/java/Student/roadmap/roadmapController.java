@@ -25,36 +25,13 @@ import Database.RoadmapDB;
 
 public class roadmapController implements Initializable {
     public HBox MainFrame;
-    public VBox LeftWrapper;
-    public HBox searhbar_container;
-    public Button yourRoadmap;
-    public Label category01;
-    public Label category02;
-    public Label category03;
-    public Label category04;
-    public Label category05;
-    public Label category06;
-    public Label category07;
-    public Label category08;
-    public Button sub_category_btn01;
-    public Button sub_category_btn02;
-    public Button sub_category_btn03;
-    public Button sub_category_btn04;
-    public Button sub_category_btn05;
-    public Button sub_category_btn06;
-    public Button sub_category_btn07;
-    public Button sub_category_btn08;
-    public Button sub_category_btn09;
-    public Button sub_category_btn10;
     public FlowPane btn_cotainer;
     public VBox categoryContainer;
-    public Button myRoadmap;
     public HBox levelContainer;
     public Button selectedLevel;
 
     private RoadmapDB roadmapDB = new RoadmapDB();
     private Navigator nav = new Navigator();
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -64,19 +41,20 @@ public class roadmapController implements Initializable {
         applyHoverEffectToInside(btn_cotainer);
         applyHoverEffectToInside(categoryContainer);
         applyHoverEffectToInside(levelContainer);
-        hoverEffect(myRoadmap);
+
+
+
         closePopupAuto();
-
         route();
-
         loadCategories();
     }
+
 
     private void loadCategories() {
         Category category = new Category();
         ArrayList<String> categories = category.getCatList();
 
-        categoryContainer.getChildren().clear(); // เคลียร์หมวดหมู่เดิมที่ defult
+        categoryContainer.getChildren().clear();
 
         for (String catName : categories) {
             Label categoryLabel = new Label(catName);
@@ -116,11 +94,9 @@ public class roadmapController implements Initializable {
                         FXMLLoader roadmapLoader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/myroadmap.fxml"));
                         Node node = roadmapLoader.load();
 
-                        // ส่งค่า RoadMap_ID ไปที่ myRoadmapController
                         myRoadmapController controller = roadmapLoader.getController();
                         controller.setRoadmapID(roadmapID);
 
-                        // เปลี่ยนหน้า
                         MainFrame.getChildren().clear();
                         MainFrame.getChildren().add(node);
                     } catch (IOException e) {
@@ -133,21 +109,16 @@ public class roadmapController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            //Button roadmapButton = new Button(roadmapName);
-
-            //btn_cotainer.getChildren().add(roadmapButton);
         }
     }
 
-    public void route(){
+    public void route() {
         Navigator nav = new Navigator();
-        myRoadmap.setOnMouseClicked(nav::myRoadmapRoute);
     }
 
     public void applyHoverEffectToInside(FlowPane root) {
         for (Node node : root.lookupAll(".forHover")) {
-            if (node instanceof Button box) {
+            if (node instanceof Button box && box != null) {
                 hoverEffect(box);
             }
         }
@@ -155,7 +126,7 @@ public class roadmapController implements Initializable {
 
     public void applyHoverEffectToInside(VBox root) {
         for (Node node : root.lookupAll(".forHover1")) {
-            if (node instanceof Label box) {
+            if (node instanceof Label box && box != null) {
                 hoverEffect(box);
             }
         }
@@ -163,7 +134,7 @@ public class roadmapController implements Initializable {
 
     public void applyHoverEffectToInside(HBox root) {
         for (Node node : root.lookupAll(".forHover")) {
-            if (node instanceof Label box) {
+            if (node instanceof Label box && box != null) {
                 hoverEffect(box);
             }
         }
@@ -187,13 +158,11 @@ public class roadmapController implements Initializable {
             scaleUp.play();
             dropShadow.setColor(Color.web("#8100CC", 0.25));
             btn.setEffect(dropShadow);
-            scaleUp.play();
         });
         btn.setOnMouseExited(mouseEvent -> {
             scaleDown.play();
             dropShadow.setColor(Color.web("#c4c4c4", 0.25));
             btn.setEffect(dropShadow);
-            scaleDown.play();
         });
     }
 
@@ -212,17 +181,12 @@ public class roadmapController implements Initializable {
         btn.setOnMouseEntered(mouseEvent -> {
             btn.setStyle("-fx-background-color: #EFEFEF;");
             scaleUp.play();
-            scaleUp.play();
         });
         btn.setOnMouseExited(mouseEvent -> {
             btn.setStyle("-fx-background-color: transparent;");
             scaleDown.play();
-            scaleDown.play();
         });
     }
-
-
-
 
     public void selectLevel(ActionEvent event) {
         Button clickedbtn = (Button) event.getSource();
@@ -230,7 +194,7 @@ public class roadmapController implements Initializable {
         if (!levelContainer.isVisible()) {
             levelContainer.setVisible(true);
             closePopupAuto();
-        }else{
+        } else {
             levelContainer.setVisible(false);
         }
 
@@ -245,5 +209,4 @@ public class roadmapController implements Initializable {
             }
         });
     }
-
 }

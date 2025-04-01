@@ -65,18 +65,7 @@
                         <Font name="Noto Sans Thai Regular" size="18.0" />
                      </font>
                   </Label>
-                  <BorderPane prefHeight="79.0" prefWidth="1087.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                     <center>
-                        <Button fx:id="myRoadmap" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="155.0" style="-fx-background-color: #8100cc; -fx-background-radius: 10;" text="Roadmap ของคุณ" textFill="WHITE" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font name="Noto Sans Thai Bold" size="16.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                     </center>
-                  </BorderPane>
+                  <BorderPane prefHeight="79.0" prefWidth="1087.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <right>
                         <Circle fill="#7e00cc52" radius="33.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" BorderPane.alignment="CENTER" />
