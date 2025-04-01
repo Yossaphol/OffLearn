@@ -1,6 +1,7 @@
 package Student.courseManage;
 
 import Student.payment.paymentController;
+import a_Session.SessionManager;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.event.ActionEvent;
@@ -83,6 +84,17 @@ public class cartCardController implements Initializable {
 
             paymentController controller = loader.getController();
             controller.setCourseInfo(courseName, amount);
+            controller.setCourseId(course.getCourseID());
+            controller.setUserId(Integer.parseInt(SessionManager.getInstance().getUserID()));
+
+
+            // 🔥 ส่ง callback เพื่อให้ลบ card นี้ตอนจ่ายเสร็จ
+            controller.setOnPaymentSuccess(() -> {
+                CartManager.getInstance().getCartList().remove(course);
+                if (parentController != null) {
+                    parentController.displayCourseList();
+                }
+            });
 
             Stage popupStage = new Stage();
             popupStage.initModality(Modality.APPLICATION_MODAL);
@@ -90,6 +102,7 @@ public class cartCardController implements Initializable {
             popupStage.setScene(new Scene(popupRoot));
             popupStage.setResizable(false);
             popupStage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -175,4 +188,7 @@ public class cartCardController implements Initializable {
             parentController.displayCourseList();
         }
     }
+
+
+
 }
