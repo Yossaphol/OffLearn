@@ -1,5 +1,6 @@
 package Student.courseManage;
 
+import Database.UserDB;
 import Student.HomeAndNavigation.Navigator;
 import Teacher.courseManagement.CourseItem;
 import javafx.fxml.Initializable;
@@ -20,6 +21,7 @@ public class courseInfoController implements Initializable {
     public Circle teacher_pic;
     public Label teacherName;
     Navigator nav = new Navigator();
+    UserDB userDB = new UserDB();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -33,9 +35,20 @@ public class courseInfoController implements Initializable {
     public void setCourseInformation(CourseItem course){
         courseName.setText(course.getCourseName());
         teacherName.setText(course.getTeacherName());
-        setProfile(course.getCourseImg());
+        setProfileCourse(course.getCourseImg());
+        setProfile(userDB.getUserNameProfileAndSpecByCourseID(course.getCourseId())[1]);
     }
     public void setProfile(String Url){
+        Image img;
+        if (Url.startsWith("http") || Url.startsWith("https")) {
+            img = new Image(Url);
+        } else {
+            img = new Image(getClass().getResource(Url).toExternalForm());
+        }
+        this.teacher_pic.setStroke(Color.TRANSPARENT);
+        this.teacher_pic.setFill(new ImagePattern(img));
+    }
+    public void setProfileCourse(String Url){
         Image img;
         if (Url.startsWith("http") || Url.startsWith("https")) {
             img = new Image(Url);
@@ -46,8 +59,8 @@ public class courseInfoController implements Initializable {
         this.course_image.setFill(new ImagePattern(img));
     }
 
-    public void quizLink(int quizID,int chapterID, javafx.scene.control.Button taskBtn){
-        taskBtn.setOnMouseClicked(e->nav.navigateTo("/fxml/Student/Quiz/quizPage.fxml", chapterID,quizID));
-    }
+//    public void courseLink(int quizID,int chapterID, javafx.scene.control.Button taskBtn){
+//        taskBtn.setOnMouseClicked(e->nav.navigateTo("/fxml/Student/learningPage/learningPage.fxml", chapterID,quizID));
+//    }
 
 }
