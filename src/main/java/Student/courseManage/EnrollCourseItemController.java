@@ -1,6 +1,7 @@
 package Student.courseManage;
 
 import Student.HomeAndNavigation.HomeController;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +11,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -27,6 +32,8 @@ public class EnrollCourseItemController implements Initializable {
     @FXML private Circle teacher_pic;
     @FXML private Label categoryLabel;
     @FXML private Button detailBtn;
+    @FXML private Rectangle course_image;
+
 
     private courseObject course;
 
@@ -123,4 +130,33 @@ public class EnrollCourseItemController implements Initializable {
     public void setCategoryName(String category) {
         if (categoryLabel != null) categoryLabel.setText(category);
     }
+
+    public void setCourseImg(String imageUrl) {
+        Image img;
+
+        if (imageUrl.startsWith("http")) {
+            img = new Image(imageUrl, true);
+
+            // ฟังเมื่อโหลดเสร็จ
+            img.progressProperty().addListener((obs, oldProgress, newProgress) -> {
+                if (newProgress.doubleValue() >= 1.0) {
+                    Platform.runLater(() -> course_image.setFill(new ImagePattern(img)));
+                }
+            });
+
+        } else {
+            InputStream is = getClass().getResourceAsStream(imageUrl);
+            if (is != null) {
+                img = new Image(is);
+                course_image.setFill(new ImagePattern(img));
+            } else {
+                System.out.println("ไม่พบภาพ: " + imageUrl);
+            }
+        }
+    }
+
+
+
+
+
 }
