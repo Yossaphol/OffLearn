@@ -43,7 +43,7 @@ public class EPButtonController {
             if (!isActive) {
                 EPbtn.setStyle("-fx-background-color: white; -fx-text-fill: #8100CC; -fx-background-radius: 10;");
             }
-            animateScale(EPbtn, 1.05, 1.0); // scale back to normal
+            animateScale(EPbtn, 1.05, 1.0);
         });
     }
 

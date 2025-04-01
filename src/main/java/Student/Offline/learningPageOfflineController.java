@@ -1,5 +1,6 @@
 package Student.Offline;
 
+import Student.learningPage.DisposableController;
 import Student.learningPage.EPButtonController;
 import Student.learningPage.VideoPlayerManager;
 import Utili.OfflineCourseData;
@@ -20,7 +21,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class learningPageOfflineController implements Initializable {
+public class learningPageOfflineController implements Initializable, DisposableController {
 
     // UI elements for offline display
     @FXML private VBox mediacontainer;
@@ -136,6 +137,7 @@ public class learningPageOfflineController implements Initializable {
         return videoManager;
     }
 
+    @Override
     public void disposePlayer() {
         System.out.println("Disposing offline video...");
         if (videoManager != null) {

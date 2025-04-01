@@ -52,19 +52,14 @@ public class learningPageController extends ChapterProgress implements Initializ
     public Label teacherName;
     public Label role;
     public Label labelPercent;
-    public Label btnRoadmap;
     public Label catName;
-    public Label nextCourseName;
-    public Label nextTeacherName;
     public Label playlistcount;
     public Circle teacherImg;
-    public Rectangle nextImgCourse;
     public Text clipDescription;
     @FXML private Button btnQuiz;
     public Button btnLike;
     public Button btnDislike;
     public Button btnContactTeacher;
-    public Button btnGloblalChat;
     public Button btnOffLoad;
     public ProgressBar progressBar;
     private EPButtonController currentlyActiveEPController = null;
@@ -98,17 +93,9 @@ public class learningPageController extends ChapterProgress implements Initializ
         FontLoader fontLoader = new FontLoader();
         fontLoader.loadFonts();
         HomeController method_home = new HomeController();
-
-        method_home.loadAndSetImage(teacherImg, "/img/Profile/user.png");
-        labelPercent.setText("69%");
-        nextCourseName.setText("DSA");
-        nextTeacherName.setText("อาจารย์ขิม ใจดี");
-        method_home.loadAndSetImage(nextImgCourse, "/img/Profile/user.png");
-
         initializeVidDownloadHandler();
         toQuizButton();
         method_home.hoverEffect(btnContactTeacher);
-        method_home.hoverEffect(btnGloblalChat);
         method_home.hoverEffect(btnLike);
         method_home.hoverEffect(btnDislike);
         method_home.hoverEffect(btnOffLoad);
@@ -123,14 +110,6 @@ public class learningPageController extends ChapterProgress implements Initializ
             }
         });
 
-        btnGloblalChat.setOnAction(event -> {
-            try {
-                Navigator navigator = new Navigator();
-                // route to global chat here
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
     }
 
     private void initializeScheduler() {
@@ -169,7 +148,6 @@ public class learningPageController extends ChapterProgress implements Initializ
         this.userID = userID;
         this.quizID = quizDB.getQuizIdByChapterId(this.chapterID);
 
-        // Create a latch to wait for both tasks (set count = 2)
         CountDownLatch latch = new CountDownLatch(3);
         AtomicReference<String[]> chapterDetailsRef = new AtomicReference<>();
         AtomicReference<Boolean> quizAvailableRef = new AtomicReference<>();
@@ -271,7 +249,6 @@ public class learningPageController extends ChapterProgress implements Initializ
     }
 
 
-    // Load chapter content asynchronously
     private void loadChapterContent() {
         Task<String[]> task = new Task<>() {
             @Override
@@ -294,7 +271,6 @@ public class learningPageController extends ChapterProgress implements Initializ
         runBackgroundTask(task);
     }
 
-//     Load teacher info asynchronously
     private void loadTeacherInfo() {
         Task<String[]> task = new Task<>() {
             @Override
@@ -327,7 +303,6 @@ public class learningPageController extends ChapterProgress implements Initializ
         runBackgroundTask(task);
     }
 
-    // Load playlist asynchronously
     private void loadPlaylist() {
         Task<ArrayList<String[]>> task = new Task<>() {
             @Override
@@ -356,13 +331,11 @@ public class learningPageController extends ChapterProgress implements Initializ
                     controller.setActive(chapterId == chapterID);
                     EPbtn.setOnAction(e2 -> {
                         if (chapterId == chapterID) {
-                            System.out.println("You clicked on the currently active chapter. Ignoring.");
                             return;
                         }
 
-                        // Update active button UI *immediately*
                         if (currentlyActiveEPController != null) {
-                            currentlyActiveEPController.setActive(false); // deactivate old one
+                            currentlyActiveEPController.setActive(false);
                         }
                         controller.setActive(true); // activate new one
                         currentlyActiveEPController = controller;
@@ -374,7 +347,7 @@ public class learningPageController extends ChapterProgress implements Initializ
                             videoManager.disposePlayer();
                         }
 
-                        receiveData(courseID, chapterId, userID); // start loading chapter
+                        receiveData(courseID, chapterId, userID);
                     });
                     playlistcontainer.getChildren().add(EPbtn);
                 } catch (IOException ex) {
@@ -390,7 +363,6 @@ public class learningPageController extends ChapterProgress implements Initializ
         runBackgroundTask(task);
     }
 
-    // Load video player asynchronously (including the DB call for video URL)
     private void loadVideoPlayer() {
         Task<String> task = new Task<>() {
             @Override
@@ -407,10 +379,8 @@ public class learningPageController extends ChapterProgress implements Initializ
             if (localVideo.exists()) {
                 mediaSource = localVideo.toURI().toString();
                 isOffline = true;
-                System.out.println("Playing offline video: " + mediaSource);
             } else {
                 mediaSource = videoURL;
-                System.out.println("Playing online video: " + mediaSource);
             }
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/learningPage/videoPlayer.fxml"));
@@ -436,7 +406,6 @@ public class learningPageController extends ChapterProgress implements Initializ
         runBackgroundTask(task);
     }
 
-    // Synchronous (or nearly synchronous) method for loading teacher image (could be refactored similarly)
     private void loadTeacherImage(Shape shape, String imagePath) {
         try {
             Image image;
@@ -453,12 +422,11 @@ public class learningPageController extends ChapterProgress implements Initializ
                 if (newVal.doubleValue() >= 1.0) {
                     Platform.runLater(() -> {
                         shape.setFill(new ImagePattern(image));
-                        System.out.println("Image loaded " + imagePath);
                     });
                 }
             });
         } catch (Exception e) {
-            System.err.println("❌ Failed to load image into shape: " + imagePath);
+            System.err.println("Failed to load image: " + imagePath);
             e.printStackTrace();
         }
     }
@@ -496,13 +464,11 @@ public class learningPageController extends ChapterProgress implements Initializ
 
     @Override
     public void disposePlayer() {
-        System.out.println("Disposing video from learningPageController...");
         if (videoManager != null) {
             videoManager.disposePlayer();
         }
     }
 
-    // For forced test—overriding courseID and chapterID
     public void recieveMethod(String courseID) {
         this.courseID = Integer.parseInt(courseID);
         chapterDB = new ChapterDB();
@@ -550,7 +516,6 @@ public class learningPageController extends ChapterProgress implements Initializ
                     HBox attachmentNode = loader.load();
                     AttachmentController controller = loader.getController();
 
-                    // Extract filename from URL (or use fallback)
                     String fileName = materialURL.substring(materialURL.lastIndexOf('/') + 1);
                     controller.setFilename(fileName);
                     controller.setDownloadURL(materialURL);
@@ -574,7 +539,6 @@ public class learningPageController extends ChapterProgress implements Initializ
         int[] totals = favDB.getChapterReactionTotals(chapterID); // totals[0]: likes, totals[1]: dislikes
         btnLike.setText(String.valueOf(totals[0]));
         btnDislike.setText(String.valueOf(totals[1]));
-        System.out.println("Updated Reaction Totals -> Likes: " + totals[0] + ", Dislikes: " + totals[1]);
     }
 
     private void initializeReactionHandlers(boolean[] userReaction, int[] totals) {
@@ -617,7 +581,7 @@ public class learningPageController extends ChapterProgress implements Initializ
                 @Override
                 protected Void call() {
                     ChapterFavDB favDB = new ChapterFavDB();
-                    favDB.toggleReaction(userId, chapterID, false); // fixed this!
+                    favDB.toggleReaction(userId, chapterID, false);
                     refreshReactions(userId);
                     Platform.runLater(() -> {
                         btnLike.setDisable(false);
@@ -683,9 +647,9 @@ public class learningPageController extends ChapterProgress implements Initializ
         }
 
         File destination = FileStorageHelper.getChapterVideoFile(chapterID);
-        System.out.println("📥 Starting video download...");
-        System.out.println("   ➤ URL: " + videoURL);
-        System.out.println("   ➤ Destination: " + destination.getAbsolutePath());
+        System.out.println("Starting video download...");
+        System.out.println("URL: " + videoURL);
+        System.out.println("Destination: " + destination.getAbsolutePath());
 
         Task<Void> downloadTask = new Task<>() {
             @Override
@@ -705,14 +669,13 @@ public class learningPageController extends ChapterProgress implements Initializ
         };
 
         downloadTask.setOnSucceeded(e -> {
-            System.out.println("✅ Video downloaded successfully.");
             Platform.runLater(() -> {
-                showAlert("Download Completed", "Video downloaded to:\n" + destination.getAbsolutePath(), Alert.AlertType.INFORMATION);
+                showAlert("Chapter Saved and Download Completed.", "Chapter Content has been saved for Offline Usage." + destination.getAbsolutePath(), Alert.AlertType.INFORMATION);
                 btnOffLoad.setDisable(false);
                 rootpage.getScene().setCursor(Cursor.DEFAULT);
 
                 try {
-                    System.out.println("📁 Saving offline chapter metadata...");
+                    System.out.println("Saving offline chapter metadata...");
                     saveCourseInfoIfNeeded(userID, courseID);
 
                     ChapterDB chapterDB = new ChapterDB();
@@ -735,7 +698,7 @@ public class learningPageController extends ChapterProgress implements Initializ
 
 
                     Utili.OfflineCourseManager.saveChapter(userID, offlineData);
-                    System.out.println("📝 Offline data saved for Chapter ID: " + chapterID);
+                    System.out.println("Offline data saved for Chapter ID: " + chapterID);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     showAlert("Offline Save Failed", "Failed to save chapter data.", Alert.AlertType.ERROR);
@@ -744,7 +707,7 @@ public class learningPageController extends ChapterProgress implements Initializ
         });
 
         downloadTask.setOnFailed(e -> {
-            System.err.println("❌ Video download failed.");
+            System.err.println("Video download failed.");
             downloadTask.getException().printStackTrace();
             Platform.runLater(() -> {
                 showAlert("Download Failed", "Failed to download video.", Alert.AlertType.ERROR);
@@ -780,7 +743,7 @@ public class learningPageController extends ChapterProgress implements Initializ
         OfflineCourseInfo info = new OfflineCourseInfo();
         info.setUserID(userID);
         info.setCourseID(courseID);
-        info.setCourseName(courseName); // Optionally get actual name from DB
+        info.setCourseName(courseName);
         info.setCourseDescription(courseDesc);
         info.setCourseCategory(category != null ? category : "Unknown");
         info.setTeacherName(teacherInfo != null ? teacherInfo[0] : "Unknown");// Optional

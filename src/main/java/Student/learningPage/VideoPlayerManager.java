@@ -1,11 +1,8 @@
 package Student.learningPage;
 
 import Student.FontLoader.FontLoader;
-import Student.HomeAndNavigation.HomeController;
-import Student.HomeAndNavigation.Navigator;
 import javafx.animation.*;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
@@ -26,9 +23,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -94,70 +89,7 @@ public class VideoPlayerManager implements Initializable {
         settingsMenu = new ContextMenu();
         //HomeController method_home = new HomeController();
         currentVideo = this;
-        // Load icons
         loadIcons();
-
-        // test video, idk how to play vid from DB lol ;w;
-        String outputFilePath = System.getProperty("java.io.tmpdir") + "testvideo123_encoded.mp4";
-
-        // ignore this (old ffpmeg stuff)
-        /*Task<Void> encodingTask = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
-                // FFmpeg command:
-                ProcessBuilder pb = new ProcessBuilder(
-                        "ffmpeg", "-loglevel", "verbose", // add this
-                        "-y",
-                        "-i", videoPath,
-                        "-c:v", "libx264",
-                        "-preset", "ultrafast",
-                        "-crf", "35",
-                        "-an",
-                        "-movflags", "+faststart",
-                        outputFilePath
-                );
-                pb.redirectErrorStream(true);
-                ffmpegProcess = pb.start();
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(ffmpegProcess.getInputStream()))) {
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        System.out.println(line);
-                    }
-                }
-                int exitCode = ffmpegProcess.waitFor();
-                if (exitCode != 0) {
-                    throw new Exception("FFmpeg encoding failed with exit code " + exitCode);
-                }
-                return null;
-            }
-        };
-
-        encodingTask.setOnSucceeded(e -> {
-            File encodedFile = new File(outputFilePath);
-            loadinggif.setImage(playIcon);
-            if (!encodedFile.exists()) {
-                System.err.println("Encoded file not found: " + outputFilePath);
-                return;
-            }
-            Media media = new Media(encodedFile.toURI().toString());
-            mediaPlayer = new MediaPlayer(media);
-            mediaView.setMediaPlayer(mediaPlayer);
-            bindMediaProperties();
-        });
-
-        // On failure, log and optionally fall back to playing the original S3 video (TEMP)
-        encodingTask.setOnFailed(e -> {
-            loadinggif.setImage(playIcon);
-            Throwable ex = encodingTask.getException();
-            ex.printStackTrace();
-            Media media = new Media(videoPath);
-            mediaPlayer = new MediaPlayer(media);
-            mediaView.setMediaPlayer(mediaPlayer);
-            bindMediaProperties();
-        });
-        new Thread(encodingTask).start();
-*/
-        // Prevent clicks from passing through certain nodes
         consumeClicks(controlpanesection);
         consumeClicks(timebox);
         consumeClicks(regionpart);
@@ -165,7 +97,6 @@ public class VideoPlayerManager implements Initializable {
 
         controlPane.setVisible(false);
         controlPane.setOpacity(0);
-        // Inactivity fade
         setupInactivityTimer();
 
         // Volume slider hide logic
@@ -174,56 +105,7 @@ public class VideoPlayerManager implements Initializable {
         sliderVolume.addEventFilter(MouseEvent.MOUSE_EXITED, this::checkVolumeMouseExit);
         hideDelayTransition = new PauseTransition(Duration.millis(300));
         hideDelayTransition.setOnFinished(e -> hideVolumeSlider());
-        Platform.runLater(() -> {
-            videocontainer.setFocusTraversable(true);
-            videocontainer.requestFocus();
-            Scene scene = btnPlay.getScene();
-            if (scene != null) {
-                scene.setOnKeyPressed(e -> {
-                    e.consume();
-                    switch (e.getCode()) {
-                        case SPACE:
-                            // Toggle play/pause
-                            togglePlayPause(mediaPlayer);
-                            userIsActive();
-                            break;
 
-                        case LEFT:
-                            // Skip backward 5s
-                            skipBackward(5);
-                            userIsActive();
-                            break;
-
-                        case RIGHT:
-                            // Skip forward 5s
-                            skipForward(5);
-                            userIsActive();
-                            break;
-                        case M:
-                            // Mute/unmute
-                            toggleMute();
-                            userIsActive();
-                            break;
-
-                        case F:
-                            // Toggle fullscreen
-                            toggleFullscreen();
-                            userIsActive();
-                            break;
-
-                        case ESCAPE:
-                            // If in fullscreen, exit
-                            if (isFullscreen) {
-                                exitFullscreen();
-                            }
-                            break;
-
-                        default:
-                            // Do nothing
-                    }
-                });
-            }
-        });
 
         Platform.runLater(() -> {
             Scene scene = btnSound.getScene();
@@ -299,14 +181,9 @@ public class VideoPlayerManager implements Initializable {
         });
         btnPlay.setGraphic(createIconView(playIcon));
 
-        //method_home.hoverEffect(btnSound);
-        //method_home.hoverEffect(btnFullscreen);
-        //method_home.hoverEffect(btnPlay);
-        //.hoverEffect(btnSetting);
     }
 
     private void bindMediaProperties() {
-        // binding
         mediaView.setMediaPlayer(mediaPlayer);
         mediaView.setPreserveRatio(true);
         mediaView.sceneProperty().addListener((obs, oldScene, newScene) -> {
@@ -324,7 +201,6 @@ public class VideoPlayerManager implements Initializable {
         });
         mediaView.setClip(clip);
 
-        // volume slider
         sliderVolume.setMin(0.0);
         sliderVolume.setMax(1.0);
         sliderVolume.setValue(0.5);
@@ -357,7 +233,6 @@ public class VideoPlayerManager implements Initializable {
         });
 
 
-        // volume icon
         sliderVolume.valueProperty().addListener((obs, oldVal, newVal) -> {
             double volume = newVal.doubleValue();
 
@@ -378,14 +253,12 @@ public class VideoPlayerManager implements Initializable {
                 }
             });
         });
-        // toggles play/pause
         videocontainer.setOnMouseClicked(e -> {
             togglePlayPause(mediaPlayer);
             userIsActive();
             videocontainer.requestFocus();
         });
 
-        // Setup settings menu
         setupSettingsMenu(mediaPlayer);
 
         settingsMenu.setOnShown(e -> {
@@ -395,12 +268,10 @@ public class VideoPlayerManager implements Initializable {
         settingsMenu.setOnHidden(ev -> {
             DelayFadeOut();
         });
-        // Fullscreen button
         btnFullscreen.setOnAction(e -> {
             videocontainer.requestFocus();
             toggleFullscreen();
         });
-        // get duration
         mediaPlayer.setOnReady(() -> {
             sliderTime.setMax(mediaPlayer.getTotalDuration().toSeconds());
             lblTime.setText("00:00 / " + formatTime(mediaPlayer.getTotalDuration()));
@@ -408,16 +279,13 @@ public class VideoPlayerManager implements Initializable {
             Platform.runLater(() -> {
                 updateSliderTimeFill();
 
-                // Hide the loading gif once ready
                 loadinggif.setVisible(false);
-                // Fade in the control pane with animation
                 controlPane.setVisible(true);
                 FadeTransition fadeIn = new FadeTransition(Duration.millis(500), controlPane);
                 fadeIn.setFromValue(0);
                 fadeIn.setToValue(1);
                 fadeIn.play();
 
-                // Optionally start your inactivity timer here if needed:
                 setupInactivityTimer();
             });
 
@@ -510,12 +378,10 @@ public class VideoPlayerManager implements Initializable {
             videocontainer.requestFocus();
         });
         mediaPlayer.setOnStalled(() -> {
-            System.out.println("Playback is stalled");
             loadinggif.setVisible(true);
         });
         mediaPlayer.statusProperty().addListener((obs, oldStatus, newStatus) -> {
             if (newStatus == MediaPlayer.Status.STALLED) {
-                System.out.println("MediaPlayer status is STALLED");
                 loadinggif.setVisible(true);
             }
         });
@@ -524,14 +390,13 @@ public class VideoPlayerManager implements Initializable {
             videoEnded = true;
         });
         if (videoPath == null || videoPath.isEmpty()) {
-            System.out.println("⚠️ No videoPath provided yet. Waiting for setVideoPath()...");
+            System.out.println("No videoPath provided yet. Waiting for setVideoPath()...");
             return; // Skip init
         }
     }
     /* Toggles play/pause or replay if ended.*/
     private void togglePlayPause(MediaPlayer mediaPlayer) {
         if (videoEnded) {
-            // Replay
             mediaPlayer.seek(Duration.ZERO);
             mediaPlayer.play();
             videoEnded = false;
@@ -547,7 +412,6 @@ public class VideoPlayerManager implements Initializable {
         }
     }
 
-    /* settings menu for speed/quality */
     private void setupSettingsMenu(MediaPlayer mediaPlayer) {
         settingsMenu = new ContextMenu();
 
@@ -607,10 +471,6 @@ public class VideoPlayerManager implements Initializable {
         double playedPercent = (playedSec / totalSec) * 100.0;
         double bufferPercent = (bufferSec / totalSec) * 100.0;
 
-        // Swapped gradient:
-        // 0% to playedPercent: played color (#8100cc)
-        // playedPercent to bufferPercent: unbuffered color (#FFFFFF)
-        // bufferPercent to 100%: buffered color (#AAAAAA)
         String style = String.format(
                 "-fx-background-color: linear-gradient(to right, " +
                         "#8100cc 0%%, " +
@@ -845,9 +705,6 @@ public class VideoPlayerManager implements Initializable {
                     new KeyFrame(Duration.millis(250), new KeyValue(sliderVolume.prefWidthProperty(), originalVolSliderWidth))
             );
             showTimeline.play();
-            System.out.println("🎚️ Showing volume slider...");
-            System.out.println("Initial width: " + sliderVolume.getPrefWidth());
-            System.out.println("Animating to width: " + originalVolSliderWidth);
         }
     }
 
@@ -862,7 +719,6 @@ public class VideoPlayerManager implements Initializable {
                 volumeSliderVisible = false;
             });
             hideTimeline.play();
-            System.out.println("🎚️ Hiding volume slider...");
         }
     }
 
@@ -992,7 +848,7 @@ public class VideoPlayerManager implements Initializable {
 
     public void setVideoPath(String path) {
         if (path == null || path.isEmpty()) {
-            System.out.println("⚠️ No videoPath provided yet. Waiting for setVideoPath()...");
+            System.out.println("No videoPath provided yet. Waiting for setVideoPath()...");
             return;
         }
 
@@ -1020,7 +876,7 @@ public class VideoPlayerManager implements Initializable {
             mediaPlayer.play();
             btnPlay.setGraphic(createIconView(pauseIcon));
         } catch (Exception e) {
-            System.err.println("❌ Failed to load media from path: " + mediaSource);
+            System.err.println("Failed to load media from path: " + mediaSource);
             e.printStackTrace();
         }
     }
