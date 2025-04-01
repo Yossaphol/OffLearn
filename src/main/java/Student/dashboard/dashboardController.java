@@ -155,11 +155,11 @@ public class dashboardController implements Initializable {
         method_home.loadAndSetImage(category_pic,"/img/icon/code.png" );
 
         //Hover effect
-        method_home.hoverEffect(cat1);
+//        method_home.hoverEffect(cat1);
         method_home.hoverEffect(user_profile);
         method_home.hoverEffect(interestC);
         method_home.hoverEffect(quizBox);
-        method_home.hoverEffect(roadmapProgression);
+//        method_home.hoverEffect(roadmapProgression);
         method_home.hoverEffect(courseProgression);
         method_home.hoverEffect(studyTable);
         method_home.hoverEffect(btn_continue);
@@ -170,9 +170,9 @@ public class dashboardController implements Initializable {
 
         us_st.setViewOrder(-1);
 
-        categorybar.setProgress(Double.parseDouble(progressCategory.getText().replace("% completed", "").trim()) / 100);
-        roadmap_progress.setProgress(Double.parseDouble(roadmap_value.getText().replace("%", "").trim()) / 100);
-        roadmap_progress1.setProgress(Double.parseDouble(roadmap_value1.getText().replace("%", "").trim()) / 100);
+//        categorybar.setProgress(Double.parseDouble(progressCategory.getText().replace("% completed", "").trim()) / 100);
+//        roadmap_progress.setProgress(Double.parseDouble(roadmap_value.getText().replace("%", "").trim()) / 100);
+//        roadmap_progress1.setProgress(Double.parseDouble(roadmap_value1.getText().replace("%", "").trim()) / 100);
 
         displayProfileBox();
         //Call chart
@@ -189,7 +189,7 @@ public class dashboardController implements Initializable {
 
     public void route(){
         Navigator nav = new Navigator();
-        saved_roadmap.setOnMouseClicked(nav::myRoadmapRoute);
+//        saved_roadmap.setOnMouseClicked(nav::myRoadmapRoute);
 //        allMyCourse.setOnMouseClicked(nav::myCourseRoute);
         studyTable.setOnMouseClicked(nav::myCourseRoute);
         btn_continue.setOnMouseClicked(nav::myCourseRoute);

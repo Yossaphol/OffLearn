@@ -18,7 +18,11 @@ import java.util.ResourceBundle;
 import static Student.payment.Paypal.capturePayment;
 import a_Session.SessionManager;
 
+
+
 public class paymentController implements Initializable {
+
+    private Runnable onPaymentSuccess;
 
     private double amount;
 
@@ -77,6 +81,9 @@ public class paymentController implements Initializable {
                     status.setStyle(isCaptured ? "-fx-text-fill: green;" : "-fx-text-fill: red;");
                     if (isCaptured) {
                         insertEnrollmentToDatabase();
+                        if (onPaymentSuccess != null) {
+                            Platform.runLater(onPaymentSuccess);
+                        }
                     }
                 });
 
@@ -135,6 +142,10 @@ public class paymentController implements Initializable {
         } catch (NumberFormatException e) {
             System.err.println("Invalid user ID format.");
         }
+    }
+
+    public void setOnPaymentSuccess(Runnable callback) {
+        this.onPaymentSuccess = callback;
     }
 
 }

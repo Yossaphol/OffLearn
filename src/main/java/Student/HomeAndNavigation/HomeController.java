@@ -330,33 +330,33 @@ public class HomeController implements Initializable, SessionHandler {
         });
     }
 
-    public void hoverEffect(Pane pane) {
-        ScaleTransition scaleUp = new ScaleTransition(Duration.millis(200), pane);
-        scaleUp.setFromX(1);
-        scaleUp.setFromY(1);
-        scaleUp.setToX(1.03);
-        scaleUp.setToY(1.03);
-
-        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(200), pane);
-        scaleDown.setFromX(1.03);
-        scaleDown.setFromY(1.03);
-        scaleDown.setToX(1);
-        scaleDown.setToY(1);
-
-        DropShadow dropShadow = new DropShadow();
-        dropShadow.setRadius(10);
-        pane.setOnMouseEntered(mouseEvent -> {
-            scaleUp.play();
-            dropShadow.setColor(Color.web("#8100CC", 0.25));
-            pane.setEffect(dropShadow);
-        });
-
-        pane.setOnMouseExited(mouseEvent -> {
-            scaleDown.play();
-            dropShadow.setColor(Color.web("#c6c6c6", 0.25));
-            pane.setEffect(dropShadow);
-        });
-    }
+//    public void hoverEffect(Pane pane) {
+//        ScaleTransition scaleUp = new ScaleTransition(Duration.millis(200), pane);
+//        scaleUp.setFromX(1);
+//        scaleUp.setFromY(1);
+//        scaleUp.setToX(1.03);
+//        scaleUp.setToY(1.03);
+//
+//        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(200), pane);
+//        scaleDown.setFromX(1.03);
+//        scaleDown.setFromY(1.03);
+//        scaleDown.setToX(1);
+//        scaleDown.setToY(1);
+//
+//        DropShadow dropShadow = new DropShadow();
+//        dropShadow.setRadius(10);
+//        pane.setOnMouseEntered(mouseEvent -> {
+//            scaleUp.play();
+//            dropShadow.setColor(Color.web("#8100CC", 0.25));
+//            pane.setEffect(dropShadow);
+//        });
+//
+//        pane.setOnMouseExited(mouseEvent -> {
+//            scaleDown.play();
+//            dropShadow.setColor(Color.web("#c6c6c6", 0.25));
+//            pane.setEffect(dropShadow);
+//        });
+//    }
 
     public void hoverEffect(VBox vBox) {
         DropShadow dropShadow = new DropShadow();
@@ -408,7 +408,7 @@ public class HomeController implements Initializable, SessionHandler {
         DropShadow dropShadow = new DropShadow();
         dropShadow.setRadius(10);
         dropShadow.setColor(Color.TRANSPARENT);
-        vBox.setEffect(dropShadow);
+//        vBox.setEffect(dropShadow);
 
         vBox.setOnMouseEntered(mouseEvent -> {
             Timeline timeline = new Timeline(
