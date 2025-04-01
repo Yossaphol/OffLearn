@@ -850,10 +850,45 @@ public class HomeController implements Initializable {
 
     public void setImgContainer() {
         CourseItem courseItem = courseDB.getLatestCourse();
-        loadAndSetImage(teacherBanner, userDB.getUserNameProfileAndSpecByCourseID(courseItem.getCourseId())[1]);
-        loadAndSetImage(imgContainer, courseItem.getCourseImg());
 
-        this.subjectName.setText(courseItem.getCourseName());
-        setProfile(courseItem.getTeacherName());
+        String profile = userDB.getUserNameProfileAndSpecByCourseID(courseItem.getCourseId())[1];
+        String banner ;
+        if (courseItem.getCourseImg() == null){
+            banner = "/img/Picture/florian-olivo-4hbJ-eymZ1o-unsplash.jpg";
+        } else {
+            banner = courseItem.getCourseImg();
+        }
+
+        setImageToShape(teacherBanner, profile);
+        setImageToShape(imgContainer, banner);
+
+        subjectName.setText(courseItem.getCourseName());
+
+        teacherName.setText(userDB.getUserNameProfileAndSpecByCourseID(courseItem.getCourseId())[0]);
+
     }
+    public boolean isURL(String path) {
+        return path != null && (path.startsWith("http://") || path.startsWith("https://"));
+    }
+
+    public boolean isResource(String path) {
+        return getClass().getResource(path) != null;
+    }
+
+    public void setImageToShape(Shape shape, String path) {
+        Image image;
+
+        if (isURL(path)) {
+            image = new Image(path);
+        } else if (isResource(path)) {
+            image = new Image(getClass().getResource(path).toExternalForm());
+        } else {
+            System.out.println("Invalid path: " + path);
+            return;
+        }
+
+        shape.setFill(new ImagePattern(image));
+    }
+
+
 }
