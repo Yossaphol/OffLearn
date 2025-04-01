@@ -2,6 +2,7 @@ package Utili;
 
 
 public class OfflineCourseData {
+    private int userid;
     private int courseID;
     private int chapterID;
     private String courseName;
@@ -72,5 +73,13 @@ public class OfflineCourseData {
 
     public void setCourseCategory(String courseCategory) {
         this.courseCategory = courseCategory;
+    }
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
     }
 }
