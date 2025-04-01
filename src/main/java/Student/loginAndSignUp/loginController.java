@@ -1,14 +1,11 @@
 package Student.loginAndSignUp;
 
-import Database.ConnectDB;
-import Database.User;
 import Database.UserDB;
 import Student.FontLoader.FontLoader;
 
-import Student.learningPage.MainPageOffline;
+import Student.Offline.MainPageOffline;
 import a_Session.SessionManager;
 import javafx.animation.FadeTransition;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -20,12 +17,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.event.ActionEvent;
 import javafx.util.Duration;
 
-import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.*;
 import java.util.Properties;
 import java.util.ResourceBundle;
 

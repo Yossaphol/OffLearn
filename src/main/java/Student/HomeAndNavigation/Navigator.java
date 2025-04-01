@@ -5,9 +5,8 @@ import Student.Quiz.QuizSummary;
 import Student.Quiz.ResultPageController;
 import Student.dashboard.dashboardController;
 import Student.learningPage.DisposableController;
-import Student.learningPage.MainPageOffline;
+import Student.Offline.MainPageOffline;
 import Student.navBarAndSearchbar.navBarOffline;
-import Teacher.quiz.QuizController;
 import Teacher.quiz.QuizItem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -21,18 +20,28 @@ import java.io.IOException;
 
 public class Navigator {
 
-    private static mainPageController controller;
-    private static MainPageOffline controller1;
+    private static mainPageController onlineController;
+    private static MainPageOffline offlineController;
     private static navBarController navCtrl;
-    private static navBarOffline navCtrl1;
+    private static navBarOffline navCtrlOffline;
     private static Object currentContentController;
 
+    // Setters and getters for the online main controller
     public static void setController(mainPageController ctrl) {
-        controller = ctrl;
+        onlineController = ctrl;
     }
 
-    public static void setMainPageOffline(MainPageOffline ctrl1) {
-        controller1 = ctrl1;
+    public static mainPageController getOnlineController() {
+        return onlineController;
+    }
+
+    // Setters and getters for the offline main controller
+    public static void setOfflineController(MainPageOffline ctrl) {
+        offlineController = ctrl;
+    }
+
+    public static MainPageOffline getCurrentOfflineController() {
+        return offlineController;
     }
 
     public static void setNavBarController(navBarController navController) {
@@ -40,17 +49,17 @@ public class Navigator {
     }
 
     public static void setNavBarController(navBarOffline navController) {
-        navCtrl1 = navController;
+        navCtrlOffline = navController;
     }
 
     private void setCurrentPageSafe(String id) {
         if (navCtrl != null) navCtrl.setCurrentPage(id);
-        if (navCtrl1 != null) navCtrl1.setCurrentPage(id);
+        if (navCtrlOffline != null) navCtrlOffline.setCurrentPage(id);
     }
 
     private void displayNavbarSafe() {
-        if (controller != null) controller.displayNavbar();
-        if (controller1 != null) controller1.displayNavbar();
+        if (onlineController != null) onlineController.displayNavbar();
+        if (offlineController != null) offlineController.displayNavbar();
     }
 
     public void homeRoute(MouseEvent event) {
@@ -83,10 +92,10 @@ public class Navigator {
             Parent root = loader.load();
             pChatController chatController = loader.getController();
             chatController.setTeacherToSelect(teacherName);
-            
-            if (controller != null) {
-                controller.displayNavbar();
-                controller.displayContent(root);
+
+            if (onlineController != null) {
+                onlineController.displayNavbar();
+                onlineController.displayContent(root);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -115,25 +124,23 @@ public class Navigator {
         displayNavbarSafe();
     }
 
-
     public void QuizPage(int chapterID, int quizID) {
         navigateTo("/fxml/Student/Quiz/quizPage.fxml", chapterID, quizID);
     }
 
-
     public void QuizResult(int point, int courseID, QuizItem quizItem, int chapterID) {
         navigateTo("/fxml/Student/Quiz/resultPage.fxml", point, courseID, quizItem, chapterID);
-        if (controller != null) {
-            controller.stopHideNavbar();
-            controller.stopHideSearchBar();
+        if (onlineController != null) {
+            onlineController.stopHideNavbar();
+            onlineController.stopHideSearchBar();
         }
     }
 
     public void QuizSummary(int point, int courseID, QuizItem quizItem, int chapterID) {
         navigateTo("/fxml/Student/Quiz/quizSummary.fxml", point, courseID, quizItem, chapterID);
-        if (controller != null) {
-            controller.stopHideNavbar();
-            controller.stopHideSearchBar();
+        if (onlineController != null) {
+            onlineController.stopHideNavbar();
+            onlineController.stopHideSearchBar();
         }
     }
 
@@ -151,9 +158,9 @@ public class Navigator {
 
     public void testRoute(MouseEvent event) {
         navigateTo("/fxml/Student/Quiz/quizPage.fxml");
-        if (controller != null) {
-            controller.hideNavbar();
-            controller.hideSearchBar();
+        if (onlineController != null) {
+            onlineController.hideNavbar();
+            onlineController.hideSearchBar();
         }
     }
 
@@ -185,36 +192,37 @@ public class Navigator {
 
     public void navigateTo(String fxmlPath) {
         System.out.println("navigateTo called: " + fxmlPath);
-        if (currentContentController instanceof DisposableController) {
-            ((DisposableController) currentContentController).disposePlayer();
+        if (currentContentController instanceof DisposableController disposable) {
+            disposable.disposePlayer();
         }
-        if (controller != null) {
-            controller.displayNavbar();
-            controller.displayContent(fxmlPath);
+        if (onlineController != null) {
+            onlineController.displayNavbar();
+            onlineController.displayContent(fxmlPath);
+        } else if (offlineController != null) {
+            offlineController.displayContent(fxmlPath);
+        } else {
+            System.err.println("No main controller set!");
         }
     }
 
     public void navigateTo(Parent root) {
         System.out.println("navigateTo called with Parent: " + root);
-        if (currentContentController instanceof DisposableController) {
+        if (currentContentController instanceof DisposableController disposable) {
             System.out.println("Calling dispose on current content controller...");
-            ((DisposableController) currentContentController).disposePlayer();
+            disposable.disposePlayer();
         }
-        if (controller != null) {
-            controller.displayNavbar();
-            controller.displayContent(root);
-        } else {
-            System.out.println("Navigator Error");
+        if (onlineController != null) {
+            onlineController.displayNavbar();
+            onlineController.displayContent(root);
         }
     }
-
 
     public void navigateTo(String fxmlPath, int chapterID, int quizID) {
         System.out.println("navigateTo called: " + fxmlPath);
 
-        if (currentContentController instanceof DisposableController) {
+        if (currentContentController instanceof DisposableController disposable) {
             System.out.println("Calling dispose on current content controller...");
-            ((DisposableController) currentContentController).disposePlayer();
+            disposable.disposePlayer();
         }
 
         try {
@@ -226,11 +234,11 @@ public class Navigator {
             quizController.loadQuiz();
             quizController.setSendButton();
             quizController.setQuizDesc();
-            if (controller != null) {
-                controller.displayNavbar();
-                controller.displayContent(root);
+            if (onlineController != null) {
+                onlineController.displayNavbar();
+                onlineController.displayContent(root);
             } else {
-                System.out.println("Navigator Error: controller is null");
+                System.out.println("Navigator Error: online controller is null");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -238,27 +246,31 @@ public class Navigator {
     }
 
     public void navigateTo(String fxmlPath, int point, int courseID, QuizItem quizItem, int chapterID) {
-        try {
+        System.out.println("navigateTo called: " + fxmlPath);
+
+        if (currentContentController instanceof DisposableController disposable) {
+            disposable.disposePlayer();
+        }
+
+        if (onlineController != null) {
+            onlineController.displayNavbar();
             Object newController = null;
-            if (controller != null) {
-                controller.displayNavbar();
-                if (fxmlPath.contains("quizSummary")) {
-                    newController = controller.displayContent(fxmlPath, QuizSummary.class);
-                    ((QuizSummary) newController).loadAnwer(point, quizItem, quizItem.getQuizID());
-                } else if (fxmlPath.contains("resultPage")) {
-                    newController = controller.displayContent(fxmlPath, ResultPageController.class);
-                    ((ResultPageController) newController).loadData(point, courseID, quizItem, chapterID);
-                }
-                currentContentController = newController;
+            if (fxmlPath.contains("quizSummary")) {
+                newController = onlineController.displayContent(fxmlPath, QuizSummary.class);
+                ((QuizSummary) newController).loadAnwer(point, quizItem, quizItem.getQuizID());
+            } else if (fxmlPath.contains("resultPage")) {
+                newController = onlineController.displayContent(fxmlPath, ResultPageController.class);
+                ((ResultPageController) newController).loadData(point, courseID, quizItem, chapterID);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+            currentContentController = newController;
         }
     }
-
 
     public static void setCurrentContentController(Object controller) {
         currentContentController = controller;
     }
-}
 
+    public static Object getCurrentContentController() {
+        return currentContentController;
+    }
+}

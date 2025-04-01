@@ -1,16 +1,13 @@
-package Student.learningPage;
+package Student.Offline;
 
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.Navigator;
-import Student.navBarAndSearchbar.navBarController;
 import Student.navBarAndSearchbar.navBarOffline;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
@@ -27,7 +24,7 @@ public class MainPageOffline implements Initializable {
     private navBarOffline navCtrl;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        Navigator.setController(this);
+        Navigator.setOfflineController(this);
         displayNavbar();
         displaySearchBar();
         displayContent("/fxml/Student/Offline/OfflineMyCourse.fxml");

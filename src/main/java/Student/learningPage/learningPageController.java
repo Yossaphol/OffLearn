@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 import Database.*;
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.HomeController;
-
+import Teacher.courseManagement.CourseItem;
 import Student.HomeAndNavigation.Navigator;
 import a_Session.SessionManager;
 import javafx.application.Platform;
@@ -67,8 +67,6 @@ public class learningPageController extends ChapterProgress implements Initializ
     public Button btnGloblalChat;
     public Button btnOffLoad;
     public ProgressBar progressBar;
-    public Button nextCourse;
-    public ProgressBar nextCourseProgressBar;
     private EPButtonController currentlyActiveEPController = null;
 
     private VideoPlayerManager videoManager;
@@ -84,6 +82,7 @@ public class learningPageController extends ChapterProgress implements Initializ
     private ChapterDB chapterDB;
     String sessionUserID = SessionManager.getInstance().getUserID();
     private ScheduledExecutorService scheduler ;
+
 
     // Helper: run tasks on a background daemon thread
     private <T> void runBackgroundTask(Task<T> task) {
@@ -113,7 +112,6 @@ public class learningPageController extends ChapterProgress implements Initializ
         method_home.hoverEffect(btnLike);
         method_home.hoverEffect(btnDislike);
         method_home.hoverEffect(btnOffLoad);
-        method_home.hoverEffect(nextCourse);
         method_home.hoverEffect(btnQuiz);
 
         btnContactTeacher.setOnAction(event -> {
@@ -133,18 +131,24 @@ public class learningPageController extends ChapterProgress implements Initializ
                 e.printStackTrace();
             }
         });
+    }
 
+    private void initializeScheduler() {
+        if (scheduler != null) {
+            scheduler.shutdown();
+        }
         scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(() -> {
             try {
-                System.out.println(111);
-                updateProgress(videoManager.getVideoMediaPlayer(), chapterID);
-                double tmp = loadChapterProgress(String.valueOf(chapterID), sessionUserID);
-                double normalized = tmp / 100.0;
-                Platform.runLater(() -> {
-                    progressBar.setProgress(normalized);
-                    labelPercent.setText(String.format("%.2f%%", tmp));
-                });
+                if (videoManager != null && videoManager.getVideoMediaPlayer() != null) {
+                    updateProgress(videoManager.getVideoMediaPlayer(), chapterID);
+                    double tmp = loadChapterProgress(String.valueOf(chapterID), sessionUserID);
+                    double normalized = tmp / 100.0;
+                    Platform.runLater(() -> {
+                        progressBar.setProgress(normalized);
+                        labelPercent.setText(String.format("%.2f%%", tmp));
+                    });
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -499,20 +503,25 @@ public class learningPageController extends ChapterProgress implements Initializ
     }
 
     // For forced test—overriding courseID and chapterID
-    public void recieveMethod(String ignoredCourseId) {
-        this.courseID = Integer.parseInt(ignoredCourseId); // test
+    public void recieveMethod(String courseID) {
+        this.courseID = Integer.parseInt(courseID);
         chapterDB = new ChapterDB();
         categoryDB = new Category();
+        CourseDB courseDB = new CourseDB();
 
         ArrayList<String[]> chapters = chapterDB.getChaptersByCourseID(this.courseID);
-        String category = categoryDB.getCategoryByCourseID(courseID);
+        String category = categoryDB.getCategoryByCourseID(this.courseID);
+        CourseItem courseInfo = courseDB.getCourseByID(this.courseID);
 
-        if (!chapters.isEmpty()) {
+        if (chapters != null && !chapters.isEmpty()) {
             this.chapterID = Integer.parseInt(chapters.get(0)[0]);
             setLoadingState(true);
+            if (courseInfo != null) {
+                subject_name.setText(courseInfo.getCourseName());
+                catName.setText(category != null ? category : "unknown");
+            }
             loadTeacherInfo();
-            receiveData(courseID, chapterID, Integer.parseInt(sessionUserID));
-            catName.setText(category != null ? category : "unknown");
+            receiveData(this.courseID, this.chapterID, Integer.parseInt(sessionUserID));
         } else {
             System.err.println("No chapters found for forced course ID: " + this.courseID);
         }
@@ -708,6 +717,9 @@ public class learningPageController extends ChapterProgress implements Initializ
 
                     ChapterDB chapterDB = new ChapterDB();
                     String[] details = chapterDB.getChapterDetailsByID(chapterID);
+                    CourseDB courseDB = new CourseDB();
+                    String courseName = courseDB.getCourseNameByID(courseID);
+                    String courseDesc = courseDB.getCourseDescriptionByID(courseID);
 
                     OfflineCourseData offlineData = new OfflineCourseData();
                     offlineData.setUserid(userID);
@@ -718,8 +730,9 @@ public class learningPageController extends ChapterProgress implements Initializ
                     offlineData.setCourseCategory(catName.getText());
                     offlineData.setTeacherName(teacherName.getText());
                     offlineData.setVideoPath(destination.getAbsolutePath());
-                    offlineData.setCourseName("TEST");
-                    offlineData.setCourseDescription("Offline Access");
+                    offlineData.setCourseName(courseName);
+                    offlineData.setCourseDescription(courseDesc);
+
 
                     Utili.OfflineCourseManager.saveChapter(userID, offlineData);
                     System.out.println("📝 Offline data saved for Chapter ID: " + chapterID);
@@ -760,12 +773,15 @@ public class learningPageController extends ChapterProgress implements Initializ
         String[] teacherInfo = userDB.getUserNameProfileAndSpecByCourseID(courseID);
         Category cat = new Category();
         String category = cat.getCategoryByCourseID(courseID);
+        CourseDB courseDB = new CourseDB();
+        String courseName = courseDB.getCourseNameByID(courseID);
+        String courseDesc = courseDB.getCourseDescriptionByID(courseID);
 
         OfflineCourseInfo info = new OfflineCourseInfo();
         info.setUserID(userID);
         info.setCourseID(courseID);
-        info.setCourseName("Offline Course"); // Optionally get actual name from DB
-        info.setCourseDescription("Downloaded Content");
+        info.setCourseName(courseName); // Optionally get actual name from DB
+        info.setCourseDescription(courseDesc);
         info.setCourseCategory(category != null ? category : "Unknown");
         info.setTeacherName(teacherInfo != null ? teacherInfo[0] : "Unknown");// Optional
 

@@ -350,5 +350,36 @@ public class CourseDB extends ConnectDB{
         return null;
     }
 
+    public String getCourseNameByID(int courseID) {
+        String sql = "SELECT courseName FROM offlearn.course WHERE Course_ID = ?";
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstm = conn.prepareStatement(sql)) {
+
+            pstm.setInt(1, courseID);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                return rs.getString("courseName");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getCourseDescriptionByID(int courseID) {
+        String sql = "SELECT courseDescription FROM offlearn.course WHERE Course_ID = ?";
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstm = conn.prepareStatement(sql)) {
+
+            pstm.setInt(1, courseID);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                return rs.getString("courseDescription");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

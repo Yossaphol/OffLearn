@@ -112,5 +112,7 @@ module com.example.offlearn {
 
     exports mediaUpload to javafx.fxml;
     opens mediaUpload;
+    exports Student.Offline;
+    opens Student.Offline to javafx.fxml;
 
 }

@@ -3,6 +3,7 @@ package Student.courseManage;
 import Database.UserDB;
 import Student.HomeAndNavigation.Navigator;
 import Teacher.courseManagement.CourseItem;
+import Student.learningPage.learningPageController;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -24,9 +25,19 @@ public class courseInfoController implements Initializable {
     public Button continueCourse;
     Navigator nav = new Navigator();
     UserDB userDB = new UserDB();
+    private CourseItem currentCourse;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        continueCourse.setOnAction(event -> {
+            Navigator nav = new Navigator();
+            nav.learningPageRoute(event);
+            Object currentController = Navigator.getCurrentContentController();
+            if (currentController instanceof learningPageController) {
+                learningPageController l = (learningPageController) currentController;
+                l.recieveMethod(String.valueOf(currentCourse.getCourseId()));
+            }
+        });
     }
 
     public void route(){
@@ -35,6 +46,7 @@ public class courseInfoController implements Initializable {
     }
 
     public void setCourseInformation(CourseItem course){
+        this.currentCourse = course;
         courseName.setText(course.getCourseName());
         teacherName.setText(course.getTeacherName());
         setProfileCourse(course.getCourseImg());
@@ -61,8 +73,8 @@ public class courseInfoController implements Initializable {
         this.course_image.setFill(new ImagePattern(img));
     }
 
-//    public void courseLink(int quizID,int chapterID, javafx.scene.control.Button taskBtn){
-//        taskBtn.setOnMouseClicked(e->nav.navigateTo("/fxml/Student/learningPage/learningPage.fxml", chapterID,quizID));
-//    }
+    public void courseLink(int quizID,int chapterID, javafx.scene.control.Button taskBtn){
+        taskBtn.setOnMouseClicked(e->nav.navigateTo("/fxml/Student/learningPage/learningPage.fxml", chapterID,quizID));
+    }
 
 }
