@@ -249,7 +249,10 @@
                                                 <Insets left="50.0" />
                                              </padding>
                                           </Label>
-                                          <Pane minHeight="6.0" prefHeight="6.0" prefWidth="561.0" />
+                                          <Pane minHeight="6.0" prefHeight="6.0" prefWidth="561.0">
+                                             <children>
+                                                <Label fx:id="tag1" layoutX="406.0" layoutY="6.0" text="Label" textFill="WHITE" />
+                                             </children></Pane>
                                           <Button fx:id="seeAll" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#openPopup" style="-fx-background-color: transparent;" text="ดูทั้งหมด" textFill="#8100cc">
                                              <font>
                                                 <Font name="Noto Sans Thai Regular" size="16.0" />

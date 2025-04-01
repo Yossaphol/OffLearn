@@ -1,5 +1,7 @@
 package Student.payment;
 
+import Database.CourseDB;
+import Database.EnrollmentDB;
 import com.google.zxing.WriterException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -14,6 +16,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static Student.payment.Paypal.capturePayment;
+import a_Session.SessionManager;
 
 public class paymentController implements Initializable {
 
@@ -36,6 +39,8 @@ public class paymentController implements Initializable {
 
     private String courseName;
     private double coursePrice;
+    private int courseId;
+    private int userId;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -55,7 +60,6 @@ public class paymentController implements Initializable {
                 String approvalUrl = orderData[1];
 
                 Image qrCodeImage = Paypal.generateQRCode(approvalUrl, 300);
-
                 Platform.runLater(() -> qrCode.setImage(qrCodeImage));
 
                 boolean isApproved = Paypal.waitForApproval(accessToken, orderId);
@@ -68,8 +72,14 @@ public class paymentController implements Initializable {
                 boolean isCaptured = capturePayment(accessToken, orderId);
                 String paymentMessage = isCaptured ? "Payment successful" : "Payment failed";
 
-                Platform.runLater(() -> status.setText(paymentMessage));
-                status.setStyle(isCaptured ? "-fx-text-fill: green;" : "-fx-text-fill: red;");
+                Platform.runLater(() -> {
+                    status.setText(paymentMessage);
+                    status.setStyle(isCaptured ? "-fx-text-fill: green;" : "-fx-text-fill: red;");
+                    if (isCaptured) {
+                        insertEnrollmentToDatabase();
+                    }
+                });
+
             } catch (IOException | WriterException e) {
                 e.printStackTrace();
                 Platform.runLater(() -> status.setText("Error generating QR code"));
@@ -86,7 +96,45 @@ public class paymentController implements Initializable {
         if (priceDisplay != null) priceDisplay.setText(String.format("%.0f THB", price));
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setCourseId(int id) {
+        this.courseId = id;
     }
+
+    public void setUserId(int id) {
+        this.userId = id;
+    }
+
+    private void insertEnrollmentToDatabase() {
+        String userIdStr = SessionManager.getInstance().getUserID();
+        if (userIdStr == null) {
+            System.err.println("⚠️ ไม่พบ user ID ใน session!");
+            return;
+        }
+
+        try {
+            int userId = Integer.parseInt(userIdStr);
+
+            // 🔍 ถ้ายังไม่มี courseId, ดึงจากชื่อ
+            if (courseId == 0 && courseName != null) {
+                CourseDB db = new CourseDB();
+                courseId = db.getCourseID(courseName);  // map ชื่อ → ID
+                System.out.println("🎯 courseId mapped from name = " + courseId);
+            }
+
+            System.out.println("🧾 Preparing to enroll userId = " + userId + ", courseId = " + courseId);
+
+            EnrollmentDB enrollmentDB = new EnrollmentDB();
+            boolean success = enrollmentDB.insertEnrollment(userId, courseId);
+
+            if (success) {
+                System.out.println("✅ Enroll saved to DB!");
+            } else {
+                System.err.println("❌ Failed to insert enroll into DB.");
+            }
+
+        } catch (NumberFormatException e) {
+            System.err.println("❌ Invalid user ID format.");
+        }
+    }
+
 }

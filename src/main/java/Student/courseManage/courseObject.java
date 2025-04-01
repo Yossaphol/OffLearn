@@ -17,6 +17,43 @@ public class courseObject {
     private String shortDescription;
     private String courseImg;
 
+    private int courseID;
+    private int totalReview;
+    private int totalLesson;
+    private String teacherImg;
+
+    public int getTotalReview() {
+        return totalReview;
+    }
+
+    public void setTotalReview(int totalReview) {
+        this.totalReview = totalReview;
+    }
+
+    public int getTotalLesson() {
+        return totalLesson;
+    }
+
+    public void setTotalLesson(int totalLesson) {
+        this.totalLesson = totalLesson;
+    }
+
+    public int getCourseID() {
+        return courseID;
+    }
+
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
+    }
+
+    public String getTeacherImg() {
+        return teacherImg;
+    }
+
+    public void setTeacherImg(String teacherImg) {
+        this.teacherImg = teacherImg;
+    }
+
 
     public courseObject(String description, String name, double price, double rating, int reviewCount,
                         String categoryIcon, String categoryName, String picture, String teacherName) {
