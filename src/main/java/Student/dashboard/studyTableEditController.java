@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
@@ -13,6 +14,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import java.io.*;
+import java.nio.file.*;
+import org.json.*;
+
+
 
 public class studyTableEditController implements Initializable{
 
@@ -41,6 +48,11 @@ public class studyTableEditController implements Initializable{
     private ObservableList<TimeBlock> occupiedTimes = FXCollections.observableArrayList();
     private ObservableList<ScheduleItem> tableData = FXCollections.observableArrayList();
 
+
+    private static final String DATA_FILE = "studyTable.json";
+    private int fromHour = 8;
+    private int toHour = 17;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         generateItem();
@@ -52,13 +64,113 @@ public class studyTableEditController implements Initializable{
         list_stop.setCellValueFactory(new PropertyValueFactory<>("stop"));
         list_bgcolor.setCellValueFactory(new PropertyValueFactory<>("bgcolor"));
         list_tcolor.setCellValueFactory(new PropertyValueFactory<>("tcolor"));
+
+        // Load data from file
+        loadData();
+
         // Set table data
         list_table.setItems(tableData);
     }
 
+    private void loadData() {
+        try {
+            File file = new File(DATA_FILE);
+            if (!file.exists()) {
+                // If file doesn't exist, use default values
+                from.getSelectionModel().select(String.format("%02d:00", fromHour));
+                to.getSelectionModel().select(String.format("%02d:00", toHour));
+                return;
+            }
+
+            String content = new String(Files.readAllBytes(Paths.get(DATA_FILE)));
+            JSONObject jsonData = new JSONObject(content);
+
+            // Load range (from/to hours)
+            fromHour = jsonData.getInt("fromHour");
+            toHour = jsonData.getInt("toHour");
+
+            // Select from and to values in comboboxes
+            from.getSelectionModel().select(String.format("%02d:00", fromHour));
+            to.getSelectionModel().select(String.format("%02d:00", toHour));
+
+            // Load schedule items
+            JSONArray items = jsonData.getJSONArray("scheduleItems");
+            for (int i = 0; i < items.length(); i++) {
+                JSONObject item = items.getJSONObject(i);
+                ScheduleItem scheduleItem = new ScheduleItem(
+                        i + 1,
+                        item.getString("name"),
+                        item.getString("day"),
+                        item.getString("start"),
+                        item.getString("stop"),
+                        item.getString("bgcolor"),
+                        item.getString("tcolor")
+                );
+                tableData.add(scheduleItem);
+            }
+
+            // Update the ID combo box
+            updateIdComboBox();
+
+        } catch (Exception e) {
+            System.err.println("Error loading data: " + e.getMessage());
+            e.printStackTrace();
+
+            // If there's an error, use default values
+            from.getSelectionModel().select(String.format("%02d:00", 8));
+            to.getSelectionModel().select(String.format("%02d:00", 17));
+        }
+    }
+
+    // Add method to save data to JSON file
+    private void saveData() {
+        try {
+            JSONObject jsonData = new JSONObject();
+
+            // Save range (from/to hours)
+            jsonData.put("fromHour", fromHour);
+            jsonData.put("toHour", toHour);
+
+            // Save schedule items
+            JSONArray items = new JSONArray();
+            for (ScheduleItem item : tableData) {
+                JSONObject jsonItem = new JSONObject();
+                jsonItem.put("name", item.getName());
+                jsonItem.put("day", item.getDay());
+
+                // Ensure time format is consistent
+                String start = item.getStart().split(":")[0];
+                String stop = item.getStop().split(":")[0];
+
+                jsonItem.put("start", start);
+                jsonItem.put("stop", stop);
+                jsonItem.put("bgcolor", item.getBgcolor());
+                jsonItem.put("tcolor", item.getTcolor());
+                items.put(jsonItem);
+            }
+            jsonData.put("scheduleItems", items);
+
+            // Write to file
+            try (FileWriter file = new FileWriter(DATA_FILE)) {
+                file.write(jsonData.toString(2));
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error saving data: " + e.getMessage());
+            e.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Save Error");
+            alert.setHeaderText("Error Saving Data");
+            alert.setContentText("Failed to save schedule data: " + e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
+
     public void generateItem() {
         ObservableList<String> timeOptions = FXCollections.observableArrayList();
-        for (int hour = 0; hour < 24; hour++) {
+        for (int hour = 0; hour <= 24; hour++) {
             String time = String.format("%02d:00", hour);
             timeOptions.add(time);
         }
@@ -232,9 +344,9 @@ public class studyTableEditController implements Initializable{
         String[] fromParts = fromStr.split(":");
         String[] toParts = toStr.split(":");
 
-        int fromHour = Integer.parseInt(fromParts[0]);
+        fromHour = Integer.parseInt(fromParts[0]);
         int fromMinute = Integer.parseInt(fromParts[1]);
-        int toHour = Integer.parseInt(toParts[0]);
+        toHour = Integer.parseInt(toParts[0]);
         int toMinute = Integer.parseInt(toParts[1]);
 
         // List to store IDs of out-of-range subjects
@@ -270,9 +382,45 @@ public class studyTableEditController implements Initializable{
             return;
         }
 
-        // If all subjects are within range, close the window
-        Stage stage = (Stage) done.getScene().getWindow();
-        stage.close();
+        // Save data to file
+        saveData();
+
+        // Try to reinitialize the study table
+        try {
+            // Get the parent controller (studyTableController) and reinitialize it
+            Stage stage = (Stage) done.getScene().getWindow();
+
+            // For this to work, we need to get a reference to the studyTableController
+            // This can be done by using a static reference or injecting it when this controller is created
+            Stage mainStage = (Stage) stage.getOwner();
+            if (mainStage != null) {
+                // Try to find the study table controller in the scene
+                studyTableController controller = findStudyTableController(mainStage.getScene());
+                if (controller != null) {
+                    // Reinitialize the study table
+                    controller.initialize(null, null);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error reinitializing study table: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            // Close the window regardless of whether reinitialization succeeded
+            Stage stage = (Stage) done.getScene().getWindow();
+            stage.close();
+        }
+    }
+
+    private studyTableController findStudyTableController(Scene scene) {
+        if (scene != null && scene.getRoot() != null) {
+            // This is a simplistic approach - in a real application, you'd have a more
+            // robust way to get a reference to the controller
+            Object controller = scene.getUserData();
+            if (controller instanceof studyTableController) {
+                return (studyTableController) controller;
+            }
+        }
+        return null;
     }
 
     // Helper method to update the id ComboBox items

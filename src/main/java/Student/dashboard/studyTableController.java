@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -11,9 +12,17 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import java.io.*;
+import java.nio.file.*;
+import java.util.stream.Collectors;
+
+import org.json.*;
+
 public class studyTableController implements Initializable {
+
     public HBox content_pane;
     public VBox content_container;
     public HBox hour_container;
@@ -44,18 +53,89 @@ public class studyTableController implements Initializable {
     private ObservableList<ScheduleItem> tableData = FXCollections.observableArrayList();
     private ObservableList<Integer> range = FXCollections.observableArrayList();
 
+    private static final String DATA_FILE = "studyTable.json";
+
+    public int fromHour = 8;
+    public int toHour = 17;
+
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ScheduleItem subject1 = new ScheduleItem(1, "One", "Monday", "09", "10", "Red", "White");
-        ScheduleItem subject2 = new ScheduleItem(2, "Two", "Friday", "09", "12", "Blue", "White");
-        ScheduleItem subject3 = new ScheduleItem(3, "Three", "Monday", "10", "11", "Green", "White");
+        // Load data from file first
+        loadDataFromFile();
 
-        tableData.addAll(subject1, subject2, subject3);
-        range.addAll(7, 17);
+        // Make sure the day containers are cleared before adding content
+        clearDayContainers();
 
-        setWidthAll(134 * (1 + range.get(1) - range.get(0)));
+        // Set the width based on the range
+        int width = 134 * (1 + range.get(1) - range.get(0));
+        setWidthAll(width);
+
+        // Add hours and content
         addHour(range.get(0), range.get(1));
         addContent();
     }
+
+    private void loadDataFromFile() {
+        try {
+            // Clear existing data first to avoid duplicates
+            tableData.clear();
+            range.clear();
+
+            File file = new File(DATA_FILE);
+            if (!file.exists()) {
+                // If file doesn't exist, use default values
+                range.add(8);
+                range.add(17);
+                return;
+            }
+
+            String content = new String(Files.readAllBytes(Paths.get(DATA_FILE)));
+            JSONObject jsonData = new JSONObject(content);
+
+            // Load range (from/to hours)
+            int fromHour = jsonData.getInt("fromHour");
+            int toHour = jsonData.getInt("toHour");
+            range.add(fromHour);
+            range.add(toHour);
+
+            // Load schedule items
+            JSONArray items = jsonData.getJSONArray("scheduleItems");
+            for (int i = 0; i < items.length(); i++) {
+                JSONObject item = items.getJSONObject(i);
+                ScheduleItem scheduleItem = new ScheduleItem(
+                        i + 1,
+                        item.getString("name"),
+                        item.getString("day"),
+                        item.getString("start"),
+                        item.getString("stop"),
+                        item.getString("bgcolor"),
+                        item.getString("tcolor")
+                );
+                tableData.add(scheduleItem);
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error loading data: " + e.getMessage());
+            e.printStackTrace();
+
+            // If there's an error, use default values
+            range.clear();
+            range.add(8);
+            range.add(17);
+        }
+    }
+
+    private void clearDayContainers() {
+        // Clear all day containers to avoid duplicates
+        day1_container.getChildren().clear();
+        day2_container.getChildren().clear();
+        day3_container.getChildren().clear();
+        day4_container.getChildren().clear();
+        day5_container.getChildren().clear();
+        day6_container.getChildren().clear();
+        day7_container.getChildren().clear();
+        hour_container.getChildren().clear();
+    }
+
 
     public void setWidthAll(double width) {
         content_pane.setPrefWidth(width);
@@ -92,6 +172,10 @@ public class studyTableController implements Initializable {
     }
 
     public void addHour(int start, int stop) {
+        Label st = new Label();
+        st.setPrefSize(134, 24);
+        st.setText("Study Table");
+        hour_container.getChildren().add(st);
         for (int i = start; i < stop; i++) {
             Label hour = new Label();
             hour.setPrefSize(134, 24);
@@ -104,6 +188,11 @@ public class studyTableController implements Initializable {
     public void addSubject(String name, String day, String start, String stop, String bgcolor, String tcolor) {
         Label subject = new Label();
         subject.setPrefSize(134 * (Integer.parseInt(stop) - Integer.parseInt(start)), 24);
+
+        // Fix color handling - Convert JavaFX color format to CSS format if needed
+        String bgColorCSS = convertToCSS(bgcolor);
+        String textColorCSS = convertToCSS(tcolor);
+
         subject.setStyle(String.format(
                 "-fx-font-size: 14; " +
                         "-fx-font-weight: bold; " +
@@ -111,7 +200,7 @@ public class studyTableController implements Initializable {
                         "-fx-background-color: %s; " +
                         "-fx-background-radius: 10; " +
                         "-fx-alignment: CENTER;",
-                tcolor, bgcolor));
+                textColorCSS, bgColorCSS));
 
         subject.setText(name);
 
@@ -133,6 +222,31 @@ public class studyTableController implements Initializable {
         } else {
             System.out.println("Invalid day: " + day);
         }
+    }
+
+    // Add this helper method to convert JavaFX color format to CSS color format
+    private String convertToCSS(String colorString) {
+        // Handle JavaFX Color.toString() format: "0xrrggbbff" or "Color[r=0.x, g=0.x, b=0.x, a=0.x]"
+        if (colorString.startsWith("0x")) {
+            return "#" + colorString.substring(2, 8);
+        } else if (colorString.startsWith("Color[")) {
+            try {
+                // Parse the rgba values from the string
+                String[] parts = colorString.substring(6, colorString.length() - 1).split(",");
+                double r = Double.parseDouble(parts[0].split("=")[1].trim());
+                double g = Double.parseDouble(parts[1].split("=")[1].trim());
+                double b = Double.parseDouble(parts[2].split("=")[1].trim());
+
+                // Convert to hex
+                String hex = String.format("#%02X%02X%02X",
+                        (int)(r * 255), (int)(g * 255), (int)(b * 255));
+                return hex;
+            } catch (Exception e) {
+                // Fallback to the original string if parsing fails
+                return colorString;
+            }
+        }
+        return colorString;
     }
 
     public void addSpace(String day, String start, String stop) {
@@ -160,64 +274,70 @@ public class studyTableController implements Initializable {
     }
 
     public void addContent() {
+        // Add day labels first
         daylabel();
+
+        // Sort the table data
         sortTableData();
 
-        HBox[] dayContainers = {day1_container, day2_container, day3_container,
-                day4_container, day5_container, day6_container, day7_container};
         String[] days = {"sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"};
 
-        int dataIndex = 0;
+        // Process each day
+        for (String currentDay : days) {
+            // Filter items for the current day
+            List<ScheduleItem> dayItems = tableData.stream()
+                    .filter(item -> item.getDay().toLowerCase().equals(currentDay))
+                    .sorted((a, b) -> compareTimes(a.getStart(), b.getStart()))
+                    .collect(Collectors.toList());
 
-        // Process each day container
-        for (int i = 0; i < dayContainers.length; i++) {
-            HBox container = dayContainers[i];
-            String currentDay = days[i];
+            // Track current position in hours
+            int currentHour = range.get(0);
 
-            // Process each hour in the range
-            for (int j = range.get(0); j < range.get(1); j++) {
-                // Check if we have more data to process
-                if (dataIndex < tableData.size()) {
-                    ScheduleItem currentItem = tableData.get(dataIndex);
+            // Get the appropriate container
+            HBox dayContainer = getDayContainer(currentDay);
 
-                    // Check if the item belongs to current day
-                    if (currentItem.getDay().toLowerCase().equals(currentDay)) {
-                        int startHour = Integer.parseInt(currentItem.getStart());
+            // Process each item for this day
+            for (ScheduleItem item : dayItems) {
+                int startHour = Integer.parseInt(item.getStart());
+                int stopHour = Integer.parseInt(item.getStop());
 
-                        // Check if the item starts at current hour
-                        if (startHour == j) {
-                            // Add the subject
-                            addSubject(
-                                    currentItem.getName(),
-                                    currentItem.getDay(),
-                                    currentItem.getStart(),
-                                    currentItem.getStop(),
-                                    currentItem.getBgcolor(),
-                                    currentItem.getTcolor()
-                            );
-
-                            // Calculate how many hours to skip
-                            int endHour = Integer.parseInt(currentItem.getStop());
-                            int duration = endHour - startHour;
-
-                            // Skip hours occupied by this subject
-                            j += duration - 1; // -1 because the loop will increment j
-
-                            // Move to next item
-                            dataIndex++;
-                        } else {
-                            // Add empty space for this hour
-                            addSpace(currentDay, String.valueOf(j), String.valueOf(j + 1));
-                        }
-                    } else {
-                        // Add empty space for this hour (item is for a different day)
-                        addSpace(currentDay, String.valueOf(j), String.valueOf(j + 1));
-                    }
-                } else {
-                    // No more items, add empty space
-                    addSpace(currentDay, String.valueOf(j), String.valueOf(j + 1));
+                // Add space before this item if needed
+                if (startHour > currentHour) {
+                    addSpace(currentDay, String.valueOf(currentHour), String.valueOf(startHour));
                 }
+
+                // Add the subject
+                addSubject(
+                        item.getName(),
+                        item.getDay(),
+                        item.getStart(),
+                        item.getStop(),
+                        item.getBgcolor(),
+                        item.getTcolor()
+                );
+
+                // Update current hour
+                currentHour = stopHour;
             }
+
+            // Add space after the last item if needed
+            if (currentHour < range.get(1)) {
+                addSpace(currentDay, String.valueOf(currentHour), String.valueOf(range.get(1)));
+            }
+        }
+    }
+
+    // Helper method to get the right container for a day
+    private HBox getDayContainer(String day) {
+        switch (day.toLowerCase()) {
+            case "sunday": return day1_container;
+            case "monday": return day2_container;
+            case "tuesday": return day3_container;
+            case "wednesday": return day4_container;
+            case "thursday": return day5_container;
+            case "friday": return day6_container;
+            case "saturday": return day7_container;
+            default: return null;
         }
     }
 
@@ -265,5 +385,3 @@ public class studyTableController implements Initializable {
         }
     }
 }
-
-

@@ -2,7 +2,13 @@ package Student.dashboard;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class ScheduleItem {
+import java.io.Serializable;
+
+public class ScheduleItem implements Serializable{
+
+
+    private static final long serialVersionUID = 1L;
+
     private final SimpleStringProperty id;
     private final SimpleStringProperty name;
     private final SimpleStringProperty day;
