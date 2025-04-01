@@ -145,13 +145,13 @@ public class MyProgressDB extends ConnectDB {
     }
 
     public ArrayList<CourseProgress> getTopThreeCoursesProgress(int userID) {
-        String sql = "SELECT c.courseName, SUM(m.myprogress) AS totalProgress, COUNT(ch.Chapter_ID) AS totalChapters " +
+        String sql = "SELECT c.courseName, AVG(m.myprogress) AS averageProgress, COUNT(ch.Chapter_ID) AS totalChapters " +
                 "FROM offlearn.myprogress m " +
                 "JOIN offlearn.chapter ch ON m.Chapter_ID = ch.Chapter_ID " +
                 "JOIN offlearn.course c ON ch.Course_ID = c.Course_ID " +
                 "WHERE m.User_ID = ? " +
                 "GROUP BY c.Course_ID, c.courseName " +
-                "ORDER BY totalProgress DESC " +
+                "ORDER BY averageProgress DESC " +
                 "LIMIT 3";
 
         ArrayList<CourseProgress> topThreeCourses = new ArrayList<>();
@@ -164,12 +164,17 @@ public class MyProgressDB extends ConnectDB {
 
             while (rs.next()) {
                 String courseName = rs.getString("courseName");
-                double totalProgress = rs.getDouble("totalProgress");
+                double averageProgress = rs.getDouble("averageProgress");
                 int totalChapters = rs.getInt("totalChapters");
 
-                double progressPercentage = totalChapters > 0 ? (totalProgress / totalChapters) * 100 : 0;
+                int roundedPercentage = (int) Math.round(averageProgress);
 
-                topThreeCourses.add(new CourseProgress(courseName, progressPercentage));
+                System.out.println("Course: " + courseName +
+                        ", Average Progress: " + averageProgress +
+                        ", Total Chapters: " + totalChapters +
+                        ", Progress Percentage: " + roundedPercentage);
+
+                topThreeCourses.add(new CourseProgress(courseName, roundedPercentage));
             }
 
         } catch (SQLException e) {
@@ -178,7 +183,4 @@ public class MyProgressDB extends ConnectDB {
 
         return topThreeCourses;
     }
-
-
-
 }

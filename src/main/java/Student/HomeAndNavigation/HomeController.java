@@ -9,7 +9,9 @@ import javax.imageio.ImageIO;
 import Database.*;
 import Student.HomeAndNavigation.*;
 import Student.courseManage.courseInfoController;
+import Student.dashboard.CourseScore;
 import Teacher.courseManagement.CourseItem;
+import a_Session.SessionHandler;
 import a_Session.SessionManager;
 import javafx.animation.*;
 import javafx.event.ActionEvent;
@@ -41,7 +43,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class HomeController implements Initializable {
+public class HomeController implements Initializable, SessionHandler {
 
     @FXML
 
@@ -162,11 +164,13 @@ public class HomeController implements Initializable {
     private int currentPage = 0;
     private final int coursesPerPage = 2;
     private ArrayList<CourseItem> courseList;
+    private int userID;
     ArrayList<MyCourse> myCourses = myCourseDB.getallMyCourse();
 
     String username = SessionManager.getInstance().getUsername();
     UserDB userDB = new UserDB();
     CourseDB courseDB = new CourseDB();
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -202,6 +206,12 @@ public class HomeController implements Initializable {
 //        callSlider();
         showCourse();
         setProfile(userDB.getProfile(username));
+    }
+
+    @Override
+    public void handleSession() {
+        UserDB userDB = new UserDB();
+        this.userID = userDB.getUserId(SessionManager.getInstance().getUsername());
     }
 
     public void showCourse() {
@@ -630,39 +640,39 @@ public class HomeController implements Initializable {
 //        continueProgressOOP.setProgress(Double.parseDouble(progressOfConValueOOP.getText().replace("%", "").trim()) / 100);
     }
 
-
-
-
-
     private void setupBarChart() {
-        List<XYChart.Data<String, Number>> chartData = new ArrayList<>();
-        chartData.add(new XYChart.Data<>("DSA", 15400));
-        chartData.add(new XYChart.Data<>("PSCP", 18000));
-        chartData.add(new XYChart.Data<>("MFIT", 11750));
-        chartData.add(new XYChart.Data<>("ICS", 14000));
+        ScoreDB scoreDB = new ScoreDB();
+        ArrayList<CourseScore> topScores = scoreDB.getTopThreeCoursesByScore(userID); // ดึงคะแนน 3 อันดับสูงสุด
+
+        barChart.getData().clear();
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
 
-        for (int i = 0; i < chartData.size(); i++) {
-            XYChart.Data<String, Number> data = chartData.get(i);
-            if (i % 2 == 0) {
-                series.getData().add(data);
-                data.nodeProperty().addListener((observable, oldNode, newNode) -> {
-                    if (newNode != null) {
+        if (topScores.isEmpty()) {
+            System.out.println("No scores available to display.");
+            return;
+        }
+
+        for (int i = 0; i < topScores.size(); i++) {
+            CourseScore courseScore = topScores.get(i);
+            XYChart.Data<String, Number> data = new XYChart.Data<>(courseScore.getCourseName(), courseScore.getScore());
+            series.getData().add(data);
+
+            int finalI = i;
+            data.nodeProperty().addListener((observable, oldNode, newNode) -> {
+                if (newNode != null) {
+                    if (finalI % 2 == 0) {
                         newNode.setStyle("-fx-bar-fill: #8100CC;");
-                    }
-                });
-            } else {
-                series.getData().add(data);
-                data.nodeProperty().addListener((observable, oldNode, newNode) -> {
-                    if (newNode != null) {
+                    } else {
                         newNode.setStyle("-fx-bar-fill: #C35BFF;");
                     }
-                });
-            }
+                }
+            });
         }
+
         barChart.getData().add(series);
     }
+
 
 //    public void applyHoverEffectToInside(AnchorPane root) {
 //        for (Node node : root.lookupAll(".continueCourse")) {
