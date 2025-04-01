@@ -101,10 +101,7 @@ public class courseController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setImgContainer();
-        closePopupAuto();
-        setEffect();
         route();
-        setProgressBar();
         handleCourseItem();
         updatePageLabel();
         setupRoadmapButtons();
@@ -113,113 +110,8 @@ public class courseController implements Initializable {
         nextButton.setOnAction(event -> handleNextButton());
     }
 
-    public void setEffect() {
-        ef.applyHoverEffectToInside(categoryPopup);
-        ef.applyHoverEffectToInside(popup);
-        ef.applyHoverEffectToInside(popup1);
-        ef.applyHoverEffectToInside(popup2);
-        ef.hoverEffect(learn_now);
-        ef.hoverEffect(cat1);
-        ef.hoverEffect(cat2);
-        ef.hoverEffect(roadmapRecommendContainer);
-        ef.hoverEffect(explore);
-        ef.hoverEffect(cat3);
-        categoryPopup.setViewOrder(-1);
-        category_recommend.setViewOrder(0);
-        popup.setViewOrder(-1);
-        popup1.setViewOrder(-1);
-        popup2.setViewOrder(-1);
-    }
 
-    @FXML
-    private void openPopup(ActionEvent event) {
-        Button clickedbtn = (Button) event.getSource();
-        switch (clickedbtn.getId()) {
-            case "btnpopup":
-                _openPopup(popup);
-                break;
-            case "btnpopup1":
-                _openPopup(popup1);
-                break;
-            case "btnpopup2":
-                _openPopup(popup2);
-                break;
-            case "seeAll":
-                seeAll.setText("ปิด");
-                _openPopup(categoryPopup);
-        }
-    }
 
-    @FXML
-    private void _openPopup(Node popup) {
-        popup.toFront();
-        FadeTransition fade = new FadeTransition(Duration.millis(300), popup);
-        FadeTransition fade2 = new FadeTransition(Duration.millis(300), category_recommend);
-
-        if (!popup.isVisible()) {
-            if (popup.getId().equals("categoryPopup")) {
-                seeAll.setText("ปิด");
-                category_recommend.setVisible(false);
-                category_recommend.setOpacity(0);
-                fade2.setFromValue(1);
-                fade2.setToValue(0);
-                fade2.setOnFinished(e -> category_recommend.setVisible(false));
-            }
-            popup.setVisible(true);
-            popup.setOpacity(0);
-            fade.setFromValue(0);
-            fade.setToValue(1);
-        } else {
-            if (popup.getId().equals("categoryPopup")) {
-                seeAll.setText("ดูทั้งหมด");
-                category_recommend.setVisible(true);
-                category_recommend.setOpacity(0);
-                fade2.setFromValue(0);
-                fade2.setToValue(1);
-            }
-            fade.setFromValue(1);
-            fade.setToValue(0);
-            fade.setOnFinished(e -> popup.setVisible(false));
-        }
-        fade.play();
-        fade2.play();
-    }
-
-    public void closePopupAuto() {
-        MainFrame.setOnMouseClicked(event -> {
-            if (popup.isVisible()) closePopup(popup);
-            if (popup1.isVisible()) closePopup(popup1);
-            if (popup2.isVisible()) closePopup(popup2);
-            if (categoryPopup.isVisible()) {
-                seeAll.setText("ดูทั้งหมด");
-                closePopup(categoryPopup);
-            }
-        });
-    }
-
-    private void closePopup(Node popup) {
-        FadeTransition fade2 = new FadeTransition(Duration.millis(300), category_recommend);
-        if (popup.getId().equals("categoryPopup")) {
-            category_recommend.setVisible(true);
-            category_recommend.setOpacity(0);
-            fade2.setFromValue(0);
-            fade2.setToValue(1);
-        }
-
-        FadeTransition fade = new FadeTransition(Duration.millis(300), popup);
-        fade.setFromValue(1);
-        fade.setToValue(0);
-        fade.setOnFinished(e -> popup.setVisible(false));
-
-        fade.play();
-        fade2.play();
-    }
-
-    private void setProgressBar() {
-        categorybar.setProgress(Double.parseDouble(progressCategory.getText().replace("% completed", "").trim()) / 100);
-        categorybar1.setProgress(Double.parseDouble(progressCategory1.getText().replace("% completed", "").trim()) / 100);
-        categorybar2.setProgress(Double.parseDouble(progressCategory2.getText().replace("% completed", "").trim()) / 100);
-    }
 
     public void handleCourseItem() {
         CourseDB courseDB = new CourseDB();
