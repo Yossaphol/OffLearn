@@ -23,6 +23,7 @@ public class courseInfoController implements Initializable {
     public Circle teacher_pic;
     public Label teacherName;
     public Button continueCourse;
+    public Label progressVal;
     Navigator nav = new Navigator();
     UserDB userDB = new UserDB();
     private CourseItem currentCourse;
@@ -49,9 +50,12 @@ public class courseInfoController implements Initializable {
         this.currentCourse = course;
         courseName.setText(course.getCourseName());
         teacherName.setText(course.getTeacherName());
+        progressVal.setText(String.valueOf(course.getProgress()));
         setProfileCourse(course.getCourseImg());
         setProfile(userDB.getUserNameProfileAndSpecByCourseID(course.getCourseId())[1]);
     }
+
+
     public void setProfile(String Url){
         Image img;
         if (Url.startsWith("http") || Url.startsWith("https")) {

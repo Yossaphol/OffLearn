@@ -29,7 +29,7 @@
                 </Label>
                 <BorderPane prefHeight="22.0" prefWidth="280.0">
                     <right>
-                        <Label text="70 %" BorderPane.alignment="CENTER" />
+                        <Label fx:id="progressVal" text="70 %" BorderPane.alignment="CENTER" />
                     </right>
                 </BorderPane>
                 <ProgressBar prefHeight="7.0" prefWidth="280.0" progress="0.0" />
@@ -62,7 +62,7 @@
          <children>
             <Button fx:id="continueCourse" mnemonicParsing="false" style="-fx-background-color: #8100CC; -fx-background-radius: 10;" text=" เข้าสู่หน้าเรียน " textFill="WHITE">
                <font>
-                  <Font name="Kodchasan Regular" size="13.0" />
+                  <Font name="Noto Sans Thai Bold" size="13.0" />
                </font>
             </Button>
          </children>

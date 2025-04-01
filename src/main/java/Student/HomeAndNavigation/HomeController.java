@@ -10,6 +10,8 @@ import Database.*;
 import Student.HomeAndNavigation.*;
 import Student.courseManage.courseInfoController;
 import Student.dashboard.CourseScore;
+import Student.learningPage.learningPageController;
+import Student.myCourse.courseCardController;
 import Teacher.courseManagement.CourseItem;
 import a_Session.SessionHandler;
 import a_Session.SessionManager;
@@ -177,6 +179,8 @@ public class HomeController implements Initializable, SessionHandler {
     String username = SessionManager.getInstance().getUsername();
     UserDB userDB = new UserDB();
     CourseDB courseDB = new CourseDB();
+    MyProgressDB myProgressDB = new MyProgressDB();
+    Category category = new Category();
 
 
     @Override
@@ -204,7 +208,7 @@ public class HomeController implements Initializable, SessionHandler {
 //        applyHoverEffectToInside(slide1);
 //        applyHoverEffectToInside(slide2);
 //        callSlider();
-        showCourse();
+        loadCourses();
         setProfile(userDB.getProfile(username));
     }
 
@@ -214,13 +218,21 @@ public class HomeController implements Initializable, SessionHandler {
         this.userID = userDB.getUserId(SessionManager.getInstance().getUsername());
     }
 
-    public void showCourse() {
-        CourseDB courseDB = new CourseDB();
-        courseList = courseDB.getAllCourses(userID);
-        loadCourses();
-    }
     private void loadCourses() {
         container.getChildren().clear();
+        ArrayList<CourseItem> courseList = new ArrayList<>();
+        ArrayList<MyCourse> myCourses = myCourseDB.getallMyCourse();
+
+        for (MyCourse myCourse : myCourses) {
+            double progress = myProgressDB.sumChapterProgress(myCourse.getCourse_ID(), myCourse.getCat_ID(), SessionManager.getInstance().getUserID());
+            int courseID = Integer.valueOf(myCourse.getCourse_ID());
+
+            if (progress >= 10 && progress < 80) {
+                CourseItem courseItem = new CourseItem(courseID, myCourse.getImage(), myCourse.getCourseName(), 0, category.getCatName(myCourse.getCat_ID()), myCourse.getCourseDescription(), progress);
+                courseItem.setTeacherName("");
+                courseList.add(courseItem);
+            }
+        }
 
         int start = currentPage * coursesPerPage;
         int end = Math.min(start + coursesPerPage, courseList.size());
@@ -235,21 +247,17 @@ public class HomeController implements Initializable, SessionHandler {
         for (int i = start; i < end; i++) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/courseInfo.fxml"));
-                Node courseItem = loader.load();
-
-                courseItem.setStyle("-fx-margin: 20px;" + "-fx-border-color: #FBFBFB;" + "-fx-border-radius: 20px;" + "-fx-background-color: #FFF;" + "-fx-background-radius: 20px;");
-
+                Node courseNode = loader.load();
                 courseInfoController controller = loader.getController();
                 controller.setCourseInformation(courseList.get(i));
-//                controller.courseLink()
-
-                hoverEffect(courseItem);
-                container.getChildren().add(courseItem);
+                hoverEffect(courseNode);
+                container.getChildren().add(courseNode);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
 
     @FXML
     private void handlePreviousButton() {
@@ -401,7 +409,7 @@ public class HomeController implements Initializable, SessionHandler {
         DropShadow dropShadow = new DropShadow();
         dropShadow.setRadius(10);
         dropShadow.setColor(Color.TRANSPARENT);
-//        vBox.setEffect(dropShadow);
+        vBox.setEffect(dropShadow);
 
         vBox.setOnMouseEntered(mouseEvent -> {
             Timeline timeline = new Timeline(

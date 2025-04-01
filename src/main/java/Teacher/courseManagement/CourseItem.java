@@ -15,6 +15,7 @@ public class CourseItem {
     private ArrayList<ChapterItem> chapterList;
     private String teacherName;
     private String categoryName;
+    private double progress;
 
     public CourseItem(int courseId, String courseImg, String courseName, int coursePrice, String courseCat){
         this.setCourseId(courseId);
@@ -33,6 +34,21 @@ public class CourseItem {
         this.setCourseDesc(courseDesc);
         this.setCourseCat(courseCat);
         this.chapterList = new ArrayList<ChapterItem>();
+    }
+
+    public CourseItem(int courseId, String courseImg, String courseName, int coursePrice, String courseCat, String courseDesc, double pro){
+        this.setCourseId(courseId);
+        this.setCourseImg(courseImg);
+        this.setCourseName(courseName);
+        this.setCoursePrice(coursePrice);
+        this.setCourseDesc(courseDesc);
+        this.setCourseCat(courseCat);
+        this.chapterList = new ArrayList<ChapterItem>();
+        this.progress = pro;
+    }
+
+    public double getProgress(){
+        return progress;
     }
 
 
