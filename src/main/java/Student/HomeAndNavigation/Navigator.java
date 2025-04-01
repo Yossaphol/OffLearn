@@ -11,10 +11,12 @@ import Teacher.quiz.QuizItem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import Student.mainPage.mainPageController;
 import Student.navBarAndSearchbar.navBarController;
 import Student.inbox.pChat.pChatController;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -274,4 +276,20 @@ public class Navigator {
     public static Object getCurrentContentController() {
         return currentContentController;
     }
+
+    public void roadmapRoute1(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/roadmap.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("สำรวจ Roadmap");
+            stage.setScene(new Scene(root));
+            stage.setResizable(true);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

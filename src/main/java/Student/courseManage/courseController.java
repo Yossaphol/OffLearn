@@ -122,10 +122,6 @@ public class courseController implements Initializable {
         popup2.setViewOrder(-1);
     }
 
-    public void route() {
-        Navigator nav = new Navigator();
-        explore.setOnMouseClicked(nav::roadmapRoute);
-    }
 
     public void setImg() {
         HomeController hm = new HomeController();
@@ -311,6 +307,12 @@ public class courseController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public void route() {
+        Navigator nav = new Navigator();
+        explore.setOnMouseClicked(nav::roadmapRoute1);
+    }
+
 
 
 
