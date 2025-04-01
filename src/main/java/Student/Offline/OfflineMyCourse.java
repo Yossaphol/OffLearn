@@ -40,7 +40,7 @@ public class OfflineMyCourse implements Initializable {
                     MainPageOffline offlineMain = Navigator.getCurrentOfflineController();
                     if (offlineMain != null) {
                         // Switch to learning page
-                        offlineMain.displayContent("/fxml/Student/learningPage/learningPageOffline.fxml");
+                        offlineMain.displayContent("/fxml/Student/Offline/learningPageOffline.fxml");
 
                         // Load actual chapters
                         List<OfflineCourseData> chapters = OfflineCourseManager.getAllChaptersForCourse(userID, course.getCourseID());

@@ -67,8 +67,6 @@ public class learningPageController extends ChapterProgress implements Initializ
     public Button btnGloblalChat;
     public Button btnOffLoad;
     public ProgressBar progressBar;
-    public Button nextCourse;
-    public ProgressBar nextCourseProgressBar;
     private EPButtonController currentlyActiveEPController = null;
 
     private VideoPlayerManager videoManager;
@@ -114,7 +112,6 @@ public class learningPageController extends ChapterProgress implements Initializ
         method_home.hoverEffect(btnLike);
         method_home.hoverEffect(btnDislike);
         method_home.hoverEffect(btnOffLoad);
-        method_home.hoverEffect(nextCourse);
         method_home.hoverEffect(btnQuiz);
 
         btnContactTeacher.setOnAction(event -> {
