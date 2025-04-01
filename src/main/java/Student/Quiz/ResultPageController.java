@@ -5,6 +5,7 @@ import Database.ScoreDB;
 import Database.UserDB;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
+import Student.learningPage.DisposableController;
 import Teacher.courseManagement.Course;
 import Teacher.quiz.QuizItem;
 import a_Session.SessionHandler;
@@ -25,7 +26,7 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class ResultPageController implements Initializable, SessionHandler {
+public class ResultPageController implements Initializable, SessionHandler, DisposableController {
 
     @FXML
     private Label yourScore;
@@ -122,7 +123,7 @@ public class ResultPageController implements Initializable, SessionHandler {
         courseDB = new CourseDB();
         navigator = new Navigator();
         seeAnswer.setOnAction(actionEvent -> {
-            navigator.QuizSummary(point, courseDB.getCourseIDByChapterID(chapterID), quizItem, chapterID);
+            navigator.QuizSummary(point, courseDB.getCourseIDByChapterID(chapterID), quizItem, chapterID, this);
         });
     }
 
@@ -176,5 +177,8 @@ public class ResultPageController implements Initializable, SessionHandler {
     }
 
 
+    @Override
+    public void disposePlayer() {
 
+    }
 }

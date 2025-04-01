@@ -128,16 +128,16 @@ public class Navigator {
         navigateTo("/fxml/Student/Quiz/quizPage.fxml", chapterID, quizID);
     }
 
-    public void QuizResult(int point, int courseID, QuizItem quizItem, int chapterID) {
-        navigateTo("/fxml/Student/Quiz/resultPage.fxml", point, courseID, quizItem, chapterID);
+    public void QuizResult(int point, int courseID, QuizItem quizItem, int chapterID, DisposableController disposableController) {
+        navigateTo(disposableController, "/fxml/Student/Quiz/resultPage.fxml", point, courseID, quizItem, chapterID);
         if (onlineController != null) {
             onlineController.stopHideNavbar();
             onlineController.stopHideSearchBar();
         }
     }
 
-    public void QuizSummary(int point, int courseID, QuizItem quizItem, int chapterID) {
-        navigateTo("/fxml/Student/Quiz/quizSummary.fxml", point, courseID, quizItem, chapterID);
+    public void QuizSummary(int point, int courseID, QuizItem quizItem, int chapterID, DisposableController disposableController) {
+        navigateTo(disposableController, "/fxml/Student/Quiz/quizSummary.fxml", point, courseID, quizItem, chapterID);
         if (onlineController != null) {
             onlineController.stopHideNavbar();
             onlineController.stopHideSearchBar();
@@ -245,10 +245,10 @@ public class Navigator {
         }
     }
 
-    public void navigateTo(String fxmlPath, int point, int courseID, QuizItem quizItem, int chapterID) {
+    public void navigateTo(DisposableController disposable, String fxmlPath, int point, int courseID, QuizItem quizItem, int chapterID) {
         System.out.println("navigateTo called: " + fxmlPath);
 
-        if (currentContentController instanceof DisposableController disposable) {
+        if (disposable != null) {
             disposable.disposePlayer();
         }
 
@@ -265,6 +265,7 @@ public class Navigator {
             currentContentController = newController;
         }
     }
+
 
     public static void setCurrentContentController(Object controller) {
         currentContentController = controller;

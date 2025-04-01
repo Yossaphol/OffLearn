@@ -10,66 +10,56 @@
 <?import javafx.scene.text.Font?>
 
 <HBox fx:id="courseCard" fillHeight="false" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="182.0" prefWidth="1008.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.myCourse.courseCardController">
-    <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="182.0" prefWidth="1003.0"
-          spacing="5.0"
-          style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0.1, 0, 3); -fx-cursor: hand; -fx-border-radius: 0;">
+    <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="182.0" prefWidth="1003.0" spacing="5.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-color: transparent; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0.1, 0, 3); -fx-cursor: hand; -fx-border-radius: 0;">
         <HBox.margin>
-            <Insets left="40.0" right="40.0"/>
+            <Insets left="40.0" right="40.0" />
         </HBox.margin>
         <effect>
-            <DropShadow/>
+            <DropShadow />
         </effect>
         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
         </padding>
-        <Rectangle fx:id="courseImage" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" stroke="BLACK"
-                   strokeType="INSIDE" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="253.0">
+        <Rectangle fx:id="courseImage" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="253.0">
            <HBox.margin>
-               <Insets right="20.0"/>
+               <Insets right="20.0" />
            </HBox.margin>
         </Rectangle>
 
         <!-- Course Details -->
-        <VBox alignment="CENTER_LEFT" prefHeight="140.0" prefWidth="681.0" spacing="2.0"
-              style="-fx-border-color: #EED9FB; -fx-border-width: 0px 0px 0px 1px;">
+        <VBox alignment="CENTER_LEFT" prefHeight="140.0" prefWidth="681.0" spacing="2.0" style="-fx-border-color: #EED9FB; -fx-border-width: 0px 0px 0px 1px;">
             <!-- Course Category -->
-            <Label fx:id="courseCategory" alignment="CENTER" prefHeight="21.0" prefWidth="74.0"
-                   style="-fx-background-color: rgba(150,150,150,0.2); -fx-padding: 3px 10px; -fx-border-radius: 25; -fx-background-radius: 25;"
-                   text="Category" textAlignment="CENTER">
+            <Label fx:id="courseCategory" alignment="CENTER" prefHeight="22.0" prefWidth="182.0" style="-fx-background-color: rgba(150,150,150,0.2); -fx-padding: 3px 10px; -fx-border-radius: 25; -fx-background-radius: 25;" text="Category" textAlignment="CENTER">
                 <VBox.margin>
-                    <Insets bottom="5.0"/>
+                    <Insets bottom="5.0" />
                 </VBox.margin>
                 <font>
-                    <Font name="Noto Sans Thai Bold" size="11.0"/>
+                    <Font name="Noto Sans Thai Bold" size="11.0" />
                 </font>
             </Label>
 
             <!-- Course Title -->
             <Label fx:id="courseTitle" prefHeight="35.0" prefWidth="287.0" text="Course title" textFill="#8100cc">
                 <font>
-                    <Font name="Noto Sans Thai Bold" size="20.0"/>
+                    <Font name="Noto Sans Thai Bold" size="20.0" />
                 </font>
             </Label>
 
             <!-- Course Subtitle -->
-            <Label fx:id="courseSubtitle" maxWidth="554.0" prefHeight="19.0" prefWidth="554.0"
-                   style="-fx-font-size: 13; -fx-text-fill: rgba(150,150,150,0.7); -fx-font-style: italic;"
-                   text="Course Description" textOverrun="CLIP" wrapText="true">
+            <Label fx:id="courseSubtitle" maxWidth="554.0" prefHeight="19.0" prefWidth="554.0" style="-fx-font-size: 13; -fx-text-fill: rgba(150,150,150,0.7); -fx-font-style: italic;" text="Course Description" textOverrun="CLIP" wrapText="true">
                 <VBox.margin>
-                    <Insets/>
+                    <Insets />
                 </VBox.margin>
             </Label>
 
             <!-- Progress Bar -->
-            <ProgressBar fx:id="courseProgress" cacheShape="false" centerShape="false" maxHeight="9.0" maxWidth="554.0"
-                         minHeight="6.0" minWidth="250.0" prefHeight="9.0" prefWidth="554.0" progress="0.0"
-                         scaleShape="false" style="-fx-accent: #6A0DAD; -fx-background-radius: 10;">
+            <ProgressBar fx:id="courseProgress" cacheShape="false" centerShape="false" maxHeight="9.0" maxWidth="554.0" minHeight="6.0" minWidth="250.0" prefHeight="9.0" prefWidth="554.0" progress="0.0" scaleShape="false" style="-fx-accent: #6A0DAD; -fx-background-radius: 10;">
                 <VBox.margin>
-                    <Insets top="10.0"/>
+                    <Insets top="10.0" />
                 </VBox.margin>
             </ProgressBar>
           <padding>
-              <Insets left="20.0"/>
+              <Insets left="20.0" />
           </padding>
         </VBox>
     </HBox>
