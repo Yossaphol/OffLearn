@@ -198,18 +198,11 @@ public class HomeController implements Initializable, SessionHandler {
         hoverEffect(topLeaderboard);
         hoverEffect(smallStatistic);
         hoverEffect(btn_dashboard_atStatistics);
-        hoverEffect(cat1);
-        hoverEffect(cat2);
         hoverEffect(learn_now);
-        hoverEffect(cat3);
 
-        applyHoverEffectToInside(categoryPopup);
-        applyHoverEffectToInside(popup);
-        applyHoverEffectToInside(popup1);
-        applyHoverEffectToInside(popup2);
+
 //        applyHoverEffectToInside(slide1);
 //        applyHoverEffectToInside(slide2);
-        closePopupAuto();
 //        callSlider();
         showCourse();
         setProfile(userDB.getProfile(username));
@@ -501,113 +494,6 @@ public class HomeController implements Initializable, SessionHandler {
 
     }
 
-    @FXML
-    private void openPopup(ActionEvent event){
-        Button clickedbtn = (Button) event.getSource();
-        switch (clickedbtn.getId()){
-            case "btnpopup":
-                _openPopup(popup);
-                break;
-            case "btnpopup1":
-                _openPopup(popup1);
-                break;
-            case "btnpopup2":
-                _openPopup(popup2);
-                break;
-            case "seeAll":
-                _openPopup(categoryPopup);
-        }
-    }
-
-    @FXML
-    private void _openPopup(Node popup) {
-        popup.toFront();
-        FadeTransition fade = new FadeTransition(Duration.millis(300), popup);
-        FadeTransition fade1 = new FadeTransition(Duration.millis(300), hideIfpopupOpen);
-        FadeTransition fade2 = new FadeTransition(Duration.millis(300), category_recommend);
-
-        if (!popup.isVisible()) {
-            if(popup.getId().equals("categoryPopup")){
-                seeAll.setText("ปิด");
-                category_recommend.setVisible(false);
-                category_recommend.setOpacity(0);
-                fade2.setFromValue(1);
-                fade2.setToValue(0);
-                fade2.setOnFinished(e -> category_recommend.setVisible(false));
-            }
-            popup.setVisible(true);
-            popup.setOpacity(0);
-            fade.setFromValue(0);
-            fade.setToValue(1);
-            hideIfpopupOpen.setVisible(false);
-            hideIfpopupOpen.setOpacity(0);
-            fade1.setFromValue(1);
-            fade1.setToValue(0);
-            fade1.setOnFinished(e -> hideIfpopupOpen.setVisible(false));
-        } else {
-            if(popup.getId().equals("categoryPopup")){
-                seeAll.setText("ดูทั้งหมด");
-                category_recommend.setVisible(true);
-                category_recommend.setOpacity(0);
-                fade2.setFromValue(0);
-                fade2.setToValue(1);
-            }
-            hideIfpopupOpen.setVisible(true);
-            hideIfpopupOpen.setOpacity(0);
-            fade1.setFromValue(0);
-            fade1.setToValue(1);
-            fade.setFromValue(1);
-            fade.setToValue(0);
-            fade.setOnFinished(e -> popup.setVisible(false));
-        }
-        fade1.play();
-        fade.play();
-        fade2.play();
-    }
-
-    public void closePopupAuto(){
-        bg.setOnMouseClicked(event -> {
-            if (popup.isVisible() && !popup.contains(event.getX() - popup.getLayoutX(), event.getY() - popup.getLayoutY())) {
-                closePopup(popup);
-            }
-            if (popup1.isVisible() && !popup1.contains(event.getX() - popup1.getLayoutX(), event.getY() - popup1.getLayoutY())) {
-                closePopup(popup1);
-            }
-            if (popup2.isVisible() && !popup2.contains(event.getX() - popup2.getLayoutX(), event.getY() - popup2.getLayoutY())) {
-                closePopup(popup2);
-            }
-            if (categoryPopup.isVisible() && !categoryPopup.contains(event.getX() - categoryPopup.getLayoutX(), event.getY() - categoryPopup.getLayoutY())) {
-                seeAll.setText("ดูทั้งหมด");
-                closePopup(categoryPopup);
-            }
-        });
-    }
-
-    private void closePopup(Node popup) {
-        FadeTransition fade2 = new FadeTransition(Duration.millis(300), category_recommend);
-        if(popup.getId().equals("categoryPopup")){
-            category_recommend.setVisible(true);
-            category_recommend.setOpacity(0);
-            fade2.setFromValue(0);
-            fade2.setToValue(1);
-        }
-
-        FadeTransition fade = new FadeTransition(Duration.millis(300), popup);
-        FadeTransition fade1 = new FadeTransition(Duration.millis(300), hideIfpopupOpen);
-
-        fade.setFromValue(1);
-        fade.setToValue(0);
-        fade.setOnFinished(e -> popup.setVisible(false));
-
-        hideIfpopupOpen.setVisible(true);
-        hideIfpopupOpen.setOpacity(0);
-        fade1.setFromValue(0);
-        fade1.setToValue(1);
-
-        fade1.play();
-        fade.play();
-        fade2.play();
-    }
 
 
 
@@ -657,20 +543,9 @@ public class HomeController implements Initializable, SessionHandler {
 
 
     private void progressValue() {
-        progress1.setProgress(Double.parseDouble(progressValue1.getText().replace("%", "").trim()) / 100);
+     //   progress1.setProgress(Double.parseDouble(progressValue1.getText().replace("%", "").trim()) / 100);
 //        progress2.setProgress(Double.parseDouble(progressValue2.getText().replace("%", "").trim()) / 100);
 //        continueProgress.setProgress(Double.parseDouble(progressOfConValue.getText().replace("%", "").trim()) / 100);
-
-        categorybar.setProgress(Double.parseDouble(progressCategory.getText().replace("% completed", "").trim()) / 100);
-        categorybar1.setProgress(Double.parseDouble(progressCategory1.getText().replace("% completed", "").trim()) / 100);
-        categorybar2.setProgress(Double.parseDouble(progressCategory2.getText().replace("% completed", "").trim()) / 100);
-
-        codingProgress.setProgress(Double.parseDouble(progressCategory.getText().replace("% completed", "").trim()) / 100);
-        businessProgress.setProgress(Double.parseDouble(progressValue1.getText().replace("%", "").trim()) / 100);
-//        mathProgress.setProgress(Double.parseDouble(progressValue2.getText().replace("%", "").trim()) / 100);
-        aiProgress.setProgress(Double.parseDouble(progressValue1.getText().replace("%", "").trim()) / 100);
-//        contxinueProgressData.setProgress(Double.parseDouble(progressOfConValueData.getText().replace("%", "").trim()) / 100);
-//        continueProgressOOP.setProgress(Double.parseDouble(progressOfConValueOOP.getText().replace("%", "").trim()) / 100);
     }
 
     private void setupBarChart() {
@@ -912,10 +787,6 @@ public class HomeController implements Initializable, SessionHandler {
 
         teacherName.setText(userDB.getUserNameProfileAndSpecByCourseID(courseItem.getCourseId())[0]);
 
-
-        loadAndSetImage(category_pic, "/img/icon/code.png");
-        loadAndSetImage(category_pic1, "/img/icon/partners.png");
-        loadAndSetImage(category_pic2, "/img/icon/artificial-intelligence.png");
 
     }
     public boolean isURL(String path) {
