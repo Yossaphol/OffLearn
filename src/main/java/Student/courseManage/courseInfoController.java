@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.control.Button;
 
 import java.awt.*;
 import java.net.URL;
@@ -20,6 +21,7 @@ public class courseInfoController implements Initializable {
     public Rectangle course_image;
     public Circle teacher_pic;
     public Label teacherName;
+    public Button continueCourse;
     Navigator nav = new Navigator();
     UserDB userDB = new UserDB();
     @Override

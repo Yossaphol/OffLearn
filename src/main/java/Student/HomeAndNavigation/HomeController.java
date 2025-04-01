@@ -215,7 +215,7 @@ public class HomeController implements Initializable {
         int end = Math.min(start + coursesPerPage, courseList.size());
 
         if (courseList.isEmpty()) {
-            Label txt = new Label("ไม่มีคอร์สที่แสดง");
+            Label txt = new Label("ยังไม่มีคอร์สที่ลงทะเบียนไว้");
             txt.setStyle("-fx-font-size: 20px;");
             container.getChildren().add(txt);
             return;
@@ -225,6 +225,8 @@ public class HomeController implements Initializable {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/courseInfo.fxml"));
                 Node courseItem = loader.load();
+
+                courseItem.setStyle("-fx-margin: 20px;" + "-fx-border-color: #FBFBFB;" + "-fx-border-radius: 20px;" + "-fx-background-color: #FFF;" + "-fx-background-radius: 20px;");
 
                 courseInfoController controller = loader.getController();
                 controller.setCourseInformation(courseList.get(i));
@@ -589,8 +591,6 @@ public class HomeController implements Initializable {
         fade2.play();
     }
 
-
-
     public void setProfile(String Url){
         Image img;
         if (Url.startsWith("http") || Url.startsWith("https")) {
@@ -855,5 +855,9 @@ public class HomeController implements Initializable {
 
         this.subjectName.setText(courseItem.getCourseName());
         setProfile(courseItem.getTeacherName());
+
+        loadAndSetImage(category_pic, "/img/icon/code.png");
+        loadAndSetImage(category_pic1, "/img/icon/partners.png");
+        loadAndSetImage(category_pic2, "/img/icon/artificial-intelligence.png");
     }
 }
