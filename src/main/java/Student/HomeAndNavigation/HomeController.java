@@ -868,17 +868,16 @@ public class HomeController implements Initializable {
 
         teacherName.setText(userDB.getUserNameProfileAndSpecByCourseID(courseItem.getCourseId())[0]);
 
+
+        loadAndSetImage(category_pic, "/img/icon/code.png");
+        loadAndSetImage(category_pic1, "/img/icon/partners.png");
+        loadAndSetImage(category_pic2, "/img/icon/artificial-intelligence.png");
+
     }
     public boolean isURL(String path) {
         return path != null && (path.startsWith("http://") || path.startsWith("https://"));
     }
 
-//        this.subjectName.setText(courseItem.getCourseName());
-//        setProfile(courseItem.getTeacherName());
-//
-//        loadAndSetImage(category_pic, "/img/icon/code.png");
-//        loadAndSetImage(category_pic1, "/img/icon/partners.png");
-//        loadAndSetImage(category_pic2, "/img/icon/artificial-intelligence.png");
     public boolean isResource(String path) {
         return getClass().getResource(path) != null;
     }
