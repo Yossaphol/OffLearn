@@ -47,8 +47,6 @@ public class myCourseController implements Initializable {
     @FXML
     private VBox coursecardContainer2;
     @FXML
-    private VBox coursecardContainer3;
-    @FXML
     private HBox bg;
     private MyProgressDB myProgressDB;
 
@@ -182,10 +180,6 @@ public class myCourseController implements Initializable {
         return coursecardContainer2;
     }
 
-    public VBox getCoursecardContainer3() {
-        return coursecardContainer3;
-    }
-
     public HBox getBg() {
         return bg;
     }
@@ -212,10 +206,6 @@ public class myCourseController implements Initializable {
 
     public void setCoursecardContainer2(VBox coursecardContainer2) {
         this.coursecardContainer2 = coursecardContainer2;
-    }
-
-    public void setCoursecardContainer3(VBox coursecardContainer3) {
-        this.coursecardContainer3 = coursecardContainer3;
     }
 
     public void setBg(HBox bg) {

@@ -102,24 +102,6 @@
                                  </ScrollPane>
                               </AnchorPane>
                            </Tab>
-                           <Tab text="Offline">
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="301.0" prefWidth="996.0">
-                                 <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="4.0" prefHeight="462.0" prefWidth="995.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" styleClass="scroll-panej" stylesheets="@../../../css/Home.css">
-                                    <opaqueInsets>
-                                       <Insets />
-                                    </opaqueInsets>
-                                    <VBox fx:id="coursecardContainer3" alignment="TOP_CENTER" minHeight="0.0" prefHeight="925.0" prefWidth="498.0" spacing="25.0" style="-fx-background-color: transparent; -fx-border-color: transparent;">
-                                       <padding>
-                                          <Insets top="20.0" />
-                                       </padding>
-                                       <!--                                                                              <fx:include source="CourseCard.fxml" />-->
-                                       <!--                                                                              <fx:include source="CourseCard.fxml" />-->
-                                       <!--                                                                              <fx:include source="CourseCard.fxml" />-->
-                                       <!--                                                                              <fx:include source="CourseCard.fxml" />-->
-                                    </VBox>
-                                 </ScrollPane>
-                              </AnchorPane>
-                           </Tab>
                         </TabPane>
                      </Pane>
                   </VBox>
