@@ -1,15 +1,21 @@
 package Student.courseManage;
 
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+
 public class courseObject {
-        private String description;
-        private String name;
-        private double price;
-        private double rating;
-        private int reviewCount;
-        private String categoryIcon;
-        private String categoryName;
-        private String picture;
-        private String teacherName;
+    private String description;
+    private String name;
+    private double price;
+    private double rating;
+    private int reviewCount;
+    private String categoryIcon;
+    private String categoryName;
+    private String picture;
+    private String teacherName;
+    private String shortDescription;
+    private String courseImg;
 
 
     public courseObject(String description, String name, double price, double rating, int reviewCount,
@@ -58,6 +64,18 @@ public class courseObject {
             this.teacherName = teacherName;
         }
 
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
 
 
 }

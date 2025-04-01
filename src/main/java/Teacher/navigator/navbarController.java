@@ -1,5 +1,6 @@
 package Teacher.navigator;
 
+import Student.navBarAndSearchbar.navBarController;
 import Teacher.navigator.Navigator;
 import a_Session.SessionManager;
 import javafx.animation.FadeTransition;
@@ -20,10 +21,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -35,6 +33,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class navbarController implements Initializable {
+
     public HBox navPopup;
     public Button nav;
     public ImageView nav_icon;
@@ -51,20 +50,16 @@ public class navbarController implements Initializable {
     public HBox logo;
     public Button logout;
 
-
     private String currentPage;
     public ArrayList<Label> buttons = new ArrayList<>();
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        Navigator.setNavBarController(this);
+        Navigator.setNavBarController(this); // ✅ set ตัวเองให้ Navigator
         closePopupAuto();
         applyHoverEffectToInside(navPopup);
         hoverEffect(withdrawBtn);
         route();
-
 
         buttons.add(dashboardLabel);
         buttons.add(courseLabel);
@@ -75,13 +70,13 @@ public class navbarController implements Initializable {
         changeFontColor();
     }
 
-    public void handleLogout(ActionEvent event){
+    public void handleLogout(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Warning");
         alert.setHeaderText(null);
         alert.setContentText("Are you sure you want to sign out?");
 
-        if (alert.showAndWait().get() == ButtonType.OK){
+        if (alert.showAndWait().get() == ButtonType.OK) {
             SessionManager.getInstance().clearSession();
 
             try {
@@ -98,12 +93,10 @@ public class navbarController implements Initializable {
     }
 
     @FXML
-    private void openPopup(ActionEvent event){
+    private void openPopup(ActionEvent event) {
         Button clickedbtn = (Button) event.getSource();
-        switch (clickedbtn.getId()){
+        switch (clickedbtn.getId()) {
             case "nav":
-                _openPopup(navPopup);
-                break;
             case "month_select":
                 _openPopup(navPopup);
                 break;
@@ -119,7 +112,6 @@ public class navbarController implements Initializable {
         if (!popup.isVisible()) {
             rotate.setToAngle(180);
             nav_icon.setImage(new Image(getClass().getResource("/img/icon/close1.png").toExternalForm()));
-
             popup.setVisible(true);
             popup.setOpacity(0);
             fade.setFromValue(0);
@@ -127,7 +119,6 @@ public class navbarController implements Initializable {
         } else {
             rotate.setToAngle(0);
             nav_icon.setImage(new Image(getClass().getResource("/img/icon/menu.png").toExternalForm()));
-
             fade.setFromValue(1);
             fade.setToValue(0);
             fade.setOnFinished(e -> popup.setVisible(false));
@@ -149,17 +140,14 @@ public class navbarController implements Initializable {
         });
     }
 
-
     private void closePopup(Node popup) {
         FadeTransition fade = new FadeTransition(Duration.millis(300), popup);
         RotateTransition rotate = new RotateTransition(Duration.millis(300), nav_icon);
         rotate.setToAngle(0);
         nav_icon.setImage(new Image(getClass().getResource("/img/icon/menu.png").toExternalForm()));
-
         fade.setFromValue(1);
         fade.setToValue(0);
         fade.setOnFinished(e -> popup.setVisible(false));
-
         rotate.play();
         fade.play();
     }
@@ -171,8 +159,8 @@ public class navbarController implements Initializable {
             }
         }
     }
+
     public void hoverEffect(HBox hBox) {
-        // Scale transition
         ScaleTransition scaleUp = new ScaleTransition(Duration.millis(150), hBox);
         scaleUp.setFromX(1);
         scaleUp.setFromY(1);
@@ -192,24 +180,17 @@ public class navbarController implements Initializable {
 
         hBox.setOnMouseEntered(mouseEvent -> {
             scaleUp.play();
-            switch (hBox.getId()) {
-                default:
-                    hBox.setStyle("-fx-background-color: #EFF7FF;");
-                    break;
-            }
+            hBox.setStyle("-fx-background-color: #EFF7FF;");
         });
 
         hBox.setOnMouseExited(mouseEvent -> {
             scaleDown.play();
-            switch (hBox.getId()){
-                case "learn_now":
-                    hBox.setEffect(null);
-                    hBox.setStyle("-fx-background-radius: 30;" + "-fx-background-color: #8100CC;");
-                    break;
-                default :
-                    hBox.setStyle("-fx-background-color: transparent;");
+            if ("learn_now".equals(hBox.getId())) {
+                hBox.setEffect(null);
+                hBox.setStyle("-fx-background-radius: 30; -fx-background-color: #8100CC;");
+            } else {
+                hBox.setStyle("-fx-background-color: transparent;");
             }
-
         });
     }
 
@@ -219,53 +200,30 @@ public class navbarController implements Initializable {
         scaleUp.setFromY(1);
         scaleUp.setToX(1.05);
         scaleUp.setToY(1.05);
+
         ScaleTransition scaleDown = new ScaleTransition(Duration.millis(200), btn);
         scaleDown.setFromX(1.05);
         scaleDown.setFromY(1.05);
         scaleDown.setToX(1);
         scaleDown.setToY(1);
 
-        btn.setOnMouseEntered(mouseEvent -> {
-            scaleUp.play();
-        });
-        btn.setOnMouseExited(mouseEvent -> {
-            scaleDown.play();
-        });
+        btn.setOnMouseEntered(mouseEvent -> scaleUp.play());
+        btn.setOnMouseExited(mouseEvent -> scaleDown.play());
     }
 
-
-    public void route(){
-        Teacher.navigator.Navigator nav = new Navigator();
-
-        //Dashboard
+    public void route() {
+        Navigator nav = new Navigator();
         dashboard.setOnMouseClicked(nav::dashboardRoute);
         logo.setOnMouseClicked(nav::dashboardRoute);
-
-        //Course
         course.setOnMouseClicked(nav::courseRoute);
-
-
-        //Inbox
         inbox.setOnMouseClicked(nav::inboxRoute);
-
         withdrawBtn.setOnMouseClicked(nav::withdrawRoute);
-
-        //setting
         setting.setOnMouseClicked(nav::settingRoute);
-
     }
 
-
-    @FXML
     public void changeFontColor() {
-        if (!buttons.isEmpty()) {
-            for (Label btn : buttons) {
-                if (btn.getId().equals(currentPage)) {
-                    btn.setTextFill(Color.web("#0675DE"));
-                } else {
-                    btn.setTextFill(Color.BLACK);
-                }
-            }
+        for (Label btn : buttons) {
+            btn.setTextFill(btn.getId().equals(currentPage) ? Color.web("#0675DE") : Color.BLACK);
         }
     }
 
@@ -273,8 +231,4 @@ public class navbarController implements Initializable {
         currentPage = id;
         changeFontColor();
     }
-
 }
-
-
-
