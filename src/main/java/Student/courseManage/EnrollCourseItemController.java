@@ -15,7 +15,10 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Modality;
+
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -85,7 +88,6 @@ public class EnrollCourseItemController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/courseEnroll.fxml"));
             Parent root = loader.load();
 
-            // ส่งข้อมูลไปยัง controller ใหม่
             courseEnrollController controller = loader.getController();
             controller.setCourseDetail(
                     course.getName(),
@@ -101,10 +103,16 @@ public class EnrollCourseItemController implements Initializable {
                     course.getCourseID()
             );
 
-            // เปลี่ยนหน้า Scene
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            Stage popupStage = new Stage();
+            popupStage.setTitle("รายละเอียดคอร์ส");
+            popupStage.setScene(new Scene(root));
+            popupStage.setResizable(false);
+
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+
+            popupStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+
+            popupStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -154,6 +162,46 @@ public class EnrollCourseItemController implements Initializable {
             }
         }
     }
+
+
+    @FXML
+    private void handleDetailButton(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/courseEnroll.fxml"));
+            Parent root = loader.load();
+
+            courseEnrollController controller = loader.getController();
+            controller.setCourseDetail(
+                    course.getName(),
+                    course.getShortDescription(),
+                    course.getDescription(),
+                    course.getPicture(),
+                    "/img/icon/artificial-intelligence.png",
+                    course.getCategoryName(),
+                    course.getPrice(),
+                    course.getRating(),
+                    course.getTotalReview(),
+                    course.getTotalLesson(),
+                    course.getCourseID()
+            );
+
+            Stage popupStage = new Stage();
+            popupStage.setTitle("รายละเอียดคอร์ส");
+            popupStage.setScene(new Scene(root));
+            popupStage.setResizable(false);
+
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+
+            popupStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+
+            popupStage.show();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 

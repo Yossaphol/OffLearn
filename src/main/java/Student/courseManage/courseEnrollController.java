@@ -67,7 +67,6 @@ public class courseEnrollController implements Initializable {
         three.setVisible(false);
         four.setVisible(false);
 
-        // 👇 ทดลองเรียกคอร์สตัวอย่าง
         setCourseDetail(
                 "Algorithm for Machine Learning",
                 "Learn Algorithm to solve real problems",
@@ -79,10 +78,9 @@ public class courseEnrollController implements Initializable {
                 4.00,
                 740,
                 20,
-                76  // 👈 courseId (ต้องมาจากฐานข้อมูลจริง)
+                76
         );
 
-        // 🧠 เชื่อมปุ่ม
         enrollBtn.setOnAction(e -> handleEnrollAction());
         addToCartBtn.setOnAction(e -> addToCart());
         otherCourse.setOnAction(e -> backToCoursePage());
@@ -95,7 +93,6 @@ public class courseEnrollController implements Initializable {
         if (otherCourse != null) ef.hoverEffect(otherCourse);
     }
 
-    // 👉 เมื่อกด Enroll ให้เปิดหน้าชำระเงิน พร้อมส่งข้อมูลไป paymentController
     @FXML
     private void handleEnrollAction() {
         try {
@@ -105,7 +102,7 @@ public class courseEnrollController implements Initializable {
             paymentController controller = loader.getController();
             controller.setCourseInfo(courseName, coursePrice);
             controller.setCourseId(courseId);
-            // ✅ ไม่ต้องเซ็ต userId เพราะ controller ดึงจาก SessionManager อยู่แล้ว
+
 
             Stage stage = new Stage();
             stage.setTitle("ชำระเงิน");
@@ -116,7 +113,7 @@ public class courseEnrollController implements Initializable {
         }
     }
 
-    // 📦 เพิ่มลงในตะกร้า (ยังไม่เชื่อม DB)
+    //เพิ่มลงในตะกร้า (ยังไม่เชื่อม DB)
     public void addToCart() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
@@ -124,13 +121,11 @@ public class courseEnrollController implements Initializable {
         alert.showAndWait();
     }
 
-    // 🔁 กลับไปหน้า Course
     public void backToCoursePage() {
         Navigator nav = new Navigator();
-        nav.navigateTo("/fxml/Student/courseManage/course.fxml");
+        nav.courseRoute(null);
     }
 
-    // 🧠 ใส่ข้อมูลคอร์ส
     public void setCourseDetail(String name, String _shortDescription, String _description, String picPath,
                                 String categoryPicPath, String _category, double _price, double _rating,
                                 int totalReview, int _totalLesson, int courseId) {
@@ -147,21 +142,42 @@ public class courseEnrollController implements Initializable {
         rating.setText(_rating + " (" + totalReview + ")");
         category.setText(_category);
 
-        // ❗ เปลี่ยนเป็นโหลดภาพจริงถ้ามี
-        URL resource = getClass().getResource("/images/sample.png");
-        if (resource != null) {
-            Image image = new Image(resource.toExternalForm());
-            courseImg.setFill(new ImagePattern(image));
+        Image image;
+        if (picPath.startsWith("http")) {
+            image = new Image(picPath, true); // async = true
         } else {
-            System.err.println("⚠️ ไม่พบไฟล์ภาพ: /images/sample.png");
-            courseImg.setFill(Color.LIGHTGRAY);
+            URL url = getClass().getResource(picPath);
+            if (url != null) {
+                image = new Image(url.toExternalForm(), true);
+            } else {
+                System.err.println("⚠️ ไม่พบไฟล์ภาพ: " + picPath);
+                courseImg.setFill(Color.LIGHTGRAY);
+                return;
+            }
         }
+
+        image.progressProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal.doubleValue() >= 1.0) {
+                courseImg.setFill(new ImagePattern(image));
+            }
+        });
     }
 
-    public void setRating(double rating) {
+
+        public void setRating(double rating) {
         one.setVisible(rating >= 1);
         two.setVisible(rating >= 2);
         three.setVisible(rating >= 3);
         four.setVisible(rating >= 4);
     }
+
+    @FXML
+    private Button closeBtn;
+
+    @FXML
+    private void handleClose() {
+        Stage stage = (Stage) closeBtn.getScene().getWindow();
+        stage.close();
+    }
+
 }

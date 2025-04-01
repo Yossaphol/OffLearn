@@ -111,17 +111,7 @@
                                     <HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="781.0">
                                        <children>
                                           <HBox prefHeight="59.0" prefWidth="5.0" />
-                                          <ImageView fitHeight="31.0" fitWidth="34.0">
-                                             <image>
-                                                <Image url="@../../../img/icon/teaching.png" />
-                                             </image>
-                                          </ImageView>
                                           <HBox prefHeight="35.0" prefWidth="10.0" />
-                                          <Label fx:id="totalLesson" text="13 บท" textFill="#a8a8a8">
-                                             <font>
-                                                <Font name="Noto Sans Thai Regular" size="20.0" />
-                                             </font>
-                                          </Label>
                                           <HBox prefHeight="54.0" prefWidth="37.0" />
                                           <HBox prefHeight="35.0" prefWidth="10.0" />
                                        </children>
@@ -176,7 +166,7 @@
                         <HBox alignment="CENTER" prefHeight="267.0" prefWidth="1132.0" spacing="20.0">
                            <children>
                               <VBox alignment="CENTER" prefHeight="254.0" prefWidth="225.0" />
-                              <Button fx:id="otherCourse" mnemonicParsing="false" prefHeight="55.0" prefWidth="233.0" style="-fx-background-color: transparent;" text="ดูคอร์สอื่นๆ">
+                              <Button fx:id="otherCourse" mnemonicParsing="false" onAction="#backToCoursePage" prefHeight="55.0" prefWidth="233.0" style="-fx-background-color: transparent;" text="ดูคอร์สอื่นๆ">
                                  <font>
                                     <Font name="Noto Sans Thai Bold" size="24.0" />
                                  </font>
