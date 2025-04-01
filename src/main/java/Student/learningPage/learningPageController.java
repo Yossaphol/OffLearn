@@ -1,13 +1,13 @@
 package Student.learningPage;
 
  // TEST IN MYCOURSE
-
+import Utili.*;
+import com.google.gson.Gson;
 import Database.*;
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.HomeController;
 
 import Student.HomeAndNavigation.Navigator;
-import Utili.FileStorageHelper;
 import a_Session.SessionManager;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -31,6 +31,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.concurrent.CountDownLatch;
@@ -254,7 +256,6 @@ public class learningPageController extends ChapterProgress implements Initializ
             loadVideoPlayer();
             loadPlaylist();
             loadProgress();
-            loadRecommendedCourses();
             loadAttachment();
             setLoadingState(false);
         });
@@ -293,24 +294,34 @@ public class learningPageController extends ChapterProgress implements Initializ
     private void loadTeacherInfo() {
         Task<String[]> task = new Task<>() {
             @Override
-            protected String[] call() {
-                UserDB userDB = new UserDB();
-                return userDB.getUserNameProfileAndSpecByCourseID(courseID);
+            protected String[] call() throws Exception {
+                String cacheFile = "teacher_" + courseID + ".json";
+                // If cached data exists, load and parse it
+                if (CacheHelper.hasCache(cacheFile)) {
+                    String json = CacheHelper.loadJson(cacheFile);
+                    String[] teacherInfo = new Gson().fromJson(json, String[].class);
+                    return teacherInfo;
+                } else {
+                    // Otherwise, fetch from DB
+                    UserDB userDB = new UserDB();
+                    String[] teacherInfo = userDB.getUserNameProfileAndSpecByCourseID(courseID);
+                    if (teacherInfo != null) {
+                        // Save to cache
+                        String json = new Gson().toJson(teacherInfo);
+                        CacheHelper.saveJson(cacheFile, json);
+                    }
+                    return teacherInfo;
+                }
             }
         };
         task.setOnSucceeded(e -> {
             String[] teacherInfo = task.getValue();
             System.out.println("Fetching teacher info for course ID: " + courseID);
             if (teacherInfo != null) {
-                String teacherUsername = teacherInfo[0];
-                String profilePath = teacherInfo[1];
-                String description = teacherInfo[2];
-                System.out.println("Teacher Username: " + teacherUsername);
-                System.out.println("Profile Path: " + profilePath);
-                System.out.println("Description: " + description);
-                teacherName.setText(teacherUsername);
-                role.setText(description);
-                loadTeacherImage(teacherImg, profilePath);
+                teacherName.setText(teacherInfo[0]);
+                // You might also want to update role and profile image
+                role.setText(teacherInfo[2]);
+                loadTeacherImage(teacherImg, teacherInfo[1]);
             } else {
                 System.err.println("No teacher info found for course ID: " + courseID);
             }
@@ -459,7 +470,6 @@ public class learningPageController extends ChapterProgress implements Initializ
     }
 
     // Stub methods for future implementations
-    private void loadRecommendedCourses() { }
 
     private void loadProgress() {
         Task<Double> progressTask = new Task<>() {
@@ -659,6 +669,7 @@ public class learningPageController extends ChapterProgress implements Initializ
                 btnOffLoad.setDisable(true);
                 rootpage.getScene().setCursor(Cursor.WAIT);
                 downloadChapterVideo();
+
             }
         });
     }
@@ -696,6 +707,40 @@ public class learningPageController extends ChapterProgress implements Initializ
                 rootpage.getScene().setCursor(Cursor.DEFAULT);
             });
         });
+        Platform.runLater(() -> {
+            showAlert("Download Completed", "Video downloaded to: " + destination.getAbsolutePath(), Alert.AlertType.INFORMATION);
+            btnOffLoad.setDisable(false);
+            rootpage.getScene().setCursor(Cursor.DEFAULT);
+
+            try {
+                // 1. Save course info if not already saved
+                saveCourseInfoIfNeeded(userID, courseID);
+
+                // 2. Save chapter metadata
+                ChapterDB chapterDB = new ChapterDB();
+                String[] details = chapterDB.getChapterDetailsByID(chapterID);
+
+                OfflineCourseData offlineData = new OfflineCourseData();
+                offlineData.setUserid(userID);
+                offlineData.setCourseID(courseID);
+                offlineData.setChapterID(chapterID);
+                offlineData.setChapterName(details[0]);               // chapter title
+                offlineData.setChapterDescription(details[1]);        // chapter description
+                offlineData.setCourseCategory(catName.getText());     // or fetch from DB
+                offlineData.setTeacherName(teacherName.getText());
+                offlineData.setVideoPath(destination.getAbsolutePath());
+
+                // Optional: You can also set courseName, courseDescription if needed
+                offlineData.setCourseName("TEST");
+                offlineData.setCourseDescription("Offline Access");
+
+                Utili.OfflineCourseManager.saveChapter(userID, offlineData);
+                System.out.println("✅ Offline chapter metadata saved");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                showAlert("Offline Save Failed", "Failed to save chapter data.", Alert.AlertType.ERROR);
+            }
+        });
         downloadTask.setOnFailed(e -> {
             Platform.runLater(() -> {
                 showAlert("Download Failed", "Failed to download video.", Alert.AlertType.ERROR);
@@ -713,4 +758,30 @@ public class learningPageController extends ChapterProgress implements Initializ
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    private void saveCourseInfoIfNeeded(int userID, int courseID) {
+        File courseInfoFile = new File(OfflinePathHelper.getCourseFolder(userID, courseID), "course_info.json");
+        if (courseInfoFile.exists()) return;
+
+        UserDB userDB = new UserDB();
+        String[] teacherInfo = userDB.getUserNameProfileAndSpecByCourseID(courseID);
+        Category cat = new Category();
+        String category = cat.getCategoryByCourseID(courseID);
+
+        OfflineCourseInfo info = new OfflineCourseInfo();
+        info.setUserID(userID);
+        info.setCourseID(courseID);
+        info.setCourseName("Offline Course"); // Optionally get actual name from DB
+        info.setCourseDescription("Downloaded Content");
+        info.setCourseCategory(category != null ? category : "Unknown");
+        info.setTeacherName(teacherInfo != null ? teacherInfo[0] : "Unknown");// Optional
+
+        try {
+            String json = new Gson().toJson(info);
+            Files.writeString(courseInfoFile.toPath(), json, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

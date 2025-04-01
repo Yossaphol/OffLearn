@@ -220,6 +220,7 @@ public class HomeController implements Initializable {
 
                 courseInfoController controller = loader.getController();
                 controller.setCourseInformation(courseList.get(i));
+//                controller.courseLink()
 
                 hoverEffect(courseItem);
                 container.getChildren().add(courseItem);

@@ -92,19 +92,12 @@ public class VideoPlayerManager implements Initializable {
         FontLoader fontLoader = new FontLoader();
         fontLoader.loadFonts();
         settingsMenu = new ContextMenu();
-        HomeController method_home = new HomeController();
+        //HomeController method_home = new HomeController();
         currentVideo = this;
         // Load icons
         loadIcons();
 
         // test video, idk how to play vid from DB lol ;w;
-        if (videoPath == null || videoPath.isEmpty()) {
-            videoPath = "https://offlearnmedia.s3.ap-southeast-2.amazonaws.com/image/longvideotest.mp4";
-            Media media = new Media(videoPath);
-            mediaPlayer = new MediaPlayer(media);
-            mediaView.setMediaPlayer(mediaPlayer);
-            bindMediaProperties();
-        }
         String outputFilePath = System.getProperty("java.io.tmpdir") + "testvideo123_encoded.mp4";
 
         // ignore this (old ffpmeg stuff)
@@ -306,10 +299,10 @@ public class VideoPlayerManager implements Initializable {
         });
         btnPlay.setGraphic(createIconView(playIcon));
 
-        method_home.hoverEffect(btnSound);
-        method_home.hoverEffect(btnFullscreen);
-        method_home.hoverEffect(btnPlay);
-        method_home.hoverEffect(btnSetting);
+        //method_home.hoverEffect(btnSound);
+        //method_home.hoverEffect(btnFullscreen);
+        //method_home.hoverEffect(btnPlay);
+        //.hoverEffect(btnSetting);
     }
 
     private void bindMediaProperties() {
@@ -530,7 +523,10 @@ public class VideoPlayerManager implements Initializable {
             btnPlay.setGraphic(createIconView(replayIcon));
             videoEnded = true;
         });
-
+        if (videoPath == null || videoPath.isEmpty()) {
+            System.out.println("⚠️ No videoPath provided yet. Waiting for setVideoPath()...");
+            return; // Skip init
+        }
     }
     /* Toggles play/pause or replay if ended.*/
     private void togglePlayPause(MediaPlayer mediaPlayer) {
@@ -602,7 +598,8 @@ public class VideoPlayerManager implements Initializable {
             bufferSec = totalSec;
         } else {
             playedSec = sliderUserDragging ? sliderTime.getValue() : mediaPlayer.getCurrentTime().toSeconds();
-            bufferSec = mediaPlayer.getBufferProgressTime().toSeconds();
+            Duration bufferTime = mediaPlayer.getBufferProgressTime();
+            bufferSec = (bufferTime != null) ? bufferTime.toSeconds() : playedSec;
             if (bufferSec < playedSec) bufferSec = playedSec;
             if (bufferSec > totalSec)  bufferSec = totalSec;
         }
@@ -994,7 +991,10 @@ public class VideoPlayerManager implements Initializable {
     }
 
     public void setVideoPath(String path) {
-        if (path == null || path.isEmpty()) return;
+        if (path == null || path.isEmpty()) {
+            System.out.println("⚠️ No videoPath provided yet. Waiting for setVideoPath()...");
+            return;
+        }
 
         this.videoPath = path;
 
@@ -1002,13 +1002,27 @@ public class VideoPlayerManager implements Initializable {
             mediaPlayer.stop();
             mediaPlayer.dispose();
         }
+
         loadinggif.setVisible(true);
-        Media media = new Media(videoPath);
-        mediaPlayer = new MediaPlayer(media);
-        mediaView.setMediaPlayer(mediaPlayer);
-        bindMediaProperties();
-        mediaPlayer.play();
-        btnPlay.setGraphic(createIconView(pauseIcon));
+
+        String mediaSource;
+        if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("file:/")) {
+            mediaSource = path;
+        } else {
+            mediaSource = new File(path).toURI().toString();
+        }
+
+        try {
+            Media media = new Media(mediaSource);
+            mediaPlayer = new MediaPlayer(media);
+            mediaView.setMediaPlayer(mediaPlayer);
+            bindMediaProperties();
+            mediaPlayer.play();
+            btnPlay.setGraphic(createIconView(pauseIcon));
+        } catch (Exception e) {
+            System.err.println("❌ Failed to load media from path: " + mediaSource);
+            e.printStackTrace();
+        }
     }
 
     public MediaPlayer getVideoMediaPlayer() {

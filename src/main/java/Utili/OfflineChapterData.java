@@ -21,4 +21,11 @@ public class OfflineChapterData {
     public void setChapterDescription(String chapterDescription) {
         this.chapterDescription = chapterDescription;
     }
+    public void setChapterName(String chapterName) {
+        this.chapterName = chapterName;
+    }
+
+    public void setVideoPath(String videoPath) {
+        this.videoPath = videoPath;
+    }
 }

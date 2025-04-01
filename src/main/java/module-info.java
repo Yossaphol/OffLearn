@@ -25,6 +25,8 @@ module com.example.offlearn {
     opens Student.inbox to javafx.fxml;
     exports Student.inbox;
 
+    opens Utili to com.google.gson;
+
     opens Student.leaderboard to javafx.fxml;
     exports Student.leaderboard;
 
