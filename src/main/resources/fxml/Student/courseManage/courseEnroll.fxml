@@ -166,7 +166,7 @@
                         <HBox alignment="CENTER" prefHeight="267.0" prefWidth="1132.0" spacing="20.0">
                            <children>
                               <VBox alignment="CENTER" prefHeight="254.0" prefWidth="225.0" />
-                              <Button fx:id="otherCourse" mnemonicParsing="false" onAction="#backToCoursePage" prefHeight="55.0" prefWidth="233.0" style="-fx-background-color: transparent;" text="ดูคอร์สอื่นๆ">
+                              <Button fx:id="otherCourse" mnemonicParsing="false" onAction="#backToCoursePage" prefHeight="55.0" prefWidth="233.0" style="-fx-background-color: transparent;" text="ดูคอร์สอื่นๆ" textFill="#f5f5f5">
                                  <font>
                                     <Font name="Noto Sans Thai Bold" size="24.0" />
                                  </font>
@@ -178,6 +178,7 @@
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="120.0" />
                            </children>
                         </HBox>
+                        <Label fx:id="totalLesson" text="a" textFill="WHITE" />
                      </children>
                   </VBox>
                </children>
