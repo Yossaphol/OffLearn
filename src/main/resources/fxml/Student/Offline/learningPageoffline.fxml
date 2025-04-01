@@ -32,11 +32,11 @@
                               </VBox>
                               <HBox prefWidth="634.0">
                                  <children>
-                                    <HBox prefHeight="117.0" prefWidth="734.0">
+                                    <HBox prefHeight="122.0" prefWidth="721.0">
                                        <children>
-                                          <VBox alignment="CENTER_LEFT" maxHeight="90.0" minWidth="90.0" prefHeight="90.0" prefWidth="530.0" spacing="5.0">
+                                          <VBox alignment="CENTER_LEFT" maxHeight="90.0" minWidth="90.0" prefHeight="90.0" prefWidth="530.0">
                                              <children>
-                                                <Label fx:id="subject_name" text="Subject name" textFill="#8100cc">
+                                                <Label fx:id="subject_name" prefHeight="41.0" prefWidth="229.0" text="Subject name" textFill="#8100cc">
                                                    <font>
                                                       <Font name="System Bold" size="36.0" />
                                                    </font>
@@ -44,19 +44,22 @@
                                                       <Insets left="20.0" />
                                                    </VBox.margin>
                                                 </Label>
-                                                <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="475.0">
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="14.0" prefWidth="530.0">
                                                    <children>
-                                                      <HBox alignment="CENTER" prefHeight="26.0" prefWidth="83.0" style="-fx-background-color: rgba(129, 0, 204, 0.2); -fx-background-radius: 25;">
+                                                      <HBox alignment="CENTER" prefHeight="14.0" prefWidth="57.0" style="-fx-background-color: rgba(129, 0, 204, 0.2); -fx-background-radius: 25;">
                                                          <children>
-                                                            <Label fx:id="catName" alignment="CENTER" style="-fx-text-fill: rgba(129, 0, 204, 1);" text="catName">
+                                                            <Label fx:id="catName" alignment="CENTER" prefHeight="27.0" prefWidth="34.0" style="-fx-text-fill: rgba(129, 0, 204, 1);" text="catName">
                                                                <font>
-                                                                  <Font name="System Bold" size="12.0" />
+                                                                  <Font name="System Bold" size="8.0" />
                                                                </font>
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
                                                             </Label>
                                                          </children>
+                                                         <HBox.margin>
+                                                            <Insets left="20.0" />
+                                                         </HBox.margin>
                                                       </HBox>
                                                    </children>
                                                 </HBox>
@@ -68,14 +71,17 @@
                                        </children>
                                     </HBox>
                                  </children>
+                                 <VBox.margin>
+                                    <Insets left="5.0" />
+                                 </VBox.margin>
                               </HBox>
                               <HBox prefHeight="354.0" prefWidth="848.0">
                                  <children>
-                                    <VBox prefHeight="354.0" prefWidth="400.0">
+                                    <VBox prefHeight="368.0" prefWidth="415.0">
                                        <children>
                                           <HBox prefHeight="45.0" prefWidth="415.0">
                                              <VBox.margin>
-                                                <Insets top="15.0" />
+                                                <Insets />
                                              </VBox.margin>
                                              <children>
                                                 <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="51.0" prefWidth="368.0">
@@ -83,9 +89,9 @@
                                                       <Insets left="15.0" />
                                                    </HBox.margin>
                                                    <children>
-                                                      <Label fx:id="teacherName" text="Teacher Name">
+                                                      <Label fx:id="teacherName" prefHeight="50.0" prefWidth="176.0" text="Teacher Name">
                                                          <font>
-                                                            <Font name="System Bold" size="18.0" />
+                                                            <Font name="System Bold" size="24.0" />
                                                          </font>
                                                       </Label>
                                                    </children>
@@ -140,6 +146,9 @@
                                        </children>
                                     </VBox>
                                  </children>
+                                 <VBox.margin>
+                                    <Insets left="5.0" />
+                                 </VBox.margin>
                               </HBox>
                            </children>
                         </VBox>

@@ -2,6 +2,7 @@ package Student.Quiz;
 
 import Database.*;
 import Student.HomeAndNavigation.Navigator;
+import Student.learningPage.DisposableController;
 import Teacher.quiz.QuestionItem;
 import Teacher.quiz.QuizItem;
 import a_Session.SessionHandler;
@@ -15,12 +16,13 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
+import javax.tools.Diagnostic;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class QuizPageController implements Initializable, SessionHandler {
+public class QuizPageController implements Initializable, SessionHandler, DisposableController {
 
     @FXML
     private VBox questionSpace;
@@ -134,7 +136,7 @@ public class QuizPageController implements Initializable, SessionHandler {
             confirmAlert.setContentText("ท่านต้องการส่งคำตอบใช่หรือไม่?");
 
             if (confirmAlert.showAndWait().get() == ButtonType.OK) {
-                navigator.QuizResult(point, courseDB.getCourseIDByChapterID(chapterID), quizItem, chapterID);
+                navigator.QuizResult(point, courseDB.getCourseIDByChapterID(chapterID), quizItem, chapterID, this);
                 scoreDB.saveToDB(courseDB, userID, chapterID, point, quizId);
                 System.out.println("" + point);
             } else {
@@ -162,4 +164,8 @@ public class QuizPageController implements Initializable, SessionHandler {
     }
 
 
+    @Override
+    public void disposePlayer() {
+
+    }
 }

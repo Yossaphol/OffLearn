@@ -58,7 +58,7 @@
                                                       <Insets />
                                                    </VBox.margin>
                                                    <children>
-                                                      <HBox alignment="CENTER" prefHeight="26.0" prefWidth="83.0" style="-fx-background-color: rgba(129, 0, 204, 0.2); -fx-background-radius: 25;">
+                                                      <HBox alignment="CENTER" prefHeight="26.0" prefWidth="253.0" style="-fx-background-color: rgba(129, 0, 204, 0.2); -fx-background-radius: 25;">
                                                          <children>
                                                             <Label fx:id="catName" alignment="CENTER" style="-fx-text-fill: rgba(129, 0, 204, 1);" text="catName">
                                                                <font>
