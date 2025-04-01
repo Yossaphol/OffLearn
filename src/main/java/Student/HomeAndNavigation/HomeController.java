@@ -223,7 +223,7 @@ public class HomeController implements Initializable, SessionHandler {
 
     public void showCourse() {
         CourseDB courseDB = new CourseDB();
-        courseList = courseDB.getAllCourses();
+        courseList = courseDB.getAllCourses(userID);
         loadCourses();
     }
     private void loadCourses() {
@@ -233,7 +233,7 @@ public class HomeController implements Initializable, SessionHandler {
         int end = Math.min(start + coursesPerPage, courseList.size());
 
         if (courseList.isEmpty()) {
-            Label txt = new Label("ยังไม่มีคอร์สที่ลงทะเบียนไว้");
+            Label txt = new Label("ยังไม่มีคอร์สที่กำลังเรียนอยู่");
             txt.setStyle("-fx-font-size: 20px;");
             container.getChildren().add(txt);
             return;
