@@ -223,7 +223,7 @@ public class HomeController implements Initializable, SessionHandler {
 
     public void showCourse() {
         CourseDB courseDB = new CourseDB();
-        courseList = courseDB.getAllCourses();
+        courseList = courseDB.getUserCourses(userID);
         loadCourses();
     }
     private void loadCourses() {
