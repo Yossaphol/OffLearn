@@ -776,12 +776,15 @@ public class learningPageController extends ChapterProgress implements Initializ
         String[] teacherInfo = userDB.getUserNameProfileAndSpecByCourseID(courseID);
         Category cat = new Category();
         String category = cat.getCategoryByCourseID(courseID);
+        CourseDB courseDB = new CourseDB();
+        String courseName = courseDB.getCourseNameByID(courseID);
+        String courseDesc = courseDB.getCourseDescriptionByID(courseID);
 
         OfflineCourseInfo info = new OfflineCourseInfo();
         info.setUserID(userID);
         info.setCourseID(courseID);
-        info.setCourseName("Offline Course"); // Optionally get actual name from DB
-        info.setCourseDescription("Downloaded Content");
+        info.setCourseName(courseName); // Optionally get actual name from DB
+        info.setCourseDescription(courseDesc);
         info.setCourseCategory(category != null ? category : "Unknown");
         info.setTeacherName(teacherInfo != null ? teacherInfo[0] : "Unknown");// Optional
 
