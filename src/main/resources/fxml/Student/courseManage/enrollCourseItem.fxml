@@ -96,7 +96,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="detailBtn" mnemonicParsing="false" prefHeight="29.0" prefWidth="96.0" style="-fx-background-color: #8100cc; -fx-background-radius: 10;" text="รายละเอียด" textFill="WHITE">
+            <Button fx:id="detailBtn" mnemonicParsing="false" onAction="#handleDetailButton" prefHeight="29.0" prefWidth="96.0" style="-fx-background-color: #8100cc; -fx-background-radius: 10;" text="รายละเอียด" textFill="WHITE">
                <font>
                   <Font name="Noto Sans Thai Bold" size="12.0" />
                </font>

@@ -185,7 +185,7 @@ public class HomeController implements Initializable, SessionHandler {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        progressValue();
+//        progressValue();
         setupBarChart();
         setImgContainer();
         route();

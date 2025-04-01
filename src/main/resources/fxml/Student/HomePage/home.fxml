@@ -133,7 +133,7 @@
                   </VBox>
                   <VBox>
                      <children>
-                        <Pane fx:id="smallStatistic" prefHeight="531.0" prefWidth="294.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                        <Pane fx:id="smallStatistic" prefHeight="450.0" prefWidth="294.0" style="-fx-background-color: white; -fx-background-radius: 10;">
                            <effect>
                               <DropShadow>
                                  <color>
@@ -145,7 +145,7 @@
                               <Cursor fx:constant="DEFAULT" />
                            </cursor>
                            <children>
-                              <VBox alignment="TOP_CENTER" prefHeight="484.0" prefWidth="297.0">
+                              <VBox alignment="TOP_CENTER" prefHeight="452.0" prefWidth="297.0">
                                  <cursor>
                                     <Cursor fx:constant="DEFAULT" />
                                  </cursor>
@@ -206,31 +206,8 @@
                                           <Font name="Noto Sans Thai Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <VBox alignment="TOP_CENTER" prefHeight="194.0" prefWidth="237.0">
+                                    <VBox alignment="TOP_CENTER" prefHeight="148.0" prefWidth="237.0">
                                        <children>
-                                          <Label prefHeight="36.0" prefWidth="244.0" text="ความคืบหน้า Roadmap">
-                                             <font>
-                                                <Font name="Noto Sans Thai Bold" size="12.0" />
-                                             </font>
-                                             <VBox.margin>
-                                                <Insets top="20.0" />
-                                             </VBox.margin>
-                                          </Label>
-                                          <HBox prefHeight="21.0" prefWidth="237.0">
-                                             <children>
-                                                <Label prefHeight="18.0" prefWidth="127.0" text="Front-end">
-                                                   <font>
-                                                      <Font name="Noto Sans Thai Regular" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label fx:id="progressValue1" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="127.0" text="67%" textFill="#8100cc">
-                                                   <font>
-                                                      <Font name="Noto Sans Thai Regular" size="12.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </HBox>
-                                          <ProgressBar fx:id="progress1" prefHeight="14.0" prefWidth="237.0" progress="0.0" stylesheets="@../../../css/Home.css" />
                                           <HBox prefHeight="21.0" prefWidth="237.0" />
                                           <Pane prefHeight="8.0" prefWidth="237.0" />
                                           <Button fx:id="btn_dashboard_atStatistics" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #8100CC; -fx-background-radius: 10;" text="Dashboard" textFill="WHITE">
