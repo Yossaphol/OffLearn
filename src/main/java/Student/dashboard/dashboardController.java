@@ -19,6 +19,7 @@ import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import Student.HomeAndNavigation.Navigator;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -34,8 +35,9 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.scene.input.MouseEvent;
 
-public class dashboardController implements Initializable, SessionHandler {
+public class dashboardController implements Initializable {
     public Rectangle userpfp;
     public Circle trophy;
     public ScrollPane mainScrollPane;
@@ -80,7 +82,7 @@ public class dashboardController implements Initializable, SessionHandler {
     public VBox roadmapProgression;
     public VBox courseProgression;
     public VBox scoreTendency;
-//    public VBox risk;
+    //    public VBox risk;
     public VBox studyTable;
     public Button btn_continue;
     public Button btn_otherCourse;
@@ -115,6 +117,8 @@ public class dashboardController implements Initializable, SessionHandler {
     public Label subjectName1;
     public Label subjectName0;
     public DatePicker date;
+
+    private static boolean isStudyTableOpen = false;
 
     @FXML
     private StackedBarChart<String, Number> courseProgressionChart;
@@ -175,10 +179,9 @@ public class dashboardController implements Initializable, SessionHandler {
         scoreChart();
 
         //handle studyTable
-       studyTable.setOnMouseClicked(event -> handleStudyTableClick());
+        studyTable.setOnMouseClicked(this::handleStudyTableClick);
     }
 
-    @Override
     public void handleSession() {
         UserDB userDB = new UserDB();
         this.userID = userDB.getUserId(SessionManager.getInstance().getUsername());
@@ -499,24 +502,32 @@ public class dashboardController implements Initializable, SessionHandler {
     }
 
     @FXML
-    public void handleStudyTableClick() {
-        try {
-            // Load the .fxml file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/statistics/studyTableEdit.fxml"));
-            Pane mdiContent = loader.load();
+    public void handleStudyTableClick(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY) {
+            try {
+                if (!isStudyTableOpen) {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/statistics/studyTableEdit.fxml"));
+                    Pane mdiContent = loader.load();
 
-            // Create a new Stage (window) for the MDI form
-            Stage mdiStage = new Stage();
-            mdiStage.setTitle("Study Table");
+                    Stage mdiStage = new Stage();
+                    mdiStage.setTitle("Study Table");
 
-            // Set the content in a Scene
-            Scene scene = new Scene(mdiContent);
-            mdiStage.setScene(scene);
+                    Scene scene = new Scene(mdiContent);
+                    mdiStage.setScene(scene);
 
-            // Show the MDI form
-            mdiStage.show();
-        } catch (IOException e) {
-            e.printStackTrace(); // Handle any loading errors
+                    isStudyTableOpen = true;
+
+                    mdiStage.setOnHidden(e -> {
+                        isStudyTableOpen = false;
+                        displayStudyTable();
+                    });
+
+                    mdiStage.show();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
+
 }

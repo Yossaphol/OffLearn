@@ -59,30 +59,25 @@ public class studyTableController implements Initializable {
     public int toHour = 17;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Load data from file first
+
         loadDataFromFile();
 
-        // Make sure the day containers are cleared before adding content
         clearDayContainers();
 
-        // Set the width based on the range
         int width = 134 * (1 + range.get(1) - range.get(0));
         setWidthAll(width);
 
-        // Add hours and content
         addHour(range.get(0), range.get(1));
         addContent();
     }
 
     private void loadDataFromFile() {
         try {
-            // Clear existing data first to avoid duplicates
             tableData.clear();
             range.clear();
 
             File file = new File(DATA_FILE);
             if (!file.exists()) {
-                // If file doesn't exist, use default values
                 range.add(8);
                 range.add(17);
                 return;
@@ -91,13 +86,11 @@ public class studyTableController implements Initializable {
             String content = new String(Files.readAllBytes(Paths.get(DATA_FILE)));
             JSONObject jsonData = new JSONObject(content);
 
-            // Load range (from/to hours)
             int fromHour = jsonData.getInt("fromHour");
             int toHour = jsonData.getInt("toHour");
             range.add(fromHour);
             range.add(toHour);
 
-            // Load schedule items
             JSONArray items = jsonData.getJSONArray("scheduleItems");
             for (int i = 0; i < items.length(); i++) {
                 JSONObject item = items.getJSONObject(i);
@@ -117,7 +110,6 @@ public class studyTableController implements Initializable {
             System.err.println("Error loading data: " + e.getMessage());
             e.printStackTrace();
 
-            // If there's an error, use default values
             range.clear();
             range.add(8);
             range.add(17);
@@ -125,7 +117,7 @@ public class studyTableController implements Initializable {
     }
 
     private void clearDayContainers() {
-        // Clear all day containers to avoid duplicates
+
         day1_container.getChildren().clear();
         day2_container.getChildren().clear();
         day3_container.getChildren().clear();
@@ -175,6 +167,12 @@ public class studyTableController implements Initializable {
         Label st = new Label();
         st.setPrefSize(134, 24);
         st.setText("Study Table");
+        st.setStyle(String.format(
+                "-fx-font-size: 18; " +
+                        "-fx-text-fill: #8100cc; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-alignment: CENTER;"
+        ));
         hour_container.getChildren().add(st);
         for (int i = start; i < stop; i++) {
             Label hour = new Label();
@@ -189,7 +187,6 @@ public class studyTableController implements Initializable {
         Label subject = new Label();
         subject.setPrefSize(134 * (Integer.parseInt(stop) - Integer.parseInt(start)), 24);
 
-        // Fix color handling - Convert JavaFX color format to CSS format if needed
         String bgColorCSS = convertToCSS(bgcolor);
         String textColorCSS = convertToCSS(tcolor);
 
@@ -224,25 +221,20 @@ public class studyTableController implements Initializable {
         }
     }
 
-    // Add this helper method to convert JavaFX color format to CSS color format
     private String convertToCSS(String colorString) {
-        // Handle JavaFX Color.toString() format: "0xrrggbbff" or "Color[r=0.x, g=0.x, b=0.x, a=0.x]"
         if (colorString.startsWith("0x")) {
             return "#" + colorString.substring(2, 8);
         } else if (colorString.startsWith("Color[")) {
             try {
-                // Parse the rgba values from the string
                 String[] parts = colorString.substring(6, colorString.length() - 1).split(",");
                 double r = Double.parseDouble(parts[0].split("=")[1].trim());
                 double g = Double.parseDouble(parts[1].split("=")[1].trim());
                 double b = Double.parseDouble(parts[2].split("=")[1].trim());
 
-                // Convert to hex
                 String hex = String.format("#%02X%02X%02X",
                         (int)(r * 255), (int)(g * 255), (int)(b * 255));
                 return hex;
             } catch (Exception e) {
-                // Fallback to the original string if parsing fails
                 return colorString;
             }
         }
@@ -274,34 +266,28 @@ public class studyTableController implements Initializable {
     }
 
     public void addContent() {
-        // Add day labels first
+
         daylabel();
 
-        // Sort the table data
         sortTableData();
 
         String[] days = {"sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"};
 
-        // Process each day
+
         for (String currentDay : days) {
-            // Filter items for the current day
             List<ScheduleItem> dayItems = tableData.stream()
                     .filter(item -> item.getDay().toLowerCase().equals(currentDay))
                     .sorted((a, b) -> compareTimes(a.getStart(), b.getStart()))
                     .collect(Collectors.toList());
 
-            // Track current position in hours
             int currentHour = range.get(0);
 
-            // Get the appropriate container
             HBox dayContainer = getDayContainer(currentDay);
 
-            // Process each item for this day
             for (ScheduleItem item : dayItems) {
                 int startHour = Integer.parseInt(item.getStart());
                 int stopHour = Integer.parseInt(item.getStop());
 
-                // Add space before this item if needed
                 if (startHour > currentHour) {
                     addSpace(currentDay, String.valueOf(currentHour), String.valueOf(startHour));
                 }
@@ -316,18 +302,15 @@ public class studyTableController implements Initializable {
                         item.getTcolor()
                 );
 
-                // Update current hour
                 currentHour = stopHour;
             }
 
-            // Add space after the last item if needed
             if (currentHour < range.get(1)) {
                 addSpace(currentDay, String.valueOf(currentHour), String.valueOf(range.get(1)));
             }
         }
     }
 
-    // Helper method to get the right container for a day
     private HBox getDayContainer(String day) {
         switch (day.toLowerCase()) {
             case "sunday": return day1_container;

@@ -1,5 +1,7 @@
 package Student.dashboard;
 
+import Database.EnrollDB;
+import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -7,24 +9,22 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import java.io.*;
 import java.nio.file.*;
+
+import javafx.util.Duration;
 import org.json.*;
-
-
 
 public class studyTableEditController implements Initializable{
 
-    public ComboBox<String> from;
-    public ComboBox<String> to;
     public TableView<ScheduleItem> list_table;
     public TableColumn<ScheduleItem, String> list_id;
     public TableColumn<ScheduleItem, String> list_name;
@@ -35,7 +35,7 @@ public class studyTableEditController implements Initializable{
     public TableColumn<ScheduleItem, String> list_tcolor;
     public ComboBox<Integer> id;
     public Button delete;
-    public TextField name;
+    public ComboBox<String> name;
     public ComboBox<String> start;
     public ColorPicker bgcolor;
     public ColorPicker tcolor;
@@ -48,14 +48,20 @@ public class studyTableEditController implements Initializable{
     private ObservableList<TimeBlock> occupiedTimes = FXCollections.observableArrayList();
     private ObservableList<ScheduleItem> tableData = FXCollections.observableArrayList();
 
-
     private static final String DATA_FILE = "studyTable.json";
     private int fromHour = 8;
     private int toHour = 17;
 
+    private int currentUserID;
+
+    public void setCurrentUserID(int userID) {
+        this.currentUserID = userID;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         generateItem();
+        fillCourseNameComboBox();
 
         list_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         list_name.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -64,36 +70,39 @@ public class studyTableEditController implements Initializable{
         list_stop.setCellValueFactory(new PropertyValueFactory<>("stop"));
         list_bgcolor.setCellValueFactory(new PropertyValueFactory<>("bgcolor"));
         list_tcolor.setCellValueFactory(new PropertyValueFactory<>("tcolor"));
+        setEffect();
 
-        // Load data from file
         loadData();
 
-        // Set table data
         list_table.setItems(tableData);
+
+        updateIdComboBox();
+    }
+
+    private void fillCourseNameComboBox() {
+        EnrollDB enrollDB = new EnrollDB();
+        int userID = currentUserID > 0 ? currentUserID : 1;
+        List<String> courseNames = enrollDB.getEnrolledCourseNames(userID);
+        name.setItems(FXCollections.observableArrayList(courseNames));
     }
 
     private void loadData() {
         try {
             File file = new File(DATA_FILE);
             if (!file.exists()) {
-                // If file doesn't exist, use default values
-                from.getSelectionModel().select(String.format("%02d:00", fromHour));
-                to.getSelectionModel().select(String.format("%02d:00", toHour));
                 return;
             }
 
             String content = new String(Files.readAllBytes(Paths.get(DATA_FILE)));
             JSONObject jsonData = new JSONObject(content);
 
-            // Load range (from/to hours)
-            fromHour = jsonData.getInt("fromHour");
-            toHour = jsonData.getInt("toHour");
+            if (jsonData.has("fromHour")) {
+                fromHour = jsonData.getInt("fromHour");
+            }
+            if (jsonData.has("toHour")) {
+                toHour = jsonData.getInt("toHour");
+            }
 
-            // Select from and to values in comboboxes
-            from.getSelectionModel().select(String.format("%02d:00", fromHour));
-            to.getSelectionModel().select(String.format("%02d:00", toHour));
-
-            // Load schedule items
             JSONArray items = jsonData.getJSONArray("scheduleItems");
             for (int i = 0; i < items.length(); i++) {
                 JSONObject item = items.getJSONObject(i);
@@ -109,36 +118,33 @@ public class studyTableEditController implements Initializable{
                 tableData.add(scheduleItem);
             }
 
-            // Update the ID combo box
-            updateIdComboBox();
-
         } catch (Exception e) {
             System.err.println("Error loading data: " + e.getMessage());
             e.printStackTrace();
-
-            // If there's an error, use default values
-            from.getSelectionModel().select(String.format("%02d:00", 8));
-            to.getSelectionModel().select(String.format("%02d:00", 17));
         }
     }
 
-    // Add method to save data to JSON file
     private void saveData() {
         try {
             JSONObject jsonData = new JSONObject();
 
-            // Save range (from/to hours)
-            jsonData.put("fromHour", fromHour);
-            jsonData.put("toHour", toHour);
+            int minStartHour = calculateMinStartHour();
+            int maxStopHour = calculateMaxStopHour();
 
-            // Save schedule items
+            if (tableData.isEmpty()) {
+                minStartHour = 0;
+                maxStopHour = 0;
+            }
+
+            jsonData.put("fromHour", minStartHour);
+            jsonData.put("toHour", maxStopHour);
+
             JSONArray items = new JSONArray();
             for (ScheduleItem item : tableData) {
                 JSONObject jsonItem = new JSONObject();
                 jsonItem.put("name", item.getName());
                 jsonItem.put("day", item.getDay());
 
-                // Ensure time format is consistent
                 String start = item.getStart().split(":")[0];
                 String stop = item.getStop().split(":")[0];
 
@@ -150,7 +156,6 @@ public class studyTableEditController implements Initializable{
             }
             jsonData.put("scheduleItems", items);
 
-            // Write to file
             try (FileWriter file = new FileWriter(DATA_FILE)) {
                 file.write(jsonData.toString(2));
             }
@@ -167,6 +172,41 @@ public class studyTableEditController implements Initializable{
         }
     }
 
+    private int calculateMinStartHour() {
+        if (tableData.isEmpty()) {
+            return fromHour;
+        }
+
+        int minHour = 24;
+
+        for (ScheduleItem item : tableData) {
+            String startStr = item.getStart();
+            int startHour = Integer.parseInt(startStr.split(":")[0]);
+            if (startHour < minHour) {
+                minHour = startHour;
+            }
+        }
+
+        return minHour;
+    }
+
+    private int calculateMaxStopHour() {
+        if (tableData.isEmpty()) {
+            return toHour;
+        }
+
+        int maxHour = 0;
+
+        for (ScheduleItem item : tableData) {
+            String stopStr = item.getStop();
+            int stopHour = Integer.parseInt(stopStr.split(":")[0]);
+            if (stopHour > maxHour) {
+                maxHour = stopHour;
+            }
+        }
+
+        return maxHour;
+    }
 
     public void generateItem() {
         ObservableList<String> timeOptions = FXCollections.observableArrayList();
@@ -175,8 +215,6 @@ public class studyTableEditController implements Initializable{
             timeOptions.add(time);
         }
 
-        from.setItems(timeOptions);
-        to.setItems(timeOptions);
         start.setItems(timeOptions);
         stop.setItems(timeOptions);
 
@@ -186,23 +224,19 @@ public class studyTableEditController implements Initializable{
 
         day.setItems(daysOfWeek);
     }
+
     @FXML
     private void handleAdd() {
-        // Validate inputs
         if (!validateInputs()) {
             return;
         }
 
-        // Parse time values
         String startStr = start.getSelectionModel().getSelectedItem();
         String stopStr = stop.getSelectionModel().getSelectedItem();
-        String fromStr = from.getSelectionModel().getSelectedItem();
-        String toStr = to.getSelectionModel().getSelectedItem();
         Color selectedbgColor = bgcolor.getValue();
         Color selectedtColor = tcolor.getValue();
 
-
-        if (startStr == null || stopStr == null || fromStr == null || toStr == null || selectedbgColor == null || selectedtColor == null) {
+        if (startStr == null || stopStr == null || selectedbgColor == null || selectedtColor == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Error");
@@ -211,44 +245,21 @@ public class studyTableEditController implements Initializable{
             return;
         }
 
-        String[] startParts = startStr.split(":");
-        String[] stopParts = stopStr.split(":");
-        String[] fromParts = fromStr.split(":");
-        String[] toParts = toStr.split(":");
+        int startHour = Integer.parseInt(startStr.split(":")[0]);
+        int stopHour = Integer.parseInt(stopStr.split(":")[0]);
 
-        int startHour = Integer.parseInt(startParts[0]);
-        int startMinute = Integer.parseInt(startParts[1]);
-        int stopHour = Integer.parseInt(stopParts[0]);
-        int stopMinute = Integer.parseInt(stopParts[1]);
-        int fromHour = Integer.parseInt(fromParts[0]);
-        int fromMinute = Integer.parseInt(fromParts[1]);
-        int toHour = Integer.parseInt(toParts[0]);
-        int toMinute = Integer.parseInt(toParts[1]);
-
-        // Check time validity
-        if (!validateTime(startHour, startMinute, stopHour, stopMinute)) {
+        if (!validateTime(startHour, stopHour)) {
             return;
         }
 
-        // Check schedule within range
-        if (startHour < fromHour || toHour < stopHour) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Range Error");
-            alert.setHeaderText("Scheduling out of range");
-            alert.setContentText("Subject is not within range.");
-            alert.showAndWait();
+
+        if (hasTimeConflict(startHour, stopHour)) {
             return;
         }
 
-        // Check time conflicts
-        if (hasTimeConflict(startHour, startMinute, stopHour, stopMinute)) {
-            return;
-        }
-
-        // Add new schedule item
         ScheduleItem newItem = new ScheduleItem(
                 tableData.size() + 1,
-                name.getText(),
+                name.getSelectionModel().getSelectedItem(),
                 day.getSelectionModel().getSelectedItem(),
                 startStr,
                 stopStr,
@@ -256,14 +267,13 @@ public class studyTableEditController implements Initializable{
                 selectedtColor.toString()
         );
         tableData.add(newItem);
-        occupiedTimes.add(new TimeBlock(startHour, startMinute, stopHour, stopMinute));
+        occupiedTimes.add(new TimeBlock(startHour, stopHour));
 
-        //update the ID after adding schedule
         updateTableIds();
     }
+
     @FXML
     private void handleDelete() {
-        // Check if the id ComboBox is empty or the table is empty
         if (id.getSelectionModel().isEmpty() || tableData.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Deletion Error");
@@ -273,10 +283,8 @@ public class studyTableEditController implements Initializable{
             return;
         }
 
-        // Get the selected id from the ComboBox
         Integer selectedId = id.getSelectionModel().getSelectedItem();
 
-        // Find the index of the item with the selected id
         int indexToDelete = -1;
         for (int i = 0; i < tableData.size(); i++) {
             if (tableData.get(i).getId().equals(String.valueOf(selectedId))) {
@@ -285,12 +293,10 @@ public class studyTableEditController implements Initializable{
             }
         }
 
-        // If the item is found, delete it
         if (indexToDelete != -1) {
             tableData.remove(indexToDelete);
             occupiedTimes.remove(indexToDelete);
 
-            //update the Table ID after deletion
             updateTableIds();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -300,6 +306,7 @@ public class studyTableEditController implements Initializable{
             alert.showAndWait();
         }
     }
+
     @FXML
     private void handleClear() {
         if (tableData.isEmpty()) {
@@ -321,83 +328,20 @@ public class studyTableEditController implements Initializable{
                 tableData.clear();
                 occupiedTimes.clear();
 
-                //update the Table ID after clearing
                 updateTableIds();
             }
         });
     }
+
     @FXML
     private void handleDone() {
-        // Get from and to times
-        String fromStr = from.getSelectionModel().getSelectedItem();
-        String toStr = to.getSelectionModel().getSelectedItem();
-
-        if (fromStr == null || toStr == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Error");
-            alert.setContentText("Please select 'From' and 'To' times.");
-            alert.showAndWait();
-            return;
-        }
-
-        String[] fromParts = fromStr.split(":");
-        String[] toParts = toStr.split(":");
-
-        fromHour = Integer.parseInt(fromParts[0]);
-        int fromMinute = Integer.parseInt(fromParts[1]);
-        toHour = Integer.parseInt(toParts[0]);
-        int toMinute = Integer.parseInt(toParts[1]);
-
-        // List to store IDs of out-of-range subjects
-        List<String> outOfRangeSubjects = new ArrayList<>();
-
-        // Check each schedule item
-        for (ScheduleItem item : tableData) {
-            String startStr = item.getStart();
-            String stopStr = item.getStop();
-
-            String[] startParts = startStr.split(":");
-            String[] stopParts = stopStr.split(":");
-
-            int startHour = Integer.parseInt(startParts[0]);
-            int startMinute = Integer.parseInt(startParts[1]);
-            int stopHour = Integer.parseInt(stopParts[0]);
-            int stopMinute = Integer.parseInt(stopParts[1]);
-
-            // Check if start or stop time is out of range
-            if (startHour < fromHour || stopHour > toHour) {
-                outOfRangeSubjects.add(item.getId());
-            }
-        }
-
-        // If there are out-of-range subjects, show an error message
-        if (!outOfRangeSubjects.isEmpty()) {
-            String message = "The following subjects are out of range: " + String.join(", ", outOfRangeSubjects);
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Range Error");
-            alert.setHeaderText("Subjects out of range");
-            alert.setContentText(message);
-            alert.showAndWait();
-            return;
-        }
-
-        // Save data to file
         saveData();
-
-        // Try to reinitialize the study table
         try {
-            // Get the parent controller (studyTableController) and reinitialize it
             Stage stage = (Stage) done.getScene().getWindow();
-
-            // For this to work, we need to get a reference to the studyTableController
-            // This can be done by using a static reference or injecting it when this controller is created
             Stage mainStage = (Stage) stage.getOwner();
             if (mainStage != null) {
-                // Try to find the study table controller in the scene
                 studyTableController controller = findStudyTableController(mainStage.getScene());
                 if (controller != null) {
-                    // Reinitialize the study table
                     controller.initialize(null, null);
                 }
             }
@@ -405,7 +349,6 @@ public class studyTableEditController implements Initializable{
             System.err.println("Error reinitializing study table: " + e.getMessage());
             e.printStackTrace();
         } finally {
-            // Close the window regardless of whether reinitialization succeeded
             Stage stage = (Stage) done.getScene().getWindow();
             stage.close();
         }
@@ -413,8 +356,6 @@ public class studyTableEditController implements Initializable{
 
     private studyTableController findStudyTableController(Scene scene) {
         if (scene != null && scene.getRoot() != null) {
-            // This is a simplistic approach - in a real application, you'd have a more
-            // robust way to get a reference to the controller
             Object controller = scene.getUserData();
             if (controller instanceof studyTableController) {
                 return (studyTableController) controller;
@@ -423,7 +364,6 @@ public class studyTableEditController implements Initializable{
         return null;
     }
 
-    // Helper method to update the id ComboBox items
     private void updateIdComboBox() {
         ObservableList<Integer> ids = FXCollections.observableArrayList();
         for (int i = 1; i <= tableData.size(); i++) {
@@ -432,32 +372,24 @@ public class studyTableEditController implements Initializable{
         id.setItems(ids);
     }
 
-    //Helper function to update the table ID
     private void updateTableIds() {
         for (int i = 0; i < tableData.size(); i++) {
             tableData.get(i).setId(String.valueOf(i + 1));
         }
-        list_table.refresh(); // Refresh the table to reflect changes
-        updateIdComboBox(); // Update the id ComboBox
+        list_table.refresh();
+        updateIdComboBox();
     }
 
-    // Helper methods
     private boolean validateInputs() {
         StringBuilder errors = new StringBuilder();
-        if (name.getText().isEmpty()) {
-            errors.append("Name field is empty\n");
+        if (name.getSelectionModel().isEmpty()) {
+            errors.append("Name selection is empty\n");
         }
         if (day.getSelectionModel().isEmpty()) {
             errors.append("Day selection is empty\n");
         }
         if (start.getSelectionModel().isEmpty()) {
             errors.append("Start time selection is empty\n");
-        }
-        if (from.getSelectionModel().isEmpty()) {
-            errors.append("From time selection is empty\n");
-        }
-        if (to.getSelectionModel().isEmpty()) {
-            errors.append("To time selection is empty\n");
         }
         if (stop.getSelectionModel().isEmpty()) {
             errors.append("Stop time selection is empty\n");
@@ -480,39 +412,28 @@ public class studyTableEditController implements Initializable{
         return true;
     }
 
-    private boolean validateTime(int startHour, int startMinute, int stopHour, int stopMinute) {
-        StringBuilder errors = new StringBuilder();
-        if (stopHour < startHour) {
-            errors.append("Stop time must be after start time\n");
-        } else if (stopHour == startHour && stopMinute <= startMinute) {
-            errors.append("Stop time must be after start time\n");
-        }
-
-        if (!errors.toString().isEmpty()) {
+    private boolean validateTime(int startHour, int stopHour) {
+        if (stopHour <= startHour) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Time Validation Error");
             alert.setHeaderText("Invalid time range:");
-            alert.setContentText(errors.toString());
+            alert.setContentText("Stop time must be after start time");
             alert.showAndWait();
             return false;
         }
         return true;
     }
 
-    private boolean hasTimeConflict(int startHour, int startMinute, int stopHour, int stopMinute) {
+    private boolean hasTimeConflict(int startHour, int stopHour) {
         String currentDay = day.getSelectionModel().getSelectedItem();
 
         for (ScheduleItem existingItem : tableData) {
-            if (currentDay.equals(existingItem.getDay())) { // Check if it's the same day
-                // Extract hours and minutes from existing item's start and stop times
+            if (currentDay.equals(existingItem.getDay())) {
                 String existingStartStr = existingItem.getStart();
                 String existingStopStr = existingItem.getStop();
-                String[] existingStartParts = existingStartStr.split(":");
-                String[] existingStopParts = existingStopStr.split(":");
-                int existingStartHour = Integer.parseInt(existingStartParts[0]);
-                int existingStopHour = Integer.parseInt(existingStopParts[0]);
+                int existingStartHour = Integer.parseInt(existingStartStr.split(":")[0]);
+                int existingStopHour = Integer.parseInt(existingStopStr.split(":")[0]);
 
-                // Check for time conflict
                 if (startHour < existingStopHour && stopHour > existingStartHour) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Time Conflict");
@@ -526,35 +447,56 @@ public class studyTableEditController implements Initializable{
         return false;
     }
 
-    // Helper classes
+    public void hoverEffect(Button btn) {
+        ScaleTransition scaleUp = new ScaleTransition(Duration.millis(200), btn);
+        scaleUp.setFromX(1);
+        scaleUp.setFromY(1);
+        scaleUp.setToX(1.05);
+        scaleUp.setToY(1.05);
+        ScaleTransition scaleDown = new ScaleTransition(Duration.millis(200), btn);
+        scaleDown.setFromX(1.05);
+        scaleDown.setFromY(1.05);
+        scaleDown.setToX(1);
+        scaleDown.setToY(1);
+
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(10);
+        btn.setOnMouseEntered(mouseEvent -> {
+            scaleUp.play();
+            dropShadow.setColor(Color.web("#8100CC", 0.25));
+            btn.setEffect(dropShadow);
+            scaleUp.play();
+        });
+        btn.setOnMouseExited(mouseEvent -> {
+            scaleDown.play();
+            dropShadow.setColor(Color.web("#c4c4c4", 0.25));
+            btn.setEffect(dropShadow);
+            scaleDown.play();
+        });
+    }
+
+    private void setEffect(){
+        hoverEffect(delete);
+        hoverEffect(clear);
+        hoverEffect(add);
+        hoverEffect(done);
+    }
 
     private static class TimeBlock {
         private final int startHour;
-        private final int startMinute;
         private final int stopHour;
-        private final int stopMinute;
 
-        public TimeBlock(int startHour, int startMinute, int stopHour, int stopMinute) {
+        public TimeBlock(int startHour, int stopHour) {
             this.startHour = startHour;
-            this.startMinute = startMinute;
             this.stopHour = stopHour;
-            this.stopMinute = stopMinute;
         }
 
         public int getStartHour() {
             return startHour;
         }
 
-        public int getStartMinute() {
-            return startMinute;
-        }
-
         public int getStopHour() {
             return stopHour;
-        }
-
-        public int getStopMinute() {
-            return stopMinute;
         }
     }
 }

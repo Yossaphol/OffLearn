@@ -7,61 +7,27 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="752.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.dashboard.studyTableEditController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="691.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.dashboard.studyTableEditController">
    <children>
       <Label alignment="CENTER" prefHeight="42.0" prefWidth="710.0" style="-fx-background-color: #8100CC;" text="Table Editor" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <VBox prefHeight="112.0" prefWidth="375.0">
+      <VBox prefHeight="186.0" prefWidth="710.0">
          <children>
-            <Label alignment="CENTER" prefHeight="27.0" prefWidth="710.0" text="Range" textFill="#8100cc">
+            <Label alignment="CENTER" prefHeight="51.0" prefWidth="710.0" text="Scheduling" textFill="#8100cc">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="150.0" prefWidth="710.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="85.0" prefWidth="617.0">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="27.0" prefWidth="710.0" text="From">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <ComboBox fx:id="from" prefWidth="150.0" style="-fx-background-radius: 10;" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="85.0" prefWidth="610.0">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="27.0" prefWidth="710.0" text="To">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <ComboBox fx:id="to" prefWidth="150.0" style="-fx-background-radius: 10;" />
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-      <VBox prefHeight="165.0" prefWidth="710.0">
-         <children>
-            <Label alignment="CENTER" prefHeight="43.0" prefWidth="714.0" text="Scheduling" textFill="#8100cc">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <TableView fx:id="list_table" prefHeight="100.0" prefWidth="655.0">
+                  <TableView fx:id="list_table" prefHeight="96.0" prefWidth="655.0">
                     <columns>
                       <TableColumn fx:id="list_id" prefWidth="50.0" text="Id" />
                       <TableColumn fx:id="list_name" minWidth="7.20001220703125" prefWidth="260.0" text="Name" />
@@ -76,7 +42,7 @@
             </HBox>
          </children>
       </VBox>
-      <Label alignment="CENTER" prefHeight="27.0" prefWidth="710.0" text="Deleting Schedule" textFill="#8100cc">
+      <Label alignment="CENTER" prefHeight="41.0" prefWidth="710.0" text="Deleting Schedule" textFill="#8100cc">
          <font>
             <Font size="18.0" />
          </font>
@@ -133,7 +99,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="name" maxWidth="150.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10;" />
+                  <ComboBox fx:id="name" prefWidth="150.0" style="-fx-background-radius: 10;" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="85.0" prefWidth="610.0">
