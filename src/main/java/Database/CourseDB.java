@@ -315,6 +315,40 @@ public class CourseDB extends ConnectDB{
         return 0;
     }
 
+    public CourseItem getLatestCourse() {
+        String sql = "SELECT c.Course_ID, c.courseName, c.image, c.price, c.courseDescription, cat.catname, " +
+                "CONCAT(u.firstname, ' ', u.lastname) AS teacherName " +
+                "FROM offlearn.course c " +
+                "JOIN offlearn.category cat ON c.Cat_ID = cat.Cat_id " +
+                "JOIN offlearn.user u ON c.User_ID = u.User_ID " +
+                "WHERE c.verify = 1 " +
+                "ORDER BY c.Course_ID DESC LIMIT 1";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstm = conn.prepareStatement(sql);
+             ResultSet rs = pstm.executeQuery()) {
+
+            if (rs.next()) {
+                int id = rs.getInt("Course_ID");
+                String name = rs.getString("courseName");
+                String img = rs.getString("image");
+                int price = rs.getInt("price");
+                String description = rs.getString("courseDescription");
+                String catName = rs.getString("catname");
+                String teacherName = rs.getString("teacherName");
+
+                CourseItem course = new CourseItem(id, img, name, price, catName, description);
+                course.setTeacherName(teacherName);
+
+                return course;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
 
 }
