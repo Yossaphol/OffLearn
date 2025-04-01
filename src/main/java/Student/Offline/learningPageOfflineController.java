@@ -1,9 +1,9 @@
-package Student.learningPage;
+package Student.Offline;
 
+import Student.learningPage.EPButtonController;
+import Student.learningPage.VideoPlayerManager;
 import Utili.OfflineCourseData;
 import Utili.OfflineCourseManager;
-import Utili.OfflinePathHelper;
-import a_Session.SessionManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,6 +14,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -40,39 +41,25 @@ public class learningPageOfflineController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        userID = 12; // จะให้ link ยังไงดี
-
-        // For testing,
-        courseID = 138;
-
-        // Load all offline chapters for the user and course.
-        List<OfflineCourseData> chapters = OfflineCourseManager.getAllChaptersForCourse(userID, courseID);
-        if (!chapters.isEmpty()) {
-            this.courseID = courseID;
-            loadOfflineChapter(chapters.get(0)); // Load first chapter by default.
-            loadOfflinePlaylist(chapters);       // Build the playlist.
-        } else {
-            System.out.println("No offline chapters found for course: " + courseID);
-        }
+        // No pre-loading here – wait until receiveOfflineData is called.
     }
 
-    public void receiveOfflineData(OfflineCourseData data) {
-        // Update current course/chapter IDs and refresh UI components.
+    public void receiveOfflineData(OfflineCourseData data, int userID) {
         this.courseID = data.getCourseID();
         this.currentChapterID = data.getChapterID();
         this.offlineData = data;
+        this.userID = userID;
 
         subject_name.setText(data.getChapterName());
         clipDescription.setText(data.getChapterDescription());
         catName.setText(data.getCourseCategory());
         teacherName.setText(data.getTeacherName());
 
-        // Update video if already initialized.
-        if (videoManager != null) {
-            videoManager.setVideoPath(data.getVideoPath());
-        }
+        // Load chapter content, including video.
+        disposePlayer();
+        loadOfflineChapter(data);
 
-        // Refresh playlist by reloading all chapters for this course.
+        // Build playlist
         List<OfflineCourseData> allChapters = OfflineCourseManager.getAllChaptersForCourse(userID, data.getCourseID());
         loadOfflinePlaylist(allChapters);
     }
@@ -113,7 +100,8 @@ public class learningPageOfflineController implements Initializable {
                     }
                     controller.setActive(true);
                     currentlyActiveEPController = controller;
-                    receiveOfflineData(ch);
+                    disposePlayer();
+                    receiveOfflineData(ch, userID);
                 });
 
                 playlistcontainer.getChildren().add(EPbtn);
@@ -137,6 +125,8 @@ public class learningPageOfflineController implements Initializable {
             videoManager = loader.getController();
             mediacontainer.getChildren().setAll(videoRoot);
             videoManager.setVideoPath(chapter.getVideoPath());
+            System.out.println("📁 Video path: " + chapter.getVideoPath());
+            System.out.println("📦 File exists? " + new File(chapter.getVideoPath()).exists());
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -144,5 +134,12 @@ public class learningPageOfflineController implements Initializable {
 
     public VideoPlayerManager getVideoManager() {
         return videoManager;
+    }
+
+    public void disposePlayer() {
+        System.out.println("Disposing offline video...");
+        if (videoManager != null) {
+            videoManager.disposePlayer();
+        }
     }
 }

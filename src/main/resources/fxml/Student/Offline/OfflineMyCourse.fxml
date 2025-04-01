@@ -15,7 +15,7 @@
 
 <HBox fx:id="bg" fillHeight="false" minWidth="-Infinity" prefHeight="1299.0" prefWidth="1136.0"
       xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="Student.learningPage.OfflineMyCourse">
+      fx:controller="Student.Offline.OfflineMyCourse">
     <HBox fx:id="rootpage">
         <VBox prefHeight="1950.0" style="-fx-background-color: #FBFBFB;">
             <HBox prefHeight="1978.0">

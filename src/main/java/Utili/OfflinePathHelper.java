@@ -6,7 +6,7 @@ public class OfflinePathHelper {
 
     // Root: ~/.offline
     public static File getOfflineRoot() {
-        File root = new File(System.getProperty("user.home"), ".offline");
+        File root = new File(System.getProperty("user.home"), ".offlineOfflearn");
         if (!root.exists()) root.mkdirs();
         return root;
     }
