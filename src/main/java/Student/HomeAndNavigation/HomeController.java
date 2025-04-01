@@ -202,7 +202,6 @@ public class HomeController implements Initializable, SessionHandler {
         hoverEffect(topLeaderboard);
         hoverEffect(smallStatistic);
         hoverEffect(btn_dashboard_atStatistics);
-        hoverEffect(learn_now);
 
 
 //        applyHoverEffectToInside(slide1);
