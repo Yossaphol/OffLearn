@@ -3,6 +3,7 @@ package Student.courseManage;
 import Student.payment.paymentController;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -19,7 +21,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.event.ActionEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -38,12 +39,14 @@ public class cartCardController implements Initializable {
     public Label review;
     public Label price;
     public Button enrollBtn;
-
     @FXML
     public Button deleteBtn;
 
     private String teacherName;
     private String courseName;
+
+    private courseObject course;
+    private cartController parentController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -101,7 +104,6 @@ public class cartCardController implements Initializable {
         name.setText(n);
     }
 
-
     public void setDescription(String n) {
         description.setText(n);
     }
@@ -113,7 +115,7 @@ public class cartCardController implements Initializable {
             if (url != null) {
                 categoryPic.setFill(new ImagePattern(new Image(url.toExternalForm())));
             } else {
-                System.out.println("❌ ไม่พบรูป category: " + picturePath);
+                System.out.println("ไม่พบรูป category: " + picturePath);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -157,8 +159,20 @@ public class cartCardController implements Initializable {
         fade.play();
     }
 
+    public void setCourse(courseObject course) {
+        this.course = course;
+    }
+
+    public void setParentController(cartController controller) {
+        this.parentController = controller;
+    }
+
+    @FXML
     public void deleteCourse(ActionEvent e) {
-        System.out.println("Delete success!");
-        // ✅ TODO: ลบออกจาก CartManager ถ้าต้องการ
+        System.out.println("🗑 ลบคอร์ส: " + course.getName());
+        CartManager.getInstance().getCartList().remove(course);
+        if (parentController != null) {
+            parentController.displayCourseList();
+        }
     }
 }

@@ -10,7 +10,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -27,6 +26,7 @@ public class cartController implements Initializable {
     private boolean isDeleteVisible = true;
     private boolean isClick = false;
 
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
         displayCourseList();
         editCart();
@@ -52,10 +52,8 @@ public class cartController implements Initializable {
         });
     }
 
-    private void displayCourseList() {
+    public void displayCourseList() {
         List<courseObject> courses = CartManager.getInstance().getCartList();
-
-
         courseContainer.getChildren().clear();
 
         for (courseObject course : courses) {
@@ -63,6 +61,8 @@ public class cartController implements Initializable {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/courseEnrollList.fxml"));
                 Pane courseContent = loader.load();
                 cartCardController controller = loader.getController();
+                controller.setCourse(course);
+                controller.setParentController(this);
                 controller.setDescription(course.getDescription());
                 controller.setName(course.getName());
                 controller.setTeacherName(course.getTeacherName());
@@ -81,14 +81,12 @@ public class cartController implements Initializable {
         }
     }
 
-
-
     public void changeColor(ActionEvent event) {
-        if(!isClick){
-            edit.setStyle("-fx-background-color: #E8E8E8;"+"-fx-background-radius: 30px;"+"-fx-padding: 5px;");
+        if (!isClick) {
+            edit.setStyle("-fx-background-color: #E8E8E8;" + "-fx-background-radius: 30px;" + "-fx-padding: 5px;");
             isClick = true;
-        }else{
-            edit.setStyle("-fx-background-color: transparent;"+"-fx-background-radius: 30px;"+"-fx-padding: 5px;");
+        } else {
+            edit.setStyle("-fx-background-color: transparent;" + "-fx-background-radius: 30px;" + "-fx-padding: 5px;");
             isClick = false;
         }
     }

@@ -1,7 +1,6 @@
 package Student.courseManage;
 
 import Student.HomeAndNavigation.HomeController;
-import Teacher.courseManagement.CourseItem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,106 +18,85 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class EnrollCourseItemController implements Initializable {
-    @FXML
-    private Label courseNameLabel;
 
-    @FXML
-    private Button addtocart;
+    @FXML private Label courseNameLabel;
+    @FXML private Button addtocart;
+    @FXML private Label tag1;
+    @FXML private Label shortDescription;
+    @FXML private Label teacherName;
+    @FXML private Circle teacher_pic;
+    @FXML private Label categoryLabel;
+    @FXML private Button detailBtn;
 
     private courseObject course;
 
-    @FXML
-    private Label tag1;
-
-    public void setData(CourseItem course) {
-        tag1.setText(course.getCourseCat()); // แสดงหมวดหมู่
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        addtocart.setOnAction(event -> {
-            if (course != null) {
-                CartManager.getInstance().addCourse(course);
-                System.out.println("✅ Added to cart: " + course.getName());
-            }
-        });
+        // ตรวจว่าปุ่ม addtocart ถูกเชื่อมจาก FXML จริง ๆ หรือไม่
+        if (addtocart != null) {
+            addtocart.setOnAction(event -> {
+                if (course != null) {
+                    CartManager.getInstance().addCourse(course);
+                    System.out.println("Added to cart: " + course.getName());
+                }
+            });
+        }
 
-        // ✅ ผูกปุ่ม "รายละเอียด" กับ method goToDetailPage
-        detailBtn.setOnAction(this::goToDetailPage);
+        if (detailBtn != null) {
+            detailBtn.setOnAction(this::goToDetailPage);
+        }
     }
-
 
     public void setData(courseObject course) {
         this.course = course;
-        courseNameLabel.setText(course.getName());
+
+        if (courseNameLabel != null) courseNameLabel.setText(course.getName());
+        if (tag1 != null) tag1.setText(course.getCategoryName());
+        if (shortDescription != null) shortDescription.setText(course.getShortDescription());
+        if (teacherName != null) teacherName.setText(course.getTeacherName());
+        if (categoryLabel != null) categoryLabel.setText(course.getCategoryName());
+
+        if (teacher_pic != null) {
+            String teacherImg = course.getTeacherImg();
+            if (teacherImg != null && !teacherImg.isBlank()) {
+                new HomeController().loadAndSetImage(teacher_pic, teacherImg);
+            } else {
+                System.out.println("teacherImg เป็น null หรือว่าง: " + teacherImg);
+            }
+        }
     }
 
-    @FXML
-    private Label shortDescription;
-    @FXML
-    private Label teacherName;
-    @FXML
-    private javafx.scene.shape.Circle teacher_pic;
-
-
-    public void setCourseName(String name) {
-        courseNameLabel.setText(name);
-    }
-
-    public void setShortDescription(String desc) {
-        shortDescription.setText(desc);
-    }
-
-    public void setTeacherName(String name) {
-        teacherName.setText(name);
-    }
-
-    public void setTeacherImg(String path) {
-        // สมมติว่าคุณมี Circle ชื่อ teacher_pic อยู่ใน FXML
-        new HomeController().loadAndSetImage(teacher_pic, path);
-    }
-
-    @FXML
-    private Label categoryLabel;
-
-    public void setCategoryName(String category) {
-        categoryLabel.setText(category);
-    }
-
-    @FXML
-    private Button detailBtn; // ปุ่ม 'รายละเอียด'
 
     @FXML
     private void goToDetailPage(ActionEvent event) {
         if (course == null) {
-            System.out.println("❌ Course is null");
+            System.out.println("Course is null");
             return;
         }
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/courseEnroll.fxml"));
-            Node root = loader.load();
+            Parent root = loader.load();
 
-            // ดึง controller ของหน้าใหม่
+            // ส่งข้อมูลไปยัง controller ใหม่
             courseEnrollController controller = loader.getController();
-
-            // ส่งข้อมูลคอร์สไปให้ controller หน้าใหม่
             controller.setCourseDetail(
                     course.getName(),
                     course.getShortDescription(),
                     course.getDescription(),
                     course.getPicture(),
-                    "/img/icon/artificial-intelligence.png", // หรือใช้จาก course.getCategoryImg()
+                    "/img/icon/artificial-intelligence.png",
                     course.getCategoryName(),
                     course.getPrice(),
                     course.getRating(),
-                    126,
-                    7
+                    course.getTotalReview(),
+                    course.getTotalLesson(),
+                    course.getCourseID()
             );
 
-            // เปลี่ยน scene
+            // เปลี่ยนหน้า Scene
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene((Parent) root);
-            stage.setScene(scene);
+            stage.setScene(new Scene(root));
             stage.show();
 
         } catch (IOException e) {
@@ -125,5 +104,23 @@ public class EnrollCourseItemController implements Initializable {
         }
     }
 
+    public void setCourseName(String name) {
+        if (courseNameLabel != null) courseNameLabel.setText(name);
+    }
 
+    public void setShortDescription(String desc) {
+        if (shortDescription != null) shortDescription.setText(desc);
+    }
+
+    public void setTeacherName(String name) {
+        if (teacherName != null) teacherName.setText(name);
+    }
+
+    public void setTeacherImg(String path) {
+        if (teacher_pic != null) new HomeController().loadAndSetImage(teacher_pic, path);
+    }
+
+    public void setCategoryName(String category) {
+        if (categoryLabel != null) categoryLabel.setText(category);
+    }
 }

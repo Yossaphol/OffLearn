@@ -43,6 +43,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Shape;
+
+import java.io.InputStream;
+
 public class HomeController implements Initializable, SessionHandler {
 
     @FXML
@@ -617,9 +624,35 @@ public class HomeController implements Initializable, SessionHandler {
     }
 
     public void loadAndSetImage(Shape shape, String path) {
-        Image img = new Image(getClass().getResource(path).toExternalForm());
-        shape.setStroke(Color.TRANSPARENT);
-        shape.setFill(new ImagePattern(img));
+        if (path == null || path.isBlank()) {
+            System.out.println("⚠️ รูปภาพไม่ถูกกำหนด (null หรือว่างเปล่า)");
+            return;
+        }
+
+        Image img = null;
+
+        try {
+            if (path.startsWith("/img/")) {
+                // โหลดจาก resources (classpath)
+                InputStream stream = getClass().getResourceAsStream(path);
+                if (stream == null) {
+                    System.out.println("❌ ไม่พบ resource path: " + path);
+                    return;
+                }
+                img = new Image(stream);
+            } else {
+                // โหลดจาก path ภายนอก
+                img = new Image("file:" + path);
+            }
+
+            shape.setStroke(Color.TRANSPARENT);
+            shape.setFill(new ImagePattern(img));
+            System.out.println("✅ โหลดภาพสำเร็จ: " + path);
+
+        } catch (Exception e) {
+            System.out.println("❌ เกิดข้อผิดพลาดในการโหลดภาพ: " + path);
+            e.printStackTrace();
+        }
     }
 
 
