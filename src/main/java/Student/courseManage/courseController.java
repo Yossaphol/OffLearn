@@ -14,11 +14,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Effect;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -250,7 +252,13 @@ public class courseController implements Initializable {
                 controller.setTeacherName(course.getTeacherName());
                 controller.setTeacherImg("/img/Profile/man.png");
                 controller.setCategoryName(course.getCategoryName());
-                //controller.setCourseImg(course.getImage() != null ? course.getImage() : "/img/Picture/bg.jpg");
+                String imageUrl = course.getPicture();
+                if (imageUrl == null || imageUrl.trim().isEmpty()) {
+                    imageUrl = "/img/Picture/bg.jpg"; // ต้องแน่ใจว่าไฟล์นี้อยู่ใน resource
+                }
+                controller.setCourseImg(imageUrl);
+
+
 
                 ef.hoverEffect(courseItemNode);
                 allCourseContainer.add(courseItemNode, col, row);
