@@ -269,11 +269,15 @@ public class dashboardController implements Initializable, SessionHandler {
 
         courseProgressionChart.getData().clear();
 
+        courseProgressesList.sort((a, b) -> Double.compare(b.getProgressPercentage(), a.getProgressPercentage()));
+
         int numberOfCourses = Math.min(courseProgressesList.size(), 3);
 
         if (numberOfCourses >= 1) {
             this.first_subject_name.setText(courseProgressesList.get(0).getCourseName());
-            this.first_val.setText(String.format("%.2f%%", courseProgressesList.get(0).getProgressPercentage())); // แสดงเปอร์เซ็นต์
+            this.first_val.setText(String.valueOf(Math.round(courseProgressesList.get(0).getProgressPercentage())) + "%"); // แสดงเปอร์เซ็นต์
+            this.first_val.setVisible(true);
+            this.first_subject_name.setVisible(true);
         } else {
             this.first_val.setVisible(false);
             this.first_subject_name.setVisible(false);
@@ -281,7 +285,9 @@ public class dashboardController implements Initializable, SessionHandler {
 
         if (numberOfCourses >= 2) {
             this.second_subject_name.setText(courseProgressesList.get(1).getCourseName());
-            this.second_val.setText(String.format("%.2f%%", courseProgressesList.get(1).getProgressPercentage())); // แสดงเปอร์เซ็นต์
+            this.second_val.setText(String.valueOf(Math.round(courseProgressesList.get(1).getProgressPercentage())) + "%"); // แสดงเปอร์เซ็นต์
+            this.second_val.setVisible(true);
+            this.second_subject_name.setVisible(true);
         } else {
             this.second_val.setVisible(false);
             this.second_subject_name.setVisible(false);
@@ -289,7 +295,9 @@ public class dashboardController implements Initializable, SessionHandler {
 
         if (numberOfCourses >= 3) {
             this.third_subject_name.setText(courseProgressesList.get(2).getCourseName());
-            this.third_val.setText(String.format("%.2f%%", courseProgressesList.get(2).getProgressPercentage())); // แสดงเปอร์เซ็นต์
+            this.third_val.setText(String.valueOf(Math.round(courseProgressesList.get(2).getProgressPercentage())) + "%"); // แสดงเปอร์เซ็นต์
+            this.third_val.setVisible(true);
+            this.third_subject_name.setVisible(true);
         } else {
             this.third_val.setVisible(false);
             this.third_subject_name.setVisible(false);
@@ -298,11 +306,15 @@ public class dashboardController implements Initializable, SessionHandler {
         for (int i = 0; i < numberOfCourses; i++) {
             XYChart.Series<String, Number> series = new XYChart.Series<>();
             series.setName(courseProgressesList.get(i).getCourseName());
-            series.getData().add(new XYChart.Data<>("Modules", courseProgressesList.get(i).getProgressPercentage()));
+
+            int roundedPercentage = (int) Math.round(courseProgressesList.get(i).getProgressPercentage());
+
+            series.getData().add(new XYChart.Data<>("Modules", roundedPercentage));
             courseProgressionChart.getData().add(series);
         }
 
-        // ถ้าไม่มีคอร์สแสดงข้อความแจ้งเตือน
+        yAxis.setAutoRanging(true);
+
         if (numberOfCourses == 0) {
             System.out.println("No courses available to display.");
         }
@@ -451,7 +463,9 @@ public class dashboardController implements Initializable, SessionHandler {
         for (CourseScore courseScore : topScores) {
             XYChart.Series<String, Number> series = new XYChart.Series<>();
             series.setName(courseScore.getCourseName());
-            series.getData().add(new XYChart.Data<>("Score Overview", courseScore.getScore()));
+
+            int roundedScore = (int) Math.round(courseScore.getScore());
+            series.getData().add(new XYChart.Data<>("Score Overview", roundedScore));
 
             scoreChart.getData().add(series);
         }
@@ -460,7 +474,7 @@ public class dashboardController implements Initializable, SessionHandler {
         double average = total / topScores.size();
         int lowest = topScores.stream().mapToInt(CourseScore::getScore).min().orElse(0);
 
-        avg.setText(Double.toString(average));
+        avg.setText(String.valueOf(Math.round(average)));
         min.setText(Integer.toString(lowest));
 
         Platform.runLater(() -> {
@@ -472,6 +486,7 @@ public class dashboardController implements Initializable, SessionHandler {
             scoreChart.lookup(".default-color0.chart-bar").setStyle("-fx-bar-fill: " + color3 + "; -fx-background-radius: 0;");
         });
     }
+
 
     public void displayStudyTable(){
         try {
