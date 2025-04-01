@@ -230,4 +230,8 @@ public class Navigator {
     public static void setCurrentContentController(Object controller) {
         currentContentController = controller;
     }
+
+    public static Object getCurrentContentController() {
+        return currentContentController;
+    }
 }
