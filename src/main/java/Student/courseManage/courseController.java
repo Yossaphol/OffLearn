@@ -1,8 +1,10 @@
 package Student.courseManage;
 
+import Database.*;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
 import Student.roadmap.myRoadmapController;
+import a_Session.SessionManager;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,6 +27,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -34,7 +38,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import Database.CourseDB;
 import Teacher.courseManagement.CourseItem;
 
 public class courseController implements Initializable {
@@ -71,6 +74,8 @@ public class courseController implements Initializable {
     public Label progressCategory;
     public Label progressCategory2;
     public ProgressBar categorybar2;
+    public Label teacherName;
+    public Text subjectName;
     HomeController ef = new HomeController();
     private int currentPage = 0;
     private final int coursesPerPage = 9;
@@ -89,10 +94,14 @@ public class courseController implements Initializable {
     @FXML
     private Label rm3;
 
+
+    UserDB userDB = new UserDB();
+    CourseDB courseDB = new CourseDB();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setImgContainer();
         closePopupAuto();
-        setImg();
         setEffect();
         route();
         setProgressBar();
@@ -120,16 +129,6 @@ public class courseController implements Initializable {
         popup.setViewOrder(-1);
         popup1.setViewOrder(-1);
         popup2.setViewOrder(-1);
-    }
-
-
-    public void setImg() {
-        HomeController hm = new HomeController();
-        hm.loadAndSetImage(imgContainer, "/img/Picture/bg.jpg");
-        hm.loadAndSetImage(teacherPic, "/img/Profile/man.png");
-        hm.loadAndSetImage(category_pic, "/img/icon/code.png");
-        hm.loadAndSetImage(category_pic1, "/img/icon/partners.png");
-        hm.loadAndSetImage(category_pic2, "/img/icon/artificial-intelligence.png");
     }
 
     @FXML
@@ -330,5 +329,47 @@ public class courseController implements Initializable {
             renderCourses();
             updatePageLabel();
         }
+    }
+    public void setImgContainer() {
+        CourseItem courseItem = courseDB.getLatestCourse();
+
+        String profile = userDB.getUserNameProfileAndSpecByCourseID(courseItem.getCourseId())[1];
+        String banner ;
+        if (courseItem.getCourseImg() == null){
+            banner = "/img/Picture/florian-olivo-4hbJ-eymZ1o-unsplash.jpg";
+        } else {
+            banner = courseItem.getCourseImg();
+        }
+
+        setImageToShape(teacherPic, profile);
+        setImageToShape(imgContainer, banner);
+
+        subjectName.setText(courseItem.getCourseName());
+
+        teacherName.setText(userDB.getUserNameProfileAndSpecByCourseID(courseItem.getCourseId())[0]);
+
+
+    }
+    public boolean isURL(String path) {
+        return path != null && (path.startsWith("http://") || path.startsWith("https://"));
+    }
+
+    public boolean isResource(String path) {
+        return getClass().getResource(path) != null;
+    }
+
+    public void setImageToShape(Shape shape, String path) {
+        Image image;
+
+        if (isURL(path)) {
+            image = new Image(path);
+        } else if (isResource(path)) {
+            image = new Image(getClass().getResource(path).toExternalForm());
+        } else {
+            System.out.println("Invalid path: " + path);
+            return;
+        }
+
+        shape.setFill(new ImagePattern(image));
     }
 }
