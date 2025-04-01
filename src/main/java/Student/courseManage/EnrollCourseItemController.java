@@ -37,7 +37,7 @@ public class EnrollCourseItemController implements Initializable {
             addtocart.setOnAction(event -> {
                 if (course != null) {
                     CartManager.getInstance().addCourse(course);
-                    System.out.println("✅ Added to cart: " + course.getName());
+                    System.out.println("Added to cart: " + course.getName());
                 }
             });
         }
@@ -61,7 +61,7 @@ public class EnrollCourseItemController implements Initializable {
             if (teacherImg != null && !teacherImg.isBlank()) {
                 new HomeController().loadAndSetImage(teacher_pic, teacherImg);
             } else {
-                System.out.println("⚠️ teacherImg เป็น null หรือว่าง: " + teacherImg);
+                System.out.println("teacherImg เป็น null หรือว่าง: " + teacherImg);
             }
         }
     }
@@ -70,7 +70,7 @@ public class EnrollCourseItemController implements Initializable {
     @FXML
     private void goToDetailPage(ActionEvent event) {
         if (course == null) {
-            System.out.println("❌ Course is null");
+            System.out.println("Course is null");
             return;
         }
 
@@ -85,7 +85,7 @@ public class EnrollCourseItemController implements Initializable {
                     course.getShortDescription(),
                     course.getDescription(),
                     course.getPicture(),
-                    "/img/icon/artificial-intelligence.png", // อาจใช้จาก course.getCategoryImg() แทนก็ได้
+                    "/img/icon/artificial-intelligence.png",
                     course.getCategoryName(),
                     course.getPrice(),
                     course.getRating(),

@@ -107,7 +107,7 @@ public class paymentController implements Initializable {
     private void insertEnrollmentToDatabase() {
         String userIdStr = SessionManager.getInstance().getUserID();
         if (userIdStr == null) {
-            System.err.println("⚠️ ไม่พบ user ID ใน session!");
+            System.err.println("ไม่พบ user ID ใน session!");
             return;
         }
 
@@ -118,22 +118,22 @@ public class paymentController implements Initializable {
             if (courseId == 0 && courseName != null) {
                 CourseDB db = new CourseDB();
                 courseId = db.getCourseID(courseName);  // map ชื่อ → ID
-                System.out.println("🎯 courseId mapped from name = " + courseId);
+                System.out.println("courseId mapped from name = " + courseId);
             }
 
-            System.out.println("🧾 Preparing to enroll userId = " + userId + ", courseId = " + courseId);
+            System.out.println("Preparing to enroll userId = " + userId + ", courseId = " + courseId);
 
             EnrollmentDB enrollmentDB = new EnrollmentDB();
             boolean success = enrollmentDB.insertEnrollment(userId, courseId);
 
             if (success) {
-                System.out.println("✅ Enroll saved to DB!");
+                System.out.println("Enroll saved to DB!");
             } else {
-                System.err.println("❌ Failed to insert enroll into DB.");
+                System.err.println("Failed to insert enroll into DB.");
             }
 
         } catch (NumberFormatException e) {
-            System.err.println("❌ Invalid user ID format.");
+            System.err.println("Invalid user ID format.");
         }
     }
 

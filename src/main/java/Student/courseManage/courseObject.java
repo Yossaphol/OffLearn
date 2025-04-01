@@ -114,5 +114,19 @@ public class courseObject {
         this.picture = picture;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        courseObject other = (courseObject) obj;
+        return this.courseID == other.courseID;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(courseID);
+    }
+
+
 
 }
