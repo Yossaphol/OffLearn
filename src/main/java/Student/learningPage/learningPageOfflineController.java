@@ -40,7 +40,7 @@ public class learningPageOfflineController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        userID = 1; // จะให้ link ยังไงดี
+        userID = 12; // จะให้ link ยังไงดี
 
         // For testing,
         courseID = 138;
