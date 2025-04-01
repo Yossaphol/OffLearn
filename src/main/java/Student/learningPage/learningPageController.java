@@ -85,6 +85,7 @@ public class learningPageController extends ChapterProgress implements Initializ
     String sessionUserID = SessionManager.getInstance().getUserID();
     private ScheduledExecutorService scheduler ;
 
+
     // Helper: run tasks on a background daemon thread
     private <T> void runBackgroundTask(Task<T> task) {
         Thread thread = new Thread(task);
@@ -719,6 +720,9 @@ public class learningPageController extends ChapterProgress implements Initializ
 
                     ChapterDB chapterDB = new ChapterDB();
                     String[] details = chapterDB.getChapterDetailsByID(chapterID);
+                    CourseDB courseDB = new CourseDB();
+                    String courseName = courseDB.getCourseNameByID(courseID);
+                    String courseDesc = courseDB.getCourseDescriptionByID(courseID);
 
                     OfflineCourseData offlineData = new OfflineCourseData();
                     offlineData.setUserid(userID);
@@ -729,8 +733,9 @@ public class learningPageController extends ChapterProgress implements Initializ
                     offlineData.setCourseCategory(catName.getText());
                     offlineData.setTeacherName(teacherName.getText());
                     offlineData.setVideoPath(destination.getAbsolutePath());
-                    offlineData.setCourseName("TEST");
-                    offlineData.setCourseDescription("Offline Access");
+                    offlineData.setCourseName(courseName);
+                    offlineData.setCourseDescription(courseDesc);
+
 
                     Utili.OfflineCourseManager.saveChapter(userID, offlineData);
                     System.out.println("📝 Offline data saved for Chapter ID: " + chapterID);
