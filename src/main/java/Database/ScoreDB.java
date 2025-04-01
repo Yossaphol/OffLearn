@@ -1,9 +1,12 @@
 package Database;
 
+import Student.dashboard.CourseScore;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -233,6 +236,41 @@ public class ScoreDB extends ConnectDB{
 
         return totalScore;
     }
+
+    public ArrayList<CourseScore> getTopThreeCoursesByScore(int userID) {
+        String query = """
+        SELECT c.Course_ID, c.courseName, SUM(s.studentscore) AS totalScore
+        FROM studentscore s
+        JOIN chapter ch ON s.Chapter_ID = ch.Chapter_ID
+        JOIN course c ON ch.Course_ID = c.Course_ID
+        WHERE s.User_ID = ?
+        GROUP BY c.Course_ID, c.courseName
+        ORDER BY totalScore DESC
+        LIMIT 3;
+    """;
+
+        ArrayList<CourseScore> topCourses = new ArrayList<>();
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, userID);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                String courseName = rs.getString("courseName");
+                int totalScore = rs.getInt("totalScore");
+
+                topCourses.add(new CourseScore(courseName, totalScore));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return topCourses;
+    }
+
 
 
 }

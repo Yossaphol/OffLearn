@@ -3,6 +3,7 @@ package Student.HomeAndNavigation;
 import Student.Quiz.QuizPageController;
 import Student.Quiz.QuizSummary;
 import Student.Quiz.ResultPageController;
+import Student.dashboard.dashboardController;
 import Student.learningPage.DisposableController;
 import Student.learningPage.MainPageOffline;
 import Student.navBarAndSearchbar.navBarOffline;
@@ -46,12 +47,28 @@ public class Navigator {
     }
 
     public void dashboardRoute(MouseEvent event) {
-        navigateTo("/fxml/Student/statistics/dashboard.fxml");
-        navCtrl.setCurrentPage("dashboard_btn");
-        navCtrl1.setCurrentPage("dashboard_btn");
-        controller.displayNavbar();
-        controller1.displayNavbar();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/statistics/dashboard.fxml"));
+            Parent root = loader.load();
+
+            dashboardController dashboardController = loader.getController();
+
+            dashboardController.setProgressionChart();
+            dashboardController.displayStudyTable();
+            dashboardController.displayProfileBox();
+            dashboardController.setUpComing();
+            dashboardController.scoreChart();
+
+            navigateTo(root);
+
+            navCtrl.setCurrentPage("dashboard_btn");
+            navCtrl1.setCurrentPage("dashboard_btn");
+            controller.displayNavbar();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
     public void courseRoute(MouseEvent event) {
         navigateTo("/fxml/Student/courseManage/course.fxml");
@@ -75,7 +92,7 @@ public class Navigator {
             Parent root = loader.load();
             pChatController chatController = loader.getController();
             chatController.setTeacherToSelect(teacherName);
-            
+
             if (controller != null) {
                 controller.displayNavbar();
                 controller.displayContent(root);
@@ -192,6 +209,21 @@ public class Navigator {
             System.out.println("Navigator Error");
         }
     }
+
+    public void navigateTo(Parent root) {
+        System.out.println("navigateTo called with Parent: " + root);
+        if (currentContentController instanceof DisposableController) {
+            System.out.println("Calling dispose on current content controller...");
+            ((DisposableController) currentContentController).disposePlayer();
+        }
+        if (controller != null) {
+            controller.displayNavbar();
+            controller.displayContent(root);
+        } else {
+            System.out.println("Navigator Error");
+        }
+    }
+
 
     public void navigateTo(String fxmlPath, int chapterID, int quizID) {
         System.out.println("navigateTo called: " + fxmlPath);

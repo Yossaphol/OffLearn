@@ -301,21 +301,10 @@
                                              <children>
                                                 <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="388.0">
                                                    <children>
-                                                      <Label prefHeight="29.0" prefWidth="447.0" text="Course progression" textFill="#8100cc">
+                                                      <Label prefHeight="29.0" prefWidth="447.0" text="Top Three Course progression" textFill="#8100cc">
                                                          <font>
                                                             <Font name="Noto Sans Thai Bold" size="18.0" />
                                                          </font>
-                                                      </Label>
-                                                      <Label fx:id="allMyCourse" alignment="CENTER_RIGHT" prefHeight="19.0" prefWidth="103.0" text="คอร์สทั้งหมด (3)" textFill="#8100cc" underline="true">
-                                                         <font>
-                                                            <Font name="Noto Sans Thai Bold" size="11.0" />
-                                                         </font>
-                                                         <padding>
-                                                            <Insets right="10.0" />
-                                                         </padding>
-                                                         <cursor>
-                                                            <Cursor fx:constant="HAND" />
-                                                         </cursor>
                                                       </Label>
                                                    </children>
                                                 </HBox>
@@ -382,16 +371,6 @@
                                                       <VBox prefHeight="263.0" prefWidth="106.0">
                                                          <children>
                                                             <Pane prefHeight="31.0" prefWidth="97.0" />
-                                                            <Label prefHeight="24.0" prefWidth="52.0" text="144 ชม." textFill="#8100cc">
-                                                               <font>
-                                                                  <Font name="Noto Sans Thai Bold" size="13.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label prefHeight="24.0" prefWidth="98.0" text="31,200.45 pts" textFill="#8100cc">
-                                                               <font>
-                                                                  <Font name="Noto Sans Thai Bold" size="13.0" />
-                                                               </font>
-                                                            </Label>
                                                          </children>
                                                       </VBox>
                                                    </children>
@@ -455,69 +434,6 @@
                                                 <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                                              </padding>
                                           </VBox>
-                                       </children>
-                                    </HBox>
-                                    <HBox prefHeight="320.0" prefWidth="1038.0">
-                                       <VBox.margin>
-                                          <Insets top="70.0" />
-                                       </VBox.margin>
-                                       <children>
-                                          <VBox prefHeight="320.0" prefWidth="941.0">
-                                             <children>
-                                                <Label prefHeight="22.0" prefWidth="510.0" text="แนวโน้มคะแนน" textFill="#a8a8a8">
-                                                   <font>
-                                                      <Font name="Noto Sans Thai Regular" size="13.0" />
-                                                   </font>
-                                                </Label>
-                                                <VBox fx:id="scoreTendency" prefHeight="309.0" prefWidth="708.0">
-                                                   <children>
-                                                      <HBox prefHeight="301.0" prefWidth="708.0" style="-fx-background-color: white; -fx-background-radius: 20;">
-                                                         <effect>
-                                                            <DropShadow>
-                                                               <color>
-                                                                  <Color red="0.7607843279838562" green="0.7607843279838562" blue="0.7607843279838562" opacity="0.25" />
-                                                               </color>
-                                                            </DropShadow>
-                                                         </effect>
-                                                         <children>
-                                                            <VBox prefHeight="278.0" prefWidth="699.0">
-                                                               <children>
-                                                                  <HBox alignment="CENTER" prefHeight="27.0" prefWidth="388.0">
-                                                                     <children>
-                                                                        <Label prefHeight="29.0" prefWidth="577.0" text="Score development" textFill="#8100cc">
-                                                                           <font>
-                                                                              <Font name="Noto Sans Thai Bold" size="18.0" />
-                                                                           </font>
-                                                                        </Label>
-                                                                        <Button fx:id="selected_subject" mnemonicParsing="false" onAction="#selectSubject" prefHeight="29.0" prefWidth="207.0" style="-fx-background-color: transparent; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #8100cc;" text="Ux Ui design" textFill="#8100cc">
-                                                                           <cursor>
-                                                                              <Cursor fx:constant="HAND" />
-                                                                           </cursor>
-                                                                           <font>
-                                                                              <Font name="Noto Sans Thai Bold" size="13.0" />
-                                                                           </font>
-                                                                           <padding>
-                                                                              <Insets left="10.0" right="10.0" />
-                                                                           </padding>
-                                                                        </Button>
-                                                                     </children>
-                                                                  </HBox>
-                                                                  <HBox fx:id="scoreDetail" prefHeight="257.0" prefWidth="518.0" />
-                                                               </children>
-                                                            </VBox>
-                                                         </children>
-                                                         <padding>
-                                                            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-                                                         </padding>
-                                                      </HBox>
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                             <HBox.margin>
-                                                <Insets right="10.0" />
-                                             </HBox.margin>
-                                          </VBox>
-                                          <VBox prefHeight="320.0" prefWidth="555.0" />
                                        </children>
                                     </HBox>
                                     <Pane fx:id="subjectSelector" maxHeight="-Infinity" maxWidth="708.0" prefHeight="78.0" prefWidth="708.0" visible="false">

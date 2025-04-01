@@ -1,9 +1,13 @@
 package Database;
 
+import Student.dashboard.CourseProgress;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class MyProgressDB extends ConnectDB {
 
@@ -139,5 +143,42 @@ public class MyProgressDB extends ConnectDB {
         }
         return 0;
     }
+
+    public ArrayList<CourseProgress> getTopThreeCoursesProgress(int userID) {
+        String sql = "SELECT c.courseName, SUM(m.myprogress) AS totalProgress, COUNT(ch.Chapter_ID) AS totalChapters " +
+                "FROM offlearn.myprogress m " +
+                "JOIN offlearn.chapter ch ON m.Chapter_ID = ch.Chapter_ID " +
+                "JOIN offlearn.course c ON ch.Course_ID = c.Course_ID " +
+                "WHERE m.User_ID = ? " +
+                "GROUP BY c.Course_ID, c.courseName " +
+                "ORDER BY totalProgress DESC " +
+                "LIMIT 3";
+
+        ArrayList<CourseProgress> topThreeCourses = new ArrayList<>();
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstm = conn.prepareStatement(sql)) {
+
+            pstm.setInt(1, userID);
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                String courseName = rs.getString("courseName");
+                double totalProgress = rs.getDouble("totalProgress");
+                int totalChapters = rs.getInt("totalChapters");
+
+                double progressPercentage = totalChapters > 0 ? (totalProgress / totalChapters) * 100 : 0;
+
+                topThreeCourses.add(new CourseProgress(courseName, progressPercentage));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return topThreeCourses;
+    }
+
+
 
 }
