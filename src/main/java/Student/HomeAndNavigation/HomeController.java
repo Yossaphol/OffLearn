@@ -550,7 +550,7 @@ public class HomeController implements Initializable, SessionHandler {
 
 
     private void progressValue() {
-     //   progress1.setProgress(Double.parseDouble(progressValue1.getText().replace("%", "").trim()) / 100);
+        //   progress1.setProgress(Double.parseDouble(progressValue1.getText().replace("%", "").trim()) / 100);
 //        progress2.setProgress(Double.parseDouble(progressValue2.getText().replace("%", "").trim()) / 100);
 //        continueProgress.setProgress(Double.parseDouble(progressOfConValue.getText().replace("%", "").trim()) / 100);
     }

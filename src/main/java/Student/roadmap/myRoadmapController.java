@@ -3,19 +3,23 @@ package Student.roadmap;
 import Database.OrderRoadmapDB;
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
+import Student.courseManage.courseEnrollController;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.effect.DropShadow;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -87,6 +91,17 @@ public class myRoadmapController implements Initializable {
                 controller.setSubjectName(courseDetails[0]);
                 controller.setOrderNumber(Integer.parseInt(courseDetails[2]));
 
+                Node node = courseItem.lookup("#courseen");
+                if (node == null) {
+                    System.out.println("⚠️ ไม่พบ #courseen ใน FXML");
+                } else if (node instanceof Button courseBtn) {
+                    courseBtn.setOnAction(e -> openCourseDetail(courseDetails));
+                } else if (node instanceof HBox hbox) {
+                    hbox.setOnMouseClicked(e -> openCourseDetail(courseDetails));
+                } else {
+                    System.out.println("❌ #courseen ไม่ใช่ Button หรือ HBox");
+                }
+
                 ef.hoverEffect(courseItem);
                 roadmap_node_container.add(courseItem, col, row);
                 GridPane.setMargin(courseItem, new Insets(10, 30, 10, 30));
@@ -99,6 +114,36 @@ public class myRoadmapController implements Initializable {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void openCourseDetail(String[] courseDetails) {
+        try {
+            FXMLLoader enrollLoader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/courseEnroll.fxml"));
+            Parent root = enrollLoader.load();
+
+            courseEnrollController enrollController = enrollLoader.getController();
+            enrollController.setCourseDetail(
+                    courseDetails[0],
+                    "Subject content1, Subject content2, Subject content3",
+                    "คำอธิบายยาวเกี่ยวกับคอร์ส",
+                    "/img/Picture/bg.jpg",
+                    "/img/icon/artificial-intelligence.png",
+                    "AI",
+                    1750.0,
+                    4.0,
+                    740,
+                    20,
+                    101
+            );
+
+            Stage stage = new Stage();
+            stage.setTitle("รายละเอียดคอร์ส");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
