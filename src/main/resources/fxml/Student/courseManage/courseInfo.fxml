@@ -3,8 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
@@ -27,12 +25,6 @@
                         <Font name="System Bold" size="15.0" />
                     </font>
                 </Label>
-                <BorderPane prefHeight="22.0" prefWidth="280.0">
-                    <right>
-                        <Label text="70 %" BorderPane.alignment="CENTER" />
-                    </right>
-                </BorderPane>
-                <ProgressBar prefHeight="7.0" prefWidth="280.0" progress="0.0" />
             </children>
         </VBox>
         <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="280.0">
