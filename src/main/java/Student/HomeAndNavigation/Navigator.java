@@ -3,9 +3,11 @@ package Student.HomeAndNavigation;
 import Student.Quiz.QuizPageController;
 import Student.Quiz.QuizSummary;
 import Student.Quiz.ResultPageController;
+import Student.dashboard.dashboardController;
 import Student.learningPage.DisposableController;
 import Student.learningPage.MainPageOffline;
 import Student.navBarAndSearchbar.navBarOffline;
+import Teacher.quiz.QuizController;
 import Teacher.quiz.QuizItem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -81,6 +83,7 @@ public class Navigator {
             Parent root = loader.load();
             pChatController chatController = loader.getController();
             chatController.setTeacherToSelect(teacherName);
+            
             if (controller != null) {
                 controller.displayNavbar();
                 controller.displayContent(root);
@@ -112,9 +115,11 @@ public class Navigator {
         displayNavbarSafe();
     }
 
+
     public void QuizPage(int chapterID, int quizID) {
         navigateTo("/fxml/Student/Quiz/quizPage.fxml", chapterID, quizID);
     }
+
 
     public void QuizResult(int point, int courseID, QuizItem quizItem, int chapterID) {
         navigateTo("/fxml/Student/Quiz/resultPage.fxml", point, courseID, quizItem, chapterID);
@@ -189,7 +194,29 @@ public class Navigator {
         }
     }
 
+    public void navigateTo(Parent root) {
+        System.out.println("navigateTo called with Parent: " + root);
+        if (currentContentController instanceof DisposableController) {
+            System.out.println("Calling dispose on current content controller...");
+            ((DisposableController) currentContentController).disposePlayer();
+        }
+        if (controller != null) {
+            controller.displayNavbar();
+            controller.displayContent(root);
+        } else {
+            System.out.println("Navigator Error");
+        }
+    }
+
+
     public void navigateTo(String fxmlPath, int chapterID, int quizID) {
+        System.out.println("navigateTo called: " + fxmlPath);
+
+        if (currentContentController instanceof DisposableController) {
+            System.out.println("Calling dispose on current content controller...");
+            ((DisposableController) currentContentController).disposePlayer();
+        }
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
@@ -202,6 +229,8 @@ public class Navigator {
             if (controller != null) {
                 controller.displayNavbar();
                 controller.displayContent(root);
+            } else {
+                System.out.println("Navigator Error: controller is null");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -227,6 +256,7 @@ public class Navigator {
         }
     }
 
+
     public static void setCurrentContentController(Object controller) {
         currentContentController = controller;
     }
@@ -235,3 +265,4 @@ public class Navigator {
         return currentContentController;
     }
 }
+
