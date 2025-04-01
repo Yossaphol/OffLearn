@@ -22,7 +22,7 @@ public class OfflineMyCourse implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        userID = 1; /// CHANGE HERE
+        userID = Integer.parseInt(SessionManager.getInstance().getUserID()); /// CHANGE HERE
         loadOfflineCourses();
     }
 

@@ -153,6 +153,7 @@ public class UserDB extends ConnectDB{
 
             if (rs.next()) {
                 SessionManager.getInstance().setUserID(rs.getString("User_ID"));
+                saveUserData(rs.getString("User_ID"), username, password);
                 return rs.getString("type");
             }
         } catch (SQLException e) {
