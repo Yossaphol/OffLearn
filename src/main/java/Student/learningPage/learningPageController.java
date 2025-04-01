@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 import Database.*;
 import Student.FontLoader.FontLoader;
 import Student.HomeAndNavigation.HomeController;
-
+import Teacher.courseManagement.CourseItem;
 import Student.HomeAndNavigation.Navigator;
 import a_Session.SessionManager;
 import javafx.application.Platform;
@@ -133,18 +133,24 @@ public class learningPageController extends ChapterProgress implements Initializ
                 e.printStackTrace();
             }
         });
+    }
 
+    private void initializeScheduler() {
+        if (scheduler != null) {
+            scheduler.shutdown();
+        }
         scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(() -> {
             try {
-                System.out.println(111);
-                updateProgress(videoManager.getVideoMediaPlayer(), chapterID);
-                double tmp = loadChapterProgress(String.valueOf(chapterID), sessionUserID);
-                double normalized = tmp / 100.0;
-                Platform.runLater(() -> {
-                    progressBar.setProgress(normalized);
-                    labelPercent.setText(String.format("%.2f%%", tmp));
-                });
+                if (videoManager != null && videoManager.getVideoMediaPlayer() != null) {
+                    updateProgress(videoManager.getVideoMediaPlayer(), chapterID);
+                    double tmp = loadChapterProgress(String.valueOf(chapterID), sessionUserID);
+                    double normalized = tmp / 100.0;
+                    Platform.runLater(() -> {
+                        progressBar.setProgress(normalized);
+                        labelPercent.setText(String.format("%.2f%%", tmp));
+                    });
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -499,20 +505,25 @@ public class learningPageController extends ChapterProgress implements Initializ
     }
 
     // For forced test—overriding courseID and chapterID
-    public void recieveMethod(String ignoredCourseId) {
-        this.courseID = Integer.parseInt(ignoredCourseId); // test
+    public void recieveMethod(String courseID) {
+        this.courseID = Integer.parseInt(courseID);
         chapterDB = new ChapterDB();
         categoryDB = new Category();
+        CourseDB courseDB = new CourseDB();
 
         ArrayList<String[]> chapters = chapterDB.getChaptersByCourseID(this.courseID);
-        String category = categoryDB.getCategoryByCourseID(courseID);
+        String category = categoryDB.getCategoryByCourseID(this.courseID);
+        CourseItem courseInfo = courseDB.getCourseByID(this.courseID);
 
-        if (!chapters.isEmpty()) {
+        if (chapters != null && !chapters.isEmpty()) {
             this.chapterID = Integer.parseInt(chapters.get(0)[0]);
             setLoadingState(true);
+            if (courseInfo != null) {
+                subject_name.setText(courseInfo.getCourseName());
+                catName.setText(category != null ? category : "unknown");
+            }
             loadTeacherInfo();
-            receiveData(courseID, chapterID, Integer.parseInt(sessionUserID));
-            catName.setText(category != null ? category : "unknown");
+            receiveData(this.courseID, this.chapterID, Integer.parseInt(sessionUserID));
         } else {
             System.err.println("No chapters found for forced course ID: " + this.courseID);
         }
