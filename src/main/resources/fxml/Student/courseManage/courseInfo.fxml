@@ -25,12 +25,6 @@
                         <Font name="System Bold" size="15.0" />
                     </font>
                 </Label>
-                <BorderPane prefHeight="22.0" prefWidth="280.0">
-                    <right>
-                        <Label fx:id="progressVal" text="70 %" BorderPane.alignment="CENTER" />
-                    </right>
-                </BorderPane>
-                <ProgressBar prefHeight="7.0" prefWidth="280.0" progress="0.0" />
             </children>
         </VBox>
         <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="280.0">

@@ -50,7 +50,7 @@ public class courseInfoController implements Initializable {
         this.currentCourse = course;
         courseName.setText(course.getCourseName());
         teacherName.setText(course.getTeacherName());
-        progressVal.setText(String.valueOf(course.getProgress()));
+        //progressVal.setText(String.valueOf(course.getProgress()));
         setProfileCourse(course.getCourseImg());
         setProfile(userDB.getUserNameProfileAndSpecByCourseID(course.getCourseId())[1]);
     }
