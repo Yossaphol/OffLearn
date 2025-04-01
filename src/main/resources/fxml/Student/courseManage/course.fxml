@@ -115,7 +115,7 @@
                                                    <children>
                                                       <VBox prefHeight="52.0" prefWidth="200.0">
                                                          <children>
-                                                            <Label text="Front-end developer">
+                                                            <Label fx:id="rm1" text="Frontend Development">
                                                                <font>
                                                                   <Font name="Kodchasan Bold" size="16.0" />
                                                                </font>
@@ -123,14 +123,7 @@
                                                                   <Insets top="8.0" />
                                                                </VBox.margin>
                                                             </Label>
-                                                            <HBox prefHeight="26.0" prefWidth="200.0">
-                                                               <children>
-                                                                  <Label text="18" textFill="#8100cc" />
-                                                                  <Label text=" คอร์ส " />
-                                                                  <Label text="36" textFill="#8100cc" />
-                                                                  <Label text=" ชั่วโมง" />
-                                                               </children>
-                                                            </HBox>
+                                                            <HBox prefHeight="26.0" prefWidth="200.0" />
                                                          </children>
                                                       </VBox>
                                                       <ImageView fitHeight="52.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
@@ -150,7 +143,7 @@
                                                    <children>
                                                       <VBox prefHeight="200.0" prefWidth="200.0">
                                                          <children>
-                                                            <Label text="Marketer">
+                                                            <Label fx:id="rm2" text="Backend Development">
                                                                <font>
                                                                   <Font name="Kodchasan Bold" size="16.0" />
                                                                </font>
@@ -158,14 +151,7 @@
                                                                   <Insets top="8.0" />
                                                                </VBox.margin>
                                                             </Label>
-                                                            <HBox prefHeight="100.0" prefWidth="200.0">
-                                                               <children>
-                                                                  <Label text="9" textFill="#8100cc" />
-                                                                  <Label text=" คอร์ส " />
-                                                                  <Label text="19.5" textFill="#8100cc" />
-                                                                  <Label text=" ชั่วโมง" />
-                                                               </children>
-                                                            </HBox>
+                                                            <HBox prefHeight="100.0" prefWidth="200.0" />
                                                          </children>
                                                       </VBox>
                                                       <ImageView fitHeight="52.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
@@ -185,7 +171,7 @@
                                                    <children>
                                                       <VBox prefHeight="200.0" prefWidth="200.0">
                                                          <children>
-                                                            <Label text="Game designer">
+                                                            <Label fx:id="rm3" text="Game designer">
                                                                <font>
                                                                   <Font name="Kodchasan Bold" size="16.0" />
                                                                </font>
@@ -193,14 +179,7 @@
                                                                   <Insets top="8.0" />
                                                                </VBox.margin>
                                                             </Label>
-                                                            <HBox prefHeight="100.0" prefWidth="200.0">
-                                                               <children>
-                                                                  <Label text="27" textFill="#8100cc" />
-                                                                  <Label text=" คอร์ส " />
-                                                                  <Label text="12" textFill="#8100cc" />
-                                                                  <Label text=" ชั่วโมง" />
-                                                               </children>
-                                                            </HBox>
+                                                            <HBox prefHeight="100.0" prefWidth="200.0" />
                                                          </children>
                                                       </VBox>
                                                       <ImageView fitHeight="52.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">

@@ -2,6 +2,7 @@ package Student.courseManage;
 
 import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
+import Student.roadmap.myRoadmapController;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -76,9 +76,20 @@ public class courseController implements Initializable {
     private final int coursesPerPage = 9;
     private ArrayList<CourseItem> courseList;
 
+    @FXML
+    private Button previousButton;
+    @FXML
+    private Button nextButton;
+    @FXML
+    private Label pageLabel;
+    @FXML
+    private Label rm1;
+    @FXML
+    private Label rm2;
+    @FXML
+    private Label rm3;
 
-
-
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
         closePopupAuto();
         setImg();
@@ -87,13 +98,13 @@ public class courseController implements Initializable {
         setProgressBar();
         handleCourseItem();
         updatePageLabel();
+        setupRoadmapButtons();
 
         previousButton.setOnAction(event -> handlePreviousButton());
         nextButton.setOnAction(event -> handleNextButton());
     }
 
-
-    public void setEffect(){
+    public void setEffect() {
         ef.applyHoverEffectToInside(categoryPopup);
         ef.applyHoverEffectToInside(popup);
         ef.applyHoverEffectToInside(popup1);
@@ -109,30 +120,26 @@ public class courseController implements Initializable {
         popup.setViewOrder(-1);
         popup1.setViewOrder(-1);
         popup2.setViewOrder(-1);
-
-
     }
 
-    public void route(){
+    public void route() {
         Navigator nav = new Navigator();
         explore.setOnMouseClicked(nav::roadmapRoute);
     }
 
-    public void setImg(){
+    public void setImg() {
         HomeController hm = new HomeController();
         hm.loadAndSetImage(imgContainer, "/img/Picture/bg.jpg");
-
         hm.loadAndSetImage(teacherPic, "/img/Profile/man.png");
         hm.loadAndSetImage(category_pic, "/img/icon/code.png");
         hm.loadAndSetImage(category_pic1, "/img/icon/partners.png");
         hm.loadAndSetImage(category_pic2, "/img/icon/artificial-intelligence.png");
     }
 
-
     @FXML
-    private void openPopup(ActionEvent event){
+    private void openPopup(ActionEvent event) {
         Button clickedbtn = (Button) event.getSource();
-        switch (clickedbtn.getId()){
+        switch (clickedbtn.getId()) {
             case "btnpopup":
                 _openPopup(popup);
                 break;
@@ -155,7 +162,7 @@ public class courseController implements Initializable {
         FadeTransition fade2 = new FadeTransition(Duration.millis(300), category_recommend);
 
         if (!popup.isVisible()) {
-            if(popup.getId().equals("categoryPopup")){
+            if (popup.getId().equals("categoryPopup")) {
                 seeAll.setText("ปิด");
                 category_recommend.setVisible(false);
                 category_recommend.setOpacity(0);
@@ -168,7 +175,7 @@ public class courseController implements Initializable {
             fade.setFromValue(0);
             fade.setToValue(1);
         } else {
-            if(popup.getId().equals("categoryPopup")){
+            if (popup.getId().equals("categoryPopup")) {
                 seeAll.setText("ดูทั้งหมด");
                 category_recommend.setVisible(true);
                 category_recommend.setOpacity(0);
@@ -183,18 +190,12 @@ public class courseController implements Initializable {
         fade2.play();
     }
 
-    public void closePopupAuto(){
+    public void closePopupAuto() {
         MainFrame.setOnMouseClicked(event -> {
-            if (popup.isVisible() && !popup.contains(event.getX() - popup.getLayoutX(), event.getY() - popup.getLayoutY())) {
-                closePopup(popup);
-            }
-            if (popup1.isVisible() && !popup1.contains(event.getX() - popup1.getLayoutX(), event.getY() - popup1.getLayoutY())) {
-                closePopup(popup1);
-            }
-            if (popup2.isVisible() && !popup2.contains(event.getX() - popup2.getLayoutX(), event.getY() - popup2.getLayoutY())) {
-                closePopup(popup2);
-            }
-            if (categoryPopup.isVisible() && !categoryPopup.contains(event.getX() - categoryPopup.getLayoutX(), event.getY() - categoryPopup.getLayoutY())) {
+            if (popup.isVisible()) closePopup(popup);
+            if (popup1.isVisible()) closePopup(popup1);
+            if (popup2.isVisible()) closePopup(popup2);
+            if (categoryPopup.isVisible()) {
                 seeAll.setText("ดูทั้งหมด");
                 closePopup(categoryPopup);
             }
@@ -203,7 +204,7 @@ public class courseController implements Initializable {
 
     private void closePopup(Node popup) {
         FadeTransition fade2 = new FadeTransition(Duration.millis(300), category_recommend);
-        if(popup.getId().equals("categoryPopup")){
+        if (popup.getId().equals("categoryPopup")) {
             category_recommend.setVisible(true);
             category_recommend.setOpacity(0);
             fade2.setFromValue(0);
@@ -211,7 +212,6 @@ public class courseController implements Initializable {
         }
 
         FadeTransition fade = new FadeTransition(Duration.millis(300), popup);
-
         fade.setFromValue(1);
         fade.setToValue(0);
         fade.setOnFinished(e -> popup.setVisible(false));
@@ -224,16 +224,16 @@ public class courseController implements Initializable {
         categorybar.setProgress(Double.parseDouble(progressCategory.getText().replace("% completed", "").trim()) / 100);
         categorybar1.setProgress(Double.parseDouble(progressCategory1.getText().replace("% completed", "").trim()) / 100);
         categorybar2.setProgress(Double.parseDouble(progressCategory2.getText().replace("% completed", "").trim()) / 100);
-
     }
 
     public void handleCourseItem() {
-
         CourseDB courseDB = new CourseDB();
         courseList = courseDB.getAllCourses();
+        renderCourses();
+    }
 
+    private void renderCourses() {
         allCourseContainer.getChildren().clear();
-
         int start = currentPage * coursesPerPage;
         int end = Math.min(start + coursesPerPage, courseList.size());
 
@@ -241,15 +241,12 @@ public class courseController implements Initializable {
         for (int i = start; i < end; i++) {
             CourseItem courseItem = courseList.get(i);
             courseObject course = courseItem.toCourseObject();
-
-
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/enrollCourseItem.fxml"));
                 Node courseItemNode = loader.load();
 
                 EnrollCourseItemController controller = loader.getController();
                 controller.setData(course);
-
                 controller.setCourseName(course.getName());
                 controller.setShortDescription("");
                 controller.setTeacherName(course.getTeacherName());
@@ -257,11 +254,9 @@ public class courseController implements Initializable {
                 controller.setCategoryName(course.getCategoryName());
                 String imageUrl = course.getPicture();
                 if (imageUrl == null || imageUrl.trim().isEmpty()) {
-                    imageUrl = "/img/Picture/bg.jpg"; // ต้องแน่ใจว่าไฟล์นี้อยู่ใน resource
+                    imageUrl = "/img/Picture/bg.jpg";
                 }
                 controller.setCourseImg(imageUrl);
-
-
 
                 ef.hoverEffect(courseItemNode);
                 allCourseContainer.add(courseItemNode, col, row);
@@ -278,131 +273,60 @@ public class courseController implements Initializable {
         }
     }
 
-    @FXML
-    private Button previousButton;
-    @FXML
-    private Button nextButton;
-    @FXML
-    private Label pageLabel;
-
-    @FXML
-    private void handlePreviousButton() {
-        if (currentPage > 0) {
-            currentPage--;
-            allCourseContainer.getChildren().clear();
-
-            int start = currentPage * coursesPerPage;
-            int end = Math.min(start + coursesPerPage, courseList.size());
-
-            int col = 0, row = 0;
-            for (int i = start; i < end; i++) {
-                CourseItem courseItem = courseList.get(i);
-                courseObject course = courseItem.toCourseObject();
-
-
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/enrollCourseItem.fxml"));
-                    Node courseItemNode = loader.load();
-
-                    EnrollCourseItemController controller = loader.getController();
-                    controller.setData(course);
-
-                    controller.setCourseName(course.getName());
-                    controller.setShortDescription("");
-                    controller.setTeacherName(course.getTeacherName());
-                    controller.setTeacherImg("/img/Profile/man.png");
-                    controller.setCategoryName(course.getCategoryName());
-                    //controller.setCourseImg(course.getImage() != null ? course.getImage() : "/img/Picture/bg.jpg");
-
-                    ef.hoverEffect(courseItemNode);
-                    allCourseContainer.add(courseItemNode, col, row);
-                    GridPane.setMargin(courseItemNode, new Insets(30, 30, 30, 30));
-
-                    col++;
-                    if (col == 3) {
-                        col = 0;
-                        row++;
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            updatePageLabel();
-        }
-    }
-
-    @FXML
-    private void handleNextButton() {
-        if ((currentPage + 1) * coursesPerPage < courseList.size()) {
-            currentPage++;
-            allCourseContainer.getChildren().clear();
-
-            int start = currentPage * coursesPerPage;
-            int end = Math.min(start + coursesPerPage, courseList.size());
-
-            int col = 0, row = 0;
-            for (int i = start; i < end; i++) {
-                CourseItem courseItem = courseList.get(i);
-                courseObject course = courseItem.toCourseObject();
-
-
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/enrollCourseItem.fxml"));
-                    Node courseItemNode = loader.load();
-
-                    EnrollCourseItemController controller = loader.getController();
-                    controller.setData(course);
-
-                    controller.setCourseName(course.getName());
-                    controller.setShortDescription("");
-                    controller.setTeacherName(course.getTeacherName());
-                    controller.setTeacherImg("/img/Profile/man.png");
-                    controller.setCategoryName(course.getCategoryName());
-                    //controller.setCourseImg(course.getImage() != null ? course.getImage() : "/img/Picture/bg.jpg");
-
-                    ef.hoverEffect(courseItemNode);
-                    allCourseContainer.add(courseItemNode, col, row);
-                    GridPane.setMargin(courseItemNode, new Insets(30, 30, 30, 30));
-
-                    col++;
-                    if (col == 3) {
-                        col = 0;
-                        row++;
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            updatePageLabel();
-        }
-    }
-
     private void updatePageLabel() {
         int totalPages = (int) Math.ceil((double) courseList.size() / coursesPerPage);
         pageLabel.setText((currentPage + 1) + "/" + totalPages);
     }
 
-
-    @FXML
-    private Button addtocart;
-
-    private courseObject course; // เก็บคอร์สปัจจุบันที่จะแสดงผล
-
-    public void setCourse(courseObject course) {
-        this.course = course;
+    private void setupRoadmapButtons() {
+        rm1.setOnMouseClicked(event -> handleRoadmapClick("Frontend Development"));
+        rm2.setOnMouseClicked(event -> handleRoadmapClick("Backend Development"));
+        rm3.setOnMouseClicked(event -> handleRoadmapClick("Game Designer"));
     }
 
-    @FXML
-    private void initialize() {
-        addtocart.setOnAction(event -> {
-            CartManager.getInstance().addCourse(course);
-            System.out.println("Added to cart: " + course.getName());
-        });
+    private void handleRoadmapClick(String roadmapName) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/myroadmap.fxml"));
+            Parent root = loader.load();
+
+            // ดึง controller ของ myRoadmapController
+            myRoadmapController controller = loader.getController();
+
+            // ส่ง roadmapID ที่ตรงกับชื่อ
+            if (roadmapName.equals("Frontend Development")) {
+                controller.setRoadmapID("00000002"); // แก้ให้ตรงกับ ID ใน DB
+            } else if (roadmapName.equals("Backend Development")) {
+                controller.setRoadmapID("00000003");
+            } else if (roadmapName.equals("Web Security")) {
+                controller.setRoadmapID("00000004");
+            }
+
+            Stage stage = new Stage();
+            stage.setTitle("Roadmap - " + roadmapName);
+            stage.setScene(new Scene(root));
+            stage.setResizable(true);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
 
+    private void handlePreviousButton() {
+        if (currentPage > 0) {
+            currentPage--;
+            renderCourses();
+            updatePageLabel();
+        }
+    }
 
-
-
+    private void handleNextButton() {
+        if ((currentPage + 1) * coursesPerPage < courseList.size()) {
+            currentPage++;
+            renderCourses();
+            updatePageLabel();
+        }
+    }
 }

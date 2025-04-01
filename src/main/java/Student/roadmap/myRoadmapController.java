@@ -49,7 +49,7 @@ public class myRoadmapController implements Initializable {
         setEffect();
         applyHoverEffectToInside(hearted_roadmap_container);
         handleHeartedRoadmap();
-        handleRoadmapNode();
+        //handleRoadmapNode();
         handleOptionalRoadmap();
         handleRelatedRoadmap();
         displaySelectedRoadmapCard();
@@ -60,6 +60,7 @@ public class myRoadmapController implements Initializable {
         this.roadmapID = roadmapID;
         handleRoadmapNode();
     }
+
 
     private void route() {
         Navigator nav = new Navigator();
