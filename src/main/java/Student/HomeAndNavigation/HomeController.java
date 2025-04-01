@@ -201,6 +201,7 @@ public class HomeController implements Initializable {
         closePopupAuto();
 //        callSlider();
         showCourse();
+        setProfile(userDB.getProfile(username));
     }
 
     public void showCourse() {

@@ -1,11 +1,9 @@
 package Student.dashboard;
 
-import Database.QuizDB;
-import Database.StudentScoreDB;
-import Database.User;
-import Database.UserDB;
+import Database.*;
 import Student.task.taskCardController;
 import Teacher.quiz.QuizItem;
+import a_Session.SessionHandler;
 import a_Session.SessionManager;
 import Student.FontLoader.FontLoader;
 import javafx.animation.FadeTransition;
@@ -37,7 +35,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class dashboardController implements Initializable {
+public class dashboardController implements Initializable, SessionHandler {
     public Rectangle userpfp;
     public Circle trophy;
     public ScrollPane mainScrollPane;
@@ -127,6 +125,7 @@ public class dashboardController implements Initializable {
     @FXML
     private NumberAxis yAxis;
 
+
     StudentScoreDB dataDB = new StudentScoreDB();
     QuizDB dtaDB = new QuizDB();
     String username = SessionManager.getInstance().getUsername();
@@ -139,6 +138,8 @@ public class dashboardController implements Initializable {
 
         FontLoader fontLoader = new FontLoader();
         fontLoader.loadFonts();
+
+        setProgressionChart();
 
         route();
 //        displayTask();
@@ -156,14 +157,11 @@ public class dashboardController implements Initializable {
         method_home.hoverEffect(quizBox);
         method_home.hoverEffect(roadmapProgression);
         method_home.hoverEffect(courseProgression);
-        method_home.hoverEffect(scoreTendency);
-//        method_home.hoverEffect(risk);
         method_home.hoverEffect(studyTable);
         method_home.hoverEffect(btn_continue);
         method_home.hoverEffect(btn_otherCourse);
 
 
-        displayScore();
         displayStudyTable();
 
         us_st.setViewOrder(-1);
@@ -174,27 +172,32 @@ public class dashboardController implements Initializable {
 
         displayProfileBox();
         //Call chart
-        courseProgressionChart();
         scoreChart();
 
         //handle studyTable
        studyTable.setOnMouseClicked(event -> handleStudyTableClick());
     }
 
+    @Override
+    public void handleSession() {
+        UserDB userDB = new UserDB();
+        this.userID = userDB.getUserId(SessionManager.getInstance().getUsername());
+    }
+
     public void route(){
         Navigator nav = new Navigator();
         saved_roadmap.setOnMouseClicked(nav::myRoadmapRoute);
-        allMyCourse.setOnMouseClicked(nav::myCourseRoute);
+//        allMyCourse.setOnMouseClicked(nav::myCourseRoute);
         studyTable.setOnMouseClicked(nav::myCourseRoute);
         btn_continue.setOnMouseClicked(nav::myCourseRoute);
         btn_otherCourse.setOnMouseClicked(nav::courseRoute);
     }
 
-    private void displayProfileBox() {
+    public void displayProfileBox() {
         loadWithTransition("/fxml/Student/statistics/dashboardProfile.fxml");
     }
 
-    private void loadWithTransition(String fxmlPath) {
+    public void loadWithTransition(String fxmlPath) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Pane newContent = loader.load();
@@ -222,7 +225,7 @@ public class dashboardController implements Initializable {
 
 
     @FXML
-    private void openPopup(ActionEvent event){
+    public void openPopup(ActionEvent event){
         Button clickedbtn = (Button) event.getSource();
         switch (clickedbtn.getId()){
             case "btnpopup":
@@ -259,6 +262,55 @@ public class dashboardController implements Initializable {
         }
     }
 
+    public void setProgressionChart() {
+        System.out.println("maaaaaa");
+        MyProgressDB myProgressDB = new MyProgressDB();
+        ArrayList<CourseProgress> courseProgressesList = myProgressDB.getTopThreeCoursesProgress(userID);
+
+        courseProgressionChart.getData().clear();
+
+        int numberOfCourses = Math.min(courseProgressesList.size(), 3);
+
+        if (numberOfCourses >= 1) {
+            this.first_subject_name.setText(courseProgressesList.get(0).getCourseName());
+            this.first_val.setText(String.format("%.2f%%", courseProgressesList.get(0).getProgressPercentage())); // แสดงเปอร์เซ็นต์
+        } else {
+            this.first_val.setVisible(false);
+            this.first_subject_name.setVisible(false);
+        }
+
+        if (numberOfCourses >= 2) {
+            this.second_subject_name.setText(courseProgressesList.get(1).getCourseName());
+            this.second_val.setText(String.format("%.2f%%", courseProgressesList.get(1).getProgressPercentage())); // แสดงเปอร์เซ็นต์
+        } else {
+            this.second_val.setVisible(false);
+            this.second_subject_name.setVisible(false);
+        }
+
+        if (numberOfCourses >= 3) {
+            this.third_subject_name.setText(courseProgressesList.get(2).getCourseName());
+            this.third_val.setText(String.format("%.2f%%", courseProgressesList.get(2).getProgressPercentage())); // แสดงเปอร์เซ็นต์
+        } else {
+            this.third_val.setVisible(false);
+            this.third_subject_name.setVisible(false);
+        }
+
+        for (int i = 0; i < numberOfCourses; i++) {
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            series.setName(courseProgressesList.get(i).getCourseName());
+            series.getData().add(new XYChart.Data<>("Modules", courseProgressesList.get(i).getProgressPercentage()));
+            courseProgressionChart.getData().add(series);
+        }
+
+        // ถ้าไม่มีคอร์สแสดงข้อความแจ้งเตือน
+        if (numberOfCourses == 0) {
+            System.out.println("No courses available to display.");
+        }
+    }
+
+
+
+
     public void hoverEffect(Button btn) {
         ScaleTransition scaleUp = new ScaleTransition(Duration.millis(200), btn);
         scaleUp.setFromX(1);
@@ -279,7 +331,7 @@ public class dashboardController implements Initializable {
         });
     }
 
-//    private void displayTask() {
+//    public void displayTask() {
 //        try {
 //            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/statistics/dashboardTaskElement.fxml"));
 //            HBox searchbarContent = loader.load();
@@ -291,7 +343,7 @@ public class dashboardController implements Initializable {
 
 
     @FXML
-    private void selectSubject(ActionEvent event) {
+    public void selectSubject(ActionEvent event) {
         Button clickedBtn = (Button) event.getSource();
         if (clickedBtn.getId().equals("selected_subject")) {
             _openSubject(subjectSelector);
@@ -301,7 +353,7 @@ public class dashboardController implements Initializable {
     }
 
     @FXML
-    private void _openSubject(Node popup) {
+    public void _openSubject(Node popup) {
         popup.setViewOrder(-1);
         FadeTransition fade = new FadeTransition(Duration.millis(300), popup);
 
@@ -321,23 +373,8 @@ public class dashboardController implements Initializable {
         fade.play();
     }
 
-
-
-    private void displayScore() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/statistics/scoreDetail.fxml"));
-            HBox searchbarContent = loader.load();
-            scoreDetail.getChildren().setAll(searchbarContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-
     @FXML
-    private void _openPopup(Node popup) {
+    public void _openPopup(Node popup) {
         popup.toFront();
         FadeTransition fade = new FadeTransition(Duration.millis(300), popup);
 
@@ -365,7 +402,7 @@ public class dashboardController implements Initializable {
         });
     }
 
-    private void closePopup(Node popup) {
+    public void closePopup(Node popup) {
         FadeTransition fade = new FadeTransition(Duration.millis(300), popup);
         fade.setFromValue(1);
         fade.setToValue(0);
@@ -382,40 +419,12 @@ public class dashboardController implements Initializable {
         }
     }
 
-    private void applyHoverEffect1(HBox categoryBox) {
+    public void applyHoverEffect1(HBox categoryBox) {
         categoryBox.setOnMouseEntered(event -> {
             categoryBox.setStyle("-fx-background-color: #F4F4F4;");
         });
         categoryBox.setOnMouseExited(event -> {
             categoryBox.setStyle("-fx-background-color: transparent;");
-        });
-    }
-
-
-    private void courseProgressionChart() {
-        if (xAxis == null || yAxis == null || courseProgressionChart == null) {
-            System.out.println("FXML components not setup properly!");
-            return;
-        }
-
-        XYChart.Series<String, Number> module1 = new XYChart.Series<>();
-        module1.setName(first_subject_name.getText());
-        module1.getData().add(new XYChart.Data<>("Overall course progression (ร้อยละ %)", Double.parseDouble(first_val.getText().replace("%", "")) / 100));
-
-        XYChart.Series<String, Number> module2 = new XYChart.Series<>();
-        module2.setName(second_subject_name.getText());
-        module2.getData().add(new XYChart.Data<>("Overall course progression (ร้อยละ %)", Double.parseDouble(second_val.getText().replace("%", "")) / 100));
-
-        XYChart.Series<String, Number> module3 = new XYChart.Series<>();
-        module3.setName(third_subject_name.getText());
-        module3.getData().add(new XYChart.Data<>("Overall course progression (ร้อยละ %)", Double.parseDouble(third_val.getText().replace("%", "")) / 100));
-
-        courseProgressionChart.getData().addAll(module1, module2, module3);
-
-        Platform.runLater(() -> {
-            courseProgressionChart.lookup(".default-color2.chart-bar").setStyle("-fx-bar-fill: " +getColorLabel(first_val)+ ";"+"-fx-background-radius: 0;");
-            courseProgressionChart.lookup(".default-color1.chart-bar").setStyle("-fx-bar-fill: " +getColorLabel(second_val)+ ";"+"-fx-background-radius: 0;");
-            courseProgressionChart.lookup(".default-color0.chart-bar").setStyle("-fx-bar-fill: " +getColorLabel(third_val)+ ";"+"-fx-background-radius: 0;");
         });
     }
 
@@ -428,67 +437,41 @@ public class dashboardController implements Initializable {
     }
 
 
-    private void scoreChart() {
-        ArrayList<Double> Score = new ArrayList<Double>();
-        Score.add(13000.4);
-        Score.add(27000.83);
-        Score.add(9700.0);
+    public void scoreChart() {
+        ScoreDB scoreDB = new ScoreDB();
+        ArrayList<CourseScore> topScores = scoreDB.getTopThreeCoursesByScore(userID);
 
-        XYChart.Series<String, Number> module1 = new XYChart.Series<>();
-        module1.setName(first_subject_name.getText());
-        module1.getData().add(new XYChart.Data<>("Score Overview", Score.get(0)));
+        scoreChart.getData().clear();
 
-        XYChart.Series<String, Number> module2 = new XYChart.Series<>();
-        module2.setName(second_subject_name.getText());
-        module2.getData().add(new XYChart.Data<>("Score Overview", Score.get(1)));
-
-        XYChart.Series<String, Number> module3 = new XYChart.Series<>();
-        module3.setName(third_subject_name.getText());
-        module3.getData().add(new XYChart.Data<>("Score Overview", Score.get(2)));
-
-
-        //Set Avg and Min score
-        Double total = 0.0;
-        for(int i = 0; i< Score.size(); i++){
-            total+=Score.get(i);
+        if (topScores.isEmpty()) {
+            System.out.println("No scores available to display.");
+            return;
         }
 
-        Double lowest = 0.0;
-        for(int i = 0; i< Score.size(); i++){
-            if(lowest == 0.0){
-                lowest = Score.get(0);
-            }
-            if(Score.get(i) < lowest){
-                lowest = Score.get(i);
-            }
+        for (CourseScore courseScore : topScores) {
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            series.setName(courseScore.getCourseName());
+            series.getData().add(new XYChart.Data<>("Score Overview", courseScore.getScore()));
+
+            scoreChart.getData().add(series);
         }
-        Double average = total / Score.size();
+
+        double total = topScores.stream().mapToDouble(CourseScore::getScore).sum();
+        double average = total / topScores.size();
+        int lowest = topScores.stream().mapToInt(CourseScore::getScore).min().orElse(0);
 
         avg.setText(Double.toString(average));
-        min.setText(Double.toString(lowest));
-
-
-        scoreChart.getData().addAll(module1, module2, module3);
+        min.setText(Integer.toString(lowest));
 
         Platform.runLater(() -> {
             String color1 = getColorLabel(first_val);
             String color2 = getColorLabel(second_val);
             String color3 = getColorLabel(third_val);
-            scoreChart.lookup(".default-color2.chart-bar").setStyle("-fx-bar-fill: "+color1+"; -fx-background-radius: 0;");
-            scoreChart.lookup(".default-color1.chart-bar").setStyle("-fx-bar-fill: "+color2+"; -fx-background-radius: 0;");
-            scoreChart.lookup(".default-color0.chart-bar").setStyle("-fx-bar-fill: "+color3+"; -fx-background-radius: 0;");
-
-            Node legend1 = scoreChart.lookup(".default-color2.chart-legend-item-symbol");
-            Node legend2 = scoreChart.lookup(".default-color1.chart-legend-item-symbol");
-            Node legend3 = scoreChart.lookup(".default-color0.chart-legend-item-symbol");
-
-            if (legend1 != null) legend1.setStyle("-fx-background-color: "+color3+";");
-            if (legend2 != null) legend2.setStyle("-fx-background-color: "+color2+";");
-            if (legend3 != null) legend3.setStyle("-fx-background-color: "+color1 + ";");
+            scoreChart.lookup(".default-color2.chart-bar").setStyle("-fx-bar-fill: " + color1 + "; -fx-background-radius: 0;");
+            scoreChart.lookup(".default-color1.chart-bar").setStyle("-fx-bar-fill: " + color2 + "; -fx-background-radius: 0;");
+            scoreChart.lookup(".default-color0.chart-bar").setStyle("-fx-bar-fill: " + color3 + "; -fx-background-radius: 0;");
         });
-
     }
-
 
     public void displayStudyTable(){
         try {
@@ -501,7 +484,7 @@ public class dashboardController implements Initializable {
     }
 
     @FXML
-    private void handleStudyTableClick() {
+    public void handleStudyTableClick() {
         try {
             // Load the .fxml file
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/statistics/studyTableEdit.fxml"));
@@ -521,8 +504,4 @@ public class dashboardController implements Initializable {
             e.printStackTrace(); // Handle any loading errors
         }
     }
-
-
-
-
 }

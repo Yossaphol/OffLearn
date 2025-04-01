@@ -123,17 +123,7 @@
                                              </font>
                                           </Label>
                                           <HBox prefHeight="54.0" prefWidth="37.0" />
-                                          <ImageView fitHeight="31.0" fitWidth="34.0">
-                                             <image>
-                                                <Image url="@../../../img/icon/chronometer.png" />
-                                             </image>
-                                          </ImageView>
                                           <HBox prefHeight="35.0" prefWidth="10.0" />
-                                          <Label fx:id="duration" text="22 ชม." textFill="#a8a8a8">
-                                             <font>
-                                                <Font name="Noto Sans Thai Regular" size="20.0" />
-                                             </font>
-                                          </Label>
                                        </children>
                                     </HBox>
                                     <HBox prefHeight="51.0" prefWidth="200.0">

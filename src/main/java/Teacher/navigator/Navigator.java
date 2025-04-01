@@ -7,76 +7,79 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import javafx.util.Duration;
 
 import java.io.IOException;
 
-
-
 public class Navigator {
 
     private static navbarController navCtrl;
+
     public static void setNavBarController(navbarController navController) {
         navCtrl = navController;
     }
-    public void dashboardRoute(MouseEvent event){
+
+    private void setCurrentPageSafe(String label) {
+        if (navCtrl != null) {
+            navCtrl.setCurrentPage(label);
+        } else {
+            System.err.println("⚠️ navCtrl is null. Did you forget to call Navigator.setNavBarController()?");
+        }
+    }
+
+    public void dashboardRoute(MouseEvent event) {
         navigateTo("/fxml/Teacher/statistics/dashboard.fxml", event);
-        navCtrl.setCurrentPage("dashboardLabel");
+        setCurrentPageSafe("dashboardLabel");
     }
 
-    public void inboxRoute(MouseEvent event){
-       navigateTo("/fxml/Teacher/pChat.fxml", event);
-       navCtrl.setCurrentPage("inboxLabel");
+    public void inboxRoute(MouseEvent event) {
+        navigateTo("/fxml/Teacher/pChat.fxml", event);
+        setCurrentPageSafe("inboxLabel");
     }
 
-    public void courseRoute(MouseEvent event){
+    public void courseRoute(MouseEvent event) {
         navigateTo("/fxml/Teacher/courseManagement/course.fxml", event);
-        navCtrl.setCurrentPage("courseLabel");
+        setCurrentPageSafe("courseLabel");
     }
 
-    public void withdrawRoute(MouseEvent event){
+    public void withdrawRoute(MouseEvent event) {
         navigateTo("/fxml/Teacher/showBalance/withdraw.fxml", event);
-
     }
 
-    public void courseEditRoute(MouseEvent event){
+    public void courseEditRoute(MouseEvent event) {
         navigateTo("/fxml/Teacher/courseManagement/courseEdit.fxml", event);
     }
 
-    public void addQuizOrTest(MouseEvent event){
+    public void addQuizOrTest(MouseEvent event) {
         navigateTo("/fxml/Teacher/Quiz/addQuiz.fxml", event);
     }
 
-    public void quizDetailRoute(MouseEvent event){
+    public void quizDetailRoute(MouseEvent event) {
         navigateTo("/fxml/Teacher/Quiz/quiz_detail.fxml", event);
     }
 
-    public void addVideoRoute(MouseEvent event){
+    public void addVideoRoute(MouseEvent event) {
         navigateTo("/fxml/Teacher/somethingWithVideo/uploadVideo.fxml", event);
     }
 
-    public void videoDetailRoute(MouseEvent event){
+    public void videoDetailRoute(MouseEvent event) {
         navigateTo("/fxml/Teacher/somethingWithVideo/videoDetail.fxml", event);
     }
 
-    public void withdrawDetailRoute(MouseEvent event){
+    public void withdrawDetailRoute(MouseEvent event) {
         navigateTo("/fxml/Teacher/showBalance/withdrawDetail.fxml", event);
     }
 
-    public void withdrawHistoryRoute(MouseEvent event){
+    public void withdrawHistoryRoute(MouseEvent event) {
         navigateTo("/fxml/Teacher/showBalance/withdrawHistory.fxml", event);
     }
 
-    public void settingRoute(MouseEvent event){
+    public void settingRoute(MouseEvent event) {
         navigateTo("/fxml/Teacher/setting/setting.fxml", event);
-        navCtrl.setCurrentPage("settingLabel");
+        setCurrentPageSafe("settingLabel");
     }
-
-
 
     public void navigateTo(String fxmlPath, MouseEvent event) {
         try {
@@ -106,9 +109,8 @@ public class Navigator {
             stage.setMaximized(true);
 
         } catch (IOException e) {
-            System.err.println("Error loading FXML file: " + fxmlPath);
+            System.err.println("❌ Error loading FXML file: " + fxmlPath);
             e.printStackTrace();
         }
     }
-
 }

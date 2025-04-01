@@ -1,11 +1,8 @@
 package Student.navBarAndSearchbar;
 
-import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
-import Student.mainPage.mainPageController;
 import a_Session.SessionManager;
 import javafx.animation.ScaleTransition;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +22,6 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class navBarOffline implements Initializable {
@@ -55,11 +51,9 @@ public class navBarOffline implements Initializable {
     public HBox settingBtn;
     public Button settingBtn1;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         instance = this;
-      //  HomeController method_home = new HomeController();
         hoverEffect(dashboard);
         hoverEffect(course);
         hoverEffect(inbox);
@@ -70,7 +64,6 @@ public class navBarOffline implements Initializable {
         hoverEffect(settingBtn);
         hoverEffect(logoutBtn);
 
-      //  route();
         Navigator.setNavBarController(this);
 
         buttons.add(home_btn);
@@ -83,7 +76,6 @@ public class navBarOffline implements Initializable {
 
         currentPage = "home_btn";
         changeFontColor();
-
     }
 
     public static navBarOffline getInstance() {
@@ -92,35 +84,23 @@ public class navBarOffline implements Initializable {
 
     public void hoverEffect(Button btn) {
         ScaleTransition scaleUp = new ScaleTransition(Duration.millis(200), btn);
-        scaleUp.setFromX(1);
-        scaleUp.setFromY(1);
         scaleUp.setToX(1.05);
         scaleUp.setToY(1.05);
+
         ScaleTransition scaleDown = new ScaleTransition(Duration.millis(200), btn);
-        scaleDown.setFromX(1.05);
-        scaleDown.setFromY(1.05);
         scaleDown.setToX(1);
         scaleDown.setToY(1);
 
-        btn.setOnMouseEntered(mouseEvent -> {
-            scaleUp.play();
-        });
-        btn.setOnMouseExited(mouseEvent -> {
-            scaleDown.play();
-        });
+        btn.setOnMouseEntered(e -> scaleUp.play());
+        btn.setOnMouseExited(e -> scaleDown.play());
     }
 
     public void hoverEffect(HBox hBox) {
-        // Scale transition
         ScaleTransition scaleUp = new ScaleTransition(Duration.millis(150), hBox);
-        scaleUp.setFromX(1);
-        scaleUp.setFromY(1);
         scaleUp.setToX(1.07);
         scaleUp.setToY(1.07);
 
         ScaleTransition scaleDown = new ScaleTransition(Duration.millis(150), hBox);
-        scaleDown.setFromX(1.07);
-        scaleDown.setFromY(1.07);
         scaleDown.setToX(1);
         scaleDown.setToY(1);
 
@@ -137,44 +117,35 @@ public class navBarOffline implements Initializable {
                     break;
                 case "learn_now":
                     hBox.setEffect(glow);
-                    hBox.setStyle(
-                            "-fx-background-radius: 30; " +
-                                    "-fx-background-color: linear-gradient(to right, #8100CC, #A000FF);"
-                    );
+                    hBox.setStyle("-fx-background-radius: 30; -fx-background-color: linear-gradient(to right, #8100CC, #A000FF);");
                     break;
                 case "pre_test":
                     hBox.setEffect(glow);
-                    hBox.setStyle(
-                            "-fx-background-radius: 30; " +
-                                    "-fx-background-color:  linear-gradient(from 0% 0% to 100% 100%, #8100cc, #410066);"
-                    );
+                    hBox.setStyle("-fx-background-radius: 30; -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #8100cc, #410066);");
                     break;
                 default:
                     hBox.setStyle("-fx-background-color: #F7E9FF;");
-                    break;
             }
         });
 
         hBox.setOnMouseExited(mouseEvent -> {
             scaleDown.play();
-            switch (hBox.getId()){
+            switch (hBox.getId()) {
                 case "learn_now":
                     hBox.setEffect(null);
-                    hBox.setStyle("-fx-background-radius: 30;" + "-fx-background-color: #8100CC;");
+                    hBox.setStyle("-fx-background-radius: 30; -fx-background-color: #8100CC;");
                     break;
                 case "pre_test":
                     hBox.setEffect(null);
-                    hBox.setStyle("-fx-background-radius: 30;" + "-fx-background-color:  linear-gradient(from 0% 0% to 100% 100%, #8100cc, #410066);");
+                    hBox.setStyle("-fx-background-radius: 30; -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #8100cc, #410066);");
                     break;
-                default :
+                default:
                     hBox.setStyle("-fx-background-color: transparent;");
             }
-
         });
     }
 
-
-//    private void route() {
+    //    private void route() {
 //        Navigator nav = new Navigator();
 //
 //        // Home
@@ -211,14 +182,13 @@ public class navBarOffline implements Initializable {
 //
 //    }
 
-
-    public void handleLogout(ActionEvent event){
+    public void handleLogout(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Warning");
         alert.setHeaderText(null);
         alert.setContentText("Are you sure you want to sign out?");
 
-        if (alert.showAndWait().get() == ButtonType.OK){
+        if (alert.showAndWait().get() == ButtonType.OK) {
             SessionManager.getInstance().clearSession();
 
             try {
@@ -251,5 +221,4 @@ public class navBarOffline implements Initializable {
         currentPage = id;
         changeFontColor();
     }
-
 }
