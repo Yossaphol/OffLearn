@@ -4,6 +4,7 @@ import Student.HomeAndNavigation.HomeController;
 import Student.HomeAndNavigation.Navigator;
 import Student.payment.paymentController;
 import javafx.animation.ScaleTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -50,11 +51,14 @@ public class courseEnrollController implements Initializable {
     @FXML public Label rating;
     @FXML public ImageView one, two, three, four;
     @FXML public Label reviewerName3, reviewerName2, reviewerName1;
+    @FXML private Button closeBtn;
 
     // 🔒 ตัวแปรเก็บค่าคอร์ส
     private String courseName;
     private double coursePrice;
     private int courseId;
+
+    private courseObject course;
 
     HomeController ef = new HomeController();
 
@@ -82,7 +86,7 @@ public class courseEnrollController implements Initializable {
         );
 
         enrollBtn.setOnAction(e -> handleEnrollAction());
-        addToCartBtn.setOnAction(e -> addToCart());
+        addToCartBtn.setOnAction(this::handleAddToCart);
         otherCourse.setOnAction(e -> backToCoursePage());
     }
 
@@ -103,7 +107,6 @@ public class courseEnrollController implements Initializable {
             controller.setCourseInfo(courseName, coursePrice);
             controller.setCourseId(courseId);
 
-
             Stage stage = new Stage();
             stage.setTitle("ชำระเงิน");
             stage.setScene(new Scene(root));
@@ -113,12 +116,20 @@ public class courseEnrollController implements Initializable {
         }
     }
 
-    //เพิ่มลงในตะกร้า (ยังไม่เชื่อม DB)
-    public void addToCart() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText(null);
-        alert.setContentText("เพิ่มคอร์สลงตะกร้าแล้ว!");
-        alert.showAndWait();
+    @FXML
+    private void handleAddToCart(ActionEvent event) {
+        if (course != null) {
+            CartManager.getInstance().addCourse(course);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("เพิ่มคอร์สลงตะกร้าแล้ว!");
+            alert.showAndWait();
+
+            System.out.println("เพิ่มลงตะกร้า: " + course.getName());
+        } else {
+            System.out.println("❌ course เป็น null");
+        }
     }
 
     public void backToCoursePage() {
@@ -144,7 +155,7 @@ public class courseEnrollController implements Initializable {
 
         Image image;
         if (picPath.startsWith("http")) {
-            image = new Image(picPath, true); // async = true
+            image = new Image(picPath, true);
         } else {
             URL url = getClass().getResource(picPath);
             if (url != null) {
@@ -163,8 +174,24 @@ public class courseEnrollController implements Initializable {
         });
     }
 
+    public void setCourse(courseObject course) {
+        this.course = course;
+        setCourseDetail(
+                course.getName(),
+                course.getShortDescription(),
+                course.getDescription(),
+                course.getPicture(),
+                "/img/icon/artificial-intelligence.png", // หรือ course.getCategoryIconPath() ถ้ามี
+                course.getCategoryName(),
+                course.getPrice(),
+                course.getRating(),
+                course.getTotalReview(),
+                course.getTotalLesson(),
+                course.getCourseID()
+        );
+    }
 
-        public void setRating(double rating) {
+    public void setRating(double rating) {
         one.setVisible(rating >= 1);
         two.setVisible(rating >= 2);
         three.setVisible(rating >= 3);
@@ -172,12 +199,8 @@ public class courseEnrollController implements Initializable {
     }
 
     @FXML
-    private Button closeBtn;
-
-    @FXML
     private void handleClose() {
         Stage stage = (Stage) closeBtn.getScene().getWindow();
         stage.close();
     }
-
 }

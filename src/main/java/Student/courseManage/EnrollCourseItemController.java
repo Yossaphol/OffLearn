@@ -42,7 +42,6 @@ public class EnrollCourseItemController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // ตรวจว่าปุ่ม addtocart ถูกเชื่อมจาก FXML จริง ๆ หรือไม่
         if (addtocart != null) {
             addtocart.setOnAction(event -> {
                 if (course != null) {
@@ -89,35 +88,21 @@ public class EnrollCourseItemController implements Initializable {
             Parent root = loader.load();
 
             courseEnrollController controller = loader.getController();
-            controller.setCourseDetail(
-                    course.getName(),
-                    course.getShortDescription(),
-                    course.getDescription(),
-                    course.getPicture(),
-                    "/img/icon/artificial-intelligence.png",
-                    course.getCategoryName(),
-                    course.getPrice(),
-                    course.getRating(),
-                    course.getTotalReview(),
-                    course.getTotalLesson(),
-                    course.getCourseID()
-            );
+            controller.setCourse(course);
 
             Stage popupStage = new Stage();
             popupStage.setTitle("รายละเอียดคอร์ส");
             popupStage.setScene(new Scene(root));
             popupStage.setResizable(false);
-
             popupStage.initModality(Modality.APPLICATION_MODAL);
-
             popupStage.initOwner(((Node) event.getSource()).getScene().getWindow());
-
             popupStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     public void setCourseName(String name) {
         if (courseNameLabel != null) courseNameLabel.setText(name);

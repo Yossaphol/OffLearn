@@ -128,7 +128,7 @@
                                              </cursor>
                                           </Button>
                                           <HBox prefHeight="51.0" prefWidth="35.0" />
-                                          <Button fx:id="addToCartBtn" mnemonicParsing="false" prefHeight="51.0" prefWidth="247.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-background-radius: 10; -fx-border-radius: 10;" text="เพิ่มลงในตะกร้า">
+                                          <Button fx:id="addToCartBtn" mnemonicParsing="false" onAction="#handleAddToCart" prefHeight="51.0" prefWidth="247.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-background-radius: 10; -fx-border-radius: 10;" text="เพิ่มลงในตะกร้า">
                                              <font>
                                                 <Font name="Noto Sans Thai Bold" size="20.0" />
                                              </font>
