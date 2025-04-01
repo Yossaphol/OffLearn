@@ -179,7 +179,7 @@ public class pChatController implements Initializable, SessionHandler {
             String teacherIP = teacherInfo.get("IP");
             int teacherPort = Integer.parseInt(teacherInfo.get("Port"));
 
-            Client client = new Client(teacherIP, teacherPort, studentName);
+            Client client = new Client(teacherIP, teacherPort, studentName, selectedTeacher);
             client.setMessageListener(this::receiveMessage);
 
             clientMap.put(selectedTeacher, client);

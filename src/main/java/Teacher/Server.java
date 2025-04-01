@@ -19,6 +19,7 @@ public class Server {
     private String teacherName;
     private String teacherIP;
     private int teacherPort;
+    private boolean isRunning = false;
 
     public Server(ServerSocket serverSocket, pChatServerController controller) {
         this.serverSocket = serverSocket;
@@ -31,19 +32,32 @@ public class Server {
     }
 
     public void startServer() {
+        if (serverSocket == null || serverSocket.isClosed()) {
+            return;
+        }
+
+        isRunning = true;
         System.out.println("Teacher server is running on " + teacherIP + ":" + teacherPort);
 
         try {
-            while (!serverSocket.isClosed()) {
-                Socket socket = serverSocket.accept();
-                new Thread(() -> handleStudent(socket)).start();
+            while (isRunning && !serverSocket.isClosed()) {
+                try {
+                    Socket socket = serverSocket.accept();
+                    new Thread(() -> handleStudent(socket)).start();
+                } catch (IOException e) {
+                    if (isRunning) {
+                        System.out.println("Error accepting connection: " + e.getMessage());
+                    }
+                    break;
+                }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
+            System.out.println("Server error: " + e.getMessage());
             closeServer();
         }
     }
 
-    public String getTeacherName(){
+    public String getTeacherName() {
         return this.teacherName;
     }
 
@@ -53,25 +67,32 @@ public class Server {
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
             String studentName = reader.readLine();
+            if (studentName == null) {
+                System.out.println("Received null student name");
+                return;
+            }
 
             if (!students.containsKey(studentName)) {
                 students.put(studentName, new ClientHandler(socket, reader, writer));
-
                 controller.addStudent(studentName);
-                teacherDb.addOrUpdateUser("studentlist" ,studentName, socket.getInetAddress().getHostAddress(), socket.getPort());
-
+                teacherDb.addOrUpdateUser("studentlist", studentName, socket.getInetAddress().getHostAddress(), socket.getPort());
                 System.out.println(studentName + " connected.");
             }
 
             String message;
             while ((message = reader.readLine()) != null) {
                 System.out.println(studentName + ": " + message);
-
                 controller.receiveMessage(studentName, message);
             }
 
         } catch (IOException e) {
-            System.out.println("A student disconnected.");
+            System.out.println("Error handling student connection: " + e.getMessage());
+        } finally {
+            try {
+                socket.close();
+            } catch (IOException e) {
+                System.out.println("Error closing student socket: " + e.getMessage());
+            }
         }
     }
 
@@ -86,26 +107,29 @@ public class Server {
     }
 
     public void closeServer() {
+        isRunning = false;
         try {
             if (serverSocket != null) {
                 serverSocket.close();
+                serverSocket = null;
                 System.out.println("Server closed.");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error closing server: " + e.getMessage());
         }
     }
 
     public void saveTeacherInfoToDB(String teacherName) {
         String ip = getLocalIPAddress();
         int port = serverSocket.getLocalPort();
-        teacherDb.addOrUpdateUser("teacherlist" ,teacherName, ip, port);
+        teacherDb.addOrUpdateUser("teacherlist", teacherName, ip, port);
     }
 
     private String getLocalIPAddress() {
         try {
             return InetAddress.getLocalHost().getHostAddress();
         } catch (UnknownHostException e) {
+            System.out.println("Error getting local IP address: " + e.getMessage());
             return "localhost";
         }
     }
@@ -121,14 +145,14 @@ public class Server {
 
         public void sendMessage(String message) {
             try {
-                writer.write(message);
-                writer.newLine();
-                writer.flush();
+                if (writer != null && !socket.isClosed()) {
+                    writer.write(message);
+                    writer.newLine();
+                    writer.flush();
+                }
             } catch (IOException e) {
-                System.out.println("Failed to send message.");
+                System.out.println("Failed to send message: " + e.getMessage());
             }
         }
     }
-
-
 }
