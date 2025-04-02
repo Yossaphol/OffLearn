@@ -3,6 +3,8 @@ package Student.HomeAndNavigation;
 import Student.Quiz.QuizPageController;
 import Student.Quiz.QuizSummary;
 import Student.Quiz.ResultPageController;
+import Student.courseManage.courseEnrollController;
+import Student.courseManage.courseObject;
 import Student.dashboard.dashboardController;
 import Student.learningPage.DisposableController;
 import Student.Offline.MainPageOffline;
@@ -200,6 +202,22 @@ public class Navigator {
         if (onlineController != null) {
             onlineController.displayNavbar();
             onlineController.displayContent(fxmlPath);
+        } else if (offlineController != null) {
+            offlineController.displayContent(fxmlPath);
+        } else {
+            System.err.println("No main controller set!");
+        }
+    }
+
+    public void navigateToEnroll(courseObject course) {
+        String fxmlPath = "/fxml/Student/courseManage/courseEnroll.fxml";
+        System.out.println("navigateTo called: " + fxmlPath);
+        if (currentContentController instanceof DisposableController disposable) {
+            disposable.disposePlayer();
+        }
+        if (onlineController != null) {
+            onlineController.displayNavbar();
+            onlineController.displayContent(course);
         } else if (offlineController != null) {
             offlineController.displayContent(fxmlPath);
         } else {

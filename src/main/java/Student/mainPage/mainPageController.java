@@ -1,6 +1,8 @@
 package Student.mainPage;
 
 import Student.Quiz.ResultPageController;
+import Student.courseManage.courseEnrollController;
+import Student.courseManage.courseObject;
 import Student.navBarAndSearchbar.navBarController;
 import a_Session.SessionManager;
 import javafx.animation.FadeTransition;
@@ -96,6 +98,31 @@ public class mainPageController implements Initializable {
             Object newController = loader.getController();
             Navigator.setCurrentContentController(newController);
 
+            FontLoader font = new FontLoader();
+            font.loadFonts();
+            FadeTransition fadeOut = new FadeTransition(Duration.millis(200), content);
+            fadeOut.setFromValue(1.0);
+            fadeOut.setToValue(0.0);
+            fadeOut.setOnFinished(event -> {
+                content.getChildren().setAll(contentComponent);
+                FadeTransition fadeIn = new FadeTransition(Duration.millis(200), content);
+                fadeIn.setFromValue(0.0);
+                fadeIn.setToValue(1.0);
+                fadeIn.play();
+            });
+            fadeOut.play();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void displayContent(courseObject course) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/courseEnroll.fxml"));
+            HBox contentComponent = loader.load();
+            courseEnrollController controller = loader.getController();
+            Navigator.setCurrentContentController(controller);
+            controller.setCourse(course);
             FontLoader font = new FontLoader();
             font.loadFonts();
             FadeTransition fadeOut = new FadeTransition(Duration.millis(200), content);

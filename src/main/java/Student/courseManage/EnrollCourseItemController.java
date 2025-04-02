@@ -1,6 +1,7 @@
 package Student.courseManage;
 
 import Student.HomeAndNavigation.HomeController;
+import Student.HomeAndNavigation.Navigator;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,6 +40,8 @@ public class EnrollCourseItemController implements Initializable {
 
 
     private courseObject course;
+
+    Navigator nav = new Navigator();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -82,25 +85,26 @@ public class EnrollCourseItemController implements Initializable {
             System.out.println("Course is null");
             return;
         }
+        nav.navigateToEnroll(course);
 
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/courseEnroll.fxml"));
-            Parent root = loader.load();
-
-            courseEnrollController controller = loader.getController();
-            controller.setCourse(course);
-
-            Stage popupStage = new Stage();
-            popupStage.setTitle("รายละเอียดคอร์ส");
-            popupStage.setScene(new Scene(root));
-            popupStage.setResizable(false);
-            popupStage.initModality(Modality.APPLICATION_MODAL);
-            popupStage.initOwner(((Node) event.getSource()).getScene().getWindow());
-            popupStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/courseEnroll.fxml"));
+//            Parent root = loader.load();
+//
+//            courseEnrollController controller = loader.getController();
+//            controller.setCourse(course);
+//
+//            Stage popupStage = new Stage();
+//            popupStage.setTitle("รายละเอียดคอร์ส");
+//            popupStage.setScene(new Scene(root));
+//            popupStage.setResizable(false);
+//            popupStage.initModality(Modality.APPLICATION_MODAL);
+//            popupStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+//            popupStage.show();
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
 
@@ -156,24 +160,26 @@ public class EnrollCourseItemController implements Initializable {
             return;
         }
 
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/courseEnroll.fxml"));
-            Parent root = loader.load();
-
-            courseEnrollController controller = loader.getController();
-            controller.setCourse(course);
-
-            Stage popupStage = new Stage();
-            popupStage.setTitle("รายละเอียดคอร์ส");
-            popupStage.setScene(new Scene(root));
-            popupStage.setResizable(false);
-            popupStage.initModality(Modality.APPLICATION_MODAL);
-            popupStage.initOwner(((Node) event.getSource()).getScene().getWindow());
-            popupStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        nav.navigateToEnroll(course);
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/courseEnroll.fxml"));
+//            Parent root = loader.load();
+//
+//            courseEnrollController controller = loader.getController();
+//            controller.setCourse(course);
+//
+//            Stage popupStage = new Stage();
+//            popupStage.setTitle("รายละเอียดคอร์ส");
+//            popupStage.setScene(new Scene(root));
+//            popupStage.setResizable(false);
+//            popupStage.initOwner(((Node) event.getSource()).getScene().getWindow());
+//            popupStage.show();
+//
+//
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
 
