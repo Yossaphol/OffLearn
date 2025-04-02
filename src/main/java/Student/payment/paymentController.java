@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 
 import static Student.payment.Paypal.capturePayment;
 import a_Session.SessionManager;
-
+import javafx.stage.Stage;
 
 
 public class paymentController implements Initializable {
@@ -68,8 +68,10 @@ public class paymentController implements Initializable {
 
                 boolean isApproved = Paypal.waitForApproval(accessToken, orderId);
                 if (!isApproved) {
-                    Platform.runLater(() -> status.setText("Payment not approved"));
-                    status.setStyle("-fx-text-fill: red;");
+                    Platform.runLater(() -> {
+                        status.setText("Payment not approved");
+                        status.setStyle("-fx-text-fill: red;");
+                    });
                     return;
                 }
 
@@ -79,11 +81,26 @@ public class paymentController implements Initializable {
                 Platform.runLater(() -> {
                     status.setText(paymentMessage);
                     status.setStyle(isCaptured ? "-fx-text-fill: green;" : "-fx-text-fill: red;");
+
                     if (isCaptured) {
                         insertEnrollmentToDatabase();
+
                         if (onPaymentSuccess != null) {
-                            Platform.runLater(onPaymentSuccess);
+                            onPaymentSuccess.run();
                         }
+
+                        // ปิดหน้าต่าง payment ภายใน 5 วินาที หลังจาก suscess
+                        new Thread(() -> {
+                            try {
+                                Thread.sleep(5000); // 5 วินาที
+                                Platform.runLater(() -> {
+                                    Stage stage = (Stage) qrCode.getScene().getWindow();
+                                    stage.close();
+                                });
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }).start();
                     }
                 });
 
@@ -93,6 +110,7 @@ public class paymentController implements Initializable {
             }
         }).start();
     }
+
 
     public void setCourseInfo(String name, double price) {
         this.courseName = name;
@@ -121,10 +139,9 @@ public class paymentController implements Initializable {
         try {
             int userId = Integer.parseInt(userIdStr);
 
-            // 🔍 ถ้ายังไม่มี courseId, ดึงจากชื่อ
             if (courseId == 0 && courseName != null) {
                 CourseDB db = new CourseDB();
-                courseId = db.getCourseID(courseName);  // map ชื่อ → ID
+                courseId = db.getCourseID(courseName);
                 System.out.println("courseId mapped from name = " + courseId);
             }
 
