@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -20,10 +21,21 @@
             <Insets left="50.0" />
          </padding>
       </HBox>
-      <VBox fx:id="choicesSpace" prefHeight="146.0" prefWidth="932.0" spacing="10.0">
+      <HBox prefHeight="151.0" prefWidth="932.0">
+         <children>
+            <ImageView fx:id="questionImg" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <VBox fx:id="choicesSpace" prefHeight="146.0" prefWidth="932.0" spacing="10.0">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </VBox>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
          <padding>
-            <Insets left="100.0" />
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
-      </VBox>
+      </HBox>
    </children>
 </VBox>

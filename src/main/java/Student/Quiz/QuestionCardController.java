@@ -4,6 +4,8 @@ import Teacher.quiz.QuestionItem;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -16,6 +18,9 @@ public class QuestionCardController implements Initializable {
 
     @FXML
     private Label QuestionName;
+
+    @FXML
+    private ImageView questionImg;
 
     private QuestionItem questionItem;
     private ToggleGroup group;
@@ -31,6 +36,10 @@ public class QuestionCardController implements Initializable {
         group = new ToggleGroup();
 
         this.QuestionName.setText(questionItem.getQuizName());
+
+        if (questionItem.getImg() != null){
+            questionImg.setImage(new Image(questionItem.getImg()));
+        }
 
         for (String choice : questionItem.getChoices()){
             RadioButton radioButton = new RadioButton(choice);

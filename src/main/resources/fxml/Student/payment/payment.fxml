@@ -8,17 +8,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="paymentDisplay" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="600.0" style="-fx-background-radius: 25; -fx-border-radius: 25; -fx-background-color: &quot;EFEFEF&quot;; -fx-border-color: black;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.payment.paymentController">
+<VBox fx:id="paymentDisplay" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="600.0" style="-fx-background-color: &quot;EFEFEF&quot;; -fx-border-color: black;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Student.payment.paymentController">
    <children>
-      <HBox alignment="TOP_RIGHT" prefHeight="11.0" prefWidth="539.0">
-         <children>
-            <ImageView id="close" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../img/icon/close.png" />
-               </image>
-            </ImageView>
-         </children>
-      </HBox>
+      <HBox alignment="TOP_RIGHT" prefHeight="11.0" prefWidth="539.0" />
       <VBox alignment="CENTER" prefHeight="436.0" prefWidth="539.0">
          <children>
             <HBox alignment="CENTER" prefHeight="91.0" prefWidth="539.0">
