@@ -228,7 +228,7 @@ public class HomeController implements Initializable, SessionHandler {
 
             if (progress >= 10 && progress < 80) {
                 CourseItem courseItem = new CourseItem(courseID, myCourse.getImage(), myCourse.getCourseName(), 0, category.getCatName(myCourse.getCat_ID()), myCourse.getCourseDescription(), progress);
-                courseItem.setTeacherName("");
+                courseItem.setTeacherName(courseDB.getTeacherNameByCourseName(myCourse.getCourseName()));
                 courseList.add(courseItem);
             }
         }

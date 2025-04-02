@@ -298,6 +298,29 @@ public class CourseDB extends ConnectDB{
     }
 
 
+    public String getTeacherNameByCourseName(String courseName) {
+        String sql = "SELECT CONCAT(u.firstname, ' ', u.lastname) AS teacherName " +
+                "FROM offlearn.course c " +
+                "JOIN offlearn.user u ON c.User_ID = u.User_ID " +
+                "WHERE c.courseName = ?";
+
+        try (Connection conn = this.connectToDB();
+             PreparedStatement pstm = conn.prepareStatement(sql)) {
+
+            pstm.setString(1, courseName);
+            ResultSet rs = pstm.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("teacherName");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+
     public int countMyChapter(int course_id) {
         String sql = "SELECT COUNT(*) FROM offlearn.chapter WHERE Course_ID = ?";
         try (Connection conn = this.connectToDB();

@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -54,8 +55,26 @@ public class EnrollCourseItemController implements Initializable {
             });
         }
 
+        addtocart.setOnAction(this::handleAddToCart);
+
         if (detailBtn != null) {
             detailBtn.setOnAction(this::goToDetailPage);
+        }
+    }
+
+    @FXML
+    private void handleAddToCart(ActionEvent event) {
+        if (course != null) {
+            CartManager.getInstance().addCourse(course);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("เพิ่มคอร์สลงตะกร้าแล้ว!");
+            alert.showAndWait();
+
+            System.out.println("เพิ่มลงตะกร้า: " + course.getName());
+        } else {
+            System.out.println("❌ course เป็น null");
         }
     }
 

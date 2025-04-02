@@ -88,7 +88,7 @@
 
             <HBox alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="280.0" spacing="10.0">
          <children>
-            <Button fx:id="addtocart" mnemonicParsing="false" prefHeight="29.0" prefWidth="96.0" style="-fx-background-color: #8100cc; -fx-background-radius: 10;" text="Add to cart" textFill="WHITE">
+            <Button fx:id="addtocart" mnemonicParsing="false" onAction="#handleAddToCart" prefHeight="29.0" prefWidth="96.0" style="-fx-background-color: #8100cc; -fx-background-radius: 10;" text="Add to cart" textFill="WHITE">
                <font>
                   <Font name="Kodchasan Bold" size="12.0" />
                </font>
