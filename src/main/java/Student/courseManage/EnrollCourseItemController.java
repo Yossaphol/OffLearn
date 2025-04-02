@@ -151,41 +151,32 @@ public class EnrollCourseItemController implements Initializable {
 
     @FXML
     private void handleDetailButton(ActionEvent event) {
+        if (course == null) {
+            System.out.println("Course is null");
+            return;
+        }
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Student/courseManage/courseEnroll.fxml"));
             Parent root = loader.load();
 
             courseEnrollController controller = loader.getController();
-            controller.setCourseDetail(
-                    course.getName(),
-                    course.getShortDescription(),
-                    course.getDescription(),
-                    course.getPicture(),
-                    "/img/icon/artificial-intelligence.png",
-                    course.getCategoryName(),
-                    course.getPrice(),
-                    course.getRating(),
-                    course.getTotalReview(),
-                    course.getTotalLesson(),
-                    course.getCourseID()
-            );
+            controller.setCourse(course);
 
             Stage popupStage = new Stage();
             popupStage.setTitle("รายละเอียดคอร์ส");
             popupStage.setScene(new Scene(root));
             popupStage.setResizable(false);
-
             popupStage.initModality(Modality.APPLICATION_MODAL);
-
             popupStage.initOwner(((Node) event.getSource()).getScene().getWindow());
-
             popupStage.show();
-
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 
 
 

@@ -29,6 +29,8 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import Student.courseManage.courseEnrollController;
+
 
 public class courseEnrollController implements Initializable {
     @FXML public VBox leftWrapper;

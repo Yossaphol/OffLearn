@@ -191,15 +191,16 @@ public class courseController implements Initializable {
 
     public void closePopupAuto() {
         MainFrame.setOnMouseClicked(event -> {
-            if (popup.isVisible()) closePopup(popup);
-            if (popup1.isVisible()) closePopup(popup1);
-            if (popup2.isVisible()) closePopup(popup2);
-            if (categoryPopup.isVisible()) {
+            if (popup != null && popup.isVisible()) closePopup(popup);
+            if (popup1 != null && popup1.isVisible()) closePopup(popup1);
+            if (popup2 != null && popup2.isVisible()) closePopup(popup2);
+            if (categoryPopup != null && categoryPopup.isVisible()) {
                 seeAll.setText("ดูทั้งหมด");
                 closePopup(categoryPopup);
             }
         });
     }
+
 
     private void closePopup(Node popup) {
         FadeTransition fade2 = new FadeTransition(Duration.millis(300), category_recommend);
